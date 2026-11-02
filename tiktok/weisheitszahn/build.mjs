@@ -1,6 +1,6 @@
 // Generates index.html + compositions/*.html from script.json.
 // Run: node build.mjs
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import {
   C,
   S,
@@ -28,6 +28,17 @@ const H = 1920;
 const DUR = script.duration;
 const SC = script.scenes;
 const lines = script.lines;
+// ElevenLabs-Takes (voices.mjs): echte Länge ersetzt das geschätzte Zeilenende.
+const VO_FILE = new URL("./assets/vo/timings.json", import.meta.url);
+const VO = existsSync(VO_FILE) ? JSON.parse(readFileSync(VO_FILE, "utf8")) : {};
+lines.forEach((l, i) => {
+  const v = VO[l.id];
+  if (!v) return;
+  l.end = +(l.start + v.duration).toFixed(2);
+  const next = lines[i + 1];
+  if (next && l.end > next.start)
+    console.warn(`! ${l.id} endet ${l.end}s, ${next.id} startet ${next.start}s`);
+});
 const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
 
 // Character acting helpers, injected into each scene script. Positions are
@@ -335,128 +346,338 @@ const opJs = `${HELPERS}${JAW_INIT}
 `;
 
 /* ================= Scene: SPÄTER card ================= */
-const flower = (x, y, s, rot) =>
-  `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})">${[0, 72, 144, 216, 288]
-    .map(
-      (a) =>
-        `<ellipse cx="0" cy="-60" rx="38" ry="62" transform="rotate(${a})" fill="#3A2290" stroke="#1B1046" stroke-width="6"/>`,
-    )
-    .join("")}<circle r="22" fill="#24155E"/></g>`;
+// Zeitsprung-Karte: dunkler Verlauf, feines Korn, Uhr, deren Zeiger vorspulen,
+// Schrift steigt Buchstabe für Buchstabe aus einer Maske, Akzentlinie wächst.
+const CARD = { bg0: "#18203A", bg1: "#06070D", accent: "#5EE6D0", text: "#F5F3EE" };
+const CLOCK_R = 118;
+const ticks = Array.from({ length: 12 }, (_, i) => {
+  const a = (i * Math.PI) / 6;
+  const r0 = i % 3 === 0 ? CLOCK_R - 30 : CLOCK_R - 20;
+  const r1 = CLOCK_R - 10;
+  const p = (r) => `${(Math.sin(a) * r).toFixed(1)} ${(-Math.cos(a) * r).toFixed(1)}`;
+  return `<path d="M ${p(r0)} L ${p(r1)}" stroke="${CARD.text}" stroke-width="${i % 3 === 0 ? 7 : 4}" stroke-linecap="round" opacity="${i % 3 === 0 ? 0.95 : 0.55}"/>`;
+}).join("");
+const SP_WORD = "SPÄTER";
 const spaeterSvg = `
 <svg viewBox="0 0 ${W} ${H}">
-  <rect width="${W}" height="${H}" fill="#07060C"/>
-  <g id="sp-flowers" opacity="0.85">
-    ${flower(150, 760, 1.4, 10)}${flower(470, 690, 1.0, 40)}${flower(820, 760, 1.5, -20)}
-    ${flower(300, 1010, 1.1, 70)}${flower(680, 1040, 1.3, 15)}${flower(1010, 980, 0.9, 50)}${flower(60, 1080, 0.8, 30)}
-  </g>
+  <defs>
+    <radialGradient id="sp-bg" cx="50%" cy="46%" r="75%">
+      <stop offset="0" stop-color="${CARD.bg0}"/><stop offset="1" stop-color="${CARD.bg1}"/>
+    </radialGradient>
+    <radialGradient id="sp-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="${CARD.accent}" stop-opacity="0.22"/><stop offset="1" stop-color="${CARD.accent}" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sp-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0"/>
+    </filter>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#sp-bg)"/>
+  <circle id="sp-glow-c" cx="540" cy="780" r="420" fill="url(#sp-glow)"/>
+  <rect width="${W}" height="${H}" filter="url(#sp-grain)"/>
+  <g transform="translate(540 780)"><g id="sp-clock">
+    <circle r="${CLOCK_R}" fill="rgba(255,255,255,0.03)"/>
+    <circle id="sp-ring" r="${CLOCK_R}" fill="none" stroke="${CARD.accent}" stroke-width="9" transform="rotate(-90)"/>
+    <g id="sp-ticks">${ticks}</g>
+    <g id="sp-hour"><path d="M 0 12 L 0 -58" stroke="${CARD.text}" stroke-width="11" stroke-linecap="round"/></g>
+    <g id="sp-min"><path d="M 0 16 L 0 -88" stroke="${CARD.accent}" stroke-width="7" stroke-linecap="round"/></g>
+    <circle r="11" fill="${CARD.text}"/>
+  </g></g>
 </svg>
-<div id="sp-text">SPÄTER…</div>`;
+<div id="sp-title">${[...SP_WORD].map((c, i) => `<span class="sp-mask"><span id="sp-l${i}" class="sp-l">${c}</span></span>`).join("")}</div>
+<div id="sp-line"></div>`;
 const spaeterCss = `
-  #sp-text { position: absolute; left: 0; right: 0; top: 820px; text-align: center;
-    font-family: "Archivo Black", sans-serif; font-size: 150px; color: #7DF3EC; letter-spacing: 2px;
-    -webkit-text-stroke: 10px #0B2B44; paint-order: stroke fill; text-shadow: 0 0 40px rgba(125,243,236,0.45); }`;
+  #sp-title { position: absolute; left: 0; right: 0; top: 960px; display: flex; justify-content: center;
+    font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 132px; line-height: 1.1;
+    letter-spacing: 0.16em; padding-left: 0.16em; color: ${CARD.text}; }
+  .sp-mask { display: inline-block; overflow: hidden; padding-top: 0.12em; }
+  .sp-l { display: inline-block; }
+  #sp-line { position: absolute; left: 50%; top: 1140px; width: 300px; height: 8px; margin-left: -150px;
+    border-radius: 4px; background: ${CARD.accent}; }`;
 const spaeterJs = `
-    tl.fromTo("#sp-text", { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2)" }, O + 0.05);
-    tl.fromTo("#sp-flowers", { scale: 1.08, transformOrigin: "50% 50%" }, { scale: 1, duration: 1.4, ease: "none" }, O);
+    const T0 = O;
+    const RING = ${(2 * Math.PI * CLOCK_R).toFixed(1)};
+    gsap.set("#sp-ring", { strokeDasharray: RING, strokeDashoffset: RING });
+    gsap.set("#sp-clock", { scale: 0.7, opacity: 0, svgOrigin: "0 0" });
+    gsap.set(["#sp-min", "#sp-hour"], { svgOrigin: "0 0" });
+    gsap.set("#sp-hour", { rotation: 300 });
+    gsap.set(".sp-l", { yPercent: 115 });
+    gsap.set("#sp-line", { scaleX: 0 });
+    gsap.set("#sp-glow-c", { opacity: 0 });
+    tl.to("#sp-clock", { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, T0);
+    tl.to("#sp-glow-c", { opacity: 1, duration: 0.4, ease: "power2.out" }, T0);
+    tl.to("#sp-ring", { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, T0 + 0.05);
+    tl.to("#sp-min", { rotation: 720, duration: 1.05, ease: "power2.inOut" }, T0 + 0.1);
+    tl.to("#sp-hour", { rotation: 360, duration: 1.05, ease: "power2.inOut" }, T0 + 0.1);
+    ${JSON.stringify([...SP_WORD].map((_, i) => i))}.forEach((i) =>
+      tl.to("#sp-l" + i, { yPercent: 0, duration: 0.32, ease: "power3.out" }, T0 + 0.16 + i * 0.035));
+    tl.to("#sp-line", { scaleX: 1, duration: 0.45, ease: "power3.out" }, T0 + 0.35);
+    tl.to(["#sp-clock", "#sp-title", "#sp-line"], { opacity: 0, y: -24, duration: 0.16, ease: "power2.in" }, T0 + 1.22);
 `;
 
 /* ================= Scene: Praxis ================= */
-const tiles = (() => {
-  let s = "";
-  for (let i = -6; i <= 12; i++)
-    s += `<line x1="${540 + i * 120}" y1="1360" x2="${540 + i * 260}" y2="1920" stroke="${C.floorLine}" stroke-width="4"/>`;
-  [1430, 1530, 1660, 1820].forEach(
-    (y) =>
-      (s += `<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="${C.floorLine}" stroke-width="4"/>`),
-  );
-  return s;
-})();
-const limb = (d, w, fill) =>
-  `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="${w + 10}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${fill}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-const eyeSmall = (id, x, y, r = 17) =>
-  `<g transform="translate(${x} ${y})"><g id="${id}"><circle r="${r}" fill="#fff" ${S(4)}/><circle id="${id}-p" cx="5" r="${r * 0.42}" fill="${C.ink}"/><clipPath id="${id}-c"><circle r="${r}"/></clipPath><g clip-path="url(#${id}-c)"><rect id="${id}-lid" x="${-r - 4}" y="${-r - 4}" width="${2 * r + 8}" height="${2 * r + 8}" fill="var(--lid)" ${S(4)} vector-effect="non-scaling-stroke"/></g><circle r="${r}" fill="none" ${S(4)}/></g></g>`;
+// Halbnahe wie das Referenzbild: alter Arzt mit weißem Zopf, runder Goldbrille,
+// Maske unterm Kinn, Krawatte, Stethoskop; schreibt auf ein Klemmbrett, dahinter
+// Fenster mit Kräutertöpfen, vorne der Tisch mit Akten.
+const P = {
+  wall: "#B9C79A",
+  wallSide: "#A9B889",
+  ceiling: "#C9D3AE",
+  wallLow: "#A3B282",
+  trim: "#8D9A6C",
+  frame: "#CBD1C2",
+  sky: "#DCEEF1",
+  tree: "#A7C69B",
+  tree2: "#8FB585",
+  pot: "#B8693F",
+  potDark: "#97522F",
+  leaf: "#6F9A57",
+  skin: "#F3D2B8",
+  skinShade: "#E4B99A",
+  hair: "#EFEFEB",
+  hairShade: "#D3D3CE",
+  coat: "#F8F9F6",
+  coatShade: "#E3E6E1",
+  shirt: "#F3EDD6",
+  tie: "#6F8DB4",
+  tieStripe: "#D2DEEB",
+  mask: "#CFE7EC",
+  maskDot: "#8FB7C7",
+  gold: "#D2A548",
+  tube: "#2F3036",
+  board: "#9C7853",
+  boardDark: "#7E5F40",
+  desk: "#EEEDD5",
+  deskSide: "#A5AF86",
+  paper: "#E7D9B5",
+};
+const stroke2 = (d, w, col) =>
+  `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="${w + 8}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const plant = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})">
+    ${[
+      "M 0 -60 C -6 -110 -30 -150 -40 -190",
+      "M 0 -60 C 4 -120 12 -170 6 -215",
+      "M 0 -60 C 10 -100 36 -135 52 -165",
+    ]
+      .map(
+        (d) =>
+          `<path d="${d}" fill="none" stroke="${P.leaf}" stroke-width="6" stroke-linecap="round"/>`,
+      )
+      .join("")}
+    ${[
+      [-14, -95, -40],
+      [-28, -135, -30],
+      [-38, -175, -20],
+      [2, -110, 10],
+      [8, -160, -6],
+      [4, -205, 0],
+      [18, -100, 40],
+      [34, -128, 35],
+      [48, -158, 30],
+    ]
+      .map(
+        ([lx, ly, r]) =>
+          `<ellipse cx="${lx}" cy="${ly}" rx="10" ry="22" transform="rotate(${r} ${lx} ${ly})" fill="${P.leaf}" ${S(3)}/>`,
+      )
+      .join("")}
+    <path d="M -48 -62 L 48 -62 L 38 20 L -38 20 Z" fill="${P.pot}" ${S(4)}/>
+    <rect x="-54" y="-74" width="108" height="20" rx="4" fill="${P.potDark}" ${S(4)}/>
+  </g>`;
+const docEye = (id, x, y) =>
+  `<g transform="translate(${x} ${y})"><clipPath id="${id}-c"><ellipse rx="25" ry="21"/></clipPath>
+    <ellipse rx="25" ry="21" fill="#fff"/>
+    <g id="${id}-p"><circle r="10" fill="${C.ink}"/><circle cx="-3" cy="-3" r="2.6" fill="#fff"/></g>
+    <g clip-path="url(#${id}-c)"><rect id="${id}-lid" x="-32" y="-28" width="64" height="56" fill="${P.skin}" ${S(4)} vector-effect="non-scaling-stroke"/></g>
+    <ellipse rx="25" ry="21" fill="none" ${S(4)}/></g>`;
+const tieClip = "M 616 1246 L 646 1246 L 668 1560 L 632 1600 L 596 1560 Z";
 
 const praxisSvg = `
 <svg viewBox="0 0 ${W} ${H}">
-  <rect width="${W}" height="${H}" fill="${C.wall}"/>
-  <rect y="0" width="${W}" height="70" fill="#C8D3A0"/>
-  <rect y="420" width="${W}" height="26" fill="${C.trim}" ${S(3)}/>
-  <rect y="446" width="${W}" height="914" fill="${C.wallLow}"/>
-  <rect y="1360" width="${W}" height="560" fill="${C.floor}"/>
-  ${tiles}
-  <rect y="1340" width="${W}" height="26" fill="#6B5A47" ${S(3)}/>
-  <g id="chair">
-    <ellipse cx="820" cy="1560" rx="150" ry="28" fill="#BFC4CA" ${S()}/>
-    <rect x="775" y="1300" width="90" height="260" fill="#CDD1D6" ${S()}/>
-    <g transform="rotate(14 960 1240)"><rect x="905" y="760" width="120" height="500" rx="40" fill="${C.chair}" ${S()}/></g>
-    <ellipse cx="990" cy="700" rx="70" ry="48" fill="${C.chair}" ${S()}/>
-    <rect x="620" y="1220" width="360" height="90" rx="36" fill="${C.chair}" ${S()}/>
-    <rect x="640" y="1290" width="330" height="22" rx="10" fill="${C.chairDark}"/>
+  <!-- Raum -->
+  <rect width="${W}" height="${H}" fill="${P.wall}"/>
+  <path d="M 0 0 L ${W} 0 L ${W} 150 L 96 150 L 0 108 Z" fill="${P.ceiling}"/>
+  <path d="M 0 108 L 96 150 L ${W} 150" fill="none" ${S(4)}/>
+  <path d="M 0 108 L 96 150 L 96 1430 L 0 1460 Z" fill="${P.wallSide}"/>
+  <path d="M 96 150 L 96 1430" fill="none" ${S(4)}/>
+  <path d="M 96 1340 L ${W} 1340 L ${W} ${H} L 96 ${H} Z" fill="${P.wallLow}"/>
+  <path d="M 0 1370 L 96 1340 L 96 ${H} L 0 ${H} Z" fill="#97A676"/>
+  <path d="M 0 1370 L 96 1340 L ${W} 1340" fill="none" ${S(4)}/>
+
+  <!-- Fenster -->
+  <rect x="620" y="560" width="500" height="560" fill="${P.sky}"/>
+  <clipPath id="win-c"><rect x="640" y="580" width="480" height="520"/></clipPath>
+  <g clip-path="url(#win-c)">
+    <path d="M 640 760 L 1120 600 L 1120 660 L 640 820 Z" fill="#fff" opacity="0.35"/>
+    <path d="M 800 1100 C 760 1000 800 930 860 940 C 870 880 940 860 980 900 C 1010 840 1090 840 1120 880 L 1120 1100 Z" fill="${P.tree}" ${S(4)}/>
+    <path d="M 640 1100 C 630 1030 670 990 720 1000 C 740 960 800 960 820 1000 C 850 1010 860 1060 850 1100 Z" fill="${P.tree2}" ${S(4)}/>
+    <path d="M 1010 1100 C 1000 960 1040 760 1120 700 L 1120 1100 Z" fill="${P.tree2}" ${S(4)}/>
   </g>
-  <g id="pat" style="--lid:${C.skinLight}">
-    ${limb("M 860 1250 L 690 1262 L 680 1500", 86, C.pants)}
-    <ellipse cx="650" cy="1520" rx="62" ry="24" fill="#1A1A1C" ${S()}/>
-    ${limb("M 820 1240 L 640 1240 L 610 1490", 86, C.pants)}
-    <ellipse cx="580" cy="1512" rx="62" ry="24" fill="#1A1A1C" ${S()}/>
-    <path d="M 800 900 C 820 870 900 868 930 885 C 960 905 970 960 968 1020 L 975 1250 L 790 1250 C 776 1120 772 980 800 900 Z" fill="${C.sweater}" ${S()}/>
-    <path d="M 860 1020 L 870 1240" stroke="#2F62A6" stroke-width="5"/>
-    <path d="M 835 880 L 870 935 L 905 880 Z" fill="#fff" ${S(4)}/>
-    ${limb("M 830 940 L 800 1120 L 720 1150", 60, C.sweater)}
-    <circle cx="712" cy="1152" r="27" fill="${C.skinLight}" ${S()}/>
-    <rect x="845" y="830" width="44" height="60" fill="${C.skinLight}" ${S()}/>
-    <ellipse cx="868" cy="770" rx="68" ry="80" fill="${C.skinLight}" ${S()}/>
-    <ellipse cx="935" cy="785" rx="12" ry="20" fill="${C.skinLight}" ${S(4)}/>
-    <path d="M 800 760 C 790 680 850 660 880 668 C 930 672 950 710 940 770 C 930 735 900 712 870 718 C 840 722 815 735 800 760 Z" fill="${C.hairDark}" ${S()}/>
-    ${eyeSmall("pe1", 840, 772)}${eyeSmall("pe2", 885, 772)}
-    <path d="M 856 790 Q 846 812 860 815" fill="none" ${S(4)}/>
-    <path d="M 845 838 Q 860 832 876 838" fill="none" ${S(4)}/>
-    <path d="M 905 800 q 10 -14 0 -24" fill="none" stroke="#E7A0A0" stroke-width="6" stroke-linecap="round"/>
-  </g>
-  <g id="doc" style="--lid:${C.skinMid}">
-    <path d="M 205 1180 L 265 1180 L 262 1505 L 212 1505 Z" fill="${C.scrubs}" ${S()}/>
-    <path d="M 290 1180 L 350 1180 L 345 1505 L 293 1505 Z" fill="${C.scrubs}" ${S()}/>
-    <ellipse cx="228" cy="1522" rx="52" ry="22" fill="#1A1A1C" ${S()}/>
-    <ellipse cx="322" cy="1522" rx="52" ry="22" fill="#1A1A1C" ${S()}/>
-    <rect x="258" y="625" width="44" height="60" fill="${C.skinMid}" ${S()}/>
-    <path d="M 170 700 C 185 670 230 662 280 668 C 330 662 372 670 388 700 L 410 1230 L 150 1230 Z" fill="${C.coat}" ${S()}/>
-    <path d="M 255 670 L 280 760 L 305 670 Z" fill="${C.scrubs}" ${S(4)}/>
-    <path d="M 280 760 L 280 1230" ${S(4)}/>
-    <path d="M 255 670 L 230 760 L 280 860 M 305 670 L 330 760 L 280 860" fill="none" ${S(4)}/>
-    <path d="M 190 1000 h 60 v 50 h -60 Z M 315 990 h 60 v 50 h -60 Z" fill="none" ${S(4)}/>
-    ${limb("M 185 710 L 160 900 L 168 1060", 66, C.coat)}
-    <circle cx="170" cy="1085" r="28" fill="${C.skinMid}" ${S()}/>
-    <g id="doc-arm">
-      ${limb("M 372 712 L 430 900 L 470 760", 62, C.coat)}
-      <line x1="472" y1="756" x2="560" y2="694" stroke="#8D949B" stroke-width="9" stroke-linecap="round"/>
-      <circle cx="568" cy="688" r="17" fill="#DCE3E8" ${S(4)}/>
-      <circle cx="470" cy="752" r="28" fill="${C.skinMid}" ${S()}/>
+  <path d="M 610 470 L 1120 470 L 1120 1150 L 610 1150 Z M 640 580 L 640 1110 L 1120 1110 L 1120 580 Z" fill="${P.frame}" fill-rule="evenodd" ${S(4)}/>
+  <rect x="600" y="470" width="520" height="96" fill="#E4E7DC" ${S(4)}/>
+  <path d="M 600 502 L 1120 502 M 600 534 L 1120 534" ${S(3)} opacity="0.6"/>
+  ${plant(770, 1100, 0.95)}${plant(935, 1104, 0.85)}
+  <rect x="590" y="1104" width="530" height="34" fill="#DDE1D2" ${S(4)}/>
+
+  <!-- Arzt -->
+  <g id="doc">
+    <g id="doc-tail">
+      <path d="M 458 945 C 390 960 312 1002 280 1080 C 256 1140 246 1220 282 1305 C 292 1250 306 1214 326 1186 C 316 1240 326 1282 356 1316 C 356 1236 372 1162 412 1090 C 436 1046 456 1008 470 974 Z" fill="${P.hair}" ${S()}/>
+      <path d="M 300 1130 C 300 1180 296 1220 300 1260 M 340 1100 C 336 1150 340 1200 348 1250" fill="none" stroke="${P.hairShade}" stroke-width="5" stroke-linecap="round"/>
+      <path d="M 262 1210 C 240 1240 232 1270 240 1300 M 372 1120 C 390 1160 392 1200 384 1240" fill="none" ${S(3)}/>
     </g>
-    <circle cx="280" cy="470" r="44" fill="${C.hairBrown}" ${S()}/>
-    <ellipse cx="280" cy="565" rx="72" ry="84" fill="${C.skinMid}" ${S()}/>
-    <ellipse cx="208" cy="575" rx="12" ry="20" fill="${C.skinMid}" ${S(4)}/>
-    <ellipse cx="352" cy="575" rx="12" ry="20" fill="${C.skinMid}" ${S(4)}/>
-    <path d="M 208 570 C 200 480 255 465 280 466 C 330 466 362 500 352 570 C 340 525 300 505 270 510 C 240 512 218 535 208 570 Z" fill="${C.hairBrown}" ${S()}/>
-    ${eyeSmall("de1", 256, 568)}${eyeSmall("de2", 304, 568)}
-    <path d="M 284 585 Q 296 610 280 614" fill="none" ${S(4)}/>
-    <g transform="translate(282 638)">${mouth("doc-m", { s: 0.75, initial: "flat" })}</g>
+    <path d="M 296 ${H} C 296 1520 308 1300 378 1226 C 428 1184 500 1170 560 1162 L 700 1162 C 772 1172 842 1194 884 1244 C 934 1314 944 1520 944 ${H} Z" fill="${P.coat}" ${S()}/>
+    <path d="M 548 1156 L 712 1156 L 664 1570 L 598 1570 Z" fill="${P.shirt}" ${S(4)}/>
+    <path d="M 588 1050 L 590 1172 L 674 1172 L 680 1050 Z" fill="${P.skin}" ${S()}/>
+    <path d="M 592 1140 C 615 1150 650 1150 676 1138" fill="none" stroke="${P.skinShade}" stroke-width="8"/>
+    <path d="M 562 1138 L 540 1206 L 616 1228 L 628 1168 Z" fill="${P.shirt}" ${S(4)}/>
+    <path d="M 700 1138 L 722 1206 L 646 1228 L 634 1168 Z" fill="${P.shirt}" ${S(4)}/>
+    <path d="M 610 1204 L 652 1204 L 646 1248 L 616 1248 Z" fill="${P.tie}" ${S(4)}/>
+    <clipPath id="tie-c"><path d="${tieClip}"/></clipPath>
+    <path d="${tieClip}" fill="${P.tie}"/>
+    <g clip-path="url(#tie-c)">${[1250, 1320, 1390, 1460, 1530].map((y) => `<path d="M 580 ${y + 40} L 690 ${y - 30}" stroke="${P.tieStripe}" stroke-width="13"/>`).join("")}</g>
+    <path d="${tieClip}" fill="none" ${S(4)}/>
+    <path d="M 552 1150 L 476 1268 L 528 1318 L 502 1360 L 600 1590 L 614 1500 Z" fill="${P.coat}" ${S(4)}/>
+    <path d="M 708 1150 L 784 1268 L 732 1318 L 758 1360 L 660 1590 L 646 1500 Z" fill="${P.coat}" ${S(4)}/>
+    <path d="M 420 1300 C 420 1420 430 1520 440 1640 M 840 1300 C 846 1420 846 1520 838 1640" fill="none" stroke="${P.coatShade}" stroke-width="12" stroke-linecap="round"/>
+    <!-- Stethoskop -->
+    ${stroke2("M 566 1166 C 478 1210 452 1320 468 1420 C 476 1470 506 1494 532 1478", 11, P.tube)}
+    ${stroke2("M 696 1166 C 752 1208 768 1262 762 1296", 11, P.tube)}
+    <circle cx="536" cy="1474" r="10" fill="${P.tube}" ${S(3)}/>
+    <circle cx="760" cy="1316" r="28" fill="#C9CED3" ${S()}/><circle cx="760" cy="1316" r="15" fill="#E9ECEE" ${S(3)}/>
+    <!-- Maske unterm Kinn -->
+    <path d="M 456 892 C 470 960 500 1030 528 1066" fill="none" stroke="#9FC6CF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 516 1056 C 560 1108 704 1118 768 1046 C 780 1080 770 1124 736 1146 C 684 1176 588 1176 542 1138 C 516 1116 508 1084 516 1056 Z" fill="${P.mask}" ${S()}/>
+    <path d="M 530 1090 C 590 1124 690 1126 752 1084 M 540 1116 C 600 1146 690 1148 744 1112" fill="none" stroke="${P.maskDot}" stroke-width="4" stroke-linecap="round"/>
+    ${[
+      [560, 1104],
+      [620, 1122],
+      [690, 1118],
+      [730, 1096],
+      [585, 1138],
+      [655, 1146],
+      [710, 1132],
+    ]
+      .map(([x, y]) => `<path d="M ${x - 6} ${y} l 6 -6 l 6 6 l -6 6 Z" fill="${P.maskDot}"/>`)
+      .join("")}
+
+    <g id="doc-head">
+      <path d="M 486 700 C 428 724 404 804 414 884 C 420 934 436 964 458 984 C 452 934 460 902 472 882 C 456 840 460 780 492 742 Z" fill="${P.hair}" ${S()}/>
+      <path d="M 470 822 C 460 700 520 600 622 594 C 732 590 800 680 795 800 C 793 880 780 942 760 992 C 734 1052 690 1086 630 1088 C 570 1088 530 1056 508 1002 C 490 956 476 892 470 822 Z" fill="${P.skin}" ${S()}/>
+      <path d="M 790 690 C 830 720 846 780 832 836 C 826 870 812 900 796 920 C 802 880 804 840 800 800 C 818 780 816 730 790 690 Z" fill="${P.hair}" ${S()}/>
+      <ellipse cx="472" cy="872" rx="27" ry="45" fill="${P.skin}" ${S()}/>
+      <path d="M 478 850 C 462 858 462 888 478 896" fill="none" ${S(4)}/>
+      <!-- Haarbüschel oben -->
+      <path d="M 548 640 C 520 600 530 556 578 548 C 560 566 562 590 580 610 C 586 570 620 548 660 556 C 640 568 636 588 648 606 C 668 580 708 576 736 596 C 712 600 698 620 700 640 C 670 620 640 612 610 616 C 590 620 566 628 548 640 Z" fill="${P.hair}" ${S(4)}/>
+      <path d="M 520 660 C 500 640 494 610 506 588 M 760 640 C 784 630 800 606 798 580 M 742 616 C 760 600 776 598 790 604" fill="none" ${S(3)}/>
+      <!-- Falten -->
+      <path d="M 566 688 Q 630 670 708 690 M 552 716 Q 630 698 724 718 M 574 742 Q 630 730 700 744" fill="none" stroke="${P.skinShade}" stroke-width="5" stroke-linecap="round"/>
+      <path d="M 566 688 Q 630 670 708 690 M 552 716 Q 630 698 724 718" fill="none" ${S(3)} opacity="0.55"/>
+      <path d="M 758 870 l 22 -8 M 760 890 l 22 2 M 506 880 l -18 -6" fill="none" ${S(3)} opacity="0.7"/>
+      <path d="M 538 922 Q 565 934 592 922 M 672 922 Q 700 934 728 922" fill="none" ${S(3)} opacity="0.7"/>
+      <path d="M 600 990 C 584 1004 584 1024 592 1040 M 690 990 C 706 1004 708 1024 700 1040" fill="none" ${S(3)}/>
+      <!-- Augen, Brauen, Brille -->
+      ${docEye("de1", 566, 864)}${docEye("de2", 700, 864)}
+      <g id="doc-brows">
+        <path d="M 514 822 C 532 790 580 780 614 798 C 600 800 590 806 584 812 C 566 806 540 812 520 830 Z" fill="${P.hairShade}" ${S(4)}/>
+        <path d="M 652 798 C 686 780 734 790 752 822 C 740 816 722 808 698 812 C 690 806 676 800 652 798 Z" fill="${P.hairShade}" ${S(4)}/>
+      </g>
+      ${stroke2("M 616 860 Q 633 846 650 860", 5, P.gold)}
+      ${stroke2("M 516 856 L 486 846", 5, P.gold)}
+      <circle cx="566" cy="864" r="50" fill="#fff" opacity="0.12"/>
+      <circle cx="700" cy="864" r="50" fill="#fff" opacity="0.12"/>
+      <circle cx="566" cy="864" r="50" fill="none" stroke="${C.ink}" stroke-width="13"/><circle cx="566" cy="864" r="50" fill="none" stroke="${P.gold}" stroke-width="6"/>
+      <circle cx="700" cy="864" r="50" fill="none" stroke="${C.ink}" stroke-width="13"/><circle cx="700" cy="864" r="50" fill="none" stroke="${P.gold}" stroke-width="6"/>
+      <path d="M 536 838 Q 548 826 562 824 M 670 838 Q 682 826 696 824" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+      <!-- Nase, Mund -->
+      <path d="M 640 868 C 640 912 650 944 670 968 C 684 988 664 1004 638 998 C 622 994 612 986 608 976" fill="${P.skin}" ${S()}/>
+      <path d="M 636 986 q 8 4 14 -2" fill="none" ${S(3)}/>
+      <g transform="translate(646 1036)">${mouth("doc-m", { s: 0.78, initial: "smile" })}</g>
+    </g>
+
+    <!-- Linker Arm (Bildseite rechts) mit Klemmbrett -->
+    ${stroke2("M 884 1270 C 934 1330 960 1400 968 1470", 104, P.coat)}
+    <g transform="rotate(-24 810 1530)">
+      <rect x="640" y="1330" width="340" height="400" rx="14" fill="${P.board}" ${S()}/>
+      <path d="M 660 1366 L 660 1710" stroke="${P.boardDark}" stroke-width="8" opacity="0.5"/>
+      <rect x="752" y="1304" width="116" height="52" rx="12" fill="#C3C8CD" ${S(4)}/>
+      <circle cx="810" cy="1318" r="10" fill="#F0F2F3" ${S(3)}/>
+    </g>
+    <g transform="translate(10 -110)"><path d="M 966 1560 C 1010 1556 1028 1600 1012 1640 C 996 1676 952 1680 936 1650 C 924 1620 930 1572 966 1560 Z" fill="${P.skin}" ${S()}/>
+    <path d="M 950 1590 C 970 1588 986 1596 992 1610 M 946 1620 C 966 1618 982 1626 988 1640" fill="none" ${S(3)}/></g>
+    <!-- Rechter Arm mit Stift -->
+    ${stroke2("M 386 1266 C 346 1400 346 1520 396 1590 L 630 1570", 104, P.coat)}
+    <path d="M 450 1520 C 470 1560 520 1572 580 1560" fill="none" stroke="${P.coatShade}" stroke-width="10" stroke-linecap="round"/>
+    <g transform="translate(46 12)"><g id="doc-hand">
+      <g id="doc-pen">
+        <path d="M 610 1540 L 676 1430" stroke="${C.ink}" stroke-width="22" stroke-linecap="round"/>
+        <path d="M 610 1540 L 676 1430" stroke="#2C2B33" stroke-width="13" stroke-linecap="round"/>
+        <path d="M 652 1470 L 664 1450" stroke="${P.gold}" stroke-width="13"/>
+        <path d="M 606 1548 L 598 1562" stroke="${P.gold}" stroke-width="6" stroke-linecap="round"/>
+      </g>
+      <path d="M 576 1508 C 610 1496 646 1512 650 1546 C 654 1580 622 1600 592 1596 C 562 1592 548 1566 552 1540 C 554 1524 562 1514 576 1508 Z" fill="${P.skin}" ${S()}/>
+      <path d="M 600 1520 C 616 1520 630 1530 634 1544" fill="none" ${S(3)}/>
+    </g></g>
   </g>
+
+  <!-- Tisch mit Akten -->
+  <path d="M -20 1660 C 300 1642 800 1630 1110 1612 L 1110 1712 C 800 1726 300 1740 -20 1756 Z" fill="${P.desk}" ${S()}/>
+  <path d="M -20 1756 C 300 1740 800 1726 1110 1712 L 1110 1960 L -20 1960 Z" fill="${P.deskSide}" ${S()}/>
+  <path d="M 0 1780 C 300 1766 800 1752 1100 1738" fill="none" stroke="#B9C29A" stroke-width="10"/>
+  ${[0, 1, 2, 3]
+    .map(
+      (i) => `<g transform="translate(${872 - i * 4} ${1640 - i * 22}) rotate(${-4 + (i % 2) * 3})">
+      <path d="M 0 0 L 230 -14 L 236 18 L 6 32 Z" fill="${i % 2 ? P.paper : "#D9C79A"}" ${S(4)}/>
+      <rect x="30" y="-6" width="34" height="14" rx="3" fill="#B9BEC3" ${S(3)}/></g>`,
+    )
+    .join("")}
 </svg>`;
 
-const praxisJs = `${HELPERS}
+const praxisJs = `
     const docLines = ${JSON.stringify(lines.filter((l) => l.speaker === "arzt").map((l) => [l.start, l.end]))};
-    gsap.set(["#de1-lid", "#de2-lid"], { scaleY: 0.2, svgOrigin: "0 -21" });
-    gsap.set(["#pe1-lid", "#pe2-lid"], { scaleY: 0.25, svgOrigin: "0 -21" });
-    gsap.set(["#pe1-p", "#pe2-p"], { x: -10 });
-    docLines.forEach(([a, b]) => talk("doc", a, b, "flat", 0.12));
-    const blinkP = (sel, t, v) => { tl.to(sel, { scaleY: 1, duration: 0.06 }, t); tl.to(sel, { scaleY: v, duration: 0.08 }, t + 0.07); };
-    [36.2, 39.1, 41.9, 45.0].forEach((t) => blinkP(["#de1-lid", "#de2-lid"], t, 0.2));
-    [37.3, 40.4, 43.2, 46.4].forEach((t) => blinkP(["#pe1-lid", "#pe2-lid"], t, 0.25));
-    [35.3, 37.5, 39.7, 41.9, 44.1, 46.3].forEach((t, i) =>
-      tl.to("#doc-arm", { rotation: i % 2 ? 0 : -3, svgOrigin: "372 712", duration: 1.2, ease: "sine.inOut" }, t));
+    const LIDS = ["#de1-lid", "#de2-lid"], PUP = ["#de1-p", "#de2-p"];
+    gsap.set(LIDS, { scaleY: 0.42, svgOrigin: "0 -28" });
+    gsap.set(PUP, { x: 6, y: 9 });
+    gsap.set("#doc-head", { svgOrigin: "630 1080" });
+    gsap.set("#doc-hand", { svgOrigin: "560 1560" });
+    const blinkD = (t, v) => { tl.to(LIDS, { scaleY: 1, duration: 0.06 }, t); tl.to(LIDS, { scaleY: v, duration: 0.09 }, t + 0.07); };
+    // Schreiben: kleine Kringel mit dem Stift.
+    const write = (t0, t1) => {
+      for (let t = t0, i = 0; t < t1 - 0.12; t += 0.16, i++)
+        tl.to("#doc-hand", { x: [0, 6, -2, 8][i % 4], y: [0, -4, 3, -2][i % 4], duration: 0.15, ease: "sine.inOut" }, t);
+      tl.to("#doc-hand", { x: 0, y: 0, duration: 0.15 }, t1 - 0.12);
+    };
+    const S0 = ${SC.praxis[0]}, S1 = ${SC.praxis[1]};
+    let prev = S0;
+    docLines.forEach(([a, b], i) => {
+      if (a - prev > 0.35) write(prev + 0.05, a - 0.1);
+      // aufschauen, Kopf leicht heben, Brauen hoch, erklären
+      tl.to(PUP, { x: 0, y: -2, duration: 0.2, ease: "power3.out" }, a - 0.15);
+      tl.to(LIDS, { scaleY: 0.3, duration: 0.2 }, a - 0.15);
+      tl.to("#doc-head", { rotation: i % 2 ? 1.5 : -1.5, y: -6, duration: 0.5, ease: "sine.inOut" }, a - 0.15);
+      tl.to("#doc-brows", { y: -8, duration: 0.18, ease: "power2.out" }, a);
+      tl.to("#doc-brows", { y: 0, duration: 0.3, ease: "power2.inOut" }, a + 0.5);
+      talk("doc", a, b, "smile", 0.12);
+      blinkD(a + (b - a) * 0.55, 0.3);
+      tl.to(PUP, { x: 6, y: 9, duration: 0.25, ease: "power2.inOut" }, b + 0.05);
+      tl.to(LIDS, { scaleY: 0.42, duration: 0.25 }, b + 0.05);
+      tl.to("#doc-head", { rotation: 0, y: 0, duration: 0.5, ease: "sine.inOut" }, b + 0.05);
+      prev = b;
+    });
+    if (S1 - prev > 0.4) write(prev + 0.2, S1 - 0.05);
 `;
 
 /* ================= Captions ================= */
-const words = wordTimes(lines);
+// Karte zeigt "SPÄTER" schon groß, daher keine Untertitel dafür.
+const spoken = lines.filter((l) => l.speaker !== "card");
+const words = spoken.flatMap((l) =>
+  VO[l.id]
+    ? VO[l.id].words.map((w) => ({
+        text: w.text,
+        start: +(l.start + w.start).toFixed(3),
+        end: +(l.start + w.end).toFixed(3),
+      }))
+    : wordTimes([l]),
+);
 const capBody = words
   .map((w, i) => `    <div id="cap-${i}" class="cap">${w.text.replace(/[!?,.…]+$/u, "")}</div>`)
   .join("\n");
@@ -477,6 +698,13 @@ const sfx = script.sfx
   .map(
     (s, i) =>
       `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${s.start}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
+  )
+  .join("\n");
+const vo = lines
+  .filter((l) => VO[l.id])
+  .map(
+    (l, i) =>
+      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.id}.mp3" data-start="${l.start}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
   )
   .join("\n");
 const host = (id, track, kind = "graphics", z = 1) => {
@@ -505,6 +733,7 @@ ${host("praxis", 4)}
 ${host("captions", 5, "captions", 5)}
 ${host("marke", 6, "graphics", 4)}
 ${sfx}
+${vo}
     </div>
     <script>
       window.__timelines = window.__timelines || {};
@@ -529,13 +758,16 @@ const marke = `<template>
 </template>
 `;
 
+mkdirSync(new URL("./compositions/", import.meta.url), { recursive: true });
 const out = (f, s) => writeFileSync(new URL(f, import.meta.url), s);
 const pre = (p, js) => js.replaceAll("@", p);
 out("./index.html", index);
 out("./compositions/kiefer.html", page("kiefer", SC.kiefer, jaw("k-"), "", pre("k-", kieferJs)));
 out("./compositions/op.html", page("op", SC.op, jaw("o-"), "", pre("o-", opJs)));
 out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaeterCss, spaeterJs));
-out("./compositions/praxis.html", page("praxis", SC.praxis, praxisSvg, "", praxisJs));
+out("./compositions/praxis.html", page("praxis", SC.praxis, praxisSvg, "", HELPERS + praxisJs));
 out("./compositions/captions.html", page("captions", [0, DUR], capBody, CAPTION_CSS, capJs));
 out("./compositions/marke.html", marke);
-console.log(`built: ${words.length} caption words, ${script.sfx.length} sfx, ${DUR}s`);
+console.log(
+  `built: ${Object.keys(VO).length} voice clips, ${words.length} caption words, ${script.sfx.length} sfx, ${DUR}s`,
+);
