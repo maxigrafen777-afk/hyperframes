@@ -88,6 +88,19 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - **Schuss/Gegenschuss:** `frameTo()` auf das sprechende Gesicht (Opfer k ≈ 1,1, damit die Untertitel frei bleiben; Verursacher k ≈ 1,45, damit das andere Gesicht nicht angeschnitten unten hängt). Rahmen-Ebene (`#@frame`) und Wackel-Ebene (`#@cam`) getrennt.
 - **Eingriff:** eigene Umgebung (grünes OP-Tuch, Lampenlicht), Lichtblitz zum Start, Kamera fährt jede Aktion an, Impact-Blitz beim Herausziehen.
 
+## Spannung und OP-Fokus (gelernt am Blinddarm v2)
+
+- **Cold Open:** Die ersten ~2,5 s zeigen den Höhepunkt der OP vorweg (gleiche Aufnahme per `"reuse": "o4"`), dazu der Hook als offene Frage („WIE PASST DER BLINDDARM DURCH 1 CM?“). Dann Zurückspulen (Streifen, ◀◀, Rewind-SFX) und „6 STUNDEN VORHER“. Die Auflösung der Frage kommt erst in der OP.
+- **Gefahren-Balken** („PLATZ-GEFAHR“) füllt sich im Streit und blinkt kurz vor der OP: sichtbarer Countdown, der die Spannung trägt.
+- **Die OP ist der Kern:** 5 beschriftete Schritte („SCHRITT 2/5 · LUFT & KAMERA“), der Arzt erklärt jeden Schritt aus dem Off, die Figuren reagieren dazwischen. Alle OP-Beats hängen an den Startzeiten der Arzt-Sätze (`a1`–`a6`), nicht an festen Zeiten, sonst laufen Bild und Erklärung auseinander. Ruhige Kamera (ein Rahmen pro Schritt), kein Lichtnebel.
+- **Ebenen ohne eigene Szene** (Hook, Untertitel, Wasserzeichen) starten bei echter Zeit 0. Nie `R(0)` verwenden, wenn die erste Szene nicht bei Autorenzeit 0 liegt (sonst laufen die Untertitel um die Teaser-Länge hinterher).
+
+## ElevenLabs-Grenzen (kostenloser Tarif)
+
+- 10.000 Credits pro Monat; QA-Retakes und Spracherkennung zählen mit. Texte vor dem Erzeugen final machen, Retakes sparsam.
+- `eleven_multilingual_v2` klingt pro Figur gleichmäßiger als v3 (fester `seed` pro Figur, `previous_text`/`next_text` derselben Figur). v3-Tags werden dafür aus dem Text entfernt; Emotion über Satzzeichen und `style`.
+- Englische Standardstimmen sprechen Deutsch nie ganz natürlich. Für muttersprachliche Stimmen braucht der Key „Voices: Read“ (Bibliothek durchsuchen) und „Voices: Write“ (Stimme hinzufügen).
+
 ## Stolperfallen
 
 - QA-Normalisierung ignoriert Bindestriche („Kot-Stein“ = „Kotstein“); schwierige Wörter mit Bindestrich schreiben hilft der Aussprache.

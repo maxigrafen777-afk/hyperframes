@@ -2,33 +2,42 @@
   "title": "Blinddarm wird entfernt",
   "handle": "Dr. Arzterklärt",
   "duration": 0,
-  "voiceModel": "eleven_v3",
+  "voiceModel": "eleven_multilingual_v2",
   "hook": [
-    ["SO WIRD DEIN", 80, "#fff"],
+    ["WIE PASST DER", 80, "#fff"],
     ["BLINDDARM", 128, "#FFE14D"],
-    ["ENTFERNT", 80, "#fff"]
+    ["DURCH 1 CM?", 86, "#fff"]
   ],
   "scenes": {
-    "streit": [0, 9.5],
+    "teaser": [90, 92.8],
+    "streit": [0, 9.0],
     "spaeter": [10, 11.4],
-    "nachher": [20, 24.5],
-    "op": [30, 43.5],
-    "frage": [50, 52],
-    "praxis": [55, 58],
-    "patient": [65, 69.5]
+    "nachher": [20, 24.0],
+    "op": [30, 50],
+    "praxis": [65, 67],
+    "patient": [70, 74.5]
   },
-  "order": ["streit", "spaeter", "nachher", "op", "frage", "praxis", "patient"],
+  "order": ["teaser", "streit", "spaeter", "nachher", "op", "praxis", "patient"],
   "qa": {
     "maxTakes": 3,
     "maxWer": 0.1
   },
   "lines": [
     {
+      "id": "t1",
+      "speaker": "bd",
+      "start": 90.3,
+      "end": 91.3,
+      "text": "[screaming] Nein! Ich will nicht weg!",
+      "emph": ["Nein"],
+      "reuse": "o4"
+    },
+    {
       "id": "s1",
       "speaker": "bd",
       "start": 0.35,
       "end": 1.35,
-      "text": "[shouting] Aua! Mir geht es so schlecht!",
+      "text": "Aua! Mir geht es so schlecht!",
       "emph": ["Aua"]
     },
     {
@@ -36,14 +45,14 @@
       "speaker": "darm",
       "start": 1.8,
       "end": 2.8,
-      "text": "[annoyed] Du bist nur ein Wurmfortsatz. Stell dich nicht so an."
+      "text": "Du bist nur ein Wurmfortsatz. Stell dich nicht so an."
     },
     {
       "id": "s3",
       "speaker": "bd",
       "start": 3.4,
       "end": 4.4,
-      "text": "[offended] Nur?! Da steckt was in mir fest!",
+      "text": "Nur?! Da steckt was in mir fest!",
       "emph": ["fest"]
     },
     {
@@ -51,16 +60,8 @@
       "speaker": "darm",
       "start": 4.8,
       "end": 5.8,
-      "text": "[sighs] Ein Kot-Stein. Selber schuld.",
+      "text": "Ein Kot-Stein. Selber schuld.",
       "emph": ["Kot-Stein"]
-    },
-    {
-      "id": "s5",
-      "speaker": "bd",
-      "start": 6.2,
-      "end": 7.2,
-      "text": "[panicked] Ich schwelle an! Ich werd ganz rot!",
-      "emph": ["rot"]
     },
     {
       "id": "l6",
@@ -74,120 +75,136 @@
       "speaker": "bd",
       "start": 20.3,
       "end": 21.3,
-      "text": "[screaming] Ich platz gleich!",
-      "emph": ["platz"]
+      "text": "Hilfe! Ich platze gleich!",
+      "emph": ["platze"]
     },
     {
       "id": "n2",
       "speaker": "darm",
       "start": 21.4,
       "end": 22.4,
-      "text": "[panicked] Bloß nicht! Dann entzündet sich hier alles!",
+      "text": "Bloß nicht! Dann entzündet sich hier alles!",
       "emph": ["alles"]
     },
     {
       "id": "n3",
       "speaker": "darm",
-      "start": 23.0,
-      "end": 24.0,
-      "text": "[shouting] Herr Doktor! Schnell!",
+      "start": 22.8,
+      "end": 23.8,
+      "text": "Herr Doktor! Schnell!",
       "emph": ["Doktor"]
+    },
+    {
+      "id": "a1",
+      "speaker": "arzt",
+      "start": 30.2,
+      "end": 31.2,
+      "text": "Der Patient schläft. Zuerst setzen wir drei kleine Zugänge.",
+      "emph": ["drei"]
+    },
+    {
+      "id": "a2",
+      "speaker": "arzt",
+      "start": 31.0,
+      "end": 32.0,
+      "text": "Gas hebt die Bauchdecke an. So haben wir Platz.",
+      "emph": ["Gas"]
     },
     {
       "id": "o1",
       "speaker": "darm",
-      "start": 30.6,
-      "end": 31.6,
-      "text": "[confused] Hey! Wer pumpt hier Luft rein?!",
-      "emph": ["Luft"]
+      "start": 31.5,
+      "end": 32.5,
+      "text": "Hey! Wer pumpt hier Luft rein?!"
     },
     {
-      "id": "o2",
-      "speaker": "bd",
+      "id": "a3",
+      "speaker": "arzt",
+      "start": 32.0,
+      "end": 33.0,
+      "text": "Durch die Mitte kommt die Kamera.",
+      "emph": ["Kamera"]
+    },
+    {
+      "id": "a4",
+      "speaker": "arzt",
       "start": 33.0,
       "end": 34.0,
-      "text": "[shouting] Ah! Das Licht!",
-      "emph": ["Licht"]
+      "text": "Eine Zange hält den Blinddarm fest.",
+      "emph": ["Zange"]
     },
     {
       "id": "o3",
       "speaker": "bd",
-      "start": 34.6,
-      "end": 35.6,
-      "text": "[panicked] Finger weg von mir!"
+      "start": 33.5,
+      "end": 34.5,
+      "text": "Finger weg von mir!"
+    },
+    {
+      "id": "a5",
+      "speaker": "arzt",
+      "start": 34.0,
+      "end": 35.0,
+      "text": "Zwei Clips an die Basis. Dann schneiden wir dazwischen.",
+      "emph": ["Clips"]
     },
     {
       "id": "o4",
       "speaker": "bd",
-      "start": 36.4,
-      "end": 37.4,
-      "text": "[nervous] Was sind das für Klammern?!",
-      "emph": ["Klammern"]
+      "start": 34.5,
+      "end": 35.5,
+      "text": "Nein! Ich will nicht weg!",
+      "emph": ["Nein"]
+    },
+    {
+      "id": "a6",
+      "speaker": "arzt",
+      "start": 35.0,
+      "end": 36.0,
+      "text": "Er kommt in einen Beutel und raus durch den Zugang.",
+      "emph": ["Beutel"]
     },
     {
       "id": "o5",
       "speaker": "bd",
-      "start": 38.0,
-      "end": 39.0,
-      "text": "[screaming] Nein! Ich will nicht weg!",
-      "emph": ["Nein"]
+      "start": 35.5,
+      "end": 36.5,
+      "text": "Ich komme wieder!"
     },
     {
       "id": "o6",
-      "speaker": "bd",
-      "start": 39.7,
-      "end": 40.7,
-      "text": "[dramatic] Ich komme wieder!"
-    },
-    {
-      "id": "o7",
       "speaker": "darm",
-      "start": 41.2,
-      "end": 42.2,
-      "text": "[smug] Nein. Kommst du nicht."
-    },
-    {
-      "id": "q1",
-      "speaker": "pat",
-      "start": 50.3,
-      "end": 51.3,
-      "text": "Herr Doktor, brauch ich den Blinddarm denn nicht?"
+      "start": 36.0,
+      "end": 37.0,
+      "text": "Nein. Kommst du nicht."
     },
     {
       "id": "d1",
       "speaker": "arzt",
-      "start": 55.4,
-      "end": 56.4,
-      "text": "Man kann gut ohne ihn leben. Er war entzündet und wäre fast durchgebrochen."
-    },
-    {
-      "id": "d2",
-      "speaker": "arzt",
-      "start": 57.0,
-      "end": 58.0,
-      "text": "Wir haben ihn durch drei kleine Schnitte mit einer Kamera entfernt.",
-      "emph": ["drei"]
+      "start": 65.3,
+      "end": 66.3,
+      "text": "Man kann gut ohne ihn leben. Er wäre fast durchgebrochen."
     },
     {
       "id": "e1",
       "speaker": "pat",
-      "start": 65.3,
-      "end": 66.3,
+      "start": 70.3,
+      "end": 71.3,
       "text": "Und warum tut Lachen so weh?"
     },
     {
       "id": "e2",
       "speaker": "arzt",
-      "start": 66.5,
-      "end": 67.5,
-      "text": "[warmly] Das ist die ersten Tage normal. Also lieber keine Witze."
+      "start": 71.5,
+      "end": 72.5,
+      "text": "Das ist die ersten Tage normal. Also lieber keine Witze."
     },
     {
       "id": "e3",
       "speaker": "pat",
-      "start": 68.2,
-      "end": 69.2,
-      "text": "[laughs] Au! Au, au!"
+      "start": 73.2,
+      "end": 74.2,
+      "text": "Haha… au! Au, au!"
     }
   ],
   "voices": {
@@ -195,41 +212,49 @@
       "name": "Blinddarm (dramatische Diva; Jessica)",
       "voice_id": "cgSgspJ2msm6clMCkdW9",
       "settings": {
+        "stability": 0.45,
         "similarity_boost": 0.8,
-        "use_speaker_boost": true,
-        "stability": 0.5
+        "style": 0.35,
+        "use_speaker_boost": true
       },
-      "tempo": 1.12
+      "tempo": 1.05,
+      "seed": 1101
     },
     "darm": {
       "name": "Dickdarm (grummelig, tief; Brian)",
       "voice_id": "nPczCjzI2devNBz1zQrb",
       "settings": {
+        "stability": 0.45,
         "similarity_boost": 0.8,
-        "use_speaker_boost": true,
-        "stability": 0.5
+        "style": 0.25,
+        "use_speaker_boost": true
       },
-      "tempo": 1.1
+      "tempo": 1.05,
+      "seed": 2202
     },
     "arzt": {
       "name": "Arzt (ruhig, warm; George)",
       "voice_id": "JBFqnCBsd6RMkjVDRZzb",
       "settings": {
+        "stability": 0.6,
         "similarity_boost": 0.85,
-        "use_speaker_boost": true,
-        "stability": 0.5
+        "style": 0.1,
+        "use_speaker_boost": true
       },
-      "tempo": 1.08
+      "tempo": 1.08,
+      "seed": 3303
     },
     "pat": {
       "name": "Patient (locker, jung; Chris)",
       "voice_id": "iP95p4xoKVk53GoZ742B",
       "settings": {
+        "stability": 0.45,
         "similarity_boost": 0.8,
-        "use_speaker_boost": true,
-        "stability": 0.5
+        "style": 0.35,
+        "use_speaker_boost": true
       },
-      "tempo": 1.08
+      "tempo": 1.0,
+      "seed": 4404
     }
   },
   "genSfx": [
@@ -292,20 +317,32 @@
       "id": "rimshot",
       "prompt": "comedic drum rimshot ba dum tss",
       "duration": 1.2
+    },
+    {
+      "id": "rewind",
+      "prompt": "fast VHS tape rewind sound, whirring squeal",
+      "duration": 0.8
     }
   ],
   "sfx": [
     {
       "id": "sfx-whoosh0",
       "src": "whoosh-short.mp3",
-      "start": 0,
+      "start": 90.0,
       "volume": 0.5
     },
     {
       "id": "sfx-boom",
       "src": "gen-boom.mp3",
-      "start": 0,
+      "start": 90.0,
       "volume": 0.7
+    },
+    {
+      "id": "sfx-rewind",
+      "src": "gen-rewind.mp3",
+      "anchor": "streit",
+      "offset": -0.7,
+      "volume": 0.6
     },
     {
       "id": "sfx-throb1",
@@ -313,6 +350,90 @@
       "line": "s1",
       "offset": -0.2,
       "volume": 0.5
+    },
+    {
+      "id": "sfx-ports",
+      "src": "pop.mp3",
+      "line": "a1",
+      "offset": 1.6,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-ports2",
+      "src": "pop.mp3",
+      "line": "a1",
+      "offset": 1.9,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-ports3",
+      "src": "pop.mp3",
+      "line": "a1",
+      "offset": 2.2,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-air",
+      "src": "gen-air.mp3",
+      "line": "a2",
+      "offset": 0.2,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-scope",
+      "src": "whoosh.mp3",
+      "line": "a3",
+      "offset": 0.3,
+      "volume": 0.4
+    },
+    {
+      "id": "sfx-grab",
+      "src": "click.mp3",
+      "line": "a4",
+      "offset": 1.0,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-clip1",
+      "src": "gen-clip.mp3",
+      "line": "a5",
+      "offset": 0.9,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-clip2",
+      "src": "gen-clip.mp3",
+      "line": "a5",
+      "offset": 1.5,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-snip1",
+      "src": "gen-snip.mp3",
+      "line": "a5",
+      "offset": 2.6,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-snip2",
+      "src": "gen-snip.mp3",
+      "line": "a5",
+      "offset": 2.9,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-slurp",
+      "src": "gen-slurp.mp3",
+      "line": "o5",
+      "offset": 0.6,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-rimshot",
+      "src": "gen-rimshot.mp3",
+      "line": "o6",
+      "offset": 1.0,
+      "volume": 0.45
     },
     {
       "id": "sfx-riser",
@@ -341,86 +462,6 @@
       "line": "n1",
       "offset": -0.3,
       "volume": 0.6
-    },
-    {
-      "id": "sfx-ports",
-      "src": "pop.mp3",
-      "start": 30.0,
-      "volume": 0.5
-    },
-    {
-      "id": "sfx-ports2",
-      "src": "pop.mp3",
-      "start": 30.15,
-      "volume": 0.45
-    },
-    {
-      "id": "sfx-ports3",
-      "src": "pop.mp3",
-      "start": 30.3,
-      "volume": 0.45
-    },
-    {
-      "id": "sfx-air",
-      "src": "gen-air.mp3",
-      "start": 30.35,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-scope",
-      "src": "whoosh.mp3",
-      "start": 32.35,
-      "volume": 0.4
-    },
-    {
-      "id": "sfx-grab",
-      "src": "click.mp3",
-      "start": 34.7,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-clip1",
-      "src": "gen-clip.mp3",
-      "start": 36.6,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-clip2",
-      "src": "gen-clip.mp3",
-      "start": 37.0,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-snip1",
-      "src": "gen-snip.mp3",
-      "start": 38.0,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-snip2",
-      "src": "gen-snip.mp3",
-      "start": 38.25,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-slurp",
-      "src": "gen-slurp.mp3",
-      "start": 40.3,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-rimshot",
-      "src": "gen-rimshot.mp3",
-      "line": "o7",
-      "offset": 1.0,
-      "volume": 0.45
-    },
-    {
-      "id": "sfx-frage",
-      "src": "gen-boing.mp3",
-      "anchor": "frage",
-      "offset": 0.0,
-      "volume": 0.5
     },
     {
       "id": "sfx-praxis",

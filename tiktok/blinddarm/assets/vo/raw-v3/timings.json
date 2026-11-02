@@ -1,0 +1,810 @@
+{
+  "s1": {
+    "text": "[shouting] Aua! Mir geht es so schlecht!",
+    "heard": "Aua, mir geht es so schlecht",
+    "wer": 0,
+    "fileDuration": 3.474286,
+    "words": [
+      {
+        "text": "Aua!",
+        "start": 0.144,
+        "end": 0.88
+      },
+      {
+        "text": "Mir",
+        "start": 1,
+        "end": 1.36
+      },
+      {
+        "text": "geht",
+        "start": 1.408,
+        "end": 1.6
+      },
+      {
+        "text": "es",
+        "start": 1.707,
+        "end": 1.92
+      },
+      {
+        "text": "so",
+        "start": 2.08,
+        "end": 2.4
+      },
+      {
+        "text": "schlecht!",
+        "start": 2.48,
+        "end": 3.44
+      }
+    ]
+  },
+  "s2": {
+    "text": "[annoyed] Du bist nur ein Wurmfortsatz. Stell dich nicht so an.",
+    "heard": "Du bist nur ein Wurmfortsatz. Stell dich nicht so an",
+    "wer": 0,
+    "fileDuration": 3.709388,
+    "words": [
+      {
+        "text": "Du",
+        "start": 0.142,
+        "end": 0.16
+      },
+      {
+        "text": "bist",
+        "start": 0.208,
+        "end": 0.4
+      },
+      {
+        "text": "nur",
+        "start": 0.48,
+        "end": 0.72
+      },
+      {
+        "text": "ein",
+        "start": 0.78,
+        "end": 0.96
+      },
+      {
+        "text": "Wurmfortsatz.",
+        "start": 1.04,
+        "end": 2.4
+      },
+      {
+        "text": "Stell",
+        "start": 2.48,
+        "end": 2.72
+      },
+      {
+        "text": "dich",
+        "start": 2.768,
+        "end": 2.96
+      },
+      {
+        "text": "nicht",
+        "start": 2.987,
+        "end": 3.12
+      },
+      {
+        "text": "so",
+        "start": 3.173,
+        "end": 3.28
+      },
+      {
+        "text": "an.",
+        "start": 3.387,
+        "end": 3.68
+      }
+    ]
+  },
+  "s3": {
+    "text": "[offended] Nur?! Da steckt was in mir fest!",
+    "heard": "Nur? Da steckt was in mir fest",
+    "wer": 0,
+    "fileDuration": 3.160816,
+    "words": [
+      {
+        "text": "Nur?!",
+        "start": 0.485,
+        "end": 0.64
+      },
+      {
+        "text": "Da",
+        "start": 0.88,
+        "end": 1.36
+      },
+      {
+        "text": "steckt",
+        "start": 1.42,
+        "end": 1.76
+      },
+      {
+        "text": "was",
+        "start": 1.82,
+        "end": 2
+      },
+      {
+        "text": "in",
+        "start": 2.053,
+        "end": 2.16
+      },
+      {
+        "text": "mir",
+        "start": 2.22,
+        "end": 2.4
+      },
+      {
+        "text": "fest!",
+        "start": 2.528,
+        "end": 3.12
+      }
+    ]
+  },
+  "s4": {
+    "text": "[sighs] Ein Kot-Stein. Selber schuld.",
+    "heard": "Ein Kotstein. Selber schuld",
+    "wer": 0,
+    "fileDuration": 3.709388,
+    "words": [
+      {
+        "text": "Ein",
+        "start": 0.54,
+        "end": 0.72
+      },
+      {
+        "text": "Kot-Stein.",
+        "start": 0.8,
+        "end": 2
+      },
+      {
+        "text": "Selber",
+        "start": 2.1,
+        "end": 2.56
+      },
+      {
+        "text": "schuld.",
+        "start": 2.6,
+        "end": 3.68
+      }
+    ]
+  },
+  "s5": {
+    "text": "[panicked] Ich schwelle an! Ich werd ganz rot!",
+    "heard": "Ich schwelle an, ich werd ganz rot",
+    "wer": 0,
+    "fileDuration": 3.160816,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0.21,
+        "end": 0.24
+      },
+      {
+        "text": "schwelle",
+        "start": 0.288,
+        "end": 0.72
+      },
+      {
+        "text": "an!",
+        "start": 0.88,
+        "end": 1.52
+      },
+      {
+        "text": "Ich",
+        "start": 1.6,
+        "end": 1.84
+      },
+      {
+        "text": "werd",
+        "start": 1.888,
+        "end": 2.08
+      },
+      {
+        "text": "ganz",
+        "start": 2.144,
+        "end": 2.4
+      },
+      {
+        "text": "rot!",
+        "start": 2.54,
+        "end": 3.12
+      }
+    ]
+  },
+  "n1": {
+    "text": "[screaming] Ich platz gleich!",
+    "heard": "Ich platz gleich",
+    "wer": 0,
+    "fileDuration": 2.037551,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0.58,
+        "end": 1.12
+      },
+      {
+        "text": "platz",
+        "start": 1.173,
+        "end": 1.44
+      },
+      {
+        "text": "gleich!",
+        "start": 1.509,
+        "end": 2
+      }
+    ]
+  },
+  "n2": {
+    "text": "[panicked] Bloß nicht! Dann entzündet sich hier alles!",
+    "heard": "Bloß nicht! Dann entzündet sich hier alles",
+    "wer": 0,
+    "fileDuration": 3.160816,
+    "words": [
+      {
+        "text": "Bloß",
+        "start": 0.204,
+        "end": 0.48
+      },
+      {
+        "text": "nicht!",
+        "start": 0.56,
+        "end": 1.28
+      },
+      {
+        "text": "Dann",
+        "start": 1.344,
+        "end": 1.6
+      },
+      {
+        "text": "entzündet",
+        "start": 1.68,
+        "end": 2.24
+      },
+      {
+        "text": "sich",
+        "start": 2.288,
+        "end": 2.48
+      },
+      {
+        "text": "hier",
+        "start": 2.512,
+        "end": 2.64
+      },
+      {
+        "text": "alles!",
+        "start": 2.707,
+        "end": 3.12
+      }
+    ]
+  },
+  "n3": {
+    "text": "[shouting] Herr Doktor! Schnell!",
+    "heard": "Herr Doktor, schnell!",
+    "wer": 0,
+    "fileDuration": 2.272653,
+    "words": [
+      {
+        "text": "Herr",
+        "start": 0.208,
+        "end": 0.24
+      },
+      {
+        "text": "Doktor!",
+        "start": 0.32,
+        "end": 0.8
+      },
+      {
+        "text": "Schnell!",
+        "start": 0.912,
+        "end": 1.76
+      }
+    ]
+  },
+  "o1": {
+    "text": "[confused] Hey! Wer pumpt hier Luft rein?!",
+    "heard": "Hey, wer pumpt hier Luft rein?",
+    "wer": 0,
+    "fileDuration": 2.429388,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0.34,
+        "end": 0.48
+      },
+      {
+        "text": "Wer",
+        "start": 0.58,
+        "end": 0.88
+      },
+      {
+        "text": "pumpt",
+        "start": 0.92,
+        "end": 1.2
+      },
+      {
+        "text": "hier",
+        "start": 1.232,
+        "end": 1.36
+      },
+      {
+        "text": "Luft",
+        "start": 1.408,
+        "end": 1.6
+      },
+      {
+        "text": "rein?!",
+        "start": 1.68,
+        "end": 2.4
+      }
+    ]
+  },
+  "o2": {
+    "text": "[shouting] Ah! Das Licht!",
+    "heard": "Ah, das Licht",
+    "wer": 0,
+    "fileDuration": 1.880816,
+    "words": [
+      {
+        "text": "Ah!",
+        "start": 0.347,
+        "end": 0.48
+      },
+      {
+        "text": "Das",
+        "start": 0.62,
+        "end": 1.04
+      },
+      {
+        "text": "Licht!",
+        "start": 1.147,
+        "end": 1.84
+      }
+    ]
+  },
+  "o3": {
+    "text": "[panicked] Finger weg von mir!",
+    "heard": "Finger weg von mir!",
+    "wer": 0,
+    "fileDuration": 1.802449,
+    "words": [
+      {
+        "text": "Finger",
+        "start": 0.269,
+        "end": 0.32
+      },
+      {
+        "text": "weg",
+        "start": 0.38,
+        "end": 0.56
+      },
+      {
+        "text": "von",
+        "start": 0.62,
+        "end": 0.8
+      },
+      {
+        "text": "mir!",
+        "start": 0.86,
+        "end": 1.2
+      }
+    ]
+  },
+  "o4": {
+    "text": "[nervous] Was sind das für Klammern?!",
+    "heard": "Was sind das für Klammern?",
+    "wer": 0,
+    "fileDuration": 2.272653,
+    "words": [
+      {
+        "text": "Was",
+        "start": 0.34,
+        "end": 0.4
+      },
+      {
+        "text": "sind",
+        "start": 0.496,
+        "end": 0.88
+      },
+      {
+        "text": "das",
+        "start": 0.96,
+        "end": 1.2
+      },
+      {
+        "text": "für",
+        "start": 1.26,
+        "end": 1.44
+      },
+      {
+        "text": "Klammern?!",
+        "start": 1.493,
+        "end": 2.24
+      }
+    ]
+  },
+  "o5": {
+    "text": "[screaming] Nein! Ich will nicht weg!",
+    "heard": "Nein, ich will nicht weg",
+    "wer": 0,
+    "fileDuration": 2.429388,
+    "words": [
+      {
+        "text": "Nein!",
+        "start": 0.28,
+        "end": 1.12
+      },
+      {
+        "text": "Ich",
+        "start": 1.18,
+        "end": 1.36
+      },
+      {
+        "text": "will",
+        "start": 1.408,
+        "end": 1.6
+      },
+      {
+        "text": "nicht",
+        "start": 1.653,
+        "end": 1.92
+      },
+      {
+        "text": "weg!",
+        "start": 2.02,
+        "end": 2.4
+      }
+    ]
+  },
+  "o6": {
+    "text": "[dramatic] Ich komme wieder!",
+    "heard": "Ich komme wieder",
+    "wer": 0,
+    "fileDuration": 1.306122,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0.204,
+        "end": 0.24
+      },
+      {
+        "text": "komme",
+        "start": 0.3,
+        "end": 0.64
+      },
+      {
+        "text": "wieder!",
+        "start": 0.709,
+        "end": 1.28
+      }
+    ]
+  },
+  "o7": {
+    "text": "[smug] Nein. Kommst du nicht.",
+    "heard": "Nein, kommst du nicht",
+    "wer": 0,
+    "fileDuration": 2.35102,
+    "words": [
+      {
+        "text": "Nein.",
+        "start": 0.453,
+        "end": 0.8
+      },
+      {
+        "text": "Kommst",
+        "start": 0.88,
+        "end": 1.28
+      },
+      {
+        "text": "du",
+        "start": 1.307,
+        "end": 1.36
+      },
+      {
+        "text": "nicht.",
+        "start": 1.413,
+        "end": 2.32
+      }
+    ]
+  },
+  "q1": {
+    "text": "Herr Doktor, brauch ich den Blinddarm denn nicht?",
+    "heard": "Herr Doktor, brauch ich den Blinddarm denn nicht?",
+    "wer": 0,
+    "fileDuration": 3.395918,
+    "words": [
+      {
+        "text": "Herr",
+        "start": 0,
+        "end": 0.08
+      },
+      {
+        "text": "Doktor,",
+        "start": 0.16,
+        "end": 0.72
+      },
+      {
+        "text": "brauch",
+        "start": 0.92,
+        "end": 1.68
+      },
+      {
+        "text": "ich",
+        "start": 1.72,
+        "end": 1.84
+      },
+      {
+        "text": "den",
+        "start": 1.88,
+        "end": 2
+      },
+      {
+        "text": "Blinddarm",
+        "start": 2.067,
+        "end": 2.64
+      },
+      {
+        "text": "denn",
+        "start": 2.672,
+        "end": 2.8
+      },
+      {
+        "text": "nicht?",
+        "start": 2.867,
+        "end": 3.36
+      }
+    ]
+  },
+  "d1": {
+    "text": "Man kann gut ohne ihn leben. Er war entzündet und wäre fast durchgebrochen.",
+    "heard": "Man kann gut ohne ihn leben. Er war entzündet und wäre fast durchgebrochen",
+    "wer": 0,
+    "fileDuration": 4.519184,
+    "words": [
+      {
+        "text": "Man",
+        "start": 0,
+        "end": 0.08
+      },
+      {
+        "text": "kann",
+        "start": 0.128,
+        "end": 0.32
+      },
+      {
+        "text": "gut",
+        "start": 0.4,
+        "end": 0.64
+      },
+      {
+        "text": "ohne",
+        "start": 0.688,
+        "end": 0.88
+      },
+      {
+        "text": "ihn",
+        "start": 0.92,
+        "end": 1.04
+      },
+      {
+        "text": "leben.",
+        "start": 1.107,
+        "end": 1.52
+      },
+      {
+        "text": "Er",
+        "start": 1.76,
+        "end": 2.24
+      },
+      {
+        "text": "war",
+        "start": 2.28,
+        "end": 2.4
+      },
+      {
+        "text": "entzündet",
+        "start": 2.44,
+        "end": 2.96
+      },
+      {
+        "text": "und",
+        "start": 2.98,
+        "end": 3.04
+      },
+      {
+        "text": "wäre",
+        "start": 3.104,
+        "end": 3.36
+      },
+      {
+        "text": "fast",
+        "start": 3.408,
+        "end": 3.6
+      },
+      {
+        "text": "durchgebrochen.",
+        "start": 3.64,
+        "end": 4.48
+      }
+    ]
+  },
+  "d2": {
+    "text": "Wir haben ihn durch drei kleine Schnitte mit einer Kamera entfernt.",
+    "heard": "Wir haben ihn durch drei kleine Schnitte mit einer Kamera entfernt",
+    "wer": 0,
+    "fileDuration": 3.395918,
+    "words": [
+      {
+        "text": "Wir",
+        "start": 0,
+        "end": 0.08
+      },
+      {
+        "text": "haben",
+        "start": 0.12,
+        "end": 0.32
+      },
+      {
+        "text": "ihn",
+        "start": 0.36,
+        "end": 0.48
+      },
+      {
+        "text": "durch",
+        "start": 0.52,
+        "end": 0.72
+      },
+      {
+        "text": "drei",
+        "start": 0.784,
+        "end": 1.04
+      },
+      {
+        "text": "kleine",
+        "start": 1.097,
+        "end": 1.44
+      },
+      {
+        "text": "Schnitte",
+        "start": 1.488,
+        "end": 1.84
+      },
+      {
+        "text": "mit",
+        "start": 1.88,
+        "end": 2
+      },
+      {
+        "text": "einer",
+        "start": 2.04,
+        "end": 2.24
+      },
+      {
+        "text": "Kamera",
+        "start": 2.28,
+        "end": 2.64
+      },
+      {
+        "text": "entfernt.",
+        "start": 2.697,
+        "end": 3.36
+      }
+    ]
+  },
+  "e1": {
+    "text": "Und warum tut Lachen so weh?",
+    "heard": "Und warum tut Lachen so weh?",
+    "wer": 0,
+    "fileDuration": 2.115918,
+    "words": [
+      {
+        "text": "Und",
+        "start": 0,
+        "end": 0.16
+      },
+      {
+        "text": "warum",
+        "start": 0.22,
+        "end": 0.56
+      },
+      {
+        "text": "tut",
+        "start": 0.64,
+        "end": 0.88
+      },
+      {
+        "text": "Lachen",
+        "start": 0.96,
+        "end": 1.36
+      },
+      {
+        "text": "so",
+        "start": 1.44,
+        "end": 1.6
+      },
+      {
+        "text": "weh?",
+        "start": 1.68,
+        "end": 2.08
+      }
+    ]
+  },
+  "e2": {
+    "text": "[warmly] Das ist die ersten Tage normal. Also lieber keine Witze.",
+    "heard": "Das ist die ersten Tage normal. Also lieber keine Witze",
+    "wer": 0,
+    "fileDuration": 3.395918,
+    "words": [
+      {
+        "text": "Das",
+        "start": 0.136,
+        "end": 0.16
+      },
+      {
+        "text": "ist",
+        "start": 0.2,
+        "end": 0.32
+      },
+      {
+        "text": "die",
+        "start": 0.36,
+        "end": 0.48
+      },
+      {
+        "text": "ersten",
+        "start": 0.537,
+        "end": 0.88
+      },
+      {
+        "text": "Tage",
+        "start": 0.944,
+        "end": 1.2
+      },
+      {
+        "text": "normal.",
+        "start": 1.28,
+        "end": 1.84
+      },
+      {
+        "text": "Also",
+        "start": 1.936,
+        "end": 2.32
+      },
+      {
+        "text": "lieber",
+        "start": 2.36,
+        "end": 2.64
+      },
+      {
+        "text": "keine",
+        "start": 2.68,
+        "end": 2.88
+      },
+      {
+        "text": "Witze.",
+        "start": 2.94,
+        "end": 3.36
+      }
+    ]
+  },
+  "e3": {
+    "text": "[laughs] Au! Au, au!",
+    "heard": "[lacht] Au, au, au",
+    "wer": 0,
+    "fileDuration": 1.802449,
+    "words": [
+      {
+        "text": "Au!",
+        "start": 0.373,
+        "end": 0.72
+      },
+      {
+        "text": "Au,",
+        "start": 0.827,
+        "end": 1.12
+      },
+      {
+        "text": "au!",
+        "start": 1.2,
+        "end": 1.44
+      }
+    ]
+  }
+}

@@ -23,8 +23,11 @@ const lines = script.lines;
 // (Echtzeit = R(t)); die Beats innerhalb einer Szene bleiben gleich.
 const VO_FILE = new URL("./assets/vo/timings.json", import.meta.url);
 const VO = existsSync(VO_FILE) ? JSON.parse(readFileSync(VO_FILE, "utf8")) : {};
+// "reuse": dieselbe Aufnahme noch einmal (Cold Open zeigt den Höhepunkt vorweg).
+for (const l of script.lines) if (l.reuse && VO[l.reuse]) VO[l.id] = VO[l.reuse];
 const ORDER = script.order;
 const GAP = {
+  teaser: 0,
   streit: 0.08,
   spaeter: 0,
   nachher: 0.08,
@@ -34,13 +37,14 @@ const GAP = {
   patient: 0.25,
 };
 const PAD = {
+  teaser: 0.5,
   streit: 0.35,
   spaeter: 0,
   nachher: 0.4,
   op: 0.4,
   frage: 0.4,
   praxis: 0.4,
-  patient: 2.4,
+  patient: 2.3,
 };
 const ORIG = Object.fromEntries(ORDER.map((id) => [id, [...SC[id]]]));
 // Szene jeder Zeile einmal vorab (nach Original-Start) festlegen.
@@ -65,7 +69,7 @@ for (const id of ORDER) {
 const R = (t, scene = sceneOf0(t)) => +(t + SHIFT[scene]).toFixed(3);
 const RL = (l) => R(l.start, LINE_SCENE[l.id]);
 const DUR = +realT.toFixed(2);
-const HOOK_END = 3.3;
+const HOOK_END = +(SC.teaser[1] - SC.teaser[0] - 0.55).toFixed(2);
 // Betonte Wörter (im Skript GROSS geschrieben) -> gelbe Untertitel + Kamera-Punch.
 // Betonte Wörter stehen pro Zeile in "emph" (der Sprechtext bleibt normal
 // geschrieben, sonst liest v3 GROSSBUCHSTABEN als Abkürzung).
@@ -279,6 +283,8 @@ const belly = (p, env = "inside") => `
   <g id="${p}clipper-pos">${lapTool(p + "clipper", "clip")}</g>
   <g id="${p}sci-pos">${lapTool(p + "sci", "sci")}</g>
   <g id="${p}scope-pos">${lapTool(p + "scope", "scope")}</g>
+  <g id="${p}bag" opacity="0"><ellipse cx="395" cy="1400" rx="235" ry="305" fill="#DDF1FF" fill-opacity="0.45" ${S(5)} transform="rotate(12 395 1400)"/>
+    <path d="M 260 1130 C 330 1090 470 1080 540 1120" fill="none" stroke="#5B8DB8" stroke-width="10" stroke-linecap="round"/></g>
   <rect id="${p}dark" x="-400" y="-400" width="${W + 800}" height="${H + 1000}" fill="#000" opacity="0"/>
   <ellipse id="${p}glow" cx="420" cy="1380" rx="360" ry="440" fill="#FFF6CF" opacity="0"/>
   <path d="M -400 -400 L ${W + 400} -400 L ${W + 400} 140 C 1000 200 80 200 -400 140 Z" fill="${TZ.wall}" ${S()}/>
@@ -331,22 +337,23 @@ const BODY_INIT = `
 
 /* ---------- Szene 1: Streit im Bauch ---------- */
 const streitJs = `${HELPERS}${BODY_INIT}
-    gsap.set("#@cam", { scale: 1.16 });
-    tl.to("#@cam", { scale: 1, duration: 0.55, ease: "power3.out" }, 0);
-    shake("#@cam", 0.02, 0.5, 16);
+    gsap.set("#@cam", { scale: 1.08 });
+    tl.to("#@cam", { scale: 1, duration: 0.5, ease: "power3.out" }, 0);
     squeeze("@bd", true, 0); squeeze("@bd", false, 0.9);
     ${JSON.stringify(emphTimes("streit").filter((t) => t > 0.7))}.forEach((t) => { punch("#@cam", t); shake("#@cam", t, 0.25, 7); });
     face("@bd", "wavy", 0); face("@darm", "flat", 0); lids("@darm", 0.45, 0, 0.01);
     look("@bd", 16, -16, 0, 0.01); look("@darm", -16, 16, 0, 0.01);
     tl.set("#@pain", { scale: 0.9 }, 0); tl.set("#@inflam", { opacity: 0.15 }, 0);
     throb(0.1, ${SC.streit[1]}, 1.2);
-    ${actLines("streit", { from: HOOK_END - 0.3 })}
+    ${actLines("streit", { from: 0.3 })}
     // "Kotstein": Kamera fährt auf den Stein.
     frameTo(520, 1290, 1.6, ${L.s4[0] + 0.5}, 0.35);
     tl.fromTo("#@stone", { scale: 1.4, svgOrigin: "522 1290" }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, ${L.s4[0] + 0.6});
-    // "Ich werd ganz rot": färbt sich.
-    tl.to("#@appx-body", { fill: "${TZ.appxRed}", duration: 0.6 }, ${L.s5[0] + 0.8});
-    tl.to("#@inflam", { opacity: 0.35, duration: 0.6 }, ${L.s5[0] + 0.8});
+    // Wird rot und schwillt an.
+    tl.to("#@appx-body", { fill: "${TZ.appxRed}", duration: 0.8 }, ${L.s4[1]});
+    tl.to("#@inflam", { opacity: 0.35, duration: 0.8 }, ${L.s4[1]});
+    tl.fromTo("#vorher", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)", immediateRender: true }, ${SC.streit[0]});
+    tl.to("#vorher", { opacity: 0, duration: 0.2 }, ${SC.streit[0]} + 1.7);
     ${blinks("streit", 0, SC.streit[1])}
 `;
 
@@ -371,88 +378,178 @@ const nachherJs = `${HELPERS}${BODY_INIT}
     ${blinks("nachher", SC.nachher[0], SC.nachher[1])}
 `;
 
-/* ---------- Szene 3: Bauchspiegelung ---------- */
+/* ---------- Cold Open: der Höhepunkt vorweg, dann zurückspulen ---------- */
+const teaserBody = `<div id="rw"><div id="rw-lines"></div><div id="rw-icon">◀◀</div></div>`;
+const teaserCss = `
+  #rw { position: absolute; inset: 0; opacity: 0; }
+  #rw-lines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.18) 0 6px, transparent 6px 46px); }
+  #rw-icon { position: absolute; left: 0; right: 0; top: 820px; text-align: center; font-family: "Montserrat", sans-serif;
+    font-weight: 900; font-size: 200px; color: #fff; -webkit-text-stroke: 14px #1d1414; paint-order: stroke fill; }`;
+const teaserJs = `${HELPERS}${BODY_INIT}
+    const T0 = ${SC.teaser[0]}, T1 = ${SC.teaser[1]};
+    inflamed(T0); tl.set("#@appx", { scale: 1.1, rotation: 8 }, T0); tl.set("#@inflam", { opacity: 0.25 }, T0);
+    const PORTS = ${JSON.stringify(PORTS)};
+    gsap.set("#@grasp-pos", { x: 290, y: 1590, rotation: (Math.atan2(PORTS.L - 290, 1590 - 150) * 180) / Math.PI, svgOrigin: "0 0" });
+    gsap.set("#@scope-pos", { x: 470, y: 760, rotation: (Math.atan2(PORTS.M - 470, 760 - 150) * 180) / Math.PI, svgOrigin: "0 0" });
+    ["#@clipper-pos", "#@sci-pos"].forEach((t) => gsap.set(t, { x: PORTS.R, y: 40, svgOrigin: "0 0" }));
+    gsap.set("#@scope-beam", { opacity: 0.22 });
+    tl.set(["#@clip1", "#@clip2", "#@stump"], { opacity: 1 }, T0);
+    face("@darm", "open", T0); lids("@darm", 0, T0, 0.01); look("@darm", -14, 16, T0, 0.01);
+    lids("@bd", 0, T0, 0.01);
+    frameTo(420, 1300, 1.12, T0, 0.01);
+    gsap.set("#@cam", { scale: 1.1 });
+    tl.to("#@cam", { scale: 1, duration: 0.5, ease: "power3.out" }, T0);
+    shake("#@cam", T0 + 0.02, 0.5, 14);
+    squeeze("@bd", true, ${L.t1[0]}); talk("@bd", ${L.t1}, "wavy");
+    tl.to(["#@grasp-pos", "#@appx"], { y: "-=180", duration: 1.6, ease: "power1.in" }, T0 + 0.3);
+    shake("#@appx", T0 + 0.4, 1.4, 4, "x");
+    // Zurückspulen
+    const RW = T1 - 0.55;
+    tl.to("#rw", { opacity: 1, duration: 0.08 }, RW);
+    tl.fromTo("#rw-lines", { backgroundPositionY: "0px" }, { backgroundPositionY: "-600px", duration: 0.55, ease: "none", immediateRender: false }, RW);
+    tl.to(["#@grasp-pos", "#@appx"], { y: "+=180", duration: 0.5, ease: "power2.inOut" }, RW);
+    tl.to("#@frame", { scale: 1.3, duration: 0.5, ease: "power2.in" }, RW);
+    tl.fromTo("#@flash", { opacity: 0 }, { opacity: 0.7, duration: 0.5, ease: "power2.in", immediateRender: false }, RW);
+`;
+
+/* ---------- Gefahren-Balken (Streit bis kurz vor der OP) ---------- */
+const meterBody = `<div id="meter"><div id="m-label">PLATZ-GEFAHR</div><div id="m-bar"><div id="m-fill"></div></div></div>`;
+const meterCss = `
+  #meter { position: absolute; left: 0; right: 0; top: 150px; text-align: center; opacity: 0; }
+  #m-label { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 46px; color: #fff;
+    -webkit-text-stroke: 10px #1d1414; paint-order: stroke fill; letter-spacing: 2px; }
+  #m-bar { margin: 10px auto 0; width: 560px; height: 46px; border-radius: 26px; border: 6px solid #1d1414;
+    background: rgba(0,0,0,0.45); overflow: hidden; }
+  #m-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #FFE14D, #FF8A3D 55%, #FF2E3F); transform-origin: left center; transform: scaleX(0); }`;
+const M = {
+  in: R(SC.streit[0], "streit") + 1.9,
+  card: R(SC.spaeter[0], "spaeter"),
+  n0: R(SC.nachher[0], "nachher"),
+  n1: R(SC.nachher[1] - 0.05, "nachher"),
+};
+const meterJs = `
+    tl.fromTo("#meter", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, ${M.in});
+    tl.fromTo("#m-fill", { scaleX: 0.25 }, { scaleX: 0.7, duration: ${+(M.card - M.in).toFixed(2)}, ease: "none", immediateRender: false }, ${M.in});
+    tl.set("#meter", { opacity: 0 }, ${M.card});
+    tl.set("#meter", { opacity: 1 }, ${M.n0});
+    tl.fromTo("#m-fill", { scaleX: 0.86 }, { scaleX: 0.99, duration: 0.8, ease: "power2.out", immediateRender: false }, ${M.n0});
+    for (let t = ${M.n0} + 0.2; t < ${M.n1} - 0.2; t += 0.4) tl.to("#meter", { opacity: t % 0.8 < 0.4 ? 0.35 : 1, duration: 0.12 }, t);
+    tl.set("#meter", { opacity: 0 }, ${M.n1});
+`;
+
+/* ---------- Szene 3: Bauchspiegelung in 5 erklärten Schritten ---------- */
+// Alle Beats hängen an den Arzt-Sätzen a1–a6 (nicht an festen Zeiten), damit
+// Bild und Erklärung immer zusammenpassen, egal wie lang die Takes sind.
+const STEPS = [
+  "NARKOSE & ZUGÄNGE",
+  "LUFT & KAMERA",
+  "BLINDDARM GREIFEN",
+  "CLIPS & ABTRENNEN",
+  "RAUS IM BEUTEL",
+];
+const stepsBody = `<div id="steps">${STEPS.map((t, i) => `<div class="st" id="st${i + 1}"><span class="st-n">SCHRITT ${i + 1}/5</span><div class="st-t">${t}</div></div>`).join("")}</div>`;
+const stepsCss = `
+  .st { position: absolute; left: 0; right: 0; top: 250px; text-align: center; opacity: 0; }
+  .st-n { display: inline-block; padding: 8px 24px; border-radius: 30px; background: #FFE14D; color: #1d1414;
+    font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 36px; border: 5px solid #1d1414; }
+  .st-t { margin-top: 12px; font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 64px; color: #fff;
+    -webkit-text-stroke: 12px #1d1414; paint-order: stroke fill; text-shadow: 0 6px 0 rgba(0,0,0,0.35); }`;
 const opJs = `${HELPERS}${BODY_INIT}
-    const O0 = ${SC.op[0]};
-    inflamed(O0); tl.set("#@appx", { scale: 1.1 }, O0);
+    const O0 = ${SC.op[0]}, O1 = ${SC.op[1]};
+    inflamed(O0); tl.set("#@appx", { scale: 1.1 }, O0); tl.set("#@inflam", { opacity: 0.25 }, O0);
     face("@bd", "wavy", O0); face("@darm", "flat", O0);
-    lids("@darm", 0, O0, 0.01); lids("@bd", 0.1, O0, 0.01);
-    tl.set("#@pain", { scale: 0.9 }, O0);
+    lids("@darm", 0.3, O0, 0.01); lids("@bd", 0.3, O0, 0.01);
+    gsap.set("#@scope-beam", { opacity: 0.22 });
     const PORTS = ${JSON.stringify(PORTS)};
     const TOOLS = { grasp: "L", scope: "M", clipper: "R", sci: "R" };
     Object.entries(TOOLS).forEach(([k, s]) => gsap.set("#@" + k + "-pos", { x: PORTS[s], y: 40, rotation: 0, svgOrigin: "0 0" }));
     ["#@grasp-jawL", "#@grasp-jawR", "#@clipper-jawL", "#@clipper-jawR", "#@sci-jawL", "#@sci-jawR"].forEach((j) => gsap.set(j, { svgOrigin: "0 -34" }));
-    const aim = (k, tx, ty, t, d = 0.45) => {
+    ["L", "M", "R"].forEach((k) => gsap.set("#@port" + k, { scale: 0, svgOrigin: PORTS[k] + " 150" }));
+    gsap.set("#@bag", { scale: 0, svgOrigin: "395 1400" });
+    const aim = (k, tx, ty, t, d = 0.6) => {
       const px = PORTS[TOOLS[k]];
-      const rot = (Math.atan2(px - tx, -(150 - ty)) * 180) / Math.PI;
-      tl.to("#@" + k + "-pos", { x: tx, y: ty, rotation: rot, duration: d, ease: "power3.out" }, t);
+      const rot = (Math.atan2(px - tx, ty - 150) * 180) / Math.PI;
+      tl.to("#@" + k + "-pos", { x: tx, y: ty, rotation: rot, duration: d, ease: "power2.inOut" }, t);
     };
-    const back = (k, t, d = 0.35) => tl.to("#@" + k + "-pos", { x: PORTS[TOOLS[k]], y: 40, duration: d, ease: "power3.in" }, t);
-    const jaws = (k, open, t, d = 0.1) => {
+    const back = (k, t, d = 0.45) => tl.to("#@" + k + "-pos", { x: PORTS[TOOLS[k]], y: 40, duration: d, ease: "power2.in" }, t);
+    const jaws = (k, open, t, d = 0.12) => {
       tl.to("#@" + k + "-jawL", { rotation: open ? -22 : 0, duration: d }, t);
       tl.to("#@" + k + "-jawR", { rotation: open ? 22 : 0, duration: d }, t);
     };
-    ${JSON.stringify(emphTimes("op").filter((t) => !(t > 39.4 && t < 40.6)))}.forEach((t) => { punch("#@cam", t, 1.06); shake("#@cam", t, 0.25, 6); });
+    let curStep = 0;
+    const step = (n, t) => {
+      if (curStep) tl.to("#st" + curStep, { opacity: 0, y: -20, duration: 0.15 }, t - 0.15);
+      tl.fromTo("#st" + n, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)", immediateRender: false }, t);
+      curStep = n;
+    };
+    const A = { a1: ${JSON.stringify(L.a1)}, a2: ${JSON.stringify(L.a2)}, a3: ${JSON.stringify(L.a3)}, a4: ${JSON.stringify(L.a4)}, a5: ${JSON.stringify(L.a5)}, a6: ${JSON.stringify(L.a6)} };
+    const a1 = A.a1[0], a2 = A.a2[0], a3 = A.a3[0], a4 = A.a4[0], a5 = A.a5[0], a6 = A.a6[0];
 
-    // 1) Zugänge + Luft rein (Kapnoperitoneum): alles bläht sich auf.
-    ["L", "M", "R"].forEach((k, i) => tl.fromTo("#@port" + k, { scale: 0, svgOrigin: PORTS[k] + " 150" }, { scale: 1, duration: 0.25, ease: "back.out(3)", immediateRender: true }, 30.0 + i * 0.15));
-    tl.fromTo("#@cam", { scale: 0.9 }, { scale: 1, duration: 0.9, ease: "elastic.out(1,0.4)", immediateRender: false }, 30.35);
-    gsap.set("#@dark", { opacity: 0.5 });
-    frameTo(680, 960, 1.25, ${L.o1[0]} - 0.12, 0.35);
-    look("@darm", -10, -14, ${L.o1[0]}); talk("@darm", ${L.o1}, "frown");
+    // Schritt 1: Narkose & Zugänge. Alles ruhig, die Figuren schlafen fast.
+    gsap.set("#@dark", { opacity: 0.2 });
+    frameTo(540, 760, 1, O0, 0.01);
+    step(1, a1 - 0.25);
+    ["L", "M", "R"].forEach((k, i) => tl.to("#@port" + k, { scale: 1, duration: 0.3, ease: "back.out(3)" }, a1 + 1.6 + i * 0.3));
 
-    // 2) Kamera mit Licht
-    frameTo(520, 1080, 1.05, 32.3, 0.4);
-    aim("scope", 470, 760, 32.35, 0.6);
-    tl.to("#@dark", { opacity: 0.08, duration: 0.3 }, 32.9);
-    tl.to("#@glow", { opacity: 0.1, duration: 0.3 }, 32.9);
-    frameTo(392, 1430, 1.3, ${L.o2[0]} - 0.12, 0.25);
-    squeeze("@bd", true, ${L.o2[0]}); talk("@bd", ${L.o2}, "wavy"); squeeze("@bd", false, ${L.o2[1]});
+    // Schritt 2: Luft & Kamera
+    step(2, a2 - 0.25);
+    tl.fromTo("#@cam", { scale: 0.9 }, { scale: 1, duration: 1.0, ease: "elastic.out(1,0.4)", immediateRender: false }, a2 + 0.2);
+    frameTo(680, 960, 1.25, ${L.o1[0]} - 0.15, 0.4);
+    lids("@darm", 0, ${L.o1[0]}, 0.1); look("@darm", -10, -14, ${L.o1[0]}); talk("@darm", ${L.o1}, "frown");
+    frameTo(520, 1000, 1, a3 - 0.15, 0.5);
+    aim("scope", 470, 760, a3 + 0.3, 0.8);
+    tl.to("#@dark", { opacity: 0.04, duration: 0.4 }, a3 + 1.1);
+    frameTo(392, 1430, 1.2, a3 + 1.2, 0.4);
+    lids("@bd", 0, a3 + 1.1, 0.1); squeeze("@bd", true, a3 + 1.2); squeeze("@bd", false, a3 + 1.8);
 
-    // 3) Greifer fasst die Spitze
-    frameTo(430, 1380, 1.2, 34.1, 0.4);
-    jaws("grasp", true, 34.2);
-    aim("grasp", 290, 1590, 34.2, 0.5);
-    jaws("grasp", false, 34.7);
-    tl.to("#@appx", { rotation: 8, duration: 0.35, ease: "power2.out" }, 34.8);
-    lids("@bd", 0, ${L.o3[0]}, 0.08); look("@bd", -16, 14, ${L.o3[0]}); talk("@bd", ${L.o3}, "wavy");
+    // Schritt 3: Blinddarm greifen
+    step(3, a4 - 0.25);
+    frameTo(430, 1380, 1.12, a4 - 0.15, 0.5);
+    jaws("grasp", true, a4 + 0.3);
+    aim("grasp", 290, 1590, a4 + 0.3, 0.8);
+    jaws("grasp", false, a4 + 1.15);
+    tl.to("#@appx", { rotation: 8, duration: 0.5, ease: "power2.out" }, a4 + 1.3);
+    look("@bd", -16, 14, ${L.o3[0]}); talk("@bd", ${L.o3}, "wavy");
 
-    // 4) Clips an die Basis
-    frameTo(500, 1330, 1.35, 36.0, 0.4);
-    aim("clipper", 530, 1222, 36.0, 0.45);
-    jaws("clipper", true, 36.35);
-    tl.set("#@clipper-clip", { opacity: 0 }, 36.6);
-    tl.set("#@clip1", { opacity: 1 }, 36.6);
-    jaws("clipper", false, 36.6);
-    tl.to("#@clipper-pos", { x: 522, y: 1262, duration: 0.2 }, 36.75);
-    tl.set("#@clip2", { opacity: 1 }, 37.0);
-    back("clipper", 37.2);
-    look("@bd", 14, -18, ${L.o4[0]}); talk("@bd", ${L.o4}, "wavy");
-
-    // 5) Schere trennt zwischen den Clips
+    // Schritt 4: Clips & abtrennen
+    step(4, a5 - 0.25);
+    frameTo(500, 1300, 1.3, a5 - 0.15, 0.5);
+    aim("clipper", 530, 1222, a5 + 0.2, 0.6);
+    jaws("clipper", true, a5 + 0.75);
+    tl.set("#@clipper-clip", { opacity: 0 }, a5 + 0.9);
+    tl.set("#@clip1", { opacity: 1 }, a5 + 0.9);
+    jaws("clipper", false, a5 + 0.9);
+    tl.to("#@clipper-pos", { x: 522, y: 1262, duration: 0.3 }, a5 + 1.1);
+    tl.set("#@clip2", { opacity: 1 }, a5 + 1.5);
+    back("clipper", a5 + 1.7);
     gsap.set("#@cut", { strokeDasharray: 140, strokeDashoffset: 140 });
-    aim("sci", 525, 1240, 37.5, 0.4);
-    [38.0, 38.25].forEach((t) => { jaws("sci", true, t - 0.12, 0.08); jaws("sci", false, t, 0.06); });
-    tl.set("#@cut", { opacity: 1 }, 38.0);
-    tl.to("#@cut", { strokeDashoffset: 0, duration: 0.3 }, 38.0);
-    back("sci", 38.5);
-    squeeze("@bd", true, ${L.o5[0]}); talk("@bd", ${L.o5}, "wavy"); squeeze("@bd", false, ${L.o5[1]});
+    aim("sci", 525, 1240, a5 + 2.0, 0.5);
+    [a5 + 2.6, a5 + 2.9].forEach((t) => { jaws("sci", true, t - 0.14, 0.1); jaws("sci", false, t, 0.07); });
+    tl.set("#@cut", { opacity: 1 }, a5 + 2.6);
+    tl.to("#@cut", { strokeDashoffset: 0, duration: 0.35 }, a5 + 2.6);
+    back("sci", a5 + 3.2);
+    look("@bd", 14, -18, a5 + 0.9);
+    squeeze("@bd", true, ${L.o4[0]}); talk("@bd", ${L.o4}, "wavy"); squeeze("@bd", false, ${L.o4[1]});
+    tl.set("#@stump", { opacity: 1 }, ${L.o4[0]});
 
-    // 6) Raus durch den Zugang
-    frameTo(540, 960, 1, 39.55, 0.35);
-    tl.to("#@cut", { opacity: 0, duration: 0.1 }, 39.6);
-    tl.to(["#@grasp-pos", "#@appx"], { y: "-=1500", duration: 0.9, ease: "power3.in" }, 39.7);
-    tl.to("#@appx", { x: "-=60", scaleX: 0.6, duration: 0.9, ease: "power3.in" }, 39.7);
-    tl.set("#@stump", { opacity: 1 }, 39.65);
-    tl.to(["#@inflam", "#@pain", "#@glow"], { opacity: 0, duration: 0.3 }, 39.8);
-    tl.fromTo("#@flash", { opacity: 0.6 }, { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, 40.45);
-    talk("@bd", ${L.o6}, "open");
-
-    // 7) Darm hat das letzte Wort
-    frameTo(680, 960, 1.3, ${L.o7[0]} - 0.12, 0.35);
-    lids("@darm", 0.5, ${L.o7[0]}); look("@darm", -6, 0, ${L.o7[0]}); talk("@darm", ${L.o7}, "smirk");
-    back("scope", ${L.o7[1]} + 0.1);
-    blink("@darm", 35.6, 0); blink("@darm", 38.8, 0);
+    // Schritt 5: in den Beutel und raus durch den Zugang
+    step(5, a6 - 0.25);
+    frameTo(430, 1250, 1.02, a6 - 0.15, 0.5);
+    tl.to("#@cut", { opacity: 0, duration: 0.2 }, a6);
+    tl.set("#@bag", { opacity: 1 }, a6 + 0.6);
+    tl.to("#@bag", { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, a6 + 0.6);
+    tl.to("#@bag", { scaleX: 0.85, duration: 0.3, ease: "power2.inOut" }, a6 + 1.5);
+    talk("@bd", ${L.o5}, "open");
+    const pull = ${L.o5[0]} + 0.2;
+    tl.to(["#@grasp-pos", "#@appx", "#@bag"], { y: "-=1500", duration: 1.1, ease: "power3.in" }, pull);
+    tl.to(["#@appx", "#@bag"], { x: "-=140", scaleX: 0.35, duration: 1.1, ease: "power3.in" }, pull);
+    tl.to(["#@inflam", "#@pain"], { opacity: 0, duration: 0.3 }, pull);
+    tl.fromTo("#@flash", { opacity: 0.6 }, { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, pull + 1.0);
+    frameTo(680, 960, 1.3, ${L.o6[0]} - 0.15, 0.4);
+    lids("@darm", 0.5, ${L.o6[0]}); look("@darm", -6, 0, ${L.o6[0]}); talk("@darm", ${L.o6}, "smirk");
+    tl.to("#st5", { opacity: 0, duration: 0.2 }, ${L.o6[0]});
+    back("scope", ${L.o6[1]} + 0.1);
+    blink("@darm", a4 + 0.5, 0.3); blink("@bd", a6 + 0.3, 0);
 `;
 
 /* ================= Scene: SPÄTER card ================= */
@@ -898,15 +995,6 @@ const patientJs = `
     tl.to("#ct2", { scale: 1, duration: 0.25, ease: "power2.inOut" }, ${L.e3[0]} + 0.62);
     tl.to("#ct3", { y: 8, duration: 0.4, ease: "sine.inOut", repeat: 4, yoyo: true }, ${L.e3[0]} + 0.6);
 `;
-// Dieselbe Patienten-Zeichnung zweimal im Video: Ids mit Präfix eindeutig machen.
-const pfxPatient = (str, p) => str.replace(/\b(pt-|pe1|pe2|pm-m)/g, p + "$1");
-const frageJs = `
-    const Q0 = ${SC.frage[0]}, Q1 = ${SC.frage[1]};
-    ${patientBase("Q0", "Q1")}
-    tl.to(PUP, { x: -8, y: -2, duration: 0.2 }, Q0 + 0.2);
-    talk("fq-pm", ${L.q1}, "frown", 0.13);
-    tl.to("#pt-head", { rotation: -3, duration: 0.3, ease: "sine.inOut" }, ${L.q1[0]});
-`;
 
 /* ================= Captions ================= */
 // Karte zeigt "SPÄTER" schon groß, daher keine Untertitel dafür.
@@ -947,6 +1035,10 @@ const capJs = `
 const CAP_EMPH_CSS = `
   .cap.emph { color: #FFE14D; font-size: 104px; -webkit-text-stroke: 16px #1d1414; }`;
 
+const VORHER_CSS = `#vorher { position: absolute; left: 0; right: 0; top: 160px; margin: 0 auto; width: max-content; padding: 12px 30px;
+  border-radius: 34px; background: #FFE14D; color: #1d1414; border: 6px solid #1d1414; font-family: "Montserrat", sans-serif;
+  font-weight: 900; font-size: 52px; opacity: 0; }`;
+
 /* ================= Hook-Titel (erste Sekunden) ================= */
 const hookBody = `
     <div id="hook">
@@ -985,12 +1077,14 @@ const vo = lines
   .filter((l) => VO[l.id])
   .map(
     (l, i) =>
-      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.id}.mp3" data-start="${RL(l)}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
+      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.reuse || l.id}.mp3" data-start="${RL(l)}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
   )
   .join("\n");
+const hostAt = (id, a, b, track, z = 1) =>
+  `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${+a.toFixed(3)}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="graphics" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
 const host = (id, track, kind = "graphics", z = 1) => {
   const [a, b] = SC[id] || (id === "hook" ? [0, HOOK_END] : [0, DUR]);
-  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${R(a, ORDER.includes(id) ? id : undefined)}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
+  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${ORDER.includes(id) ? R(a, id) : a}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
 };
 
 const index = `<!doctype html>
@@ -1007,13 +1101,14 @@ const index = `<!doctype html>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
+${host("teaser", 13)}
 ${host("streit", 1)}
+${hostAt("meter", M.in - 0.01, M.n1 + 0.1, 14, 6)}
 ${host("spaeter", 2, "graphics", 2)}
 ${host("op", 3)}
 ${host("praxis", 4)}
 ${host("captions", 5, "captions", 5)}
 ${host("nachher", 11)}
-${host("frage", 12)}
 ${host("patient", 7)}
 ${host("hook", 8, "graphics", 6)}
 ${host("marke", 6, "graphics", 4)}
@@ -1048,8 +1143,20 @@ mkdirSync(new URL("./compositions/", import.meta.url), { recursive: true });
 const out = (f, s) => writeFileSync(new URL(f, import.meta.url), s);
 const pre = (p, js) => js.replaceAll("@", p);
 out("./index.html", index);
-out("./compositions/streit.html", page("streit", SC.streit, belly("s-"), "", pre("s-", streitJs)));
-out("./compositions/op.html", page("op", SC.op, belly("o-", "op"), "", pre("o-", opJs)));
+out(
+  "./compositions/streit.html",
+  page(
+    "streit",
+    SC.streit,
+    belly("s-") + '<div id="vorher">6 STUNDEN VORHER</div>',
+    VORHER_CSS,
+    pre("s-", streitJs),
+  ),
+);
+out(
+  "./compositions/op.html",
+  page("op", SC.op, belly("o-", "op") + stepsBody, stepsCss, pre("o-", opJs)),
+);
 out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaeterCss, spaeterJs));
 out(
   "./compositions/praxis.html",
@@ -1070,8 +1177,12 @@ out(
   page("nachher", SC.nachher, belly("n-"), "", pre("n-", nachherJs)),
 );
 out(
-  "./compositions/frage.html",
-  page("frage", SC.frage, pfxPatient(patientSvg, "fq-"), "", HELPERS + pfxPatient(frageJs, "fq-")),
+  "./compositions/teaser.html",
+  page("teaser", SC.teaser, belly("t-", "op") + teaserBody, teaserCss, pre("t-", teaserJs)),
+);
+out(
+  "./compositions/meter.html",
+  page("meter", [M.in - 0.01, M.n1 + 0.1], meterBody, meterCss, meterJs),
 );
 out("./compositions/hook.html", page("hook", [0, HOOK_END], hookBody, hookCss, hookJs));
 out(

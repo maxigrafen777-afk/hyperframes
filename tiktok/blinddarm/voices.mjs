@@ -61,19 +61,32 @@ export function toWords(al) {
     .map((w) => ({ text: w.text, start: +w.start.toFixed(3), end: +w.end.toFixed(3) }));
 }
 
-async function tts(line) {
+// v3 versteht [Tags]; ältere Modelle (multilingual_v2) würden sie vorlesen.
+const isV3 = model === "eleven_v3";
+const spoken = (t) => (isV3 ? t : t.replace(/\[[^\]]*\]\s*/g, "").trim());
+async function tts(line, take = 1) {
   const v = voices[line.speaker];
+  // Gleichmäßiger Klang: fester Seed pro Figur, und (multilingual_v2) die
+  // Nachbarsätze derselben Figur als Kontext.
+  const same = script.lines.filter((l) => l.speaker === line.speaker && !l.reuse);
+  const i = same.findIndex((l) => l.id === line.id);
+  const body = {
+    text: spoken(line.text),
+    model_id: model,
+    voice_settings: v.settings,
+    seed: (v.seed ?? 4242) + take - 1,
+  };
+  if (isV3) body.language_code = "de";
+  else {
+    if (same[i - 1]) body.previous_text = spoken(same[i - 1].text);
+    if (same[i + 1]) body.next_text = spoken(same[i + 1].text);
+  }
   const res = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${v.voice_id}/with-timestamps?output_format=mp3_44100_128`,
     {
       method: "POST",
       headers: { "xi-api-key": key, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: line.text,
-        model_id: model,
-        language_code: "de",
-        voice_settings: v.settings,
-      }),
+      body: JSON.stringify(body),
     },
   );
   if (!res.ok) throw new Error(`${line.id}: HTTP ${res.status} ${await res.text()}`);
@@ -119,10 +132,10 @@ async function stt(buf) {
 }
 if (!retimeOnly) {
   for (const line of script.lines) {
-    if (!voices[line.speaker] || (only.length && !only.includes(line.id))) continue;
+    if (!voices[line.speaker] || line.reuse || (only.length && !only.includes(line.id))) continue;
     let best = null;
     for (let take = 1; take <= QA.maxTakes; take++) {
-      const data = await tts(line);
+      const data = await tts(line, take);
       const buf = Buffer.from(data.audio_base64, "base64");
       const heard = QA.maxTakes > 1 ? await stt(buf) : line.text;
       const score = wer(normWords(line.text), normWords(heard));
