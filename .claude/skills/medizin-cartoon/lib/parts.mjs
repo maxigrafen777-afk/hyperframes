@@ -104,12 +104,12 @@ export function toothBody(id, { halo = true, gumLine = 270 } = {}) {
 // A tooth character: body + face. `face` = {x,y,rot,r,gap,mouthY,mouthS}
 export function toothFace(
   id,
-  { r = 52, gap = 62, mouthY = 92, mouthS = 1, mouthInit = "flat" } = {},
+  { r = 52, gap = 62, mouthY = 92, mouthS = 1, mouthInit = "flat", lidFill = C.tooth } = {},
 ) {
   return `
   <g id="${id}-face">
-    <g transform="translate(${-gap} 0)">${eye(`${id}-eyeL`, { r, side: "L" })}</g>
-    <g transform="translate(${gap} 0)">${eye(`${id}-eyeR`, { r, side: "R" })}</g>
+    <g transform="translate(${-gap} 0)">${eye(`${id}-eyeL`, { r, side: "L", lidFill })}</g>
+    <g transform="translate(${gap} 0)">${eye(`${id}-eyeR`, { r, side: "R", lidFill })}</g>
     <g transform="translate(0 ${mouthY})">${mouth(`${id}-m`, { s: mouthS, initial: mouthInit })}</g>
   </g>`;
 }
@@ -236,4 +236,29 @@ export function drop(id, { s = 1, fill = "#BFE6F5" } = {}) {
 
 export function chip(id, { s = 1 } = {}) {
   return `<path id="${id}" d="M -10 -6 L 4 -12 L 12 0 L 4 10 L -9 7 Z" fill="${C.bone}" ${S(3)} transform="scale(${s})"/>`;
+}
+
+// Nagelschere/Nagelspalter: Spitze bei (0,0), zeigt nach unten; Klingen -bladeL/-bladeR
+// drehen um den Drehpunkt (0,-120) (svgOrigin "0 -120").
+export function scissors(id) {
+  const blade = (sx) => `
+    <path d="M ${sx * 2} 0 C ${sx * 14} -40 ${sx * 20} -90 ${sx * 16} -120 L ${sx * -6} -120 C ${sx * -4} -80 ${sx * -2} -40 ${sx * 2} 0 Z" fill="${C.metalHi}" ${S(4)}/>
+    <path d="M ${sx * 16} -120 C ${sx * 30} -200 ${sx * 50} -280 ${sx * 60} -330 L ${sx * 40} -336 C ${sx * 28} -280 ${sx * 8} -200 ${sx * -6} -120 Z" fill="${C.metal}" ${S(4)}/>
+    <ellipse cx="${sx * 66}" cy="-390" rx="38" ry="56" fill="none" stroke="${C.ink}" stroke-width="22"/>
+    <ellipse cx="${sx * 66}" cy="-390" rx="38" ry="56" fill="none" stroke="${C.metal}" stroke-width="12"/>`;
+  return `
+  <g id="${id}">
+    <g id="${id}-bladeL">${blade(-1)}</g>
+    <g id="${id}-bladeR">${blade(1)}</g>
+    <circle cy="-120" r="11" fill="${C.metalDark}" ${S(3)}/>
+  </g>`;
+}
+
+// Wattestäbchen / Applikator: Watte-Spitze bei (0,0), Stiel nach oben.
+export function swab(id, { tip = "#F7F3E8" } = {}) {
+  return `
+  <g id="${id}">
+    <rect x="-7" y="-640" width="14" height="620" rx="6" fill="#E9DCC4" ${S(4)}/>
+    <ellipse id="${id}-tip" cx="0" cy="-20" rx="22" ry="34" fill="${tip}" ${S(4)}/>
+  </g>`;
 }

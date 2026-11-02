@@ -10,8 +10,8 @@ Hochformat-Kurzvideos, die den Referenzen des Creators folgen (Stil wie die
 das Handle des Creators). Alles ist Code: SVG-Zeichnungen und GSAP-Timeline in
 HyperFrames-Kompositionen. Lies vorher `/hyperframes` (Vertrag, Workflow).
 
-Referenzprojekt, das du kopierst und umbaust: `tiktok/weisheitszahn/`.
-Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Zahn, Instrumente, Schmerzstern, Naht, Untertitel).
+Referenzprojekte, die du kopierst und umbaust: `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
+Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Gesicht mit `lidFill` für Haut/Nagel, Zahn, Instrumente inkl. Schere und Wattestäbchen, Schmerzstern, Naht, Untertitel).
 
 ## Dramaturgie (immer gleich)
 
@@ -75,6 +75,9 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - **Ton:** `node sfx-gen.mjs` erzeugt SFX und ein Musikbett (`bed-long.mp3`, Loop mit Überblendungen; Lautstärke 0,17). SFX können an Zeilen hängen (`"line": "k7", "offset": -0.55`). Die ElevenLabs-Musik-API braucht einen Bezahl-Tarif; Sound-Generation reicht für das Bett. Am Ende `loudnorm=I=-14`.
 
 ## Stolperfallen
+
+- Untertitel liegen bei y ≈ 1270: Gesichter in der Körperszene nicht dorthin legen (Zeh-Gesicht bei y 1500, Nagel-Gesicht darüber).
+- Patienten-Szenen in Seitenansicht zeichnen (sitzen, betroffener Körperteil auf Hocker); verkürzte Perspektive auf die Kamera zu ist schwer lesbar.
 
 - Kiefer- und OP-Szene teilen dieselbe Zeichnung (`jaw(prefix)`), Ids also mit Präfix (`k-`, `o-`); im JS steht `@` für das Präfix.
 - `shake()` setzt absolute Werte: nie auf ein positioniertes `*-pos`-Instrument anwenden, sondern auf die innere Gruppe.
