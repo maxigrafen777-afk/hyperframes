@@ -1,0 +1,447 @@
+{
+  "title": "Blinddarm wird entfernt",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_v3",
+  "hook": [
+    ["SO WIRD DEIN", 80, "#fff"],
+    ["BLINDDARM", 128, "#FFE14D"],
+    ["ENTFERNT", 80, "#fff"]
+  ],
+  "scenes": {
+    "streit": [0, 9.5],
+    "spaeter": [10, 11.4],
+    "nachher": [20, 24.5],
+    "op": [30, 43.5],
+    "frage": [50, 52],
+    "praxis": [55, 58],
+    "patient": [65, 69.5]
+  },
+  "order": ["streit", "spaeter", "nachher", "op", "frage", "praxis", "patient"],
+  "qa": {
+    "maxTakes": 3,
+    "maxWer": 0.1
+  },
+  "lines": [
+    {
+      "id": "s1",
+      "speaker": "bd",
+      "start": 0.35,
+      "end": 1.35,
+      "text": "[shouting] Aua! Mir geht es so schlecht!",
+      "emph": ["Aua"]
+    },
+    {
+      "id": "s2",
+      "speaker": "darm",
+      "start": 1.8,
+      "end": 2.8,
+      "text": "[annoyed] Du bist nur ein Wurmfortsatz. Stell dich nicht so an."
+    },
+    {
+      "id": "s3",
+      "speaker": "bd",
+      "start": 3.4,
+      "end": 4.4,
+      "text": "[offended] Nur?! Da steckt was in mir fest!",
+      "emph": ["fest"]
+    },
+    {
+      "id": "s4",
+      "speaker": "darm",
+      "start": 4.8,
+      "end": 5.8,
+      "text": "[sighs] Ein Kot-Stein. Selber schuld.",
+      "emph": ["Kot-Stein"]
+    },
+    {
+      "id": "s5",
+      "speaker": "bd",
+      "start": 6.2,
+      "end": 7.2,
+      "text": "[panicked] Ich schwelle an! Ich werd ganz rot!",
+      "emph": ["rot"]
+    },
+    {
+      "id": "l6",
+      "speaker": "card",
+      "start": 10.1,
+      "end": 11.1,
+      "text": "Später"
+    },
+    {
+      "id": "n1",
+      "speaker": "bd",
+      "start": 20.3,
+      "end": 21.3,
+      "text": "[screaming] Ich platz gleich!",
+      "emph": ["platz"]
+    },
+    {
+      "id": "n2",
+      "speaker": "darm",
+      "start": 21.4,
+      "end": 22.4,
+      "text": "[panicked] Bloß nicht! Dann entzündet sich hier alles!",
+      "emph": ["alles"]
+    },
+    {
+      "id": "n3",
+      "speaker": "darm",
+      "start": 23.0,
+      "end": 24.0,
+      "text": "[shouting] Herr Doktor! Schnell!",
+      "emph": ["Doktor"]
+    },
+    {
+      "id": "o1",
+      "speaker": "darm",
+      "start": 30.6,
+      "end": 31.6,
+      "text": "[confused] Hey! Wer pumpt hier Luft rein?!",
+      "emph": ["Luft"]
+    },
+    {
+      "id": "o2",
+      "speaker": "bd",
+      "start": 33.0,
+      "end": 34.0,
+      "text": "[shouting] Ah! Das Licht!",
+      "emph": ["Licht"]
+    },
+    {
+      "id": "o3",
+      "speaker": "bd",
+      "start": 34.6,
+      "end": 35.6,
+      "text": "[panicked] Finger weg von mir!"
+    },
+    {
+      "id": "o4",
+      "speaker": "bd",
+      "start": 36.4,
+      "end": 37.4,
+      "text": "[nervous] Was sind das für Klammern?!",
+      "emph": ["Klammern"]
+    },
+    {
+      "id": "o5",
+      "speaker": "bd",
+      "start": 38.0,
+      "end": 39.0,
+      "text": "[screaming] Nein! Ich will nicht weg!",
+      "emph": ["Nein"]
+    },
+    {
+      "id": "o6",
+      "speaker": "bd",
+      "start": 39.7,
+      "end": 40.7,
+      "text": "[dramatic] Ich komme wieder!"
+    },
+    {
+      "id": "o7",
+      "speaker": "darm",
+      "start": 41.2,
+      "end": 42.2,
+      "text": "[smug] Nein. Kommst du nicht."
+    },
+    {
+      "id": "q1",
+      "speaker": "pat",
+      "start": 50.3,
+      "end": 51.3,
+      "text": "Herr Doktor, brauch ich den Blinddarm denn nicht?"
+    },
+    {
+      "id": "d1",
+      "speaker": "arzt",
+      "start": 55.4,
+      "end": 56.4,
+      "text": "Man kann gut ohne ihn leben. Er war entzündet und wäre fast durchgebrochen."
+    },
+    {
+      "id": "d2",
+      "speaker": "arzt",
+      "start": 57.0,
+      "end": 58.0,
+      "text": "Wir haben ihn durch drei kleine Schnitte mit einer Kamera entfernt.",
+      "emph": ["drei"]
+    },
+    {
+      "id": "e1",
+      "speaker": "pat",
+      "start": 65.3,
+      "end": 66.3,
+      "text": "Und warum tut Lachen so weh?"
+    },
+    {
+      "id": "e2",
+      "speaker": "arzt",
+      "start": 66.5,
+      "end": 67.5,
+      "text": "[warmly] Das ist die ersten Tage normal. Also lieber keine Witze."
+    },
+    {
+      "id": "e3",
+      "speaker": "pat",
+      "start": 68.2,
+      "end": 69.2,
+      "text": "[laughs] Au! Au, au!"
+    }
+  ],
+  "voices": {
+    "bd": {
+      "name": "Blinddarm (dramatische Diva; Jessica)",
+      "voice_id": "cgSgspJ2msm6clMCkdW9",
+      "settings": {
+        "similarity_boost": 0.8,
+        "use_speaker_boost": true,
+        "stability": 0.5
+      },
+      "tempo": 1.12
+    },
+    "darm": {
+      "name": "Dickdarm (grummelig, tief; Brian)",
+      "voice_id": "nPczCjzI2devNBz1zQrb",
+      "settings": {
+        "similarity_boost": 0.8,
+        "use_speaker_boost": true,
+        "stability": 0.5
+      },
+      "tempo": 1.1
+    },
+    "arzt": {
+      "name": "Arzt (ruhig, warm; George)",
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+      "settings": {
+        "similarity_boost": 0.85,
+        "use_speaker_boost": true,
+        "stability": 0.5
+      },
+      "tempo": 1.08
+    },
+    "pat": {
+      "name": "Patient (locker, jung; Chris)",
+      "voice_id": "iP95p4xoKVk53GoZ742B",
+      "settings": {
+        "similarity_boost": 0.8,
+        "use_speaker_boost": true,
+        "stability": 0.5
+      },
+      "tempo": 1.08
+    }
+  },
+  "genSfx": [
+    {
+      "id": "boom",
+      "prompt": "deep cinematic boom impact with sub bass, short",
+      "duration": 1.5
+    },
+    {
+      "id": "riser",
+      "prompt": "short tense suspense riser whoosh building up, ends abruptly",
+      "duration": 1.2
+    },
+    {
+      "id": "impact",
+      "prompt": "cartoon pop and heavy thud impact, tooth pulled out",
+      "duration": 1.0
+    },
+    {
+      "id": "boing",
+      "prompt": "comedic cartoon boing wobble, rubbery",
+      "duration": 1.0
+    },
+    {
+      "id": "squeak",
+      "prompt": "short cartoon rubber squeak, comedic",
+      "duration": 0.5
+    },
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "throb",
+      "prompt": "cartoon throbbing pulse, deep dull thump thump",
+      "duration": 1.2
+    },
+    {
+      "id": "air",
+      "prompt": "air pump inflating, pressurized hiss whoosh",
+      "duration": 1.2
+    },
+    {
+      "id": "clip",
+      "prompt": "small metal surgical clip click, crisp",
+      "duration": 0.5
+    },
+    {
+      "id": "snip",
+      "prompt": "metal scissors snip, single crisp cut",
+      "duration": 0.6
+    },
+    {
+      "id": "slurp",
+      "prompt": "cartoon suction slurp pop, something pulled through a tube",
+      "duration": 0.9
+    },
+    {
+      "id": "rimshot",
+      "prompt": "comedic drum rimshot ba dum tss",
+      "duration": 1.2
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-whoosh0",
+      "src": "whoosh-short.mp3",
+      "start": 0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-boom",
+      "src": "gen-boom.mp3",
+      "start": 0,
+      "volume": 0.7
+    },
+    {
+      "id": "sfx-throb1",
+      "src": "gen-throb.mp3",
+      "line": "s1",
+      "offset": -0.2,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-riser",
+      "src": "gen-riser.mp3",
+      "anchor": "spaeter",
+      "offset": -1.15,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-card-in",
+      "src": "whoosh-short.mp3",
+      "anchor": "spaeter",
+      "offset": -0.05,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-card-out",
+      "src": "whoosh-short.mp3",
+      "anchor": "nachher",
+      "offset": -0.1,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-throb2",
+      "src": "gen-throb.mp3",
+      "line": "n1",
+      "offset": -0.3,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-ports",
+      "src": "pop.mp3",
+      "start": 30.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-ports2",
+      "src": "pop.mp3",
+      "start": 30.15,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-ports3",
+      "src": "pop.mp3",
+      "start": 30.3,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-air",
+      "src": "gen-air.mp3",
+      "start": 30.35,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-scope",
+      "src": "whoosh.mp3",
+      "start": 32.35,
+      "volume": 0.4
+    },
+    {
+      "id": "sfx-grab",
+      "src": "click.mp3",
+      "start": 34.7,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-clip1",
+      "src": "gen-clip.mp3",
+      "start": 36.6,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-clip2",
+      "src": "gen-clip.mp3",
+      "start": 37.0,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-snip1",
+      "src": "gen-snip.mp3",
+      "start": 38.0,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-snip2",
+      "src": "gen-snip.mp3",
+      "start": 38.25,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-slurp",
+      "src": "gen-slurp.mp3",
+      "start": 40.3,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-rimshot",
+      "src": "gen-rimshot.mp3",
+      "line": "o7",
+      "offset": 1.0,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-frage",
+      "src": "gen-boing.mp3",
+      "anchor": "frage",
+      "offset": 0.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-praxis",
+      "src": "whoosh-short.mp3",
+      "anchor": "praxis",
+      "offset": -0.05,
+      "volume": 0.4
+    },
+    {
+      "id": "sfx-boing",
+      "src": "gen-boing.mp3",
+      "anchor": "patient",
+      "offset": 0.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-rimshot2",
+      "src": "gen-rimshot.mp3",
+      "line": "e2",
+      "offset": 2.6,
+      "volume": 0.4
+    }
+  ]
+}

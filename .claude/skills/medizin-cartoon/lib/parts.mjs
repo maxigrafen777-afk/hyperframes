@@ -262,3 +262,23 @@ export function swab(id, { tip = "#F7F3E8" } = {}) {
     <ellipse id="${id}-tip" cx="0" cy="-20" rx="22" ry="34" fill="${tip}" ${S(4)}/>
   </g>`;
 }
+
+// Laparoskopie-Instrument: Spitze bei (0,0), langer Schaft nach oben.
+// kind: "grasp" (Greifer, -jawL/-jawR um "0 -34"), "sci" (Schere, gleiche Backen-Ids),
+// "clip" (Clip-Zange mit -clip), "scope" (Kamera mit Lichtkegel -beam).
+export function lapTool(id, kind = "grasp") {
+  const shaft = `<rect x="-11" y="-1600" width="22" height="1560" fill="${C.metal}" ${S(4)}/>
+    <rect x="-15" y="-64" width="30" height="30" rx="6" fill="${C.metalDark}" ${S(3)}/>`;
+  const jaws = (len, curve) => `
+    <g id="${id}-jawL"><path d="M -3 -34 C ${-10 - curve} -20 ${-14 - curve} ${-len / 2} -12 ${-len + 34} L -2 ${-len + 30} C -4 -16 -1 -24 3 -34 Z" fill="${C.metalHi}" ${S(4)}/></g>
+    <g id="${id}-jawR"><path d="M 3 -34 C ${10 + curve} -20 ${14 + curve} ${-len / 2} 12 ${-len + 34} L 2 ${-len + 30} C 4 -16 1 -24 -3 -34 Z" fill="${C.metalHi}" ${S(4)}/></g>`;
+  let tip = "";
+  if (kind === "grasp") tip = jaws(34, 4);
+  if (kind === "sci") tip = jaws(34, 10);
+  if (kind === "clip")
+    tip = `${jaws(34, 2)}<g id="${id}-clip"><path d="M -10 -6 L -10 10 L 10 10 L 10 -6" fill="none" stroke="${C.ink}" stroke-width="11" stroke-linecap="round"/><path d="M -10 -6 L -10 10 L 10 10 L 10 -6" fill="none" stroke="#D9DDE1" stroke-width="6" stroke-linecap="round"/></g>`;
+  if (kind === "scope")
+    tip = `<path id="${id}-beam" d="M -12 0 L -190 460 C -60 520 60 520 190 460 L 12 0 Z" fill="#FFF6CF" opacity="0.32"/>
+    <rect x="-16" y="-34" width="32" height="34" rx="8" fill="${C.metalDark}" ${S(4)}/><circle cy="-4" r="11" fill="#BFE8FF" ${S(3)}/>`;
+  return `<g id="${id}">${shaft}${tip}</g>`;
+}

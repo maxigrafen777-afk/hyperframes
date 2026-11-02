@@ -10,7 +10,7 @@ Hochformat-Kurzvideos, die den Referenzen des Creators folgen (Stil wie die
 das Handle des Creators). Alles ist Code: SVG-Zeichnungen und GSAP-Timeline in
 HyperFrames-Kompositionen. Lies vorher `/hyperframes` (Vertrag, Workflow).
 
-Referenzprojekte, die du kopierst und umbaust: `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
+Referenzprojekte, die du kopierst und umbaust: `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
 Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Gesicht mit `lidFill` für Haut/Nagel, Zahn, Instrumente inkl. Schere und Wattestäbchen, Schmerzstern, Naht, Untertitel).
 
 ## Dramaturgie (immer gleich)
@@ -70,7 +70,7 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - **Dramatik im Eingriff:** langsamer Zoom auf den Höhepunkt (Zahn teilen), Wackeln + Impact beim Ziehen, Riser vor der Karte.
 - **Szenenfolge:** `kiefer → spaeter → nachher → op → frage → praxis → patient` (`order` in `script.json`). Jede Szene hat eigene Autorenzeit und wächst mit ihren Takes; `build.mjs` legt sie nacheinander.
 - **Schluss-Gag + Kommentar-Frage:** Patient mit Folge-Symptom (Hamsterbacken, Kühlpack) fragt nach dem Essen, der Arzt antwortet aus dem Off korrekt, dazu „WIE DICK WAREN DEINE BACKEN?“ + „Schreib's in die Kommentare ↓“, mindestens 2,5 s stehen lassen.
-- **Länge:** 60–80 s ist okay (über 60 s zählt für das Creator-Rewards-Programm); Streit bis zur Karte ≤ 15 s.
+- **Länge:** Ziel ≈ 60 s (Wunsch des Creators: lieber um 1 min als länger). 60–80 s ist die Obergrenze (über 60 s zählt für das Creator-Rewards-Programm); Streit bis zur Karte ≤ 15 s.
 - **Stimmen:** `eleven_v3` mit Tags (`[shouting]`, `[laughs]`, `[whining]`, `[slurring]`, `[panicked]`, `[sighs]`, `[mumbling]`). v3 spricht langsam: `tempo` pro Sprecher (Zähne 1,2, Arzt 1,1, Patient 1,08), und die Stille vor dem ersten Wort wird abgeschnitten (außer bei hörbarem Laut wie `[laughs]`). `node voices.mjs --retime` wendet das ohne neue Credits an.
 - **Ton:** `node sfx-gen.mjs` erzeugt SFX und ein Musikbett (`bed-long.mp3`, Loop mit Überblendungen; Lautstärke 0,17). SFX können an Zeilen hängen (`"line": "k7", "offset": -0.55`). Die ElevenLabs-Musik-API braucht einen Bezahl-Tarif; Sound-Generation reicht für das Bett. Am Ende `loudnorm=I=-14`.
 
@@ -89,6 +89,9 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - **Eingriff:** eigene Umgebung (grünes OP-Tuch, Lampenlicht), Lichtblitz zum Start, Kamera fährt jede Aktion an, Impact-Blitz beim Herausziehen.
 
 ## Stolperfallen
+
+- QA-Normalisierung ignoriert Bindestriche („Kot-Stein“ = „Kotstein“); schwierige Wörter mit Bindestrich schreiben hilft der Aussprache.
+- SFX nie direkt auf den Satzanfang legen: Ein Quietschen genau auf „Nur?!“ hat das Wort im Mix verdeckt. Nach dem Rendern den Mix transkribieren (Ziel ≥ 95 %).
 
 - Untertitel liegen bei y ≈ 1270: Gesichter in der Körperszene nicht dorthin legen (Zeh-Gesicht bei y 1500, Nagel-Gesicht darüber).
 - Patienten-Szenen in Seitenansicht zeichnen (sitzen, betroffener Körperteil auf Hocker); verkürzte Perspektive auf die Kamera zu ist schwer lesbar.
