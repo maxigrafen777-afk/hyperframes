@@ -49,6 +49,15 @@ Betäubung (Spritze) → Schnitt → **Zahnfleisch sichtbar aufklappen** (Lappen
 6. **Stimme (ElevenLabs)**: Stimmen-Ids und Einstellungen pro Sprecher stehen in `script.json` unter `voices` (Opfer höher und gestresst, Verursacher frech, Arzt ruhig). `ELEVENLABS_API_KEY=… node voices.mjs` erzeugt `assets/vo/<zeile>.mp3` und `assets/vo/timings.json` mit Wortzeiten aus dem Alignment (`/with-timestamps`); zu lange Takes werden einmal schneller nachgesprochen. `node build.mjs` übernimmt danach die echte Länge als Zeilenende, setzt die Untertitel auf die echten Wortzeiten und legt die Audio-Clips an. Einzelne Zeilen neu: `node voices.mjs l3 l7`. Der Key braucht die Berechtigung „Text to Speech“.
 7. Rendern: `render -q delivery -o renders/<thema>_vN.mp4`.
 
+## Retention-Regeln (TikTok)
+
+- **Frame 0 ist das Thumbnail im Feed:** Hook-Titel oben (y ≈ 210–500, 3 Zeilen, Schlüsselwort gelb `#FFE14D`), ab dem ersten Frame voll lesbar, nie hereinskaliert. Dazu Kamera-Punch (1,16 → 1) mit Wackeln, tiefer Boom, erster Satz geschrien.
+- **Betonung:** Wörter, die im Skript GROSS stehen, werden gelbe, größere Untertitel und bekommen einen kurzen Kamera-Punch. Sparsam einsetzen, 1 pro Zeile höchstens.
+- **Dramatik im Eingriff:** langsamer Zoom auf den Höhepunkt (Zahn teilen), Wackeln und Impact beim Ziehen, Riser vor der Zeitsprung-Karte.
+- **Schluss-Gag + Kommentar-Frage:** Nach dem Arzt kommt der Patient mit Folge-Symptom (z. B. Hamsterbacken mit Kühlpack), nuschelt eine Frage, der Arzt antwortet aus dem Off korrekt (z. B. „Heute nur was Weiches. Und gut kühlen.“). Dann eine Frage an die Zuschauer einblenden („WIE DICK WAREN DEINE BACKEN?“ + „Schreib's in die Kommentare ↓“), mindestens 2,5 s stehen lassen.
+- **Länge:** knapp über 60 s ist okay (zählt für das Creator-Rewards-Programm); die Streitszene aber unter ~13 s halten.
+- **Stimmen:** `eleven_v3` mit Tags (`[shouting]`, `[laughs]`, `[slurring]`, `[panicked]`, `[sighs]`, `[mumbling]`); v3 spricht langsam, daher `tempo` pro Sprecher (1,05–1,15) über `node voices.mjs --retime` ohne neue Credits. Soundeffekte über `node sfx-gen.mjs` (`genSfx` in `script.json`). Musik-API braucht einen Bezahl-Tarif.
+
 ## Stolperfallen
 
 - Kiefer- und OP-Szene teilen dieselbe Zeichnung (`jaw(prefix)`), Ids also mit Präfix (`k-`, `o-`); im JS steht `@` für das Präfix.
