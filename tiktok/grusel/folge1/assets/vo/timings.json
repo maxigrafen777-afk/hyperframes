@@ -1,0 +1,906 @@
+{
+  "n1": {
+    "duration": 2.925,
+    "words": [
+      {
+        "text": "Stell",
+        "start": 0.01,
+        "end": 0.27
+      },
+      {
+        "text": "dir",
+        "start": 0.27,
+        "end": 0.5
+      },
+      {
+        "text": "vor,",
+        "start": 0.5,
+        "end": 0.73
+      },
+      {
+        "text": "es",
+        "start": 0.88,
+        "end": 1.127
+      },
+      {
+        "text": "ist",
+        "start": 1.127,
+        "end": 1.39
+      },
+      {
+        "text": "kurz",
+        "start": 1.39,
+        "end": 1.671
+      },
+      {
+        "text": "nach",
+        "start": 1.671,
+        "end": 1.951
+      },
+      {
+        "text": "zwei",
+        "start": 1.951,
+        "end": 2.232
+      },
+      {
+        "text": "Uhr",
+        "start": 2.232,
+        "end": 2.495
+      },
+      {
+        "text": "nachts.",
+        "start": 2.495,
+        "end": 2.81
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n2": {
+    "duration": 3.091,
+    "words": [
+      {
+        "text": "Du",
+        "start": 0.02,
+        "end": 0.263
+      },
+      {
+        "text": "steigst",
+        "start": 0.263,
+        "end": 0.59
+      },
+      {
+        "text": "in",
+        "start": 0.59,
+        "end": 0.833
+      },
+      {
+        "text": "den",
+        "start": 0.833,
+        "end": 1.093
+      },
+      {
+        "text": "Aufzug",
+        "start": 1.093,
+        "end": 1.613
+      },
+      {
+        "text": "und",
+        "start": 1.613,
+        "end": 1.873
+      },
+      {
+        "text": "drückst",
+        "start": 1.873,
+        "end": 2.2
+      },
+      {
+        "text": "die",
+        "start": 2.2,
+        "end": 2.46
+      },
+      {
+        "text": "Sieben.",
+        "start": 2.46,
+        "end": 2.98
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n3": {
+    "duration": 3.197,
+    "words": [
+      {
+        "text": "Dein",
+        "start": 0.03,
+        "end": 0.314
+      },
+      {
+        "text": "Handy:",
+        "start": 0.314,
+        "end": 0.83
+      },
+      {
+        "text": "drei",
+        "start": 0.99,
+        "end": 1.252
+      },
+      {
+        "text": "Prozent",
+        "start": 1.252,
+        "end": 1.76
+      },
+      {
+        "text": "Akku.",
+        "start": 1.76,
+        "end": 2.22
+      },
+      {
+        "text": "Kein",
+        "start": 2.49,
+        "end": 2.79
+      },
+      {
+        "text": "Netz.",
+        "start": 2.79,
+        "end": 3.09
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n4": {
+    "duration": 1.58,
+    "words": [
+      {
+        "text": "Der",
+        "start": 0.02,
+        "end": 0.305
+      },
+      {
+        "text": "Aufzug",
+        "start": 0.305,
+        "end": 0.874
+      },
+      {
+        "text": "fährt",
+        "start": 0.874,
+        "end": 1.195
+      },
+      {
+        "text": "los.",
+        "start": 1.195,
+        "end": 1.48
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n5": {
+    "duration": 1.818,
+    "words": [
+      {
+        "text": "Fünf.",
+        "start": 0.01,
+        "end": 0.37
+      },
+      {
+        "text": "Sechs.",
+        "start": 0.62,
+        "end": 1.02
+      },
+      {
+        "text": "Sieben.",
+        "start": 1.23,
+        "end": 1.7
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n6": {
+    "duration": 1.184,
+    "words": [
+      {
+        "text": "Er",
+        "start": 0.07,
+        "end": 0.3
+      },
+      {
+        "text": "hält",
+        "start": 0.3,
+        "end": 0.562
+      },
+      {
+        "text": "nicht",
+        "start": 0.562,
+        "end": 0.84
+      },
+      {
+        "text": "an.",
+        "start": 0.84,
+        "end": 1.07
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n7": {
+    "duration": 2.525,
+    "words": [
+      {
+        "text": "Acht,",
+        "start": 0.04,
+        "end": 0.31
+      },
+      {
+        "text": "neun,",
+        "start": 0.42,
+        "end": 0.83
+      },
+      {
+        "text": "zehn,",
+        "start": 0.96,
+        "end": 1.39
+      },
+      {
+        "text": "elf,",
+        "start": 1.54,
+        "end": 1.81
+      },
+      {
+        "text": "zwölf.",
+        "start": 1.98,
+        "end": 2.41
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n8": {
+    "duration": 2.073,
+    "words": [
+      {
+        "text": "Das",
+        "start": 0.01,
+        "end": 0.246
+      },
+      {
+        "text": "Haus",
+        "start": 0.246,
+        "end": 0.498
+      },
+      {
+        "text": "hat",
+        "start": 0.498,
+        "end": 0.734
+      },
+      {
+        "text": "nur",
+        "start": 0.734,
+        "end": 0.97
+      },
+      {
+        "text": "zwölf",
+        "start": 0.97,
+        "end": 1.236
+      },
+      {
+        "text": "Stockwerke.",
+        "start": 1.236,
+        "end": 1.96
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n9": {
+    "duration": 2.303,
+    "words": [
+      {
+        "text": "Auf",
+        "start": 0.06,
+        "end": 0.272
+      },
+      {
+        "text": "der",
+        "start": 0.272,
+        "end": 0.483
+      },
+      {
+        "text": "Anzeige",
+        "start": 0.483,
+        "end": 1.091
+      },
+      {
+        "text": "steht:",
+        "start": 1.091,
+        "end": 1.33
+      },
+      {
+        "text": "dreizehn.",
+        "start": 1.53,
+        "end": 2.19
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n10": {
+    "duration": 1.765,
+    "words": [
+      {
+        "text": "Ein",
+        "start": 0.04,
+        "end": 0.258
+      },
+      {
+        "text": "Ruck.",
+        "start": 0.258,
+        "end": 0.49
+      },
+      {
+        "text": "Das",
+        "start": 0.75,
+        "end": 0.964
+      },
+      {
+        "text": "Licht",
+        "start": 0.964,
+        "end": 1.205
+      },
+      {
+        "text": "flackert.",
+        "start": 1.205,
+        "end": 1.66
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n11": {
+    "duration": 4.278,
+    "words": [
+      {
+        "text": "Neben",
+        "start": 0.03,
+        "end": 0.503
+      },
+      {
+        "text": "den",
+        "start": 0.503,
+        "end": 0.747
+      },
+      {
+        "text": "Knöpfen",
+        "start": 0.747,
+        "end": 1.251
+      },
+      {
+        "text": "klebt",
+        "start": 1.251,
+        "end": 1.527
+      },
+      {
+        "text": "ein",
+        "start": 1.527,
+        "end": 1.771
+      },
+      {
+        "text": "Zettel,",
+        "start": 1.771,
+        "end": 2.26
+      },
+      {
+        "text": "der",
+        "start": 2.39,
+        "end": 2.586
+      },
+      {
+        "text": "dir",
+        "start": 2.586,
+        "end": 2.781
+      },
+      {
+        "text": "noch",
+        "start": 2.781,
+        "end": 2.989
+      },
+      {
+        "text": "nie",
+        "start": 2.989,
+        "end": 3.185
+      },
+      {
+        "text": "aufgefallen",
+        "start": 3.185,
+        "end": 3.954
+      },
+      {
+        "text": "ist.",
+        "start": 3.954,
+        "end": 4.15
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n12": {
+    "duration": 3.71,
+    "words": [
+      {
+        "text": "Hält",
+        "start": 0.01,
+        "end": 0.268
+      },
+      {
+        "text": "der",
+        "start": 0.268,
+        "end": 0.51
+      },
+      {
+        "text": "Aufzug",
+        "start": 0.51,
+        "end": 0.993
+      },
+      {
+        "text": "im",
+        "start": 0.993,
+        "end": 1.22
+      },
+      {
+        "text": "dreizehnten",
+        "start": 1.22,
+        "end": 1.977
+      },
+      {
+        "text": "Stock,",
+        "start": 1.977,
+        "end": 2.25
+      },
+      {
+        "text": "bleib",
+        "start": 2.39,
+        "end": 2.653
+      },
+      {
+        "text": "auf",
+        "start": 2.653,
+        "end": 2.886
+      },
+      {
+        "text": "keinen",
+        "start": 2.886,
+        "end": 3.352
+      },
+      {
+        "text": "Fall.",
+        "start": 3.352,
+        "end": 3.6
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n13": {
+    "duration": 1.514,
+    "words": [
+      {
+        "text": "Der",
+        "start": 0.02,
+        "end": 0.219
+      },
+      {
+        "text": "Rest",
+        "start": 0.219,
+        "end": 0.431
+      },
+      {
+        "text": "ist",
+        "start": 0.431,
+        "end": 0.63
+      },
+      {
+        "text": "abgerissen.",
+        "start": 0.63,
+        "end": 1.4
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n14": {
+    "duration": 1.266,
+    "words": [
+      {
+        "text": "Die",
+        "start": 0.01,
+        "end": 0.204
+      },
+      {
+        "text": "Türen",
+        "start": 0.204,
+        "end": 0.58
+      },
+      {
+        "text": "gehen",
+        "start": 0.58,
+        "end": 0.956
+      },
+      {
+        "text": "auf.",
+        "start": 0.956,
+        "end": 1.15
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n15": {
+    "duration": 1.751,
+    "words": [
+      {
+        "text": "Ein",
+        "start": 0.04,
+        "end": 0.34
+      },
+      {
+        "text": "Flur,",
+        "start": 0.34,
+        "end": 0.66
+      },
+      {
+        "text": "genau",
+        "start": 0.76,
+        "end": 1.105
+      },
+      {
+        "text": "wie",
+        "start": 1.105,
+        "end": 1.283
+      },
+      {
+        "text": "deiner.",
+        "start": 1.283,
+        "end": 1.64
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n16": {
+    "duration": 4.551,
+    "words": [
+      {
+        "text": "Ganz",
+        "start": 0.03,
+        "end": 0.308
+      },
+      {
+        "text": "hinten:",
+        "start": 0.308,
+        "end": 0.83
+      },
+      {
+        "text": "deine",
+        "start": 1.03,
+        "end": 1.389
+      },
+      {
+        "text": "Wohnungstür.",
+        "start": 1.389,
+        "end": 1.97
+      },
+      {
+        "text": "Sie",
+        "start": 2.22,
+        "end": 2.446
+      },
+      {
+        "text": "steht",
+        "start": 2.446,
+        "end": 2.702
+      },
+      {
+        "text": "offen.",
+        "start": 2.702,
+        "end": 3.14
+      },
+      {
+        "text": "Drinnen",
+        "start": 3.39,
+        "end": 3.879
+      },
+      {
+        "text": "brennt",
+        "start": 3.879,
+        "end": 4.162
+      },
+      {
+        "text": "Licht.",
+        "start": 4.162,
+        "end": 4.43
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n17": {
+    "duration": 1.812,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0.01,
+        "end": 0.233
+      },
+      {
+        "text": "ruft",
+        "start": 0.233,
+        "end": 0.456
+      },
+      {
+        "text": "jemand",
+        "start": 0.456,
+        "end": 0.875
+      },
+      {
+        "text": "deinen",
+        "start": 0.875,
+        "end": 1.294
+      },
+      {
+        "text": "Namen.",
+        "start": 1.294,
+        "end": 1.7
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n18": {
+    "duration": 0.996,
+    "words": [
+      {
+        "text": "Mit",
+        "start": 0.01,
+        "end": 0.184
+      },
+      {
+        "text": "deiner",
+        "start": 0.184,
+        "end": 0.532
+      },
+      {
+        "text": "Stimme.",
+        "start": 0.532,
+        "end": 0.88
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n19": {
+    "duration": 2.393,
+    "words": [
+      {
+        "text": "Die",
+        "start": 0.01,
+        "end": 0.206
+      },
+      {
+        "text": "Türen",
+        "start": 0.206,
+        "end": 0.585
+      },
+      {
+        "text": "fangen",
+        "start": 0.585,
+        "end": 0.977
+      },
+      {
+        "text": "an,",
+        "start": 0.977,
+        "end": 1.16
+      },
+      {
+        "text": "sich",
+        "start": 1.26,
+        "end": 1.519
+      },
+      {
+        "text": "zu",
+        "start": 1.519,
+        "end": 1.746
+      },
+      {
+        "text": "schließen.",
+        "start": 1.746,
+        "end": 2.28
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n20": {
+    "duration": 1.648,
+    "words": [
+      {
+        "text": "Du",
+        "start": 0.02,
+        "end": 0.219
+      },
+      {
+        "text": "hast",
+        "start": 0.219,
+        "end": 0.446
+      },
+      {
+        "text": "zwei",
+        "start": 0.446,
+        "end": 0.673
+      },
+      {
+        "text": "Möglichkeiten:",
+        "start": 0.673,
+        "end": 1.54
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n21": {
+    "duration": 3.614,
+    "words": [
+      {
+        "text": "A,",
+        "start": 0.04,
+        "end": 0.32
+      },
+      {
+        "text": "du",
+        "start": 0.43,
+        "end": 0.679
+      },
+      {
+        "text": "bleibst",
+        "start": 0.679,
+        "end": 1.015
+      },
+      {
+        "text": "im",
+        "start": 1.015,
+        "end": 1.264
+      },
+      {
+        "text": "Aufzug",
+        "start": 1.264,
+        "end": 1.797
+      },
+      {
+        "text": "und",
+        "start": 1.797,
+        "end": 2.064
+      },
+      {
+        "text": "drückst",
+        "start": 2.064,
+        "end": 2.399
+      },
+      {
+        "text": "auf",
+        "start": 2.399,
+        "end": 2.666
+      },
+      {
+        "text": "Erdgeschoss.",
+        "start": 2.666,
+        "end": 3.5
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n22": {
+    "duration": 3.337,
+    "words": [
+      {
+        "text": "Oder",
+        "start": 0.05,
+        "end": 1.06
+      },
+      {
+        "text": "B,",
+        "start": 1.06,
+        "end": 1.53
+      },
+      {
+        "text": "du",
+        "start": 1.64,
+        "end": 1.783
+      },
+      {
+        "text": "steigst",
+        "start": 1.783,
+        "end": 1.976
+      },
+      {
+        "text": "aus",
+        "start": 1.976,
+        "end": 2.129
+      },
+      {
+        "text": "und",
+        "start": 2.129,
+        "end": 2.282
+      },
+      {
+        "text": "gehst",
+        "start": 2.282,
+        "end": 2.455
+      },
+      {
+        "text": "zu",
+        "start": 2.455,
+        "end": 2.598
+      },
+      {
+        "text": "deiner",
+        "start": 2.598,
+        "end": 2.904
+      },
+      {
+        "text": "Wohnung.",
+        "start": 2.904,
+        "end": 3.22
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n23": {
+    "duration": 1.509,
+    "words": [
+      {
+        "text": "Also,",
+        "start": 0.04,
+        "end": 0.49
+      },
+      {
+        "text": "was",
+        "start": 0.58,
+        "end": 0.839
+      },
+      {
+        "text": "machst",
+        "start": 0.839,
+        "end": 1.148
+      },
+      {
+        "text": "du?",
+        "start": 1.148,
+        "end": 1.39
+      }
+    ],
+    "engine": "mbrola"
+  },
+  "n24": {
+    "duration": 2.546,
+    "words": [
+      {
+        "text": "Schreib",
+        "start": 0.02,
+        "end": 0.304
+      },
+      {
+        "text": "A",
+        "start": 0.304,
+        "end": 0.501
+      },
+      {
+        "text": "oder",
+        "start": 0.501,
+        "end": 0.923
+      },
+      {
+        "text": "B",
+        "start": 0.923,
+        "end": 1.119
+      },
+      {
+        "text": "in",
+        "start": 1.119,
+        "end": 1.331
+      },
+      {
+        "text": "die",
+        "start": 1.331,
+        "end": 1.556
+      },
+      {
+        "text": "Kommentare.",
+        "start": 1.556,
+        "end": 2.43
+      }
+    ],
+    "engine": "mbrola"
+  }
+}

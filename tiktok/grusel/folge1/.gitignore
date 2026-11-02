@@ -1,0 +1,7 @@
+assets/vo/raw/
+renders/
+.hyperframes/
+# aus sfx.py erzeugt (deterministisch): python3 sfx.py
+assets/sfx/drone.mp3
+assets/sfx/herz.mp3
+assets/sfx/motor.mp3

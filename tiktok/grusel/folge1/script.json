@@ -1,0 +1,151 @@
+{
+  "title": "Stockwerk 13 · Teil 1",
+  "voice": {
+    "engine": "mbrola",
+    "mbrolaVoice": "mb-de6",
+    "wpm": 180,
+    "espeakPitch": 30,
+    "pitch": 0.96,
+    "tempo": 1.0,
+    "gap": 0.12,
+    "elevenModel": "eleven_multilingual_v2",
+    "voiceId": ""
+  },
+  "lines": [
+    {
+      "id": "n1",
+      "shot": "lobby",
+      "text": "Stell dir vor, es ist kurz nach zwei Uhr nachts."
+    },
+    {
+      "id": "n2",
+      "shot": "kabine",
+      "text": "Du steigst in den Aufzug und drückst die Sieben.",
+      "emph": ["Sieben"]
+    },
+    {
+      "id": "n3",
+      "shot": "handy",
+      "text": "Dein Handy: drei Prozent Akku. Kein Netz."
+    },
+    {
+      "id": "n4",
+      "shot": "kabine",
+      "text": "Der Aufzug fährt los."
+    },
+    {
+      "id": "n5",
+      "shot": "anzeige",
+      "text": "Fünf. Sechs. Sieben.",
+      "gap": 0.2
+    },
+    {
+      "id": "n6",
+      "shot": "gesicht",
+      "text": "Er hält nicht an.",
+      "emph": ["nicht"]
+    },
+    {
+      "id": "n7",
+      "shot": "anzeige",
+      "text": "Acht, neun, zehn, elf, zwölf."
+    },
+    {
+      "id": "n8",
+      "shot": "knoepfe",
+      "text": "Das Haus hat nur zwölf Stockwerke.",
+      "emph": ["zwölf"]
+    },
+    {
+      "id": "n9",
+      "shot": "anzeige13",
+      "text": "Auf der Anzeige steht: dreizehn.",
+      "emph": ["dreizehn"],
+      "gap": 0.25
+    },
+    {
+      "id": "n10",
+      "shot": "ruck",
+      "text": "Ein Ruck. Das Licht flackert."
+    },
+    {
+      "id": "n11",
+      "shot": "knoepfe",
+      "text": "Neben den Knöpfen klebt ein Zettel, der dir noch nie aufgefallen ist."
+    },
+    {
+      "id": "n12",
+      "shot": "zettel",
+      "text": "Hält der Aufzug im dreizehnten Stock, bleib auf keinen Fall ...",
+      "gap": 0.2
+    },
+    {
+      "id": "n13",
+      "shot": "zettel",
+      "text": "Der Rest ist abgerissen.",
+      "emph": ["abgerissen"]
+    },
+    {
+      "id": "n14",
+      "shot": "tueren",
+      "text": "Die Türen gehen auf.",
+      "gap": 0.3
+    },
+    {
+      "id": "n15",
+      "shot": "flur",
+      "text": "Ein Flur, genau wie deiner."
+    },
+    {
+      "id": "n16",
+      "shot": "flur",
+      "text": "Ganz hinten: deine Wohnungstür. Sie steht offen. Drinnen brennt Licht."
+    },
+    {
+      "id": "n17",
+      "shot": "gesicht2",
+      "text": "Dann ruft jemand deinen Namen.",
+      "gap": 0.3
+    },
+    {
+      "id": "n18",
+      "shot": "schatten",
+      "text": "Mit deiner Stimme.",
+      "emph": ["Stimme"],
+      "gap": 0.35
+    },
+    {
+      "id": "n19",
+      "shot": "schliessen",
+      "text": "Die Türen fangen an, sich zu schließen.",
+      "gap": 0.3
+    },
+    {
+      "id": "n20",
+      "shot": "wahl",
+      "text": "Du hast zwei Möglichkeiten:"
+    },
+    {
+      "id": "n21",
+      "shot": "wahl",
+      "text": "A, du bleibst im Aufzug und drückst auf Erdgeschoss."
+    },
+    {
+      "id": "n22",
+      "shot": "wahl",
+      "text": "Oder B, du steigst aus und gehst zu deiner Wohnung."
+    },
+    {
+      "id": "n23",
+      "shot": "angst",
+      "text": "Also, was machst du?",
+      "gap": 0.25
+    },
+    {
+      "id": "n24",
+      "shot": "ende",
+      "text": "Schreib A oder B in die Kommentare."
+    }
+  ],
+  "tail": 3.0
+}
