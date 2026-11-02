@@ -1,48 +1,49 @@
 {
   "title": "Weisheitszahn wird entfernt",
-  "duration": 47.6,
+  "duration": 0,
   "handle": "Dr. Arzterklärt",
   "scenes": {
     "kiefer": [0, 9.8],
     "spaeter": [9.8, 11.2],
     "op": [11.2, 35.0],
-    "praxis": [35.0, 47.6]
+    "praxis": [35.0, 47.6],
+    "patient": [47.6, 55.0]
   },
   "lines": [
     {
       "id": "l1",
       "speaker": "bz",
-      "start": 0.3,
-      "end": 2.2,
-      "text": "Hey, du da hinten! Hör auf zu drücken!"
+      "start": 0.05,
+      "end": 1.95,
+      "text": "[shouting] AUA! Hör sofort auf zu drücken!"
     },
     {
       "id": "l2",
       "speaker": "wz",
-      "start": 2.4,
-      "end": 4.4,
-      "text": "Geht nicht. Hier ist einfach kein Platz für mich."
+      "start": 2.3,
+      "end": 4.3,
+      "text": "[laughs] Sorry. Hier ist halt kein Platz für mich."
     },
     {
       "id": "l3",
       "speaker": "bz",
       "start": 4.6,
       "end": 6.4,
-      "text": "Dann wachs woanders hin! Das tut weh!"
+      "text": "[angry] Dann wachs woanders hin! Du machst mich KAPUTT!"
     },
     {
       "id": "l4",
       "speaker": "wz",
       "start": 6.6,
       "end": 7.7,
-      "text": "Pech gehabt. Ich bleibe."
+      "text": "[mischievously] Pech gehabt. Ich bleib hier."
     },
     {
       "id": "l5",
       "speaker": "bz",
       "start": 7.9,
       "end": 9.6,
-      "text": "Na warte. Das sag ich dem Zahnarzt."
+      "text": "[angry] Na warte! DAS sag ich dem Zahnarzt!"
     },
     {
       "id": "l6",
@@ -56,70 +57,105 @@
       "speaker": "wz",
       "start": 12.3,
       "end": 13.6,
-      "text": "Autsch! Was war das denn?"
+      "text": "[shouting] AUA! Was war DAS denn?!"
     },
     {
       "id": "l8",
       "speaker": "wz",
       "start": 14.0,
       "end": 15.6,
-      "text": "Ich spür… gar nichts mehr…"
+      "text": "[slurring] Ich spür… gar nix mehr…"
     },
     {
       "id": "l9",
       "speaker": "bz",
       "start": 17.4,
       "end": 18.9,
-      "text": "Oha. Jetzt wird's ernst."
+      "text": "[nervous] Oh oh. Jetzt wird's ernst."
     },
     {
       "id": "l10",
       "speaker": "wz",
       "start": 21.6,
       "end": 23.8,
-      "text": "Moment! Ihr könnt mich doch nicht zerteilen!"
+      "text": "[panicked] Halt! Ihr könnt mich doch nicht ZERTEILEN!"
     },
     {
       "id": "l11",
       "speaker": "wz",
       "start": 25.5,
       "end": 26.3,
-      "text": "Neeein!"
+      "text": "[screaming] NEEEIN!"
     },
     {
       "id": "l12",
       "speaker": "bz",
       "start": 33.1,
       "end": 34.8,
-      "text": "Endlich hab ich wieder Ruhe."
+      "text": "[sighs] Endlich… wieder Ruhe."
     },
     {
       "id": "l13",
       "speaker": "arzt",
       "start": 35.4,
       "end": 39.0,
-      "text": "Wenn ein Weisheitszahn keinen Platz hat, drückt er oft gegen den Nachbarzahn."
+      "text": "Hat ein Weisheitszahn keinen Platz, drückt er gegen den Nachbarzahn."
     },
     {
       "id": "l14",
       "speaker": "arzt",
       "start": 39.2,
       "end": 43.2,
-      "text": "Dann betäuben wir, klappen das Zahnfleisch auf und tragen etwas Knochen ab."
+      "text": "Dann betäuben wir, öffnen das Zahnfleisch und tragen etwas Knochen ab."
     },
     {
       "id": "l15",
       "speaker": "arzt",
       "start": 43.4,
       "end": 47.3,
-      "text": "Den Zahn teilen wir, holen ihn Stück für Stück heraus und nähen die Wunde zu."
+      "text": "Den Zahn teilen wir, holen ihn Stück für Stück raus und nähen zu."
+    },
+    {
+      "id": "l16",
+      "speaker": "pat",
+      "start": 48.0,
+      "end": 50.0,
+      "text": "[mumbling] Unn wann kann isch wieda essn?"
+    },
+    {
+      "id": "l17",
+      "speaker": "arzt",
+      "start": 50.3,
+      "end": 52.3,
+      "text": "[warmly] Heute nur was Weiches. Und gut kühlen."
+    },
+    {
+      "id": "l18",
+      "speaker": "pat",
+      "start": 52.6,
+      "end": 53.8,
+      "text": "[sighs] Mmmh… okay."
     }
   ],
   "sfx": [
     {
+      "id": "sfx-boom",
+      "src": "gen-boom.mp3",
+      "start": 0,
+      "volume": 0.7
+    },
+    {
+      "id": "sfx-riser",
+      "src": "gen-riser.mp3",
+      "anchor": "spaeter",
+      "offset": -1.15,
+      "volume": 0.55
+    },
+    {
       "id": "sfx-card-in",
       "src": "whoosh-short.mp3",
-      "start": 9.75,
+      "anchor": "spaeter",
+      "offset": -0.05,
       "volume": 0.5
     },
     {
@@ -219,47 +255,89 @@
       "volume": 0.6
     },
     {
+      "id": "sfx-impact",
+      "src": "gen-impact.mp3",
+      "start": 25.7,
+      "volume": 0.6
+    },
+    {
       "id": "sfx-praxis",
       "src": "whoosh-short.mp3",
-      "start": 34.95,
+      "anchor": "praxis",
+      "offset": -0.05,
       "volume": 0.4
+    },
+    {
+      "id": "sfx-boing",
+      "src": "gen-boing.mp3",
+      "anchor": "patient",
+      "offset": 0.0,
+      "volume": 0.6
     }
   ],
-  "voiceModel": "eleven_multilingual_v2",
+  "voiceModel": "eleven_v3",
   "voices": {
     "bz": {
-      "name": "Backenzahn (Opfer, höher, gestresst)",
+      "name": "Backenzahn (Opfer, gestresst; Charlie)",
       "voice_id": "IKne3meq5aSn9XLyUdCD",
       "settings": {
-        "stability": 0.3,
+        "stability": 0.0,
         "similarity_boost": 0.8,
-        "style": 0.6,
-        "use_speaker_boost": true,
-        "speed": 1.05
-      }
+        "use_speaker_boost": true
+      },
+      "tempo": 1.15
     },
     "wz": {
-      "name": "Weisheitszahn (frech)",
+      "name": "Weisheitszahn (frech; Liam)",
       "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
       "settings": {
-        "stability": 0.35,
+        "stability": 0.0,
         "similarity_boost": 0.8,
-        "style": 0.55,
-        "use_speaker_boost": true,
-        "speed": 1.05
-      }
+        "use_speaker_boost": true
+      },
+      "tempo": 1.15
     },
     "arzt": {
       "name": "Arzt (ruhig, warm; George)",
       "voice_id": "JBFqnCBsd6RMkjVDRZzb",
       "settings": {
-        "stability": 0.6,
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "use_speaker_boost": true
+      },
+      "tempo": 1.08
+    },
+    "pat": {
+      "name": "Patient (dicke Backen, nuschelt; Callum)",
+      "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+      "settings": {
+        "stability": 0.0,
         "similarity_boost": 0.8,
-        "style": 0.15,
-        "use_speaker_boost": true,
-        "speed": 0.95
-      }
+        "use_speaker_boost": true
+      },
+      "tempo": 1.05
     }
   },
-  "voiceMaxSpeed": 1.1
+  "genSfx": [
+    {
+      "id": "boom",
+      "prompt": "deep cinematic boom impact with sub bass, short",
+      "duration": 1.5
+    },
+    {
+      "id": "riser",
+      "prompt": "short tense suspense riser whoosh building up, ends abruptly",
+      "duration": 1.2
+    },
+    {
+      "id": "impact",
+      "prompt": "cartoon pop and heavy thud impact, tooth pulled out",
+      "duration": 1.0
+    },
+    {
+      "id": "boing",
+      "prompt": "comedic cartoon boing wobble, rubbery",
+      "duration": 1.0
+    }
+  ]
 }

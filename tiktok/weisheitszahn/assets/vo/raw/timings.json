@@ -1,0 +1,649 @@
+{
+  "l1": {
+    "duration": 2.351,
+    "fileDuration": 2.35102,
+    "words": [
+      {
+        "text": "AUA!",
+        "start": 0.22,
+        "end": 0.64
+      },
+      {
+        "text": "Hör",
+        "start": 0.8,
+        "end": 1.04
+      },
+      {
+        "text": "sofort",
+        "start": 1.109,
+        "end": 1.52
+      },
+      {
+        "text": "auf",
+        "start": 1.56,
+        "end": 1.68
+      },
+      {
+        "text": "zu",
+        "start": 1.707,
+        "end": 1.76
+      },
+      {
+        "text": "drücken!",
+        "start": 1.813,
+        "end": 2.32
+      }
+    ]
+  },
+  "l2": {
+    "duration": 2.769,
+    "fileDuration": 2.76898,
+    "words": [
+      {
+        "text": "Sorry.",
+        "start": 0.727,
+        "end": 1.04
+      },
+      {
+        "text": "Hier",
+        "start": 1.136,
+        "end": 1.52
+      },
+      {
+        "text": "ist",
+        "start": 1.54,
+        "end": 1.6
+      },
+      {
+        "text": "halt",
+        "start": 1.632,
+        "end": 1.76
+      },
+      {
+        "text": "kein",
+        "start": 1.808,
+        "end": 2
+      },
+      {
+        "text": "Platz",
+        "start": 2.04,
+        "end": 2.24
+      },
+      {
+        "text": "für",
+        "start": 2.28,
+        "end": 2.4
+      },
+      {
+        "text": "mich.",
+        "start": 2.432,
+        "end": 2.72
+      }
+    ]
+  },
+  "l3": {
+    "duration": 3.788,
+    "fileDuration": 3.787755,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0.134,
+        "end": 0.16
+      },
+      {
+        "text": "wachs",
+        "start": 0.24,
+        "end": 0.56
+      },
+      {
+        "text": "woanders",
+        "start": 0.64,
+        "end": 1.12
+      },
+      {
+        "text": "hin!",
+        "start": 1.18,
+        "end": 1.64
+      },
+      {
+        "text": "Du",
+        "start": 1.733,
+        "end": 1.92
+      },
+      {
+        "text": "machst",
+        "start": 1.968,
+        "end": 2.32
+      },
+      {
+        "text": "mich",
+        "start": 2.384,
+        "end": 2.64
+      },
+      {
+        "text": "KAPUTT!",
+        "start": 2.72,
+        "end": 3.76
+      }
+    ]
+  },
+  "l4": {
+    "duration": 2.273,
+    "fileDuration": 2.272653,
+    "words": [
+      {
+        "text": "Pech",
+        "start": 0.269,
+        "end": 0.32
+      },
+      {
+        "text": "gehabt.",
+        "start": 0.4,
+        "end": 0.96
+      },
+      {
+        "text": "Ich",
+        "start": 1.06,
+        "end": 1.36
+      },
+      {
+        "text": "bleib",
+        "start": 1.42,
+        "end": 1.76
+      },
+      {
+        "text": "hier.",
+        "start": 1.84,
+        "end": 2.24
+      }
+    ]
+  },
+  "l5": {
+    "text": "[angry] Na warte! DAS sag ich dem Zahnarzt!",
+    "fileDuration": 3.160816,
+    "words": [
+      {
+        "text": "Na",
+        "start": 0.213,
+        "end": 0.24
+      },
+      {
+        "text": "warte!",
+        "start": 0.32,
+        "end": 0.8
+      },
+      {
+        "text": "DAS",
+        "start": 1,
+        "end": 1.44
+      },
+      {
+        "text": "sag",
+        "start": 1.54,
+        "end": 1.84
+      },
+      {
+        "text": "ich",
+        "start": 1.88,
+        "end": 2
+      },
+      {
+        "text": "dem",
+        "start": 2.04,
+        "end": 2.16
+      },
+      {
+        "text": "Zahnarzt!",
+        "start": 2.2,
+        "end": 3.12
+      }
+    ]
+  },
+  "l7": {
+    "duration": 2.769,
+    "fileDuration": 2.76898,
+    "words": [
+      {
+        "text": "AUA!",
+        "start": 0.227,
+        "end": 0.8
+      },
+      {
+        "text": "Was",
+        "start": 0.86,
+        "end": 1.04
+      },
+      {
+        "text": "war",
+        "start": 1.08,
+        "end": 1.2
+      },
+      {
+        "text": "DAS",
+        "start": 1.32,
+        "end": 1.68
+      },
+      {
+        "text": "denn?!",
+        "start": 1.776,
+        "end": 2.72
+      }
+    ]
+  },
+  "l8": {
+    "duration": 3.239,
+    "fileDuration": 3.239184,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0.34,
+        "end": 0.4
+      },
+      {
+        "text": "spür…",
+        "start": 0.507,
+        "end": 1.2
+      },
+      {
+        "text": "gar",
+        "start": 1.46,
+        "end": 2.24
+      },
+      {
+        "text": "nix",
+        "start": 2.28,
+        "end": 2.64
+      },
+      {
+        "text": "mehr…",
+        "start": 2.72,
+        "end": 3.2
+      }
+    ]
+  },
+  "l9": {
+    "duration": 2.508,
+    "fileDuration": 2.507755,
+    "words": [
+      {
+        "text": "Oh",
+        "start": 0.139,
+        "end": 0.16
+      },
+      {
+        "text": "oh.",
+        "start": 0.267,
+        "end": 1
+      },
+      {
+        "text": "Jetzt",
+        "start": 1.087,
+        "end": 1.52
+      },
+      {
+        "text": "wird's",
+        "start": 1.568,
+        "end": 1.84
+      },
+      {
+        "text": "ernst.",
+        "start": 1.92,
+        "end": 2.48
+      }
+    ]
+  },
+  "l10": {
+    "duration": 3.082,
+    "fileDuration": 3.082449,
+    "words": [
+      {
+        "text": "Halt!",
+        "start": 0.072,
+        "end": 0.56
+      },
+      {
+        "text": "Ihr",
+        "start": 0.66,
+        "end": 0.96
+      },
+      {
+        "text": "könnt",
+        "start": 1,
+        "end": 1.2
+      },
+      {
+        "text": "mich",
+        "start": 1.232,
+        "end": 1.36
+      },
+      {
+        "text": "doch",
+        "start": 1.392,
+        "end": 1.52
+      },
+      {
+        "text": "nicht",
+        "start": 1.56,
+        "end": 1.76
+      },
+      {
+        "text": "ZERTEILEN!",
+        "start": 1.84,
+        "end": 3.04
+      }
+    ]
+  },
+  "l11": {
+    "duration": 1.959,
+    "fileDuration": 1.959184,
+    "words": [
+      {
+        "text": "NEEEIN!",
+        "start": 0.3,
+        "end": 1.92
+      }
+    ]
+  },
+  "l12": {
+    "duration": 3.239,
+    "fileDuration": 3.239184,
+    "words": [
+      {
+        "text": "Endlich…",
+        "start": 0.8,
+        "end": 2.04
+      },
+      {
+        "text": "wieder",
+        "start": 2.103,
+        "end": 2.48
+      },
+      {
+        "text": "Ruhe.",
+        "start": 2.56,
+        "end": 3.2
+      }
+    ]
+  },
+  "l13": {
+    "duration": 3.866,
+    "fileDuration": 3.866122,
+    "words": [
+      {
+        "text": "Hat",
+        "start": 0,
+        "end": 0.16
+      },
+      {
+        "text": "ein",
+        "start": 0.2,
+        "end": 0.32
+      },
+      {
+        "text": "Weisheitszahn",
+        "start": 0.373,
+        "end": 1.2
+      },
+      {
+        "text": "keinen",
+        "start": 1.246,
+        "end": 1.52
+      },
+      {
+        "text": "Platz,",
+        "start": 1.573,
+        "end": 2.16
+      },
+      {
+        "text": "drückt",
+        "start": 2.213,
+        "end": 2.48
+      },
+      {
+        "text": "er",
+        "start": 2.533,
+        "end": 2.64
+      },
+      {
+        "text": "gegen",
+        "start": 2.68,
+        "end": 2.88
+      },
+      {
+        "text": "den",
+        "start": 2.92,
+        "end": 3.04
+      },
+      {
+        "text": "Nachbarzahn.",
+        "start": 3.088,
+        "end": 3.84
+      }
+    ]
+  },
+  "l14": {
+    "duration": 4.127,
+    "fileDuration": 4.127347,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0,
+        "end": 0.16
+      },
+      {
+        "text": "betäuben",
+        "start": 0.22,
+        "end": 0.64
+      },
+      {
+        "text": "wir,",
+        "start": 0.7,
+        "end": 1.12
+      },
+      {
+        "text": "öffnen",
+        "start": 1.16,
+        "end": 1.44
+      },
+      {
+        "text": "das",
+        "start": 1.48,
+        "end": 1.6
+      },
+      {
+        "text": "Zahnfleisch",
+        "start": 1.68,
+        "end": 2.32
+      },
+      {
+        "text": "und",
+        "start": 2.42,
+        "end": 2.72
+      },
+      {
+        "text": "tragen",
+        "start": 2.747,
+        "end": 3.04
+      },
+      {
+        "text": "etwas",
+        "start": 3.093,
+        "end": 3.36
+      },
+      {
+        "text": "Knochen",
+        "start": 3.44,
+        "end": 3.76
+      },
+      {
+        "text": "ab.",
+        "start": 3.84,
+        "end": 4.08
+      }
+    ]
+  },
+  "l15": {
+    "duration": 4.206,
+    "fileDuration": 4.205714,
+    "words": [
+      {
+        "text": "Den",
+        "start": 0,
+        "end": 0.16
+      },
+      {
+        "text": "Zahn",
+        "start": 0.24,
+        "end": 0.48
+      },
+      {
+        "text": "teilen",
+        "start": 0.56,
+        "end": 0.96
+      },
+      {
+        "text": "wir,",
+        "start": 1.02,
+        "end": 1.52
+      },
+      {
+        "text": "holen",
+        "start": 1.56,
+        "end": 1.84
+      },
+      {
+        "text": "ihn",
+        "start": 1.88,
+        "end": 2
+      },
+      {
+        "text": "Stück",
+        "start": 2.053,
+        "end": 2.32
+      },
+      {
+        "text": "für",
+        "start": 2.36,
+        "end": 2.48
+      },
+      {
+        "text": "Stück",
+        "start": 2.507,
+        "end": 2.72
+      },
+      {
+        "text": "raus",
+        "start": 2.76,
+        "end": 3.12
+      },
+      {
+        "text": "und",
+        "start": 3.18,
+        "end": 3.36
+      },
+      {
+        "text": "nähen",
+        "start": 3.413,
+        "end": 3.68
+      },
+      {
+        "text": "zu.",
+        "start": 3.787,
+        "end": 4.16
+      }
+    ]
+  },
+  "l16": {
+    "duration": 2.508,
+    "fileDuration": 2.507755,
+    "words": [
+      {
+        "text": "Unn",
+        "start": 0.267,
+        "end": 0.4
+      },
+      {
+        "text": "wann",
+        "start": 0.512,
+        "end": 0.96
+      },
+      {
+        "text": "kann",
+        "start": 1.008,
+        "end": 1.2
+      },
+      {
+        "text": "isch",
+        "start": 1.253,
+        "end": 1.44
+      },
+      {
+        "text": "wieda",
+        "start": 1.48,
+        "end": 1.76
+      },
+      {
+        "text": "essn?",
+        "start": 1.86,
+        "end": 2.48
+      }
+    ]
+  },
+  "l17": {
+    "duration": 2.508,
+    "fileDuration": 2.507755,
+    "words": [
+      {
+        "text": "Heute",
+        "start": 0.069,
+        "end": 0.24
+      },
+      {
+        "text": "nur",
+        "start": 0.3,
+        "end": 0.48
+      },
+      {
+        "text": "was",
+        "start": 0.52,
+        "end": 0.64
+      },
+      {
+        "text": "Weiches.",
+        "start": 0.72,
+        "end": 1.48
+      },
+      {
+        "text": "Und",
+        "start": 1.53,
+        "end": 1.68
+      },
+      {
+        "text": "gut",
+        "start": 1.74,
+        "end": 1.92
+      },
+      {
+        "text": "kühlen.",
+        "start": 2.04,
+        "end": 2.48
+      }
+    ]
+  },
+  "l18": {
+    "duration": 2.586,
+    "fileDuration": 2.586122,
+    "words": [
+      {
+        "text": "Mmmh…",
+        "start": 0.92,
+        "end": 1.68
+      },
+      {
+        "text": "okay.",
+        "start": 1.84,
+        "end": 2.56
+      }
+    ]
+  }
+}

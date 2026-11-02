@@ -28,30 +28,47 @@ const H = 1920;
 const SC = script.scenes;
 const lines = script.lines;
 // ElevenLabs-Takes (voices.mjs): echte Länge ersetzt das geschätzte Zeilenende.
-// Szenen-Skripte arbeiten in "Autorenzeit" (script.json). Wird die Streitszene
-// durch längere Takes länger, rutscht alles danach um DELTA nach hinten
-// (Echtzeit = R(t)); die Beats in OP und Praxis bleiben relativ gleich.
+// Jede Szene arbeitet in ihrer "Autorenzeit" (script.json). Werden die Takes
+// länger, wächst die Szene, und alle späteren Szenen rutschen nach hinten
+// (Echtzeit = R(t)); die Beats innerhalb einer Szene bleiben gleich.
 const VO_FILE = new URL("./assets/vo/timings.json", import.meta.url);
 const VO = existsSync(VO_FILE) ? JSON.parse(readFileSync(VO_FILE, "utf8")) : {};
-function relayout(sceneId, gap) {
-  const [a, b] = SC[sceneId];
+const ORDER = ["kiefer", "spaeter", "op", "praxis", "patient"];
+const GAP = { kiefer: 0.1, spaeter: 0, op: 0.15, praxis: 0.3, patient: 0.25 };
+const PAD = { kiefer: 0.3, spaeter: 0, op: 0.4, praxis: 0.5, patient: 2.6 };
+const ORIG = Object.fromEntries(ORDER.map((id) => [id, [...SC[id]]]));
+// Szene jeder Zeile einmal vorab (nach Original-Start) festlegen.
+const sceneOf0 = (t) => ORDER.find((id) => t >= ORIG[id][0] && t < ORIG[id][1]) ?? ORDER.at(-1);
+const LINE_SCENE = Object.fromEntries(lines.map((l) => [l.id, sceneOf0(l.start)]));
+const SHIFT = {};
+let cum = 0;
+for (const id of ORDER) {
+  SHIFT[id] = +cum.toFixed(3);
+  const [a, b] = ORIG[id];
   let prevEnd = -1;
-  for (const l of lines.filter((x) => x.start >= a && x.start < b && VO[x.id])) {
-    if (prevEnd > 0 && l.start < prevEnd + gap) l.start = +(prevEnd + gap).toFixed(2);
+  for (const l of lines.filter((x) => LINE_SCENE[x.id] === id && VO[x.id])) {
+    if (prevEnd > 0 && l.start < prevEnd + GAP[id]) l.start = +(prevEnd + GAP[id]).toFixed(2);
     l.end = +(l.start + VO[l.id].duration).toFixed(2);
     prevEnd = l.end;
   }
-  return prevEnd;
+  const end = prevEnd > 0 ? Math.max(b, prevEnd + PAD[id]) : b;
+  SC[id] = [a, +end.toFixed(2)];
+  cum += end - b;
 }
-const K_END0 = SC.kiefer[1];
-const kEnd = relayout("kiefer", 0.15);
-const DELTA = Math.max(0, +(kEnd + 0.35 - K_END0).toFixed(2));
-SC.kiefer = [0, +(K_END0 + DELTA).toFixed(2)];
-relayout("op", 0.15);
-const pEnd = relayout("praxis", 0.35);
-SC.praxis[1] = Math.max(SC.praxis[1], +(pEnd + 0.8).toFixed(2));
-const R = (t) => +(t >= K_END0 ? t + DELTA : t).toFixed(3);
-const DUR = R(SC.praxis[1]);
+const R = (t, scene = sceneOf0(t)) => +(t + SHIFT[scene]).toFixed(3);
+const RL = (l) => R(l.start, LINE_SCENE[l.id]);
+const DUR = +(R(SC.patient[0], "patient") + SC.patient[1] - SC.patient[0]).toFixed(2);
+// Betonte Wörter (im Skript GROSS geschrieben) -> gelbe Untertitel + Kamera-Punch.
+const isEmph = (w) => {
+  const c = w.replace(/[^\p{L}]/gu, "");
+  return c.length >= 2 && c === c.toUpperCase();
+};
+const emphTimes = (scene) =>
+  lines
+    .filter((l) => LINE_SCENE[l.id] === scene && VO[l.id])
+    .flatMap((l) =>
+      VO[l.id].words.filter((w) => isEmph(w.text)).map((w) => +(l.start + w.start).toFixed(3)),
+    );
 
 const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
 
@@ -91,6 +108,10 @@ const HELPERS = `
       tl.to(o, { scaleY: i % 2 ? 0.35 : 1, duration: step * 0.9, ease: "sine.inOut" }, t);
     }
     face(ch, rest, t1);
+  }
+  function punch(sel, t, k = 1.07) {
+    tl.to(sel, { scale: k, duration: 0.07, ease: "power2.out" }, t);
+    tl.to(sel, { scale: 1, duration: 0.35, ease: "power2.inOut" }, t + 0.08);
   }
   function shake(sel, t, d, amp, prop = "x") {
     const n = Math.max(2, Math.round(d / 0.05));
@@ -140,7 +161,7 @@ const CHUNKS = [
 ];
 
 const jaw = (p) => `
-<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+<svg id="${p}cam" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
   <rect x="-200" y="-200" width="${W + 400}" height="${H + 400}" fill="${C.mouth}"/>
   <path d="M -200 1420 C 200 1480 700 1440 1300 1330 L 1300 2200 L -200 2200 Z" fill="${C.lowerPink}"/>
   <path d="${GUM} L 1120 1310 C 800 1400 300 1500 -40 1530 Z" fill="${C.bone}" ${S()}/>
@@ -203,6 +224,7 @@ const jaw = (p) => `
 // Shared initial state for a jaw scene (prefix-agnostic via "@").
 const JAW_INIT = `
     const WZ = ["#@wz-crown", "#@wz-root", "#@wz-fmove"];
+    gsap.set("#@cam", { transformOrigin: "60% 48%" });
     initChar("@bz", 52, 0.42);
     initChar("@wz", 44, 0.38);
     gsap.set("#@pain", { scale: 0, svgOrigin: "0 0" });
@@ -220,6 +242,12 @@ const JAW_INIT = `
 
 /* ---------- Scene 1: Streit im Kiefer ---------- */
 const kieferJs = `${HELPERS}${JAW_INIT}
+    // Hook: Kamera knallt rein und wackelt, Schmerzstern pulsiert.
+    gsap.set("#@cam", { scale: 1.16 });
+    tl.to("#@cam", { scale: 1, duration: 0.55, ease: "power3.out" }, 0);
+    shake("#@cam", 0.02, 0.5, 16);
+    squeeze("@bz", true, 0); squeeze("@bz", false, 0.9);
+    ${JSON.stringify(emphTimes("kiefer").filter((t) => t > 0.7))}.forEach((t) => { punch("#@cam", t); shake("#@cam", t, 0.25, 7); });
     face("@bz", "frown", 0); face("@wz", "smirk", 0);
     look("@bz", 14, 4, 0, 0.01); look("@wz", -10, -2, 0, 0.01);
     tl.set("#@pain", { scale: 0.9 }, 0);
@@ -248,6 +276,13 @@ const opJs = `${HELPERS}${JAW_INIT}
     gsap.set("#@incision", { opacity: 1, strokeDasharray: 420, strokeDashoffset: 420 });
     gsap.set("#@wz-cut", { opacity: 1, strokeDasharray: 360, strokeDashoffset: 360 });
 
+    ${JSON.stringify(emphTimes("op").filter((t) => !(t > 21.6 && t < 23.5) && !(t > 25.6 && t < 26.4)))}.forEach((t) => { punch("#@cam", t, 1.06); shake("#@cam", t, 0.25, 6); });
+    // Dramatik: beim Teilen langsam auf den Zahn zoomen, beim Ziehen wackeln.
+    tl.to("#@cam", { scale: 1.14, transformOrigin: "72% 52%", duration: 1.2, ease: "power1.inOut" }, 21.75);
+    tl.to("#@cam", { scale: 1, duration: 0.4, ease: "power2.inOut" }, 23.0);
+    shake("#@cam", 25.75, 0.45, 14);
+    tl.to("#@cam", { scale: 1.06, duration: 0.08, ease: "power2.out" }, 25.75);
+    tl.to("#@cam", { scale: 1, duration: 0.4, ease: "power2.inOut" }, 25.85);
     // 1) Betäubung
     go("syr", 700, 812, 11.4, 0.55);
     look("@wz", 12, -16, 11.45); look("@bz", 22, -14, 11.45);
@@ -661,6 +696,8 @@ const praxisJs = `
       tl.to("#doc-hand", { x: 0, y: 0, duration: 0.15 }, t1 - 0.12);
     };
     const S0 = ${SC.praxis[0]}, S1 = ${SC.praxis[1]};
+    gsap.set("#px-cam", { transformOrigin: "58% 45%" });
+    tl.fromTo("#px-cam", { scale: 1 }, { scale: 1.07, duration: S1 - S0, ease: "none" }, S0);
     let prev = S0;
     docLines.forEach(([a, b], i) => {
       if (a - prev > 0.35) write(prev + 0.05, a - 0.1);
@@ -680,6 +717,124 @@ const praxisJs = `
     if (S1 - prev > 0.4) write(prev + 0.2, S1 - 0.05);
 `;
 
+/* ================= Scene: Patient mit dicken Backen ================= */
+const PT = {
+  hair: "#5A3A26",
+  sweater: "#3D79C9",
+  chair: "#3F7FD0",
+  chairDark: "#2F63A8",
+  ice: "#8FD3F5",
+  blush: "#F29C94",
+};
+const FACE =
+  "M 540 640 C 640 640 690 716 700 812 C 800 846 846 958 816 1064 C 784 1170 668 1214 540 1214 C 412 1214 296 1170 264 1064 C 234 958 280 846 380 812 C 390 716 440 640 540 640 Z";
+const ptEye = (id, x, y) =>
+  `<g transform="translate(${x} ${y})"><clipPath id="${id}-c"><circle r="24"/></clipPath>
+    <circle r="24" fill="#fff"/>
+    <g id="${id}-p"><circle r="10" fill="${C.ink}"/><circle cx="-3" cy="-3" r="2.6" fill="#fff"/></g>
+    <g clip-path="url(#${id}-c)"><rect id="${id}-lid" x="-30" y="-30" width="60" height="60" fill="${P.skin}" ${S(4)} vector-effect="non-scaling-stroke"/></g>
+    <circle r="24" fill="none" ${S(4)}/></g>`;
+const puff = (x, y, dir) =>
+  `<path d="M ${x} ${y - 40} q ${dir * 22} 40 0 80 M ${x + dir * 26} ${y - 26} q ${dir * 16} 26 0 52" fill="none" ${S(5)}/>`;
+const patientSvg = `
+<svg id="pt-cam" viewBox="0 0 ${W} ${H}">
+  <rect width="${W}" height="${H}" fill="${P.wall}"/>
+  <rect y="0" width="${W}" height="120" fill="${P.ceiling}"/>
+  <path d="M 0 120 L ${W} 120" ${S(4)}/>
+  <rect y="1340" width="${W}" height="${H - 1340}" fill="${P.wallLow}"/>
+  <path d="M 0 1340 L ${W} 1340" ${S(4)}/>
+  <rect x="40" y="380" width="230" height="300" rx="6" fill="#F3F1E6" ${S(4)}/>
+  <path d="M 80 450 h 150 M 80 500 h 120 M 80 550 h 140 M 80 600 h 90" stroke="#B9C29A" stroke-width="10" stroke-linecap="round"/>
+  <!-- Stuhl -->
+  <rect x="210" y="1150" width="660" height="900" rx="90" fill="${PT.chair}" ${S()}/>
+  <rect x="370" y="560" width="340" height="420" rx="120" fill="${PT.chair}" ${S()}/>
+  <rect x="400" y="600" width="280" height="40" rx="20" fill="${PT.chairDark}" opacity="0.6"/>
+  <!-- Körper -->
+  <path d="M 190 ${H} C 190 1500 250 1310 400 1262 L 680 1262 C 830 1310 890 1500 890 ${H} Z" fill="${PT.sweater}" ${S()}/>
+  <path d="M 470 1262 L 540 1360 L 610 1262 Z" fill="#fff" ${S(4)}/>
+  <path d="M 540 1360 L 540 1700" stroke="#2F62A6" stroke-width="6"/>
+  <rect x="492" y="1150" width="96" height="120" fill="${P.skin}" ${S()}/>
+  <rect x="300" y="1300" width="480" height="70" rx="20" fill="#E8F3F7" ${S(4)}/>
+  <!-- Kopf -->
+  <g id="pt-head">
+    <ellipse cx="368" cy="870" rx="24" ry="40" fill="${P.skin}" ${S()}/>
+    <ellipse cx="712" cy="870" rx="24" ry="40" fill="${P.skin}" ${S()}/>
+    <g id="pt-face">
+      <path d="${FACE}" fill="${P.skin}" ${S()}/>
+      <ellipse cx="372" cy="1030" rx="78" ry="52" fill="${PT.blush}" opacity="0.65"/>
+      <ellipse cx="708" cy="1030" rx="78" ry="52" fill="${PT.blush}" opacity="0.65"/>
+      <path d="M 330 960 q 30 -20 60 -6 M 690 954 q 30 -14 60 6" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+      <g transform="translate(540 1040)">${mouth("pm-m", { s: 0.62, initial: "frown" })}</g>
+    </g>
+    <path d="M 378 820 C 360 700 430 606 540 602 C 652 606 722 690 702 820 C 690 770 650 730 606 726 C 586 700 546 696 524 716 C 484 704 424 734 378 820 Z" fill="${PT.hair}" ${S()}/>
+    <path d="M 500 640 q 20 -40 60 -30 M 560 616 q 30 -30 64 -10" fill="none" ${S(4)}/>
+    ${ptEye("pe1", 490, 870)}${ptEye("pe2", 590, 870)}
+    <path id="pt-browL" d="M 452 826 L 516 806" fill="none" ${S(7)}/>
+    <path id="pt-browR" d="M 564 806 L 628 826" fill="none" ${S(7)}/>
+    <path d="M 540 892 q -14 30 4 36" fill="none" ${S(4)}/>
+  </g>
+  <g id="pt-puffs">${puff(226, 1010, -1)}${puff(854, 1010, 1)}</g>
+  <!-- Kühlpack + Hand -->
+  ${`<path d="M 860 ${H} C 900 1500 900 1260 820 1140" fill="none" stroke="${C.ink}" stroke-width="102" stroke-linecap="round"/><path d="M 860 ${H} C 900 1500 900 1260 820 1140" fill="none" stroke="${PT.sweater}" stroke-width="92" stroke-linecap="round"/>`}
+  <g id="pt-ice" transform="rotate(14 790 1010)">
+    <rect x="720" y="900" width="150" height="210" rx="34" fill="${PT.ice}" ${S()}/>
+    <path d="M 795 950 v 110 M 748 978 l 94 54 M 842 978 l -94 54" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <path d="M 790 1080 C 840 1070 870 1110 856 1150 C 842 1190 790 1196 772 1162 C 760 1136 762 1094 790 1080 Z" fill="${P.skin}" ${S()}/>
+</svg>`;
+const ctaBody = `
+<div id="cta">
+  <div class="ct" id="ct1">WIE DICK WAREN</div>
+  <div class="ct ct-y" id="ct2">DEINE BACKEN?</div>
+  <div id="ct3">Schreib's in die Kommentare ↓</div>
+</div>`;
+const ctaCss = `
+  #cta { position: absolute; left: 0; right: 0; top: 190px; text-align: center; opacity: 0; }
+  .ct { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 88px; line-height: 1.05; color: #fff;
+    -webkit-text-stroke: 16px #1d1414; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(0,0,0,0.35); }
+  .ct-y { color: #FFE14D; font-size: 104px; }
+  #ct3 { display: inline-block; margin-top: 22px; padding: 14px 30px; border-radius: 40px; background: #1d1414;
+    color: #fff; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 44px; }`;
+const patientJs = `
+    const P0 = ${SC.patient[0]}, P1 = ${SC.patient[1]};
+    const LIDS = ["#pe1-lid", "#pe2-lid"], PUP = ["#pe1-p", "#pe2-p"];
+    gsap.set(LIDS, { scaleY: 0.5, svgOrigin: "0 -30" });
+    gsap.set("#pt-cam", { transformOrigin: "50% 48%", scale: 1.22 });
+    gsap.set(["#pt-face", "#pt-head"], { svgOrigin: "540 1100" });
+    gsap.set(["#pt-browL"], { svgOrigin: "516 806" });
+    gsap.set(["#pt-browR"], { svgOrigin: "564 806" });
+    gsap.set("#pt-browL", { rotation: -10 }); gsap.set("#pt-browR", { rotation: 10 });
+    // Reveal: Kamera federt rein, Backen schwabbeln.
+    tl.to("#pt-cam", { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, P0);
+    tl.fromTo("#pt-face", { scaleX: 1.12, scaleY: 0.94 }, { scaleX: 1, scaleY: 1, duration: 0.7, ease: "elastic.out(1.2,0.35)" }, P0 + 0.05);
+    // Schwellung pocht.
+    const talkWin = [${L.l16}];
+    for (let t = P0 + 0.9; t < P1 - 0.2; t += 0.95) {
+      if (t > talkWin[0] - 0.6 && t < talkWin[1]) continue;
+      tl.to("#pt-face", { scaleX: 1.035, scaleY: 0.99, duration: 0.1, ease: "power2.out" }, t);
+      tl.to("#pt-face", { scaleX: 1, scaleY: 1, duration: 0.45, ease: "elastic.out(1,0.4)" }, t + 0.1);
+      tl.fromTo("#pt-puffs", { opacity: 1 }, { opacity: 0.25, duration: 0.5, ease: "power1.out" }, t);
+    }
+    // Nuscheln: Mund klein, Backen wabbeln mit.
+    talk("pm", ${L.l16}, "frown", 0.14);
+    for (let t = ${L.l16[0]}, i = 0; t < ${L.l16[1]} - 0.1; t += 0.14, i++)
+      tl.to("#pt-head", { scaleX: i % 2 ? 1 : 1.025, duration: 0.13, ease: "sine.inOut" }, t);
+    // Arzt antwortet aus dem Off: Patient schaut nach links.
+    tl.to(PUP, { x: -10, y: 2, duration: 0.2, ease: "power3.out" }, ${L.l17[0]} - 0.1);
+    tl.to(LIDS, { scaleY: 0.4, duration: 0.15 }, ${L.l17[0]});
+    // Seufzen: Lider fallen, Kopf sinkt.
+    tl.to(PUP, { x: 0, y: 6, duration: 0.3, ease: "power2.inOut" }, ${L.l18[0]});
+    tl.to(LIDS, { scaleY: 0.68, duration: 0.4 }, ${L.l18[0]});
+    tl.to("#pt-head", { y: 10, rotation: -2, duration: 0.6, ease: "sine.inOut" }, ${L.l18[0]});
+    talk("pm", ${L.l18}, "frown", 0.22);
+    [P0 + 1.4, ${L.l17[1]} + 0.2].forEach((t) => { tl.to(LIDS, { scaleY: 1, duration: 0.06 }, t); tl.to(LIDS, { scaleY: 0.5, duration: 0.09 }, t + 0.07); });
+    // Kommentar-Frage
+    tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${L.l18[0]} - 0.3);
+    tl.to("#ct2", { scale: 1.08, duration: 0.12, ease: "power2.out" }, ${L.l18[0]} + 0.4);
+    tl.to("#ct2", { scale: 1, duration: 0.25, ease: "power2.inOut" }, ${L.l18[0]} + 0.52);
+    tl.to("#ct3", { y: 8, duration: 0.4, ease: "sine.inOut", repeat: 5, yoyo: true }, ${L.l18[0]} + 0.5);
+`;
+
 /* ================= Captions ================= */
 // Karte zeigt "SPÄTER" schon groß, daher keine Untertitel dafür.
 const spoken = lines.filter((l) => l.speaker !== "card");
@@ -687,13 +842,20 @@ const words = spoken.flatMap((l) =>
   VO[l.id]
     ? VO[l.id].words.map((w) => ({
         text: w.text,
-        start: +(R(l.start) + w.start).toFixed(3),
-        end: +(R(l.start) + w.end).toFixed(3),
+        start: +(RL(l) + w.start).toFixed(3),
+        end: +(RL(l) + w.end).toFixed(3),
       }))
-    : wordTimes([l]).map((w) => ({ ...w, start: R(w.start), end: R(w.end) })),
+    : wordTimes([l]).map((w) => ({
+        ...w,
+        start: +(w.start - l.start + RL(l)).toFixed(3),
+        end: +(w.end - l.start + RL(l)).toFixed(3),
+      })),
 );
 const capBody = words
-  .map((w, i) => `    <div id="cap-${i}" class="cap">${w.text.replace(/[!?,.…]+$/u, "")}</div>`)
+  .map(
+    (w, i) =>
+      `    <div id="cap-${i}" class="cap${isEmph(w.text) ? " emph" : ""}">${w.text.replace(/[!?,.…]+$/u, "")}</div>`,
+  )
   .join("\n");
 const capJs = `
     const W = ${JSON.stringify(words.map((w) => [w.start, w.end]))};
@@ -707,23 +869,48 @@ const capJs = `
     });
 `;
 
+const CAP_EMPH_CSS = `
+  .cap.emph { color: #FFE14D; font-size: 104px; -webkit-text-stroke: 16px #1d1414; }`;
+
+/* ================= Hook-Titel (erste Sekunden) ================= */
+const HOOK_END = 3.3;
+const hookBody = `
+    <div id="hook">
+      <div class="hk" id="hk1">SO WIRD DEIN</div>
+      <div class="hk hk-y" id="hk2">WEISHEITSZAHN</div>
+      <div class="hk" id="hk3">GEZOGEN</div>
+    </div>`;
+const hookCss = `
+  #hook { position: absolute; left: 0; right: 0; top: 210px; text-align: center; transform: rotate(-3deg); }
+  .hk { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 86px; line-height: 1.04;
+    color: #fff; -webkit-text-stroke: 16px #1d1414; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(0,0,0,0.35); }
+  .hk-y { color: #FFE14D; font-size: 102px; }`;
+const hookJs = `
+    // Frame 0 = erster Eindruck im Feed: Titel sofort voll lesbar, dann Puls auf dem Schlüsselwort.
+    [0.25, 1.6].forEach((t) => {
+      tl.to("#hk2", { scale: 1.1, duration: 0.08, ease: "power2.out" }, t);
+      tl.to("#hk2", { scale: 1, duration: 0.3, ease: "elastic.out(1,0.5)" }, t + 0.08);
+    });
+    tl.to("#hook", { scale: 0.6, opacity: 0, duration: 0.18, ease: "power2.in" }, ${HOOK_END} - 0.18);
+`;
+
 /* ================= index.html ================= */
 const sfx = script.sfx
   .map(
     (s, i) =>
-      `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${R(s.start)}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
+      `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${s.anchor ? +(R(ORIG[s.anchor][0], s.anchor) + s.offset).toFixed(3) : R(s.start)}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
   )
   .join("\n");
 const vo = lines
   .filter((l) => VO[l.id])
   .map(
     (l, i) =>
-      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.id}.mp3" data-start="${R(l.start)}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
+      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.id}.mp3" data-start="${RL(l)}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
   )
   .join("\n");
 const host = (id, track, kind = "graphics", z = 1) => {
-  const [a, b] = SC[id] || [0, DUR];
-  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${R(a)}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
+  const [a, b] = SC[id] || (id === "hook" ? [0, HOOK_END] : [0, DUR]);
+  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${R(a, ORDER.includes(id) ? id : undefined)}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
 };
 
 const index = `<!doctype html>
@@ -745,6 +932,8 @@ ${host("spaeter", 2, "graphics", 2)}
 ${host("op", 3)}
 ${host("praxis", 4)}
 ${host("captions", 5, "captions", 5)}
+${host("patient", 7)}
+${host("hook", 8, "graphics", 6)}
 ${host("marke", 6, "graphics", 4)}
 ${sfx}
 ${vo}
@@ -779,10 +968,33 @@ out("./index.html", index);
 out("./compositions/kiefer.html", page("kiefer", SC.kiefer, jaw("k-"), "", pre("k-", kieferJs)));
 out("./compositions/op.html", page("op", SC.op, jaw("o-"), "", pre("o-", opJs)));
 out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaeterCss, spaeterJs));
-out("./compositions/praxis.html", page("praxis", SC.praxis, praxisSvg, "", HELPERS + praxisJs));
-out("./compositions/captions.html", page("captions", [0, DUR], capBody, CAPTION_CSS, capJs));
+out(
+  "./compositions/praxis.html",
+  page(
+    "praxis",
+    SC.praxis,
+    praxisSvg.replace("<svg ", '<svg id="px-cam" '),
+    "",
+    HELPERS + praxisJs,
+  ),
+);
+out(
+  "./compositions/patient.html",
+  page("patient", SC.patient, patientSvg + ctaBody, ctaCss, HELPERS + patientJs),
+);
+out("./compositions/hook.html", page("hook", [0, HOOK_END], hookBody, hookCss, hookJs));
+out(
+  "./compositions/captions.html",
+  page("captions", [0, DUR], capBody, CAPTION_CSS + CAP_EMPH_CSS, capJs),
+);
 out("./compositions/marke.html", marke);
-console.log(`Streit +${DELTA}s, Praxis bis ${SC.praxis[1]}s`);
+console.log(
+  "Szenen (Echtzeit):",
+  ORDER.map(
+    (id) =>
+      `${id} ${R(ORIG[id][0], id)}–${+(R(ORIG[id][0], id) + SC[id][1] - SC[id][0]).toFixed(2)}`,
+  ).join(", "),
+);
 console.log(
   `built: ${Object.keys(VO).length} voice clips, ${words.length} caption words, ${script.sfx.length} sfx, ${DUR}s`,
 );

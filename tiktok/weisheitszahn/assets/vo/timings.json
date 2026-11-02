@@ -1,604 +1,665 @@
 {
   "l1": {
-    "duration": 2.136,
-    "fileDuration": 2.168163,
-    "speed": 1.1,
+    "duration": 2.064,
+    "fileDuration": 2.063673,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Hey,",
-        "start": 0,
-        "end": 0.267
-      },
-      {
-        "text": "du",
-        "start": 0.29,
-        "end": 0.36
-      },
-      {
-        "text": "da",
-        "start": 0.395,
-        "end": 0.453
-      },
-      {
-        "text": "hinten!",
-        "start": 0.499,
-        "end": 0.871
+        "text": "AUA!",
+        "start": 0.191,
+        "end": 0.557
       },
       {
         "text": "Hör",
-        "start": 1.033,
-        "end": 1.161
+        "start": 0.696,
+        "end": 0.904
+      },
+      {
+        "text": "sofort",
+        "start": 0.964,
+        "end": 1.322
       },
       {
         "text": "auf",
-        "start": 1.219,
-        "end": 1.347
+        "start": 1.357,
+        "end": 1.461
       },
       {
         "text": "zu",
-        "start": 1.405,
-        "end": 1.474
+        "start": 1.484,
+        "end": 1.53
       },
       {
         "text": "drücken!",
-        "start": 1.521,
-        "end": 2.136
+        "start": 1.577,
+        "end": 2.017
       }
     ]
   },
   "l2": {
-    "duration": 2.74,
-    "fileDuration": 2.76898,
-    "speed": 1.1,
+    "duration": 2.429,
+    "fileDuration": 2.429388,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Geht",
-        "start": 0,
-        "end": 0.267
-      },
-      {
-        "text": "nicht.",
-        "start": 0.325,
-        "end": 0.615
+        "text": "Sorry.",
+        "start": 0.632,
+        "end": 0.904
       },
       {
         "text": "Hier",
-        "start": 0.801,
-        "end": 0.975
+        "start": 0.988,
+        "end": 1.322
       },
       {
         "text": "ist",
-        "start": 1.033,
-        "end": 1.173
+        "start": 1.339,
+        "end": 1.391
       },
       {
-        "text": "einfach",
-        "start": 1.231,
-        "end": 1.498
+        "text": "halt",
+        "start": 1.419,
+        "end": 1.53
       },
       {
         "text": "kein",
-        "start": 1.544,
-        "end": 1.776
+        "start": 1.572,
+        "end": 1.739
       },
       {
         "text": "Platz",
-        "start": 1.834,
-        "end": 2.101
+        "start": 1.774,
+        "end": 1.948
       },
       {
         "text": "für",
-        "start": 2.148,
-        "end": 2.264
+        "start": 1.983,
+        "end": 2.087
       },
       {
         "text": "mich.",
-        "start": 2.287,
-        "end": 2.74
+        "start": 2.115,
+        "end": 2.365
       }
     ]
   },
   "l3": {
-    "duration": 2.229,
-    "fileDuration": 2.272653,
-    "speed": 1.1,
+    "duration": 3.318,
+    "fileDuration": 3.317551,
+    "tempo": 1.15,
     "words": [
       {
         "text": "Dann",
-        "start": 0,
-        "end": 0.232
+        "start": 0.117,
+        "end": 0.139
       },
       {
         "text": "wachs",
-        "start": 0.29,
-        "end": 0.488
+        "start": 0.209,
+        "end": 0.487
       },
       {
         "text": "woanders",
-        "start": 0.534,
-        "end": 0.894
+        "start": 0.557,
+        "end": 0.974
       },
       {
         "text": "hin!",
-        "start": 0.94,
-        "end": 1.196
+        "start": 1.026,
+        "end": 1.426
       },
       {
-        "text": "Das",
-        "start": 1.277,
-        "end": 1.451
+        "text": "Du",
+        "start": 1.507,
+        "end": 1.67
       },
       {
-        "text": "tut",
-        "start": 1.509,
-        "end": 1.707
+        "text": "machst",
+        "start": 1.711,
+        "end": 2.017
       },
       {
-        "text": "weh!",
-        "start": 1.753,
-        "end": 2.229
+        "text": "mich",
+        "start": 2.073,
+        "end": 2.296
+      },
+      {
+        "text": "KAPUTT!",
+        "start": 2.365,
+        "end": 3.27
       }
     ]
   },
   "l4": {
-    "duration": 1.718,
-    "fileDuration": 1.750204,
-    "speed": 1.1,
+    "duration": 1.985,
+    "fileDuration": 1.985306,
+    "tempo": 1.15,
     "words": [
       {
         "text": "Pech",
-        "start": 0,
-        "end": 0.244
+        "start": 0.234,
+        "end": 0.278
       },
       {
         "text": "gehabt.",
-        "start": 0.302,
-        "end": 0.685
+        "start": 0.348,
+        "end": 0.835
       },
       {
         "text": "Ich",
-        "start": 0.871,
-        "end": 1.01
+        "start": 0.922,
+        "end": 1.183
       },
       {
-        "text": "bleibe.",
-        "start": 1.045,
-        "end": 1.718
+        "text": "bleib",
+        "start": 1.235,
+        "end": 1.53
+      },
+      {
+        "text": "hier.",
+        "start": 1.6,
+        "end": 1.948
       }
     ]
   },
   "l5": {
-    "duration": 1.904,
-    "fileDuration": 1.933061,
-    "speed": 1.1,
+    "duration": 2.769,
+    "fileDuration": 2.76898,
+    "tempo": 1.15,
     "words": [
       {
         "text": "Na",
-        "start": 0,
-        "end": 0.174
+        "start": 0.185,
+        "end": 0.209
       },
       {
-        "text": "warte.",
-        "start": 0.232,
-        "end": 0.58
+        "text": "warte!",
+        "start": 0.278,
+        "end": 0.696
       },
       {
-        "text": "Das",
-        "start": 0.627,
-        "end": 0.766
+        "text": "DAS",
+        "start": 0.87,
+        "end": 1.252
       },
       {
         "text": "sag",
-        "start": 0.789,
-        "end": 0.906
+        "start": 1.339,
+        "end": 1.6
       },
       {
         "text": "ich",
-        "start": 0.952,
-        "end": 1.022
+        "start": 1.635,
+        "end": 1.739
       },
       {
         "text": "dem",
-        "start": 1.057,
-        "end": 1.149
+        "start": 1.774,
+        "end": 1.878
       },
       {
-        "text": "Zahnarzt.",
-        "start": 1.207,
-        "end": 1.904
+        "text": "Zahnarzt!",
+        "start": 1.913,
+        "end": 2.713
       }
     ]
   },
   "l7": {
-    "duration": 1.579,
-    "fileDuration": 1.619592,
-    "speed": 1.1,
+    "duration": 2.403,
+    "fileDuration": 2.403265,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Autsch!",
-        "start": 0,
-        "end": 0.418
+        "text": "AUA!",
+        "start": 0.197,
+        "end": 0.696
       },
       {
         "text": "Was",
-        "start": 0.604,
-        "end": 0.755
+        "start": 0.748,
+        "end": 0.904
       },
       {
         "text": "war",
-        "start": 0.801,
-        "end": 0.917
+        "start": 0.939,
+        "end": 1.043
       },
       {
-        "text": "das",
-        "start": 0.94,
-        "end": 1.057
+        "text": "DAS",
+        "start": 1.148,
+        "end": 1.461
       },
       {
-        "text": "denn?",
-        "start": 1.115,
-        "end": 1.579
+        "text": "denn?!",
+        "start": 1.544,
+        "end": 2.365
       }
     ]
   },
   "l8": {
-    "duration": 2.276,
-    "fileDuration": 2.324898,
-    "speed": 1.1,
+    "duration": 2.821,
+    "fileDuration": 2.821224,
+    "tempo": 1.15,
     "words": [
       {
         "text": "Ich",
-        "start": 0,
-        "end": 0.151
+        "start": 0.296,
+        "end": 0.348
       },
       {
         "text": "spür…",
-        "start": 0.186,
-        "end": 0.743
+        "start": 0.441,
+        "end": 1.043
       },
       {
         "text": "gar",
-        "start": 1.207,
-        "end": 1.37
+        "start": 1.27,
+        "end": 1.948
       },
       {
-        "text": "nichts",
-        "start": 1.416,
-        "end": 1.672
+        "text": "nix",
+        "start": 1.983,
+        "end": 2.296
       },
       {
         "text": "mehr…",
-        "start": 1.73,
-        "end": 2.276
+        "start": 2.365,
+        "end": 2.783
       }
     ]
   },
   "l9": {
-    "duration": 1.579,
-    "fileDuration": 1.619592,
-    "speed": 1.05,
+    "duration": 2.22,
+    "fileDuration": 2.220408,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Oha.",
-        "start": 0,
-        "end": 0.418
+        "text": "Oh",
+        "start": 0.121,
+        "end": 0.139
+      },
+      {
+        "text": "oh.",
+        "start": 0.232,
+        "end": 0.87
       },
       {
         "text": "Jetzt",
-        "start": 0.534,
-        "end": 0.755
+        "start": 0.945,
+        "end": 1.322
       },
       {
         "text": "wird's",
-        "start": 0.778,
-        "end": 0.975
+        "start": 1.363,
+        "end": 1.6
       },
       {
         "text": "ernst.",
-        "start": 0.998,
-        "end": 1.579
+        "start": 1.67,
+        "end": 2.157
       }
     ]
   },
   "l10": {
-    "duration": 2.554,
-    "fileDuration": 2.586122,
-    "speed": 1.1,
+    "duration": 2.691,
+    "fileDuration": 2.690612,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Moment!",
-        "start": 0,
-        "end": 0.65
+        "text": "Halt!",
+        "start": 0.063,
+        "end": 0.487
       },
       {
         "text": "Ihr",
-        "start": 0.906,
-        "end": 1.033
+        "start": 0.574,
+        "end": 0.835
       },
       {
         "text": "könnt",
-        "start": 1.068,
-        "end": 1.242
+        "start": 0.87,
+        "end": 1.043
       },
       {
         "text": "mich",
-        "start": 1.277,
-        "end": 1.393
+        "start": 1.071,
+        "end": 1.183
       },
       {
         "text": "doch",
-        "start": 1.416,
-        "end": 1.533
+        "start": 1.21,
+        "end": 1.322
       },
       {
         "text": "nicht",
-        "start": 1.567,
-        "end": 1.718
+        "start": 1.357,
+        "end": 1.53
       },
       {
-        "text": "zerteilen!",
-        "start": 1.753,
-        "end": 2.554
+        "text": "ZERTEILEN!",
+        "start": 1.6,
+        "end": 2.643
       }
     ]
   },
   "l11": {
-    "duration": 0.789,
-    "fileDuration": 0.835918,
-    "speed": 1.05,
+    "duration": 1.698,
+    "fileDuration": 1.697959,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Neeein!",
-        "start": 0,
-        "end": 0.789
+        "text": "NEEEIN!",
+        "start": 0.261,
+        "end": 1.67
       }
     ]
   },
   "l12": {
-    "duration": 1.533,
-    "fileDuration": 1.567347,
-    "speed": 1.05,
+    "duration": 2.821,
+    "fileDuration": 2.821224,
+    "tempo": 1.15,
     "words": [
       {
-        "text": "Endlich",
-        "start": 0,
-        "end": 0.418
-      },
-      {
-        "text": "hab",
-        "start": 0.441,
-        "end": 0.557
-      },
-      {
-        "text": "ich",
-        "start": 0.604,
-        "end": 0.673
+        "text": "Endlich…",
+        "start": 0.696,
+        "end": 1.774
       },
       {
         "text": "wieder",
-        "start": 0.708,
-        "end": 0.929
+        "start": 1.829,
+        "end": 2.157
       },
       {
         "text": "Ruhe.",
-        "start": 0.975,
-        "end": 1.533
+        "start": 2.226,
+        "end": 2.783
       }
     ]
   },
   "l13": {
-    "duration": 4.365,
-    "fileDuration": 4.414694,
-    "speed": 1.1,
+    "duration": 3.605,
+    "fileDuration": 3.604898,
+    "tempo": 1.08,
     "words": [
       {
-        "text": "Wenn",
+        "text": "Hat",
         "start": 0,
-        "end": 0.209
+        "end": 0.148
       },
       {
         "text": "ein",
-        "start": 0.255,
-        "end": 0.337
+        "start": 0.185,
+        "end": 0.296
       },
       {
         "text": "Weisheitszahn",
-        "start": 0.395,
-        "end": 1.196
+        "start": 0.345,
+        "end": 1.111
       },
       {
         "text": "keinen",
-        "start": 1.277,
-        "end": 1.544
+        "start": 1.154,
+        "end": 1.407
       },
       {
-        "text": "Platz",
-        "start": 1.591,
-        "end": 1.858
-      },
-      {
-        "text": "hat,",
-        "start": 1.904,
-        "end": 2.136
+        "text": "Platz,",
+        "start": 1.456,
+        "end": 2
       },
       {
         "text": "drückt",
-        "start": 2.264,
-        "end": 2.543
+        "start": 2.049,
+        "end": 2.296
       },
       {
         "text": "er",
-        "start": 2.566,
-        "end": 2.612
-      },
-      {
-        "text": "oft",
-        "start": 2.67,
-        "end": 2.891
+        "start": 2.345,
+        "end": 2.444
       },
       {
         "text": "gegen",
-        "start": 2.926,
-        "end": 3.123
+        "start": 2.481,
+        "end": 2.667
       },
       {
         "text": "den",
-        "start": 3.146,
-        "end": 3.251
+        "start": 2.704,
+        "end": 2.815
       },
       {
         "text": "Nachbarzahn.",
-        "start": 3.286,
-        "end": 4.365
+        "start": 2.859,
+        "end": 3.556
       }
     ]
   },
   "l14": {
-    "duration": 4.598,
-    "fileDuration": 4.623673,
-    "speed": 1.1,
+    "duration": 3.814,
+    "fileDuration": 3.813878,
+    "tempo": 1.08,
     "words": [
       {
         "text": "Dann",
         "start": 0,
-        "end": 0.267
+        "end": 0.148
       },
       {
         "text": "betäuben",
-        "start": 0.325,
-        "end": 0.766
+        "start": 0.204,
+        "end": 0.593
       },
       {
         "text": "wir,",
-        "start": 0.801,
-        "end": 1.126
+        "start": 0.648,
+        "end": 1.037
       },
       {
-        "text": "klappen",
-        "start": 1.254,
-        "end": 1.567
+        "text": "öffnen",
+        "start": 1.074,
+        "end": 1.333
       },
       {
         "text": "das",
-        "start": 1.602,
-        "end": 1.741
+        "start": 1.37,
+        "end": 1.481
       },
       {
         "text": "Zahnfleisch",
-        "start": 1.823,
-        "end": 2.368
-      },
-      {
-        "text": "auf",
-        "start": 2.45,
-        "end": 2.659
+        "start": 1.556,
+        "end": 2.148
       },
       {
         "text": "und",
-        "start": 2.856,
-        "end": 2.995
+        "start": 2.241,
+        "end": 2.519
       },
       {
         "text": "tragen",
-        "start": 3.03,
-        "end": 3.332
+        "start": 2.544,
+        "end": 2.815
       },
       {
         "text": "etwas",
-        "start": 3.379,
-        "end": 3.611
+        "start": 2.864,
+        "end": 3.111
       },
       {
         "text": "Knochen",
-        "start": 3.669,
-        "end": 3.994
+        "start": 3.185,
+        "end": 3.481
       },
       {
         "text": "ab.",
-        "start": 4.063,
-        "end": 4.598
+        "start": 3.556,
+        "end": 3.778
       }
     ]
   },
   "l15": {
-    "duration": 4.83,
-    "fileDuration": 4.858776,
-    "speed": 1.1,
+    "duration": 3.892,
+    "fileDuration": 3.892245,
+    "tempo": 1.08,
     "words": [
       {
         "text": "Den",
         "start": 0,
-        "end": 0.221
+        "end": 0.148
       },
       {
         "text": "Zahn",
-        "start": 0.29,
-        "end": 0.569
+        "start": 0.222,
+        "end": 0.444
       },
       {
         "text": "teilen",
-        "start": 0.639,
-        "end": 0.987
+        "start": 0.519,
+        "end": 0.889
       },
       {
         "text": "wir,",
-        "start": 1.033,
-        "end": 1.37
+        "start": 0.944,
+        "end": 1.407
       },
       {
         "text": "holen",
-        "start": 1.567,
-        "end": 1.869
+        "start": 1.444,
+        "end": 1.704
       },
       {
         "text": "ihn",
-        "start": 1.927,
-        "end": 2.009
+        "start": 1.741,
+        "end": 1.852
       },
       {
         "text": "Stück",
-        "start": 2.067,
-        "end": 2.31
+        "start": 1.901,
+        "end": 2.148
       },
       {
         "text": "für",
-        "start": 2.368,
-        "end": 2.485
+        "start": 2.185,
+        "end": 2.296
       },
       {
         "text": "Stück",
-        "start": 2.519,
-        "end": 2.74
+        "start": 2.321,
+        "end": 2.519
       },
       {
-        "text": "heraus",
-        "start": 2.798,
-        "end": 3.181
+        "text": "raus",
+        "start": 2.556,
+        "end": 2.889
       },
       {
         "text": "und",
-        "start": 3.274,
-        "end": 3.39
+        "start": 2.944,
+        "end": 3.111
       },
       {
         "text": "nähen",
-        "start": 3.471,
-        "end": 3.715
-      },
-      {
-        "text": "die",
-        "start": 3.762,
-        "end": 3.843
-      },
-      {
-        "text": "Wunde",
-        "start": 3.889,
-        "end": 4.168
+        "start": 3.16,
+        "end": 3.407
       },
       {
         "text": "zu.",
-        "start": 4.238,
-        "end": 4.83
+        "start": 3.506,
+        "end": 3.852
+      }
+    ]
+  },
+  "l16": {
+    "duration": 2.403,
+    "fileDuration": 2.403265,
+    "tempo": 1.05,
+    "words": [
+      {
+        "text": "Unn",
+        "start": 0.254,
+        "end": 0.381
+      },
+      {
+        "text": "wann",
+        "start": 0.488,
+        "end": 0.914
+      },
+      {
+        "text": "kann",
+        "start": 0.96,
+        "end": 1.143
+      },
+      {
+        "text": "isch",
+        "start": 1.193,
+        "end": 1.371
+      },
+      {
+        "text": "wieda",
+        "start": 1.41,
+        "end": 1.676
+      },
+      {
+        "text": "essn?",
+        "start": 1.771,
+        "end": 2.362
+      }
+    ]
+  },
+  "l17": {
+    "duration": 2.325,
+    "fileDuration": 2.324898,
+    "tempo": 1.08,
+    "words": [
+      {
+        "text": "Heute",
+        "start": 0.064,
+        "end": 0.222
+      },
+      {
+        "text": "nur",
+        "start": 0.278,
+        "end": 0.444
+      },
+      {
+        "text": "was",
+        "start": 0.481,
+        "end": 0.593
+      },
+      {
+        "text": "Weiches.",
+        "start": 0.667,
+        "end": 1.37
+      },
+      {
+        "text": "Und",
+        "start": 1.417,
+        "end": 1.556
+      },
+      {
+        "text": "gut",
+        "start": 1.611,
+        "end": 1.778
+      },
+      {
+        "text": "kühlen.",
+        "start": 1.889,
+        "end": 2.296
+      }
+    ]
+  },
+  "l18": {
+    "duration": 2.482,
+    "fileDuration": 2.481633,
+    "tempo": 1.05,
+    "words": [
+      {
+        "text": "Mmmh…",
+        "start": 0.876,
+        "end": 1.6
+      },
+      {
+        "text": "okay.",
+        "start": 1.752,
+        "end": 2.438
       }
     ]
   }

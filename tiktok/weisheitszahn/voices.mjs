@@ -1,38 +1,67 @@
 // Generates one ElevenLabs voice clip per dialogue line + exact word timings.
 // Run: ELEVENLABS_API_KEY=... node voices.mjs [lineId ...]
-// Writes assets/vo/<id>.mp3 and assets/vo/timings.json; build.mjs picks them up.
+//      node voices.mjs --retime   (only re-apply tempo to the raw takes, no API calls)
+// Raw takes: assets/vo/raw/<id>.mp3 + raw/timings.json. Final clips (sped up by
+// the speaker's "tempo" via ffmpeg atempo, pitch unchanged): assets/vo/<id>.mp3
+// + assets/vo/timings.json; build.mjs picks them up.
+// Lines may carry eleven_v3 audio tags ("[shouting] AUA!"); they steer the
+// delivery and are dropped from the caption words.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
+const retimeOnly = process.argv.includes("--retime");
 const key = process.env.ELEVENLABS_API_KEY;
-if (!key) throw new Error("ELEVENLABS_API_KEY fehlt");
+if (!key && !retimeOnly) throw new Error("ELEVENLABS_API_KEY fehlt");
 const here = (p) => new URL(p, import.meta.url);
 const script = JSON.parse(readFileSync(here("./script.json"), "utf8"));
 const voices = script.voices;
-const only = process.argv.slice(2);
-mkdirSync(here("./assets/vo"), { recursive: true });
-const timingsFile = here("./assets/vo/timings.json");
-const timings = existsSync(timingsFile) ? JSON.parse(readFileSync(timingsFile, "utf8")) : {};
+const model = script.voiceModel || "eleven_v3";
+const only = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+mkdirSync(here("./assets/vo/raw"), { recursive: true });
+const rawFile = here("./assets/vo/raw/timings.json");
+const raw = existsSync(rawFile) ? JSON.parse(readFileSync(rawFile, "utf8")) : {};
+const probe = (f) =>
+  +execFileSync("ffprobe", [
+    "-v",
+    "error",
+    "-show_entries",
+    "format=duration",
+    "-of",
+    "csv=p=0",
+    f,
+  ]).toString();
 
-// Character-level alignment -> words (split on whitespace, like the caption text).
-function toWords(al) {
+// Character-level alignment -> words, skipping [audio tags].
+export function toWords(al) {
   const out = [];
   let cur = null;
+  let inTag = false;
+  const flush = () => {
+    if (cur) out.push(cur);
+    cur = null;
+  };
   al.characters.forEach((ch, i) => {
-    if (/\s/.test(ch)) {
-      if (cur) out.push(cur);
-      cur = null;
+    if (ch === "[") {
+      flush();
+      inTag = true;
       return;
     }
+    if (inTag) {
+      if (ch === "]") inTag = false;
+      return;
+    }
+    if (/\s/.test(ch)) return flush();
     if (!cur) cur = { text: "", start: al.character_start_times_seconds[i] };
     cur.text += ch;
     cur.end = al.character_end_times_seconds[i];
   });
-  if (cur) out.push(cur);
-  return out.map((w) => ({ text: w.text, start: +w.start.toFixed(3), end: +w.end.toFixed(3) }));
+  flush();
+  return out
+    .filter((w) => /[\p{L}\p{N}]/u.test(w.text))
+    .map((w) => ({ text: w.text, start: +w.start.toFixed(3), end: +w.end.toFixed(3) }));
 }
 
-async function tts(line, speed) {
+async function tts(line) {
   const v = voices[line.speaker];
   const res = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${v.voice_id}/with-timestamps?output_format=mp3_44100_128`,
@@ -41,9 +70,9 @@ async function tts(line, speed) {
       headers: { "xi-api-key": key, "Content-Type": "application/json" },
       body: JSON.stringify({
         text: line.text,
-        model_id: script.voiceModel || "eleven_multilingual_v2",
+        model_id: model,
         language_code: "de",
-        voice_settings: { ...v.settings, speed },
+        voice_settings: v.settings,
       }),
     },
   );
@@ -51,41 +80,52 @@ async function tts(line, speed) {
   return res.json();
 }
 
-for (const line of script.lines) {
-  if (!voices[line.speaker] || (only.length && !only.includes(line.id))) continue;
-  const win = line.end - line.start;
-  let speed = voices[line.speaker].settings?.speed ?? 1;
-  let data, dur;
-  // Up to two tries: if the take overruns its window, re-take a bit faster (max voiceMaxSpeed).
-  // Longer takes are fine: build.mjs re-lays the lines around the real lengths.
-  for (let attempt = 0; attempt < 2; attempt++) {
-    data = await tts(line, speed);
-    const al = data.normalized_alignment || data.alignment;
-    dur = al.character_end_times_seconds.at(-1);
-    const max = script.voiceMaxSpeed ?? 1.1;
-    if (dur <= win + 0.25 || speed >= max) break;
-    speed = Math.min(max, +(speed * Math.min(1.1, dur / win)).toFixed(2));
+if (!retimeOnly) {
+  for (const line of script.lines) {
+    if (!voices[line.speaker] || (only.length && !only.includes(line.id))) continue;
+    const data = await tts(line);
+    const file = here(`./assets/vo/raw/${line.id}.mp3`).pathname;
+    writeFileSync(file, Buffer.from(data.audio_base64, "base64"));
+    raw[line.id] = { text: line.text, fileDuration: probe(file), words: toWords(data.alignment) };
+    console.log(
+      `${line.id} ${line.speaker} roh ${raw[line.id].fileDuration.toFixed(2)}s  ${raw[line.id].words.map((w) => w.text).join(" ")}`,
+    );
   }
-  const mp3 = here(`./assets/vo/${line.id}.mp3`);
-  writeFileSync(mp3, Buffer.from(data.audio_base64, "base64"));
-  const fileDur = +execFileSync("ffprobe", [
+  writeFileSync(rawFile, JSON.stringify(raw, null, 2));
+}
+
+// Tempo pass: raw -> final clips and timings.
+const timings = {};
+for (const line of script.lines) {
+  const r = raw[line.id];
+  if (!voices[line.speaker] || !r) continue;
+  const k = voices[line.speaker].tempo ?? 1;
+  const out = here(`./assets/vo/${line.id}.mp3`).pathname;
+  execFileSync("ffmpeg", [
+    "-y",
     "-v",
     "error",
-    "-show_entries",
-    "format=duration",
-    "-of",
-    "csv=p=0",
-    mp3.pathname,
-  ]).toString();
+    "-i",
+    here(`./assets/vo/raw/${line.id}.mp3`).pathname,
+    "-filter:a",
+    `atempo=${k}`,
+    "-b:a",
+    "160k",
+    out,
+  ]);
+  const fileDur = probe(out);
+  const words = r.words.map((w) => ({
+    text: w.text,
+    start: +(w.start / k).toFixed(3),
+    end: +(w.end / k).toFixed(3),
+  }));
   timings[line.id] = {
-    duration: +dur.toFixed(3),
+    duration: +Math.min(fileDur, words.at(-1).end + 0.15).toFixed(3),
     fileDuration: fileDur,
-    speed,
-    words: toWords(data.alignment),
+    tempo: k,
+    words,
   };
-  console.log(
-    `${line.id} ${line.speaker} ${dur.toFixed(2)}s (Fenster ${win.toFixed(2)}s, speed ${speed})`,
-  );
+  console.log(`${line.id} ${timings[line.id].duration.toFixed(2)}s (tempo ${k})`);
 }
-writeFileSync(timingsFile, JSON.stringify(timings, null, 2));
+writeFileSync(here("./assets/vo/timings.json"), JSON.stringify(timings, null, 2));
 console.log("fertig -> assets/vo/timings.json; jetzt: node build.mjs");
