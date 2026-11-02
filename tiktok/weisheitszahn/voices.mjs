@@ -56,13 +56,15 @@ for (const line of script.lines) {
   const win = line.end - line.start;
   let speed = voices[line.speaker].settings?.speed ?? 1;
   let data, dur;
-  // Up to two tries: if the take overruns its window, re-take a bit faster (max 1.2).
+  // Up to two tries: if the take overruns its window, re-take a bit faster (max voiceMaxSpeed).
+  // Longer takes are fine: build.mjs re-lays the lines around the real lengths.
   for (let attempt = 0; attempt < 2; attempt++) {
     data = await tts(line, speed);
     const al = data.normalized_alignment || data.alignment;
     dur = al.character_end_times_seconds.at(-1);
-    if (dur <= win + 0.25 || speed >= 1.2) break;
-    speed = Math.min(1.2, +(speed * Math.min(1.15, dur / win)).toFixed(2));
+    const max = script.voiceMaxSpeed ?? 1.1;
+    if (dur <= win + 0.25 || speed >= max) break;
+    speed = Math.min(max, +(speed * Math.min(1.1, dur / win)).toFixed(2));
   }
   const mp3 = here(`./assets/vo/${line.id}.mp3`);
   writeFileSync(mp3, Buffer.from(data.audio_base64, "base64"));

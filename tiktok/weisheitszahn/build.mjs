@@ -25,20 +25,34 @@ import {
 const script = JSON.parse(readFileSync(new URL("./script.json", import.meta.url), "utf8"));
 const W = 1080;
 const H = 1920;
-const DUR = script.duration;
 const SC = script.scenes;
 const lines = script.lines;
 // ElevenLabs-Takes (voices.mjs): echte Länge ersetzt das geschätzte Zeilenende.
+// Szenen-Skripte arbeiten in "Autorenzeit" (script.json). Wird die Streitszene
+// durch längere Takes länger, rutscht alles danach um DELTA nach hinten
+// (Echtzeit = R(t)); die Beats in OP und Praxis bleiben relativ gleich.
 const VO_FILE = new URL("./assets/vo/timings.json", import.meta.url);
 const VO = existsSync(VO_FILE) ? JSON.parse(readFileSync(VO_FILE, "utf8")) : {};
-lines.forEach((l, i) => {
-  const v = VO[l.id];
-  if (!v) return;
-  l.end = +(l.start + v.duration).toFixed(2);
-  const next = lines[i + 1];
-  if (next && l.end > next.start)
-    console.warn(`! ${l.id} endet ${l.end}s, ${next.id} startet ${next.start}s`);
-});
+function relayout(sceneId, gap) {
+  const [a, b] = SC[sceneId];
+  let prevEnd = -1;
+  for (const l of lines.filter((x) => x.start >= a && x.start < b && VO[x.id])) {
+    if (prevEnd > 0 && l.start < prevEnd + gap) l.start = +(prevEnd + gap).toFixed(2);
+    l.end = +(l.start + VO[l.id].duration).toFixed(2);
+    prevEnd = l.end;
+  }
+  return prevEnd;
+}
+const K_END0 = SC.kiefer[1];
+const kEnd = relayout("kiefer", 0.15);
+const DELTA = Math.max(0, +(kEnd + 0.35 - K_END0).toFixed(2));
+SC.kiefer = [0, +(K_END0 + DELTA).toFixed(2)];
+relayout("op", 0.15);
+const pEnd = relayout("praxis", 0.35);
+SC.praxis[1] = Math.max(SC.praxis[1], +(pEnd + 0.8).toFixed(2));
+const R = (t) => +(t >= K_END0 ? t + DELTA : t).toFixed(3);
+const DUR = R(SC.praxis[1]);
+
 const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
 
 // Character acting helpers, injected into each scene script. Positions are
@@ -209,7 +223,7 @@ const kieferJs = `${HELPERS}${JAW_INIT}
     face("@bz", "frown", 0); face("@wz", "smirk", 0);
     look("@bz", 14, 4, 0, 0.01); look("@wz", -10, -2, 0, 0.01);
     tl.set("#@pain", { scale: 0.9 }, 0);
-    [0.1, 1.3, 2.7, 4.0, 5.2, 6.4, 7.6, 8.8].forEach((t) => {
+    ${JSON.stringify(Array.from({ length: Math.floor((SC.kiefer[1] - 0.6) / 1.25) + 1 }, (_, i) => +(0.1 + i * 1.25).toFixed(2)))}.forEach((t) => {
       tl.to(WZ, { rotation: -4, x: -10, duration: 0.16, ease: "power2.out" }, t);
       tl.to(WZ, { rotation: 0, x: 0, duration: 0.35, ease: "power2.inOut" }, t + 0.18);
       tl.to("#@bz-wob", { rotation: -2.2, svgOrigin: "0 600", duration: 0.12, ease: "power2.out" }, t + 0.06);
@@ -220,10 +234,10 @@ const kieferJs = `${HELPERS}${JAW_INIT}
     talk("@bz", ${L.l1}, "frown");
     look("@wz", -14, -6, 0.4);
     talk("@wz", ${L.l2}, "smirk");
-    squeeze("@bz", true, 4.5); talk("@bz", ${L.l3}, "wavy"); squeeze("@bz", false, 6.5);
-    lids("@wz", 0.5, 6.5); talk("@wz", ${L.l4}, "smirk");
-    lids("@bz", 0.0, 7.8, 0.1); look("@bz", 0, -14, 7.8); talk("@bz", ${L.l5}, "frown");
-    blink("@wz", 1.6, 0.38); blink("@bz", 3.0, 0.42); blink("@wz", 5.0, 0.38); blink("@wz", 9.0, 0.5);
+    squeeze("@bz", true, ${L.l3[0] - 0.1}); talk("@bz", ${L.l3}, "wavy"); squeeze("@bz", false, ${L.l3[1] + 0.1});
+    lids("@wz", 0.5, ${L.l4[0] - 0.1}); talk("@wz", ${L.l4}, "smirk");
+    lids("@bz", 0.0, ${L.l5[0] - 0.1}, 0.1); look("@bz", 0, -14, ${L.l5[0] - 0.1}); talk("@bz", ${L.l5}, "frown");
+    blink("@wz", 1.6, 0.38); blink("@bz", 3.0, 0.42); blink("@wz", 5.0, 0.38); blink("@wz", ${L.l5[1] + 0.1}, 0.5);
 `;
 
 /* ---------- Scene 3: OP ---------- */
@@ -673,10 +687,10 @@ const words = spoken.flatMap((l) =>
   VO[l.id]
     ? VO[l.id].words.map((w) => ({
         text: w.text,
-        start: +(l.start + w.start).toFixed(3),
-        end: +(l.start + w.end).toFixed(3),
+        start: +(R(l.start) + w.start).toFixed(3),
+        end: +(R(l.start) + w.end).toFixed(3),
       }))
-    : wordTimes([l]),
+    : wordTimes([l]).map((w) => ({ ...w, start: R(w.start), end: R(w.end) })),
 );
 const capBody = words
   .map((w, i) => `    <div id="cap-${i}" class="cap">${w.text.replace(/[!?,.…]+$/u, "")}</div>`)
@@ -697,19 +711,19 @@ const capJs = `
 const sfx = script.sfx
   .map(
     (s, i) =>
-      `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${s.start}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
+      `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${R(s.start)}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
   )
   .join("\n");
 const vo = lines
   .filter((l) => VO[l.id])
   .map(
     (l, i) =>
-      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.id}.mp3" data-start="${l.start}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
+      `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.id}.mp3" data-start="${R(l.start)}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
   )
   .join("\n");
 const host = (id, track, kind = "graphics", z = 1) => {
   const [a, b] = SC[id] || [0, DUR];
-  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${a}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
+  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${R(a)}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
 };
 
 const index = `<!doctype html>
@@ -768,6 +782,7 @@ out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaet
 out("./compositions/praxis.html", page("praxis", SC.praxis, praxisSvg, "", HELPERS + praxisJs));
 out("./compositions/captions.html", page("captions", [0, DUR], capBody, CAPTION_CSS, capJs));
 out("./compositions/marke.html", marke);
+console.log(`Streit +${DELTA}s, Praxis bis ${SC.praxis[1]}s`);
 console.log(
   `built: ${Object.keys(VO).length} voice clips, ${words.length} caption words, ${script.sfx.length} sfx, ${DUR}s`,
 );
