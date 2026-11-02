@@ -1,0 +1,58 @@
+{
+  "title": "Weisheitszahn wird gezogen",
+  "duration": 30,
+  "handle": "@deinkanal",
+  "lines": [
+    { "id": "l1", "speaker": "bz", "start": 0.25, "end": 1.85, "text": "Hey! Hör auf zu drücken!" },
+    { "id": "l2", "speaker": "wz", "start": 2.05, "end": 3.35, "text": "Ich brauch aber Platz!" },
+    {
+      "id": "l3",
+      "speaker": "bz",
+      "start": 3.55,
+      "end": 5.55,
+      "text": "Hier ist kein Platz! Das tut weh!"
+    },
+    { "id": "l4", "speaker": "wz", "start": 5.75, "end": 6.75, "text": "Pech gehabt." },
+    { "id": "l5", "speaker": "bz", "start": 7.0, "end": 8.6, "text": "Ich hol den Zahnarzt!" },
+    { "id": "l6", "speaker": "card", "start": 9.1, "end": 10.3, "text": "Später…" },
+    { "id": "l7", "speaker": "wz", "start": 11.3, "end": 12.5, "text": "Au! Was soll das?!" },
+    { "id": "l8", "speaker": "wz", "start": 14.5, "end": 15.9, "text": "Nein! Ich bleib hier!" },
+    { "id": "l9", "speaker": "bz", "start": 18.5, "end": 19.7, "text": "Endlich Ruhe." },
+    {
+      "id": "l10",
+      "speaker": "arzt",
+      "start": 20.4,
+      "end": 23.6,
+      "text": "Hat ein Weisheitszahn keinen Platz, drückt er auf den Nachbarzahn."
+    },
+    {
+      "id": "l11",
+      "speaker": "arzt",
+      "start": 23.8,
+      "end": 27.2,
+      "text": "Wir betäuben, öffnen das Zahnfleisch, lockern den Zahn und ziehen ihn raus."
+    },
+    {
+      "id": "l12",
+      "speaker": "arzt",
+      "start": 27.4,
+      "end": 29.6,
+      "text": "Danach wird die Wunde genäht."
+    }
+  ],
+  "sfx": [
+    { "id": "sfx-card-in", "src": "whoosh-short.mp3", "start": 8.95, "volume": 0.5 },
+    { "id": "sfx-card-out", "src": "whoosh-short.mp3", "start": 10.3, "volume": 0.45 },
+    { "id": "sfx-needle", "src": "whoosh.mp3", "start": 10.5, "volume": 0.4 },
+    { "id": "sfx-poke", "src": "click-soft.mp3", "start": 11.05, "volume": 0.7 },
+    { "id": "sfx-scalpel", "src": "whoosh-short.mp3", "start": 12.85, "volume": 0.45 },
+    { "id": "sfx-lever", "src": "whoosh-short.mp3", "start": 14.1, "volume": 0.4 },
+    { "id": "sfx-forceps", "src": "whoosh.mp3", "start": 15.95, "volume": 0.4 },
+    { "id": "sfx-grab", "src": "click.mp3", "start": 16.4, "volume": 0.6 },
+    { "id": "sfx-pop", "src": "pop.mp3", "start": 16.75, "volume": 0.8 },
+    { "id": "sfx-st1", "src": "click-soft.mp3", "start": 18.05, "volume": 0.6 },
+    { "id": "sfx-st2", "src": "click-soft.mp3", "start": 18.25, "volume": 0.6 },
+    { "id": "sfx-st3", "src": "click-soft.mp3", "start": 18.45, "volume": 0.6 },
+    { "id": "sfx-praxis", "src": "whoosh-short.mp3", "start": 19.95, "volume": 0.4 }
+  ]
+}
