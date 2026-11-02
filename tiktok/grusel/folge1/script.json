@@ -1,15 +1,26 @@
 {
   "title": "Stockwerk 13 · Teil 1",
   "voice": {
-    "engine": "mbrola",
+    "engine": "elevenlabs",
+    "voiceId": "nPczCjzI2devNBz1zQrb",
+    "voiceName": "Brian (ElevenLabs Standardstimme)",
+    "elevenModel": "eleven_multilingual_v2",
+    "settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "style": 0.3,
+      "use_speaker_boost": true
+    },
+    "qa": {
+      "maxTakes": 3,
+      "maxWer": 0.1
+    },
+    "pitch": 1.0,
+    "tempo": 1.0,
+    "gap": 0.18,
     "mbrolaVoice": "mb-de6",
     "wpm": 180,
-    "espeakPitch": 30,
-    "pitch": 0.96,
-    "tempo": 1.0,
-    "gap": 0.12,
-    "elevenModel": "eleven_multilingual_v2",
-    "voiceId": ""
+    "espeakPitch": 30
   },
   "lines": [
     {
@@ -76,7 +87,7 @@
     {
       "id": "n12",
       "shot": "zettel",
-      "text": "Hält der Aufzug im dreizehnten Stock, bleib auf keinen Fall ...",
+      "text": "Hält der Aufzug im dreizehnten Stock, bleib auf keinen Fall …",
       "gap": 0.2
     },
     {

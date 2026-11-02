@@ -155,14 +155,6 @@ x += bp_fast(rng.standard_normal(len(t)), 60, 600) * np.exp(-6 * t) * 0.8
 creak = np.sin(2 * np.pi * (380 + 60 * np.sin(2 * np.pi * 3 * t)) * t) * np.exp(-2.5 * t) * 0.12
 save("ruck", x + creak)
 
-# 9. Handy-Vibration (2 Pulse)
-d = 1.3
-t = t_(d)
-gate = ((t % 0.6) < 0.35).astype(float)
-x = (np.sin(2 * np.pi * 170 * t) + 0.4 * np.sign(np.sin(2 * np.pi * 170 * t))) * gate
-x = lp_fast(x, 1200)
-save("vibration", x)
-
 # 10. Herzschlag (30 s, 70 -> 120 bpm)
 d = 30
 t = t_(d)

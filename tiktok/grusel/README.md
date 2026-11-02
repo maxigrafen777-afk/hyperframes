@@ -2,7 +2,8 @@
 
 Interaktive Horror-Serie in der Du-Perspektive: Am Ende jeder Folge schreiben die
 Zuschauer **A** oder **B** in die Kommentare, die Mehrheit entscheidet Teil 2.
-Alles ist Code (SVG + GSAP in HyperFrames), 1080×1920, 30 fps.
+Alles ist Code: 3D-Szene in Three.js (`folge1/assets/scene.js`, lokal unter `assets/three/`, weil das CDN
+hier gesperrt ist), Untertitel und Endkarte als HyperFrames-Kompositionen, 1080×1920, 30 fps.
 
 | Folge | Ordner    | Thema                                                               |
 | ----- | --------- | ------------------------------------------------------------------- |
@@ -14,26 +15,42 @@ Alles ist Code (SVG + GSAP in HyperFrames), 1080×1920, 30 fps.
 cd tiktok/grusel/folge1
 python3 sfx.py            # synthetische SFX (deterministisch) -> assets/sfx/*.mp3
 python3 voices.py         # Erzähler -> assets/vo/<zeile>.mp3 + timings.json
-node build.mjs            # index.html + compositions/{film,captions,overlay}.html
-node ../../../packages/cli/dist/cli.js lint && node ../../../packages/cli/dist/cli.js check
+node build.mjs            # index.html (3D-Bühne + Ton) + compositions/{captions,overlay}.html
+node ../../../packages/cli/dist/cli.js lint
+node ../../../packages/cli/dist/cli.js snapshot --at 4,20,40.7   # 3D-Beats ansehen (check dauert mit 3D sehr lange)
 node ../../../packages/cli/dist/cli.js render -q delivery -o renders/stockwerk13_teil1.mp4
-# Lautheit wie die Vorbilder (TikTok normalisiert ohnehin):
-ffmpeg -i renders/stockwerk13_teil1.mp4 -c:v copy -af loudnorm=I=-10:TP=-1:LRA=7 -c:a aac -b:a 192k renders/stockwerk13_teil1_final.mp4
+# Lautheit nah an den Vorbildern, Spitzen begrenzt, kleiner Fade gegen den Boom-Spike in Frame 0:
+ffmpeg -i renders/stockwerk13_teil1.mp4 -c:v libx264 -crf 21 -preset slow -pix_fmt yuv420p \
+  -af "afade=t=in:d=0.025,volume=3.4dB,alimiter=limit=0.75:attack=1:release=60:level=false" \
+  -c:a aac -b:a 192k -movflags +faststart renders/stockwerk13_teil1_final.mp4
 ```
 
 Text und Timing stehen in `script.json`. Jede Zeile hat `id`, `text`, optional `emph`
 (rote Untertitel) und `gap` (Pause davor). Alle Schnitte und Aktionen hängen an den
-Wortzeiten der Erzählung (`W_("n9", "dreizehn")`), nicht an festen Sekunden.
+Wortzeiten der Erzählung (`W_("n9", "dreizehn")`), nicht an festen Sekunden: `build.mjs` schreibt sie als
+`window.__STK.ev` in `index.html`, `scene.js` berechnet daraus jedes Bild als reine Funktion von t
+(Kamera pro Schnitt, Türen, Anzeige, Licht, Mimik).
+
+### 3D-Set (`scene.js`, Einheiten in Metern)
+
+- Kabine x −0,9…0,9, z −1,6…0, Tür bei z = 0. Bedienfeld und Zettel an der Frontwand neben der Tür
+  (von hinten gesehen rechts, damit das A-Etikett im Wahl-Shot auf den EG-Knopf zeigen kann).
+- Lobby (EG) und Flur im 13. Stock liegen beide vor der Tür (z > 0) und werden umgeschaltet.
+- Figur: Gliederpuppe aus Kapseln/Kugeln, Gesicht aus Ringen, Brauen und Mund (`setExpr`: neutral,
+  worried, shock). Silhouette: dieselbe Figur in unbeleuchtetem Schwarz mit leuchtenden Augen und Grinsen.
+- Achtung: von hinten auf +z geschaut liegt +x links im Bild.
 
 ## Stimme
 
 `script.json → voice.engine`:
 
-- `"mbrola"` (aktuell): offline, `espeak-ng` + MBROLA `mb-de6` (`apt-get install espeak-ng mbrola mbrola-de6`),
+- `"elevenlabs"` (aktuell): **Brian** (`nPczCjzI2devNBz1zQrb`), `eleven_multilingual_v2`, Stabilität 0,5.
+  Wortzeiten aus `/with-timestamps`, jede Zeile wird per scribe gegen den Text geprüft
+  (`qa: maxTakes 3, maxWer 0.1`, Ziffern werden normalisiert). Brian spricht ~3 Wörter/s wie die Vorbilder.
+  Die Bibliothekssuche nach deutschen Stimmen braucht „Voices: Read“ am Key.
+- `"mbrola"`: Notlösung offline, `espeak-ng` + MBROLA `mb-de6` (`apt-get install espeak-ng mbrola mbrola-de6`),
   180 wpm, danach tiefer, wärmer, komprimiert, kleiner Raum. Wortzeiten werden aus den Pausen im Signal
   plus Silbengewichtung geschätzt.
-- `"elevenlabs"`: `voice.voiceId` eintragen, `ELEVENLABS_API_KEY=… python3 voices.py`. Braucht Credits und
-  für die Bibliothekssuche die Key-Berechtigung „Voices: Read“.
 
 Danach `node build.mjs`: Untertitel, Schnitte und Audio-Clips übernehmen die neuen Längen.
 
