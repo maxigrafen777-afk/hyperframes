@@ -24,6 +24,11 @@ Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Zahn, Instrumente, Schmerz
 
 Eine 60-s-Version streckt Teil 1 und Teil 3 (mehr Dialog-Beats), nicht Teil 4.
 
+## Eingriffe realistisch zeigen
+
+Jeder echte OP-Schritt ist ein eigener Beat (Instrument rein → Aktion → Reaktion → Instrument raus). Weisheitszahn als Muster:
+Betäubung (Spritze) → Schnitt → **Zahnfleisch sichtbar aufklappen** (Lappen dreht am Scharnier weg und bleibt offen) → Knochen über der Krone wegfräsen (Knochenstücke verschwinden, Späne fliegen) → Zahn mit dem Bohrer teilen (Schnittlinie zeichnet sich) → Krone mit dem Hebel lockern, mit der Zange ziehen → Wurzeln einzeln → spülen → Blutgerinnsel → Lappen zurück → nähen (Nadelhalter, Stich für Stich) → Erleichterung.
+
 ## Look (Zahlen, nicht Adjektive)
 
 - 1080×1920, 30 fps. Konturen `#2A1E1E`, 5 px, runde Enden; flächige Farben, höchstens ein Schattenstreifen. Palette in `C` in `lib/parts.mjs`.
@@ -43,6 +48,14 @@ Eine 60-s-Version streckt Teil 1 und Teil 3 (mehr Dialog-Beats), nicht Teil 4.
 5. `snapshot --at …` an jedem Beat ansehen: Gesichter lesbar, Instrumentenspitze trifft das Ziel, nichts Wichtiges unter den Untertiteln.
 6. **Stimme**: Deutsch braucht HeyGen (`/media-use`, `npx hyperframes auth login`); Kokoro (`hyperframes tts`) kann kein Deutsch. Pro Figur eine eigene Stimme (Opfer höher und gestresst, Verursacher frech, Arzt ruhig). Danach transkribieren (`transcribe --model small --language de`) und die Wortzeiten statt `wordTimes()` in die Untertitel geben; die Zeilenfenster in `script.json` an die echte Audiolänge anpassen.
 7. Rendern: `render -q delivery -o renders/<thema>_vN.mp4`.
+
+## Stolperfallen
+
+- Kiefer- und OP-Szene teilen dieselbe Zeichnung (`jaw(prefix)`), Ids also mit Präfix (`k-`, `o-`); im JS steht `@` für das Präfix.
+- `shake()` setzt absolute Werte: nie auf ein positioniertes `*-pos`-Instrument anwenden, sondern auf die innere Gruppe.
+- `blink(ch, t, v)` mit explizitem Lidwert aufrufen, wenn die Blinzler nicht in zeitlicher Reihenfolge stehen.
+- Wasserzeichen trägt `data-layout-ignore`, sonst schlägt der Kontrast-Check an.
+- HeyGen-Login klappt in der Cloud-Umgebung nicht interaktiv: `HEYGEN_API_KEY` als Umgebungs-Secret setzen lassen, oder der Creator lädt eigene Sprachaufnahmen hoch.
 
 ## Regeln
 

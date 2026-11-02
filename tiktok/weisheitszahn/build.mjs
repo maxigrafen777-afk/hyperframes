@@ -11,6 +11,10 @@ import {
   scalpel,
   elevator,
   forceps,
+  drill,
+  needleHolder,
+  drop,
+  chip,
   painStar,
   stitch,
   mouth,
@@ -22,23 +26,24 @@ const script = JSON.parse(readFileSync(new URL("./script.json", import.meta.url)
 const W = 1080;
 const H = 1920;
 const DUR = script.duration;
+const SC = script.scenes;
 const lines = script.lines;
-const linesFor = (who) => lines.filter((l) => l.speaker === who).map((l) => [l.start, l.end]);
+const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
 
-// Shared runtime helpers injected into each scene script (character acting).
+// Character acting helpers, injected into each scene script. Positions are
+// GLOBAL seconds; `tl` shifts them by the scene's start (O).
 const HELPERS = `
   const st = {};
   const lidSel = (ch) => ["#" + ch + "-eyeL-lid", "#" + ch + "-eyeR-lid"];
   function initChar(ch, r, lid) {
-    st[ch] = { lid, mouth: null };
+    st[ch] = { lid };
     gsap.set(lidSel(ch), { scaleY: lid, svgOrigin: "0 " + -(r + 8) });
   }
   function lids(ch, v, t, d = 0.14) {
     st[ch].lid = v;
     tl.to(lidSel(ch), { scaleY: v, duration: d, ease: "power2.out" }, t);
   }
-  function blink(ch, t) {
-    const v = st[ch].lid;
+  function blink(ch, t, v = st[ch].lid) {
     tl.to(lidSel(ch), { scaleY: 1, duration: 0.06, ease: "power1.in" }, t);
     tl.to(lidSel(ch), { scaleY: v, duration: 0.08, ease: "power1.out" }, t + 0.07);
   }
@@ -70,7 +75,7 @@ const HELPERS = `
   }
 `;
 
-const page = (id, dur, body, css, js) => `<template>
+const page = (id, [start, end], body, css, js) => `<template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; }
     #root svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -80,154 +85,253 @@ const page = (id, dur, body, css, js) => `<template>
 ${body}
   </div>
   <script>
-    const tl = gsap.timeline({ paused: true });
+    const TL = gsap.timeline({ paused: true });
+    const O = ${start};
+    const tl = {
+      to: (a, b, t) => TL.to(a, b, t - O),
+      set: (a, b, t) => TL.set(a, b, t - O),
+      fromTo: (a, b, c, t) => TL.fromTo(a, b, c, t - O),
+    };
 ${js}
-    tl.set({}, {}, ${dur});
-    window.__timelines["${id}"] = tl;
+    TL.set({}, {}, ${+(end - start).toFixed(2)});
+    window.__timelines["${id}"] = TL;
   </script>
 </template>
 `;
 
-/* ================= Scene: Zahn (Kiefer + OP), 0–20 s ================= */
+/* ================= Jaw drawing (shared by "kiefer" and "op") ================= */
+const T = "rotate(-68) scale(0.86) translate(0 -280)";
 const GUM =
   "M -40 928 C 150 915 380 916 468 934 C 520 946 548 880 602 822 C 680 742 830 690 1120 664";
-const zahnSvg = `
+const GUM_A = "M -40 928 C 150 915 380 916 468 934 C 500 941 520 925 540 905";
+const FLAP =
+  "M 498 922 C 530 900 560 838 600 792 C 680 712 830 662 1120 634 L 1120 696 C 1000 706 920 730 880 760 C 820 820 760 858 700 870 C 640 882 592 920 560 968 C 546 984 520 962 498 940 Z";
+const BONECAP =
+  "M 548 962 C 562 905 584 850 604 820 C 660 760 760 724 860 702 C 830 760 770 840 700 860 C 640 870 590 912 548 962 Z";
+const CHUNKS = [
+  [520, 615],
+  [615, 730],
+  [730, 900],
+];
+
+const jaw = (p) => `
 <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-  <g id="zahn-cam">
   <rect x="-200" y="-200" width="${W + 400}" height="${H + 400}" fill="${C.mouth}"/>
   <path d="M -200 1420 C 200 1480 700 1440 1300 1330 L 1300 2200 L -200 2200 Z" fill="${C.lowerPink}"/>
   <path d="${GUM} L 1120 1310 C 800 1400 300 1500 -40 1530 Z" fill="${C.bone}" ${S()}/>
   <path d="M -40 1470 C 300 1440 800 1350 1120 1250" fill="none" stroke="${C.boneShade}" stroke-width="60" opacity="0.7"/>
+  <path d="${GUM_A}" fill="none" stroke="${C.ink}" stroke-width="70" stroke-linecap="round"/>
+  <path d="${GUM_A}" fill="none" stroke="${C.gum}" stroke-width="60" stroke-linecap="round"/>
 
-  <path id="gum-ink" d="${GUM}" fill="none" stroke="${C.ink}" stroke-width="70" stroke-linecap="round"/>
-  <path id="gum-band" d="${GUM}" fill="none" stroke="${C.gum}" stroke-width="60" stroke-linecap="round"/>
-  <path d="M -40 950 C 150 937 380 938 468 956" fill="none" stroke="${C.gumDark}" stroke-width="10" opacity="0.5"/>
-  <path id="wz-socket" opacity="0" d="${TOOTH_PATH}" fill="${C.clot}" ${S()} transform="translate(800 1010) rotate(-68) scale(0.8) translate(0 -280)"/>
+  <path id="${p}socket" opacity="0" d="${TOOTH_PATH}" fill="#9E1E2E" ${S()} transform="translate(800 1010) ${T}"/>
 
-  <g transform="translate(-170 668)">${toothBody("lz-body")}</g>
-
-  <g transform="translate(330 650)"><g id="bz-wob">
-    ${toothBody("bz-body")}
-    <g transform="translate(0 122)">${toothFace("bz", { r: 52, gap: 64, mouthY: 92 })}</g>
+  <g transform="translate(-170 668)">${toothBody(p + "lz-body")}</g>
+  <g transform="translate(330 650)"><g id="${p}bz-wob">
+    ${toothBody(p + "bz-body")}
+    <g transform="translate(0 122)">${toothFace(p + "bz", { r: 52, gap: 64, mouthY: 92 })}</g>
   </g></g>
 
-  <g transform="translate(800 1010)"><g id="wz-move">
-    <g transform="rotate(-68) scale(0.86) translate(0 -280)">${toothBody("wz-body", { gumLine: 140 })}</g>
-  </g></g>
+  <g transform="translate(800 1010)"><g id="${p}wz-root"><g transform="${T}">
+    <clipPath id="${p}wzr-clip"><rect x="-300" y="290" width="600" height="420"/></clipPath>
+    <g clip-path="url(#${p}wzr-clip)">${toothBody(p + "wzr", { gumLine: 140 })}</g>
+  </g></g></g>
+  <g transform="translate(800 1010)"><g id="${p}wz-crown"><g transform="${T}">
+    <clipPath id="${p}wzc-clip"><rect x="-300" y="-60" width="600" height="353"/></clipPath>
+    <g clip-path="url(#${p}wzc-clip)">${toothBody(p + "wzc", { gumLine: 140 })}</g>
+    <path id="${p}wz-cut" opacity="0" d="M 175 290 L -175 290" fill="none" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>
+  </g></g></g>
 
+  ${CHUNKS.map(
+    (
+      [a, b],
+      i,
+    ) => `<g id="${p}bone${i}"><clipPath id="${p}bc${i}"><rect x="${a}" y="600" width="${b - a}" height="500"/></clipPath>
+    <g clip-path="url(#${p}bc${i})"><path d="${BONECAP}" fill="${C.bone}" ${S()}/>
+    <circle cx="${(a + b) / 2 - 10}" cy="${830 - i * 40}" r="5" fill="${C.boneShade}"/><circle cx="${(a + b) / 2 + 18}" cy="${850 - i * 45}" r="4" fill="${C.boneShade}"/></g></g>`,
+  ).join("\n  ")}
 
-  <g id="wz-flap">
-    <path d="M 560 905 C 590 840 640 790 720 760 C 760 790 770 830 760 860 C 700 880 640 900 560 905 Z" fill="${C.gum}" ${S()}/>
+  <g id="${p}flap">
+    <path d="${FLAP}" fill="${C.gum}" ${S()}/>
+    <path d="M 560 940 C 600 885 650 860 700 852 C 770 840 830 790 880 740" fill="none" stroke="${C.gumDark}" stroke-width="10" opacity="0.5" stroke-linecap="round"/>
   </g>
-  <path id="cut-line" d="M 566 880 C 620 830 680 800 742 790" fill="none" stroke="${C.blood}" stroke-width="9" stroke-linecap="round"/>
+  <path id="${p}incision" opacity="0" d="M 520 940 C 545 905 570 860 604 822 C 660 770 720 742 780 726" fill="none" stroke="${C.blood}" stroke-width="9" stroke-linecap="round"/>
 
-  <g transform="translate(800 1010)"><g id="wz-fmove">
-    <g transform="translate(-118 -38) rotate(-20)">${toothFace("wz", { r: 44, gap: 52, mouthY: 78, mouthS: 0.85, mouthInit: "smirk" })}</g>
+  <g transform="translate(800 1010)"><g id="${p}wz-fmove">
+    <g transform="translate(-118 -38) rotate(-20)">${toothFace(p + "wz", { r: 44, gap: 52, mouthY: 78, mouthS: 0.85, mouthInit: "smirk" })}</g>
   </g></g>
 
-  <g transform="translate(535 872)">${painStar("pain", { r: 62 })}</g>
-  <g transform="translate(655 822)">${stitch("st1")}</g>
-  <g transform="translate(712 796)">${stitch("st2")}</g>
-  <g transform="translate(600 862)">${stitch("st3")}</g>
+  <g transform="translate(535 872)">${painStar(p + "pain", { r: 62 })}</g>
+  <g transform="translate(548 915)">${stitch(p + "st1", 0.8)}</g>
+  <g transform="translate(602 852)">${stitch(p + "st2", 0.8)}</g>
+  <g transform="translate(668 806)">${stitch(p + "st3", 0.8)}</g>
+  ${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => `<g id="${p}chip${i}" opacity="0">${chip(p + "chipx" + i, { s: 1.2 })}</g>`).join("")}
+  ${[0, 1, 2, 3, 4, 5].map((i) => `<g id="${p}drop${i}" opacity="0">${drop(p + "dropx" + i, { s: 1.1 })}</g>`).join("")}
 
-  <g id="syr-pos">${syringe("syr")}</g>
-  <g id="scal-pos">${scalpel("scal")}</g>
-  <g id="elev-pos">${elevator("elev")}</g>
-  <g id="forc-pos">${forceps("forc")}</g>
-  </g>
+  <g id="${p}syr-pos">${syringe(p + "syr")}</g>
+  <g id="${p}scal-pos">${scalpel(p + "scal")}</g>
+  <g id="${p}drill-pos">${drill(p + "drill")}</g>
+  <g id="${p}elev-pos">${elevator(p + "elev")}</g>
+  <g id="${p}forc-pos">${forceps(p + "forc")}</g>
+  <g id="${p}nh-pos">${needleHolder(p + "nh")}</g>
 </svg>`;
 
-const zahnJs = `${HELPERS}
-    initChar("bz", 52, 0.42);
-    initChar("wz", 44, 0.38);
-    face("bz", "frown", 0);
-    face("wz", "smirk", 0);
-    look("bz", 14, 4, 0, 0.01);
-    look("wz", -10, -2, 0, 0.01);
-    gsap.set("#pain", { scale: 0.9, svgOrigin: "0 0" });
-    gsap.set(["#st1", "#st2", "#st3"], { scale: 0, svgOrigin: "0 0" });
-    gsap.set("#cut-line", { strokeDasharray: 220, strokeDashoffset: 220 });
-    gsap.set("#syr-pos", { x: 1180, y: 20, rotation: 28, svgOrigin: "0 0" });
-    gsap.set("#scal-pos", { x: 1200, y: 300, rotation: 52, svgOrigin: "0 0" });
-    gsap.set("#elev-pos", { x: 980, y: -560, rotation: 18, svgOrigin: "0 0" });
-    gsap.set("#forc-pos", { x: 760, y: -900, rotation: 16, svgOrigin: "0 0" });
-    gsap.set(["#wz-move", "#wz-fmove"], { svgOrigin: "0 0" });
-    gsap.set("#bz-wob", { svgOrigin: "0 600" });
+// Shared initial state for a jaw scene (prefix-agnostic via "@").
+const JAW_INIT = `
+    const WZ = ["#@wz-crown", "#@wz-root", "#@wz-fmove"];
+    initChar("@bz", 52, 0.42);
+    initChar("@wz", 44, 0.38);
+    gsap.set("#@pain", { scale: 0, svgOrigin: "0 0" });
+    gsap.set(["#@st1", "#@st2", "#@st3"], { scale: 0, svgOrigin: "0 0" });
+    gsap.set(WZ.concat(["#@bz-wob"]), { svgOrigin: "0 0" });
+    const OFF = { syr: [1180, 20, 28], scal: [1250, 380, 52], drill: [1150, -500, 22], elev: [1000, -560, 18], forc: [800, -900, 16], nh: [1100, -700, 30] };
+    Object.entries(OFF).forEach(([k, [x, y, r]]) => gsap.set("#@" + k + "-pos", { x, y, rotation: r, svgOrigin: "0 0" }));
+    gsap.set("#@forc-armL", { rotation: -10, svgOrigin: "0 -232" });
+    gsap.set("#@forc-armR", { rotation: 10, svgOrigin: "0 -232" });
+    gsap.set("#@nh-f-armL", { rotation: -4, svgOrigin: "0 -232" });
+    gsap.set("#@nh-f-armR", { rotation: 4, svgOrigin: "0 -232" });
+    const go = (k, x, y, t, d = 0.45, rot) => tl.to("#@" + k + "-pos", Object.assign({ x, y, duration: d, ease: "power3.out" }, rot === undefined ? {} : { rotation: rot }), t);
+    const away = (k, t, d = 0.4) => { const [x, y, r] = OFF[k]; tl.to("#@" + k + "-pos", { x, y, rotation: r, duration: d, ease: "power3.in" }, t); };
+`;
 
-    // --- the wisdom tooth keeps shoving (0–8.8 s)
-    [0.1, 1.2, 2.6, 3.9, 5.0, 6.2, 7.4].forEach((t, i) => {
-      tl.to(["#wz-move", "#wz-fmove"], { rotation: -4, x: -10, duration: 0.16, ease: "power2.out" }, t);
-      tl.to(["#wz-move", "#wz-fmove"], { rotation: 0, x: 0, duration: 0.35, ease: "power2.inOut" }, t + 0.18);
-      tl.to("#bz-wob", { rotation: -2.2, duration: 0.12, ease: "power2.out" }, t + 0.06);
-      tl.to("#bz-wob", { rotation: 0, duration: 0.4, ease: "elastic.out(1,0.5)" }, t + 0.2);
-      tl.to("#pain", { scale: 0.75, duration: 0.04 }, t + 0.03); tl.to("#pain", { scale: 1.15, duration: 0.25, ease: "back.out(3)" }, t + 0.08);
+/* ---------- Scene 1: Streit im Kiefer ---------- */
+const kieferJs = `${HELPERS}${JAW_INIT}
+    face("@bz", "frown", 0); face("@wz", "smirk", 0);
+    look("@bz", 14, 4, 0, 0.01); look("@wz", -10, -2, 0, 0.01);
+    tl.set("#@pain", { scale: 0.9 }, 0);
+    [0.1, 1.3, 2.7, 4.0, 5.2, 6.4, 7.6, 8.8].forEach((t) => {
+      tl.to(WZ, { rotation: -4, x: -10, duration: 0.16, ease: "power2.out" }, t);
+      tl.to(WZ, { rotation: 0, x: 0, duration: 0.35, ease: "power2.inOut" }, t + 0.18);
+      tl.to("#@bz-wob", { rotation: -2.2, svgOrigin: "0 600", duration: 0.12, ease: "power2.out" }, t + 0.06);
+      tl.to("#@bz-wob", { rotation: 0, svgOrigin: "0 600", duration: 0.4, ease: "elastic.out(1,0.5)" }, t + 0.2);
+      tl.to("#@pain", { scale: 0.75, duration: 0.04 }, t + 0.03);
+      tl.to("#@pain", { scale: 1.15, duration: 0.25, ease: "back.out(3)" }, t + 0.08);
     });
-    tl.to("#pain", { scale: 0, opacity: 0, duration: 0.2 }, 8.7);
+    talk("@bz", ${L.l1}, "frown");
+    look("@wz", -14, -6, 0.4);
+    talk("@wz", ${L.l2}, "smirk");
+    squeeze("@bz", true, 4.5); talk("@bz", ${L.l3}, "wavy"); squeeze("@bz", false, 6.5);
+    lids("@wz", 0.5, 6.5); talk("@wz", ${L.l4}, "smirk");
+    lids("@bz", 0.0, 7.8, 0.1); look("@bz", 0, -14, 7.8); talk("@bz", ${L.l5}, "frown");
+    blink("@wz", 1.6, 0.38); blink("@bz", 3.0, 0.42); blink("@wz", 5.0, 0.38); blink("@wz", 9.0, 0.5);
+`;
 
-    // dialogue (lip flap from script.json)
-    const bzLines = ${JSON.stringify(linesFor("bz"))};
-    const wzLines = ${JSON.stringify(linesFor("wz"))};
-    talk("bz", bzLines[0][0], bzLines[0][1], "frown");
-    look("wz", -14, -6, 0.4);
-    talk("wz", wzLines[0][0], wzLines[0][1], "smirk");
-    squeeze("bz", true, 3.5); talk("bz", bzLines[1][0], bzLines[1][1], "wavy"); squeeze("bz", false, 5.6);
-    lids("wz", 0.5, 5.6); talk("wz", wzLines[1][0], wzLines[1][1], "smirk");
-    lids("bz", 0.0, 6.9, 0.1); look("bz", 0, -14, 6.9); talk("bz", bzLines[2][0], bzLines[2][1], "flat");
-    blink("wz", 1.6); blink("bz", 2.9); blink("wz", 4.6); blink("bz", 6.4); blink("wz", 8.1);
+/* ---------- Scene 3: OP ---------- */
+const opJs = `${HELPERS}${JAW_INIT}
+    face("@bz", "flat", 11.2); face("@wz", "flat", 11.2);
+    lids("@bz", 0, 11.2, 0.01); lids("@wz", 0, 11.2, 0.01);
+    look("@bz", 16, -10, 11.2, 0.01); look("@wz", 0, 0, 11.2, 0.01);
+    gsap.set("#@incision", { opacity: 1, strokeDasharray: 420, strokeDashoffset: 420 });
+    gsap.set("#@wz-cut", { opacity: 1, strokeDasharray: 360, strokeDashoffset: 360 });
 
-    // --- after the "SPÄTER" card (10.4 s): needle
-    lids("bz", 0, 10.4, 0.01); face("bz", "flat", 10.4); look("bz", 16, -10, 10.4, 0.01);
-    lids("wz", 0, 10.4, 0.01); face("wz", "flat", 10.4); look("wz", 0, 0, 10.4, 0.01);
-    tl.to("#syr-pos", { x: 700, y: 812, duration: 0.55, ease: "power3.out" }, 10.5);
-    look("wz", 12, -16, 10.55); look("bz", 22, -14, 10.55);
-    tl.to("#syr-plunger", { y: 90, duration: 0.6, ease: "power1.inOut" }, 11.2);
-    squeeze("wz", true, 11.05); talk("wz", wzLines[2][0], wzLines[2][1], "wavy"); squeeze("wz", false, 12.5);
-    shake(["#wz-move", "#wz-fmove"], 11.05, 0.35, 6);
-    tl.to("#syr-pos", { x: 1180, y: 20, duration: 0.45, ease: "power3.in" }, 12.0);
-    lids("wz", 0.55, 12.55, 0.3); look("wz", -6, 6, 12.55, 0.4);
+    // 1) Betäubung
+    go("syr", 700, 812, 11.4, 0.55);
+    look("@wz", 12, -16, 11.45); look("@bz", 22, -14, 11.45);
+    squeeze("@wz", true, 12.0); shake(WZ, 12.0, 0.35, 6);
+    tl.to("#@syr-plunger", { y: 90, duration: 0.8, ease: "power1.inOut" }, 12.2);
+    talk("@wz", ${L.l7}, "wavy"); squeeze("@wz", false, 13.6);
+    away("syr", 13.1);
+    lids("@wz", 0.6, 13.8, 0.4); look("@wz", -6, 8, 13.8, 0.5);
+    talk("@wz", ${L.l8}, "wavy", 0.2);
 
-    // scalpel opens the gum
-    tl.to("#scal-pos", { x: 566, y: 880, duration: 0.4, ease: "power3.out" }, 12.85);
-    tl.to("#scal-pos", { x: 742, y: 790, duration: 0.55, ease: "power1.inOut" }, 13.3);
-    tl.to("#cut-line", { strokeDashoffset: 0, duration: 0.55, ease: "power1.inOut" }, 13.3);
-    tl.to("#scal-pos", { x: 1260, y: 420, duration: 0.4, ease: "power3.in" }, 13.9);
-    tl.to("#wz-flap", { x: 70, y: -60, rotation: 25, svgOrigin: "760 760", duration: 0.35, ease: "back.out(2)" }, 13.95);
-    tl.to("#cut-line", { opacity: 0, duration: 0.2 }, 14.0);
-    look("bz", 30, 0, 13.2);
+    // 2) Schnitt + Zahnfleisch aufklappen
+    go("scal", 520, 940, 15.8, 0.4);
+    tl.to("#@scal-pos", { x: 604, y: 822, duration: 0.35, ease: "power1.inOut" }, 16.25);
+    tl.to("#@scal-pos", { x: 780, y: 726, duration: 0.4, ease: "power1.inOut" }, 16.6);
+    tl.to("#@incision", { strokeDashoffset: 0, duration: 0.75, ease: "none" }, 16.25);
+    away("scal", 17.0);
+    look("@bz", 30, -6, 16.2);
+    tl.to("#@flap", { rotation: 30, svgOrigin: "1060 660", duration: 0.45, ease: "back.out(1.6)" }, 17.05);
+    tl.to("#@incision", { opacity: 0, duration: 0.2 }, 17.1);
+    lids("@bz", 0, 17.3); talk("@bz", ${L.l9}, "wavy");
 
-    // elevator loosens it
-    tl.to("#elev-pos", { x: 548, y: 902, duration: 0.4, ease: "power3.out" }, 14.15);
-    lids("wz", 0, 14.4, 0.08); look("wz", 0, -12, 14.4, 0.1);
-    talk("wz", wzLines[3][0], wzLines[3][1], "wavy");
-    [14.6, 14.9, 15.2, 15.5].forEach((t, i) => {
+    // 3) Knochen wegfräsen
+    const chunkAt = [[585, 885], [668, 815], [790, 765]];
+    chunkAt.forEach(([x, y], i) => {
+      const t = 19.2 + i * 0.7;
+      go("drill", x, y, t, 0.25);
+      shake("#@drill", t + 0.25, 0.4, 4, "y");
+      tl.to("#@bone" + i, { opacity: 0, duration: 0.35, ease: "power1.in" }, t + 0.25);
+      [0, 1, 2].forEach((k) => {
+        const c = "#@chip" + (i * 3 + k);
+        const dx = [-90, -20, 70][k], dy = [-120, -170, -110][k];
+        tl.set(c, { opacity: 1, x, y }, t + 0.3 + k * 0.05);
+        tl.to(c, { x: x + dx, y: y + dy, rotation: 200, duration: 0.5, ease: "power2.out" }, t + 0.3 + k * 0.05);
+        tl.to(c, { opacity: 0, duration: 0.15 }, t + 0.7 + k * 0.05);
+      });
+    });
+    lids("@wz", 0.15, 19.2, 0.2); look("@wz", 10, -14, 19.3);
+    look("@bz", 30, -20, 19.2); face("@bz", "wavy", 19.2);
+
+    // 4) Zahn teilen
+    go("drill", 864, 874, 21.4, 0.3, 30);
+    tl.to("#@drill-pos", { x: 752, y: 1153, duration: 1.2, ease: "none" }, 21.75);
+    shake("#@drill", 21.75, 1.2, 3);
+    tl.to("#@wz-cut", { strokeDashoffset: 0, duration: 1.2, ease: "none" }, 21.75);
+    away("drill", 23.0);
+    squeeze("@wz", true, 21.45); squeeze("@wz", false, 21.6); lids("@wz", 0, 21.6, 0.08);
+    look("@wz", 14, 6, 21.6);
+    talk("@wz", ${L.l10}, "wavy");
+    tl.to(["#@wz-crown", "#@wz-fmove"], { x: -10, y: -8, duration: 0.25, ease: "power2.out" }, 23.0);
+
+    // 5) Krone lockern + herausziehen
+    go("elev", 552, 945, 24.0, 0.35, 12);
+    [24.4, 24.65, 24.9].forEach((t, i) => {
       const s = i % 2 ? -1 : 1;
-      tl.to("#elev-pos", { rotation: 18 + s * 9, duration: 0.14, ease: "power2.inOut" }, t);
-      tl.to(["#wz-move", "#wz-fmove"], { rotation: s * 5, duration: 0.14, ease: "power2.inOut" }, t);
+      tl.to("#@elev-pos", { rotation: 12 + s * 9, duration: 0.12, ease: "power2.inOut" }, t);
+      tl.to(["#@wz-crown", "#@wz-fmove"], { rotation: s * 5, duration: 0.12, ease: "power2.inOut" }, t);
     });
-    tl.to(["#wz-move", "#wz-fmove"], { rotation: 0, duration: 0.15 }, 15.75);
-    tl.to("#elev-pos", { x: 980, y: -560, duration: 0.35, ease: "power3.in" }, 15.8);
+    tl.to(["#@wz-crown", "#@wz-fmove"], { rotation: 0, duration: 0.12 }, 25.1);
+    away("elev", 25.05, 0.3);
+    go("forc", 700, 872, 24.95, 0.4, 14);
+    tl.to(["#@forc-armL", "#@forc-armR"], { rotation: 0, duration: 0.1 }, 25.35);
+    squeeze("@wz", true, 25.4); face("@wz", "open", 25.4);
+    tl.set("#@socket", { opacity: 1 }, 25.75);
+    tl.to("#@forc-pos", { x: "+=0", y: "-=1500", rotation: 34, duration: 0.65, ease: "power3.in" }, 25.7);
+    tl.to(["#@wz-crown", "#@wz-fmove"], { y: -1500, rotation: 22, duration: 0.65, ease: "power3.in" }, 25.7);
+    shake("#@bz-wob", 25.75, 0.4, 3, "rotation");
+    look("@bz", 30, -40, 25.8, 0.2);
 
-    // forceps pull it out
-    tl.set("#forc-armL", { rotation: -10, svgOrigin: "0 -232" }, 0);
-    tl.set("#forc-armR", { rotation: 10, svgOrigin: "0 -232" }, 0);
-    tl.to("#forc-pos", { x: 640, y: 905, duration: 0.45, ease: "power3.out" }, 15.95);
-    tl.to("#forc-armL", { rotation: 0, duration: 0.12 }, 16.4);
-    tl.to("#forc-armR", { rotation: 0, duration: 0.12 }, 16.4);
-    squeeze("wz", true, 16.45); face("wz", "open", 16.45);
-    tl.set("#wz-socket", { opacity: 1 }, 16.6);
-    tl.to("#wz-flap", { opacity: 0, duration: 0.15 }, 16.6);
-    tl.to(["#forc-pos"], { y: "-=1500", rotation: 30, duration: 0.6, ease: "power3.in" }, 16.6);
-    tl.to(["#wz-move", "#wz-fmove"], { y: -1500, rotation: 18, duration: 0.6, ease: "power3.in" }, 16.6);
-    shake("#bz-wob", 16.65, 0.4, 3, "rotation");
-    look("bz", 30, -40, 16.7, 0.2);
+    // 6) Wurzeln
+    go("elev", 700, 960, 26.6, 0.35, 16);
+    [27.0, 27.25, 27.5, 27.75].forEach((t, i) => {
+      const s = i % 2 ? -1 : 1;
+      tl.to("#@elev-pos", { rotation: 16 + s * 8, duration: 0.12, ease: "power2.inOut" }, t);
+      tl.to("#@wz-root", { rotation: s * 4, duration: 0.12, ease: "power2.inOut" }, t);
+    });
+    tl.to("#@wz-root", { rotation: 0, duration: 0.12 }, 27.9);
+    away("elev", 27.85, 0.3);
+    tl.set("#@forc-armL", { rotation: -10 }, 27.0); tl.set("#@forc-armR", { rotation: 10 }, 27.0);
+    tl.set("#@forc-pos", { x: 840, y: -700, rotation: -10 }, 27.0);
+    go("forc", 840, 1026, 27.7, 0.4, -10);
+    tl.to(["#@forc-armL", "#@forc-armR"], { rotation: 0, duration: 0.1 }, 28.1);
+    tl.to(["#@forc-pos", "#@wz-root"], { x: "-=60", y: "-=40", duration: 0.25, ease: "power2.inOut" }, 28.3);
+    tl.to(["#@forc-pos", "#@wz-root"], { y: "-=1500", duration: 0.6, ease: "power3.in" }, 28.55);
+    look("@bz", 30, -30, 28.4);
 
-    // clot + stitches
-    tl.to("#wz-flap", { opacity: 1, x: 0, y: 0, rotation: 0, duration: 0.3, ease: "power2.out" }, 17.5);
-    ["#st3", "#st1", "#st2"].forEach((s, i) => tl.to(s, { scale: 1, duration: 0.18, ease: "back.out(3)" }, 18.05 + i * 0.2));
-    look("bz", 16, 6, 17.9);
-    talk("bz", bzLines[3][0], bzLines[3][1], "smile");
-    lids("bz", 0.55, 18.4, 0.3);
-    look("bz", 0, 6, 18.4);
+    // 7) Spülen, Blutgerinnsel
+    go("syr", 720, 780, 29.0, 0.35, 20);
+    [0, 1, 2, 3, 4, 5].forEach((i) => {
+      const t = 29.3 + i * 0.1, x = 700 + (i % 3) * 30;
+      tl.set("#@drop" + i, { opacity: 1, x, y: 800 }, t);
+      tl.to("#@drop" + i, { y: 960 + (i % 2) * 30, duration: 0.3, ease: "power1.in" }, t);
+      tl.to("#@drop" + i, { opacity: 0, duration: 0.1 }, t + 0.3);
+    });
+    away("syr", 30.0);
+    tl.to("#@socket", { fill: "#5E1019", duration: 0.5 }, 30.0);
+
+    // 8) Zahnfleisch zurück + nähen
+    tl.to("#@flap", { rotation: 0, svgOrigin: "1060 660", duration: 0.35, ease: "power2.inOut" }, 30.6);
+    [[548, 915], [602, 852], [668, 806]].forEach(([x, y], i) => {
+      const t = 31.0 + i * 0.6;
+      go("nh", x, y, t, 0.3, 30);
+      tl.to("#@nh-pos", { y: y + 18, duration: 0.12, ease: "power1.inOut" }, t + 0.3);
+      tl.to("#@st" + (i + 1), { scale: 1, duration: 0.16, ease: "back.out(3)" }, t + 0.45);
+    });
+    away("nh", 32.9);
+    look("@bz", 16, 6, 32.6);
+    talk("@bz", ${L.l12}, "smile");
+    lids("@bz", 0.55, 33.0, 0.3); look("@bz", 0, 6, 33.0);
+    blink("@bz", 14.6, 0); blink("@bz", 23.6, 0); blink("@bz", 30.4, 0);
 `;
 
 /* ================= Scene: SPÄTER card ================= */
@@ -252,11 +356,11 @@ const spaeterCss = `
     font-family: "Archivo Black", sans-serif; font-size: 150px; color: #7DF3EC; letter-spacing: 2px;
     -webkit-text-stroke: 10px #0B2B44; paint-order: stroke fill; text-shadow: 0 0 40px rgba(125,243,236,0.45); }`;
 const spaeterJs = `
-    tl.fromTo("#sp-text", { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2)" }, 0.05);
-    tl.fromTo("#sp-flowers", { scale: 1.08, transformOrigin: "50% 50%" }, { scale: 1, duration: 1.4, ease: "none" }, 0);
+    tl.fromTo("#sp-text", { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2)" }, O + 0.05);
+    tl.fromTo("#sp-flowers", { scale: 1.08, transformOrigin: "50% 50%" }, { scale: 1, duration: 1.4, ease: "none" }, O);
 `;
 
-/* ================= Scene: Praxis, 20–30 s ================= */
+/* ================= Scene: Praxis ================= */
 const tiles = (() => {
   let s = "";
   for (let i = -6; i <= 12; i++)
@@ -281,8 +385,6 @@ const praxisSvg = `
   <rect y="1360" width="${W}" height="560" fill="${C.floor}"/>
   ${tiles}
   <rect y="1340" width="${W}" height="26" fill="#6B5A47" ${S(3)}/>
-
-  <!-- dental chair -->
   <g id="chair">
     <ellipse cx="820" cy="1560" rx="150" ry="28" fill="#BFC4CA" ${S()}/>
     <rect x="775" y="1300" width="90" height="260" fill="#CDD1D6" ${S()}/>
@@ -291,8 +393,6 @@ const praxisSvg = `
     <rect x="620" y="1220" width="360" height="90" rx="36" fill="${C.chair}" ${S()}/>
     <rect x="640" y="1290" width="330" height="22" rx="10" fill="${C.chairDark}"/>
   </g>
-
-  <!-- patient -->
   <g id="pat" style="--lid:${C.skinLight}">
     ${limb("M 860 1250 L 690 1262 L 680 1500", 86, C.pants)}
     <ellipse cx="650" cy="1520" rx="62" ry="24" fill="#1A1A1C" ${S()}/>
@@ -310,9 +410,8 @@ const praxisSvg = `
     ${eyeSmall("pe1", 840, 772)}${eyeSmall("pe2", 885, 772)}
     <path d="M 856 790 Q 846 812 860 815" fill="none" ${S(4)}/>
     <path d="M 845 838 Q 860 832 876 838" fill="none" ${S(4)}/>
+    <path d="M 905 800 q 10 -14 0 -24" fill="none" stroke="#E7A0A0" stroke-width="6" stroke-linecap="round"/>
   </g>
-
-  <!-- dentist -->
   <g id="doc" style="--lid:${C.skinMid}">
     <path d="M 205 1180 L 265 1180 L 262 1505 L 212 1505 Z" fill="${C.scrubs}" ${S()}/>
     <path d="M 290 1180 L 350 1180 L 345 1505 L 293 1505 Z" fill="${C.scrubs}" ${S()}/>
@@ -344,19 +443,19 @@ const praxisSvg = `
 </svg>`;
 
 const praxisJs = `${HELPERS}
-    const docLines = ${JSON.stringify(linesFor("arzt").map(([a, b]) => [+(a - 20).toFixed(2), +(b - 20).toFixed(2)]))};
-    st["doc"] = { lid: 0 };
+    const docLines = ${JSON.stringify(lines.filter((l) => l.speaker === "arzt").map((l) => [l.start, l.end]))};
     gsap.set(["#de1-lid", "#de2-lid"], { scaleY: 0.2, svgOrigin: "0 -21" });
     gsap.set(["#pe1-lid", "#pe2-lid"], { scaleY: 0.25, svgOrigin: "0 -21" });
     gsap.set(["#pe1-p", "#pe2-p"], { x: -10 });
     docLines.forEach(([a, b]) => talk("doc", a, b, "flat", 0.12));
     const blinkP = (sel, t, v) => { tl.to(sel, { scaleY: 1, duration: 0.06 }, t); tl.to(sel, { scaleY: v, duration: 0.08 }, t + 0.07); };
-    [1.2, 4.1, 6.9, 9.0].forEach((t) => blinkP(["#de1-lid", "#de2-lid"], t, 0.2));
-    [2.3, 5.4, 8.2].forEach((t) => blinkP(["#pe1-lid", "#pe2-lid"], t, 0.25));
-    tl.to("#doc-arm", { rotation: -3, svgOrigin: "372 712", duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0.3);
+    [36.2, 39.1, 41.9, 45.0].forEach((t) => blinkP(["#de1-lid", "#de2-lid"], t, 0.2));
+    [37.3, 40.4, 43.2, 46.4].forEach((t) => blinkP(["#pe1-lid", "#pe2-lid"], t, 0.25));
+    [35.3, 37.5, 39.7, 41.9, 44.1, 46.3].forEach((t, i) =>
+      tl.to("#doc-arm", { rotation: i % 2 ? 0 : -3, svgOrigin: "372 712", duration: 1.2, ease: "sine.inOut" }, t));
 `;
 
-/* ================= Captions overlay, 0–30 s ================= */
+/* ================= Captions ================= */
 const words = wordTimes(lines);
 const capBody = words
   .map((w, i) => `    <div id="cap-${i}" class="cap">${w.text.replace(/[!?,.…]+$/u, "")}</div>`)
@@ -368,13 +467,10 @@ const capJs = `
       const next = W[i + 1];
       const end = next && next[0] - e < 0.35 ? next[0] : e + 0.12;
       tl.set(el, { opacity: 1 }, s);
-      tl.fromTo(el, { scale: 0.82 }, { scale: 1, duration: 0.09, ease: "back.out(3)" }, s);
+      tl.fromTo(el, { scale: 0.82 }, { scale: 1, duration: 0.09, ease: "back.out(3)", immediateRender: false }, s);
       tl.set(el, { opacity: 0 }, end);
     });
 `;
-const capCss = `${CAPTION_CSS}
-  #wm { position: absolute; left: 70px; top: 1500px; font-family: "Montserrat", sans-serif; font-weight: 700;
-    font-size: 44px; color: rgba(255,255,255,0.32); transform: rotate(32deg); transform-origin: left center; }`;
 
 /* ================= index.html ================= */
 const sfx = script.sfx
@@ -383,8 +479,10 @@ const sfx = script.sfx
       `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${s.start}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
   )
   .join("\n");
-const host = (id, start, dur, track, kind = "graphics", z = 1) =>
-  `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${start}" data-duration="${dur}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
+const host = (id, track, kind = "graphics", z = 1) => {
+  const [a, b] = SC[id] || [0, DUR];
+  return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${a}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
+};
 
 const index = `<!doctype html>
 <html lang="de" data-composition-variables='[{"id":"handle","type":"string","label":"Wasserzeichen / Handle","default":"${script.handle}"}]'>
@@ -400,11 +498,12 @@ const index = `<!doctype html>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
-${host("zahn", 0, 20, 1, "graphics", 1)}
-${host("spaeter", 9.0, 1.4, 2, "graphics", 2)}
-${host("praxis", 20, 10, 3, "graphics", 1)}
-${host("captions", 0, DUR, 4, "captions", 5)}
-${host("marke", 0, DUR, 5, "graphics", 4)}
+${host("kiefer", 1)}
+${host("spaeter", 2, "graphics", 2)}
+${host("op", 3)}
+${host("praxis", 4)}
+${host("captions", 5, "captions", 5)}
+${host("marke", 6, "graphics", 4)}
 ${sfx}
     </div>
     <script>
@@ -419,10 +518,10 @@ const marke = `<template>
   <style>
     #root { position: absolute; inset: 0; pointer-events: none; }
     #wm { position: absolute; left: 60px; top: 1430px; font-family: "Montserrat", sans-serif; font-weight: 700;
-      font-size: 46px; color: rgba(255,255,255,0.3); transform: rotate(32deg); transform-origin: left center; }
+      font-size: 46px; color: rgba(255,255,255,0.32); transform: rotate(32deg); transform-origin: left center; white-space: nowrap; }
   </style>
   <div id="root" data-composition-id="marke" data-width="${W}" data-height="${H}">
-    <div id="wm" data-var-text="handle">${script.handle}</div>
+    <div id="wm" data-layout-ignore data-var-text="handle">${script.handle}</div>
   </div>
   <script>
     window.__timelines["marke"] = gsap.timeline({ paused: true });
@@ -430,22 +529,13 @@ const marke = `<template>
 </template>
 `;
 
-writeFileSync(new URL("./index.html", import.meta.url), index);
-writeFileSync(
-  new URL("./compositions/zahn.html", import.meta.url),
-  page("zahn", 20, zahnSvg, "", zahnJs),
-);
-writeFileSync(
-  new URL("./compositions/spaeter.html", import.meta.url),
-  page("spaeter", 1.4, spaeterSvg, spaeterCss, spaeterJs),
-);
-writeFileSync(
-  new URL("./compositions/praxis.html", import.meta.url),
-  page("praxis", 10, praxisSvg, "", praxisJs),
-);
-writeFileSync(
-  new URL("./compositions/captions.html", import.meta.url),
-  page("captions", DUR, capBody, capCss, capJs),
-);
-writeFileSync(new URL("./compositions/marke.html", import.meta.url), marke);
-console.log(`built: ${words.length} caption words, ${script.sfx.length} sfx`);
+const out = (f, s) => writeFileSync(new URL(f, import.meta.url), s);
+const pre = (p, js) => js.replaceAll("@", p);
+out("./index.html", index);
+out("./compositions/kiefer.html", page("kiefer", SC.kiefer, jaw("k-"), "", pre("k-", kieferJs)));
+out("./compositions/op.html", page("op", SC.op, jaw("o-"), "", pre("o-", opJs)));
+out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaeterCss, spaeterJs));
+out("./compositions/praxis.html", page("praxis", SC.praxis, praxisSvg, "", praxisJs));
+out("./compositions/captions.html", page("captions", [0, DUR], capBody, CAPTION_CSS, capJs));
+out("./compositions/marke.html", marke);
+console.log(`built: ${words.length} caption words, ${script.sfx.length} sfx, ${DUR}s`);

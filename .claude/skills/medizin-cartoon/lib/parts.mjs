@@ -205,3 +205,35 @@ export const CAPTION_CSS = `
     -webkit-text-stroke: 14px #1d1414; paint-order: stroke fill;
     text-shadow: 0 6px 0 rgba(0,0,0,0.35);
   }`;
+
+/* ---------- More instruments ---------- */
+// Dental handpiece with a round bur (tip at 0,0).
+export function drill(id) {
+  return `
+  <g id="${id}">
+    <rect x="-4" y="-70" width="8" height="64" fill="${C.metalDark}" ${S(3)}/>
+    <circle r="11" fill="${C.metalHi}" ${S(4)}/>
+    <rect x="-28" y="-128" width="56" height="62" rx="16" fill="${C.metal}" ${S(4)}/>
+    <path d="M -22 -122 L -30 -700 L 30 -700 L 22 -122 Z" fill="${C.metal}" ${S(4)}/>
+    <rect x="-34" y="-420" width="68" height="26" rx="6" fill="${C.metalDark}" ${S(4)}/>
+    <path d="M -10 -680 L -12 -440 M 10 -680 L 12 -440" stroke="${C.metalHi}" stroke-width="6" stroke-linecap="round"/>
+  </g>`;
+}
+
+// Needle holder: forceps body with a curved suture needle + thread at the tip.
+export function needleHolder(id) {
+  return `
+  <g id="${id}">
+    ${forceps(id + "-f")}
+    <path d="M -2 4 A 30 30 0 0 1 52 -8" fill="none" stroke="${C.metalDark}" stroke-width="6" stroke-linecap="round"/>
+    <path id="${id}-thread" d="M -2 4 C -40 40 -20 90 -70 120" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linecap="round"/>
+  </g>`;
+}
+
+export function drop(id, { s = 1, fill = "#BFE6F5" } = {}) {
+  return `<path id="${id}" d="M 0 -18 C 8 -6 12 2 12 8 A 12 12 0 0 1 -12 8 C -12 2 -8 -6 0 -18 Z" fill="${fill}" ${S(3)} transform="scale(${s})"/>`;
+}
+
+export function chip(id, { s = 1 } = {}) {
+  return `<path id="${id}" d="M -10 -6 L 4 -12 L 12 0 L 4 10 L -9 7 Z" fill="${C.bone}" ${S(3)} transform="scale(${s})"/>`;
+}
