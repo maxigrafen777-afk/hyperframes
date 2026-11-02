@@ -19,3 +19,29 @@ for (const s of script.genSfx || []) {
   writeFileSync(out, Buffer.from(await res.arrayBuffer()));
   console.log(`gen-${s.id}.mp3`);
 }
+
+// Musikbett: die ersten 19,5 s des generierten Loops mit 1-s-Überblendungen
+// auf 150 s verlängern (build.mjs schneidet auf die Videolänge).
+import { execFileSync } from "node:child_process";
+const bed = new URL("./assets/sfx/gen-bed.mp3", import.meta.url).pathname;
+const long = new URL("./assets/sfx/bed-long.mp3", import.meta.url).pathname;
+if (existsSync(bed) && (!existsSync(long) || force)) {
+  const n = 8;
+  const inputs = Array.from({ length: n }, () => ["-t", "19.5", "-i", bed]).flat();
+  let chain = "[0:a][1:a]acrossfade=d=1[a1]";
+  for (let i = 2; i < n; i++) chain += `;[a${i - 1}][${i}:a]acrossfade=d=1[a${i}]`;
+  execFileSync("ffmpeg", [
+    "-y",
+    "-v",
+    "error",
+    ...inputs,
+    "-filter_complex",
+    chain,
+    "-map",
+    `[a${n - 1}]`,
+    "-b:a",
+    "160k",
+    long,
+  ]);
+  console.log("bed-long.mp3");
+}

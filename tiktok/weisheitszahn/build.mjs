@@ -33,17 +33,33 @@ const lines = script.lines;
 // (Echtzeit = R(t)); die Beats innerhalb einer Szene bleiben gleich.
 const VO_FILE = new URL("./assets/vo/timings.json", import.meta.url);
 const VO = existsSync(VO_FILE) ? JSON.parse(readFileSync(VO_FILE, "utf8")) : {};
-const ORDER = ["kiefer", "spaeter", "op", "praxis", "patient"];
-const GAP = { kiefer: 0.1, spaeter: 0, op: 0.15, praxis: 0.3, patient: 0.25 };
-const PAD = { kiefer: 0.3, spaeter: 0, op: 0.4, praxis: 0.5, patient: 2.6 };
+const ORDER = script.order;
+const GAP = {
+  kiefer: 0.08,
+  spaeter: 0,
+  nachher: 0.08,
+  op: 0.15,
+  frage: 0.2,
+  praxis: 0.3,
+  patient: 0.25,
+};
+const PAD = {
+  kiefer: 0.35,
+  spaeter: 0,
+  nachher: 0.4,
+  op: 0.4,
+  frage: 0.4,
+  praxis: 0.4,
+  patient: 2.8,
+};
 const ORIG = Object.fromEntries(ORDER.map((id) => [id, [...SC[id]]]));
 // Szene jeder Zeile einmal vorab (nach Original-Start) festlegen.
 const sceneOf0 = (t) => ORDER.find((id) => t >= ORIG[id][0] && t < ORIG[id][1]) ?? ORDER.at(-1);
 const LINE_SCENE = Object.fromEntries(lines.map((l) => [l.id, sceneOf0(l.start)]));
+// Szenen laufen in ORDER nacheinander; SHIFT = Echtzeit-Start minus Autoren-Start.
 const SHIFT = {};
-let cum = 0;
+let realT = 0;
 for (const id of ORDER) {
-  SHIFT[id] = +cum.toFixed(3);
   const [a, b] = ORIG[id];
   let prevEnd = -1;
   for (const l of lines.filter((x) => LINE_SCENE[x.id] === id && VO[x.id])) {
@@ -53,11 +69,12 @@ for (const id of ORDER) {
   }
   const end = prevEnd > 0 ? Math.max(b, prevEnd + PAD[id]) : b;
   SC[id] = [a, +end.toFixed(2)];
-  cum += end - b;
+  SHIFT[id] = +(realT - a).toFixed(3);
+  realT += end - a;
 }
 const R = (t, scene = sceneOf0(t)) => +(t + SHIFT[scene]).toFixed(3);
 const RL = (l) => R(l.start, LINE_SCENE[l.id]);
-const DUR = +(R(SC.patient[0], "patient") + SC.patient[1] - SC.patient[0]).toFixed(2);
+const DUR = +realT.toFixed(2);
 // Betonte Wörter (im Skript GROSS geschrieben) -> gelbe Untertitel + Kamera-Punch.
 const isEmph = (w) => {
   const c = w.replace(/[^\p{L}]/gu, "");
@@ -71,6 +88,46 @@ const emphTimes = (scene) =>
     );
 
 const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
+const tagOf = (l) => ((l.text.match(/^\s*\[([^\]]+)\]/) || [])[1] || "").toLowerCase();
+// Mimik aus den Emotions-Tags: Zuhörer schaut zum Sprecher, laut = Kneifaugen,
+// frech = Schlafzimmerblick, jammern = Blick nach oben, seufzen = Lider runter.
+function actLines(scene) {
+  return lines
+    .filter(
+      (l) => LINE_SCENE[l.id] === scene && VO[l.id] && (l.speaker === "bz" || l.speaker === "wz"),
+    )
+    .map((l) => {
+      const tag = tagOf(l);
+      const me = "@" + l.speaker;
+      const other = l.speaker === "bz" ? "@wz" : "@bz";
+      const loud = /shout|angry|scream|panick/.test(tag);
+      const rest =
+        l.speaker === "bz"
+          ? loud
+            ? "frown"
+            : "flat"
+          : /whin|panick|scream|slur/.test(tag)
+            ? "wavy"
+            : "smirk";
+      let js = `look("${other}", ${l.speaker === "bz" ? "-14, -6" : "18, 4"}, ${+(l.start - 0.1).toFixed(2)});`;
+      if (loud && l.speaker === "bz")
+        js += `squeeze("@bz", true, ${l.start}); squeeze("@bz", false, ${+(l.start + 0.55).toFixed(2)});
+      tl.to("#@pain", { scale: 1.35, duration: 0.08 }, ${l.start}); tl.to("#@pain", { scale: 1, duration: 0.3, ease: "back.out(3)" }, ${+(l.start + 0.1).toFixed(2)});`;
+      if (/mischiev|laugh/.test(tag)) js += `lids("${me}", 0.5, ${l.start});`;
+      if (/whin/.test(tag))
+        js += `lids("${me}", 0.05, ${l.start}); look("${me}", 0, -16, ${l.start});`;
+      if (/sigh/.test(tag)) js += `lids("${me}", 0.55, ${l.start}, 0.3);`;
+      if (/angry/.test(tag) && l.speaker === "bz") js += `lids("@bz", 0.35, ${l.start});`;
+      return js + `talk("${me}", ${l.start}, ${l.end}, "${rest}");`;
+    })
+    .join("\n    ");
+}
+const blinks = (scene, a, b) => {
+  let js = "";
+  for (let t = a + 1.3, i = 0; t < b - 0.3; t += 1.9, i++)
+    js += `blink("${i % 2 ? "@bz" : "@wz"}", ${+t.toFixed(2)});`;
+  return js;
+};
 
 // Character acting helpers, injected into each scene script. Positions are
 // GLOBAL seconds; `tl` shifts them by the scene's start (O).
@@ -174,6 +231,7 @@ const jaw = (p) => `
   <g transform="translate(-170 668)">${toothBody(p + "lz-body")}</g>
   <g transform="translate(330 650)"><g id="${p}bz-wob">
     ${toothBody(p + "bz-body")}
+    <g id="${p}cavity" opacity="0"><path id="${p}cavity-fill" d="M 120 186 C 146 176 164 198 160 226 C 156 252 130 262 114 246 C 102 232 102 198 120 186 Z" fill="#5B3A29" ${S(4)}/><circle id="${p}cavity-dot" cx="128" cy="208" r="6" fill="#3A2318"/></g>
     <g transform="translate(0 122)">${toothFace(p + "bz", { r: 52, gap: 64, mouthY: 92 })}</g>
   </g></g>
 
@@ -259,13 +317,34 @@ const kieferJs = `${HELPERS}${JAW_INIT}
       tl.to("#@pain", { scale: 0.75, duration: 0.04 }, t + 0.03);
       tl.to("#@pain", { scale: 1.15, duration: 0.25, ease: "back.out(3)" }, t + 0.08);
     });
-    talk("@bz", ${L.l1}, "frown");
-    look("@wz", -14, -6, 0.4);
-    talk("@wz", ${L.l2}, "smirk");
-    squeeze("@bz", true, ${L.l3[0] - 0.1}); talk("@bz", ${L.l3}, "wavy"); squeeze("@bz", false, ${L.l3[1] + 0.1});
-    lids("@wz", 0.5, ${L.l4[0] - 0.1}); talk("@wz", ${L.l4}, "smirk");
-    lids("@bz", 0.0, ${L.l5[0] - 0.1}, 0.1); look("@bz", 0, -14, ${L.l5[0] - 0.1}); talk("@bz", ${L.l5}, "frown");
-    blink("@wz", 1.6, 0.38); blink("@bz", 3.0, 0.42); blink("@wz", 5.0, 0.38); blink("@wz", ${L.l5[1] + 0.1}, 0.5);
+    ${actLines("kiefer")}
+    // Furz-Gag: Weisheitszahn drückt, es pupst, Backenzahn ekelt sich.
+    shake(WZ, ${L.k7[0] - 0.55}, 0.4, 8, "y");
+    squeeze("@bz", true, ${L.k7[0] - 0.4}); face("@bz", "wavy", ${L.k7[0] - 0.4}); squeeze("@bz", false, ${L.k7[1]});
+    ${blinks("kiefer", 0, SC.kiefer[1])}
+`;
+
+/* ---------- Scene 2b: nach dem Zeitsprung (Loch im Backenzahn) ---------- */
+const nachherJs = `${HELPERS}${JAW_INIT}
+    const N0 = ${SC.nachher[0]};
+    gsap.set("#@cavity", { opacity: 1 });
+    face("@bz", "frown", N0); face("@wz", "smirk", N0);
+    look("@bz", 14, 4, N0, 0.01); look("@wz", -10, -2, N0, 0.01);
+    tl.set("#@pain", { scale: 0.9 }, N0);
+    gsap.set("#@cam", { scale: 1.08 });
+    tl.to("#@cam", { scale: 1, duration: 0.5, ease: "power3.out" }, N0);
+    ${JSON.stringify(emphTimes("nachher"))}.forEach((t) => { punch("#@cam", t); shake("#@cam", t, 0.25, 7); });
+    [N0 + 0.8, N0 + 3.4, N0 + 6.2].forEach((t) => {
+      tl.to(WZ, { rotation: -4, x: -10, duration: 0.16, ease: "power2.out" }, t);
+      tl.to(WZ, { rotation: 0, x: 0, duration: 0.35, ease: "power2.inOut" }, t + 0.18);
+      tl.to("#@pain", { scale: 1.15, duration: 0.25, ease: "back.out(3)" }, t + 0.08);
+    });
+    ${actLines("nachher")}
+    // Beim "Loch" schaut der Backenzahn runter auf seine Seite.
+    look("@bz", 22, 26, ${L.n2[0] + 0.2}); tl.fromTo("#@cavity", { scale: 1.3, svgOrigin: "132 220" }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, ${L.n2[0] + 0.3});
+    // "DOC!": schaut in die Kamera.
+    look("@bz", 0, -16, ${L.n5[0]}); lids("@bz", 0, ${L.n5[0]});
+    ${blinks("nachher", SC.nachher[0], SC.nachher[1])}
 `;
 
 /* ---------- Scene 3: OP ---------- */
@@ -273,6 +352,7 @@ const opJs = `${HELPERS}${JAW_INIT}
     face("@bz", "flat", 11.2); face("@wz", "flat", 11.2);
     lids("@bz", 0, 11.2, 0.01); lids("@wz", 0, 11.2, 0.01);
     look("@bz", 16, -10, 11.2, 0.01); look("@wz", 0, 0, 11.2, 0.01);
+    gsap.set("#@cavity", { opacity: 1 });
     gsap.set("#@incision", { opacity: 1, strokeDasharray: 420, strokeDashoffset: 420 });
     gsap.set("#@wz-cut", { opacity: 1, strokeDasharray: 360, strokeDashoffset: 360 });
 
@@ -331,6 +411,7 @@ const opJs = `${HELPERS}${JAW_INIT}
     squeeze("@wz", true, 21.45); squeeze("@wz", false, 21.6); lids("@wz", 0, 21.6, 0.08);
     look("@wz", 14, 6, 21.6);
     talk("@wz", ${L.l10}, "wavy");
+    lids("@wz", 0.5, ${L.l10b[0]}); talk("@wz", ${L.l10b}, "smirk");
     tl.to(["#@wz-crown", "#@wz-fmove"], { x: -10, y: -8, duration: 0.25, ease: "power2.out" }, 23.0);
 
     // 5) Krone lockern + herausziehen
@@ -379,6 +460,13 @@ const opJs = `${HELPERS}${JAW_INIT}
     away("syr", 30.0);
     tl.to("#@socket", { fill: "#5E1019", duration: 0.5 }, 30.0);
 
+    // 7b) Loch im Nachbarzahn füllen
+    go("elev", 486, 872, 30.02, 0.25, 30);
+    tl.to("#@cavity-fill", { fill: "#EFEDE2", duration: 0.2 }, 30.3);
+    tl.to("#@cavity-dot", { opacity: 0, duration: 0.1 }, 30.3);
+    tl.fromTo("#@cavity", { scale: 1.25, svgOrigin: "132 220" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 30.3);
+    away("elev", 30.5, 0.3);
+    look("@bz", 20, 24, 30.1);
     // 8) Zahnfleisch zurück + nähen
     tl.to("#@flap", { rotation: 0, svgOrigin: "1060 660", duration: 0.35, ease: "power2.inOut" }, 30.6);
     [[548, 915], [602, 852], [668, 806]].forEach(([x, y], i) => {
@@ -682,7 +770,7 @@ const praxisSvg = `
 </svg>`;
 
 const praxisJs = `
-    const docLines = ${JSON.stringify(lines.filter((l) => l.speaker === "arzt").map((l) => [l.start, l.end]))};
+    const docLines = ${JSON.stringify(lines.filter((l) => l.speaker === "arzt" && LINE_SCENE[l.id] === "praxis").map((l) => [l.start, l.end]))};
     const LIDS = ["#de1-lid", "#de2-lid"], PUP = ["#de1-p", "#de2-p"];
     gsap.set(LIDS, { scaleY: 0.42, svgOrigin: "0 -28" });
     gsap.set(PUP, { x: 6, y: 9 });
@@ -822,17 +910,35 @@ const patientJs = `
     // Arzt antwortet aus dem Off: Patient schaut nach links.
     tl.to(PUP, { x: -10, y: 2, duration: 0.2, ease: "power3.out" }, ${L.l17[0]} - 0.1);
     tl.to(LIDS, { scaleY: 0.4, duration: 0.15 }, ${L.l17[0]});
-    // Seufzen: Lider fallen, Kopf sinkt.
-    tl.to(PUP, { x: 0, y: 6, duration: 0.3, ease: "power2.inOut" }, ${L.l18[0]});
-    tl.to(LIDS, { scaleY: 0.68, duration: 0.4 }, ${L.l18[0]});
-    tl.to("#pt-head", { y: 10, rotation: -2, duration: 0.6, ease: "sine.inOut" }, ${L.l18[0]});
-    talk("pm", ${L.l18}, "frown", 0.22);
-    [P0 + 1.4, ${L.l17[1]} + 0.2].forEach((t) => { tl.to(LIDS, { scaleY: 1, duration: 0.06 }, t); tl.to(LIDS, { scaleY: 0.5, duration: 0.09 }, t + 0.07); });
+    // Enttäuscht: Lider fallen, Kopf sinkt.
+    tl.to(PUP, { x: 0, y: 6, duration: 0.3, ease: "power2.inOut" }, ${L.l17[1]});
+    tl.to(LIDS, { scaleY: 0.68, duration: 0.4 }, ${L.l17[1]});
+    tl.to("#pt-head", { y: 10, rotation: -2, duration: 0.6, ease: "sine.inOut" }, ${L.l17[1]});
+    [P0 + 1.4].forEach((t) => { tl.to(LIDS, { scaleY: 1, duration: 0.06 }, t); tl.to(LIDS, { scaleY: 0.5, duration: 0.09 }, t + 0.07); });
     // Kommentar-Frage
-    tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${L.l18[0]} - 0.3);
-    tl.to("#ct2", { scale: 1.08, duration: 0.12, ease: "power2.out" }, ${L.l18[0]} + 0.4);
-    tl.to("#ct2", { scale: 1, duration: 0.25, ease: "power2.inOut" }, ${L.l18[0]} + 0.52);
-    tl.to("#ct3", { y: 8, duration: 0.4, ease: "sine.inOut", repeat: 5, yoyo: true }, ${L.l18[0]} + 0.5);
+    tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${L.l17[0]} + 0.2);
+    tl.to("#ct2", { scale: 1.08, duration: 0.12, ease: "power2.out" }, ${L.l17[0]} + 0.9);
+    tl.to("#ct2", { scale: 1, duration: 0.25, ease: "power2.inOut" }, ${L.l17[0]} + 1.02);
+    tl.to("#ct3", { y: 8, duration: 0.4, ease: "sine.inOut", repeat: 5, yoyo: true }, ${L.l17[0]} + 1.0);
+`;
+
+// Dieselbe Patienten-Zeichnung zweimal im Video: Ids mit Präfix eindeutig machen.
+const pfxPatient = (str, p) => str.replace(/\b(pt-|pe1|pe2|pm-m)/g, p + "$1");
+const frageJs = `
+    const Q0 = ${SC.frage[0]}, Q1 = ${SC.frage[1]};
+    const LIDS = ["#pe1-lid", "#pe2-lid"], PUP = ["#pe1-p", "#pe2-p"];
+    gsap.set(LIDS, { scaleY: 0.35, svgOrigin: "0 -30" });
+    gsap.set(PUP, { x: -8, y: -4 });
+    gsap.set("#pt-cam", { transformOrigin: "50% 48%", scale: 1.22 });
+    gsap.set(["#pt-face", "#pt-head"], { svgOrigin: "540 1100" });
+    gsap.set("#pt-browL", { rotation: -14, svgOrigin: "516 806" });
+    gsap.set("#pt-browR", { rotation: 14, svgOrigin: "564 806" });
+    tl.to("#pt-cam", { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, Q0);
+    tl.fromTo("#pt-face", { scaleX: 1.12, scaleY: 0.94 }, { scaleX: 1, scaleY: 1, duration: 0.7, ease: "elastic.out(1.2,0.35)" }, Q0 + 0.05);
+    talk("fq-pm", ${L.q1}, "frown", 0.14);
+    for (let t = ${L.q1[0]}, i = 0; t < ${L.q1[1]} - 0.1; t += 0.14, i++)
+      tl.to("#pt-head", { scaleX: i % 2 ? 1 : 1.025, duration: 0.13, ease: "sine.inOut" }, t);
+    tl.to(LIDS, { scaleY: 1, duration: 0.06 }, Q0 + 1.6); tl.to(LIDS, { scaleY: 0.35, duration: 0.09 }, Q0 + 1.67);
 `;
 
 /* ================= Captions ================= */
@@ -898,9 +1004,17 @@ const hookJs = `
 const sfx = script.sfx
   .map(
     (s, i) =>
-      `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${s.anchor ? +(R(ORIG[s.anchor][0], s.anchor) + s.offset).toFixed(3) : R(s.start)}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
+      `      <audio id="${s.id}" class="clip" src="assets/sfx/${s.src}" data-start="${sfxStart(s)}" data-track-index="${10 + i}" data-volume="${s.volume}"></audio>`,
   )
   .join("\n");
+function sfxStart(s) {
+  if (s.anchor) return +(R(ORIG[s.anchor][0], s.anchor) + s.offset).toFixed(3);
+  if (s.line) return +(RL(lines.find((l) => l.id === s.line)) + s.offset).toFixed(3);
+  return R(s.start);
+}
+const bed = existsSync(new URL("./assets/sfx/bed-long.mp3", import.meta.url))
+  ? `      <audio id="bed" class="clip" src="assets/sfx/bed-long.mp3" data-start="0" data-duration="${DUR}" data-track-index="9" data-volume="0.17"></audio>`
+  : "";
 const vo = lines
   .filter((l) => VO[l.id])
   .map(
@@ -932,11 +1046,14 @@ ${host("spaeter", 2, "graphics", 2)}
 ${host("op", 3)}
 ${host("praxis", 4)}
 ${host("captions", 5, "captions", 5)}
+${host("nachher", 11)}
+${host("frage", 12)}
 ${host("patient", 7)}
 ${host("hook", 8, "graphics", 6)}
 ${host("marke", 6, "graphics", 4)}
 ${sfx}
 ${vo}
+${bed}
     </div>
     <script>
       window.__timelines = window.__timelines || {};
@@ -981,6 +1098,14 @@ out(
 out(
   "./compositions/patient.html",
   page("patient", SC.patient, patientSvg + ctaBody, ctaCss, HELPERS + patientJs),
+);
+out(
+  "./compositions/nachher.html",
+  page("nachher", SC.nachher, jaw("n-"), "", pre("n-", nachherJs)),
+);
+out(
+  "./compositions/frage.html",
+  page("frage", SC.frage, pfxPatient(patientSvg, "fq-"), "", HELPERS + pfxPatient(frageJs, "fq-")),
 );
 out("./compositions/hook.html", page("hook", [0, HOOK_END], hookBody, hookCss, hookJs));
 out(

@@ -5,139 +5,203 @@
   "scenes": {
     "kiefer": [0, 9.8],
     "spaeter": [9.8, 11.2],
+    "nachher": [60, 66.5],
     "op": [11.2, 35.0],
-    "praxis": [35.0, 47.6],
-    "patient": [47.6, 55.0]
+    "frage": [80, 81],
+    "praxis": [35.0, 42.0],
+    "patient": [47.6, 50.5]
   },
   "lines": [
     {
-      "id": "l1",
+      "id": "k1",
       "speaker": "bz",
-      "start": 0.05,
-      "end": 1.95,
-      "text": "[shouting] AUA! Hör sofort auf zu drücken!"
+      "start": 0.6,
+      "end": 1.6,
+      "text": "[shouting] Aua! Hör auf zu drücken!"
     },
     {
-      "id": "l2",
+      "id": "k2",
       "speaker": "wz",
-      "start": 2.3,
-      "end": 4.3,
-      "text": "[laughs] Sorry. Hier ist halt kein Platz für mich."
+      "start": 2.0,
+      "end": 3.0,
+      "text": "Ich drück doch gar nicht. Ich will hier raus!"
     },
     {
-      "id": "l3",
+      "id": "k3",
       "speaker": "bz",
+      "start": 3.5,
+      "end": 4.5,
+      "text": "[angry] Hier ist kein Platz für dich!"
+    },
+    {
+      "id": "k4",
+      "speaker": "wz",
       "start": 4.6,
-      "end": 6.4,
-      "text": "[angry] Dann wachs woanders hin! Du machst mich KAPUTT!"
+      "end": 5.6,
+      "text": "[whining] Aber hier unten ist's so langweilig!"
     },
     {
-      "id": "l4",
+      "id": "k5",
       "speaker": "wz",
-      "start": 6.6,
-      "end": 7.7,
-      "text": "[mischievously] Pech gehabt. Ich bleib hier."
+      "start": 6.0,
+      "end": 7.0,
+      "text": "Ich will auch mal was KAUEN!"
     },
     {
-      "id": "l5",
+      "id": "k6",
       "speaker": "bz",
-      "start": 7.9,
-      "end": 9.6,
-      "text": "[angry] Na warte! DAS sag ich dem Zahnarzt!"
+      "start": 7.2,
+      "end": 8.2,
+      "text": "[shouting] Aua! Lass das!"
+    },
+    {
+      "id": "k7",
+      "speaker": "wz",
+      "start": 8.4,
+      "end": 9.4,
+      "text": "[laughs] Upps. Das war ich nicht."
     },
     {
       "id": "l6",
       "speaker": "card",
       "start": 9.9,
-      "end": 11.1,
+      "end": 10.9,
       "text": "Später"
+    },
+    {
+      "id": "n1",
+      "speaker": "bz",
+      "start": 60.3,
+      "end": 61.3,
+      "text": "[sighs] Du hörst nicht auf, oder?"
+    },
+    {
+      "id": "n2",
+      "speaker": "bz",
+      "start": 61.5,
+      "end": 62.5,
+      "text": "Guck mal! Du hast mir ein LOCH gemacht!"
+    },
+    {
+      "id": "n3",
+      "speaker": "wz",
+      "start": 63.0,
+      "end": 64.0,
+      "text": "[mischievously] Tja. Freiheit hat ihren Preis."
+    },
+    {
+      "id": "n4",
+      "speaker": "bz",
+      "start": 64.5,
+      "end": 65.5,
+      "text": "[angry] Na gut. Dann zeig ich dir mal Freiheit."
+    },
+    {
+      "id": "n5",
+      "speaker": "bz",
+      "start": 66.0,
+      "end": 67.0,
+      "text": "[shouting] DOC! Hol ihn raus!"
     },
     {
       "id": "l7",
       "speaker": "wz",
       "start": 12.3,
-      "end": 13.6,
-      "text": "[shouting] AUA! Was war DAS denn?!"
+      "end": 13.3,
+      "text": "[shouting] Aua! Was war DAS denn?!"
     },
     {
       "id": "l8",
       "speaker": "wz",
       "start": 14.0,
-      "end": 15.6,
+      "end": 15.0,
       "text": "[slurring] Ich spür… gar nix mehr…"
     },
     {
       "id": "l9",
       "speaker": "bz",
       "start": 17.4,
-      "end": 18.9,
-      "text": "[nervous] Oh oh. Jetzt wird's ernst."
+      "end": 18.4,
+      "text": "[nervous] Oha. Jetzt wird's ernst."
     },
     {
       "id": "l10",
       "speaker": "wz",
       "start": 21.6,
-      "end": 23.8,
-      "text": "[panicked] Halt! Ihr könnt mich doch nicht ZERTEILEN!"
+      "end": 22.6,
+      "text": "[panicked] Halt! Nicht ZERTEILEN!"
+    },
+    {
+      "id": "l10b",
+      "speaker": "wz",
+      "start": 23.0,
+      "end": 24.0,
+      "text": "[laughs] Ha! So leicht kriegt ihr mich nicht!"
     },
     {
       "id": "l11",
       "speaker": "wz",
       "start": 25.5,
-      "end": 26.3,
+      "end": 26.5,
       "text": "[screaming] NEEEIN!"
     },
     {
       "id": "l12",
       "speaker": "bz",
       "start": 33.1,
-      "end": 34.8,
-      "text": "[sighs] Endlich… wieder Ruhe."
+      "end": 34.1,
+      "text": "[sighs] Endlich… Ruhe."
     },
     {
-      "id": "l13",
+      "id": "q1",
+      "speaker": "pat",
+      "start": 80.3,
+      "end": 81.3,
+      "text": "[mumbling] Doc, dad war Folter! Wad habt ihr da rausgeholt?"
+    },
+    {
+      "id": "d1",
       "speaker": "arzt",
       "start": 35.4,
+      "end": 36.4,
+      "text": "Ihr Weisheitszahn lag quer und hatte keinen Platz."
+    },
+    {
+      "id": "d2",
+      "speaker": "arzt",
+      "start": 38.0,
       "end": 39.0,
-      "text": "Hat ein Weisheitszahn keinen Platz, drückt er gegen den Nachbarzahn."
+      "text": "Er hat gegen den Nachbarzahn gedrückt. Da ist sogar ein Loch entstanden."
     },
     {
-      "id": "l14",
+      "id": "d3",
       "speaker": "arzt",
-      "start": 39.2,
-      "end": 43.2,
-      "text": "Dann betäuben wir, öffnen das Zahnfleisch und tragen etwas Knochen ab."
-    },
-    {
-      "id": "l15",
-      "speaker": "arzt",
-      "start": 43.4,
-      "end": 47.3,
-      "text": "Den Zahn teilen wir, holen ihn Stück für Stück raus und nähen zu."
+      "start": 41.5,
+      "end": 42.5,
+      "text": "Wir haben ihn geteilt, Stück für Stück entfernt, das Loch gefüllt und genäht."
     },
     {
       "id": "l16",
       "speaker": "pat",
       "start": 48.0,
-      "end": 50.0,
+      "end": 49.0,
       "text": "[mumbling] Unn wann kann isch wieda essn?"
     },
     {
       "id": "l17",
       "speaker": "arzt",
       "start": 50.3,
-      "end": 52.3,
+      "end": 51.3,
       "text": "[warmly] Heute nur was Weiches. Und gut kühlen."
-    },
-    {
-      "id": "l18",
-      "speaker": "pat",
-      "start": 52.6,
-      "end": 53.8,
-      "text": "[sighs] Mmmh… okay."
     }
   ],
   "sfx": [
+    {
+      "id": "sfx-whoosh0",
+      "src": "whoosh-short.mp3",
+      "start": 0,
+      "volume": 0.5
+    },
     {
       "id": "sfx-boom",
       "src": "gen-boom.mp3",
@@ -273,6 +337,54 @@
       "anchor": "patient",
       "offset": 0.0,
       "volume": 0.6
+    },
+    {
+      "id": "sfx-squeak1",
+      "src": "gen-squeak.mp3",
+      "line": "k1",
+      "offset": -0.15,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-squeak2",
+      "src": "gen-squeak.mp3",
+      "line": "k6",
+      "offset": -0.15,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-fart",
+      "src": "gen-fart.mp3",
+      "line": "k7",
+      "offset": -0.55,
+      "volume": 0.7
+    },
+    {
+      "id": "sfx-nachher",
+      "src": "pop.mp3",
+      "line": "n2",
+      "offset": 0.3,
+      "volume": 0.4
+    },
+    {
+      "id": "sfx-fill",
+      "src": "gen-ding.mp3",
+      "start": 30.3,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-frage",
+      "src": "gen-boing.mp3",
+      "anchor": "frage",
+      "offset": 0.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-praxis2",
+      "src": "whoosh-short.mp3",
+      "anchor": "frage",
+      "offset": -0.05,
+      "volume": 0.4
     }
   ],
   "voiceModel": "eleven_v3",
@@ -285,7 +397,7 @@
         "similarity_boost": 0.8,
         "use_speaker_boost": true
       },
-      "tempo": 1.15
+      "tempo": 1.2
     },
     "wz": {
       "name": "Weisheitszahn (frech; Liam)",
@@ -295,7 +407,7 @@
         "similarity_boost": 0.8,
         "use_speaker_boost": true
       },
-      "tempo": 1.15
+      "tempo": 1.2
     },
     "arzt": {
       "name": "Arzt (ruhig, warm; George)",
@@ -305,7 +417,7 @@
         "similarity_boost": 0.85,
         "use_speaker_boost": true
       },
-      "tempo": 1.08
+      "tempo": 1.1
     },
     "pat": {
       "name": "Patient (dicke Backen, nuschelt; Callum)",
@@ -315,7 +427,7 @@
         "similarity_boost": 0.8,
         "use_speaker_boost": true
       },
-      "tempo": 1.05
+      "tempo": 1.08
     }
   },
   "genSfx": [
@@ -338,6 +450,27 @@
       "id": "boing",
       "prompt": "comedic cartoon boing wobble, rubbery",
       "duration": 1.0
+    },
+    {
+      "id": "fart",
+      "prompt": "short funny cartoon fart sound",
+      "duration": 0.8
+    },
+    {
+      "id": "squeak",
+      "prompt": "short cartoon rubber squeak, comedic",
+      "duration": 0.5
+    },
+    {
+      "id": "ding",
+      "prompt": "bright sparkle ding, clean shiny chime",
+      "duration": 0.8
+    },
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
     }
-  ]
+  ],
+  "order": ["kiefer", "spaeter", "nachher", "op", "frage", "praxis", "patient"]
 }

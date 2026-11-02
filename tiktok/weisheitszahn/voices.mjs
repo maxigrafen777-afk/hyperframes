@@ -100,6 +100,10 @@ for (const line of script.lines) {
   const r = raw[line.id];
   if (!voices[line.speaker] || !r) continue;
   const k = voices[line.speaker].tempo ?? 1;
+  // Stille vor dem ersten Wort abschneiden (schnelles Hin und Her wie in den
+  // Vorbildern), außer der Satz beginnt mit einem hörbaren Laut ([laughs] …).
+  const audible = /^\s*\[(laughs|sighs|giggles|gasps|chuckles|screams)\]/i.test(line.text);
+  const cut = audible ? 0 : Math.max(0, +(r.words[0].start - 0.06).toFixed(3));
   const out = here(`./assets/vo/${line.id}.mp3`).pathname;
   execFileSync("ffmpeg", [
     "-y",
@@ -108,7 +112,7 @@ for (const line of script.lines) {
     "-i",
     here(`./assets/vo/raw/${line.id}.mp3`).pathname,
     "-filter:a",
-    `atempo=${k}`,
+    `atrim=start=${cut},asetpts=PTS-STARTPTS,atempo=${k}`,
     "-b:a",
     "160k",
     out,
@@ -116,8 +120,8 @@ for (const line of script.lines) {
   const fileDur = probe(out);
   const words = r.words.map((w) => ({
     text: w.text,
-    start: +(w.start / k).toFixed(3),
-    end: +(w.end / k).toFixed(3),
+    start: +((w.start - cut) / k).toFixed(3),
+    end: +((w.end - cut) / k).toFixed(3),
   }));
   timings[line.id] = {
     duration: +Math.min(fileDur, words.at(-1).end + 0.15).toFixed(3),

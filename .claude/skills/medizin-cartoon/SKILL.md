@@ -49,14 +49,30 @@ Betäubung (Spritze) → Schnitt → **Zahnfleisch sichtbar aufklappen** (Lappen
 6. **Stimme (ElevenLabs)**: Stimmen-Ids und Einstellungen pro Sprecher stehen in `script.json` unter `voices` (Opfer höher und gestresst, Verursacher frech, Arzt ruhig). `ELEVENLABS_API_KEY=… node voices.mjs` erzeugt `assets/vo/<zeile>.mp3` und `assets/vo/timings.json` mit Wortzeiten aus dem Alignment (`/with-timestamps`); zu lange Takes werden einmal schneller nachgesprochen. `node build.mjs` übernimmt danach die echte Länge als Zeilenende, setzt die Untertitel auf die echten Wortzeiten und legt die Audio-Clips an. Einzelne Zeilen neu: `node voices.mjs l3 l7`. Der Key braucht die Berechtigung „Text to Speech“.
 7. Rendern: `render -q delivery -o renders/<thema>_vN.mp4`.
 
-## Retention-Regeln (TikTok)
+## Erkenntnisse aus den Vorbildern (Analyse von 3 Videos mit Millionen Aufrufen)
 
-- **Frame 0 ist das Thumbnail im Feed:** Hook-Titel oben (y ≈ 210–500, 3 Zeilen, Schlüsselwort gelb `#FFE14D`), ab dem ersten Frame voll lesbar, nie hereinskaliert. Dazu Kamera-Punch (1,16 → 1) mit Wackeln, tiefer Boom, erster Satz geschrien.
-- **Betonung:** Wörter, die im Skript GROSS stehen, werden gelbe, größere Untertitel und bekommen einen kurzen Kamera-Punch. Sparsam einsetzen, 1 pro Zeile höchstens.
-- **Dramatik im Eingriff:** langsamer Zoom auf den Höhepunkt (Zahn teilen), Wackeln und Impact beim Ziehen, Riser vor der Zeitsprung-Karte.
-- **Schluss-Gag + Kommentar-Frage:** Nach dem Arzt kommt der Patient mit Folge-Symptom (z. B. Hamsterbacken mit Kühlpack), nuschelt eine Frage, der Arzt antwortet aus dem Off korrekt (z. B. „Heute nur was Weiches. Und gut kühlen.“). Dann eine Frage an die Zuschauer einblenden („WIE DICK WAREN DEINE BACKEN?“ + „Schreib's in die Kommentare ↓“), mindestens 2,5 s stehen lassen.
-- **Länge:** knapp über 60 s ist okay (zählt für das Creator-Rewards-Programm); die Streitszene aber unter ~13 s halten.
-- **Stimmen:** `eleven_v3` mit Tags (`[shouting]`, `[laughs]`, `[slurring]`, `[panicked]`, `[sighs]`, `[mumbling]`); v3 spricht langsam, daher `tempo` pro Sprecher (1,05–1,15) über `node voices.mjs --retime` ohne neue Credits. Soundeffekte über `node sfx-gen.mjs` (`genSfx` in `script.json`). Musik-API braucht einen Bezahl-Tarif.
+Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, Pegel):
+
+- **Länge 62 s** (+ TikTok-Endscreen). Aufteilung im Weisheitszahn-Vorbild: Streit 0–14 s, Karte 14–15,6 s, weiterer Streit 15–24 s, Eingriff 24–43 s (davon 12 s ganz ohne Sprache, nur SFX), Patient fragt + Arzt erklärt 43–62 s.
+- **Kein Hook-Text** im Original, das erste Bild ist die Szene; nach Whoosh + Boing spricht die erste Figur bei etwa 2 s.
+- **Schnelles Hin und Her:** Sätze 0,5–1,5 s, etwa 2,4 Wörter/s, kaum Pausen zwischen Sprechern.
+- **Figuren mit Motiv und Witz:** Der Verursacher ist sympathisch frech und hat einen Grund („hier unten ist's langweilig, ich will auch kauen“), Pointen wie „Freiheit hat ihren Preis“, ein Furz-Gag. Das Opfer ruft selbst den Arzt („Doc, hol ihn raus!“): Das ist die Überleitung zum Eingriff.
+- **Sichtbare Folge + Payoff:** Der Verursacher richtet Schaden an (Loch im Nachbarzahn), das Opfer zeigt es („Guck, was du gemacht hast!“), im Eingriff wird es versorgt, der Arzt erwähnt es.
+- **Arzt-Szene:** Der Patient stellt zuerst eine Frage („Doc, das war Folter! Was habt ihr da rausgeholt?“), dann erklärt der Arzt 15–20 s ausführlich und korrekt.
+- **Ton ohne Lücken:** keine einzige Stille (< −40 dB) im ganzen Video, laut gemischt (etwa −14 LUFS). SFX auf jeder Aktion (Whoosh, Boing, Squeak, Bohrer, Pop).
+- **Untertitel:** ein Wort, weiß mit dunkler Kontur, mittig unten. Zeichnungen flächig, Praxis als Totale mit Arzt und Patient.
+
+## Umsetzung (Hausregeln, über die Vorbilder hinaus)
+
+- **Frame 0 ist das Thumbnail im Feed:** Hook-Titel oben (y ≈ 210–500, 3 Zeilen, Schlüsselwort gelb `#FFE14D`), ab dem ersten Frame voll lesbar, nie hereinskaliert. Dazu Kamera-Punch (1,16 → 1) mit Wackeln, Whoosh + Boom, erster Satz geschrien.
+- **Betonung:** Wörter, die im Skript GROSS stehen, werden gelbe, größere Untertitel mit kurzem Kamera-Punch. Höchstens 1 pro Zeile.
+- **Mimik aus Tags:** `actLines(scene)` in `build.mjs` leitet das Acting aus den v3-Tags ab (laut = Kneifaugen + Schmerzstern, frech/lachen = Schlafzimmerblick, jammern = Blick nach oben, seufzen = Lider runter; der Zuhörer schaut zum Sprecher).
+- **Dramatik im Eingriff:** langsamer Zoom auf den Höhepunkt (Zahn teilen), Wackeln + Impact beim Ziehen, Riser vor der Karte.
+- **Szenenfolge:** `kiefer → spaeter → nachher → op → frage → praxis → patient` (`order` in `script.json`). Jede Szene hat eigene Autorenzeit und wächst mit ihren Takes; `build.mjs` legt sie nacheinander.
+- **Schluss-Gag + Kommentar-Frage:** Patient mit Folge-Symptom (Hamsterbacken, Kühlpack) fragt nach dem Essen, der Arzt antwortet aus dem Off korrekt, dazu „WIE DICK WAREN DEINE BACKEN?“ + „Schreib's in die Kommentare ↓“, mindestens 2,5 s stehen lassen.
+- **Länge:** 60–80 s ist okay (über 60 s zählt für das Creator-Rewards-Programm); Streit bis zur Karte ≤ 15 s.
+- **Stimmen:** `eleven_v3` mit Tags (`[shouting]`, `[laughs]`, `[whining]`, `[slurring]`, `[panicked]`, `[sighs]`, `[mumbling]`). v3 spricht langsam: `tempo` pro Sprecher (Zähne 1,2, Arzt 1,1, Patient 1,08), und die Stille vor dem ersten Wort wird abgeschnitten (außer bei hörbarem Laut wie `[laughs]`). `node voices.mjs --retime` wendet das ohne neue Credits an.
+- **Ton:** `node sfx-gen.mjs` erzeugt SFX und ein Musikbett (`bed-long.mp3`, Loop mit Überblendungen; Lautstärke 0,17). SFX können an Zeilen hängen (`"line": "k7", "offset": -0.55`). Die ElevenLabs-Musik-API braucht einen Bezahl-Tarif; Sound-Generation reicht für das Bett. Am Ende `loudnorm=I=-14`.
 
 ## Stolperfallen
 
