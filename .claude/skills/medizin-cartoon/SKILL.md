@@ -74,6 +74,20 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - **Stimmen:** `eleven_v3` mit Tags (`[shouting]`, `[laughs]`, `[whining]`, `[slurring]`, `[panicked]`, `[sighs]`, `[mumbling]`). v3 spricht langsam: `tempo` pro Sprecher (Zähne 1,2, Arzt 1,1, Patient 1,08), und die Stille vor dem ersten Wort wird abgeschnitten (außer bei hörbarem Laut wie `[laughs]`). `node voices.mjs --retime` wendet das ohne neue Credits an.
 - **Ton:** `node sfx-gen.mjs` erzeugt SFX und ein Musikbett (`bed-long.mp3`, Loop mit Überblendungen; Lautstärke 0,17). SFX können an Zeilen hängen (`"line": "k7", "offset": -0.55`). Die ElevenLabs-Musik-API braucht einen Bezahl-Tarif; Sound-Generation reicht für das Bett. Am Ende `loudnorm=I=-14`.
 
+## Stimmen-Qualität (gelernt am Zehennagel)
+
+- **Stabilität 0,5** („natural“) für alle Figuren. 0,0 („creative“) verfälscht Wörter („Steht dir“ → „Date dir“, „Puh, nur der Rand“ → „Pfff, nur daran“).
+- **Keine GROSSBUCHSTABEN im Sprechtext:** v3 liest sie als Abkürzung („DOC“ → „Mark“). Betonung für Untertitel und Kamera-Punch steht separat in `"emph": ["Wort"]` pro Zeile. Lieber „Herr Doktor“ statt „Doc“.
+- **Automatische QA:** `qa: { maxTakes: 3, maxWer: 0.1 }` in `script.json`; `voices.mjs` prüft jeden Take per ElevenLabs-Spracherkennung (scribe) gegen den Soll-Text und erzeugt bei Abweichung neu. Am Ende den fertigen Mix noch einmal transkribieren (Ziel ≥ 95 % Übereinstimmung).
+- **Tempo höchstens 1,15** (atempo); 1,2 klingt gepresst. Stille vor dem ersten Wort mit 0,15 s Vorlauf trimmen, sonst fehlen Anlaute (P, St).
+- **Kontrast zwischen den Figuren:** Opfer und Verursacher klar unterscheidbar besetzen (z. B. Opfer weiblich-gestresst: Jessica, Verursacher lässig-frech: Will). Alle 14 getesteten Standardstimmen sprechen bei Stabilität 0,5 korrekt Deutsch; eigene deutsche Stimmen designen geht nur im Bezahl-Tarif.
+
+## Look (gelernt am Zehennagel)
+
+- **Problem sichtbar machen statt sagen:** Streit spielt im engen Schuh (dunkler Innenraum, quetschende Schuhwände bei jedem Drücken, grüne Stinkewolken).
+- **Schuss/Gegenschuss:** `frameTo()` auf das sprechende Gesicht (Opfer k ≈ 1,1, damit die Untertitel frei bleiben; Verursacher k ≈ 1,45, damit das andere Gesicht nicht angeschnitten unten hängt). Rahmen-Ebene (`#@frame`) und Wackel-Ebene (`#@cam`) getrennt.
+- **Eingriff:** eigene Umgebung (grünes OP-Tuch, Lampenlicht), Lichtblitz zum Start, Kamera fährt jede Aktion an, Impact-Blitz beim Herausziehen.
+
 ## Stolperfallen
 
 - Untertitel liegen bei y ≈ 1270: Gesichter in der Körperszene nicht dorthin legen (Zeh-Gesicht bei y 1500, Nagel-Gesicht darüber).

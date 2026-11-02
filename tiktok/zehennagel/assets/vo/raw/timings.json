@@ -1,233 +1,237 @@
 {
   "s1": {
-    "text": "[shouting] Aua! Hör auf, dich in mich reinzubohren!",
-    "fileDuration": 2.586122,
+    "text": "[shouting] Aua! Hör auf zu bohren!",
+    "heard": "Aua, hör auf zu bohren",
+    "wer": 0,
+    "fileDuration": 2.429388,
     "words": [
       {
         "text": "Aua!",
         "start": 0.144,
-        "end": 0.64
+        "end": 0.72
       },
       {
         "text": "Hör",
-        "start": 0.76,
-        "end": 0.96
-      },
-      {
-        "text": "auf,",
-        "start": 1.02,
-        "end": 1.28
-      },
-      {
-        "text": "dich",
-        "start": 1.296,
-        "end": 1.36
-      },
-      {
-        "text": "in",
-        "start": 1.387,
-        "end": 1.44
-      },
-      {
-        "text": "mich",
-        "start": 1.472,
-        "end": 1.6
-      },
-      {
-        "text": "reinzubohren!",
-        "start": 1.664,
-        "end": 2.56
-      }
-    ]
-  },
-  "s2": {
-    "text": "Ich bohr nicht. Ich wachs nur zur Seite!",
-    "fileDuration": 2.690612,
-    "words": [
-      {
-        "text": "Ich",
-        "start": 0,
-        "end": 0.16
-      },
-      {
-        "text": "bohr",
-        "start": 0.24,
-        "end": 0.48
-      },
-      {
-        "text": "nicht.",
-        "start": 0.533,
-        "end": 0.88
-      },
-      {
-        "text": "Ich",
-        "start": 1,
-        "end": 1.36
-      },
-      {
-        "text": "wachs",
-        "start": 1.4,
-        "end": 1.68
-      },
-      {
-        "text": "nur",
-        "start": 1.74,
-        "end": 1.92
-      },
-      {
-        "text": "zur",
-        "start": 1.96,
-        "end": 2.08
-      },
-      {
-        "text": "Seite!",
-        "start": 2.16,
-        "end": 2.64
-      }
-    ]
-  },
-  "s3": {
-    "text": "[angry] Zur Seite?! Da bin ICH!",
-    "fileDuration": 2.272653,
-    "words": [
-      {
-        "text": "Zur",
-        "start": 0.204,
-        "end": 0.24
-      },
-      {
-        "text": "Seite?!",
-        "start": 0.333,
-        "end": 0.88
-      },
-      {
-        "text": "Da",
-        "start": 1.067,
-        "end": 1.44
-      },
-      {
-        "text": "bin",
-        "start": 1.5,
-        "end": 1.68
-      },
-      {
-        "text": "ICH!",
-        "start": 1.8,
-        "end": 2.24
-      }
-    ]
-  },
-  "s4": {
-    "text": "[mischievously] Tja. Hättest halt mehr Platz machen sollen.",
-    "fileDuration": 2.35102,
-    "words": [
-      {
-        "text": "Tja.",
-        "start": 0.474,
-        "end": 0.64
-      },
-      {
-        "text": "Hättest",
-        "start": 0.72,
+        "start": 0.8,
         "end": 1.04
       },
       {
-        "text": "halt",
-        "start": 1.072,
-        "end": 1.2
-      },
-      {
-        "text": "mehr",
-        "start": 1.232,
-        "end": 1.36
-      },
-      {
-        "text": "Platz",
-        "start": 1.413,
-        "end": 1.68
-      },
-      {
-        "text": "machen",
-        "start": 1.714,
-        "end": 1.92
-      },
-      {
-        "text": "sollen.",
-        "start": 1.966,
-        "end": 2.32
-      }
-    ]
-  },
-  "s5": {
-    "text": "[whining] Die SCHUHE sind zu eng!",
-    "fileDuration": 2.272653,
-    "words": [
-      {
-        "text": "Die",
-        "start": 0.21,
-        "end": 0.24
-      },
-      {
-        "text": "SCHUHE",
-        "start": 0.34,
-        "end": 0.96
-      },
-      {
-        "text": "sind",
-        "start": 1.024,
+        "text": "auf",
+        "start": 1.1,
         "end": 1.28
       },
       {
         "text": "zu",
-        "start": 1.36,
+        "start": 1.333,
+        "end": 1.44
+      },
+      {
+        "text": "bohren!",
+        "start": 1.52,
+        "end": 2.4
+      }
+    ]
+  },
+  "s2": {
+    "text": "Ich bohr doch nicht. Ich wachse nur zur Seite!",
+    "heard": "Ich bohr doch nicht. Ich wachse nur zur Seite",
+    "wer": 0,
+    "fileDuration": 3.239184,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.08
+      },
+      {
+        "text": "bohr",
+        "start": 0.16,
+        "end": 0.44
+      },
+      {
+        "text": "doch",
+        "start": 0.464,
+        "end": 0.56
+      },
+      {
+        "text": "nicht.",
+        "start": 0.627,
+        "end": 1.04
+      },
+      {
+        "text": "Ich",
+        "start": 1.18,
+        "end": 1.6
+      },
+      {
+        "text": "wachse",
+        "start": 1.68,
+        "end": 2
+      },
+      {
+        "text": "nur",
+        "start": 2.04,
+        "end": 2.16
+      },
+      {
+        "text": "zur",
+        "start": 2.22,
+        "end": 2.4
+      },
+      {
+        "text": "Seite!",
+        "start": 2.467,
+        "end": 3.2
+      }
+    ]
+  },
+  "s3": {
+    "text": "[angry] Zur Seite?! Da bin ich!",
+    "heard": "Zur Seite? Da bin ich",
+    "wer": 0,
+    "fileDuration": 2.507755,
+    "words": [
+      {
+        "text": "Zur",
+        "start": 0.12,
+        "end": 0.24
+      },
+      {
+        "text": "Seite?!",
+        "start": 0.347,
+        "end": 0.96
+      },
+      {
+        "text": "Da",
+        "start": 1.2,
+        "end": 1.68
+      },
+      {
+        "text": "bin",
+        "start": 1.74,
+        "end": 1.92
+      },
+      {
+        "text": "ich!",
+        "start": 2.02,
+        "end": 2.48
+      }
+    ]
+  },
+  "s4": {
+    "text": "[mischievously] Pech gehabt. Mach halt Platz.",
+    "heard": "Pech gehabt. Mach halt Platz",
+    "wer": 0,
+    "fileDuration": 2.194286,
+    "words": [
+      {
+        "text": "Pech",
+        "start": 0.206,
+        "end": 0.24
+      },
+      {
+        "text": "gehabt.",
+        "start": 0.3,
+        "end": 0.88
+      },
+      {
+        "text": "Mach",
+        "start": 1.008,
         "end": 1.52
       },
       {
+        "text": "halt",
+        "start": 1.552,
+        "end": 1.68
+      },
+      {
+        "text": "Platz.",
+        "start": 1.747,
+        "end": 2.16
+      }
+    ]
+  },
+  "s5": {
+    "text": "[whining] Die Schuhe sind viel zu eng!",
+    "heard": "Die Schuhe sind viel zu eng",
+    "wer": 0,
+    "fileDuration": 3.317551,
+    "words": [
+      {
+        "text": "Die",
+        "start": 0.29,
+        "end": 0.32
+      },
+      {
+        "text": "Schuhe",
+        "start": 0.38,
+        "end": 0.88
+      },
+      {
+        "text": "sind",
+        "start": 0.96,
+        "end": 1.28
+      },
+      {
+        "text": "viel",
+        "start": 1.376,
+        "end": 1.76
+      },
+      {
+        "text": "zu",
+        "start": 1.893,
+        "end": 2.16
+      },
+      {
         "text": "eng!",
-        "start": 1.68,
-        "end": 2.24
+        "start": 2.4,
+        "end": 3.28
       }
     ]
   },
   "s6": {
     "text": "[laughs] Und wer schneidet mich so rund?",
-    "fileDuration": 3.160816,
+    "heard": "[lacht] Und wer schneidet mich so rund?",
+    "wer": 0,
+    "fileDuration": 2.586122,
     "words": [
       {
         "text": "Und",
-        "start": 0.92,
-        "end": 1.52
+        "start": 0.64,
+        "end": 1.12
       },
       {
         "text": "wer",
-        "start": 1.58,
-        "end": 1.76
+        "start": 1.18,
+        "end": 1.36
       },
       {
         "text": "schneidet",
-        "start": 1.8,
-        "end": 2.24
+        "start": 1.4,
+        "end": 1.76
       },
       {
         "text": "mich",
-        "start": 2.288,
-        "end": 2.48
+        "start": 1.792,
+        "end": 1.92
       },
       {
         "text": "so",
-        "start": 2.533,
-        "end": 2.64
+        "start": 1.973,
+        "end": 2.08
       },
       {
         "text": "rund?",
-        "start": 2.72,
-        "end": 3.12
+        "start": 2.144,
+        "end": 2.56
       }
     ]
   },
   "n1": {
-    "text": "[whining] Jetzt pocht's auch noch!",
-    "fileDuration": 2.429388,
+    "text": "[whining] Jetzt pocht es auch noch!",
+    "heard": "Jetzt pocht es auch noch",
+    "wer": 0,
+    "fileDuration": 2.115918,
     "words": [
       {
         "text": "Jetzt",
@@ -235,25 +239,32 @@
         "end": 0.32
       },
       {
-        "text": "pocht's",
+        "text": "pocht",
         "start": 0.427,
         "end": 0.88
       },
       {
+        "text": "es",
+        "start": 0.933,
+        "end": 1.04
+      },
+      {
         "text": "auch",
-        "start": 0.944,
-        "end": 1.2
+        "start": 1.104,
+        "end": 1.36
       },
       {
         "text": "noch!",
-        "start": 1.264,
-        "end": 1.68
+        "start": 1.488,
+        "end": 2.08
       }
     ]
   },
   "n2": {
-    "text": "Guck mal, wie ROT ich bin!",
-    "fileDuration": 1.802449,
+    "text": "Guck mal, wie rot ich bin!",
+    "heard": "Guck mal, wie rot ich bin",
+    "wer": 0,
+    "fileDuration": 1.724082,
     "words": [
       {
         "text": "Guck",
@@ -262,246 +273,284 @@
       },
       {
         "text": "mal,",
-        "start": 0.22,
-        "end": 0.48
+        "start": 0.2,
+        "end": 0.4
       },
       {
         "text": "wie",
-        "start": 0.5,
-        "end": 0.56
+        "start": 0.42,
+        "end": 0.48
       },
       {
-        "text": "ROT",
-        "start": 0.68,
-        "end": 1.04
+        "text": "rot",
+        "start": 0.58,
+        "end": 0.88
       },
       {
         "text": "ich",
-        "start": 1.1,
-        "end": 1.28
+        "start": 0.94,
+        "end": 1.12
       },
       {
         "text": "bin!",
-        "start": 1.36,
-        "end": 1.76
+        "start": 1.2,
+        "end": 1.68
       }
     ]
   },
   "n3": {
-    "text": "[mischievously] Steht dir.",
-    "fileDuration": 1.306122,
+    "text": "[mischievously] Steht dir doch.",
+    "heard": "Steht dir doch",
+    "wer": 0,
+    "fileDuration": 1.959184,
     "words": [
       {
         "text": "Steht",
-        "start": 0.45,
-        "end": 0.64
+        "start": 0.296,
+        "end": 0.4
       },
       {
-        "text": "dir.",
-        "start": 0.76,
-        "end": 1.28
+        "text": "dir",
+        "start": 0.44,
+        "end": 0.56
+      },
+      {
+        "text": "doch.",
+        "start": 0.656,
+        "end": 1.92
       }
     ]
   },
   "n4": {
-    "text": "[shouting] DOC! Hol ihn da raus!",
-    "fileDuration": 2.037551,
+    "text": "[shouting] Herr Doktor! Holen Sie ihn da raus!",
+    "heard": "Herr Doktor, holen Sie ihn da raus!",
+    "wer": 0,
+    "fileDuration": 2.429388,
     "words": [
       {
-        "text": "DOC!",
-        "start": 0.47,
-        "end": 0.76
+        "text": "Herr",
+        "start": 0.134,
+        "end": 0.16
       },
       {
-        "text": "Hol",
-        "start": 0.81,
-        "end": 0.96
+        "text": "Doktor!",
+        "start": 0.24,
+        "end": 0.8
+      },
+      {
+        "text": "Holen",
+        "start": 0.92,
+        "end": 1.36
+      },
+      {
+        "text": "Sie",
+        "start": 1.4,
+        "end": 1.52
       },
       {
         "text": "ihn",
-        "start": 1,
-        "end": 1.12
+        "start": 1.54,
+        "end": 1.6
       },
       {
         "text": "da",
-        "start": 1.173,
-        "end": 1.28
+        "start": 1.653,
+        "end": 1.76
       },
       {
         "text": "raus!",
-        "start": 1.36,
-        "end": 2
+        "start": 1.84,
+        "end": 2.4
       }
     ]
   },
   "n5": {
-    "text": "[nervous] Moment… ganz raus?!",
-    "fileDuration": 3.160816,
+    "text": "[nervous] Moment mal… ganz raus?!",
+    "heard": "Moment mal. Ganz raus?",
+    "wer": 0,
+    "fileDuration": 2.847347,
     "words": [
       {
-        "text": "Moment…",
-        "start": 0.96,
-        "end": 1.28
+        "text": "Moment",
+        "start": 0.464,
+        "end": 0.56
+      },
+      {
+        "text": "mal…",
+        "start": 0.66,
+        "end": 1.04
       },
       {
         "text": "ganz",
-        "start": 1.52,
-        "end": 2.48
+        "start": 1.264,
+        "end": 2.16
       },
       {
         "text": "raus?!",
-        "start": 2.56,
-        "end": 3.12
+        "start": 2.24,
+        "end": 2.8
       }
     ]
   },
   "o1": {
-    "text": "[shouting] AUA! Die SPRITZE!",
-    "fileDuration": 2.429388,
+    "text": "[shouting] Aua! Die Spritze!",
+    "heard": "Aua, die Spritze",
+    "wer": 0,
+    "fileDuration": 2.115918,
     "words": [
       {
-        "text": "AUA!",
+        "text": "Aua!",
         "start": 0.15,
-        "end": 0.8
+        "end": 0.64
       },
       {
         "text": "Die",
-        "start": 0.94,
-        "end": 1.36
+        "start": 0.74,
+        "end": 1.04
       },
       {
-        "text": "SPRITZE!",
-        "start": 1.46,
-        "end": 2.4
+        "text": "Spritze!",
+        "start": 1.12,
+        "end": 2.08
       }
     ]
   },
   "o2": {
     "text": "[slurring] Ich spür… meinen Zeh nicht mehr…",
-    "fileDuration": 3.160816,
+    "heard": "Ich spür meinen Zeh nicht mehr",
+    "wer": 0,
+    "fileDuration": 4.127347,
     "words": [
       {
         "text": "Ich",
-        "start": 0.272,
-        "end": 0.32
+        "start": 0.204,
+        "end": 0.24
       },
       {
         "text": "spür…",
-        "start": 0.427,
-        "end": 1.2
+        "start": 0.373,
+        "end": 1.76
       },
       {
         "text": "meinen",
-        "start": 1.269,
-        "end": 1.68
+        "start": 1.863,
+        "end": 2.48
       },
       {
         "text": "Zeh",
-        "start": 1.88,
-        "end": 2.24
+        "start": 2.6,
+        "end": 2.96
       },
       {
         "text": "nicht",
-        "start": 2.307,
-        "end": 2.64
+        "start": 3.027,
+        "end": 3.36
       },
       {
         "text": "mehr…",
-        "start": 2.704,
-        "end": 3.12
+        "start": 3.44,
+        "end": 4.08
       }
     ]
   },
   "o3": {
     "text": "[panicked] Hey! Warum hebt ihr mich hoch?!",
+    "heard": "Hey, warum hebt ihr mich hoch?",
+    "wer": 0,
     "fileDuration": 2.115918,
     "words": [
       {
         "text": "Hey!",
-        "start": 0.204,
-        "end": 0.32
+        "start": 0.34,
+        "end": 0.48
       },
       {
         "text": "Warum",
-        "start": 0.44,
-        "end": 0.96
+        "start": 0.6,
+        "end": 1.04
       },
       {
         "text": "hebt",
-        "start": 0.992,
-        "end": 1.12
+        "start": 1.088,
+        "end": 1.28
       },
       {
         "text": "ihr",
-        "start": 1.14,
-        "end": 1.2
+        "start": 1.3,
+        "end": 1.36
       },
       {
         "text": "mich",
-        "start": 1.248,
-        "end": 1.44
+        "start": 1.392,
+        "end": 1.52
       },
       {
         "text": "hoch?!",
-        "start": 1.504,
+        "start": 1.6,
         "end": 2.08
       }
     ]
   },
   "o4": {
-    "text": "[screaming] NICHT SCHNEIDEN!",
-    "fileDuration": 1.959184,
+    "text": "[screaming] Nicht schneiden!",
+    "heard": "Nicht schneiden!",
+    "wer": 0,
+    "fileDuration": 1.306122,
     "words": [
       {
-        "text": "NICHT",
-        "start": 0.34,
-        "end": 0.48
+        "text": "Nicht",
+        "start": 0.27,
+        "end": 0.32
       },
       {
-        "text": "SCHNEIDEN!",
-        "start": 0.58,
-        "end": 1.92
+        "text": "schneiden!",
+        "start": 0.38,
+        "end": 1.28
       }
     ]
   },
   "o5": {
-    "text": "[sighs] Puh… nur der Rand.",
-    "fileDuration": 2.690612,
+    "text": "[sighs] Puh. Nur der Rand.",
+    "heard": "[seufzt] Puh. Nur der Rand",
+    "wer": 0,
+    "fileDuration": 3.63102,
     "words": [
       {
-        "text": "Puh…",
-        "start": 0.68,
-        "end": 1.28
+        "text": "Puh.",
+        "start": 0.8,
+        "end": 1.96
       },
       {
-        "text": "nur",
-        "start": 1.44,
-        "end": 1.92
+        "text": "Nur",
+        "start": 2.11,
+        "end": 2.56
       },
       {
         "text": "der",
-        "start": 1.98,
-        "end": 2.16
+        "start": 2.66,
+        "end": 2.96
       },
       {
         "text": "Rand.",
-        "start": 2.224,
-        "end": 2.64
+        "start": 3.072,
+        "end": 3.6
       }
     ]
   },
   "o6": {
-    "text": "[panicked] Was macht ihr an meiner WURZEL?!",
-    "fileDuration": 2.586122,
+    "text": "[panicked] Was macht ihr an meiner Wurzel?!",
+    "heard": "Was macht ihr an meiner Wurzel?",
+    "wer": 0,
+    "fileDuration": 1.802449,
     "words": [
       {
         "text": "Was",
-        "start": 0.275,
-        "end": 0.32
+        "start": 0.12,
+        "end": 0.24
       },
       {
         "text": "macht",
-        "start": 0.36,
+        "start": 0.293,
         "end": 0.56
       },
       {
@@ -511,75 +560,94 @@
       },
       {
         "text": "an",
-        "start": 0.773,
-        "end": 0.88
+        "start": 0.747,
+        "end": 0.8
       },
       {
         "text": "meiner",
-        "start": 0.914,
-        "end": 1.12
+        "start": 0.834,
+        "end": 1.04
       },
       {
-        "text": "WURZEL?!",
-        "start": 1.2,
-        "end": 2.56
+        "text": "Wurzel?!",
+        "start": 1.08,
+        "end": 1.76
       }
     ]
   },
   "o7": {
-    "text": "[sighs] Endlich… Platz.",
-    "fileDuration": 2.35102,
+    "text": "[sighs] Endlich hab ich Platz.",
+    "heard": "[seufzt] Endlich hab ich Platz",
+    "wer": 0,
+    "fileDuration": 2.272653,
     "words": [
       {
-        "text": "Endlich…",
-        "start": 0.8,
-        "end": 1.6
+        "text": "Endlich",
+        "start": 0.74,
+        "end": 1.36
+      },
+      {
+        "text": "hab",
+        "start": 1.4,
+        "end": 1.52
+      },
+      {
+        "text": "ich",
+        "start": 1.56,
+        "end": 1.68
       },
       {
         "text": "Platz.",
-        "start": 1.693,
-        "end": 2.32
+        "start": 1.76,
+        "end": 2.24
       }
     ]
   },
   "q1": {
-    "text": "[nervous] Doc, war das jetzt der ganze Nagel?",
-    "fileDuration": 4.04898,
+    "text": "[nervous] Herr Doktor, war das jetzt der ganze Nagel?",
+    "heard": "Herr Doktor, war das jetzt der ganze Nagel?",
+    "wer": 0,
+    "fileDuration": 3.082449,
     "words": [
       {
-        "text": "Doc,",
-        "start": 0.535,
-        "end": 1.12
+        "text": "Herr",
+        "start": 0.202,
+        "end": 0.24
+      },
+      {
+        "text": "Doktor,",
+        "start": 0.32,
+        "end": 0.8
       },
       {
         "text": "war",
-        "start": 1.2,
-        "end": 1.44
+        "start": 0.98,
+        "end": 1.52
       },
       {
         "text": "das",
-        "start": 1.5,
-        "end": 1.68
+        "start": 1.58,
+        "end": 1.76
       },
       {
         "text": "jetzt",
-        "start": 1.733,
+        "start": 1.8,
         "end": 2
       },
       {
         "text": "der",
-        "start": 2.06,
-        "end": 2.24
+        "start": 2.04,
+        "end": 2.16
       },
       {
         "text": "ganze",
-        "start": 2.347,
-        "end": 2.88
+        "start": 2.227,
+        "end": 2.56
       },
       {
         "text": "Nagel?",
-        "start": 2.98,
-        "end": 4.16
+        "start": 2.64,
+        "end": 3.04
       }
     ]
   },
@@ -813,58 +881,60 @@
     ]
   },
   "e2": {
-    "text": "[warmly] Erst mal nur offene Schuhe. Und Nägel immer GERADE schneiden.",
-    "fileDuration": 5.250612,
+    "text": "[warmly] Erst mal nur offene Schuhe. Und Nägel immer gerade schneiden.",
+    "heard": "Erst mal nur offene Schuhe und Nägel immer gerade schneiden",
+    "wer": 0,
+    "fileDuration": 3.787755,
     "words": [
       {
         "text": "Erst",
         "start": 0.139,
-        "end": 0.32
+        "end": 0.24
       },
       {
         "text": "mal",
-        "start": 0.38,
-        "end": 0.56
+        "start": 0.28,
+        "end": 0.4
       },
       {
         "text": "nur",
-        "start": 0.62,
-        "end": 0.8
+        "start": 0.48,
+        "end": 0.72
       },
       {
         "text": "offene",
-        "start": 0.86,
-        "end": 1.2
+        "start": 0.76,
+        "end": 1.04
       },
       {
         "text": "Schuhe.",
-        "start": 1.26,
-        "end": 2.12
+        "start": 1.1,
+        "end": 1.52
       },
       {
         "text": "Und",
-        "start": 2.23,
-        "end": 2.56
+        "start": 1.66,
+        "end": 2.08
       },
       {
         "text": "Nägel",
-        "start": 2.667,
-        "end": 3.04
+        "start": 2.16,
+        "end": 2.48
       },
       {
         "text": "immer",
-        "start": 3.093,
-        "end": 3.36
+        "start": 2.533,
+        "end": 2.8
       },
       {
-        "text": "GERADE",
-        "start": 3.4,
-        "end": 3.84
+        "text": "gerade",
+        "start": 2.857,
+        "end": 3.2
       },
       {
         "text": "schneiden.",
-        "start": 3.88,
-        "end": 4.4
+        "start": 3.24,
+        "end": 3.76
       }
     ]
   }

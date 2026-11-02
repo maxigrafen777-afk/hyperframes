@@ -80,18 +80,69 @@ async function tts(line) {
   return res.json();
 }
 
+// Qualitätskontrolle: jeder Take wird per Spracherkennung (scribe) gegen den
+// Soll-Text geprüft (Wortfehlerrate ohne Tags/Satzzeichen). Ist sie über
+// qa.maxWer, wird neu erzeugt (bis qa.maxTakes); der beste Take gewinnt.
+const QA = script.qa || { maxTakes: 1, maxWer: 1 };
+const normWords = (s) =>
+  s
+    .replace(/\[[^\]]*\]/g, " ")
+    .toLowerCase()
+    .replace(/[^\p{L}\s]/gu, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+function wer(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(
+        d[i - 1][j] + 1,
+        d[i][j - 1] + 1,
+        d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1),
+      );
+  return d[a.length][b.length] / Math.max(1, a.length);
+}
+async function stt(buf) {
+  const fd = new FormData();
+  fd.append("model_id", "scribe_v1");
+  fd.append("language_code", "deu");
+  fd.append("file", new Blob([buf]), "take.mp3");
+  const res = await fetch("https://api.elevenlabs.io/v1/speech-to-text", {
+    method: "POST",
+    headers: { "xi-api-key": key },
+    body: fd,
+  });
+  if (!res.ok) throw new Error(`STT HTTP ${res.status} ${await res.text()}`);
+  return (await res.json()).text || "";
+}
 if (!retimeOnly) {
   for (const line of script.lines) {
     if (!voices[line.speaker] || (only.length && !only.includes(line.id))) continue;
-    const data = await tts(line);
+    let best = null;
+    for (let take = 1; take <= QA.maxTakes; take++) {
+      const data = await tts(line);
+      const buf = Buffer.from(data.audio_base64, "base64");
+      const heard = QA.maxTakes > 1 ? await stt(buf) : line.text;
+      const score = wer(normWords(line.text), normWords(heard));
+      console.log(`  ${line.id} Take ${take}: WER ${score.toFixed(2)}  "${heard}"`);
+      if (!best || score < best.score) best = { data, buf, score, heard };
+      if (score <= QA.maxWer) break;
+    }
     const file = here(`./assets/vo/raw/${line.id}.mp3`).pathname;
-    writeFileSync(file, Buffer.from(data.audio_base64, "base64"));
-    raw[line.id] = { text: line.text, fileDuration: probe(file), words: toWords(data.alignment) };
+    writeFileSync(file, best.buf);
+    raw[line.id] = {
+      text: line.text,
+      heard: best.heard,
+      wer: +best.score.toFixed(2),
+      fileDuration: probe(file),
+      words: toWords(best.data.alignment),
+    };
     console.log(
-      `${line.id} ${line.speaker} roh ${raw[line.id].fileDuration.toFixed(2)}s  ${raw[line.id].words.map((w) => w.text).join(" ")}`,
+      `${line.id} ${line.speaker} roh ${raw[line.id].fileDuration.toFixed(2)}s  WER ${best.score.toFixed(2)}`,
     );
+    writeFileSync(rawFile, JSON.stringify(raw, null, 2));
   }
-  writeFileSync(rawFile, JSON.stringify(raw, null, 2));
 }
 
 // Tempo pass: raw -> final clips and timings.
@@ -103,7 +154,7 @@ for (const line of script.lines) {
   // Stille vor dem ersten Wort abschneiden (schnelles Hin und Her wie in den
   // Vorbildern), außer der Satz beginnt mit einem hörbaren Laut ([laughs] …).
   const audible = /^\s*\[(laughs|sighs|giggles|gasps|chuckles|screams)\]/i.test(line.text);
-  const cut = audible ? 0 : Math.max(0, +(r.words[0].start - 0.06).toFixed(3));
+  const cut = audible ? 0 : Math.max(0, +(r.words[0].start - 0.15).toFixed(3));
   const out = here(`./assets/vo/${line.id}.mp3`).pathname;
   execFileSync("ffmpeg", [
     "-y",

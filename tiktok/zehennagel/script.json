@@ -24,35 +24,38 @@
       "speaker": "zeh",
       "start": 0.35,
       "end": 1.6,
-      "text": "[shouting] Aua! Hör auf, dich in mich reinzubohren!"
+      "text": "[shouting] Aua! Hör auf zu bohren!",
+      "emph": ["Aua"]
     },
     {
       "id": "s2",
       "speaker": "nagel",
       "start": 1.8,
       "end": 2.8,
-      "text": "Ich bohr nicht. Ich wachs nur zur Seite!"
+      "text": "Ich bohr doch nicht. Ich wachse nur zur Seite!"
     },
     {
       "id": "s3",
       "speaker": "zeh",
       "start": 3.2,
       "end": 4.2,
-      "text": "[angry] Zur Seite?! Da bin ICH!"
+      "text": "[angry] Zur Seite?! Da bin ich!",
+      "emph": ["ich"]
     },
     {
       "id": "s4",
       "speaker": "nagel",
       "start": 4.4,
       "end": 5.4,
-      "text": "[mischievously] Tja. Hättest halt mehr Platz machen sollen."
+      "text": "[mischievously] Pech gehabt. Mach halt Platz."
     },
     {
       "id": "s5",
       "speaker": "zeh",
       "start": 5.8,
       "end": 6.8,
-      "text": "[whining] Die SCHUHE sind zu eng!"
+      "text": "[whining] Die Schuhe sind viel zu eng!",
+      "emph": ["Schuhe"]
     },
     {
       "id": "s6",
@@ -73,42 +76,45 @@
       "speaker": "zeh",
       "start": 20.3,
       "end": 21.3,
-      "text": "[whining] Jetzt pocht's auch noch!"
+      "text": "[whining] Jetzt pocht es auch noch!"
     },
     {
       "id": "n2",
       "speaker": "zeh",
       "start": 21.4,
       "end": 22.4,
-      "text": "Guck mal, wie ROT ich bin!"
+      "text": "Guck mal, wie rot ich bin!",
+      "emph": ["rot"]
     },
     {
       "id": "n3",
       "speaker": "nagel",
       "start": 22.6,
       "end": 23.6,
-      "text": "[mischievously] Steht dir."
+      "text": "[mischievously] Steht dir doch."
     },
     {
       "id": "n4",
       "speaker": "zeh",
       "start": 23.4,
       "end": 24.4,
-      "text": "[shouting] DOC! Hol ihn da raus!"
+      "text": "[shouting] Herr Doktor! Holen Sie ihn da raus!",
+      "emph": ["Doktor"]
     },
     {
       "id": "n5",
       "speaker": "nagel",
       "start": 24.6,
       "end": 25.6,
-      "text": "[nervous] Moment… ganz raus?!"
+      "text": "[nervous] Moment mal… ganz raus?!"
     },
     {
       "id": "o1",
       "speaker": "zeh",
       "start": 30.8,
       "end": 31.8,
-      "text": "[shouting] AUA! Die SPRITZE!"
+      "text": "[shouting] Aua! Die Spritze!",
+      "emph": ["Spritze"]
     },
     {
       "id": "o2",
@@ -129,35 +135,37 @@
       "speaker": "nagel",
       "start": 37.6,
       "end": 38.6,
-      "text": "[screaming] NICHT SCHNEIDEN!"
+      "text": "[screaming] Nicht schneiden!",
+      "emph": ["schneiden"]
     },
     {
       "id": "o5",
       "speaker": "nagel",
       "start": 40.6,
       "end": 41.6,
-      "text": "[sighs] Puh… nur der Rand."
+      "text": "[sighs] Puh. Nur der Rand."
     },
     {
       "id": "o6",
       "speaker": "nagel",
       "start": 42.6,
       "end": 43.6,
-      "text": "[panicked] Was macht ihr an meiner WURZEL?!"
+      "text": "[panicked] Was macht ihr an meiner Wurzel?!",
+      "emph": ["Wurzel"]
     },
     {
       "id": "o7",
       "speaker": "zeh",
       "start": 45.8,
       "end": 46.8,
-      "text": "[sighs] Endlich… Platz."
+      "text": "[sighs] Endlich hab ich Platz."
     },
     {
       "id": "q1",
       "speaker": "pat",
       "start": 50.3,
       "end": 51.3,
-      "text": "[nervous] Doc, war das jetzt der ganze Nagel?"
+      "text": "[nervous] Herr Doktor, war das jetzt der ganze Nagel?"
     },
     {
       "id": "d1",
@@ -192,29 +200,30 @@
       "speaker": "arzt",
       "start": 66.8,
       "end": 67.8,
-      "text": "[warmly] Erst mal nur offene Schuhe. Und Nägel immer GERADE schneiden."
+      "text": "[warmly] Erst mal nur offene Schuhe. Und Nägel immer gerade schneiden.",
+      "emph": ["gerade"]
     }
   ],
   "voices": {
     "zeh": {
-      "name": "Zeh (Opfer, gestresst; Charlie)",
-      "voice_id": "IKne3meq5aSn9XLyUdCD",
+      "name": "Zeh (Opfer, gestresst; Jessica)",
+      "voice_id": "cgSgspJ2msm6clMCkdW9",
       "settings": {
-        "stability": 0.0,
+        "stability": 0.5,
         "similarity_boost": 0.8,
         "use_speaker_boost": true
       },
-      "tempo": 1.2
+      "tempo": 1.15
     },
     "nagel": {
-      "name": "Nagel (frech; Liam)",
-      "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+      "name": "Nagel (lässig-frech; Will)",
+      "voice_id": "bIHbv24MWmeRgasZH58o",
       "settings": {
-        "stability": 0.0,
+        "stability": 0.5,
         "similarity_boost": 0.8,
         "use_speaker_boost": true
       },
-      "tempo": 1.2
+      "tempo": 1.15
     },
     "arzt": {
       "name": "Arzt (ruhig, warm; George)",
@@ -224,17 +233,17 @@
         "similarity_boost": 0.85,
         "use_speaker_boost": true
       },
-      "tempo": 1.12
+      "tempo": 1.08
     },
     "pat": {
       "name": "Patient (Callum)",
       "voice_id": "N2lVS1w4EtoT3dr4eOWO",
       "settings": {
-        "stability": 0.0,
+        "stability": 0.5,
         "similarity_boost": 0.8,
         "use_speaker_boost": true
       },
-      "tempo": 1.1
+      "tempo": 1.08
     }
   },
   "genSfx": [
@@ -438,6 +447,17 @@
       "anchor": "patient",
       "offset": 0.0,
       "volume": 0.5
+    },
+    {
+      "id": "sfx-light",
+      "src": "gen-boom.mp3",
+      "anchor": "op",
+      "offset": 0,
+      "volume": 0.35
     }
-  ]
+  ],
+  "qa": {
+    "maxTakes": 3,
+    "maxWer": 0.1
+  }
 }

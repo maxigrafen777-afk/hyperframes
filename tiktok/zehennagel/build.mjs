@@ -69,16 +69,17 @@ for (const id of ORDER) {
 const R = (t, scene = sceneOf0(t)) => +(t + SHIFT[scene]).toFixed(3);
 const RL = (l) => R(l.start, LINE_SCENE[l.id]);
 const DUR = +realT.toFixed(2);
+const HOOK_END = 3.3;
 // Betonte Wörter (im Skript GROSS geschrieben) -> gelbe Untertitel + Kamera-Punch.
-const isEmph = (w) => {
-  const c = w.replace(/[^\p{L}]/gu, "");
-  return c.length >= 2 && c === c.toUpperCase();
-};
+// Betonte Wörter stehen pro Zeile in "emph" (der Sprechtext bleibt normal
+// geschrieben, sonst liest v3 GROSSBUCHSTABEN als Abkürzung).
+const bare = (w) => w.toLowerCase().replace(/[^\p{L}]/gu, "");
+const isEmphIn = (l, w) => (l.emph || []).some((e) => bare(e) === bare(w));
 const emphTimes = (scene) =>
   lines
     .filter((l) => LINE_SCENE[l.id] === scene && VO[l.id])
     .flatMap((l) =>
-      VO[l.id].words.filter((w) => isEmph(w.text)).map((w) => +(l.start + w.start).toFixed(3)),
+      VO[l.id].words.filter((w) => isEmphIn(l, w.text)).map((w) => +(l.start + w.start).toFixed(3)),
     );
 
 const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
@@ -89,7 +90,10 @@ const VICTIM = "zeh";
 const CAUSER = "nagel";
 // Blickrichtung des Zuhörers zum Sprecher (Zeh-Gesicht unten, Nagel-Gesicht oben).
 const LOOK_AT = { [VICTIM]: "0, -18", [CAUSER]: "0, 16" };
-function actLines(scene) {
+// Schuss/Gegenschuss: Kamera auf das Gesicht, das spricht (laut = schneller Snap,
+// Opfer schreit = halbnah mit Schmerzstelle).
+const FACE = { [VICTIM]: [540, 1500, 1.1], [CAUSER]: [520, 800, 1.45] };
+function actLines(scene, { frames = true, from = 0 } = {}) {
   return lines
     .filter(
       (l) =>
@@ -109,6 +113,10 @@ function actLines(scene) {
             ? "wavy"
             : "smirk";
       let js = `look("${other}", ${LOOK_AT[l.speaker === VICTIM ? CAUSER : VICTIM]}, ${+(l.start - 0.1).toFixed(2)});`;
+      if (frames && l.start >= from) {
+        const [fx, fy, fk] = loud && l.speaker === VICTIM ? [600, 1150, 1.12] : FACE[l.speaker];
+        js += `frameTo(${fx}, ${fy}, ${fk}, ${+(l.start - 0.12).toFixed(2)}, ${loud ? 0.2 : 0.4});`;
+      }
       if (loud && l.speaker === VICTIM)
         js += `squeeze("@${VICTIM}", true, ${l.start}); squeeze("@${VICTIM}", false, ${+(l.start + 0.55).toFixed(2)});
       tl.to("#@pain", { scale: 1.35, duration: 0.08 }, ${l.start}); tl.to("#@pain", { scale: 1, duration: 0.3, ease: "back.out(3)" }, ${+(l.start + 0.1).toFixed(2)});`;
@@ -226,18 +234,39 @@ const NAIL =
 const CUT_X = 690;
 const FOLD =
   "M 724 596 C 800 636 852 748 856 880 C 860 994 818 1062 752 1056 C 772 992 770 900 756 820 C 746 740 732 660 724 596 Z";
-const tiles = (() => {
-  let s = "";
-  for (let x = -60; x < W + 200; x += 220)
-    s += `<path d="M ${x} 0 L ${x} ${H}" stroke="${TZ.tile}" stroke-width="8"/>`;
-  for (let y = 80; y < H; y += 220)
-    s += `<path d="M 0 ${y} L ${W} ${y}" stroke="${TZ.tile}" stroke-width="8"/>`;
-  return s;
-})();
-const toe = (p) => `
-<svg id="${p}cam" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-  <rect x="-200" y="-200" width="${W + 400}" height="${H + 400}" fill="${TZ.bg}"/>
-  ${tiles}
+// Umgebung: "shoe" = im engen Sneaker (Streit), "op" = OP-Tuch mit Lampe.
+const shoeBack = (p) => `
+  <defs><radialGradient id="${p}shoe-g" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#3B3256"/><stop offset="1" stop-color="#120E1C"/></radialGradient></defs>
+  <rect x="-400" y="-400" width="${W + 800}" height="${H + 900}" fill="url(#${p}shoe-g)"/>
+  <path d="M -400 -400 L ${W + 400} -400 L ${W + 400} 250 C 800 380 280 380 -400 250 Z" fill="#4A3D69" ${S()}/>
+  <path d="M -40 230 C 300 340 780 340 1120 230" fill="none" stroke="#9A8CC8" stroke-width="6" stroke-dasharray="18 14"/>`;
+const shoeFront = (p) => `
+  <g id="${p}wallL"><path d="M -400 -100 L 250 -100 C 220 500 214 1200 236 2600 L -400 2600 Z" fill="#54467A" ${S()}/>
+    <path d="M 205 160 C 180 700 176 1300 196 2300" fill="none" stroke="#9A8CC8" stroke-width="6" stroke-dasharray="18 14"/>
+    <path d="M 60 300 L 120 300 M 60 700 L 120 700 M 60 1100 L 120 1100 M 60 1500 L 120 1500" stroke="#3A3054" stroke-width="14" stroke-linecap="round"/></g>
+  <g id="${p}wallR"><path d="M ${W + 400} -100 L 930 -100 C 958 500 964 1200 944 2600 L ${W + 400} 2600 Z" fill="#54467A" ${S()}/>
+    <path d="M 975 160 C 1000 700 1004 1300 984 2300" fill="none" stroke="#9A8CC8" stroke-width="6" stroke-dasharray="18 14"/></g>
+  ${[
+    [430, 470],
+    [560, 420],
+    [690, 470],
+  ]
+    .map(
+      ([x, y], i) =>
+        `<path id="${p}stink${i}" opacity="0" d="M ${x} ${y} q -22 -30 0 -60 t 0 -60 t 0 -60" fill="none" stroke="#9BD36A" stroke-width="12" stroke-linecap="round"/>`,
+    )
+    .join("")}
+  <rect x="-400" y="-400" width="${W + 800}" height="${H + 900}" fill="url(#${p}vig)" pointer-events="none"/>
+  <defs><radialGradient id="${p}vig" cx="50%" cy="50%" r="60%"><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></radialGradient></defs>`;
+const opBack = (p) => `
+  <rect x="-400" y="-400" width="${W + 800}" height="${H + 900}" fill="#4C9883"/>
+  ${[-200, 120, 440, 760, 1080].map((x) => `<path d="M ${x} -400 C ${x + 60} 600 ${x - 40} 1400 ${x + 30} 2600" fill="none" stroke="#3F806E" stroke-width="18"/>`).join("")}
+  <defs><radialGradient id="${p}lamp" cx="50%" cy="38%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+  <rect x="-400" y="-400" width="${W + 800}" height="${H + 900}" fill="url(#${p}lamp)"/>`;
+const toe = (p, env = "shoe") => `
+<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+ <g id="${p}frame"><g id="${p}cam">
+  ${env === "shoe" ? shoeBack(p) : opBack(p)}
   <path d="${TOE2}" fill="${TZ.skin}" ${S()}/>
   <path d="M 920 1060 C 960 1040 1010 1040 1050 1056 C 1040 1100 940 1110 920 1060 Z" fill="${TZ.nail}" ${S(4)}/>
   <g id="${p}zeh-wob">
@@ -281,17 +310,33 @@ const toe = (p) => `
         .join("")}
     </g>
   </g>
+  ${env === "shoe" ? shoeFront(p) : ""}
   <g id="${p}syr-pos">${syringe(p + "syr")}</g>
   <g id="${p}elev-pos">${elevator(p + "elev")}</g>
   <g id="${p}sci-pos">${scissors(p + "sci")}</g>
   <g id="${p}forc-pos">${forceps(p + "forc")}</g>
   <g id="${p}swab-pos">${swab(p + "swab")}</g>
+ </g></g>
+ <rect id="${p}flash" x="0" y="0" width="${W}" height="${H}" fill="#fff" opacity="0"/>
 </svg>`;
 
 const TOE_INIT = `
     initChar("@zeh", 54, 0.3);
     initChar("@nagel", 42, 0.4);
-    gsap.set("#@cam", { transformOrigin: "55% 45%" });
+    gsap.set("#@cam", { svgOrigin: "540 960" });
+    gsap.set("#@frame", { svgOrigin: "0 0" });
+    const frameTo = (px, py, k, t, d = 0.3, ease = "power3.inOut") => {
+      const x = Math.min(0, Math.max(${W} - k * ${W}, 540 - k * px));
+      const y = Math.min(0, Math.max(${H} - k * ${H}, 960 - k * py));
+      tl.to("#@frame", { x, y, scale: k, duration: d, ease }, t);
+    };
+    const stink = (a, b) => {
+      for (let t = a, i = 0; t < b - 0.8; t += 0.55, i++) {
+        const el = "#@stink" + (i % 3);
+        tl.fromTo(el, { y: 20, opacity: 0 }, { y: -40, opacity: 0.9, duration: 0.6, ease: "sine.out", immediateRender: false }, t);
+        tl.to(el, { y: -110, opacity: 0, duration: 0.7, ease: "sine.in" }, t + 0.6);
+      }
+    };
     gsap.set("#@pain", { scale: 0, svgOrigin: "0 0" });
     gsap.set("#@fold", { svgOrigin: "752 830" });
     gsap.set("#@inflam", { svgOrigin: "790 840" });
@@ -306,6 +351,13 @@ const TOE_INIT = `
     const away = (k, t, d = 0.4) => { const [x, y, r] = OFF[k]; tl.to("#@" + k + "-pos", { x, y, rotation: r, duration: d, ease: "power3.in" }, t); };
     // Nagel drückt in den Wall: Nagel ruckt nach rechts, Wall quetscht, Schmerz pulsiert.
     const press = (t) => {
+      if (document.querySelector("#@wallL")) {
+        tl.to("#@wallL", { x: 26, duration: 0.14, ease: "power2.out" }, t);
+        tl.to("#@wallR", { x: -26, duration: 0.14, ease: "power2.out" }, t);
+        tl.to(["#@wallL", "#@wallR"], { x: 0, duration: 0.45, ease: "elastic.out(1,0.5)" }, t + 0.16);
+        tl.to("#@zeh-wob", { scaleX: 0.97, duration: 0.14, ease: "power2.out" }, t);
+        tl.to("#@zeh-wob", { scaleX: 1, duration: 0.45, ease: "elastic.out(1,0.5)" }, t + 0.16);
+      }
       tl.to("#@nailall", { x: 9, duration: 0.14, ease: "power2.out" }, t);
       tl.to("#@nailall", { x: 0, duration: 0.35, ease: "power2.inOut" }, t + 0.16);
       tl.to("#@fold", { scaleX: 1.07, duration: 0.12, ease: "power2.out" }, t + 0.04);
@@ -339,7 +391,8 @@ const streitJs = `${HELPERS}${TOE_INIT}
     look("@zeh", 0, -18, 0, 0.01); look("@nagel", 0, 16, 0, 0.01);
     tl.set("#@pain", { scale: 0.9 }, 0); tl.set("#@inflam", { opacity: 0.2 }, 0);
     ${JSON.stringify(Array.from({ length: Math.floor((SC.streit[1] - 0.6) / 1.3) + 1 }, (_, i) => +(0.1 + i * 1.3).toFixed(2)))}.forEach(press);
-    ${actLines("streit")}
+    ${actLines("streit", { from: HOOK_END - 0.3 })}
+    stink(0.4, ${SC.streit[1]});
     ${blinks("streit", 0, SC.streit[1])}
 `;
 
@@ -355,7 +408,9 @@ const nachherJs = `${HELPERS}${TOE_INIT}
     ${JSON.stringify(emphTimes("nachher"))}.forEach((t) => { punch("#@cam", t); shake("#@cam", t, 0.25, 7); });
     throb(N0 + 0.2, ${SC.nachher[1]});
     ${actLines("nachher")}
-    look("@zeh", 18, -12, ${L.n2[0] + 0.2});
+    stink(N0 + 0.3, ${SC.nachher[1]});
+    // "Guck mal, wie rot": Kamera fährt auf die Entzündung.
+    look("@zeh", 18, -12, ${L.n2[0] + 0.2}); frameTo(800, 860, 1.45, ${L.n2[0] + 0.45}, 0.35);
     look("@zeh", 0, -2, ${L.n4[0]}); lids("@zeh", 0, ${L.n4[0]});
     lids("@nagel", 0, ${L.n5[0]}, 0.08); look("@nagel", 0, 0, ${L.n5[0]}); face("@nagel", "open", ${L.n5[1]});
     ${blinks("nachher", SC.nachher[0], SC.nachher[1])}
@@ -365,6 +420,20 @@ const nachherJs = `${HELPERS}${TOE_INIT}
 const opJs = `${HELPERS}${TOE_INIT}
     const O0 = ${SC.op[0]};
     inflamed(O0);
+    // Licht an: OP-Lampe blitzt auf.
+    tl.fromTo("#@flash", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, O0);
+    gsap.set("#@flash", { opacity: 1 });
+    frameTo(400, 1500, 1.12, 30.05, 0.45);
+    frameTo(680, 1500, 1.12, 31.85, 0.4);
+    frameTo(540, 1450, 1.1, ${L.o2[0]} - 0.1, 0.45);
+    frameTo(670, 800, 1.5, 34.85, 0.45);
+    frameTo(690, 820, 1.6, 37.3, 1.6, "sine.inOut");
+    frameTo(540, 960, 1, 39.68, 0.14, "power2.out");
+    tl.fromTo("#@flash", { opacity: 0.85 }, { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, 39.75);
+    frameTo(520, 800, 1.45, ${L.o5[0]} - 0.1, 0.4);
+    frameTo(700, 1000, 1.45, 42.2, 0.4);
+    frameTo(540, 960, 1, 44.7, 0.4);
+    frameTo(540, 1500, 1.1, ${L.o7[0]} - 0.1, 0.45);
     face("@zeh", "wavy", O0); face("@nagel", "flat", O0);
     lids("@zeh", 0, O0, 0.01); lids("@nagel", 0, O0, 0.01);
     look("@zeh", -10, 10, O0, 0.01); look("@nagel", 0, -10, O0, 0.01);
@@ -892,11 +961,13 @@ const words = spoken.flatMap((l) =>
   VO[l.id]
     ? VO[l.id].words.map((w) => ({
         text: w.text,
+        emph: isEmphIn(l, w.text),
         start: +(RL(l) + w.start).toFixed(3),
         end: +(RL(l) + w.end).toFixed(3),
       }))
     : wordTimes([l]).map((w) => ({
         ...w,
+        emph: isEmphIn(l, w.text),
         start: +(w.start - l.start + RL(l)).toFixed(3),
         end: +(w.end - l.start + RL(l)).toFixed(3),
       })),
@@ -904,7 +975,7 @@ const words = spoken.flatMap((l) =>
 const capBody = words
   .map(
     (w, i) =>
-      `    <div id="cap-${i}" class="cap${isEmph(w.text) ? " emph" : ""}">${w.text.replace(/[!?,.…]+$/u, "")}</div>`,
+      `    <div id="cap-${i}" class="cap${w.emph ? " emph" : ""}">${w.text.replace(/[!?,.…]+$/u, "")}</div>`,
   )
   .join("\n");
 const capJs = `
@@ -923,7 +994,6 @@ const CAP_EMPH_CSS = `
   .cap.emph { color: #FFE14D; font-size: 104px; -webkit-text-stroke: 16px #1d1414; }`;
 
 /* ================= Hook-Titel (erste Sekunden) ================= */
-const HOOK_END = 3.3;
 const hookBody = `
     <div id="hook">
 ${script.hook.map(([t, size, col], i) => `      <div class="hk" id="hk${i + 1}" style="font-size:${size}px;color:${col}">${t}</div>`).join("\n")}
@@ -1024,8 +1094,11 @@ mkdirSync(new URL("./compositions/", import.meta.url), { recursive: true });
 const out = (f, s) => writeFileSync(new URL(f, import.meta.url), s);
 const pre = (p, js) => js.replaceAll("@", p);
 out("./index.html", index);
-out("./compositions/streit.html", page("streit", SC.streit, toe("s-"), "", pre("s-", streitJs)));
-out("./compositions/op.html", page("op", SC.op, toe("o-"), "", pre("o-", opJs)));
+out(
+  "./compositions/streit.html",
+  page("streit", SC.streit, toe("s-", "shoe"), "", pre("s-", streitJs)),
+);
+out("./compositions/op.html", page("op", SC.op, toe("o-", "op"), "", pre("o-", opJs)));
 out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaeterCss, spaeterJs));
 out(
   "./compositions/praxis.html",
@@ -1043,7 +1116,7 @@ out(
 );
 out(
   "./compositions/nachher.html",
-  page("nachher", SC.nachher, toe("n-"), "", pre("n-", nachherJs)),
+  page("nachher", SC.nachher, toe("n-", "shoe"), "", pre("n-", nachherJs)),
 );
 out(
   "./compositions/frage.html",
