@@ -4,34 +4,32 @@
   "vanish": 0.918,
   "first": 1.5839999999999999,
   "hookOut": 1.484,
-  "ostern": 3.4370000000000003,
-  "witz": 4.669,
-  "vollmond": 7.781,
-  "osternOut": 8.959,
-  "dark": 8.859,
-  "starsIn": 9.774,
-  "lions": 12.07,
-  "savanna": 10.458,
-  "rise": 14.878,
-  "ghostSun": 16.849,
-  "bigger": 19.63,
-  "farther": 21.32,
-  "stamp": 22.669,
-  "toEarth": 23.683,
-  "orbitOut": 25.26,
-  "axis": 26.331,
-  "years": 27.253999999999998,
-  "tip": 27.994,
-  "pin": 29.45,
-  "hot": 29.956,
-  "cold": 31.531,
-  "wolf": 33.478,
-  "jobless": 35.712,
-  "cta": 36.912,
-  "ctaSub": 37.012,
-  "teaser": 40.711,
-  "twoMoons": 40.84,
-  "deg": 26.631
+  "ostern": 3.387,
+  "witz": 4.619,
+  "vollmond": 7.731,
+  "osternOut": 8.829,
+  "dark": 8.729,
+  "starsIn": 9.644,
+  "lions": 11.94,
+  "savanna": 10.328,
+  "rise": 14.398,
+  "ghostSun": 16.369,
+  "bigger": 19.15,
+  "farther": 20.84,
+  "stamp": 22.189,
+  "toEarth": 23.053,
+  "orbitOut": 24.63,
+  "axis": 25.700999999999997,
+  "years": 26.624,
+  "tip": 27.364,
+  "pin": 28.79,
+  "hot": 29.296,
+  "cold": 30.871,
+  "wolf": 32.468,
+  "jobless": 34.702000000000005,
+  "cta": 35.852,
+  "ctaSub": 35.952,
+  "deg": 26.000999999999998
  },
  "L": {
   "n1": {
@@ -86,548 +84,497 @@
    ]
   },
   "n2": {
-   "s": 3.487,
-   "e": 8.659,
+   "s": 3.437,
+   "e": 8.609,
    "words": [
     {
      "text": "Ostern",
-     "start": 3.487,
-     "end": 3.943
+     "start": 3.437,
+     "end": 3.893
     },
     {
      "text": "fällt",
-     "start": 4.016,
-     "end": 4.223
+     "start": 3.966,
+     "end": 4.173
     },
     {
      "text": "aus.",
-     "start": 4.274,
-     "end": 4.607
+     "start": 4.224,
+     "end": 4.557
     },
     {
      "text": "Kein",
-     "start": 4.669,
-     "end": 4.845
+     "start": 4.619,
+     "end": 4.795
     },
     {
      "text": "Witz:",
-     "start": 4.886,
-     "end": 5.156
+     "start": 4.836,
+     "end": 5.106
     },
     {
      "text": "Ostern",
-     "start": 5.263,
-     "end": 5.677
+     "start": 5.213,
+     "end": 5.627
     },
     {
      "text": "ist",
-     "start": 5.76,
-     "end": 5.936
+     "start": 5.71,
+     "end": 5.886
     },
     {
      "text": "immer",
-     "start": 5.989,
-     "end": 6.154
+     "start": 5.939,
+     "end": 6.104
     },
     {
      "text": "der",
-     "start": 6.185,
-     "end": 6.279
+     "start": 6.135,
+     "end": 6.229
     },
     {
      "text": "Sonntag",
-     "start": 6.331,
-     "end": 6.734
+     "start": 6.281,
+     "end": 6.684
     },
     {
      "text": "nach",
-     "start": 6.797,
-     "end": 6.921
+     "start": 6.747,
+     "end": 6.871
     },
     {
      "text": "dem",
-     "start": 6.952,
-     "end": 7.056
+     "start": 6.902,
+     "end": 7.006
     },
     {
      "text": "ersten",
-     "start": 7.139,
-     "end": 7.44
+     "start": 7.089,
+     "end": 7.39
     },
     {
      "text": "Frühlings-Vollmond.",
-     "start": 7.481,
-     "end": 8.611
+     "start": 7.431,
+     "end": 8.561
     }
    ]
   },
   "n3": {
-   "s": 8.859,
-   "e": 14.528,
+   "s": 8.729,
+   "e": 14.398,
    "words": [
     {
      "text": "Jede",
-     "start": 8.859,
-     "end": 9.129
+     "start": 8.729,
+     "end": 8.999
     },
     {
      "text": "Nacht",
-     "start": 9.17,
-     "end": 9.346
+     "start": 9.04,
+     "end": 9.216
     },
     {
      "text": "wird",
-     "start": 9.388,
-     "end": 9.522
+     "start": 9.258,
+     "end": 9.392
     },
     {
      "text": "pechschwarz.",
-     "start": 9.574,
-     "end": 10.28
+     "start": 9.444,
+     "end": 10.15
     },
     {
      "text": "Und",
-     "start": 10.387,
-     "end": 10.605
+     "start": 10.257,
+     "end": 10.475
     },
     {
      "text": "genau",
-     "start": 10.708,
-     "end": 10.946
+     "start": 10.578,
+     "end": 10.816
     },
     {
      "text": "in",
-     "start": 10.978,
-     "end": 11.019
+     "start": 10.848,
+     "end": 10.889
     },
     {
      "text": "solchen",
-     "start": 11.061,
-     "end": 11.34
+     "start": 10.931,
+     "end": 11.21
     },
     {
      "text": "Nächten",
-     "start": 11.382,
-     "end": 11.724
+     "start": 11.252,
+     "end": 11.594
     },
     {
      "text": "greifen",
-     "start": 11.787,
-     "end": 12.118
+     "start": 11.657,
+     "end": 11.988
     },
     {
      "text": "Löwen",
-     "start": 12.17,
-     "end": 12.471
+     "start": 12.04,
+     "end": 12.341
     },
     {
      "text": "am",
-     "start": 12.578,
-     "end": 12.744
+     "start": 12.448,
+     "end": 12.614
     },
     {
      "text": "häufigsten",
-     "start": 12.847,
-     "end": 13.324
+     "start": 12.717,
+     "end": 13.194
     },
     {
      "text": "Menschen",
-     "start": 13.365,
-     "end": 13.676
+     "start": 13.235,
+     "end": 13.546
     },
     {
      "text": "an.",
-     "start": 13.759,
-     "end": 14.496
+     "start": 13.629,
+     "end": 14.366
     }
    ]
   },
   "n5": {
-   "s": 15.428,
-   "e": 23.683,
+   "s": 14.948,
+   "e": 23.203,
    "words": [
     {
      "text": "Und",
-     "start": 15.428,
-     "end": 15.625
+     "start": 14.948,
+     "end": 15.145
     },
     {
      "text": "Sonnenfinsternisse",
-     "start": 15.666,
-     "end": 16.496
+     "start": 15.186,
+     "end": 16.016
     },
     {
      "text": "waren",
-     "start": 16.557,
-     "end": 16.786
+     "start": 16.077,
+     "end": 16.306
     },
     {
      "text": "sowieso",
-     "start": 16.827,
-     "end": 17.242
+     "start": 16.347,
+     "end": 16.762
     },
     {
      "text": "ein",
-     "start": 17.315,
-     "end": 17.387
+     "start": 16.835,
+     "end": 16.907
     },
     {
      "text": "Riesenzufall:",
-     "start": 17.449,
-     "end": 18.248
+     "start": 16.969,
+     "end": 17.768
     },
     {
      "text": "Die",
-     "start": 18.351,
-     "end": 18.475
+     "start": 17.871,
+     "end": 17.995
     },
     {
      "text": "Sonne",
-     "start": 18.507,
-     "end": 18.724
+     "start": 18.027,
+     "end": 18.244
     },
     {
      "text": "ist",
-     "start": 18.776,
-     "end": 18.942
+     "start": 18.296,
+     "end": 18.462
     },
     {
      "text": "vierhundertmal",
-     "start": 18.994,
-     "end": 19.678
+     "start": 18.514,
+     "end": 19.198
     },
     {
      "text": "größer,",
-     "start": 19.73,
-     "end": 20.249
+     "start": 19.25,
+     "end": 19.769
     },
     {
      "text": "aber",
-     "start": 20.31,
-     "end": 20.528
+     "start": 19.83,
+     "end": 20.048
     },
     {
      "text": "auch",
-     "start": 20.559,
-     "end": 20.683
+     "start": 20.079,
+     "end": 20.203
     },
     {
      "text": "vierhundertmal",
-     "start": 20.735,
-     "end": 21.357
+     "start": 20.255,
+     "end": 20.877
     },
     {
      "text": "weiter",
-     "start": 21.42,
-     "end": 21.679
+     "start": 20.94,
+     "end": 21.199
     },
     {
      "text": "weg.",
-     "start": 21.731,
-     "end": 22.104
+     "start": 21.251,
+     "end": 21.624
     },
     {
      "text": "Jetzt:",
-     "start": 22.211,
-     "end": 22.647
+     "start": 21.731,
+     "end": 22.167
     },
     {
      "text": "nie",
-     "start": 22.719,
-     "end": 22.854
+     "start": 22.239,
+     "end": 22.374
     },
     {
      "text": "wieder.",
-     "start": 22.906,
-     "end": 23.632
+     "start": 22.426,
+     "end": 23.152
     }
    ]
   },
   "n6": {
-   "s": 24.033,
-   "e": 28.944,
+   "s": 23.403,
+   "e": 28.314,
    "words": [
     {
      "text": "Aber",
-     "start": 24.033,
-     "end": 24.312
+     "start": 23.403,
+     "end": 23.682
     },
     {
      "text": "das",
-     "start": 24.386,
-     "end": 24.489
+     "start": 23.756,
+     "end": 23.859
     },
     {
      "text": "Gefährlichste:",
-     "start": 24.53,
-     "end": 25.153
+     "start": 23.9,
+     "end": 24.523
     },
     {
      "text": "Ohne",
-     "start": 25.26,
-     "end": 25.519
+     "start": 24.63,
+     "end": 24.889
     },
     {
      "text": "Mond",
-     "start": 25.571,
-     "end": 25.851
+     "start": 24.941,
+     "end": 25.221
     },
     {
      "text": "könnte",
-     "start": 25.954,
-     "end": 26.204
+     "start": 25.324,
+     "end": 25.574
     },
     {
      "text": "die",
-     "start": 26.245,
-     "end": 26.348
+     "start": 25.615,
+     "end": 25.718
     },
     {
      "text": "Erdachse",
-     "start": 26.431,
-     "end": 26.991
+     "start": 25.801,
+     "end": 26.361
     },
     {
      "text": "über",
-     "start": 27.095,
-     "end": 27.312
+     "start": 26.465,
+     "end": 26.682
     },
     {
      "text": "Millionen",
-     "start": 27.354,
-     "end": 27.83
+     "start": 26.724,
+     "end": 27.2
     },
     {
      "text": "Jahre",
-     "start": 27.882,
-     "end": 28.142
+     "start": 27.252,
+     "end": 27.512
     },
     {
      "text": "kippen.",
-     "start": 28.194,
-     "end": 28.878
+     "start": 27.564,
+     "end": 28.248
     }
    ]
   },
   "n7": {
-   "s": 29.094,
-   "e": 33.378,
+   "s": 28.434,
+   "e": 32.718,
    "words": [
     {
      "text": "Dann",
-     "start": 29.094,
-     "end": 29.312
+     "start": 28.434,
+     "end": 28.652
     },
     {
      "text": "hätte",
-     "start": 29.353,
-     "end": 29.508
+     "start": 28.693,
+     "end": 28.848
     },
     {
      "text": "Deutschland",
-     "start": 29.55,
-     "end": 29.955
+     "start": 28.89,
+     "end": 29.295
     },
     {
      "text": "Sommer",
-     "start": 30.006,
-     "end": 30.306
+     "start": 29.346,
+     "end": 29.646
     },
     {
      "text": "wie",
-     "start": 30.38,
-     "end": 30.535
+     "start": 29.72,
+     "end": 29.875
     },
     {
      "text": "in",
-     "start": 30.576,
-     "end": 30.639
+     "start": 29.916,
+     "end": 29.979
     },
     {
      "text": "der",
-     "start": 30.67,
-     "end": 30.763
+     "start": 30.01,
+     "end": 30.103
     },
     {
      "text": "Wüste.",
-     "start": 30.805,
-     "end": 31.23
+     "start": 30.145,
+     "end": 30.57
     },
     {
      "text": "Und",
-     "start": 31.333,
-     "end": 31.52
+     "start": 30.673,
+     "end": 30.86
     },
     {
      "text": "Winter",
-     "start": 31.581,
-     "end": 31.945
+     "start": 30.921,
+     "end": 31.285
     },
     {
      "text": "wie",
-     "start": 32.017,
-     "end": 32.183
+     "start": 31.357,
+     "end": 31.523
     },
     {
      "text": "in",
-     "start": 32.235,
-     "end": 32.297
+     "start": 31.575,
+     "end": 31.637
     },
     {
      "text": "der",
-     "start": 32.339,
-     "end": 32.422
+     "start": 31.679,
+     "end": 31.762
     },
     {
      "text": "Arktis.",
-     "start": 32.473,
-     "end": 33.323
+     "start": 31.813,
+     "end": 32.663
     }
    ]
   },
   "n8": {
-   "s": 34.228,
-   "e": 36.762,
+   "s": 33.218,
+   "e": 35.752,
    "words": [
     {
      "text": "Ach",
-     "start": 34.228,
-     "end": 34.404
+     "start": 33.218,
+     "end": 33.394
     },
     {
      "text": "ja:",
-     "start": 34.466,
-     "end": 34.715
+     "start": 33.456,
+     "end": 33.705
     },
     {
      "text": "Werwölfe",
-     "start": 34.819,
-     "end": 35.337
+     "start": 33.809,
+     "end": 34.327
     },
     {
      "text": "wären",
-     "start": 35.389,
-     "end": 35.658
+     "start": 34.379,
+     "end": 34.648
     },
     {
      "text": "arbeitslos.",
-     "start": 35.762,
-     "end": 36.715
+     "start": 34.752,
+     "end": 35.705
     }
    ]
   },
   "n9": {
-   "s": 37.062,
-   "e": 39.361,
+   "s": 36.002,
+   "e": 38.301,
    "words": [
     {
      "text": "Was",
-     "start": 37.062,
-     "end": 37.28
+     "start": 36.002,
+     "end": 36.22
     },
     {
      "text": "würdest",
-     "start": 37.341,
-     "end": 37.591
+     "start": 36.281,
+     "end": 36.531
     },
     {
      "text": "du",
-     "start": 37.611,
-     "end": 37.757
+     "start": 36.551,
+     "end": 36.697
     },
     {
      "text": "am",
-     "start": 37.86,
-     "end": 37.984
+     "start": 36.8,
+     "end": 36.924
     },
     {
      "text": "meisten",
-     "start": 38.047,
-     "end": 38.409
+     "start": 36.987,
+     "end": 37.349
     },
     {
      "text": "vermissen?",
-     "start": 38.451,
-     "end": 39.301
-    }
-   ]
-  },
-  "n10": {
-   "s": 40.611,
-   "e": 43.615,
-   "words": [
-    {
-     "text": "Teil",
-     "start": 40.611,
-     "end": 40.839
-    },
-    {
-     "text": "zwei:",
-     "start": 40.89,
-     "end": 41.243
-    },
-    {
-     "text": "Was",
-     "start": 41.35,
-     "end": 41.537
-    },
-    {
-     "text": "wäre,",
-     "start": 41.599,
-     "end": 41.962
-    },
-    {
-     "text": "wenn",
-     "start": 42.014,
-     "end": 42.169
-    },
-    {
-     "text": "wir",
-     "start": 42.2,
-     "end": 42.335
-    },
-    {
-     "text": "zwei",
-     "start": 42.398,
-     "end": 42.646
-    },
-    {
-     "text": "Monde",
-     "start": 42.708,
-     "end": 42.989
-    },
-    {
-     "text": "hätten?",
-     "start": 43.04,
-     "end": 43.558
+     "start": 37.391,
+     "end": 38.241
     }
    ]
   }
  },
- "DUR": 46.015,
+ "DUR": 41.201,
  "WOB": [
   [
-   27.253999999999998,
+   26.624,
    23.4
   ],
   [
-   27.994,
+   27.364,
    38
   ],
   [
-   28.394,
+   27.764,
    14
   ],
   [
-   28.944,
+   28.314,
    64
   ],
   [
-   33.178000000000004,
+   32.168000000000006,
    64
   ],
   [
-   34.078,
+   33.068000000000005,
    23.4
   ]
  ],

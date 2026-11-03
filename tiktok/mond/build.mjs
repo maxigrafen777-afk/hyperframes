@@ -15,7 +15,7 @@ const f = (n) => +n.toFixed(3);
 
 /* ================= Zeitplan aus den echten Takes ================= */
 // Pause VOR jeder Zeile (Platz für Kamerafahrten und Aktionen).
-const WAIT = { n1: 0.1, n2: 0.2, n3: 0.2, n4: 0.3, n5: 0.9, n6: 0.35, n7: 0.15, n8: 0.85, n9: 0.3, n10: 1.25 };
+const WAIT = { n1: 0.1, n2: 0.15, n3: 0.12, n5: 0.55, n6: 0.2, n7: 0.12, n8: 0.5, n9: 0.25 };
 const L = {};
 let t = 0;
 for (const line of script.lines) {
@@ -28,7 +28,7 @@ for (const line of script.lines) {
   };
   t = L[line.id].e;
 }
-const END_HOLD = 2.4;
+const END_HOLD = 2.9;
 const DUR = f(t + END_HOLD);
 const at = (id, w) => {
   const hit = L[id].words.find((x) => x.text.toLowerCase().startsWith(w.toLowerCase()));
@@ -529,8 +529,6 @@ const T = {
   jobless: at("n8", "arbeitslos") - 0.05,
   cta: f(L.n9.s - 0.15),
   ctaSub: f(L.n9.s - 0.05),
-  teaser: f(L.n10.s + 0.1),
-  twoMoons: at("n10", "zwei") - 0.05,
 };
 T.deg = T.axis + 0.3;
 const TILT_MAX = 64;
@@ -676,17 +674,17 @@ const worldJs = `
     tl.to("#orbit", { opacity: 1, duration: 0.5 }, ${T.cta});
     tl.set("#ghost-orbit-pos", { x: 0, y: 0 }, ${T.cta});
     tl.to("#ghost-orbit-pos", { opacity: 1, duration: 0.5 }, ${T.cta});
-    tl.to("#cta", { opacity: 0, scale: 0.9, duration: 0.2 }, ${T.teaser} - 0.2);
-    tl.fromTo("#teaser", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.teaser});
-    tl.fromTo("#tz3", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ${f(L.n10.e)});
+    tl.to("#cta", { opacity: 0, scale: 0.9, duration: 0.2 }, ${DUR} - 0.2);
+    tl.fromTo("#teaser", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${DUR});
+    tl.fromTo("#tz3", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ${DUR});
     gsap.set("#m2a", { svgOrigin: "${EARTH.x - 470} ${EARTH.y}" });
     gsap.set("#m2b", { svgOrigin: "${EARTH.x + 470} ${EARTH.y}" });
-    tl.to("#ghost-orbit-pos", { opacity: 0, duration: 0.15 }, ${T.twoMoons});
-    tl.set(["#moon2a", "#moon2b"], { opacity: 1 }, ${T.twoMoons});
-    tl.fromTo("#m2a", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${T.twoMoons});
-    tl.fromTo("#m2b", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${T.twoMoons} + 0.25);
-    tl.fromTo("#moon2a", { x: 0, y: 0 }, { x: 110, y: 62, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
-    tl.fromTo("#moon2b", { x: 0, y: 0 }, { x: -110, y: -62, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
+    tl.to("#ghost-orbit-pos", { opacity: 0, duration: 0.15 }, ${DUR});
+    tl.set(["#moon2a", "#moon2b"], { opacity: 1 }, ${DUR});
+    tl.fromTo("#m2a", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${DUR});
+    tl.fromTo("#m2b", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${DUR} + 0.25);
+    tl.fromTo("#moon2a", { x: 0, y: 0 }, { x: 110, y: 62, duration: ${f(0.01)}, ease: "sine.inOut", immediateRender: false }, ${DUR});
+    tl.fromTo("#moon2b", { x: 0, y: 0 }, { x: -110, y: -62, duration: ${f(0.01)}, ease: "sine.inOut", immediateRender: false }, ${DUR});
     gsap.set(["#m2a", "#m2b"], { scale: 0 });
 `;
 
@@ -756,7 +754,7 @@ const SFX = [
   ["vanish", "gen-vanish", T.vanish - 0.1, 0.6],
   ["pop1", "gen-pop", T.first - 0.05, 0.4],
   ["pop2", "gen-pop", T.ostern, 0.45],
-  ["pop3", "gen-pop", T.vollmond + 0.2, 0.4],
+  ["pop3", "gen-pop", T.vollmond - 0.2, 0.4],
   ["dark", "gen-dark", T.dark, 0.45],
   ["swoosh0", "gen-swoosh2", T.savanna - 0.05, 0.35],
   ["growl", "gen-growl", T.lions + 0.6, 0.4],
@@ -773,8 +771,6 @@ const SFX = [
   ["howl", "gen-howl", T.wolf + 0.05, 0.5],
   ["stamp2", "gen-stamp", T.jobless + 0.15, 0.55],
   ["pop7", "gen-pop", T.cta, 0.45],
-  ["pop8", "gen-pop", T.twoMoons, 0.5],
-  ["pop9", "gen-pop", T.twoMoons + 0.25, 0.45],
 ];
 let track = 10;
 const sfx = SFX.map(
@@ -820,7 +816,7 @@ ${vo}
 
 mkdirSync(here("./compositions/"), { recursive: true });
 writeFileSync(here("./index.html"), index);
-writeFileSync(here("./compositions/welt.html"), page("welt", world, worldCss, worldJs));
+// welt.html (flache v4-Welt) wird nicht mehr gebaut; pov.mjs erzeugt compositions/pov.html.
 writeFileSync(here("./compositions/captions.html"), page("captions", capBody, capCss, capJs));
 writeFileSync(here("./assets/beats.json"), JSON.stringify({ T, L, DUR, WOB, TILT_MAX }, null, 1));
 console.log("Zeilen:", Object.entries(L).map(([k, v]) => `${k} ${v.s}–${v.e}`).join(", "));

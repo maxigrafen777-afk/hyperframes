@@ -8,7 +8,7 @@ const here = (p) => new URL(p, import.meta.url);
 const { T, L, DUR, WOB } = JSON.parse(readFileSync(here("./assets/beats.json"), "utf8"));
 const f = (n) => +n.toFixed(3);
 const W = 1080, H = 1920;
-const C = { ink: "#0A1020", accent: "#FFD23F", hot: "#FF6B2C", ice: "#EAF6FF", red: "#E8505B" };
+const C = { ink: "#0A1020", accent: "#FFD23F", hot: "#D9480F", ice: "#EAF6FF", red: "#E8505B" };
 
 const blob = (pts, cx, cy, r) => {
   const P = pts.map(([x, y]) => [cx + x * r, cy + y * r]);
@@ -55,27 +55,15 @@ const body = `
   </div>
 </div>
 
-<div id="glasses" class="layer">
-  <div id="sunview">
-    <div id="sun"></div>
-    <svg width="${W}" height="${H}" class="abs"><g id="sunghost"><circle cx="540" cy="760" r="226" fill="none" stroke="#F3EBCF" stroke-width="7" stroke-dasharray="22 15" stroke-linecap="round"/></g></svg>
+<div id="mail">
+  <div class="ph-screen">
+    <div class="ph-status"><span>23:58</span><span>●●● 5G ▮</span></div>
+    <div class="ml-top">‹ Posteingang</div>
+    <div class="ml-from"><div class="ml-av">AG</div><div><b>Arbeitgeber Nachtschicht GmbH</b><span>an: Herr Wolf</span></div></div>
+    <div class="ml-subj">Kündigung</div>
+    <div class="ml-body">Sehr geehrter Herr Wolf,<br><br>mangels Vollmond entfällt Ihre Stelle.</div>
   </div>
-  <svg width="${W}" height="${H}" class="abs" id="frame">
-    <defs><mask id="lens"><rect width="${W}" height="${H}" fill="#fff"/><path d="M 60 420 C 60 280 200 240 540 250 C 880 240 1020 280 1020 420 L 1020 1020 C 1020 1130 900 1180 700 1170 C 620 1165 600 1110 540 1110 C 480 1110 460 1165 380 1170 C 180 1180 60 1130 60 1020 Z" fill="#000"/></mask>
-      <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter></defs>
-    <rect width="${W}" height="${H}" fill="#E9E1CF" mask="url(#lens)" filter="url(#soft)"/>
-    <rect y="1240" width="${W}" height="680" fill="#D8CFBB" filter="url(#soft)" opacity="0.9"/>
-  </svg>
 </div>
-
-<div id="wolf" class="layer"><svg width="${W}" height="${H}">
-  <circle cx="790" cy="640" r="130" fill="none" stroke="#F3EBCF" stroke-width="6" stroke-dasharray="20 14" stroke-linecap="round" opacity="0.8"/>
-  <path d="M -20 1560 C 120 1500 360 1490 560 1530 C 640 1550 700 1600 720 1660 L -20 1700 Z" fill="#03050a" stroke="#4a5884" stroke-width="3"/>
-  <g transform="translate(40 880) scale(2.3)"><g id="wolfbody">
-    <path d="M 40 300 L 30 250 L 45 240 L 35 215 L 55 200 L 50 175 L 70 160 L 85 130 L 95 95 L 105 45 L 125 95 L 150 100 L 200 70 L 245 35 L 255 40 L 232 72 L 212 88 L 238 92 L 200 120 L 165 160 L 175 190 L 160 200 L 170 230 L 155 240 L 160 300 Z" fill="#04060c" stroke="#7484b8" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M 168 102 L 180 98" stroke="#7484b8" stroke-width="2.4" stroke-linecap="round"/>
-  </g></g>
-</svg></div>
 
 <div id="flash" class="layer"></div>
 <div id="vig" class="layer"></div>
@@ -92,7 +80,6 @@ const body = `
 <div id="cold" class="ov"><div class="card card-cold">WINTER <span>=</span> ARKTIS</div></div>
 <div id="jobless" class="ov"><div class="stp stp-red">ARBEITSLOS</div></div>
 <div id="cta" class="ov"><div class="ct">WAS WÜRDEST DU AM MEISTEN</div><div class="ct ct-y">VERMISSEN?</div><div class="pill">Schreib's in die Kommentare ↓</div></div>
-<div id="teaser" class="ov"><div class="tz-k">TEIL 2</div><div class="ct ct-y">ZWEI MONDE?</div><div class="pill" id="tz3">Folgen, damit du es nicht verpasst</div></div>
 `;
 
 const css = `
@@ -137,7 +124,15 @@ const css = `
     background: radial-gradient(circle at 50% 50%, #FFE7A8 0%, #FFB347 45%, #F07A1A 78%, #B9460A 100%); }
   .gl-print { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 54px; fill: #6A5F4A; letter-spacing: 4px; }
 
-  #wolf { opacity: 0; }
+  #mail { position: absolute; left: 230px; top: 330px; width: 620px; height: 1240px; border-radius: 86px;
+    background: #111; border: 14px solid #2A2D33; box-shadow: 0 40px 80px rgba(0,0,0,0.6); opacity: 0; }
+  .ml-top { padding: 26px 40px 10px; color: #2F7BF6; font-size: 34px; font-weight: 600; }
+  .ml-from { display: flex; gap: 22px; align-items: center; padding: 20px 40px; border-bottom: 2px solid #E4E4E8; }
+  .ml-from b { display: block; font-size: 32px; } .ml-from span { font-size: 28px; color: #777; }
+  .ml-av { width: 84px; height: 84px; border-radius: 42px; background: #6B7A99; color: #fff; font-weight: 800; font-size: 32px;
+    display: flex; align-items: center; justify-content: center; flex: none; }
+  .ml-subj { padding: 28px 40px 8px; font-size: 52px; font-weight: 900; }
+  .ml-body { padding: 10px 40px; font-size: 34px; line-height: 1.35; color: #222; }
   .tag { position: absolute; top: 1030px; font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 76px;
     color: ${C.ink}; background: ${C.accent}; padding: 6px 26px; border-radius: 18px; border: 6px solid ${C.ink}; opacity: 0; }
   .tag span { opacity: 0.7; }
@@ -146,7 +141,7 @@ const css = `
   .stp { display: inline-block; color: ${C.accent}; font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 112px;
     padding: 6px 30px 12px; border: 10px solid ${C.accent}; border-radius: 18px; background: ${C.ink}; }
   .stp-red { color: #fff; background: ${C.red}; border-color: #fff; font-size: 96px; }
-  #jobless { top: 340px; }
+  #jobless { top: 1010px; }
   #deg { top: 380px; } .deg-n { color: ${C.accent}; font-size: 120px; }
   .sub { font-size: 46px; -webkit-text-stroke: 12px ${C.ink}; margin-top: 8px; font-weight: 800; }
   #years { top: 1390px; } .yr { font-size: 64px; }
@@ -164,7 +159,7 @@ const css = `
 
 /* ================= Overlay-Timeline (GSAP) ================= */
 const overlayJs = `
-    gsap.set(".ov, .tag, #phone", { transformOrigin: "50% 50%" });
+    gsap.set(".ov, .tag, #phone, #mail", { transformOrigin: "50% 50%" });
     // Hook
     tl.to("#hook", { opacity: 0, y: -30, duration: 0.22, ease: "power2.in" }, ${T.hookOut});
     tl.fromTo("#first", { opacity: 0, scale: 0.5, rotation: -10 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.3, ease: "back.out(2.2)" }, ${T.first});
@@ -178,26 +173,21 @@ const overlayJs = `
     tl.fromTo("#phone", { opacity: 1, y: 1700, rotation: 6 }, { opacity: 1, y: 0, rotation: -3, duration: 0.55, ease: "power3.out" }, ${T.ostern});
     tl.to("#phone", { y: 12, rotation: -2, duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: 1 }, ${f(T.ostern + 0.55)});
     tl.to("#phone", { x: 14, duration: 0.06 }, ${T.witz}); tl.to("#phone", { x: -10, duration: 0.06 }, ${T.witz} + 0.06); tl.to("#phone", { x: 0, duration: 0.06 }, ${T.witz} + 0.12);
-    tl.to("#ph-easter", { backgroundColor: "#F7F7F9", color: "#C9C9CF", duration: 0.25 }, ${T.vollmond});
-    tl.to("#ph-event", { opacity: 0.35, duration: 0.25 }, ${T.vollmond});
-    tl.set("#ph-ev-t", { textContent: "entfällt" }, ${T.vollmond});
-    tl.fromTo("#ph-note", { opacity: 0, y: -120 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)" }, ${T.vollmond} + 0.15);
+    tl.to("#ph-easter", { backgroundColor: "#F7F7F9", color: "#C9C9CF", duration: 0.25 }, ${f(T.vollmond - 0.4)});
+    tl.to("#ph-event", { opacity: 0.35, duration: 0.25 }, ${f(T.vollmond - 0.4)});
+    tl.set("#ph-ev-t", { textContent: "entfällt" }, ${f(T.vollmond - 0.4)});
+    tl.fromTo("#ph-note", { opacity: 0, y: -120 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)" }, ${f(T.vollmond - 0.4)} + 0.15);
     tl.to("#phone", { y: 1700, rotation: 8, duration: 0.45, ease: "power3.in" }, ${T.osternOut} - 0.15);
     tl.set("#phone", { opacity: 0 }, ${T.osternOut} + 0.32);
 
-    // POV: Finsternis-Brille auf, der Geister-Mond passt exakt vor die Sonne.
-    tl.fromTo("#glasses", { opacity: 0 }, { opacity: 1, duration: 0.12 }, ${SC.sun[0]});
-    tl.fromTo("#frame", { y: -700 }, { y: 0, duration: 0.45, ease: "power3.out" }, ${SC.sun[0]});
-    gsap.set("#sunghost", { x: -900 });
-    tl.to("#sunghost", { x: 0, duration: 0.9, ease: "power3.out" }, ${T.ghostSun});
+    // Finsternis: ×400 und NIE WIEDER (das Bild macht Three.js).
     tl.fromTo("#tagA", { opacity: 0, scale: 0.4, rotation: -10 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.3, ease: "back.out(2.4)" }, ${T.bigger});
     tl.fromTo("#tagB", { opacity: 0, scale: 0.4, rotation: 10 }, { opacity: 1, scale: 1, rotation: 4, duration: 0.3, ease: "back.out(2.4)" }, ${T.farther});
-    tl.to(["#tagA", "#tagB"], { opacity: 0, duration: 0.15 }, ${T.stamp} - 0.15);
-    tl.to("#sunghost", { x: 900, duration: 0.5, ease: "power3.in" }, ${T.stamp} - 0.45);
+    tl.to(["#tagA", "#tagB"], { opacity: 0, duration: 0.15 }, ${T.stamp} - 0.45);
     tl.fromTo("#stamp", { opacity: 0, scale: 1.8, rotation: -14 }, { opacity: 1, scale: 1, rotation: -7, duration: 0.18, ease: "power4.in" }, ${T.stamp});
     tl.to("#stamp", { opacity: 0, duration: 0.2 }, ${SC.sun[1]} - 0.1);
-    tl.to("#frame", { y: -900, duration: 0.45, ease: "power3.in" }, ${SC.sun[1]} - 0.35);
-    tl.to("#glasses", { opacity: 0, duration: 0.25 }, ${SC.sun[1]} - 0.05);
+    tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.6, duration: 0.06, immediateRender: false }, ${f(T.stamp - 0.4)});
+    tl.to("#flash", { opacity: 0, duration: 0.5 }, ${f(T.stamp - 0.34)});
 
     // Erde: Gradzahl, Jahre, Deutschland.
     tl.fromTo("#deg", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, ${T.deg});
@@ -208,18 +198,15 @@ const overlayJs = `
     tl.fromTo("#cold", { opacity: 0, scale: 0.5, rotation: 8 }, { opacity: 1, scale: 1, rotation: 3, duration: 0.3, ease: "back.out(2.2)" }, ${T.cold});
     tl.to("#cold", { opacity: 0, duration: 0.15 }, ${SC.wolf[0]} - 0.1);
 
-    // Werwolf
-    tl.fromTo("#wolf", { opacity: 0 }, { opacity: 1, duration: 0.15 }, ${SC.wolf[0]});
-    
-    tl.fromTo("#wolfbody", { y: 260 }, { y: 0, duration: 0.5, ease: "power3.out" }, ${SC.wolf[0]});
+    // Werwolf: Kündigungs-Mail auf deinem Handy.
+    tl.fromTo("#mail", { opacity: 1, y: 1700, rotation: 6 }, { opacity: 1, y: 0, rotation: -3, duration: 0.5, ease: "power3.out" }, ${SC.wolf[0]});
     tl.fromTo("#jobless", { opacity: 0, scale: 1.8, rotation: -16 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.18, ease: "power4.in" }, ${T.jobless});
-    tl.to(["#wolf", "#jobless"], { opacity: 0, duration: 0.2 }, ${SC.wolf[1]} - 0.1);
+    tl.to("#mail", { y: 1700, rotation: 8, duration: 0.4, ease: "power3.in" }, ${SC.wolf[1]} - 0.35);
+    tl.set("#mail", { opacity: 0 }, ${SC.wolf[1]} + 0.1);
+    tl.to("#jobless", { opacity: 0, duration: 0.2 }, ${SC.wolf[1]} - 0.15);
 
     // Kommentar-Frage + Teaser
     tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.cta});
-    tl.to("#cta", { opacity: 0, scale: 0.9, duration: 0.2 }, ${T.teaser} - 0.2);
-    tl.fromTo("#teaser", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.teaser});
-    tl.fromTo("#tz3", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ${f(L.n10.e)});
 `;
 
 /* ================= 3D (Three.js) ================= */
@@ -340,6 +327,32 @@ const glJs = `
         g.position.set(x, y, z); g.scale.setScalar(0.0001); sav.add(g); eyes.push(g); });
       S.sav = { scene: sav, cam: sCam, ground, grass, eyes, sky: sSky };
 
+
+      /* ---------- Totale Sonnenfinsternis ---------- */
+      const ecl = new THREE.Scene();
+      const xCam = new THREE.PerspectiveCamera(50, ${W / H}, 0.1, 100);
+      const eclSky = new THREE.Mesh(new THREE.BoxGeometry(80, 80, 80), skyMat(cube)); eclSky.material.uniforms.uTintAmt.value = 0; ecl.add(eclSky);
+      const unit = 10 * Math.tan(25 * Math.PI / 180) / 960; // Welt-Einheiten pro Pixel in 10 m Abstand
+      const SR = 230 * unit, SY = (960 - 760) * unit;
+      const sunM = new THREE.Mesh(new THREE.PlaneGeometry(SR * 8, SR * 8), new THREE.ShaderMaterial({ transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+        uniforms: { uT: { value: 0 }, uGlare: { value: 0 } },
+        vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }",
+        fragmentShader: "uniform float uT; uniform float uGlare; varying vec2 vUv; float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5); }" +
+          "float n(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(h(i),h(i+vec2(1,0)),f.x), mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x), f.y); }" +
+          "void main(){ vec2 p = (vUv-0.5)*8.0; float r = length(p); float disk = smoothstep(1.0, 0.985, r); float mu = sqrt(max(0.0, 1.0-r*r));" +
+          "float gran = n(p*22.0 + uT*0.3)*0.5 + n(p*45.0 - uT*0.2)*0.5; vec3 c = mix(vec3(1.0,0.45,0.08), vec3(1.0,0.95,0.78), pow(mu,0.45)) * (0.9 + 0.12*gran) * disk;" +
+          "float halo = (r > 1.0) ? exp(-(r-1.0)*2.2)*0.9 + exp(-(r-1.0)*0.6)*0.25 : 0.0; c += vec3(1.0,0.75,0.45)*halo*uGlare; gl_FragColor = vec4(c, 1.0); }" }));
+      sunM.position.set(0, SY, -10); ecl.add(sunM);
+      const corona = new THREE.Mesh(new THREE.PlaneGeometry(SR * 8, SR * 8), new THREE.ShaderMaterial({ transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+        uniforms: { uOn: { value: 0 }, uT: { value: 0 } },
+        vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }",
+        fragmentShader: "uniform float uOn; uniform float uT; varying vec2 vUv; void main(){ vec2 p = (vUv-0.5)*8.0; float r = length(p); float a = atan(p.y, p.x);" +
+          "float streak = 0.55 + 0.25*sin(a*7.0+1.3) + 0.15*sin(a*13.0-0.7) + 0.1*sin(a*29.0+uT*0.2); float k = r > 1.0 ? pow(1.0/r, 5.0)*streak*2.4 + smoothstep(1.06, 1.0, r)*1.5 : 0.0;" +
+          "vec3 c = vec3(0.85,0.9,1.0)*k + vec3(1.0,0.25,0.35)*smoothstep(1.04,1.0,r)*step(1.0,r)*1.4; gl_FragColor = vec4(c*uOn, 1.0); }" }));
+      corona.position.set(0, SY, -9.9); ecl.add(corona);
+      const moonDisk = new THREE.Mesh(new THREE.CircleGeometry(SR * 1.015, 96), new THREE.MeshBasicMaterial({ map: moonTex, color: 0x0b0b0e }));
+      moonDisk.position.set(0, SY, -9.8); ecl.add(moonDisk);
+      S.ecl = { scene: ecl, cam: xCam, sunM, corona, moonDisk, SR, SY };
       /* ---------- Erde ---------- */
       const es = new THREE.Scene();
       const eCam = new THREE.PerspectiveCamera(40, ${W / H}, 0.01, 2000);
@@ -442,6 +455,14 @@ const glJs = `
         [V.ground, V.grass].forEach((m) => { m.material.uniforms.uFlash.value = flash; m.material.uniforms.uCam.value.copy(cam.position); m.material.uniforms.uDir.value.copy(dir); });
         V.grass.material.uniforms.uT.value = t;
         V.eyes.forEach((g, i) => { const on = ss(TT.lions + i * 0.18, TT.lions + i * 0.18 + 0.12, t); const blink = Math.abs(t - (TT.lions + 1.3 + i * 0.2)) < 0.06 ? 0.1 : 1; g.scale.set(on, on * blink, on); });
+      } else if (t < SC.sun[1]) {
+        const X = S.ecl; scene = X.scene; cam = X.cam; cam.position.set(0, 0, 0); cam.rotation.set(0, 0, 0); hand(cam, t, 1.2); cam.updateProjectionMatrix();
+        const slide = 1 - ease3((t - SC.sun[0]) / (TT.ghostSun + 0.9 - SC.sun[0]));
+        const gone = ss(TT.stamp - 0.45, TT.stamp - 0.3, t);
+        X.moonDisk.position.x = slide * X.SR * 2.2; X.moonDisk.scale.setScalar(Math.max(0.001, 1 - gone));
+        const total = 1 - Math.min(1, Math.abs(X.moonDisk.position.x) / (X.SR * 0.08));
+        X.corona.material.uniforms.uOn.value = total * (1 - gone); X.corona.material.uniforms.uT.value = t;
+        X.sunM.material.uniforms.uT.value = t; X.sunM.material.uniforms.uGlare.value = Math.max(0.15 * (1 - total), gone);
       } else {
         const E = S.earth; scene = E.scene; cam = E.cam;
         const end = t >= SC.end[0];
@@ -463,10 +484,10 @@ const glJs = `
         E.earthMat.uniforms.uHot.value = ss(TT.hot, TT.hot + 0.6, t) * (1 - ss(TT.cold, TT.cold + 0.4, t)) * (end ? 0 : 1);
         E.earthMat.uniforms.uCold.value = ss(TT.cold, TT.cold + 0.6, t) * (end ? 0 : 1);
         const ringOn = (t < TT.orbitOut ? 1 : 1 - ss(TT.orbitOut, TT.orbitOut + 0.4, t)) * (t < SC.earth[0] + 0.2 ? 0 : 1);
-        E.ring.material.opacity = (end ? 0.75 : ringOn * 0.75); E.ghostM.material.opacity = end && t < TT.twoMoons ? 0.9 : ringOn * 0.9;
+        E.ring.material.opacity = (end ? 0.75 : ringOn * 0.75); E.ghostM.material.opacity = end ? 0.9 : ringOn * 0.9;
         const ga = (t - SC.earth[0]) * 0.6 + 2.2; E.ghostM.position.set(Math.cos(ga) * 2.5, Math.sin(ga) * 2.5 * Math.sin(0.18), Math.sin(ga) * 2.5 * Math.cos(0.18)); E.ghostM.lookAt(cam.position);
-        const two = end && t >= TT.twoMoons; E.m2a.visible = E.m2b.visible = two;
-        if (two) { const p = ss(TT.twoMoons, TT.twoMoons + 0.4, t), p2 = ss(TT.twoMoons + 0.25, TT.twoMoons + 0.65, t); const a = (t - TT.twoMoons) * 0.45;
+        const two = false; E.m2a.visible = E.m2b.visible = two;
+        if (two) { const p = ss(0, TT.twoMoons + 0.4, t), p2 = 0; const a = 0;
           E.m2a.position.set(Math.cos(a + 3.3) * 2.5, 0, Math.sin(a + 3.3) * 2.5).applyAxisAngle(new THREE.Vector3(1, 0, 0), 0.18); E.m2a.scale.setScalar(Math.max(0.001, p));
           E.m2b.position.set(Math.cos(a + 0.1) * 2.5, 0, Math.sin(a + 0.1) * 2.5).applyAxisAngle(new THREE.Vector3(1, 0, 0), 0.18); E.m2b.scale.setScalar(Math.max(0.001, p2)); }
         cam.updateProjectionMatrix();
