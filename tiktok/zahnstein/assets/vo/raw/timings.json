@@ -1,0 +1,466 @@
+{
+  "s1": {
+    "text": "Runter von mir! Ich war mal strahlend weiß!",
+    "heard": "Runter von mir! Ich war mal strahlend weiß",
+    "wer": 0,
+    "fileDuration": 3.657143,
+    "words": [
+      {
+        "text": "Runter",
+        "start": 0,
+        "end": 0.488
+      },
+      {
+        "text": "von",
+        "start": 0.546,
+        "end": 0.731
+      },
+      {
+        "text": "mir!",
+        "start": 0.789,
+        "end": 1.057
+      },
+      {
+        "text": "Ich",
+        "start": 1.091,
+        "end": 1.231
+      },
+      {
+        "text": "war",
+        "start": 1.312,
+        "end": 1.509
+      },
+      {
+        "text": "mal",
+        "start": 1.556,
+        "end": 1.741
+      },
+      {
+        "text": "strahlend",
+        "start": 1.858,
+        "end": 2.74
+      },
+      {
+        "text": "weiß!",
+        "start": 2.798,
+        "end": 3.622
+      }
+    ]
+  },
+  "s2": {
+    "text": "Ich wohn hier jetzt, Schätzchen.",
+    "heard": "Ich wohn hier jetzt, Schätzchen",
+    "wer": 0,
+    "fileDuration": 1.515102,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.151
+      },
+      {
+        "text": "wohn",
+        "start": 0.197,
+        "end": 0.36
+      },
+      {
+        "text": "hier",
+        "start": 0.406,
+        "end": 0.534
+      },
+      {
+        "text": "jetzt,",
+        "start": 0.58,
+        "end": 0.848
+      },
+      {
+        "text": "Schätzchen.",
+        "start": 0.882,
+        "end": 1.486
+      }
+    ]
+  },
+  "s3": {
+    "text": "Du bist hart, gelb und hässlich!",
+    "heard": "Du bist hart, gelb und hässlich",
+    "wer": 0,
+    "fileDuration": 2.533878,
+    "words": [
+      {
+        "text": "Du",
+        "start": 0,
+        "end": 0.139
+      },
+      {
+        "text": "bist",
+        "start": 0.186,
+        "end": 0.383
+      },
+      {
+        "text": "hart,",
+        "start": 0.464,
+        "end": 0.917
+      },
+      {
+        "text": "gelb",
+        "start": 0.987,
+        "end": 1.289
+      },
+      {
+        "text": "und",
+        "start": 1.358,
+        "end": 1.451
+      },
+      {
+        "text": "hässlich!",
+        "start": 1.544,
+        "end": 2.508
+      }
+    ]
+  },
+  "s4": {
+    "text": "Danke! Kaffee und Cola kommen auch gleich.",
+    "heard": "Danke. Kaffee und Cola kommen auch gleich",
+    "wer": 0,
+    "fileDuration": 2.821224,
+    "words": [
+      {
+        "text": "Danke!",
+        "start": 0,
+        "end": 0.546
+      },
+      {
+        "text": "Kaffee",
+        "start": 0.697,
+        "end": 0.998
+      },
+      {
+        "text": "und",
+        "start": 1.033,
+        "end": 1.126
+      },
+      {
+        "text": "Cola",
+        "start": 1.161,
+        "end": 1.451
+      },
+      {
+        "text": "kommen",
+        "start": 1.509,
+        "end": 1.753
+      },
+      {
+        "text": "auch",
+        "start": 1.788,
+        "end": 1.904
+      },
+      {
+        "text": "gleich.",
+        "start": 1.939,
+        "end": 2.786
+      }
+    ]
+  },
+  "f1": {
+    "text": "Keine Panik! Ich quetsch mich da durch!",
+    "heard": "Keine Panik, ich quetsch mich da durch",
+    "wer": 0,
+    "fileDuration": 1.750204,
+    "words": [
+      {
+        "text": "Keine",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "Panik!",
+        "start": 0.255,
+        "end": 0.604
+      },
+      {
+        "text": "Ich",
+        "start": 0.639,
+        "end": 0.755
+      },
+      {
+        "text": "quetsch",
+        "start": 0.813,
+        "end": 1.091
+      },
+      {
+        "text": "mich",
+        "start": 1.149,
+        "end": 1.265
+      },
+      {
+        "text": "da",
+        "start": 1.3,
+        "end": 1.37
+      },
+      {
+        "text": "durch!",
+        "start": 1.416,
+        "end": 1.718
+      }
+    ]
+  },
+  "f2": {
+    "text": "Ich steck fest… ich reiße!",
+    "heard": "Ich steck fest, ich reiße",
+    "wer": 0,
+    "fileDuration": 2.220408,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.128
+      },
+      {
+        "text": "steck",
+        "start": 0.151,
+        "end": 0.36
+      },
+      {
+        "text": "fest…",
+        "start": 0.43,
+        "end": 0.848
+      },
+      {
+        "text": "ich",
+        "start": 0.998,
+        "end": 1.149
+      },
+      {
+        "text": "reiße!",
+        "start": 1.3,
+        "end": 2.183
+      }
+    ]
+  },
+  "f3": {
+    "text": "Tja. Das war's dann, Spaghetti.",
+    "heard": "Tja, das war's dann, Spaghetti",
+    "wer": 0,
+    "fileDuration": 2.45551,
+    "words": [
+      {
+        "text": "Tja.",
+        "start": 0,
+        "end": 0.43
+      },
+      {
+        "text": "Das",
+        "start": 0.673,
+        "end": 0.906
+      },
+      {
+        "text": "war's",
+        "start": 0.964,
+        "end": 1.161
+      },
+      {
+        "text": "dann,",
+        "start": 1.219,
+        "end": 1.393
+      },
+      {
+        "text": "Spaghetti.",
+        "start": 1.416,
+        "end": 2.415
+      }
+    ]
+  },
+  "o1": {
+    "text": "Hey! Hör auf zu vibrieren!",
+    "heard": "Hey, hör auf zu vibrieren",
+    "wer": 0,
+    "fileDuration": 2.168163,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0,
+        "end": 0.488
+      },
+      {
+        "text": "Hör",
+        "start": 0.662,
+        "end": 0.824
+      },
+      {
+        "text": "auf",
+        "start": 0.882,
+        "end": 1.045
+      },
+      {
+        "text": "zu",
+        "start": 1.115,
+        "end": 1.196
+      },
+      {
+        "text": "vibrieren!",
+        "start": 1.242,
+        "end": 2.136
+      }
+    ]
+  },
+  "o2": {
+    "text": "Nicht meine Lieblingsecke!",
+    "heard": "Nicht meine Lieblingsecke",
+    "wer": 0,
+    "fileDuration": 1.619592,
+    "words": [
+      {
+        "text": "Nicht",
+        "start": 0,
+        "end": 0.302
+      },
+      {
+        "text": "meine",
+        "start": 0.372,
+        "end": 0.58
+      },
+      {
+        "text": "Lieblingsecke!",
+        "start": 0.627,
+        "end": 1.579
+      }
+    ]
+  },
+  "o3": {
+    "text": "Ich glänze wieder!",
+    "heard": "Ich glänze wieder",
+    "wer": 0,
+    "fileDuration": 1.28,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.163
+      },
+      {
+        "text": "glänze",
+        "start": 0.232,
+        "end": 0.627
+      },
+      {
+        "text": "wieder!",
+        "start": 0.662,
+        "end": 1.254
+      }
+    ]
+  },
+  "d1": {
+    "text": "Zahnstein kann man nicht wegputzen. Dafür gibt es die Zahnreinigung.",
+    "heard": "Zahnstein kann man nicht wegputzen. Dafür gibt es die Zahnreinigung",
+    "wer": 0,
+    "fileDuration": 4.493061,
+    "words": [
+      {
+        "text": "Zahnstein",
+        "start": 0,
+        "end": 0.58
+      },
+      {
+        "text": "kann",
+        "start": 0.65,
+        "end": 0.789
+      },
+      {
+        "text": "man",
+        "start": 0.836,
+        "end": 0.94
+      },
+      {
+        "text": "nicht",
+        "start": 0.964,
+        "end": 1.138
+      },
+      {
+        "text": "wegputzen.",
+        "start": 1.173,
+        "end": 1.881
+      },
+      {
+        "text": "Dafür",
+        "start": 2.485,
+        "end": 2.786
+      },
+      {
+        "text": "gibt",
+        "start": 2.821,
+        "end": 3.019
+      },
+      {
+        "text": "es",
+        "start": 3.053,
+        "end": 3.123
+      },
+      {
+        "text": "die",
+        "start": 3.158,
+        "end": 3.239
+      },
+      {
+        "text": "Zahnreinigung.",
+        "start": 3.32,
+        "end": 4.458
+      }
+    ]
+  },
+  "e1": {
+    "text": "Endlich wieder weiße Zähne!",
+    "heard": "Endlich wieder weiße Zähne",
+    "wer": 0,
+    "fileDuration": 1.567347,
+    "words": [
+      {
+        "text": "Endlich",
+        "start": 0,
+        "end": 0.372
+      },
+      {
+        "text": "wieder",
+        "start": 0.406,
+        "end": 0.592
+      },
+      {
+        "text": "weiße",
+        "start": 0.65,
+        "end": 0.906
+      },
+      {
+        "text": "Zähne!",
+        "start": 0.964,
+        "end": 1.533
+      }
+    ]
+  },
+  "e2": {
+    "text": "Hi! Wir sehen uns!",
+    "heard": "Hi, wir sehen uns",
+    "wer": 0,
+    "fileDuration": 1.097143,
+    "words": [
+      {
+        "text": "Hi!",
+        "start": 0,
+        "end": 0.279
+      },
+      {
+        "text": "Wir",
+        "start": 0.406,
+        "end": 0.488
+      },
+      {
+        "text": "sehen",
+        "start": 0.511,
+        "end": 0.662
+      },
+      {
+        "text": "uns!",
+        "start": 0.72,
+        "end": 1.068
+      }
+    ]
+  }
+}

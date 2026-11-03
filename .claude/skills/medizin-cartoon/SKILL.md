@@ -10,7 +10,7 @@ Hochformat-Kurzvideos, die den Referenzen des Creators folgen (Stil wie die
 das Handle des Creators). Alles ist Code: SVG-Zeichnungen und GSAP-Timeline in
 HyperFrames-Kompositionen. Lies vorher `/hyperframes` (Vertrag, Workflow).
 
-Referenzprojekte, die du kopierst und umbaust: `tiktok/ohrenschmalz/` (neuester Stand: 40 s, kein Cold Open, Augenbrauen/Schweiß, Sticker-Frage in der Mitte), `tiktok/mandeln/` (neuester Stand: deutsche Design-Stimmen, Pausen-Kürzung, drei Figuren) und `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
+Referenzprojekte, die du kopierst und umbaust: `tiktok/zahnstein/` (neuester Stand: Sicherheitszonen eingehalten, Zoom ≤ 1,12, Wasserzeichen waagerecht bei y 1440, Texte ab y 380), `tiktok/ohrenschmalz/` (neuester Stand: 40 s, kein Cold Open, Augenbrauen/Schweiß, Sticker-Frage in der Mitte), `tiktok/mandeln/` (neuester Stand: deutsche Design-Stimmen, Pausen-Kürzung, drei Figuren) und `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
 Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Gesicht mit `lidFill` für Haut/Nagel, Zahn, Instrumente inkl. Schere und Wattestäbchen, Schmerzstern, Naht, Untertitel).
 
 ## Dramaturgie (immer gleich)
@@ -182,3 +182,5 @@ Die TikTok-Oberfläche verdeckt Teile des 1080×1920-Bilds:
 
 - **Texte im Bild ausschreiben:** „Schreib's in die Kommentare ↓“, nie nur „Schreib's ↓“. Schluss-Gags müssen ohne Vorwissen verständlich sein (Patient sagt erst, was er vorhat: „Mein Ohr juckt schon wieder“, dann protestiert das Stäbchen).
 - Pro Zeile überschreibbare Stimm-Einstellungen: `"settings": {...}` in `script.json`. Kippt ein Satz trotzdem immer in die falsche Tonlage, umformulieren (Ausrufe wie „Vergiss es!“ provozieren Kreischen).
+- **Sicherheitszonen-Check per Overlay:** Snapshots mit `--keep` erzeugen und mit ffmpeg `drawbox` die verdeckten Bereiche rot einfärben (oben 0–340, rechts x 880–1080/y 880–1700, unten ab 1540), dann als Raster ansehen.
+- Voice-Design braucht mindestens 100 Zeichen Vorschautext und 20 Zeichen Beschreibung.
