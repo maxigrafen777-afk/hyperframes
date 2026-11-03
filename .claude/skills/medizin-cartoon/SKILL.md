@@ -145,7 +145,7 @@ Daraus folgt:
 - **Lebendigkeit messen:** `f0s.py` gibt Tonhöhe (Median), Tonhöhen-Schwankung in Halbtönen (`var`) und Dynamik aus. Unter ~4 Halbtönen klingt eine Stimme monoton („langweilig“). Voice-Design mit überzeichneten Beschreibungen („extrem hysterisch, schrill“, „sehr tief, schläfrig, schmatzend“, „großspuriger Angeber“), `eleven_ttv_v3`, `guidance_scale: 5`, 6 Vorschläge pro Rolle; den mit hoher `var`, Wortfehlerrate 0 und passender Tonhöhe nehmen.
 - **Sprechen:** `eleven_multilingual_v2`, `stability 0.4`, `style 0.6` war im Test lebendiger als v3.
 - **Konsistenz-QA:** `f0ref` pro Stimme in `script.json`, `qa.maxF0Dev: 0.3` (Oktaven). Takes, die in eine andere Tonlage kippen (z. B. 308 statt 159 Hz), werden neu erzeugt. Ausnahme: geschriene Einwörter liegen naturgemäß höher.
-- **Timing dicht:** Zeilen starten immer direkt nach der vorigen (`GAP` 0,05 s im Streit), nur `"wait": 1.1` in `script.json` lässt Platz für eine Aktion (z. B. Plopp). Szenen enden kurz nach dem letzten Satz (keine feste Mindestlänge). `maxPause` 0,22 s.
+- **Timing dicht, aber nicht gehetzt:** Zeilen starten direkt nach der vorigen (`GAP` 0,25 s im Streit, 0,3 s in OP/Patient; 0,05 s war dem Creator zu flott, man kam beim Hinschauen nicht hinterher), Tempo 1,0, `"wait"` (0,5–1,5 s) in `script.json` lässt Platz, damit man eine Aktion sehen kann (Stäbchen schiebt, Spritze kommt, Plopp). Szenen enden kurz nach dem letzten Satz (keine feste Mindestlänge). `maxPause` 0,3 s. Zielt ~35–40 s.
 - **Musikbett 0,08** (~19 dB unter den Stimmen).
 - Aktuelle Stimmen: Trommelfell `qUEezpe9PVeBGCAuvgCT`, Pfropf `60QqaEwKeWbeCvUpTWud`, Wattestäbchen `57UyT2voiMHSkl25qJtO`; Arzt `Og1j4Myr6614gRWlVatR`, Patient `DG0JkxHQrOrx7vnDPwPZ`.
 
@@ -169,3 +169,6 @@ Daraus folgt:
 - Keine fremden Wasserzeichen, Namen oder Logos (kein „Dr.healthcare“, kein TikTok-Endscreen; den fügt TikTok selbst an).
 - Kein Gore: Blut ist flach und stilisiert, Wunden werden gleich versorgt.
 - Deterministisch: kein `Math.random`, keine Timer; alle Bewegung in der Timeline.
+
+- **Texte im Bild ausschreiben:** „Schreib's in die Kommentare ↓“, nie nur „Schreib's ↓“. Schluss-Gags müssen ohne Vorwissen verständlich sein (Patient sagt erst, was er vorhat: „Mein Ohr juckt schon wieder“, dann protestiert das Stäbchen).
+- Pro Zeile überschreibbare Stimm-Einstellungen: `"settings": {...}` in `script.json`. Kippt ein Satz trotzdem immer in die falsche Tonlage, umformulieren (Ausrufe wie „Vergiss es!“ provozieren Kreischen).

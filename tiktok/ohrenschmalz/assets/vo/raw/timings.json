@@ -441,25 +441,40 @@
     ]
   },
   "e1": {
-    "text": "Nur ganz kurz…",
-    "heard": "Nur ganz kurz",
+    "text": "Hm… mein Ohr juckt schon wieder.",
+    "heard": "Hm, mein Ohr juckt schon wieder",
     "wer": 0,
-    "fileDuration": 1.097143,
+    "fileDuration": 1.802449,
     "words": [
       {
-        "text": "Nur",
+        "text": "Hm…",
         "start": 0,
-        "end": 0.186
-      },
-      {
-        "text": "ganz",
-        "start": 0.209,
         "end": 0.406
       },
       {
-        "text": "kurz…",
-        "start": 0.464,
-        "end": 1.068
+        "text": "mein",
+        "start": 0.557,
+        "end": 0.673
+      },
+      {
+        "text": "Ohr",
+        "start": 0.731,
+        "end": 0.848
+      },
+      {
+        "text": "juckt",
+        "start": 0.894,
+        "end": 1.08
+      },
+      {
+        "text": "schon",
+        "start": 1.103,
+        "end": 1.254
+      },
+      {
+        "text": "wieder.",
+        "start": 1.289,
+        "end": 1.765
       }
     ]
   },

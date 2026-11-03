@@ -29,12 +29,12 @@ for (const l of script.lines) if (l.reuse && VO[l.reuse]) VO[l.id] = VO[l.reuse]
 const ORDER = script.order;
 const GAP = {
   teaser: 0,
-  streit: 0.05,
+  streit: 0.25,
   nachher: 0.08,
-  op: 0.2,
+  op: 0.3,
   frage: 0.2,
   praxis: 0.3,
-  patient: 0.25,
+  patient: 0.3,
 };
 const PAD = {
   teaser: 0.5,
@@ -411,10 +411,11 @@ const streitJs = `${HELPERS}${BODY_INIT}
     tl.to("#ask", { opacity: 0, duration: 0.2 }, S1 - 0.1);
     ${blinks("streit", SC.streit[0], SC.streit[1])}
 `;
-const askBody = `<div id="ask">Kennst du das? Schreib's ↓</div>`;
+const askBody = `<div id="ask"><div class="ask-1">Kennst du das?</div><div class="ask-2">Schreib's in die Kommentare ↓</div></div>`;
 const askCss = `#ask { position: absolute; left: 0; right: 0; top: 150px; margin: 0 auto; width: max-content; padding: 12px 30px;
   border-radius: 34px; background: #FFE14D; color: #1d1414; border: 6px solid #1d1414; font-family: "Montserrat", sans-serif;
-  font-weight: 900; font-size: 46px; opacity: 0; }`;
+  font-weight: 900; font-size: 46px; opacity: 0; text-align: center; line-height: 1.15; }
+  #ask .ask-2 { font-size: 34px; font-weight: 800; }`;
 
 /* ---------- Szene 2: beim Arzt – aufweichen, spülen, raus ---------- */
 const STEPS = ["AUFWEICHEN", "SPÜLEN", "RAUS DAMIT"];

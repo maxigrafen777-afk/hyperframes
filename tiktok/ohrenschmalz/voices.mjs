@@ -73,7 +73,7 @@ async function tts(line, take = 1) {
   const body = {
     text: spoken(line.text),
     model_id: model,
-    voice_settings: v.settings,
+    voice_settings: { ...v.settings, ...(line.settings || {}) },
     seed: (v.seed ?? 4242) + take - 1,
   };
   if (isV3) body.language_code = "de";
