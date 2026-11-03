@@ -1,62 +1,140 @@
 {
   "n1": {
-    "text": "Heute Nacht verschwindet der Mond. Das passiert als Erstes.",
+    "text": "Heute Nacht verschwindet der Mond. Das passiert als Erstes:",
     "heard": "Heute Nacht verschwindet der Mond. Das passiert als Erstes",
     "wer": 0,
-    "fileDuration": 3.709388,
+    "fileDuration": 3.578776,
     "words": [
       {
         "text": "Heute",
         "start": 0,
-        "end": 0.29
+        "end": 0.244
       },
       {
         "text": "Nacht",
-        "start": 0.348,
-        "end": 0.604
+        "start": 0.29,
+        "end": 0.522
       },
       {
         "text": "verschwindet",
-        "start": 0.673,
-        "end": 1.207
+        "start": 0.58,
+        "end": 1.068
       },
       {
         "text": "der",
-        "start": 1.231,
-        "end": 1.347
+        "start": 1.103,
+        "end": 1.219
       },
       {
         "text": "Mond.",
-        "start": 1.405,
-        "end": 1.823
+        "start": 1.277,
+        "end": 1.649
       },
       {
         "text": "Das",
-        "start": 2.101,
-        "end": 2.299
+        "start": 1.718,
+        "end": 1.927
       },
       {
         "text": "passiert",
-        "start": 2.368,
-        "end": 2.717
+        "start": 1.997,
+        "end": 2.392
       },
       {
         "text": "als",
-        "start": 2.775,
-        "end": 2.914
+        "start": 2.473,
+        "end": 2.601
       },
       {
-        "text": "Erstes.",
-        "start": 2.995,
-        "end": 3.669
+        "text": "Erstes:",
+        "start": 2.682,
+        "end": 3.529
       }
     ]
   },
   "n2": {
-    "text": "Jede Nacht wird so dunkel wie bei Neumond. Für immer.",
-    "heard": "Jede Nacht wird so dunkel wie bei Neumond. Für immer",
+    "text": "Ostern fällt aus. Kein Witz: Ostern ist immer der Sonntag nach dem ersten Frühlings-Vollmond.",
+    "heard": "Ostern fällt aus. Kein Witz. Ostern ist immer der Sonntag nach dem ersten Frühlingsvollmond",
     "wer": 0,
-    "fileDuration": 3.578776,
+    "fileDuration": 5.929796,
+    "words": [
+      {
+        "text": "Ostern",
+        "start": 0,
+        "end": 0.511
+      },
+      {
+        "text": "fällt",
+        "start": 0.592,
+        "end": 0.824
+      },
+      {
+        "text": "aus.",
+        "start": 0.882,
+        "end": 1.254
+      },
+      {
+        "text": "Kein",
+        "start": 1.324,
+        "end": 1.521
+      },
+      {
+        "text": "Witz:",
+        "start": 1.567,
+        "end": 1.869
+      },
+      {
+        "text": "Ostern",
+        "start": 2.148,
+        "end": 2.612
+      },
+      {
+        "text": "ist",
+        "start": 2.705,
+        "end": 2.902
+      },
+      {
+        "text": "immer",
+        "start": 2.961,
+        "end": 3.146
+      },
+      {
+        "text": "der",
+        "start": 3.181,
+        "end": 3.286
+      },
+      {
+        "text": "Sonntag",
+        "start": 3.344,
+        "end": 3.796
+      },
+      {
+        "text": "nach",
+        "start": 3.866,
+        "end": 4.005
+      },
+      {
+        "text": "dem",
+        "start": 4.04,
+        "end": 4.156
+      },
+      {
+        "text": "ersten",
+        "start": 4.249,
+        "end": 4.586
+      },
+      {
+        "text": "Frühlings-Vollmond.",
+        "start": 4.632,
+        "end": 5.898
+      }
+    ]
+  },
+  "n3": {
+    "text": "Jede Nacht wird pechschwarz. Und genau in solchen Nächten greifen Löwen am häufigsten Menschen an.",
+    "heard": "Jede Nacht wird pechschwarz und genau in solchen Nächten greifen Löwen am häufigsten Menschen an",
+    "wer": 0,
+    "fileDuration": 6.530612,
     "words": [
       {
         "text": "Jede",
@@ -66,405 +144,402 @@
       {
         "text": "Nacht",
         "start": 0.348,
-        "end": 0.569
+        "end": 0.546
       },
       {
         "text": "wird",
-        "start": 0.615,
-        "end": 0.755
+        "start": 0.592,
+        "end": 0.743
       },
       {
-        "text": "so",
-        "start": 0.789,
-        "end": 0.906
+        "text": "pechschwarz.",
+        "start": 0.801,
+        "end": 1.591
       },
       {
-        "text": "dunkel",
-        "start": 0.964,
-        "end": 1.324
+        "text": "Und",
+        "start": 1.869,
+        "end": 2.113
       },
       {
-        "text": "wie",
-        "start": 1.382,
-        "end": 1.498
-      },
-      {
-        "text": "bei",
-        "start": 1.533,
-        "end": 1.66
-      },
-      {
-        "text": "Neumond.",
-        "start": 1.718,
-        "end": 2.322
-      },
-      {
-        "text": "Für",
-        "start": 2.566,
-        "end": 2.763
-      },
-      {
-        "text": "immer.",
-        "start": 2.798,
-        "end": 3.529
-      }
-    ]
-  },
-  "n3": {
-    "text": "Dein Strandurlaub? Ebbe und Flut schrumpfen auf etwa ein Drittel.",
-    "heard": "Dein Strandurlaub? Ebbe und Flut schrumpfen auf etwa ein Drittel.",
-    "wer": 0,
-    "fileDuration": 4.179592,
-    "words": [
-      {
-        "text": "Dein",
-        "start": 0,
-        "end": 0.221
-      },
-      {
-        "text": "Strandurlaub?",
-        "start": 0.255,
-        "end": 0.987
-      },
-      {
-        "text": "Ebbe",
-        "start": 1.161,
-        "end": 1.451
-      },
-      {
-        "text": "und",
-        "start": 1.533,
-        "end": 1.637
-      },
-      {
-        "text": "Flut",
-        "start": 1.695,
-        "end": 1.962
-      },
-      {
-        "text": "schrumpfen",
-        "start": 2.009,
+        "text": "genau",
+        "start": 2.229,
         "end": 2.496
       },
       {
-        "text": "auf",
-        "start": 2.577,
-        "end": 2.705
+        "text": "in",
+        "start": 2.531,
+        "end": 2.577
       },
       {
-        "text": "etwa",
-        "start": 2.786,
-        "end": 3.03
+        "text": "solchen",
+        "start": 2.624,
+        "end": 2.937
       },
       {
-        "text": "ein",
-        "start": 3.123,
-        "end": 3.286
+        "text": "Nächten",
+        "start": 2.984,
+        "end": 3.367
       },
       {
-        "text": "Drittel.",
-        "start": 3.32,
-        "end": 4.133
+        "text": "greifen",
+        "start": 3.437,
+        "end": 3.808
+      },
+      {
+        "text": "Löwen",
+        "start": 3.866,
+        "end": 4.203
+      },
+      {
+        "text": "am",
+        "start": 4.354,
+        "end": 4.54
+      },
+      {
+        "text": "häufigsten",
+        "start": 4.656,
+        "end": 5.19
+      },
+      {
+        "text": "Menschen",
+        "start": 5.236,
+        "end": 5.584
+      },
+      {
+        "text": "an.",
+        "start": 5.677,
+        "end": 6.502
       }
     ]
   },
   "n4": {
-    "text": "Unter Wasser fehlt plötzlich ein Startsignal. Viele Korallen laichen nach dem Vollmond.",
-    "heard": "Unter Wasser fehlt plötzlich ein Startsignal. Viele Korallen laichen nach dem Vollmond",
+    "text": "Ebbe und Flut? Schrumpfen auf etwa ein Drittel.",
+    "heard": "Ebbe und Flut schrumpfen auf etwa ein Drittel",
     "wer": 0,
-    "fileDuration": 5.511837,
+    "fileDuration": 3.004082,
     "words": [
       {
-        "text": "Unter",
-        "start": 0,
-        "end": 0.244
-      },
-      {
-        "text": "Wasser",
-        "start": 0.279,
-        "end": 0.58
-      },
-      {
-        "text": "fehlt",
-        "start": 0.65,
-        "end": 0.917
-      },
-      {
-        "text": "plötzlich",
-        "start": 0.975,
-        "end": 1.44
-      },
-      {
-        "text": "ein",
-        "start": 1.533,
-        "end": 1.637
-      },
-      {
-        "text": "Startsignal.",
-        "start": 1.695,
-        "end": 2.682
-      },
-      {
-        "text": "Viele",
-        "start": 2.798,
-        "end": 3.077
-      },
-      {
-        "text": "Korallen",
-        "start": 3.123,
-        "end": 3.553
-      },
-      {
-        "text": "laichen",
-        "start": 3.634,
-        "end": 3.994
-      },
-      {
-        "text": "nach",
-        "start": 4.017,
-        "end": 4.168
-      },
-      {
-        "text": "dem",
-        "start": 4.203,
-        "end": 4.319
-      },
-      {
-        "text": "Vollmond.",
-        "start": 4.377,
-        "end": 5.48
-      }
-    ]
-  },
-  "n5": {
-    "text": "Sonnenfinsternis? Nie wieder. Nirgends auf der Erde.",
-    "heard": "Sonnenfinsternis? Nie wieder. Nirgends auf der Erde",
-    "wer": 0,
-    "fileDuration": 3.526531,
-    "words": [
-      {
-        "text": "Sonnenfinsternis?",
-        "start": 0,
-        "end": 0.987
-      },
-      {
-        "text": "Nie",
-        "start": 1.045,
-        "end": 1.196
-      },
-      {
-        "text": "wieder.",
-        "start": 1.254,
-        "end": 1.625
-      },
-      {
-        "text": "Nirgends",
-        "start": 1.904,
-        "end": 2.392
-      },
-      {
-        "text": "auf",
-        "start": 2.485,
-        "end": 2.601
-      },
-      {
-        "text": "der",
-        "start": 2.647,
-        "end": 2.728
-      },
-      {
-        "text": "Erde.",
-        "start": 2.786,
-        "end": 3.483
-      }
-    ]
-  },
-  "n6": {
-    "text": "Aber das Schlimmste kommt langsam. Der Mond hält die Erdachse stabil.",
-    "heard": "Aber das Schlimmste kommt langsam. Der Mond hält die Erdachse stabil",
-    "wer": 0,
-    "fileDuration": 4.597551,
-    "words": [
-      {
-        "text": "Aber",
+        "text": "Ebbe",
         "start": 0,
         "end": 0.279
       },
       {
-        "text": "das",
-        "start": 0.313,
-        "end": 0.418
+        "text": "und",
+        "start": 0.337,
+        "end": 0.441
       },
       {
-        "text": "Schlimmste",
-        "start": 0.441,
-        "end": 0.929
+        "text": "Flut?",
+        "start": 0.488,
+        "end": 0.882
       },
       {
-        "text": "kommt",
-        "start": 1.01,
-        "end": 1.312
+        "text": "Schrumpfen",
+        "start": 0.952,
+        "end": 1.428
       },
       {
-        "text": "langsam.",
-        "start": 1.382,
-        "end": 1.916
+        "text": "auf",
+        "start": 1.486,
+        "end": 1.591
       },
       {
-        "text": "Der",
-        "start": 2.032,
-        "end": 2.183
+        "text": "etwa",
+        "start": 1.66,
+        "end": 1.881
       },
       {
-        "text": "Mond",
-        "start": 2.229,
-        "end": 2.473
+        "text": "ein",
+        "start": 1.962,
+        "end": 2.125
       },
       {
-        "text": "hält",
-        "start": 2.531,
-        "end": 2.705
-      },
-      {
-        "text": "die",
-        "start": 2.728,
-        "end": 2.856
-      },
-      {
-        "text": "Erdachse",
-        "start": 2.949,
-        "end": 3.529
-      },
-      {
-        "text": "stabil.",
-        "start": 3.564,
-        "end": 4.551
+        "text": "Drittel.",
+        "start": 2.159,
+        "end": 2.972
       }
     ]
   },
-  "n7": {
-    "text": "Ohne ihn könnte sie über Millionen Jahre kippen.",
-    "heard": "Ohne ihn könnte sie über Millionen Jahre kippen",
-    "wer": 0,
-    "fileDuration": 3.787755,
+  "n5": {
+    "text": "Und Sonnenfinsternisse waren sowieso ein Riesenzufall: Die Sonne ist vierhundertmal größer, aber auch vierhundertmal weiter weg. Jetzt: nie wieder.",
+    "heard": "Und Sonnenfinsternisse waren sowieso ein Riesenzufall. Die Sonne ist 400 Mal größer, aber auch 400 Mal weiter weg. Jetzt nie wieder",
+    "wer": 0.11,
+    "fileDuration": 9.273469,
     "words": [
       {
-        "text": "Ohne",
+        "text": "Und",
         "start": 0,
-        "end": 0.29
+        "end": 0.221
       },
       {
-        "text": "ihn",
-        "start": 0.36,
-        "end": 0.604
+        "text": "Sonnenfinsternisse",
+        "start": 0.267,
+        "end": 1.196
       },
       {
-        "text": "könnte",
-        "start": 0.72,
-        "end": 0.975
-      },
-      {
-        "text": "sie",
-        "start": 1.033,
-        "end": 1.138
-      },
-      {
-        "text": "über",
+        "text": "waren",
         "start": 1.265,
         "end": 1.521
       },
       {
-        "text": "Millionen",
-        "start": 1.556,
-        "end": 2.02
+        "text": "sowieso",
+        "start": 1.567,
+        "end": 2.032
       },
       {
-        "text": "Jahre",
-        "start": 2.078,
-        "end": 2.334
+        "text": "ein",
+        "start": 2.113,
+        "end": 2.194
       },
       {
-        "text": "kippen.",
-        "start": 2.392,
-        "end": 3.762
+        "text": "Riesenzufall:",
+        "start": 2.264,
+        "end": 3.158
+      },
+      {
+        "text": "Die",
+        "start": 3.274,
+        "end": 3.413
+      },
+      {
+        "text": "Sonne",
+        "start": 3.448,
+        "end": 3.692
+      },
+      {
+        "text": "ist",
+        "start": 3.75,
+        "end": 3.936
+      },
+      {
+        "text": "vierhundertmal",
+        "start": 3.994,
+        "end": 4.76
+      },
+      {
+        "text": "größer,",
+        "start": 4.818,
+        "end": 5.399
+      },
+      {
+        "text": "aber",
+        "start": 5.468,
+        "end": 5.712
+      },
+      {
+        "text": "auch",
+        "start": 5.747,
+        "end": 5.886
+      },
+      {
+        "text": "vierhundertmal",
+        "start": 5.944,
+        "end": 6.641
+      },
+      {
+        "text": "weiter",
+        "start": 6.711,
+        "end": 7.001
+      },
+      {
+        "text": "weg.",
+        "start": 7.059,
+        "end": 7.477
+      },
+      {
+        "text": "Jetzt:",
+        "start": 7.651,
+        "end": 8.139
+      },
+      {
+        "text": "nie",
+        "start": 8.22,
+        "end": 8.371
+      },
+      {
+        "text": "wieder.",
+        "start": 8.429,
+        "end": 9.242
       }
     ]
   },
-  "n8": {
-    "text": "Dann hätte Deutschland Sommer wie in der Wüste. Und Winter wie in der Arktis.",
-    "heard": "Dann hätte Deutschland Sommer wie in der Wüste und Winter wie in der Arktis",
+  "n6": {
+    "text": "Aber das Gefährlichste: Ohne Mond könnte die Erdachse über Millionen Jahre kippen.",
+    "heard": "Aber das Gefährlichste: Ohne Mond könnte die Erdachse über Millionen Jahre kippen",
     "wer": 0,
-    "fileDuration": 5.276735,
+    "fileDuration": 5.511837,
     "words": [
       {
-        "text": "Dann",
+        "text": "Aber",
         "start": 0,
         "end": 0.313
       },
       {
+        "text": "das",
+        "start": 0.395,
+        "end": 0.511
+      },
+      {
+        "text": "Gefährlichste:",
+        "start": 0.557,
+        "end": 1.254
+      },
+      {
+        "text": "Ohne",
+        "start": 1.428,
+        "end": 1.718
+      },
+      {
+        "text": "Mond",
+        "start": 1.776,
+        "end": 2.09
+      },
+      {
+        "text": "könnte",
+        "start": 2.206,
+        "end": 2.485
+      },
+      {
+        "text": "die",
+        "start": 2.531,
+        "end": 2.647
+      },
+      {
+        "text": "Erdachse",
+        "start": 2.74,
+        "end": 3.367
+      },
+      {
+        "text": "über",
+        "start": 3.483,
+        "end": 3.727
+      },
+      {
+        "text": "Millionen",
+        "start": 3.773,
+        "end": 4.307
+      },
+      {
+        "text": "Jahre",
+        "start": 4.365,
+        "end": 4.656
+      },
+      {
+        "text": "kippen.",
+        "start": 4.714,
+        "end": 5.48
+      }
+    ]
+  },
+  "n7": {
+    "text": "Dann hätte Deutschland Sommer wie in der Wüste. Und Winter wie in der Arktis.",
+    "heard": "Dann hätte Deutschland Sommer wie in der Wüste und Winter wie in der Arktis",
+    "wer": 0,
+    "fileDuration": 4.780408,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0,
+        "end": 0.244
+      },
+      {
         "text": "hätte",
-        "start": 0.372,
-        "end": 0.557
+        "start": 0.29,
+        "end": 0.464
       },
       {
         "text": "Deutschland",
-        "start": 0.615,
-        "end": 1.115
+        "start": 0.511,
+        "end": 0.964
       },
       {
         "text": "Sommer",
-        "start": 1.173,
-        "end": 1.579
+        "start": 1.022,
+        "end": 1.358
       },
       {
         "text": "wie",
-        "start": 1.695,
-        "end": 1.974
+        "start": 1.44,
+        "end": 1.614
       },
       {
         "text": "in",
-        "start": 2.043,
-        "end": 2.171
+        "start": 1.66,
+        "end": 1.73
       },
       {
         "text": "der",
-        "start": 2.218,
-        "end": 2.322
+        "start": 1.765,
+        "end": 1.869
       },
       {
         "text": "Wüste.",
-        "start": 2.368,
-        "end": 2.891
+        "start": 1.916,
+        "end": 2.392
       },
       {
         "text": "Und",
-        "start": 3.065,
-        "end": 3.251
+        "start": 2.508,
+        "end": 2.717
       },
       {
         "text": "Winter",
-        "start": 3.309,
-        "end": 3.669
+        "start": 2.786,
+        "end": 3.193
       },
       {
         "text": "wie",
-        "start": 3.82,
-        "end": 4.005
+        "start": 3.274,
+        "end": 3.46
       },
       {
         "text": "in",
-        "start": 4.052,
-        "end": 4.133
+        "start": 3.518,
+        "end": 3.587
       },
       {
         "text": "der",
-        "start": 4.18,
-        "end": 4.296
+        "start": 3.634,
+        "end": 3.727
       },
       {
         "text": "Arktis.",
-        "start": 4.365,
-        "end": 5.248
+        "start": 3.785,
+        "end": 4.737
+      }
+    ]
+  },
+  "n8": {
+    "text": "Ach ja: Werwölfe wären arbeitslos.",
+    "heard": "Ach ja, Werwölfe wären arbeitslos",
+    "wer": 0,
+    "fileDuration": 2.821224,
+    "words": [
+      {
+        "text": "Ach",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "ja:",
+        "start": 0.267,
+        "end": 0.546
+      },
+      {
+        "text": "Werwölfe",
+        "start": 0.662,
+        "end": 1.242
+      },
+      {
+        "text": "wären",
+        "start": 1.3,
+        "end": 1.602
+      },
+      {
+        "text": "arbeitslos.",
+        "start": 1.718,
+        "end": 2.786
       }
     ]
   },
@@ -472,100 +547,90 @@
     "text": "Was würdest du am meisten vermissen?",
     "heard": "Was würdest du am meisten vermissen?",
     "wer": 0,
-    "fileDuration": 2.089796,
+    "fileDuration": 2.533878,
     "words": [
       {
         "text": "Was",
         "start": 0,
-        "end": 0.279
+        "end": 0.244
       },
       {
         "text": "würdest",
-        "start": 0.36,
-        "end": 0.639
+        "start": 0.313,
+        "end": 0.592
       },
       {
         "text": "du",
-        "start": 0.662,
-        "end": 0.755
+        "start": 0.615,
+        "end": 0.778
       },
       {
         "text": "am",
-        "start": 0.813,
-        "end": 0.894
+        "start": 0.894,
+        "end": 1.033
       },
       {
         "text": "meisten",
-        "start": 0.929,
-        "end": 1.312
+        "start": 1.103,
+        "end": 1.509
       },
       {
         "text": "vermissen?",
-        "start": 1.37,
-        "end": 2.043
+        "start": 1.556,
+        "end": 2.508
       }
     ]
   },
   "n10": {
-    "text": "Und in Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
-    "heard": "Und in Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
+    "text": "Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
+    "heard": "Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
     "wer": 0,
-    "fileDuration": 3.657143,
+    "fileDuration": 3.422041,
     "words": [
       {
-        "text": "Und",
-        "start": 0,
-        "end": 0.232
-      },
-      {
-        "text": "in",
-        "start": 0.313,
-        "end": 0.36
-      },
-      {
         "text": "Teil",
-        "start": 0.395,
-        "end": 0.557
+        "start": 0,
+        "end": 0.255
       },
       {
         "text": "zwei:",
-        "start": 0.615,
-        "end": 1.01
+        "start": 0.313,
+        "end": 0.708
       },
       {
         "text": "Was",
-        "start": 1.289,
-        "end": 1.509
+        "start": 0.917,
+        "end": 1.126
       },
       {
         "text": "wäre,",
-        "start": 1.579,
-        "end": 1.985
+        "start": 1.196,
+        "end": 1.602
       },
       {
         "text": "wenn",
-        "start": 2.043,
-        "end": 2.206
+        "start": 1.66,
+        "end": 1.834
       },
       {
         "text": "wir",
-        "start": 2.241,
-        "end": 2.345
+        "start": 1.869,
+        "end": 2.02
       },
       {
         "text": "zwei",
-        "start": 2.392,
-        "end": 2.624
+        "start": 2.09,
+        "end": 2.368
       },
       {
         "text": "Monde",
-        "start": 2.682,
-        "end": 3.007
+        "start": 2.438,
+        "end": 2.752
       },
       {
         "text": "hätten?",
-        "start": 3.053,
-        "end": 3.622
+        "start": 2.81,
+        "end": 3.39
       }
     ]
   }

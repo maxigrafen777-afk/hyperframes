@@ -1,4 +1,4 @@
-// "Was wäre, wenn der Mond verschwindet?" (v2) – baut index.html und compositions/*
+// "Was wäre, wenn der Mond verschwindet?" (v3) – baut index.html und compositions/*
 // aus script.json + assets/vo/timings.json (node voices.mjs).
 // Eine durchgehende Welt (Weltall → Nachthimmel → Küste → Unterwasser), durch die
 // die Kamera in einer Fahrt fliegt. Der gestrichelte "Geister-Mond" ist das
@@ -15,7 +15,7 @@ const f = (n) => +n.toFixed(3);
 
 /* ================= Zeitplan aus den echten Takes ================= */
 // Pause VOR jeder Zeile (Platz für Kamerafahrten und Aktionen).
-const WAIT = { n1: 0.1, n2: 0.45, n3: 0.75, n4: 2.1, n5: 1.35, n6: 1.15, n7: 0.3, n8: 0.35, n9: 0.7, n10: 1.65 };
+const WAIT = { n1: 0.1, n2: 0.2, n3: 0.2, n4: 0.3, n5: 0.9, n6: 0.35, n7: 0.15, n8: 0.85, n9: 0.3, n10: 0.35 };
 const L = {};
 let t = 0;
 for (const line of script.lines) {
@@ -28,7 +28,7 @@ for (const line of script.lines) {
   };
   t = L[line.id].e;
 }
-const END_HOLD = 2.6;
+const END_HOLD = 2.4;
 const DUR = f(t + END_HOLD);
 const at = (id, w) => {
   const hit = L[id].words.find((x) => x.text.toLowerCase().startsWith(w.toLowerCase()));
@@ -148,7 +148,7 @@ const sky = `
   <g id="sun">${rays}<circle cx="${SUN.x}" cy="${SUN.y}" r="${SUN.r}" fill="${C.sun}"/>
     <circle cx="${SUN.x - 40}" cy="${SUN.y - 45}" r="${SUN.r * 0.42}" fill="#FFD966"/>
     <circle cx="${SUN.x + 55}" cy="${SUN.y + 50}" r="${SUN.r * 0.16}" fill="#FFB52E"/></g>
-  <g id="ghost-sun-pos">${ghost("ghost-sun", SUN.x, SUN.y, 140)}</g>
+  <g id="ghost-sun-pos">${ghost("ghost-sun", SUN.x, SUN.y, SUN.r)}</g>
 `;
 
 /* ---- Erde (Blick auf Europa und Afrika) ---- */
@@ -169,6 +169,7 @@ const ARABIA = P([[35, 28], [39, 20], [43, 13], [45, 13], [52, 16], [59, 22], [5
 const SAMERICA = P([[-35, -6], [-39, -13], [-41, -22], [-48, -27], [-53, -34], [-58, -38], [-62, -20], [-60, 0], [-52, 5], [-45, -1]]);
 const MADAGASCAR = P([[49, -12], [50, -16], [47, -25], [44, -22], [44, -16]]);
 const SAHARA = P([[-14, 26], [-5, 30], [10, 31], [25, 30], [32, 27], [33, 20], [22, 17], [8, 16], [-5, 17], [-14, 19]]);
+const WOLF = [[80, 300], [60, 215], [76, 150], [98, 110], [92, 42], [132, 84], [156, 34], [172, 92], [206, 92], [256, 30], [282, 44], [238, 112], [208, 150], [196, 214], [214, 300]];
 const GER = (([x, y]) => ({ dx: x, dy: y }))(proj([10, 51])); // Deutschland, relativ zum Erdmittelpunkt in Einheiten von r
 const clouds = [[-0.55, -0.5, 0.16], [0.6, 0.2, 0.13], [-0.4, 0.45, 0.12], [0.55, -0.55, 0.1], [0.2, 0.72, 0.12]]
   .map(([dx, dy, s]) => {
@@ -261,6 +262,7 @@ const beach = `
 const coast = `
   <rect x="0" y="${Y_H}" width="${W}" height="${Y_WL - Y_H}" fill="${C.seaFar}"/>
   ${house}
+  <path d="M 0 4170 C 120 4160 260 4230 360 4330 C 420 4390 470 4430 520 ${Y_H + 20} L 0 ${Y_H + 20} Z" fill="#0E1830"/>
   <g id="waves">${waveStripes}</g>
   <g id="refl">${reflection}</g>
   ${beach}
@@ -350,6 +352,7 @@ const world = `
   ${underwater}
   <rect id="dark" x="0" y="2600" width="${W}" height="${Y_WL - 2600}" fill="#02040B" opacity="0"/>
   <g id="stars2">${stars(120, 3150, 4400, "s2", 1.2, 3.4)}${sparkles(8, 3150, 4300, "s2")}</g>
+  <g id="lions"><g class="eye" ><ellipse cx="114" cy="4285" rx="20" ry="11" fill="#FFD23F"/><ellipse cx="146" cy="4285" rx="20" ry="11" fill="#FFD23F"/><rect x="112" y="4278" width="5" height="18" fill="#0A1020"/><rect x="144" y="4278" width="5" height="18" fill="#0A1020"/></g><g class="eye" ><ellipse cx="254" cy="4335" rx="20" ry="11" fill="#FFD23F"/><ellipse cx="286" cy="4335" rx="20" ry="11" fill="#FFD23F"/><rect x="252" y="4328" width="5" height="18" fill="#0A1020"/><rect x="284" y="4328" width="5" height="18" fill="#0A1020"/></g></g>
   <g id="moon-pos">${moonArt("moon", MOON.x, MOON.y, MOON.r)}</g>
   <g id="cracks" opacity="0" stroke="${C.ink}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M ${MOON.x - 20} ${MOON.y - 160} l 30 70 l -40 40 l 50 50 l -20 60"/>
@@ -367,14 +370,42 @@ const world = `
   <div class="hk hk-y">DER MOND</div>
 </div>
 <div id="first" class="ov"><div class="stk">DAS PASSIERT ALS ERSTES ↓</div></div>
-<div id="forever" class="ov"><div class="stk stk-d">NEUMOND. FÜR IMMER.</div></div>
-<div id="third" class="ov"><div class="big-y">≈ ⅓</div><div class="sub">so stark wie heute</div></div>
-<div id="qmark" class="ov"><div class="q">?</div></div>
+<div id="ostern" class="ov">
+  <svg width="420" height="330" viewBox="0 0 420 330">
+    <rect x="58" y="22" width="300" height="290" rx="22" fill="#00000055"/>
+    <rect x="50" y="10" width="300" height="290" rx="22" fill="#F7F3EA"/>
+    <rect x="50" y="10" width="300" height="80" rx="22" fill="#E8505B"/><rect x="50" y="60" width="300" height="30" fill="#E8505B"/>
+    <text x="200" y="68" text-anchor="middle" class="cal-t">OSTERN</text>
+    <g id="os-moon"><circle cx="200" cy="195" r="62" fill="#F3EBCF" stroke="#CDBD8E" stroke-width="6"/><circle cx="180" cy="180" r="12" fill="#CDBD8E"/><circle cx="222" cy="212" r="9" fill="#CDBD8E"/></g>
+    <text id="os-q" x="200" y="235" text-anchor="middle" class="os-q">??</text>
+    <g id="egg"><ellipse cx="360" cy="250" rx="52" ry="68" fill="#7FD1C7" stroke="#0A1020" stroke-width="6"/>
+      <path d="M 312 236 l 16 -14 l 16 14 l 16 -14 l 16 14 l 16 -14 l 14 12" fill="none" stroke="#FFD23F" stroke-width="9" stroke-linejoin="round"/>
+      <path d="M 314 270 h 92" stroke="#E8505B" stroke-width="9"/></g>
+  </svg>
+</div>
+<div id="third" class="ov"><div class="big-y">≈ ⅓</div></div>
+<div id="bigger" class="ov ratio"><div class="rt"><b>400×</b> GRÖSSER</div></div>
+<div id="farther" class="ov ratio ratio2"><div class="rt"><b>400×</b> WEITER WEG</div></div>
 <div id="stamp" class="ov"><div class="stp">NIE WIEDER</div></div>
 <div id="deg" class="ov"><div class="deg-n" id="deg-n">23,4°</div><div class="sub">Neigung der Erdachse</div></div>
 <div id="years" class="ov"><div class="yr" id="yr">+1 MIO. JAHRE</div></div>
 <div id="hot" class="ov"><div class="card card-hot">SOMMER <span>=</span> WÜSTE</div></div>
 <div id="cold" class="ov"><div class="card card-cold">WINTER <span>=</span> ARKTIS</div></div>
+<div id="wolf" class="ov">
+  <svg width="440" height="420" viewBox="0 0 300 300">
+    <g id="wolf-head">
+      <path d="${blob(WOLF, 0, 0, 1)}" fill="#8F99AD" stroke="#0A1020" stroke-width="7" stroke-linejoin="round"/>
+      <path d="${blob([[118, 300], [112, 230], [140, 170], [178, 150], [196, 210], [206, 300]], 0, 0, 1)}" fill="#C9D0DC"/>
+      <path d="M 104 70 L 112 96 L 126 84 Z M 150 58 L 152 92 L 164 88 Z" fill="#E8A0A8"/>
+      <path d="M 176 108 q 14 12 28 2" fill="none" stroke="#0A1020" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 172 96 l 30 -10" stroke="#0A1020" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="194" cy="132" rx="6" ry="11" fill="#7FC8F0"/>
+      <ellipse cx="265" cy="50" rx="10" ry="14" fill="#0A1020" transform="rotate(40 265 50)"/>
+      <circle cx="272" cy="36" r="9" fill="#0A1020"/>
+    </g>
+  </svg>
+  <div id="jobless" class="stp stp-red">ARBEITSLOS</div>
+</div>
 <div id="cta" class="ov">
   <div class="ct">WAS WÜRDEST DU AM MEISTEN</div>
   <div class="ct ct-y">VERMISSEN?</div>
@@ -388,6 +419,15 @@ const world = `
 
 const worldCss = `
   #root { background: ${C.space}; }
+  #ostern { top: 360px; }
+  .os-q { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 120px; fill: #E8505B; }
+  .ratio { top: 975px; } .ratio2 { top: 1075px; }
+  .rt { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 62px; color: #fff; -webkit-text-stroke: 14px ${C.ink}; paint-order: stroke fill; }
+  .rt b { color: ${C.accent}; }
+  #wolf { top: 340px; }
+  #wolf svg { display: block; margin: 0 auto; }
+  #jobless { position: absolute; left: 0; right: 0; margin: 0 auto; width: max-content; top: 370px; }
+  #jobless.stp-red { color: #fff; background: #E8505B; border-color: #fff; font-size: 84px; }
   #shake, #zoom { position: absolute; left: 0; top: 0; width: ${W}px; height: ${H}px; }
   #cam { position: absolute; left: 0; top: 0; width: ${W}px; height: ${WORLD_H}px; }
   #world { position: absolute; left: 0; top: 0; width: ${W}px; height: ${WORLD_H}px; }
@@ -442,47 +482,48 @@ const T = {
   vanish: f(at("n1", "verschwindet") + 0.3),
   first: at("n1", "Das") - 0.05,
   hookOut: at("n1", "Das") - 0.15,
-  firstOut: f(L.n2.s + 0.1),
-  dark: L.n2.s,
-  starsIn: at("n2", "Neumond") - 0.2,
-  forever: at("n2", "Für"),
-  toTide: f(L.n3.s - 0.6),
-  bigTide: at("n3", "Ebbe") - 0.35,
-  smallTide: at("n3", "schrumpfen") - 0.05,
-  third: at("n3", "Drittel"),
-  dive: f(L.n4.s - 1.35),
-  cal: L.n4.s,
-  calGone: at("n4", "Startsignal") - 0.1,
-  eggs: at("n4", "laichen"),
-  rise: f(L.n5.s - 1.3),
-  ghostSun: f(L.n5.s - 0.1),
-  stamp: at("n5", "Nie") - 0.05,
-  toEarth: f(L.n6.s - 0.95),
-  orbit: at("n6", "Mond") - 0.1,
+  ostern: L.n2.s - 0.05,
+  witz: at("n2", "Kein"),
+  vollmond: at("n2", "Frühlings") + 0.3,
+  osternOut: f(L.n3.s + 0.1),
+  dark: L.n3.s,
+  starsIn: at("n3", "pechschwarz") + 0.2,
+  lions: at("n3", "Löwen") - 0.1,
+  toTide: f(L.n4.s - 0.35),
+  bigTide: L.n4.s + 0.1,
+  smallTide: at("n4", "Schrumpfen") - 0.05,
+  third: at("n4", "Drittel"),
+  rise: f(L.n5.s - 0.55),
+  ghostSun: at("n5", "Riesenzufall") - 0.6,
+  bigger: at("n5", "größer") - 0.1,
+  farther: at("n5", "weiter") - 0.1,
+  ratioOut: at("n5", "Jetzt") - 0.1,
+  stamp: at("n5", "nie") - 0.05,
+  toEarth: f(L.n6.s - 0.35),
+  orbitOut: at("n6", "Ohne"),
   axis: at("n6", "Erdachse") - 0.1,
-  deg: at("n6", "stabil"),
-  orbitOut: L.n7.s,
-  years: at("n7", "Millionen") - 0.1,
-  tip: at("n7", "kippen") - 0.3,
-  pin: at("n8", "Deutschland") - 0.1,
-  hot: at("n8", "Sommer") - 0.05,
-  cold: at("n8", "Winter") - 0.05,
+  years: at("n6", "Millionen") - 0.1,
+  tip: at("n6", "kippen") - 0.2,
+  pin: at("n7", "Deutschland") - 0.1,
+  hot: at("n7", "Sommer") - 0.05,
+  cold: at("n7", "Winter") - 0.05,
+  wolf: f(L.n8.s - 0.75),
+  jobless: at("n8", "arbeitslos") - 0.05,
   cta: f(L.n9.s - 0.15),
-  ctaSub: f(L.n9.s + 0.9),
-  teaser: f(L.n10.s + 0.2),
+  ctaSub: f(L.n9.s - 0.05),
+  teaser: f(L.n10.s + 0.1),
   twoMoons: at("n10", "zwei") - 0.05,
 };
+T.deg = T.axis + 0.3;
 const TILT_MAX = 64;
-// Erdachsen-Kippen: Winkel-Keyframes (Grad), ab der Senkrechten.
 const WOB = [
   [T.years, 23.4],
-  [T.tip, 40],
-  [T.tip + 0.6, 12],
-  [T.tip + 1.3, TILT_MAX],
-  [T.cta - 0.1, TILT_MAX],
-  [T.cta + 0.8, 23.4],
+  [T.tip, 38],
+  [T.tip + 0.4, 14],
+  [T.tip + 0.95, TILT_MAX],
+  [T.wolf - 0.3, TILT_MAX],
+  [T.wolf + 0.6, 23.4],
 ];
-// Kamera auf Deutschland: Pin-Position bei voller Neigung.
 const ang = (TILT_MAX * Math.PI) / 180;
 const pinX = EARTH.x + GER.dx * EARTH.r * Math.cos(ang) - GER.dy * EARTH.r * Math.sin(ang);
 const pinY = EARTH.y + GER.dx * EARTH.r * Math.sin(ang) + GER.dy * EARTH.r * Math.cos(ang);
@@ -511,75 +552,72 @@ const worldJs = `
     tl.to(".refl", { scaleX: 0, opacity: 0, transformOrigin: "50% 50%", duration: 0.25, stagger: 0.04, ease: "power2.in" }, ${T.vanish} + 0.2);
     tl.to("#hook", { opacity: 0, y: -30, duration: 0.22, ease: "power2.in" }, ${T.hookOut});
     tl.fromTo("#first", { opacity: 0, scale: 0.5, rotation: -10 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.3, ease: "back.out(2.2)" }, ${T.first});
-    tl.to("#first", { opacity: 0, scale: 0.8, duration: 0.2, ease: "power2.in" }, ${T.firstOut});
+    tl.to("#first", { opacity: 0, scale: 0.8, duration: 0.18, ease: "power2.in" }, ${T.ostern} - 0.2);
 
-    // Wellen laufen, solange wir an der Küste sind.
-    tl.fromTo(".wave", { x: 0 }, { x: -90, duration: 2.4, ease: "none", repeat: ${Math.ceil(T.dive / 2.4)}, stagger: 0.3 }, 0);
+    tl.fromTo(".wave", { x: 0 }, { x: -90, duration: 2.4, ease: "none", repeat: ${Math.ceil(T.rise / 2.4)}, stagger: 0.3 }, 0);
 
-    // Die Nacht wird schwarz: Fenster im Haus gehen an, mehr Sterne, Kamera schiebt rein.
+    // OSTERN: Kalender fliegt rein, wackelt bei "Kein Witz", der Vollmond darin verschwindet.
+    tl.fromTo("#ostern", { opacity: 0, scale: 0.4, rotation: -14 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.35, ease: "back.out(2)" }, ${T.ostern});
+    tl.fromTo("#egg", { rotation: -18 }, { rotation: 12, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 5, transformOrigin: "50% 90%" }, ${T.ostern});
+    tl.to("#ostern", { rotation: 4, duration: 0.07 }, ${T.witz});
+    tl.to("#ostern", { rotation: -6, duration: 0.07 }, ${T.witz} + 0.07);
+    tl.to("#ostern", { rotation: -4, duration: 0.07 }, ${T.witz} + 0.14);
+    tl.to("#os-moon", { scale: 0, duration: 0.25, ease: "back.in(2)", transformOrigin: "50% 50%" }, ${T.vollmond});
+    tl.fromTo("#os-q", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.6)", transformOrigin: "50% 50%" }, ${T.vollmond} + 0.2);
+    tl.to("#ostern", { opacity: 0, scale: 0.85, duration: 0.2 }, ${T.osternOut});
+
+    // PECHSCHWARZ: Nacht kippt ins Dunkle, Fenster gehen an, Sterne, dann Löwenaugen.
     gsap.set(".s2", { opacity: 0 });
-    tl.to("#dark", { opacity: 0.66, duration: 1.3, ease: "power2.inOut" }, ${T.dark});
-    tl.to(".win", { opacity: 1, duration: 0.08, stagger: 0.35 }, ${T.dark} + 0.7);
-    tl.to(".s2", { opacity: 0.9, duration: 0.25, stagger: 0.01, ease: "power1.out" }, ${T.starsIn});
-    tl.to("#zoom", { scale: 1.07, duration: ${f(L.n2.e - T.dark)}, ease: "power1.inOut" }, ${T.dark});
-    tl.fromTo("#forever", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, rotation: 2, duration: 0.3, ease: "back.out(2.2)" }, ${T.forever});
-    tl.to("#forever", { opacity: 0, duration: 0.2 }, ${T.toTide});
+    tl.to("#dark", { opacity: 0.7, duration: 1.1, ease: "power2.inOut" }, ${T.dark});
+    tl.to(".win", { opacity: 1, duration: 0.08, stagger: 0.3 }, ${T.dark} + 0.6);
+    tl.to(".s2", { opacity: 0.9, duration: 0.2, stagger: 0.008, ease: "power1.out" }, ${T.starsIn});
+    tl.to("#zoom", { scale: 1.08, duration: ${f(T.toTide - T.dark - 0.02)}, ease: "power1.inOut" }, ${T.dark});
+    gsap.set(".eye", { scaleY: 0, transformOrigin: "50% 50%" });
+    tl.to(".eye", { scaleY: 1, duration: 0.14, stagger: 0.12, ease: "power2.out" }, ${T.lions});
+    tl.to(".eye", { scaleY: 0.1, duration: 0.06 }, ${T.lions} + 1.3);
+    tl.to(".eye", { scaleY: 1, duration: 0.08 }, ${T.lions} + 1.38);
+    tl.to(".eye", { scaleY: 0, duration: 0.15 }, ${T.toTide});
 
-    // Dein Strandurlaub: Kamera runter, früher frisst die Flut die Sandburg, jetzt nicht mehr.
-    tl.to("#zoom", { scale: 1, duration: 0.9, ease: "power3.inOut" }, ${T.toTide});
-    tl.to("#cam", { y: ${-CY.tide}, duration: 0.9, ease: "power3.inOut" }, ${T.toTide});
-    tl.to("#dark", { opacity: 0.3, duration: 0.9 }, ${T.toTide});
+    // GEZEITEN: kurz und klar, große Tide → kleine Tide → ⅓.
+    tl.to("#zoom", { scale: 1, duration: 0.8, ease: "power3.inOut" }, ${T.toTide});
+    tl.to("#cam", { y: ${-CY.tide}, duration: 0.8, ease: "power3.inOut" }, ${T.toTide});
+    tl.to("#dark", { opacity: 0.3, duration: 0.8 }, ${T.toTide});
     const tideTo = (y, d, t0) => {
       tl.to("#tide-water", { attr: { y, height: ${Y_WL + 4} - y }, duration: d, ease: "sine.inOut" }, t0);
       tl.to("#tide-edge", { attr: { y: y - 3 }, duration: d, ease: "sine.inOut" }, t0);
     };
     tl.to("#br-old", { opacity: 1, duration: 0.2 }, ${T.bigTide});
-    tideTo(${TIDE.mid - TIDE.big}, 0.6, ${T.bigTide});
-    tideTo(${TIDE.mid + TIDE.big}, ${f(T.smallTide - T.bigTide - 0.62)}, ${T.bigTide} + 0.6);
-    tl.to("#br-old", { opacity: 0.45, duration: 0.3 }, ${T.smallTide});
+    tideTo(${TIDE.mid - TIDE.big}, 0.4, ${T.bigTide});
+    tideTo(${TIDE.mid + TIDE.big}, ${f(T.smallTide - T.bigTide - 0.42)}, ${T.bigTide} + 0.4);
+    tl.to("#br-old", { opacity: 0.45, duration: 0.25 }, ${T.smallTide});
     tl.to("#br-new", { opacity: 1, duration: 0.2 }, ${T.smallTide});
-    tideTo(${TIDE.mid - TIDE.small}, 0.55, ${T.smallTide});
-    tideTo(${TIDE.mid + TIDE.small}, 0.55, ${T.smallTide} + 0.55);
-    tideTo(${TIDE.mid - TIDE.small}, 0.55, ${T.smallTide} + 1.1);
-    tideTo(${TIDE.mid}, 0.4, ${T.smallTide} + 1.65);
+    tideTo(${TIDE.mid - TIDE.small}, 0.4, ${T.smallTide});
+    tideTo(${TIDE.mid + TIDE.small}, 0.4, ${T.smallTide} + 0.4);
+    tideTo(${TIDE.mid}, 0.35, ${T.smallTide} + 0.8);
     tl.fromTo("#third", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, ${T.third});
-    tl.to("#third", { opacity: 0, duration: 0.2 }, ${T.dive});
+    tl.to("#third", { opacity: 0, duration: 0.2 }, ${T.rise});
 
-    // Abtauchen: der Vollmond fehlt im Kalender der Korallen.
-    tl.to("#cam", { y: ${-CY.under}, duration: 1.05, ease: "power3.inOut" }, ${T.dive});
-    tl.to("#fish1", { x: 1400, duration: 7, ease: "none" }, ${T.dive} + 0.4);
-    tl.to("#fish2", { x: -1500, duration: 8, ease: "none" }, ${T.dive} + 0.9);
-    tl.to("#fish3", { x: 1500, duration: 6, ease: "none" }, ${T.dive} + 1.6);
-    gsap.set(".weed", { svgOrigin: "0 6930" });
-    tl.fromTo(".weed", { skewX: -4 }, { skewX: 4, duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.25 }, ${T.dive});
-    tl.fromTo("#cal", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.8)" }, ${T.cal});
-    gsap.set("#cal-moon-art", { svgOrigin: "540 6020" });
-    tl.to("#cal-moon-art", { scale: 0, duration: 0.3, ease: "back.in(2)" }, ${T.calGone});
-    tl.to("#cal-ghost", { opacity: 1, duration: 0.3 }, ${T.calGone} + 0.25);
-    tl.fromTo("#qmark", { opacity: 0, scale: 0.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 8, duration: 0.4, ease: "back.out(2.5)" }, ${T.calGone} + 0.3);
-    // Ein paar Eier steigen zögernd auf und sinken wieder ab: kein Signal.
-    tl.fromTo(".egg", { opacity: 0, y: 0 }, { opacity: 1, y: -90, duration: 0.6, stagger: 0.015, ease: "power2.out" }, ${T.eggs});
-    tl.to(".egg", { opacity: 0, y: 40, duration: 0.9, stagger: 0.01, ease: "power2.in" }, ${T.eggs} + 1.15);
-    tl.to(["#qmark", "#cal"], { opacity: 0, duration: 0.2 }, ${T.rise});
-
-    // Hoch ins All, an der Sonne vorbei.
-    tl.to("#cam", { y: ${-CY.sun}, duration: 1.3, ease: "power3.inOut" }, ${T.rise});
+    // SONNE: hoch ins All, der Geister-Mond deckt die Sonne exakt ab, 400 × 400.
+    tl.to("#cam", { y: ${-CY.sun}, duration: 1.2, ease: "power3.inOut" }, ${T.rise});
     tl.to("#dark", { opacity: 0, duration: 0.6 }, ${T.rise});
     gsap.set("#ghost-sun-pos", { x: -760 });
-    tl.to("#ghost-sun-pos", { x: 0, duration: 1.0, ease: "power2.out" }, ${T.ghostSun});
-    tl.to("#ghost-sun-pos", { x: 800, duration: 1.0, ease: "power2.in" }, ${T.ghostSun} + 1.4);
+    tl.to("#ghost-sun-pos", { x: 0, duration: 0.8, ease: "power3.out" }, ${T.ghostSun});
+    tl.fromTo("#bigger", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, ${T.bigger});
+    tl.fromTo("#farther", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, ${T.farther});
+    tl.to(["#bigger", "#farther"], { opacity: 0, duration: 0.15 }, ${T.stamp} - 0.15);
+    tl.to("#ghost-sun-pos", { x: 800, duration: 0.5, ease: "power3.in" }, ${T.ratioOut});
     tl.fromTo("#stamp", { opacity: 0, scale: 1.8, rotation: -14 }, { opacity: 1, scale: 1, rotation: -7, duration: 0.18, ease: "power4.in" }, ${T.stamp});
     tl.to("#shake", { x: 10, y: -8, duration: 0.05 }, ${T.stamp} + 0.18);
     tl.to("#shake", { x: -7, y: 6, duration: 0.05 }, ${T.stamp} + 0.23);
     tl.to("#shake", { x: 0, y: 0, duration: 0.08 }, ${T.stamp} + 0.28);
-    tl.to("#stamp", { opacity: 0, duration: 0.2 }, ${T.toEarth});
+    tl.to("#stamp", { opacity: 0, duration: 0.2 }, ${T.toEarth} + 0.1);
 
-    // Zur Erde: Mondbahn, Achse, 23,4°.
-    tl.to("#cam", { y: ${-CY.earth}, duration: 0.9, ease: "power2.inOut" }, ${T.toEarth});
-    tl.to("#orbit", { opacity: 1, duration: 0.4 }, ${T.orbit});
-    tl.to("#ghost-orbit-pos", { opacity: 1, duration: 0.4 }, ${T.orbit});
-    tl.to("#ghost-orbit-pos", { x: 470, y: 118, duration: 1.4, ease: "sine.inOut" }, ${T.orbit});
-    tl.to(["#axis", "#axis-ref"], { opacity: 1, duration: 0.3 }, ${T.axis});
+    // ERDE: Mondbahn verschwindet, Achse 23,4°, Millionen Jahre, kippen.
+    tl.to("#cam", { y: ${-CY.earth}, duration: 0.85, ease: "power2.inOut" }, ${T.toEarth});
+    tl.set(["#orbit", "#ghost-orbit-pos"], { opacity: 1 }, ${T.toEarth});
+    tl.to("#ghost-orbit-pos", { x: 470, y: 118, duration: 1.2, ease: "sine.inOut" }, ${T.toEarth});
+    tl.to(["#orbit", "#ghost-orbit-pos"], { opacity: 0, duration: 0.35 }, ${T.orbitOut});
+    tl.to(["#axis", "#axis-ref"], { opacity: 1, duration: 0.25 }, ${T.axis});
     const A = { a: 23.4 };
     const arcR = E.r + 70;
     const drawArc = () => {
@@ -589,11 +627,8 @@ const worldJs = `
       document.querySelector("#deg-n").textContent = A.a.toFixed(1).replace(".", ",") + "°";
     };
     drawArc();
-    tl.to("#axis-arc", { opacity: 1, duration: 0.3 }, ${T.deg});
+    tl.to("#axis-arc", { opacity: 1, duration: 0.25 }, ${T.deg});
     tl.fromTo("#deg", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, ${T.deg});
-
-    // Ohne Mond: Bahn weg, Achse kippt, Jahre zählen hoch.
-    tl.to(["#orbit", "#ghost-orbit-pos"], { opacity: 0, duration: 0.35 }, ${T.orbitOut});
     const WOB = ${JSON.stringify(WOB)};
     for (let i = 1; i < WOB.length; i++) {
       const [t0, a0] = WOB[i - 1], [t1, a1] = WOB[i];
@@ -607,33 +642,38 @@ const worldJs = `
       document.querySelector("#yr").textContent = "+" + Math.round(Y.v) + " MIO. JAHRE";
     } }, ${T.years});
     tl.to(["#years", "#deg", "#axis-arc"], { opacity: 0, duration: 0.2 }, ${T.pin} - 0.3);
-    ${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => `tl.to("#shake", { x: ${i % 2 ? -7 : 7}, y: ${i % 3 ? 5 : -6}, duration: 0.08 }, ${f(T.tip + i * 0.12)});`).join("\n    ")}
-    tl.to("#shake", { x: 0, y: 0, duration: 0.12 }, ${f(T.tip + 0.96)});
+    ${[0, 1, 2, 3, 4, 5, 6].map((i) => `tl.to("#shake", { x: ${i % 2 ? -7 : 7}, y: ${i % 3 ? 5 : -6}, duration: 0.08 }, ${f(T.tip + i * 0.12)});`).join("\n    ")}
+    tl.to("#shake", { x: 0, y: 0, duration: 0.12 }, ${f(T.tip + 0.84)});
 
-    // Dein Deutschland: Kamera auf den Pin, Sommer wie Wüste, Winter wie Arktis.
+    // DEUTSCHLAND: Pin, Sommer = Wüste, Winter = Arktis.
     tl.fromTo("#pin", { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.35, ease: "bounce.out" }, ${T.pin});
-    tl.to("#cam", { x: ${GER_CAM.x}, y: ${GER_CAM.y}, duration: 0.8, ease: "power2.inOut" }, ${T.pin});
-    tl.to("#zoom", { scale: 1.08, duration: 0.8, ease: "power2.inOut" }, ${T.pin});
-    tl.to("#season-n", { opacity: 0.72, duration: 0.35 }, ${T.hot});
+    tl.to("#cam", { x: ${GER_CAM.x}, y: ${GER_CAM.y}, duration: 0.7, ease: "power2.inOut" }, ${T.pin});
+    tl.to("#zoom", { scale: 1.08, duration: 0.7, ease: "power2.inOut" }, ${T.pin});
+    tl.to("#season-n", { opacity: 0.72, duration: 0.3 }, ${T.hot});
     tl.fromTo("#hot", { opacity: 0, scale: 0.5, rotation: -8 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.3, ease: "back.out(2.2)" }, ${T.hot});
     tl.to("#hot", { opacity: 0, duration: 0.15 }, ${T.cold} - 0.1);
-    tl.to("#season-n", { attr: { fill: "${C.ice}" }, opacity: 0.85, duration: 0.35 }, ${T.cold});
+    tl.to("#season-n", { attr: { fill: "${C.ice}" }, opacity: 0.85, duration: 0.3 }, ${T.cold});
     tl.fromTo("#cold", { opacity: 0, scale: 0.5, rotation: 8 }, { opacity: 1, scale: 1, rotation: 3, duration: 0.3, ease: "back.out(2.2)" }, ${T.cold});
-    tl.to("#cold", { opacity: 0, duration: 0.2 }, ${T.cta} - 0.2);
-    tl.to("#season-n", { opacity: 0, duration: 0.4 }, ${T.cta});
-    tl.to("#pin", { opacity: 0, duration: 0.3 }, ${T.cta} + 0.4);
+    tl.to("#cold", { opacity: 0, duration: 0.2 }, ${T.wolf} - 0.2);
+    tl.to("#season-n", { opacity: 0, duration: 0.4 }, ${T.wolf});
+    tl.to("#pin", { opacity: 0, duration: 0.3 }, ${T.wolf});
 
-    // Kommentar-Frage: Kamera zurück, die Mondbahn kommt wieder.
-    tl.to("#cam", { x: 0, y: ${-CY.end}, duration: 0.7, ease: "power2.inOut" }, ${T.cta} - 0.2);
-    tl.to("#zoom", { scale: 1, duration: 0.7, ease: "power2.inOut" }, ${T.cta} - 0.2);
+    // WERWOLF: Kamera zurück, der Werwolf heult den leeren Himmel an, "ARBEITSLOS".
+    tl.to("#cam", { x: 0, y: ${-CY.end}, duration: 0.7, ease: "power2.inOut" }, ${T.wolf} - 0.2);
+    tl.to("#zoom", { scale: 1, duration: 0.7, ease: "power2.inOut" }, ${T.wolf} - 0.2);
+    tl.fromTo("#wolf", { opacity: 0, y: 120 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)" }, ${T.wolf});
+    tl.fromTo("#wolf-head", { rotation: 0 }, { rotation: -8, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1, svgOrigin: "120 260" }, ${T.wolf} + 0.2);
+    tl.to("#wolf-head", { rotation: 14, y: 16, duration: 0.35, ease: "power2.inOut", svgOrigin: "120 260" }, ${T.jobless});
+    tl.fromTo("#jobless", { opacity: 0, scale: 1.8, rotation: -16 }, { opacity: 1, scale: 1, rotation: -9, duration: 0.18, ease: "power4.in" }, ${T.jobless});
+    tl.to(["#wolf", "#jobless"], { opacity: 0, duration: 0.2 }, ${T.cta} - 0.15);
+
+    // KOMMENTAR-FRAGE + TEASER
     tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.cta});
     tl.fromTo("#ct3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, ${T.ctaSub});
-    tl.to("#orbit", { opacity: 1, duration: 0.6 }, ${T.ctaSub});
-    tl.set("#ghost-orbit-pos", { x: 0, y: 0 }, ${T.ctaSub});
-    tl.to("#ghost-orbit-pos", { opacity: 1, duration: 0.6 }, ${T.ctaSub});
+    tl.to("#orbit", { opacity: 1, duration: 0.5 }, ${T.cta});
+    tl.set("#ghost-orbit-pos", { x: 0, y: 0 }, ${T.cta});
+    tl.to("#ghost-orbit-pos", { opacity: 1, duration: 0.5 }, ${T.cta});
     tl.to("#cta", { opacity: 0, scale: 0.9, duration: 0.2 }, ${T.teaser} - 0.2);
-
-    // Teaser Teil 2: zwei Monde ploppen auf die Bahn.
     tl.fromTo("#teaser", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.teaser});
     tl.fromTo("#tz3", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ${f(L.n10.e)});
     gsap.set("#m2a", { svgOrigin: "${EARTH.x - 470} ${EARTH.y}" });
@@ -712,23 +752,27 @@ const SFX = [
   ["crack", "gen-crack", T.crack - 0.05, 0.45],
   ["vanish", "gen-vanish", T.vanish - 0.1, 0.6],
   ["pop1", "gen-pop", T.first - 0.05, 0.4],
+  ["pop2", "gen-pop", T.ostern, 0.45],
+  ["pop3", "gen-pop", T.vollmond + 0.2, 0.4],
   ["dark", "gen-dark", T.dark, 0.45],
-  ["wave2", "gen-wave", T.toTide + 0.3, 0.35],
-  ["pop2", "gen-pop", T.third, 0.45],
-  ["splash", "gen-splash", T.dive + 0.45, 0.55],
-  ["bubbles", "gen-bubbles", T.dive + 1.2, 0.3],
-  ["pop3", "gen-pop", T.calGone + 0.3, 0.45],
+  ["growl", "gen-growl", T.lions + 0.6, 0.4],
+  ["wave2", "gen-wave", T.toTide + 0.2, 0.3],
+  ["pop4", "gen-pop", T.third, 0.45],
   ["rise", "gen-rise", T.rise, 0.5],
-  ["stamp", "gen-stamp", T.stamp + 0.15, 0.7],
+  ["pop5", "gen-pop", T.bigger, 0.35],
+  ["pop6", "gen-pop", T.farther, 0.35],
+  ["stamp", "gen-stamp", T.stamp + 0.15, 0.6],
   ["swoosh", "gen-swoosh2", T.toEarth, 0.35],
-  ["tick", "gen-tick", T.years, 0.22],
-  ["rumble", "gen-rumble", T.tip - 0.2, 0.55],
+  ["tick", "gen-tick", T.years, 0.2],
+  ["rumble", "gen-rumble", T.tip - 0.2, 0.5],
   ["pin", "gen-pop", T.pin + 0.1, 0.45],
-  ["wind", "gen-wind", T.hot, 0.3],
-  ["blizzard", "gen-blizzard", T.cold, 0.3],
-  ["pop4", "gen-pop", T.cta, 0.45],
-  ["pop5", "gen-pop", T.twoMoons, 0.5],
-  ["pop6", "gen-pop", T.twoMoons + 0.25, 0.45],
+  ["wind", "gen-wind", T.hot, 0.28],
+  ["blizzard", "gen-blizzard", T.cold, 0.28],
+  ["howl", "gen-howl", T.wolf + 0.05, 0.5],
+  ["stamp2", "gen-stamp", T.jobless + 0.15, 0.55],
+  ["pop7", "gen-pop", T.cta, 0.45],
+  ["pop8", "gen-pop", T.twoMoons, 0.5],
+  ["pop9", "gen-pop", T.twoMoons + 0.25, 0.45],
 ];
 let track = 10;
 const sfx = SFX.map(

@@ -1,7 +1,7 @@
 {
   "title": "Was wäre, wenn der Mond verschwindet?",
   "voiceModel": "eleven_multilingual_v2",
-  "maxPause": 0.35,
+  "maxPause": 0.12,
   "gap": 0.3,
   "qa": {
     "maxTakes": 3,
@@ -12,12 +12,12 @@
     "erz": {
       "voice_id": "JYafmsWQW103q9CaNv5y",
       "seed": 777,
-      "tempo": 1.06,
+      "tempo": 1.12,
       "f0ref": 97,
       "settings": {
-        "stability": 0.42,
+        "stability": 0.4,
         "similarity_boost": 0.8,
-        "style": 0.45,
+        "style": 0.55,
         "use_speaker_boost": true
       }
     }
@@ -26,7 +26,7 @@
     {
       "id": "n1",
       "speaker": "erz",
-      "text": "Heute Nacht verschwindet der Mond. Das passiert als Erstes.",
+      "text": "Heute Nacht verschwindet der Mond. Das passiert als Erstes:",
       "emph": [
         "verschwindet"
       ]
@@ -34,58 +34,59 @@
     {
       "id": "n2",
       "speaker": "erz",
-      "text": "Jede Nacht wird so dunkel wie bei Neumond. Für immer.",
+      "text": "Ostern fällt aus. Kein Witz: Ostern ist immer der Sonntag nach dem ersten Frühlings-Vollmond.",
       "emph": [
-        "immer"
+        "Ostern"
       ]
     },
     {
       "id": "n3",
       "speaker": "erz",
-      "text": "Dein Strandurlaub? Ebbe und Flut schrumpfen auf etwa ein Drittel.",
+      "text": "Jede Nacht wird pechschwarz. Und genau in solchen Nächten greifen Löwen am häufigsten Menschen an.",
       "emph": [
-        "Drittel"
+        "Löwen"
       ]
     },
     {
       "id": "n4",
       "speaker": "erz",
-      "text": "Unter Wasser fehlt plötzlich ein Startsignal. Viele Korallen laichen nach dem Vollmond.",
+      "text": "Ebbe und Flut? Schrumpfen auf etwa ein Drittel.",
       "emph": [
-        "Startsignal"
+        "Drittel"
       ]
     },
     {
       "id": "n5",
       "speaker": "erz",
-      "text": "Sonnenfinsternis? Nie wieder. Nirgends auf der Erde.",
+      "text": "Und Sonnenfinsternisse waren sowieso ein Riesenzufall: Die Sonne ist vierhundertmal größer, aber auch vierhundertmal weiter weg. Jetzt: nie wieder.",
       "emph": [
+        "Riesenzufall",
         "nie"
       ]
     },
     {
       "id": "n6",
       "speaker": "erz",
-      "text": "Aber das Schlimmste kommt langsam. Der Mond hält die Erdachse stabil.",
-      "emph": [
-        "Schlimmste"
-      ]
-    },
-    {
-      "id": "n7",
-      "speaker": "erz",
-      "text": "Ohne ihn könnte sie über Millionen Jahre kippen.",
+      "text": "Aber das Gefährlichste: Ohne Mond könnte die Erdachse über Millionen Jahre kippen.",
       "emph": [
         "kippen"
       ]
     },
     {
-      "id": "n8",
+      "id": "n7",
       "speaker": "erz",
       "text": "Dann hätte Deutschland Sommer wie in der Wüste. Und Winter wie in der Arktis.",
       "emph": [
         "Wüste",
         "Arktis"
+      ]
+    },
+    {
+      "id": "n8",
+      "speaker": "erz",
+      "text": "Ach ja: Werwölfe wären arbeitslos.",
+      "emph": [
+        "arbeitslos"
       ]
     },
     {
@@ -99,7 +100,7 @@
     {
       "id": "n10",
       "speaker": "erz",
-      "text": "Und in Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
+      "text": "Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
       "emph": [
         "zwei"
       ]
@@ -185,6 +186,16 @@
       "id": "crack",
       "duration": 1.2,
       "prompt": "Glass-like crack then implosion, magical"
+    },
+    {
+      "id": "howl",
+      "duration": 2.5,
+      "prompt": "Cartoon wolf howl that turns into a sad whimper, funny"
+    },
+    {
+      "id": "growl",
+      "duration": 2,
+      "prompt": "Low lion growl in the dark night, close"
     }
   ]
 }
