@@ -10,7 +10,7 @@ Hochformat-Kurzvideos, die den Referenzen des Creators folgen (Stil wie die
 das Handle des Creators). Alles ist Code: SVG-Zeichnungen und GSAP-Timeline in
 HyperFrames-Kompositionen. Lies vorher `/hyperframes` (Vertrag, Workflow).
 
-Referenzprojekte, die du kopierst und umbaust: `tiktok/mandeln/` (neuester Stand: deutsche Design-Stimmen, Pausen-Kürzung, drei Figuren) und `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
+Referenzprojekte, die du kopierst und umbaust: `tiktok/ohrenschmalz/` (neuester Stand: 40 s, kein Cold Open, Augenbrauen/Schweiß, Sticker-Frage in der Mitte), `tiktok/mandeln/` (neuester Stand: deutsche Design-Stimmen, Pausen-Kürzung, drei Figuren) und `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
 Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Gesicht mit `lidFill` für Haut/Nagel, Zahn, Instrumente inkl. Schere und Wattestäbchen, Schmerzstern, Naht, Untertitel).
 
 ## Dramaturgie (immer gleich)
@@ -116,6 +116,29 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - **Arzt kurz halten:** keine Arzt-Stimme während der OP. Die Figuren kommentieren die OP, kurze Schritt-Labels erklären; in der Praxis höchstens ein knapper Satz (wie im ersten Weisheitszahn-Video).
 - **Frecher Dialog:** Beleidigungen mit Witz („Fettklöße“ – „Das sind Muskeln, Kleiner“ – „Wackelpudding mit Gesicht“), Running Gags, Callback am Ende (das Eis taucht wieder auf: „Schon wieder ich?!“).
 - **Requisiten als Figuren:** Hausmittel/Gegenstände (Eis am Stiel) bekommen Gesicht und eigene Stimme; Eis am Stiel statt Kugel.
+
+## Erkenntnisse aus den eigenen TikTok-Statistiken (ab Ohrenschmalz verbindlich)
+
+Gemessen an den ersten 4 Videos (Stand 3. Nov. 2026):
+
+| Video      | Länge | Ø angeschaut | bis zum Ende | OP-Start |
+| ---------- | ----- | ------------ | ------------ | -------- |
+| Zehennagel | 70 s  | 24,8 s       | 13,7 %       | ~23 s    |
+| Blinddarm  | 64 s  | 16,9 s       | 5,0 %        | ~23 s    |
+| Mandeln    | 60 s  | 13,5 s       | 4,8 %        | ~33 s    |
+
+Beim Mandel-Video gingen die meisten bei **0:02**, genau am Schnitt Cold Open → „3 WOCHEN VORHER“. Like-Rate ~7–8 % (gut): der Inhalt gefällt, die Reichweite scheitert an der Bindung.
+
+Daraus folgt:
+
+- **Kein Cold Open, kein Zurückspulen, kein „vorher/später“.** Frame 0 = großer, lesbarer Titel mit einem Alltagsproblem („OHRENSCHMALZ?“) und die Figuren schon im Streit; erster Satz nach ≤ 0,3 s.
+- **35–45 s Gesamtlänge**, die erste Aktion (Gegenstand/Instrument kommt ins Bild) spätestens bei Sekunde 8–10.
+- **Alle 2–3 s passiert etwas Neues** im Bild.
+- **Kommentar-Frage früh**: kurz als Sticker in der Mitte („Kennst du das? Schreib's ↓“) und am Ende; dazu dem Creator raten, sie als ersten Kommentar anzupinnen.
+- **Alltags-Themen** schlagen seltene OPs (Zehennagel lief am besten).
+- **Cover = erstes Bild mit Titel** (das Mandel-Video ohne Titel im Cover lief am schwächsten).
+- **Lustigere Figuren, trotzdem anatomisch richtig:** jede Figur bekommt Augenbrauen (`browPair`, `brows(ch, mood, t)`), Gestresste schwitzen (`sweat`), Körperteile reagieren physisch (Trommelfell beult sich, Pfropf räkelt sich und quetscht), Gegenstände bekommen Accessoires (Wattestäbchen mit Sonnenbrille, die beim „Upps“ verrutscht).
+- **SFX nie auf ein Wort legen**, auch nicht auf kurze („Upps“ ging unter einem Boing verloren). Nach dem Rendern den Mix transkribieren.
 
 ## Stolperfallen
 

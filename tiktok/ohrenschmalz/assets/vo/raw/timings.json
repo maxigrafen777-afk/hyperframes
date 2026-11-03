@@ -1,0 +1,504 @@
+{
+  "s1": {
+    "text": "Hallo?! Ich hör gar nichts mehr!",
+    "heard": "Hallo? Ich hör gar nichts mehr",
+    "wer": 0,
+    "fileDuration": 3.84,
+    "words": [
+      {
+        "text": "Hallo?!",
+        "start": 0,
+        "end": 1.057
+      },
+      {
+        "text": "Ich",
+        "start": 1.753,
+        "end": 1.985
+      },
+      {
+        "text": "hör",
+        "start": 2.02,
+        "end": 2.241
+      },
+      {
+        "text": "gar",
+        "start": 2.299,
+        "end": 2.554
+      },
+      {
+        "text": "nichts",
+        "start": 2.612,
+        "end": 2.914
+      },
+      {
+        "text": "mehr!",
+        "start": 2.995,
+        "end": 3.808
+      }
+    ]
+  },
+  "s2": {
+    "text": "Psst. Ich mach's mir hier gemütlich.",
+    "heard": "Psst. Ich mach's mir hier gemütlich",
+    "wer": 0,
+    "fileDuration": 3.761633,
+    "words": [
+      {
+        "text": "Psst.",
+        "start": 0,
+        "end": 0.453
+      },
+      {
+        "text": "Ich",
+        "start": 1.405,
+        "end": 1.533
+      },
+      {
+        "text": "mach's",
+        "start": 1.579,
+        "end": 1.8
+      },
+      {
+        "text": "mir",
+        "start": 1.846,
+        "end": 1.927
+      },
+      {
+        "text": "hier",
+        "start": 1.962,
+        "end": 2.078
+      },
+      {
+        "text": "gemütlich.",
+        "start": 2.125,
+        "end": 3.715
+      }
+    ]
+  },
+  "s3": {
+    "text": "Was?!",
+    "heard": "Was?",
+    "wer": 0,
+    "fileDuration": 0.835918,
+    "words": [
+      {
+        "text": "Was?!",
+        "start": 0,
+        "end": 0.789
+      }
+    ]
+  },
+  "s4": {
+    "text": "Du verstopfst das ganze Ohr!",
+    "heard": "Du verstopfst das ganze Ohr",
+    "wer": 0,
+    "fileDuration": 1.750204,
+    "words": [
+      {
+        "text": "Du",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "verstopfst",
+        "start": 0.267,
+        "end": 0.871
+      },
+      {
+        "text": "das",
+        "start": 0.894,
+        "end": 1.068
+      },
+      {
+        "text": "ganze",
+        "start": 1.126,
+        "end": 1.428
+      },
+      {
+        "text": "Ohr!",
+        "start": 1.544,
+        "end": 1.718
+      }
+    ]
+  },
+  "w1": {
+    "text": "Keine Sorge! Ich mach das sauber!",
+    "heard": "Keine Sorge, ich mach das sauber",
+    "wer": 0,
+    "fileDuration": 3.657143,
+    "words": [
+      {
+        "text": "Keine",
+        "start": 0,
+        "end": 1.66
+      },
+      {
+        "text": "Sorge!",
+        "start": 1.707,
+        "end": 2.241
+      },
+      {
+        "text": "Ich",
+        "start": 2.624,
+        "end": 2.752
+      },
+      {
+        "text": "mach",
+        "start": 2.786,
+        "end": 2.937
+      },
+      {
+        "text": "das",
+        "start": 2.995,
+        "end": 3.123
+      },
+      {
+        "text": "sauber!",
+        "start": 3.146,
+        "end": 3.622
+      }
+    ]
+  },
+  "s5": {
+    "text": "Aua! Du schiebst ihn ja rein!",
+    "heard": "Aua! Du schiebst ihn ja rein",
+    "wer": 0,
+    "fileDuration": 3.108571,
+    "words": [
+      {
+        "text": "Aua!",
+        "start": 0,
+        "end": 0.813
+      },
+      {
+        "text": "Du",
+        "start": 1.765,
+        "end": 1.95
+      },
+      {
+        "text": "schiebst",
+        "start": 2.009,
+        "end": 2.345
+      },
+      {
+        "text": "ihn",
+        "start": 2.415,
+        "end": 2.496
+      },
+      {
+        "text": "ja",
+        "start": 2.566,
+        "end": 2.647
+      },
+      {
+        "text": "rein!",
+        "start": 2.705,
+        "end": 3.065
+      }
+    ]
+  },
+  "s6": {
+    "text": "Danke, Kumpel. Jetzt lieg ich noch bequemer.",
+    "heard": "Danke Kumpel. Jetzt lieg ich noch bequemer",
+    "wer": 0,
+    "fileDuration": 2.507755,
+    "words": [
+      {
+        "text": "Danke,",
+        "start": 0,
+        "end": 0.372
+      },
+      {
+        "text": "Kumpel.",
+        "start": 0.406,
+        "end": 0.813
+      },
+      {
+        "text": "Jetzt",
+        "start": 0.987,
+        "end": 1.173
+      },
+      {
+        "text": "lieg",
+        "start": 1.219,
+        "end": 1.347
+      },
+      {
+        "text": "ich",
+        "start": 1.393,
+        "end": 1.463
+      },
+      {
+        "text": "noch",
+        "start": 1.521,
+        "end": 1.672
+      },
+      {
+        "text": "bequemer.",
+        "start": 1.73,
+        "end": 2.461
+      }
+    ]
+  },
+  "w2": {
+    "text": "Upps.",
+    "heard": "Ups",
+    "wer": 1,
+    "fileDuration": 1.253878,
+    "words": [
+      {
+        "text": "Upps.",
+        "start": 0,
+        "end": 1.207
+      }
+    ]
+  },
+  "o1": {
+    "text": "Hey! Wer kippt hier Öl auf mich?",
+    "heard": "Hey, wer kippt hier Öl auf mich?",
+    "wer": 0,
+    "fileDuration": 2.742857,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0,
+        "end": 0.383
+      },
+      {
+        "text": "Wer",
+        "start": 1.196,
+        "end": 1.347
+      },
+      {
+        "text": "kippt",
+        "start": 1.405,
+        "end": 1.614
+      },
+      {
+        "text": "hier",
+        "start": 1.637,
+        "end": 1.765
+      },
+      {
+        "text": "Öl",
+        "start": 1.823,
+        "end": 1.997
+      },
+      {
+        "text": "auf",
+        "start": 2.067,
+        "end": 2.171
+      },
+      {
+        "text": "mich?",
+        "start": 2.241,
+        "end": 2.694
+      }
+    ]
+  },
+  "o2": {
+    "text": "Nein! Ich hab hier einen Mietvertrag!",
+    "heard": "Nein, ich hab hier einen Mietvertrag",
+    "wer": 0,
+    "fileDuration": 2.089796,
+    "words": [
+      {
+        "text": "Nein!",
+        "start": 0,
+        "end": 0.372
+      },
+      {
+        "text": "Ich",
+        "start": 0.464,
+        "end": 0.615
+      },
+      {
+        "text": "hab",
+        "start": 0.662,
+        "end": 0.743
+      },
+      {
+        "text": "hier",
+        "start": 0.778,
+        "end": 0.894
+      },
+      {
+        "text": "einen",
+        "start": 0.94,
+        "end": 1.115
+      },
+      {
+        "text": "Mietvertrag!",
+        "start": 1.161,
+        "end": 2.043
+      }
+    ]
+  },
+  "o3": {
+    "text": "Ich hör alles! Sogar das Gras wachsen!",
+    "heard": "Ich hör alles, sogar das Gras wachsen",
+    "wer": 0,
+    "fileDuration": 3.343673,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.174
+      },
+      {
+        "text": "hör",
+        "start": 0.209,
+        "end": 0.406
+      },
+      {
+        "text": "alles!",
+        "start": 0.476,
+        "end": 0.975
+      },
+      {
+        "text": "Sogar",
+        "start": 1.358,
+        "end": 1.695
+      },
+      {
+        "text": "das",
+        "start": 1.718,
+        "end": 1.916
+      },
+      {
+        "text": "Gras",
+        "start": 1.985,
+        "end": 2.368
+      },
+      {
+        "text": "wachsen!",
+        "start": 2.461,
+        "end": 3.297
+      }
+    ]
+  },
+  "d1": {
+    "text": "Das Ohr reinigt sich selbst. Wattestäbchen schieben das Schmalz nur tiefer.",
+    "heard": "Das Ohr reinigt sich selbst. Wattestäbchen schieben das Schmalz nur tiefer",
+    "wer": 0,
+    "fileDuration": 5.433469,
+    "words": [
+      {
+        "text": "Das",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "Ohr",
+        "start": 0.337,
+        "end": 0.534
+      },
+      {
+        "text": "reinigt",
+        "start": 0.627,
+        "end": 0.998
+      },
+      {
+        "text": "sich",
+        "start": 1.033,
+        "end": 1.184
+      },
+      {
+        "text": "selbst.",
+        "start": 1.219,
+        "end": 1.811
+      },
+      {
+        "text": "Wattestäbchen",
+        "start": 2.624,
+        "end": 3.483
+      },
+      {
+        "text": "schieben",
+        "start": 3.611,
+        "end": 3.913
+      },
+      {
+        "text": "das",
+        "start": 3.947,
+        "end": 4.063
+      },
+      {
+        "text": "Schmalz",
+        "start": 4.087,
+        "end": 4.47
+      },
+      {
+        "text": "nur",
+        "start": 4.54,
+        "end": 4.679
+      },
+      {
+        "text": "tiefer.",
+        "start": 4.725,
+        "end": 5.387
+      }
+    ]
+  },
+  "e1": {
+    "text": "Nur ganz kurz…",
+    "heard": "Nur ganz kurz",
+    "wer": 0,
+    "fileDuration": 1.097143,
+    "words": [
+      {
+        "text": "Nur",
+        "start": 0,
+        "end": 0.186
+      },
+      {
+        "text": "ganz",
+        "start": 0.209,
+        "end": 0.406
+      },
+      {
+        "text": "kurz…",
+        "start": 0.464,
+        "end": 1.068
+      }
+    ]
+  },
+  "e2": {
+    "text": "Nicht ich! Ich geh in Rente!",
+    "heard": "Nicht ich, ich gehe in Rente",
+    "wer": 0.17,
+    "fileDuration": 1.906939,
+    "words": [
+      {
+        "text": "Nicht",
+        "start": 0,
+        "end": 0.302
+      },
+      {
+        "text": "ich!",
+        "start": 0.418,
+        "end": 0.58
+      },
+      {
+        "text": "Ich",
+        "start": 0.615,
+        "end": 0.731
+      },
+      {
+        "text": "geh",
+        "start": 0.778,
+        "end": 0.964
+      },
+      {
+        "text": "in",
+        "start": 0.998,
+        "end": 1.057
+      },
+      {
+        "text": "Rente!",
+        "start": 1.138,
+        "end": 1.858
+      }
+    ]
+  }
+}

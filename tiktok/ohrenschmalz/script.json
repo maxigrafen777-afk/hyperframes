@@ -1,0 +1,350 @@
+{
+  "title": "Ohrenschmalz-Pfropf wird entfernt",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "maxPause": 0.3,
+  "hook": [
+    ["OHRENSCHMALZ?", 92, "#FFE14D"],
+    ["SO KOMMT ER RAUS", 60, "#fff"]
+  ],
+  "scenes": {
+    "streit": [0, 14],
+    "op": [20, 30],
+    "praxis": [35, 36],
+    "patient": [40, 43]
+  },
+  "order": ["streit", "op", "praxis", "patient"],
+  "qa": {
+    "maxTakes": 3,
+    "maxWer": 0.1
+  },
+  "lines": [
+    {
+      "id": "s1",
+      "speaker": "tr",
+      "start": 0.1,
+      "end": 1.1,
+      "text": "Hallo?! Ich hör gar nichts mehr!",
+      "emph": ["nichts"]
+    },
+    {
+      "id": "s2",
+      "speaker": "pf",
+      "start": 1.4,
+      "end": 2.4,
+      "text": "Psst. Ich mach's mir hier gemütlich.",
+      "emph": ["gemütlich"]
+    },
+    {
+      "id": "s3",
+      "speaker": "tr",
+      "start": 2.6,
+      "end": 3.6,
+      "text": "Was?!"
+    },
+    {
+      "id": "s4",
+      "speaker": "tr",
+      "start": 3.2,
+      "end": 4.2,
+      "text": "Du verstopfst das ganze Ohr!",
+      "emph": ["verstopfst"]
+    },
+    {
+      "id": "w1",
+      "speaker": "watt",
+      "start": 4.4,
+      "end": 5.4,
+      "text": "Keine Sorge! Ich mach das sauber!",
+      "emph": ["sauber"]
+    },
+    {
+      "id": "s5",
+      "speaker": "tr",
+      "start": 6.0,
+      "end": 7.0,
+      "text": "Aua! Du schiebst ihn ja rein!",
+      "emph": ["rein"]
+    },
+    {
+      "id": "s6",
+      "speaker": "pf",
+      "start": 7.2,
+      "end": 8.2,
+      "text": "Danke, Kumpel. Jetzt lieg ich noch bequemer.",
+      "emph": ["bequemer"]
+    },
+    {
+      "id": "w2",
+      "speaker": "watt",
+      "start": 8.8,
+      "end": 9.8,
+      "text": "Upps."
+    },
+    {
+      "id": "o1",
+      "speaker": "pf",
+      "start": 20.6,
+      "end": 21.6,
+      "text": "Hey! Wer kippt hier Öl auf mich?",
+      "emph": ["Öl"]
+    },
+    {
+      "id": "o2",
+      "speaker": "pf",
+      "start": 23.0,
+      "end": 24.0,
+      "text": "Nein! Ich hab hier einen Mietvertrag!",
+      "emph": ["Mietvertrag"]
+    },
+    {
+      "id": "o3",
+      "speaker": "tr",
+      "start": 27.2,
+      "end": 28.2,
+      "text": "Ich hör alles! Sogar das Gras wachsen!",
+      "emph": ["alles"]
+    },
+    {
+      "id": "d1",
+      "speaker": "arzt",
+      "start": 35.3,
+      "end": 36.3,
+      "text": "Das Ohr reinigt sich selbst. Wattestäbchen schieben das Schmalz nur tiefer."
+    },
+    {
+      "id": "e1",
+      "speaker": "pat",
+      "start": 40.3,
+      "end": 41.3,
+      "text": "Nur ganz kurz…"
+    },
+    {
+      "id": "e2",
+      "speaker": "watt",
+      "start": 41.2,
+      "end": 42.2,
+      "text": "Nicht ich! Ich geh in Rente!",
+      "emph": ["Rente"]
+    }
+  ],
+  "voices": {
+    "tr": {
+      "name": "Trommelfell (DE, hoch, gestresst)",
+      "voice_id": "Xb7cfBV1lE0cYVC2AJjo",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.35,
+        "use_speaker_boost": true
+      },
+      "seed": 1212,
+      "tempo": 1.06
+    },
+    "pf": {
+      "name": "Pfropf (DE, tief, faul)",
+      "voice_id": "yvz9Q6w0xtp74piKcTUi",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 2323,
+      "tempo": 1.06
+    },
+    "watt": {
+      "name": "Wattestäbchen (DE, frech)",
+      "voice_id": "bF3rVjXZtAfDZVJn5SNR",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.35,
+        "use_speaker_boost": true
+      },
+      "seed": 3434,
+      "tempo": 1.06
+    },
+    "arzt": {
+      "name": "Arzt (DE, ruhig, älter)",
+      "voice_id": "Og1j4Myr6614gRWlVatR",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.85,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "seed": 4444,
+      "tempo": 1.06
+    },
+    "pat": {
+      "name": "Patient (DE, locker)",
+      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 5555,
+      "tempo": 1.06
+    }
+  },
+  "genSfx": [
+    {
+      "id": "boom",
+      "prompt": "deep cinematic boom impact with sub bass, short",
+      "duration": 1.5
+    },
+    {
+      "id": "impact",
+      "prompt": "cartoon pop and heavy thud impact, tooth pulled out",
+      "duration": 1.0
+    },
+    {
+      "id": "boing",
+      "prompt": "comedic cartoon boing wobble, rubbery",
+      "duration": 1.0
+    },
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "throb",
+      "prompt": "cartoon throbbing pulse, deep dull thump thump",
+      "duration": 1.2
+    },
+    {
+      "id": "rimshot",
+      "prompt": "comedic drum rimshot ba dum tss",
+      "duration": 1.2
+    },
+    {
+      "id": "squish",
+      "prompt": "wet squishy squelch, cartoon, short",
+      "duration": 0.8
+    },
+    {
+      "id": "drip",
+      "prompt": "single oily drop falling, soft plip",
+      "duration": 0.5
+    },
+    {
+      "id": "spray",
+      "prompt": "water jet rinsing, short gush and gurgle",
+      "duration": 1.5
+    },
+    {
+      "id": "plop",
+      "prompt": "loud satisfying wet cartoon plop, cork popping out",
+      "duration": 0.8
+    },
+    {
+      "id": "ring",
+      "prompt": "muffled hearing then sudden clear bright ding, ears opening",
+      "duration": 1.0
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-boom",
+      "src": "gen-boom.mp3",
+      "start": 0,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-throb",
+      "src": "gen-throb.mp3",
+      "line": "s1",
+      "offset": 0.0,
+      "volume": 0.35
+    },
+    {
+      "id": "sfx-swab-in",
+      "src": "whoosh-short.mp3",
+      "line": "w1",
+      "offset": -0.5,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-squish",
+      "src": "gen-squish.mp3",
+      "line": "s5",
+      "offset": -0.35,
+      "volume": 0.65
+    },
+    {
+      "id": "sfx-boing",
+      "src": "gen-boing.mp3",
+      "line": "w2",
+      "offset": 0.75,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-light",
+      "src": "gen-boom.mp3",
+      "anchor": "op",
+      "offset": 0,
+      "volume": 0.3
+    },
+    {
+      "id": "sfx-drip1",
+      "src": "gen-drip.mp3",
+      "line": "o1",
+      "offset": -0.5,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-drip2",
+      "src": "gen-drip.mp3",
+      "line": "o1",
+      "offset": -0.2,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-spray",
+      "src": "gen-spray.mp3",
+      "line": "o2",
+      "offset": -0.6,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-plop",
+      "src": "gen-plop.mp3",
+      "line": "o3",
+      "offset": -0.9,
+      "volume": 0.75
+    },
+    {
+      "id": "sfx-ring",
+      "src": "gen-ring.mp3",
+      "line": "o3",
+      "offset": -0.4,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-praxis",
+      "src": "whoosh-short.mp3",
+      "anchor": "praxis",
+      "offset": -0.05,
+      "volume": 0.4
+    },
+    {
+      "id": "sfx-pat",
+      "src": "whoosh-short.mp3",
+      "anchor": "patient",
+      "offset": -0.05,
+      "volume": 0.35
+    },
+    {
+      "id": "sfx-rimshot",
+      "src": "gen-rimshot.mp3",
+      "line": "e2",
+      "offset": 1.2,
+      "volume": 0.4
+    }
+  ]
+}
