@@ -9,6 +9,7 @@ hier gesperrt ist), Untertitel und Endkarte als HyperFrames-Kompositionen, 1080�
 | ----- | --------- | ------------------------------------------------------------------------------------------- |
 | 1     | `folge1/` | Stockwerk 13: der Aufzug hält in einem Stockwerk, das es nicht gibt                         |
 | 2     | `folge2/` | Stockwerk 13, Weg A (Mehrheit): Flucht nach unten bis −13, Nachricht von der eigenen Nummer |
+| 3     | `folge3/` | Stockwerk 13, Weg B (Mehrheit): Chat mit dir selbst, Foto von hinten, „Dreh dich nicht um.“ |
 
 ## Bauen
 
@@ -92,6 +93,15 @@ Keller mit grünem Notausgang-Schild, jemand tippt → neue Wahl:
 
 Für Teil 3: `cp -r folge2 folge3` (ohne `renders/`, `.hyperframes/`, `assets/vo/`), Skript in `script.json`,
 Wortanker in `build.mjs` (`EV`, `disp`), Choreografie in `assets/scene.js` (`CUTS`, `update`).
+
+## Teil 3 (umgesetzt, Weg B hat gewonnen)
+
+Rückblick → Weg A als Schreckmoment (du rennst zum Notausgang, die Tür fliegt auf, die Gestalt steht darin)
+→ Zurückspulen → Weg B: „Wer bist du?“ wird getippt und gesendet, Antwort „Ich bin du. Der, der hier unten
+geblieben ist.“, dann ein Foto von dir von hinten. Das Foto wird live gerendert (`photoRT`, Kamera in der hinteren
+Kabinenecke = Blick der Gestalt) und im Chat angezeigt. „Dreh dich nicht um.“, das grüne Licht geht aus,
+hinter dir atmet jemand (die Gestalt ragt über deinem Kopf auf).
+Neue Wahl: **A** dich umdrehen · **B** in die Dunkelheit rennen.
 
 ## Ideen-Archiv Teil 2 (vor der Abstimmung)
 

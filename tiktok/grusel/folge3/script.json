@@ -1,0 +1,123 @@
+{
+  "title": "Stockwerk 13 · Teil 3",
+  "voice": {
+    "engine": "elevenlabs",
+    "voiceId": "nPczCjzI2devNBz1zQrb",
+    "voiceName": "Brian (ElevenLabs Standardstimme)",
+    "elevenModel": "eleven_multilingual_v2",
+    "settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "style": 0.3,
+      "use_speaker_boost": true
+    },
+    "qa": {
+      "maxTakes": 3,
+      "maxWer": 0.1
+    },
+    "pitch": 1.0,
+    "tempo": 1.0,
+    "gap": 0.18,
+    "mbrolaVoice": "mb-de6",
+    "wpm": 180,
+    "espeakPitch": 30
+  },
+  "lines": [
+    {
+      "id": "q1",
+      "text": "Die meisten von euch haben entschieden: Du schreibst zurück."
+    },
+    {
+      "id": "q2",
+      "text": "Gut so. Denn wärst du zum Notausgang gerannt …",
+      "gap": 0.25
+    },
+    {
+      "id": "q3",
+      "text": "… hätte dich das hier erwartet.",
+      "gap": 0.15,
+      "emph": ["erwartet"]
+    },
+    {
+      "id": "q4",
+      "text": "Spulen wir zurück.",
+      "gap": 0.9
+    },
+    {
+      "id": "q5",
+      "text": "Du tippst: Wer bist du?",
+      "gap": 0.5
+    },
+    {
+      "id": "q6",
+      "text": "Die Antwort kommt sofort.",
+      "gap": 0.35
+    },
+    {
+      "id": "q7",
+      "text": "Ich bin du. Der, der hier unten geblieben ist.",
+      "gap": 0.2
+    },
+    {
+      "id": "q8",
+      "text": "Dann kommt ein Foto.",
+      "gap": 0.6
+    },
+    {
+      "id": "q9",
+      "text": "Es zeigt dich. Von hinten. Gerade eben aufgenommen.",
+      "gap": 0.35,
+      "emph": ["hinten"]
+    },
+    {
+      "id": "q10",
+      "text": "Jemand steht direkt hinter dir.",
+      "gap": 0.8,
+      "emph": ["hinter"]
+    },
+    {
+      "id": "q11",
+      "text": "Eine letzte Nachricht:",
+      "gap": 0.35
+    },
+    {
+      "id": "q12",
+      "text": "Dreh dich nicht um.",
+      "gap": 0.25
+    },
+    {
+      "id": "q13",
+      "text": "Im Gang vor dir geht das grüne Licht aus.",
+      "gap": 0.6
+    },
+    {
+      "id": "q14",
+      "text": "Und hinter dir hörst du jemanden atmen.",
+      "gap": 0.6,
+      "emph": ["atmen"]
+    },
+    {
+      "id": "q15",
+      "text": "Du hast zwei Möglichkeiten:",
+      "gap": 0.6
+    },
+    {
+      "id": "q16",
+      "text": "A, du drehst dich um."
+    },
+    {
+      "id": "q17",
+      "text": "Oder B, du rennst los. In die Dunkelheit."
+    },
+    {
+      "id": "q18",
+      "text": "Also, was machst du?",
+      "gap": 0.25
+    },
+    {
+      "id": "q19",
+      "text": "Schreib A oder B in die Kommentare."
+    }
+  ],
+  "tail": 3.0
+}
