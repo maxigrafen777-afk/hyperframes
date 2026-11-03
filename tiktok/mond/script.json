@@ -3,39 +3,188 @@
   "voiceModel": "eleven_multilingual_v2",
   "maxPause": 0.35,
   "gap": 0.3,
-  "qa": { "maxTakes": 3, "maxWer": 0.1, "maxF0Dev": 0.35 },
+  "qa": {
+    "maxTakes": 3,
+    "maxWer": 0.1,
+    "maxF0Dev": 0.35
+  },
   "voices": {
     "erz": {
       "voice_id": "JYafmsWQW103q9CaNv5y",
       "seed": 777,
       "tempo": 1.06,
       "f0ref": 97,
-      "settings": { "stability": 0.42, "similarity_boost": 0.8, "style": 0.45, "use_speaker_boost": true }
+      "settings": {
+        "stability": 0.42,
+        "similarity_boost": 0.8,
+        "style": 0.45,
+        "use_speaker_boost": true
+      }
     }
   },
   "lines": [
-    { "id": "n1", "speaker": "erz", "text": "Was wäre, wenn der Mond einfach verschwindet?", "emph": ["verschwindet"] },
-    { "id": "n2", "speaker": "erz", "text": "Erst mal: kein Weltuntergang. Die Erde kreist ganz normal weiter.", "emph": ["kein"] },
-    { "id": "n3", "speaker": "erz", "text": "Aber die Nächte werden richtig dunkel. Kein Mondlicht. Nie wieder.", "emph": ["dunkel"] },
-    { "id": "n4", "speaker": "erz", "text": "Am Meer merkst du es sofort: Ebbe und Flut schrumpfen auf etwa ein Drittel.", "emph": ["Drittel"] },
-    { "id": "n5", "speaker": "erz", "text": "Unter Wasser wird es chaotisch. Viele Korallen laichen nach dem Vollmond. Ihr Kalender ist weg.", "emph": ["Kalender"] },
-    { "id": "n6", "speaker": "erz", "text": "Sonnenfinsternisse? Gibt es ab jetzt nie wieder.", "emph": ["nie"] },
-    { "id": "n7", "speaker": "erz", "text": "Und das Gefährlichste: Der Mond hält die Erdachse stabil.", "emph": ["stabil"] },
-    { "id": "n8", "speaker": "erz", "text": "Ohne ihn könnte sie über Millionen Jahre ins Taumeln geraten. Mit extremen Jahreszeiten.", "emph": ["Taumeln"] },
-    { "id": "n9", "speaker": "erz", "text": "Was würdest du am meisten vermissen?", "emph": ["vermissen"] }
+    {
+      "id": "n1",
+      "speaker": "erz",
+      "text": "Heute Nacht verschwindet der Mond. Das passiert als Erstes.",
+      "emph": [
+        "verschwindet"
+      ]
+    },
+    {
+      "id": "n2",
+      "speaker": "erz",
+      "text": "Jede Nacht wird so dunkel wie bei Neumond. Für immer.",
+      "emph": [
+        "immer"
+      ]
+    },
+    {
+      "id": "n3",
+      "speaker": "erz",
+      "text": "Dein Strandurlaub? Ebbe und Flut schrumpfen auf etwa ein Drittel.",
+      "emph": [
+        "Drittel"
+      ]
+    },
+    {
+      "id": "n4",
+      "speaker": "erz",
+      "text": "Unter Wasser fehlt plötzlich ein Startsignal. Viele Korallen laichen nach dem Vollmond.",
+      "emph": [
+        "Startsignal"
+      ]
+    },
+    {
+      "id": "n5",
+      "speaker": "erz",
+      "text": "Sonnenfinsternis? Nie wieder. Nirgends auf der Erde.",
+      "emph": [
+        "nie"
+      ]
+    },
+    {
+      "id": "n6",
+      "speaker": "erz",
+      "text": "Aber das Schlimmste kommt langsam. Der Mond hält die Erdachse stabil.",
+      "emph": [
+        "Schlimmste"
+      ]
+    },
+    {
+      "id": "n7",
+      "speaker": "erz",
+      "text": "Ohne ihn könnte sie über Millionen Jahre kippen.",
+      "emph": [
+        "kippen"
+      ]
+    },
+    {
+      "id": "n8",
+      "speaker": "erz",
+      "text": "Dann hätte Deutschland Sommer wie in der Wüste. Und Winter wie in der Arktis.",
+      "emph": [
+        "Wüste",
+        "Arktis"
+      ]
+    },
+    {
+      "id": "n9",
+      "speaker": "erz",
+      "text": "Was würdest du am meisten vermissen?",
+      "emph": [
+        "vermissen"
+      ]
+    },
+    {
+      "id": "n10",
+      "speaker": "erz",
+      "text": "Und in Teil zwei: Was wäre, wenn wir zwei Monde hätten?",
+      "emph": [
+        "zwei"
+      ]
+    }
   ],
   "genSfx": [
-    { "id": "bed", "duration": 20, "prompt": "Mysterious cinematic science documentary music bed, soft pulsing synth arpeggio, gentle low strings, curious and wondrous mood, steady 100 bpm, seamless loop, no vocals" },
-    { "id": "boom", "duration": 1.6, "prompt": "Deep cinematic boom impact with short sub tail" },
-    { "id": "vanish", "duration": 1.2, "prompt": "Magical vanishing sound, quick reverse shimmer sucking into a soft pop" },
-    { "id": "dark", "duration": 2.5, "prompt": "Low ominous drone swell fading in, night falling" },
-    { "id": "wave", "duration": 3, "prompt": "Calm ocean waves washing on a beach, close" },
-    { "id": "splash", "duration": 1.5, "prompt": "Camera plunges into water, splash then muffled underwater bubbles" },
-    { "id": "bubbles", "duration": 2.5, "prompt": "Soft underwater ambience with small bubbles rising" },
-    { "id": "rise", "duration": 1.6, "prompt": "Fast upward whoosh rising, swoosh into the sky" },
-    { "id": "stamp", "duration": 0.8, "prompt": "Heavy rubber stamp thud on paper" },
-    { "id": "rumble", "duration": 3.5, "prompt": "Deep tectonic rumble with slow wobbling movement, ominous" },
-    { "id": "pop", "duration": 0.5, "prompt": "Short soft bubbly pop, user interface" },
-    { "id": "tick", "duration": 1.2, "prompt": "Fast mechanical counter ticking, clock rolling numbers" }
+    {
+      "id": "bed",
+      "duration": 20,
+      "prompt": "Mysterious cinematic science documentary music bed, soft pulsing synth arpeggio, gentle low strings, curious and wondrous mood, steady 100 bpm, seamless loop, no vocals"
+    },
+    {
+      "id": "boom",
+      "duration": 1.6,
+      "prompt": "Deep cinematic boom impact with short sub tail"
+    },
+    {
+      "id": "vanish",
+      "duration": 1.2,
+      "prompt": "Magical vanishing sound, quick reverse shimmer sucking into a soft pop"
+    },
+    {
+      "id": "dark",
+      "duration": 2.5,
+      "prompt": "Low ominous drone swell fading in, night falling"
+    },
+    {
+      "id": "wave",
+      "duration": 3,
+      "prompt": "Calm ocean waves washing on a beach, close"
+    },
+    {
+      "id": "splash",
+      "duration": 1.5,
+      "prompt": "Camera plunges into water, splash then muffled underwater bubbles"
+    },
+    {
+      "id": "bubbles",
+      "duration": 2.5,
+      "prompt": "Soft underwater ambience with small bubbles rising"
+    },
+    {
+      "id": "rise",
+      "duration": 1.6,
+      "prompt": "Fast upward whoosh rising, swoosh into the sky"
+    },
+    {
+      "id": "stamp",
+      "duration": 0.8,
+      "prompt": "Heavy rubber stamp thud on paper"
+    },
+    {
+      "id": "rumble",
+      "duration": 3.5,
+      "prompt": "Deep tectonic rumble with slow wobbling movement, ominous"
+    },
+    {
+      "id": "pop",
+      "duration": 0.5,
+      "prompt": "Short soft bubbly pop, user interface"
+    },
+    {
+      "id": "tick",
+      "duration": 1.2,
+      "prompt": "Fast mechanical counter ticking, clock rolling numbers"
+    },
+    {
+      "id": "wind",
+      "duration": 3,
+      "prompt": "Hot desert wind gust with crackling heat"
+    },
+    {
+      "id": "blizzard",
+      "duration": 3,
+      "prompt": "Howling arctic blizzard wind with ice crackle"
+    },
+    {
+      "id": "swoosh2",
+      "duration": 1.2,
+      "prompt": "Short punchy cinematic whoosh transition"
+    },
+    {
+      "id": "crack",
+      "duration": 1.2,
+      "prompt": "Glass-like crack then implosion, magical"
+    }
   ]
 }

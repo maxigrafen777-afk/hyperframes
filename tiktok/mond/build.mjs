@@ -1,8 +1,9 @@
-// "Was wäre, wenn der Mond verschwindet?" – baut index.html und compositions/*
+// "Was wäre, wenn der Mond verschwindet?" (v2) – baut index.html und compositions/*
 // aus script.json + assets/vo/timings.json (node voices.mjs).
-// Eine durchgehende Welt (Weltall → Nachthimmel → Meer → Unterwasser), durch die
+// Eine durchgehende Welt (Weltall → Nachthimmel → Küste → Unterwasser), durch die
 // die Kamera in einer Fahrt fliegt. Der gestrichelte "Geister-Mond" ist das
-// Trägerelement, das in jeder Station wieder auftaucht.
+// Trägerelement, das in jeder Station wieder auftaucht. Der Zuschauer ("du")
+// kommt an jeder Station vor: dein Haus, dein Strandurlaub, dein Deutschland.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 
 const W = 1080;
@@ -14,18 +15,21 @@ const f = (n) => +n.toFixed(3);
 
 /* ================= Zeitplan aus den echten Takes ================= */
 // Pause VOR jeder Zeile (Platz für Kamerafahrten und Aktionen).
-const WAIT = { n1: 0.15, n2: 0.55, n3: 0.3, n4: 0.65, n5: 1.7, n6: 1.35, n7: 1.15, n8: 0.25, n9: 0.6 };
+const WAIT = { n1: 0.1, n2: 0.45, n3: 0.75, n4: 2.1, n5: 1.35, n6: 1.15, n7: 0.3, n8: 0.35, n9: 0.7, n10: 1.65 };
 const L = {};
 let t = 0;
 for (const line of script.lines) {
   const v = VO[line.id];
   const s = f(t + WAIT[line.id]);
-  L[line.id] = { s, e: f(s + v.duration), words: v.words.map((w) => ({ ...w, start: f(s + w.start), end: f(s + w.end) })) };
+  L[line.id] = {
+    s,
+    e: f(s + v.duration),
+    words: v.words.map((w) => ({ ...w, start: f(s + w.start), end: f(s + w.end) })),
+  };
   t = L[line.id].e;
 }
-const END_HOLD = 3.2;
+const END_HOLD = 2.6;
 const DUR = f(t + END_HOLD);
-// Startzeit eines Worts (erstes Vorkommen, das mit `w` beginnt).
 const at = (id, w) => {
   const hit = L[id].words.find((x) => x.text.toLowerCase().startsWith(w.toLowerCase()));
   if (!hit) throw new Error(`Wort ${w} fehlt in ${id}`);
@@ -39,14 +43,15 @@ const WORLD_H = 7400;
 const MOON = { x: 540, y: 3990, r: 165 };
 const SUN = { x: 540, y: 700, r: 150 };
 const EARTH = { x: 540, y: 1900, r: 300 };
-const CY = { hook: 3150, tide: 3800, under: 5450, sun: 0, earth: 1000 };
+const CY = { hook: 3150, tide: 3800, under: 5450, sun: 0, earth: 1000, end: 760 };
 const TIDE = { mid: 4900, big: 140, small: 47 };
 const C = {
   space: "#0A1020",
   ink: "#0A1020",
   moon: "#F3EBCF",
-  moonShade: "#E2D5AC",
-  crater: "#D6C79C",
+  moonShade: "#DCCDA0",
+  crater: "#CDBD8E",
+  craterLight: "#FBF6E4",
   accent: "#FFD23F",
   sea: "#1F5A80",
   seaFar: "#1A4A6C",
@@ -56,7 +61,11 @@ const C = {
   sun: "#FFC83D",
   ray: "#FFA41B",
   ocean: "#2F72B8",
-  land: "#5DAA5F",
+  oceanDeep: "#285FA0",
+  land: "#6DB060",
+  desert: "#D9B15F",
+  hot: "#FF6B2C",
+  ice: "#EAF6FF",
 };
 
 // Deterministischer Zufall (nur beim Bauen; das Ergebnis ist statisches SVG).
@@ -76,24 +85,55 @@ const stars = (n, y0, y1, cls = "", minR = 1.4, maxR = 3.6) =>
     const o = 0.45 + rnd() * 0.55;
     return `<circle class="${cls}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#fff" opacity="${o.toFixed(2)}"/>`;
   }).join("");
+// Ein paar größere Funkel-Sterne (vierzackig, flach).
+const sparkles = (n, y0, y1, cls = "") =>
+  Array.from({ length: n }, () => {
+    const x = rnd() * W;
+    const y = y0 + rnd() * (y1 - y0);
+    const s = 7 + rnd() * 8;
+    return `<path class="${cls}" d="M ${x} ${y - s} Q ${x} ${y} ${x + s} ${y} Q ${x} ${y} ${x} ${y + s} Q ${x} ${y} ${x - s} ${y} Q ${x} ${y} ${x} ${y - s} Z" fill="#fff" opacity="0.9"/>`;
+  }).join("");
+
+// Glatte geschlossene Kurve durch Punkte (Catmull-Rom → Bezier).
+const blob = (pts, cx, cy, r) => {
+  const P = pts.map(([x, y]) => [cx + x * r, cy + y * r]);
+  const n = P.length;
+  let d = `M ${P[0][0].toFixed(1)} ${P[0][1].toFixed(1)}`;
+  for (let i = 0; i < n; i++) {
+    const p0 = P[(i - 1 + n) % n], p1 = P[i], p2 = P[(i + 1) % n], p3 = P[(i + 2) % n];
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += ` C ${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  return d + " Z";
+};
 
 const ghost = (id, x, y, r, extra = "") =>
   `<circle id="${id}" cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${C.moon}" stroke-width="6" stroke-dasharray="20 14" stroke-linecap="round" ${extra}/>`;
 
-const moonArt = (id, x, y, r) => `
+// Mond mit Mare-Flecken, Kratern mit Lichtkante und Schattenseite.
+const moonArt = (id, x, y, r) => {
+  const crater = (dx, dy, cr) =>
+    `<circle cx="${x + dx * r}" cy="${y + dy * r}" r="${cr * r}" fill="${C.crater}"/>` +
+    `<path d="M ${x + (dx - cr) * r} ${y + dy * r} A ${cr * r} ${cr * r} 0 0 0 ${x + (dx + cr) * r} ${y + dy * r}" fill="none" stroke="${C.craterLight}" stroke-width="${Math.max(2, r * 0.025)}" opacity="0.8"/>`;
+  return `
   <g id="${id}">
-    <circle cx="${x}" cy="${y}" r="${r}" fill="${C.moon}"/>
-    <path d="M ${x + r * 0.2} ${y - r * 0.98} A ${r} ${r} 0 0 1 ${x + r * 0.2} ${y + r * 0.98} A ${r * 0.82} ${r} 0 0 0 ${x + r * 0.2} ${y - r * 0.98} Z" fill="${C.moonShade}"/>
-    <circle cx="${x - r * 0.35}" cy="${y - r * 0.3}" r="${r * 0.2}" fill="${C.crater}"/>
-    <circle cx="${x + r * 0.3}" cy="${y + r * 0.35}" r="${r * 0.14}" fill="${C.crater}"/>
-    <circle cx="${x - r * 0.15}" cy="${y + r * 0.45}" r="${r * 0.1}" fill="${C.crater}"/>
-    <circle cx="${x + r * 0.45}" cy="${y - r * 0.4}" r="${r * 0.08}" fill="${C.crater}"/>
+    <defs><clipPath id="${id}-clip"><circle cx="${x}" cy="${y}" r="${r}"/></clipPath></defs>
+    <g clip-path="url(#${id}-clip)">
+      <circle cx="${x}" cy="${y}" r="${r}" fill="${C.moon}"/>
+      <path d="${blob([[-0.6, -0.3], [-0.2, -0.55], [0.15, -0.35], [0.05, -0.05], [-0.35, 0.05], [-0.62, -0.05]], x, y, r)}" fill="#E4D8B4"/>
+      <path d="${blob([[0.1, 0.15], [0.45, 0.05], [0.6, 0.3], [0.35, 0.55], [0.05, 0.45]], x, y, r)}" fill="#E4D8B4"/>
+      ${crater(-0.38, -0.3, 0.17)}${crater(0.32, 0.36, 0.13)}${crater(-0.12, 0.5, 0.09)}${crater(0.46, -0.36, 0.08)}${crater(0.05, -0.62, 0.06)}${crater(-0.62, 0.3, 0.07)}
+      <path d="M ${x + r * 0.35} ${y - r * 1.05} A ${r * 1.05} ${r * 1.05} 0 0 1 ${x + r * 0.35} ${y + r * 1.05} A ${r * 0.78} ${r * 1.05} 0 0 0 ${x + r * 0.35} ${y - r * 1.05} Z" fill="${C.moonShade}" opacity="0.85"/>
+    </g>
   </g>`;
+};
 
 /* ---- Weltall + Himmel ---- */
 const rays = Array.from({ length: 12 }, (_, i) => {
   const a = (i / 12) * Math.PI * 2;
-  const p = (rr, da) => `${(SUN.x + Math.cos(a + da) * rr).toFixed(1)} ${(SUN.y + Math.sin(a + da) * rr).toFixed(1)}`;
+  const p = (rr, da) =>
+    `${(SUN.x + Math.cos(a + da) * rr).toFixed(1)} ${(SUN.y + Math.sin(a + da) * rr).toFixed(1)}`;
   return `<path d="M ${p(SUN.r + 22, -0.12)} L ${p(SUN.r + 82, 0)} L ${p(SUN.r + 22, 0.12)} Z" fill="${C.ray}"/>`;
 }).join("");
 
@@ -104,18 +144,38 @@ const sky = `
   <rect x="0" y="3000" width="${W}" height="200" fill="#152346"/>
   <rect x="0" y="3200" width="${W}" height="900" fill="#1A2B55"/>
   <rect x="0" y="4100" width="${W}" height="${Y_H - 4100}" fill="#21386A"/>
-  <g id="stars">${stars(150, 0, 2600)}${stars(70, 2600, 4380, "", 1.2, 3)}</g>
+  <g id="stars">${stars(160, 0, 2600)}${sparkles(10, 0, 2600)}${stars(70, 2600, 4380, "", 1.2, 3)}${sparkles(5, 3000, 4200)}</g>
   <g id="sun">${rays}<circle cx="${SUN.x}" cy="${SUN.y}" r="${SUN.r}" fill="${C.sun}"/>
-    <circle cx="${SUN.x - 40}" cy="${SUN.y - 45}" r="${SUN.r * 0.42}" fill="#FFD966"/></g>
+    <circle cx="${SUN.x - 40}" cy="${SUN.y - 45}" r="${SUN.r * 0.42}" fill="#FFD966"/>
+    <circle cx="${SUN.x + 55}" cy="${SUN.y + 50}" r="${SUN.r * 0.16}" fill="#FFB52E"/></g>
   <g id="ghost-sun-pos">${ghost("ghost-sun", SUN.x, SUN.y, 140)}</g>
 `;
 
-/* ---- Erde ---- */
+/* ---- Erde (Blick auf Europa und Afrika) ---- */
 const E = EARTH;
-const land = `
-  <path d="M ${E.x - 210} ${E.y - 150} C ${E.x - 150} ${E.y - 230} ${E.x - 40} ${E.y - 210} ${E.x - 20} ${E.y - 140} C ${E.x} ${E.y - 70} ${E.x - 90} ${E.y - 40} ${E.x - 70} ${E.y + 30} C ${E.x - 50} ${E.y + 110} ${E.x - 130} ${E.y + 160} ${E.x - 170} ${E.y + 90} C ${E.x - 200} ${E.y + 30} ${E.x - 260} ${E.y - 60} ${E.x - 210} ${E.y - 150} Z" fill="${C.land}"/>
-  <path d="M ${E.x + 60} ${E.y - 200} C ${E.x + 140} ${E.y - 240} ${E.x + 250} ${E.y - 170} ${E.x + 240} ${E.y - 80} C ${E.x + 230} ${E.y - 20} ${E.x + 150} ${E.y - 40} ${E.x + 120} ${E.y + 20} C ${E.x + 100} ${E.y + 80} ${E.x + 170} ${E.y + 150} ${E.x + 110} ${E.y + 200} C ${E.x + 60} ${E.y + 240} ${E.x + 20} ${E.y + 150} ${E.x + 30} ${E.y + 80} C ${E.x + 40} ${E.y} ${E.x - 10} ${E.y - 150} ${E.x + 60} ${E.y - 200} Z" fill="${C.land}"/>
-  <path d="M ${E.x - 60} ${E.y + 190} C ${E.x - 20} ${E.y + 170} ${E.x + 30} ${E.y + 200} ${E.x + 10} ${E.y + 240} C ${E.x - 10} ${E.y + 270} ${E.x - 80} ${E.y + 250} ${E.x - 60} ${E.y + 190} Z" fill="${C.land}"/>`;
+// Kontinente aus echten Küstenpunkten (Länge, Breite), orthografisch projiziert
+// mit Blick auf 20° N / 15° O: Europa oben, Afrika in der Mitte.
+const LAT0 = (20 * Math.PI) / 180, LON0 = 15;
+const proj = ([lon, lat]) => {
+  const la = (lat * Math.PI) / 180, lo = ((lon - LON0) * Math.PI) / 180;
+  return [Math.cos(la) * Math.sin(lo), -(Math.cos(LAT0) * Math.sin(la) - Math.sin(LAT0) * Math.cos(la) * Math.cos(lo))];
+};
+const P = (pts) => pts.map(proj);
+const AFRICA = P([[-6, 36], [10, 37], [11, 33], [20, 31], [32, 31], [34, 28], [39, 20], [43, 12], [51, 12], [49, 6], [42, -1], [40, -10], [35, -20], [33, -26], [27, -33], [20, -35], [18, -32], [14, -22], [12, -17], [13, -6], [9, 1], [9, 4], [3, 6], [-4, 5], [-8, 4], [-13, 8], [-17, 14], [-17, 21], [-13, 27], [-10, 30]]);
+const EUROPE = P([[-9, 37], [-9, 43], [-2, 43.5], [-1, 46], [-4, 48], [2, 51], [5, 53], [8, 54], [9, 57], [11, 56], [12, 54], [19, 54.5], [21, 57], [24, 59], [21, 61], [22, 65], [18, 63], [17, 60], [19, 59], [16, 56], [12, 56], [11, 59], [6, 58], [5, 61], [10, 64], [15, 68], [20, 70], [26, 71], [31, 70], [33, 66], [30, 61], [40, 60], [44, 52], [40, 46], [30, 46], [28, 42], [26, 40], [23, 37], [21, 39], [19, 42], [16, 43], [13, 45.5], [12, 44], [16, 41], [18, 40], [16, 38], [12, 42], [8, 44], [3, 43], [-1, 38]]);
+const BRITAIN = P([[-5, 50], [1, 51], [0, 53], [-2, 56], [-3, 58.5], [-6, 57], [-5, 54], [-3, 53.5]]);
+const IRELAND = P([[-6, 52], [-6, 54.5], [-8, 55], [-10, 53], [-9, 51.5]]);
+const ARABIA = P([[35, 28], [39, 20], [43, 13], [45, 13], [52, 16], [59, 22], [56, 26], [51, 24], [48, 29], [39, 32]]);
+const SAMERICA = P([[-35, -6], [-39, -13], [-41, -22], [-48, -27], [-53, -34], [-58, -38], [-62, -20], [-60, 0], [-52, 5], [-45, -1]]);
+const MADAGASCAR = P([[49, -12], [50, -16], [47, -25], [44, -22], [44, -16]]);
+const SAHARA = P([[-14, 26], [-5, 30], [10, 31], [25, 30], [32, 27], [33, 20], [22, 17], [8, 16], [-5, 17], [-14, 19]]);
+const GER = (([x, y]) => ({ dx: x, dy: y }))(proj([10, 51])); // Deutschland, relativ zum Erdmittelpunkt in Einheiten von r
+const clouds = [[-0.55, -0.5, 0.16], [0.6, 0.2, 0.13], [-0.4, 0.45, 0.12], [0.55, -0.55, 0.1], [0.2, 0.72, 0.12]]
+  .map(([dx, dy, s]) => {
+    const x = E.x + dx * E.r, y = E.y + dy * E.r, w = s * E.r;
+    return `<g opacity="0.85"><ellipse cx="${x}" cy="${y}" rx="${w}" ry="${w * 0.32}" fill="#fff"/><ellipse cx="${x + w * 0.3}" cy="${y - w * 0.18}" rx="${w * 0.55}" ry="${w * 0.3}" fill="#fff"/></g>`;
+  })
+  .join("");
 const earth = `
   <defs><clipPath id="earth-clip"><circle cx="${E.x}" cy="${E.y}" r="${E.r}"/></clipPath></defs>
   <g id="orbit" opacity="0">
@@ -125,20 +185,34 @@ const earth = `
   <g id="earth">
     <g clip-path="url(#earth-clip)">
       <circle cx="${E.x}" cy="${E.y}" r="${E.r}" fill="${C.ocean}"/>
-      ${land}
-      <ellipse cx="${E.x}" cy="${E.y - E.r + 10}" rx="170" ry="55" fill="#F4FAFF"/>
-      <ellipse cx="${E.x}" cy="${E.y + E.r - 10}" rx="190" ry="60" fill="#F4FAFF"/>
-      <rect id="season-n" x="${E.x - E.r}" y="${E.y - E.r}" width="${2 * E.r}" height="${E.r}" fill="#EAF6FF" opacity="0"/>
-      <rect id="season-s" x="${E.x - E.r}" y="${E.y}" width="${2 * E.r}" height="${E.r}" fill="#FF6B2C" opacity="0"/>
-      <path d="M ${E.x + E.r * 0.15} ${E.y - E.r} A ${E.r} ${E.r} 0 0 1 ${E.x + E.r * 0.15} ${E.y + E.r} L ${E.x + E.r} ${E.y + E.r} L ${E.x + E.r} ${E.y - E.r} Z" fill="#000" opacity="0.18"/>
+      <circle cx="${E.x + E.r * 0.25}" cy="${E.y + E.r * 0.2}" r="${E.r * 0.9}" fill="${C.oceanDeep}" opacity="0.35"/>
+      <path d="${blob(SAMERICA, E.x, E.y, E.r)}" fill="${C.land}"/>
+      <path d="${blob(AFRICA, E.x, E.y, E.r)}" fill="${C.land}"/>
+      <path d="${blob(SAHARA, E.x, E.y, E.r)}" fill="${C.desert}"/>
+      <path d="${blob(EUROPE, E.x, E.y, E.r)}" fill="${C.land}"/>
+      <path d="${blob(ARABIA, E.x, E.y, E.r)}" fill="${C.desert}"/>
+      <path d="${blob(MADAGASCAR, E.x, E.y, E.r)}" fill="${C.land}"/>
+      <path d="${blob(BRITAIN, E.x, E.y, E.r)}" fill="${C.land}"/>
+      <path d="${blob(IRELAND, E.x, E.y, E.r)}" fill="${C.land}"/>
+      <ellipse cx="${E.x}" cy="${E.y - E.r - 2}" rx="150" ry="30" fill="${C.ice}"/>
+      <ellipse cx="${E.x}" cy="${E.y + E.r - 6}" rx="210" ry="52" fill="${C.ice}"/>
+      ${clouds}
+      <rect id="season-n" x="${E.x - E.r}" y="${E.y - E.r}" width="${2 * E.r}" height="${E.r}" fill="${C.hot}" opacity="0"/>
+      <path d="M ${E.x + E.r * 0.15} ${E.y - E.r} A ${E.r} ${E.r} 0 0 1 ${E.x + E.r * 0.15} ${E.y + E.r} L ${E.x + E.r} ${E.y + E.r} L ${E.x + E.r} ${E.y - E.r} Z" fill="#000" opacity="0.2"/>
+    </g>
+    <g id="pin" opacity="0">
+      <path d="M ${E.x + GER.dx * E.r} ${E.y + GER.dy * E.r} c -26 -34 -40 -52 -40 -72 a 40 40 0 0 1 80 0 c 0 20 -14 38 -40 72 Z" fill="${C.accent}" stroke="${C.ink}" stroke-width="6"/>
+      <circle cx="${E.x + GER.dx * E.r}" cy="${E.y + GER.dy * E.r - 72}" r="14" fill="${C.ink}"/>
     </g>
     <line id="axis" x1="${E.x}" y1="${E.y - E.r - 110}" x2="${E.x}" y2="${E.y + E.r + 110}" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0"/>
   </g>
   <path id="axis-arc" d="" fill="none" stroke="${C.accent}" stroke-width="7" stroke-linecap="round" opacity="0"/>
   <g id="ghost-orbit-pos" opacity="0">${ghost("ghost-orbit", E.x - 470, E.y, 44)}</g>
+  <g id="moon2a" opacity="0">${moonArt("m2a", E.x - 470, E.y, 52)}</g>
+  <g id="moon2b" opacity="0">${moonArt("m2b", E.x + 470, E.y, 40)}</g>
 `;
 
-/* ---- Meer an der Küste ---- */
+/* ---- Küste: dein Haus auf der Klippe, dein Strand ---- */
 const reflection = Array.from({ length: 9 }, (_, i) => {
   const y = Y_H + 24 + i * 34;
   const w = 150 - i * 11 + (i % 2 ? 26 : 0);
@@ -154,19 +228,48 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
   const y = 4660 + i * 40;
   return `<rect x="${i % 2 ? 612 : 600}" y="${y - 2}" width="${i % 2 ? 16 : 28}" height="5" fill="#F4E6C8"/>`;
 }).join("");
-const coast = `
-  <rect x="0" y="${Y_H}" width="${W}" height="${Y_WL - Y_H}" fill="${C.seaFar}"/>
-  <path d="M 760 ${Y_H} C 800 ${Y_H - 50} 860 ${Y_H - 90} 920 ${Y_H - 70} C 980 ${Y_H - 110} 1040 ${Y_H - 80} 1080 ${Y_H - 60} L 1080 ${Y_H} Z" fill="#101B36"/>
-  <g id="waves">${waveStripes}</g>
-  <g id="refl">${reflection}</g>
+// Haus auf der Klippe rechts am Horizont (Fenster gehen an, wenn es dunkel wird).
+const house = `
+  <path d="M 700 ${Y_H} C 740 ${Y_H - 70} 800 ${Y_H - 120} 880 ${Y_H - 110} C 960 ${Y_H - 140} 1040 ${Y_H - 110} 1080 ${Y_H - 95} L 1080 ${Y_H + 30} L 700 ${Y_H + 30} Z" fill="#101B36"/>
+  <g transform="translate(820 ${Y_H - 210})">
+    <rect x="0" y="40" width="130" height="80" fill="#1B2540"/>
+    <path d="M -14 44 L 65 -14 L 144 44 Z" fill="#141C33"/>
+    <rect x="96" y="-6" width="16" height="30" fill="#141C33"/>
+    <rect class="win" x="18" y="62" width="30" height="30" fill="#FFD772" opacity="0"/>
+    <rect class="win" x="80" y="62" width="30" height="30" fill="#FFD772" opacity="0"/>
+  </g>`;
+// Dein Strandurlaub: Handtuch, Sonnenschirm, Sandburg.
+const beach = `
   <path d="M 0 4720 C 160 4730 330 4800 470 4930 C 540 5000 600 5090 640 ${Y_WL} L 0 ${Y_WL} Z" fill="${C.sand}"/>
   <path d="M 0 4860 C 150 4880 300 4960 400 ${Y_WL} L 0 ${Y_WL} Z" fill="${C.sandDark}" opacity="0.5"/>
-  <g id="tide"><rect id="tide-water" x="0" y="${TIDE.mid}" width="${W}" height="${Y_WL - TIDE.mid + 4}" fill="${C.sea}"/>
+  <g transform="translate(150 4800) rotate(-6)">
+    <rect x="0" y="0" width="190" height="80" rx="8" fill="#E8505B"/>
+    <rect x="0" y="22" width="190" height="14" fill="#fff"/><rect x="0" y="50" width="190" height="14" fill="#fff"/>
+  </g>
+  <g transform="translate(110 4640)">
+    <line x1="80" y1="40" x2="96" y2="200" stroke="#5A4632" stroke-width="9" stroke-linecap="round"/>
+    <path d="M -20 60 Q 70 -40 180 30 Q 150 40 125 52 Q 100 35 75 52 Q 50 40 25 58 Q 0 48 -20 60 Z" fill="${C.accent}" stroke="${C.ink}" stroke-width="5"/>
+  </g>
+  <g id="castle" transform="translate(345 4862) scale(0.85)">
+    <rect x="-55" y="-30" width="110" height="60" fill="#C9A564"/>
+    <rect x="-70" y="-62" width="40" height="92" fill="#C9A564"/><rect x="30" y="-62" width="40" height="92" fill="#C9A564"/>
+    <rect x="-22" y="-92" width="44" height="62" fill="#C9A564"/>
+    <path d="M -70 -62 h 10 v -10 h 10 v 10 h 10 v -10 h 10 v 10" fill="none" stroke="#C9A564" stroke-width="10"/>
+    <path d="M 0 -92 v -40" stroke="#5A4632" stroke-width="5"/><path d="M 0 -132 l 34 10 l -34 10 Z" fill="#E8505B"/>
+    <rect x="-12" y="0" width="24" height="30" rx="12" fill="#8E7348"/>
+  </g>`;
+const coast = `
+  <rect x="0" y="${Y_H}" width="${W}" height="${Y_WL - Y_H}" fill="${C.seaFar}"/>
+  ${house}
+  <g id="waves">${waveStripes}</g>
+  <g id="refl">${reflection}</g>
+  ${beach}
+  <g id="tide"><rect id="tide-water" x="0" y="${TIDE.mid}" width="${W}" height="${Y_WL - TIDE.mid + 4}" fill="${C.sea}" opacity="0.94"/>
     <rect id="tide-edge" x="0" y="${TIDE.mid - 3}" width="${W}" height="7" fill="${C.foam}"/></g>
   <g id="post"><rect x="626" y="4600" width="28" height="${Y_WL - 4600}" fill="#6B4F35"/><rect x="620" y="4588" width="40" height="18" rx="4" fill="#4E3824"/>${ticks}</g>
   <g id="br-old" opacity="0">
     <path d="M 585 ${TIDE.mid - TIDE.big} h -22 v ${2 * TIDE.big} h 22" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="14 10"/>
-    <text x="545" y="${TIDE.mid - TIDE.big + 10}" text-anchor="end" class="lab">FRÜHER</text>
+    <text x="548" y="${TIDE.mid - TIDE.big + 12}" text-anchor="end" class="lab">MIT MOND</text>
   </g>
   <g id="br-new" opacity="0">
     <path d="M 695 ${TIDE.mid - TIDE.small} h 22 v ${2 * TIDE.small} h -22" fill="none" stroke="${C.accent}" stroke-width="8"/>
@@ -180,39 +283,56 @@ const coral = (x, y, s, col) => `
   <g transform="translate(${x} ${y}) scale(${s})">
     <path d="M 0 0 C -6 -60 -50 -90 -70 -150 M 0 0 C 4 -80 0 -130 10 -200 M 0 0 C 10 -50 60 -80 70 -160 M -38 -96 C -70 -110 -90 -130 -96 -170 M 6 -130 C 30 -150 40 -170 44 -205 M 50 -110 C 80 -120 96 -140 104 -175"
       fill="none" stroke="${col}" stroke-width="22" stroke-linecap="round"/>
+    <path d="M 0 0 C -6 -60 -50 -90 -70 -150 M 0 0 C 10 -50 60 -80 70 -160" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.22" transform="translate(-5 -4)"/>
   </g>`;
 const fanCoral = (x, y, s, col) => `
   <g transform="translate(${x} ${y}) scale(${s})">
     <path d="M -110 0 C -120 -120 -60 -190 0 -190 C 60 -190 120 -120 110 0 Z" fill="${col}"/>
     <path d="M 0 0 L 0 -170 M 0 -60 L -70 -130 M 0 -60 L 70 -130 M 0 -110 L -40 -165 M 0 -110 L 40 -165" stroke="#00000033" stroke-width="10" stroke-linecap="round"/>
   </g>`;
-const eggs = Array.from({ length: 34 }, (_, i) => {
+const brain = (x, y, s, col) => `
+  <g transform="translate(${x} ${y}) scale(${s})">
+    <path d="M -80 0 C -90 -70 -30 -100 0 -100 C 40 -100 90 -70 80 0 Z" fill="${col}"/>
+    <path d="M -60 -20 q 15 -30 30 0 t 30 0 t 30 0 M -50 -55 q 15 -25 30 0 t 30 0 t 30 0" fill="none" stroke="#00000030" stroke-width="7" stroke-linecap="round"/>
+  </g>`;
+const weed = (x, y, h, col) =>
+  `<path class="weed" d="M ${x} ${y} C ${x - 30} ${y - h * 0.3} ${x + 30} ${y - h * 0.6} ${x} ${y - h}" fill="none" stroke="${col}" stroke-width="14" stroke-linecap="round"/>`;
+const eggs = Array.from({ length: 34 }, () => {
   const x = 150 + rnd() * 780;
   const y = 6480 + rnd() * 260;
   return `<circle class="egg" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(7 + rnd() * 6).toFixed(1)}" fill="#FFC2D6" opacity="0"/>`;
 }).join("");
-const fish = (id, x, y, s, col) => `
+const fish = (id, x, y, s, col, stripe) => `
   <g id="${id}"><g transform="translate(${x} ${y}) scale(${s})">
     <path d="M 0 0 C 30 -34 90 -34 120 0 C 90 34 30 34 0 0 Z" fill="${col}"/>
+    <path d="M 52 -24 C 44 -8 44 8 52 24 M 74 -26 C 66 -8 66 8 74 26" fill="none" stroke="${stripe}" stroke-width="8"/>
     <path d="M 0 0 L -40 -30 L -34 0 L -40 30 Z" fill="${col}"/>
-    <circle cx="92" cy="-6" r="7" fill="${C.ink}"/>
+    <circle cx="96" cy="-6" r="7" fill="${C.ink}"/>
   </g></g>`;
+const shafts = [140, 420, 760]
+  .map((x, i) => `<path d="M ${x} ${Y_WL} L ${x + 120} ${Y_WL} L ${x + 260 + i * 30} ${Y_WL + 1500} L ${x + 60} ${Y_WL + 1500} Z" fill="#9FD6EE" opacity="0.07"/>`)
+  .join("");
 const underwater = `
   <rect x="0" y="${Y_WL}" width="${W}" height="450" fill="#1C6A8C"/>
   <rect x="0" y="${Y_WL + 450}" width="${W}" height="600" fill="#165C7C"/>
   <rect x="0" y="${Y_WL + 1050}" width="${W}" height="600" fill="#114B68"/>
   <rect x="0" y="${Y_WL + 1650}" width="${W}" height="${WORLD_H - Y_WL - 1650}" fill="#0D3D57"/>
+  ${shafts}
   <path d="M 0 ${Y_WL} q 45 -18 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 L 1080 ${Y_WL + 14} L 0 ${Y_WL + 14} Z" fill="${C.foam}"/>
   <path d="M 0 6930 C 200 6880 420 6920 600 6900 C 800 6880 960 6910 1080 6890 L 1080 ${WORLD_H} L 0 ${WORLD_H} Z" fill="#8E7A55"/>
-  ${fish("fish1", -200, 5800, 0.9, "#FFB347")}${fish("fish2", 1150, 6080, 0.7, "#7FD1C7")}
+  <ellipse cx="900" cy="6915" rx="120" ry="50" fill="#5E5A57"/><ellipse cx="60" cy="6925" rx="90" ry="40" fill="#55524F"/>
+  ${fish("fish1", -200, 5800, 0.9, "#FFB347", "#fff")}${fish("fish2", 1150, 6080, 0.7, "#7FD1C7", "#2E8B84")}${fish("fish3", -300, 6300, 0.55, "#FFE066", "#E8505B")}
+  <g id="weeds">${weed(40, 6930, 260, "#2E8B57")}${weed(980, 6915, 300, "#2E8B57")}${weed(1030, 6925, 200, "#3FA36A")}${weed(330, 6930, 180, "#3FA36A")}</g>
   ${coral(250, 6940, 1.5, "#FF7A7A")}${fanCoral(560, 6950, 1.35, "#FF9F43")}${coral(840, 6950, 1.35, "#E86A9A")}
-  ${coral(420, 6960, 0.9, "#FFB0A0")}${fanCoral(130, 6970, 0.8, "#E86A9A")}${coral(700, 6975, 0.85, "#FF7A7A")}
+  ${brain(400, 6965, 0.9, "#F2A65A")}${coral(700, 6975, 0.85, "#FF7A7A")}${fanCoral(130, 6970, 0.8, "#E86A9A")}${brain(960, 6960, 0.7, "#FFB0A0")}
   <g id="eggs">${eggs}</g>
   <g id="cal" opacity="0">
     <g id="cal-in">
+      <rect x="388" y="5842" width="320" height="300" rx="22" fill="#00000040"/>
       <rect x="380" y="5830" width="320" height="300" rx="22" fill="#F7F3EA"/>
       <rect x="380" y="5830" width="320" height="78" rx="22" fill="#E8505B"/>
       <rect x="380" y="5880" width="320" height="28" fill="#E8505B"/>
+      <circle cx="440" cy="5830" r="10" fill="#7A2730"/><circle cx="640" cy="5830" r="10" fill="#7A2730"/>
       <text x="540" y="5884" text-anchor="middle" class="cal-t">VOLLMOND</text>
       <g id="cal-moon">${moonArt("cal-moon-art", 540, 6020, 74)}</g>
       ${ghost("cal-ghost", 540, 6020, 74, 'opacity="0" stroke="#9B8F70"')}
@@ -229,27 +349,41 @@ const world = `
   ${coast}
   ${underwater}
   <rect id="dark" x="0" y="2600" width="${W}" height="${Y_WL - 2600}" fill="#02040B" opacity="0"/>
-  <g id="stars2">${stars(110, 3150, 4400, "s2", 1.2, 3.4)}</g>
+  <g id="stars2">${stars(120, 3150, 4400, "s2", 1.2, 3.4)}${sparkles(8, 3150, 4300, "s2")}</g>
   <g id="moon-pos">${moonArt("moon", MOON.x, MOON.y, MOON.r)}</g>
+  <g id="cracks" opacity="0" stroke="${C.ink}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M ${MOON.x - 20} ${MOON.y - 160} l 30 70 l -40 40 l 50 50 l -20 60"/>
+    <path d="M ${MOON.x + 140} ${MOON.y - 40} l -70 30 l -30 -40 l -60 40"/>
+    <path d="M ${MOON.x - 150} ${MOON.y + 50} l 70 -10 l 30 50"/>
+  </g>
   ${ghost("moon-ghost", MOON.x, MOON.y, MOON.r, 'opacity="0"')}
 </svg>
 </div></div></div>
+<div id="grain"></div>
 <div id="flash"></div>
 <div id="hook" class="ov">
-  <div class="hk hk-s">WAS WÄRE, WENN</div>
+  <div class="hk hk-s">HEUTE NACHT</div>
+  <div class="hk">VERSCHWINDET</div>
   <div class="hk hk-y">DER MOND</div>
-  <div class="hk">VERSCHWINDET?</div>
 </div>
-<div id="sticker" class="ov"><div class="stk">KEIN WELTUNTERGANG <span class="ok">✓</span></div></div>
-<div id="third" class="ov"><div class="big-y">≈ ⅓</div><div class="sub">so hoch wie heute</div></div>
+<div id="first" class="ov"><div class="stk">DAS PASSIERT ALS ERSTES ↓</div></div>
+<div id="forever" class="ov"><div class="stk stk-d">NEUMOND. FÜR IMMER.</div></div>
+<div id="third" class="ov"><div class="big-y">≈ ⅓</div><div class="sub">so stark wie heute</div></div>
 <div id="qmark" class="ov"><div class="q">?</div></div>
 <div id="stamp" class="ov"><div class="stp">NIE WIEDER</div></div>
 <div id="deg" class="ov"><div class="deg-n" id="deg-n">23,4°</div><div class="sub">Neigung der Erdachse</div></div>
 <div id="years" class="ov"><div class="yr" id="yr">+1 MIO. JAHRE</div></div>
+<div id="hot" class="ov"><div class="card card-hot">SOMMER <span>=</span> WÜSTE</div></div>
+<div id="cold" class="ov"><div class="card card-cold">WINTER <span>=</span> ARKTIS</div></div>
 <div id="cta" class="ov">
   <div class="ct">WAS WÜRDEST DU AM MEISTEN</div>
   <div class="ct ct-y">VERMISSEN?</div>
   <div id="ct3">Schreib's in die Kommentare ↓</div>
+</div>
+<div id="teaser" class="ov">
+  <div class="tz-k">TEIL 2</div>
+  <div class="ct ct-y">ZWEI MONDE?</div>
+  <div id="tz3">Folgen, damit du es nicht verpasst</div>
 </div>`;
 
 const worldCss = `
@@ -257,22 +391,24 @@ const worldCss = `
   #shake, #zoom { position: absolute; left: 0; top: 0; width: ${W}px; height: ${H}px; }
   #cam { position: absolute; left: 0; top: 0; width: ${W}px; height: ${WORLD_H}px; }
   #world { position: absolute; left: 0; top: 0; width: ${W}px; height: ${WORLD_H}px; }
+  #grain { position: absolute; inset: 0; background-image: url("assets/grain.png"); background-size: ${W}px ${H}px;
+    mix-blend-mode: overlay; opacity: 0.22; pointer-events: none; }
   #flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
   .ov { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; }
   .lab { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 40px; fill: #fff;
     stroke: ${C.ink}; stroke-width: 10px; paint-order: stroke fill; }
   .lab-y { fill: ${C.accent}; }
   .cal-t { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 40px; fill: #fff; letter-spacing: 2px; }
-  .hk, .ct, .big-y, .deg-n, .yr, .stp, .q, .sub { font-family: "Montserrat", sans-serif; font-weight: 900; color: #fff;
+  .hk, .ct, .big-y, .deg-n, .yr, .stp, .q, .sub, .tz-k { font-family: "Montserrat", sans-serif; font-weight: 900; color: #fff;
     -webkit-text-stroke: 16px ${C.ink}; paint-order: stroke fill; line-height: 1.04; }
-  #hook { top: 372px; opacity: 1; }
-  .hk { font-size: 92px; }
-  .hk-s { font-size: 66px; }
-  .hk-y { color: ${C.accent}; font-size: 124px; }
-  #sticker { top: 400px; }
+  #hook { top: 368px; opacity: 1; }
+  .hk { font-size: 104px; }
+  .hk-s { font-size: 64px; }
+  .hk-y { color: ${C.accent}; font-size: 132px; }
+  #first, #forever { top: 400px; }
   .stk { display: inline-block; padding: 22px 36px; border-radius: 26px; background: #fff; color: ${C.ink};
     font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 54px; border: 7px solid ${C.ink}; }
-  .ok { color: #1FA35C; }
+  .stk-d { background: ${C.ink}; color: #fff; border-color: #fff; }
   #third { top: 380px; }
   .big-y { color: ${C.accent}; font-size: 150px; }
   .sub { font-size: 46px; -webkit-text-stroke: 12px ${C.ink}; margin-top: 8px; font-weight: 800; }
@@ -285,136 +421,160 @@ const worldCss = `
   .deg-n { color: ${C.accent}; font-size: 120px; }
   #years { top: 1390px; }
   .yr { font-size: 64px; }
-  #cta { top: 372px; }
+  #hot, #cold { top: 390px; }
+  .card { display: inline-block; padding: 20px 40px; border-radius: 24px; font-family: "Montserrat", sans-serif;
+    font-weight: 900; font-size: 74px; border: 8px solid ${C.ink}; }
+  .card span { opacity: 0.6; }
+  .card-hot { background: ${C.hot}; color: #fff; }
+  .card-cold { background: ${C.ice}; color: ${C.ink}; }
+  #cta, #teaser { top: 372px; }
   .ct { font-size: 64px; }
   .ct-y { color: ${C.accent}; font-size: 112px; }
-  #ct3 { display: inline-block; margin-top: 22px; padding: 16px 34px; border-radius: 40px; background: ${C.ink};
+  .tz-k { display: inline-block; font-size: 56px; color: ${C.ink}; background: ${C.accent}; -webkit-text-stroke: 0;
+    padding: 8px 26px; border-radius: 14px; margin-bottom: 14px; }
+  #ct3, #tz3 { display: inline-block; margin-top: 22px; padding: 16px 34px; border-radius: 40px; background: ${C.ink};
     color: #fff; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 44px; border: 4px solid #fff; }
 `;
 
-/* ---- Timeline der Welt ---- */
-const vanishT = at("n1", "verschwindet") + 0.2;
+/* ---- Beats ---- */
 const T = {
-  vanish: f(vanishT),
-  hookOut: f(L.n1.e + 0.15),
-  sticker: at("n2", "kein"),
-  stickerOut: f(L.n2.e + 0.1),
-  dark: at("n3", "dunkel") - 0.4,
-  starsIn: at("n3", "Mondlicht"),
-  toTide: f(L.n4.s - 0.6),
-  bigTide: at("n4", "Ebbe") - 0.3,
-  smallTide: at("n4", "schrumpfen"),
-  third: at("n4", "Drittel"),
-  dive: f(L.n5.s - 1.2),
-  eggs: at("n5", "laichen"),
-  cal: at("n5", "Korallen") - 0.1,
-  calGone: at("n5", "Kalender") + 0.15,
-  rise: f(L.n6.s - 1.3),
-  ghostSun: f(L.n6.s - 0.1),
-  stamp: at("n6", "nie") - 0.05,
-  toEarth: f(L.n7.s - 0.4),
-  axis: at("n7", "Erdachse") - 0.1,
-  orbit: at("n7", "Mond") - 0.1,
-  deg: at("n7", "stabil"),
-  orbitOut: L.n8.s,
-  years: at("n8", "Millionen") - 0.1,
-  wobble: at("n8", "Taumeln") - 0.3,
-  seasons: at("n8", "extremen"),
-  cta: f(L.n9.s - 0.1),
-  ctaSub: f(L.n9.e + 0.1),
+  crack: at("n1", "verschwindet") - 0.05,
+  vanish: f(at("n1", "verschwindet") + 0.3),
+  first: at("n1", "Das") - 0.05,
+  hookOut: at("n1", "Das") - 0.15,
+  firstOut: f(L.n2.s + 0.1),
+  dark: L.n2.s,
+  starsIn: at("n2", "Neumond") - 0.2,
+  forever: at("n2", "Für"),
+  toTide: f(L.n3.s - 0.6),
+  bigTide: at("n3", "Ebbe") - 0.35,
+  smallTide: at("n3", "schrumpfen") - 0.05,
+  third: at("n3", "Drittel"),
+  dive: f(L.n4.s - 1.35),
+  cal: L.n4.s,
+  calGone: at("n4", "Startsignal") - 0.1,
+  eggs: at("n4", "laichen"),
+  rise: f(L.n5.s - 1.3),
+  ghostSun: f(L.n5.s - 0.1),
+  stamp: at("n5", "Nie") - 0.05,
+  toEarth: f(L.n6.s - 0.95),
+  orbit: at("n6", "Mond") - 0.1,
+  axis: at("n6", "Erdachse") - 0.1,
+  deg: at("n6", "stabil"),
+  orbitOut: L.n7.s,
+  years: at("n7", "Millionen") - 0.1,
+  tip: at("n7", "kippen") - 0.3,
+  pin: at("n8", "Deutschland") - 0.1,
+  hot: at("n8", "Sommer") - 0.05,
+  cold: at("n8", "Winter") - 0.05,
+  cta: f(L.n9.s - 0.15),
+  ctaSub: f(L.n9.s + 0.9),
+  teaser: f(L.n10.s + 0.2),
+  twoMoons: at("n10", "zwei") - 0.05,
 };
-
-// Erdachsen-Taumeln: Winkel-Keyframes (Grad), gemessen ab der Senkrechten.
+const TILT_MAX = 64;
+// Erdachsen-Kippen: Winkel-Keyframes (Grad), ab der Senkrechten.
 const WOB = [
   [T.years, 23.4],
-  [T.years + 0.9, 31],
-  [T.wobble + 0.1, 58],
-  [T.wobble + 0.95, 12],
-  [T.wobble + 1.7, 71],
-  [T.seasons + 0.8, 18],
-  [T.seasons + 1.6, 66],
-  [T.cta + 0.2, 23.4],
+  [T.tip, 40],
+  [T.tip + 0.6, 12],
+  [T.tip + 1.3, TILT_MAX],
+  [T.cta - 0.1, TILT_MAX],
+  [T.cta + 0.8, 23.4],
 ];
+// Kamera auf Deutschland: Pin-Position bei voller Neigung.
+const ang = (TILT_MAX * Math.PI) / 180;
+const pinX = EARTH.x + GER.dx * EARTH.r * Math.cos(ang) - GER.dy * EARTH.r * Math.sin(ang);
+const pinY = EARTH.y + GER.dx * EARTH.r * Math.sin(ang) + GER.dy * EARTH.r * Math.cos(ang);
+const GER_CAM = { x: f((540 - pinX) * 0.5), y: f(-(pinY - 900)) };
 
 const worldJs = `
     const E = ${JSON.stringify(EARTH)};
     gsap.set("#zoom", { transformOrigin: "540px 960px", scale: 1.12 });
     gsap.set("#cam", { y: ${-CY.hook} });
     gsap.set("#moon", { svgOrigin: "${MOON.x} ${MOON.y}" });
+    gsap.set("#cracks", { svgOrigin: "${MOON.x} ${MOON.y}" });
     gsap.set("#earth", { svgOrigin: "${E.x} ${E.y}", rotation: 23.4 });
     gsap.set(".ov", { transformOrigin: "50% 50%" });
 
-    // HOOK: Titel steht ab Frame 0, Kamera-Punch, der Mond verschwindet.
+    // HOOK: Titel ab Frame 0, Kamera-Punch, der Mond bekommt Risse und implodiert.
     tl.to("#zoom", { scale: 1, duration: 0.7, ease: "back.out(1.4)" }, 0);
-    tl.to("#moon", { scale: 1.12, duration: 0.25, ease: "power2.out" }, ${T.vanish} - 0.25);
-    tl.to("#moon", { scale: 0, rotation: 40, duration: 0.32, ease: "back.in(2)" }, ${T.vanish});
-    tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.35, duration: 0.05 }, ${T.vanish} + 0.3);
-    tl.to("#flash", { opacity: 0, duration: 0.3 }, ${T.vanish} + 0.35);
-    tl.to("#moon-ghost", { opacity: 0.8, duration: 0.4, ease: "power1.out" }, ${T.vanish} + 0.32);
+    tl.to("#cracks", { opacity: 1, duration: 0.08 }, ${T.crack});
+    tl.to(["#moon", "#cracks"], { scale: 1.1, duration: 0.3, ease: "power2.out" }, ${T.crack});
+    tl.to(["#moon", "#cracks"], { scale: 0, rotation: 50, duration: 0.3, ease: "back.in(2.2)" }, ${T.vanish});
+    tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.45, duration: 0.05 }, ${T.vanish} + 0.28);
+    tl.to("#flash", { opacity: 0, duration: 0.3 }, ${T.vanish} + 0.33);
+    tl.to("#shake", { x: 9, y: -7, duration: 0.05 }, ${T.vanish} + 0.3);
+    tl.to("#shake", { x: -6, y: 5, duration: 0.05 }, ${T.vanish} + 0.35);
+    tl.to("#shake", { x: 0, y: 0, duration: 0.08 }, ${T.vanish} + 0.4);
+    tl.to("#moon-ghost", { opacity: 0.8, duration: 0.4, ease: "power1.out" }, ${T.vanish} + 0.3);
     tl.to(".refl", { scaleX: 0, opacity: 0, transformOrigin: "50% 50%", duration: 0.25, stagger: 0.04, ease: "power2.in" }, ${T.vanish} + 0.2);
-    tl.to("#hook", { opacity: 0, y: -30, duration: 0.25, ease: "power2.in" }, ${T.hookOut});
+    tl.to("#hook", { opacity: 0, y: -30, duration: 0.22, ease: "power2.in" }, ${T.hookOut});
+    tl.fromTo("#first", { opacity: 0, scale: 0.5, rotation: -10 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.3, ease: "back.out(2.2)" }, ${T.first});
+    tl.to("#first", { opacity: 0, scale: 0.8, duration: 0.2, ease: "power2.in" }, ${T.firstOut});
 
-    // Wellen laufen (Wasser bewegt sich, solange wir an der Küste sind).
+    // Wellen laufen, solange wir an der Küste sind.
     tl.fromTo(".wave", { x: 0 }, { x: -90, duration: 2.4, ease: "none", repeat: ${Math.ceil(T.dive / 2.4)}, stagger: 0.3 }, 0);
 
-    // "Kein Weltuntergang"-Sticker
-    tl.fromTo("#sticker", { opacity: 0, scale: 0.5, rotation: -10 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.35, ease: "back.out(2.2)" }, ${T.sticker});
-    tl.to("#sticker", { opacity: 0, scale: 0.8, duration: 0.2, ease: "power2.in" }, ${T.stickerOut});
-
-    // Nacht wird dunkel, mehr Sterne sichtbar, Kamera schiebt langsam rein.
+    // Die Nacht wird schwarz: Fenster im Haus gehen an, mehr Sterne, Kamera schiebt rein.
     gsap.set(".s2", { opacity: 0 });
-    tl.to("#dark", { opacity: 0.62, duration: 1.4, ease: "power2.inOut" }, ${T.dark});
-    tl.to(".s2", { opacity: 0.9, duration: 0.25, stagger: 0.012, ease: "power1.out" }, ${T.starsIn});
-    tl.to("#zoom", { scale: 1.06, duration: ${f(L.n3.e - T.dark)}, ease: "power1.inOut" }, ${T.dark});
+    tl.to("#dark", { opacity: 0.66, duration: 1.3, ease: "power2.inOut" }, ${T.dark});
+    tl.to(".win", { opacity: 1, duration: 0.08, stagger: 0.35 }, ${T.dark} + 0.7);
+    tl.to(".s2", { opacity: 0.9, duration: 0.25, stagger: 0.01, ease: "power1.out" }, ${T.starsIn});
+    tl.to("#zoom", { scale: 1.07, duration: ${f(L.n2.e - T.dark)}, ease: "power1.inOut" }, ${T.dark});
+    tl.fromTo("#forever", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, rotation: 2, duration: 0.3, ease: "back.out(2.2)" }, ${T.forever});
+    tl.to("#forever", { opacity: 0, duration: 0.2 }, ${T.toTide});
 
-    // Gezeiten: Kamera runter zum Pegel, große Tide, dann kleine.
+    // Dein Strandurlaub: Kamera runter, früher frisst die Flut die Sandburg, jetzt nicht mehr.
     tl.to("#zoom", { scale: 1, duration: 0.9, ease: "power3.inOut" }, ${T.toTide});
     tl.to("#cam", { y: ${-CY.tide}, duration: 0.9, ease: "power3.inOut" }, ${T.toTide});
-    tl.to("#dark", { opacity: 0.35, duration: 0.9 }, ${T.toTide});
-    const tideTo = (y, d, t0, ease) => {
-      tl.to("#tide-water", { attr: { y, height: ${Y_WL + 4} - y }, duration: d, ease }, t0);
-      tl.to("#tide-edge", { attr: { y: y - 3 }, duration: d, ease }, t0);
+    tl.to("#dark", { opacity: 0.3, duration: 0.9 }, ${T.toTide});
+    const tideTo = (y, d, t0) => {
+      tl.to("#tide-water", { attr: { y, height: ${Y_WL + 4} - y }, duration: d, ease: "sine.inOut" }, t0);
+      tl.to("#tide-edge", { attr: { y: y - 3 }, duration: d, ease: "sine.inOut" }, t0);
     };
     tl.to("#br-old", { opacity: 1, duration: 0.2 }, ${T.bigTide});
-    tideTo(${TIDE.mid - TIDE.big}, 0.6, ${T.bigTide}, "sine.inOut");
-    tideTo(${TIDE.mid + TIDE.big}, ${f(T.smallTide - T.bigTide - 0.62)}, ${T.bigTide} + 0.6, "sine.inOut");
+    tideTo(${TIDE.mid - TIDE.big}, 0.6, ${T.bigTide});
+    tideTo(${TIDE.mid + TIDE.big}, ${f(T.smallTide - T.bigTide - 0.62)}, ${T.bigTide} + 0.6);
     tl.to("#br-old", { opacity: 0.45, duration: 0.3 }, ${T.smallTide});
     tl.to("#br-new", { opacity: 1, duration: 0.2 }, ${T.smallTide});
-    tideTo(${TIDE.mid - TIDE.small}, 0.55, ${T.smallTide}, "sine.inOut");
-    tideTo(${TIDE.mid + TIDE.small}, 0.55, ${T.smallTide} + 0.55, "sine.inOut");
-    tideTo(${TIDE.mid - TIDE.small}, 0.55, ${T.smallTide} + 1.1, "sine.inOut");
-    tideTo(${TIDE.mid}, 0.4, ${T.smallTide} + 1.65, "sine.inOut");
+    tideTo(${TIDE.mid - TIDE.small}, 0.55, ${T.smallTide});
+    tideTo(${TIDE.mid + TIDE.small}, 0.55, ${T.smallTide} + 0.55);
+    tideTo(${TIDE.mid - TIDE.small}, 0.55, ${T.smallTide} + 1.1);
+    tideTo(${TIDE.mid}, 0.4, ${T.smallTide} + 1.65);
     tl.fromTo("#third", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, ${T.third});
     tl.to("#third", { opacity: 0, duration: 0.2 }, ${T.dive});
 
-    // Abtauchen ins Meer.
+    // Abtauchen: der Vollmond fehlt im Kalender der Korallen.
     tl.to("#cam", { y: ${-CY.under}, duration: 1.05, ease: "power3.inOut" }, ${T.dive});
     tl.to("#fish1", { x: 1400, duration: 7, ease: "none" }, ${T.dive} + 0.4);
     tl.to("#fish2", { x: -1500, duration: 8, ease: "none" }, ${T.dive} + 0.9);
+    tl.to("#fish3", { x: 1500, duration: 6, ease: "none" }, ${T.dive} + 1.6);
+    gsap.set(".weed", { svgOrigin: "0 6930" });
+    tl.fromTo(".weed", { skewX: -4 }, { skewX: 4, duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.25 }, ${T.dive});
     tl.fromTo("#cal", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.8)" }, ${T.cal});
-    tl.fromTo(".egg", { opacity: 0, y: 0 }, { opacity: 1, y: -60, duration: 0.5, stagger: 0.015, ease: "power2.out" }, ${T.eggs});
-    tl.to(".egg", { y: -260, duration: ${f(T.calGone + 0.18 - T.eggs - 0.5 - 33 * 0.015)}, stagger: 0.015, ease: "sine.inOut" }, ${T.eggs} + 0.5);
-    // Der Vollmond verschwindet aus dem Kalender: Eier stoppen und sinken.
     gsap.set("#cal-moon-art", { svgOrigin: "540 6020" });
     tl.to("#cal-moon-art", { scale: 0, duration: 0.3, ease: "back.in(2)" }, ${T.calGone});
     tl.to("#cal-ghost", { opacity: 1, duration: 0.3 }, ${T.calGone} + 0.25);
-    tl.to(".egg", { opacity: 0, y: -140, duration: 0.7, stagger: 0.01, ease: "power2.in" }, ${T.calGone} + 0.2);
     tl.fromTo("#qmark", { opacity: 0, scale: 0.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 8, duration: 0.4, ease: "back.out(2.5)" }, ${T.calGone} + 0.3);
+    // Ein paar Eier steigen zögernd auf und sinken wieder ab: kein Signal.
+    tl.fromTo(".egg", { opacity: 0, y: 0 }, { opacity: 1, y: -90, duration: 0.6, stagger: 0.015, ease: "power2.out" }, ${T.eggs});
+    tl.to(".egg", { opacity: 0, y: 40, duration: 0.9, stagger: 0.01, ease: "power2.in" }, ${T.eggs} + 1.15);
     tl.to(["#qmark", "#cal"], { opacity: 0, duration: 0.2 }, ${T.rise});
 
     // Hoch ins All, an der Sonne vorbei.
     tl.to("#cam", { y: ${-CY.sun}, duration: 1.3, ease: "power3.inOut" }, ${T.rise});
     tl.to("#dark", { opacity: 0, duration: 0.6 }, ${T.rise});
     gsap.set("#ghost-sun-pos", { x: -760 });
-    tl.to("#ghost-sun-pos", { x: 0, duration: 1.1, ease: "power2.out" }, ${T.ghostSun});
-    tl.to("#ghost-sun-pos", { x: 800, duration: 1.0, ease: "power2.in" }, ${T.ghostSun} + 1.5);
+    tl.to("#ghost-sun-pos", { x: 0, duration: 1.0, ease: "power2.out" }, ${T.ghostSun});
+    tl.to("#ghost-sun-pos", { x: 800, duration: 1.0, ease: "power2.in" }, ${T.ghostSun} + 1.4);
     tl.fromTo("#stamp", { opacity: 0, scale: 1.8, rotation: -14 }, { opacity: 1, scale: 1, rotation: -7, duration: 0.18, ease: "power4.in" }, ${T.stamp});
     tl.to("#shake", { x: 10, y: -8, duration: 0.05 }, ${T.stamp} + 0.18);
     tl.to("#shake", { x: -7, y: 6, duration: 0.05 }, ${T.stamp} + 0.23);
     tl.to("#shake", { x: 0, y: 0, duration: 0.08 }, ${T.stamp} + 0.28);
     tl.to("#stamp", { opacity: 0, duration: 0.2 }, ${T.toEarth});
 
-    // Zur Erde: Achse, Mondbahn, 23,4°.
+    // Zur Erde: Mondbahn, Achse, 23,4°.
     tl.to("#cam", { y: ${-CY.earth}, duration: 0.9, ease: "power2.inOut" }, ${T.toEarth});
     tl.to("#orbit", { opacity: 1, duration: 0.4 }, ${T.orbit});
     tl.to("#ghost-orbit-pos", { opacity: 1, duration: 0.4 }, ${T.orbit});
@@ -432,43 +592,64 @@ const worldJs = `
     tl.to("#axis-arc", { opacity: 1, duration: 0.3 }, ${T.deg});
     tl.fromTo("#deg", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, ${T.deg});
 
-    // Ohne Mond: Bahn weg, Achse taumelt, Jahre zählen hoch.
+    // Ohne Mond: Bahn weg, Achse kippt, Jahre zählen hoch.
     tl.to(["#orbit", "#ghost-orbit-pos"], { opacity: 0, duration: 0.35 }, ${T.orbitOut});
     const WOB = ${JSON.stringify(WOB)};
     for (let i = 1; i < WOB.length; i++) {
       const [t0, a0] = WOB[i - 1], [t1, a1] = WOB[i];
+      if (a0 === a1) continue;
       tl.to(A, { a: a1, duration: t1 - t0, ease: "sine.inOut", onUpdate: drawArc }, t0);
       tl.to("#earth", { rotation: a1, duration: t1 - t0, ease: "sine.inOut" }, t0);
     }
     const Y = { v: 1 };
     tl.fromTo("#years", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25 }, ${T.years});
-    tl.to(Y, { v: 50, duration: ${f(T.cta - 0.3 - T.years)}, ease: "power2.in", onUpdate: () => {
+    tl.to(Y, { v: 50, duration: ${f(T.pin - 0.3 - T.years)}, ease: "power2.in", onUpdate: () => {
       document.querySelector("#yr").textContent = "+" + Math.round(Y.v) + " MIO. JAHRE";
     } }, ${T.years});
-    tl.to("#years", { opacity: 0, duration: 0.2 }, ${T.cta} - 0.3);
-    // Rumpeln beim Taumeln.
-    ${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => `tl.to("#shake", { x: ${i % 2 ? -6 : 6}, y: ${i % 3 ? 4 : -5}, duration: 0.08 }, ${f(T.wobble + i * 0.12)});`).join("\n    ")}
-    tl.to("#shake", { x: 0, y: 0, duration: 0.12 }, ${f(T.wobble + 0.96)});
-    // Extreme Jahreszeiten: Norden vereist, Süden glüht, dann umgekehrt.
-    tl.to("#season-n", { opacity: 0.88, duration: 0.3 }, ${T.seasons});
-    tl.to("#season-s", { opacity: 0.8, duration: 0.3 }, ${T.seasons});
-    tl.to("#season-n", { attr: { fill: "#FF6B2C" }, opacity: 0.8, duration: 0.3 }, ${T.seasons} + 0.9);
-    tl.to("#season-s", { attr: { fill: "#EAF6FF" }, opacity: 0.88, duration: 0.3 }, ${T.seasons} + 0.9);
-    tl.to(["#season-n", "#season-s"], { opacity: 0, duration: 0.4 }, ${T.cta});
-    tl.to("#deg", { opacity: 0, duration: 0.2 }, ${T.cta} - 0.3);
+    tl.to(["#years", "#deg", "#axis-arc"], { opacity: 0, duration: 0.2 }, ${T.pin} - 0.3);
+    ${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => `tl.to("#shake", { x: ${i % 2 ? -7 : 7}, y: ${i % 3 ? 5 : -6}, duration: 0.08 }, ${f(T.tip + i * 0.12)});`).join("\n    ")}
+    tl.to("#shake", { x: 0, y: 0, duration: 0.12 }, ${f(T.tip + 0.96)});
 
-    // Kommentar-Frage, der Geister-Mond kehrt an die Erde zurück.
-    tl.to("#cam", { y: -760, duration: 0.6, ease: "power2.inOut" }, ${T.cta} - 0.2);
+    // Dein Deutschland: Kamera auf den Pin, Sommer wie Wüste, Winter wie Arktis.
+    tl.fromTo("#pin", { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.35, ease: "bounce.out" }, ${T.pin});
+    tl.to("#cam", { x: ${GER_CAM.x}, y: ${GER_CAM.y}, duration: 0.8, ease: "power2.inOut" }, ${T.pin});
+    tl.to("#zoom", { scale: 1.08, duration: 0.8, ease: "power2.inOut" }, ${T.pin});
+    tl.to("#season-n", { opacity: 0.72, duration: 0.35 }, ${T.hot});
+    tl.fromTo("#hot", { opacity: 0, scale: 0.5, rotation: -8 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.3, ease: "back.out(2.2)" }, ${T.hot});
+    tl.to("#hot", { opacity: 0, duration: 0.15 }, ${T.cold} - 0.1);
+    tl.to("#season-n", { attr: { fill: "${C.ice}" }, opacity: 0.85, duration: 0.35 }, ${T.cold});
+    tl.fromTo("#cold", { opacity: 0, scale: 0.5, rotation: 8 }, { opacity: 1, scale: 1, rotation: 3, duration: 0.3, ease: "back.out(2.2)" }, ${T.cold});
+    tl.to("#cold", { opacity: 0, duration: 0.2 }, ${T.cta} - 0.2);
+    tl.to("#season-n", { opacity: 0, duration: 0.4 }, ${T.cta});
+    tl.to("#pin", { opacity: 0, duration: 0.3 }, ${T.cta} + 0.4);
+
+    // Kommentar-Frage: Kamera zurück, die Mondbahn kommt wieder.
+    tl.to("#cam", { x: 0, y: ${-CY.end}, duration: 0.7, ease: "power2.inOut" }, ${T.cta} - 0.2);
+    tl.to("#zoom", { scale: 1, duration: 0.7, ease: "power2.inOut" }, ${T.cta} - 0.2);
     tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.cta});
     tl.fromTo("#ct3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, ${T.ctaSub});
     tl.to("#orbit", { opacity: 1, duration: 0.6 }, ${T.ctaSub});
     tl.set("#ghost-orbit-pos", { x: 0, y: 0 }, ${T.ctaSub});
     tl.to("#ghost-orbit-pos", { opacity: 1, duration: 0.6 }, ${T.ctaSub});
-    tl.to("#ghost-orbit-pos", { x: 470, y: 118, duration: ${f(DUR - T.ctaSub)}, ease: "sine.inOut" }, ${T.ctaSub});
+    tl.to("#cta", { opacity: 0, scale: 0.9, duration: 0.2 }, ${T.teaser} - 0.2);
+
+    // Teaser Teil 2: zwei Monde ploppen auf die Bahn.
+    tl.fromTo("#teaser", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${T.teaser});
+    tl.fromTo("#tz3", { opacity: 0 }, { opacity: 1, duration: 0.3 }, ${f(L.n10.e)});
+    gsap.set("#m2a", { svgOrigin: "${EARTH.x - 470} ${EARTH.y}" });
+    gsap.set("#m2b", { svgOrigin: "${EARTH.x + 470} ${EARTH.y}" });
+    tl.to("#ghost-orbit-pos", { opacity: 0, duration: 0.15 }, ${T.twoMoons});
+    tl.set(["#moon2a", "#moon2b"], { opacity: 1 }, ${T.twoMoons});
+    tl.fromTo("#m2a", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${T.twoMoons});
+    tl.fromTo("#m2b", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${T.twoMoons} + 0.25);
+    tl.fromTo("#moon2a", { x: 0, y: 0 }, { x: 470, y: 118, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
+    tl.fromTo("#moon2b", { x: 0, y: 0 }, { x: -470, y: -118, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
+    gsap.set(["#m2a", "#m2b"], { scale: 0 });
 `;
 
 /* ================= Untertitel ================= */
-const emphOf = (l, w) => (l.emph || []).some((e) => w.toLowerCase().replace(/[^\p{L}]/gu, "") === e.toLowerCase());
+const norm = (w) => w.toLowerCase().replace(/[^\p{L}]/gu, "");
+const emphOf = (l, w) => (l.emph || []).some((e) => norm(w) === norm(e));
 const chunks = [];
 for (const line of script.lines) {
   let cur = [];
@@ -494,7 +675,7 @@ const capCss = `
   .cap { position: absolute; left: 70px; right: 70px; top: 1210px; text-align: center; opacity: 0;
     font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 74px; line-height: 1.05; color: #fff;
     text-transform: uppercase; -webkit-text-stroke: 14px ${C.ink}; paint-order: stroke fill; }
-  .cap .emph { color: ${C.accent}; }`;
+  .cap .emph { color: ${C.accent}; font-size: 86px; }`;
 const capJs = `
     const CH = ${JSON.stringify(chunks.map((c) => [c[0].start, c.at(-1).end]))};
     CH.forEach(([s, e], i) => {
@@ -528,20 +709,26 @@ ${js}
 /* ================= Ton ================= */
 const SFX = [
   ["boom", "gen-boom", 0, 0.5],
-  ["vanish", "gen-vanish", T.vanish - 0.15, 0.6],
-  ["wave1", "gen-wave", 3.2, 0.25],
-  ["pop1", "gen-pop", T.sticker - 0.05, 0.45],
+  ["crack", "gen-crack", T.crack - 0.05, 0.45],
+  ["vanish", "gen-vanish", T.vanish - 0.1, 0.6],
+  ["pop1", "gen-pop", T.first - 0.05, 0.4],
   ["dark", "gen-dark", T.dark, 0.45],
-  ["wave2", "gen-wave", T.toTide + 0.4, 0.35],
+  ["wave2", "gen-wave", T.toTide + 0.3, 0.35],
   ["pop2", "gen-pop", T.third, 0.45],
   ["splash", "gen-splash", T.dive + 0.45, 0.55],
   ["bubbles", "gen-bubbles", T.dive + 1.2, 0.3],
   ["pop3", "gen-pop", T.calGone + 0.3, 0.45],
   ["rise", "gen-rise", T.rise, 0.5],
   ["stamp", "gen-stamp", T.stamp + 0.15, 0.7],
-  ["tick", "gen-tick", T.years, 0.25],
-  ["rumble", "gen-rumble", T.wobble - 0.2, 0.55],
+  ["swoosh", "gen-swoosh2", T.toEarth, 0.35],
+  ["tick", "gen-tick", T.years, 0.22],
+  ["rumble", "gen-rumble", T.tip - 0.2, 0.55],
+  ["pin", "gen-pop", T.pin + 0.1, 0.45],
+  ["wind", "gen-wind", T.hot, 0.3],
+  ["blizzard", "gen-blizzard", T.cold, 0.3],
   ["pop4", "gen-pop", T.cta, 0.45],
+  ["pop5", "gen-pop", T.twoMoons, 0.5],
+  ["pop6", "gen-pop", T.twoMoons + 0.25, 0.45],
 ];
 let track = 10;
 const sfx = SFX.map(
@@ -574,7 +761,7 @@ const index = `<!doctype html>
       <div id="captions" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="${DUR}" data-track-index="2" data-track-kind="captions" data-width="${W}" data-height="${H}" style="z-index:5"></div>
 ${sfx}
 ${vo}
-      <audio id="bed" class="clip" src="assets/sfx/bed-long.mp3" data-start="0" data-duration="${DUR}" data-track-index="9" data-volume="0.08"></audio>
+      <audio id="bed" class="clip" src="assets/sfx/bed-long.mp3" data-start="0" data-duration="${DUR}" data-track-index="9" data-volume="0.09"></audio>
     </div>
     <script>
       window.__timelines = window.__timelines || {};
