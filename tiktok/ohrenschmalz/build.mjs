@@ -783,10 +783,12 @@ const patientSvg = `
   <path d="M 430 850 L 470 960 L 430 968 L 404 862 Z" fill="#D94A4A" ${S(4)}/>
   <path d="M 500 900 C 560 960 600 920 580 860" fill="none" stroke="${C.ink}" stroke-width="72" stroke-linecap="round"/><path d="M 500 900 C 560 960 600 920 580 860" fill="none" stroke="${PT.sweater}" stroke-width="62" stroke-linecap="round"/>
   <g id="pt-belly">
-    <rect x="-7" y="0" width="14" height="150" rx="6" fill="#9FD0EE" ${S(3)} transform="translate(580 860) rotate(40)"/>
-    <ellipse cx="520" cy="790" rx="26" ry="34" fill="#FBFBF8" ${S(4)} transform="rotate(40 520 790)"/>
-    <g transform="translate(520 788)">${toothFace("pice", { r: 8, gap: 10, mouthY: 15, mouthS: 0.28, mouthInit: "smirk", lidFill: "#FBFBF8" })}</g>
+    <path d="M 522 794 L 604 884" stroke="${C.ink}" stroke-width="17" stroke-linecap="round"/>
+    <path d="M 522 794 L 604 884" stroke="#9FD0EE" stroke-width="10" stroke-linecap="round"/>
+    <ellipse cx="516" cy="787" rx="22" ry="32" fill="#FBFBF8" ${S(4)} transform="rotate(-42 516 787)"/>
+    <g transform="translate(514 784)">${toothFace("pice", { r: 8, gap: 10, mouthY: 14, mouthS: 0.28, mouthInit: "smirk", lidFill: "#FBFBF8" })}</g>
   </g>
+
 
 
   <circle cx="580" cy="856" r="28" fill="${P.skin}" ${S()}/>
