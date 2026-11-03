@@ -29,7 +29,7 @@ for (const l of script.lines) if (l.reuse && VO[l.reuse]) VO[l.id] = VO[l.reuse]
 const ORDER = script.order;
 const GAP = {
   teaser: 0,
-  streit: 0.08,
+  streit: 0.05,
   nachher: 0.08,
   op: 0.2,
   frage: 0.2,
@@ -56,11 +56,14 @@ for (const id of ORDER) {
   const [a, b] = ORIG[id];
   let prevEnd = -1;
   for (const l of lines.filter((x) => LINE_SCENE[x.id] === id && VO[x.id])) {
-    if (prevEnd > 0 && l.start < prevEnd + GAP[id]) l.start = +(prevEnd + GAP[id]).toFixed(2);
+    // Dicht hintereinander: jede Zeile startet direkt nach der vorigen (plus
+    // GAP); nur "wait" in script.json lässt Platz für eine Aktion.
+    if (prevEnd > 0) l.start = +(prevEnd + (l.wait ?? GAP[id])).toFixed(2);
     l.end = +(l.start + VO[l.id].duration).toFixed(2);
     prevEnd = l.end;
   }
-  const end = prevEnd > 0 ? Math.max(b, prevEnd + PAD[id]) : b;
+  // Szene endet kurz nach ihrem letzten Satz (keine feste Mindestlänge mehr).
+  const end = prevEnd > 0 ? prevEnd + PAD[id] : b;
   SC[id] = [a, +end.toFixed(2)];
   SHIFT[id] = +(realT - a).toFixed(3);
   realT += end - a;
@@ -404,7 +407,7 @@ const streitJs = `${HELPERS}${BODY_INIT}
     tl.to("#@watt-shades", { y: 14, duration: 0.15 }, ${L.w2[0]});
     tl.to("#@watt-pos", { y: WOFF[1], duration: 0.6, ease: "power2.in" }, ${L.w2[1]} + 0.1);
     // Kommentar-Frage schon hier (nicht erst am Ende).
-    tl.fromTo("#ask", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, ${L.w2[0]});
+    tl.fromTo("#ask", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, ${L.s5[0]} + 0.3);
     tl.to("#ask", { opacity: 0, duration: 0.2 }, S1 - 0.1);
     ${blinks("streit", SC.streit[0], SC.streit[1])}
 `;
@@ -478,7 +481,7 @@ const opJs = `${HELPERS}${BODY_INIT}
     tl.fromTo("#@flash", { opacity: 0.5 }, { opacity: 0, duration: 0.25, immediateRender: false }, o3[0] - 0.4);
     tl.to("#@pain", { scale: 0, duration: 0.2 }, o3[0] - 0.4);
     frameTo(540, 560, 1.15, o3[0] - 0.15, 0.4);
-    tl.to("#st3", { opacity: 0, duration: 0.2 }, o3[0]);
+    tl.to("#st3", { opacity: 0, duration: 0.2 }, o3[0] + 0.9);
     bulge(o3[0] - 0.4, 0.9);
     lids("@tr", 0, o3[0] - 0.3, 0.1);
     blink("@tr", o3[1] + 0.2, 0);
@@ -922,7 +925,7 @@ function sfxStart(s) {
   return R(s.start);
 }
 const bed = existsSync(new URL("./assets/sfx/bed-long.mp3", import.meta.url))
-  ? `      <audio id="bed" class="clip" src="assets/sfx/bed-long.mp3" data-start="0" data-duration="${DUR}" data-track-index="9" data-volume="0.17"></audio>`
+  ? `      <audio id="bed" class="clip" src="assets/sfx/bed-long.mp3" data-start="0" data-duration="${DUR}" data-track-index="9" data-volume="0.08"></audio>`
   : "";
 const vo = lines
   .filter((l) => VO[l.id])

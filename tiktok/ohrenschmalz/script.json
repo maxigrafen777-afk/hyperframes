@@ -3,7 +3,7 @@
   "handle": "Dr. Arzterklärt",
   "duration": 0,
   "voiceModel": "eleven_multilingual_v2",
-  "maxPause": 0.3,
+  "maxPause": 0.22,
   "hook": [
     ["OHRENSCHMALZ?", 92, "#FFE14D"],
     ["SO KOMMT ER RAUS", 60, "#fff"]
@@ -16,8 +16,9 @@
   },
   "order": ["streit", "op", "praxis", "patient"],
   "qa": {
-    "maxTakes": 3,
-    "maxWer": 0.1
+    "maxTakes": 4,
+    "maxWer": 0.1,
+    "maxF0Dev": 0.3
   },
   "lines": [
     {
@@ -104,7 +105,8 @@
       "start": 27.2,
       "end": 28.2,
       "text": "Ich hör alles! Sogar das Gras wachsen!",
-      "emph": ["alles"]
+      "emph": ["alles"],
+      "wait": 1.1
     },
     {
       "id": "d1",
@@ -131,40 +133,43 @@
   ],
   "voices": {
     "tr": {
-      "name": "Trommelfell (DE, hoch, gestresst)",
-      "voice_id": "Xb7cfBV1lE0cYVC2AJjo",
+      "name": "Trommelfell (DE, hysterisch)",
+      "voice_id": "qUEezpe9PVeBGCAuvgCT",
       "settings": {
-        "stability": 0.5,
+        "stability": 0.4,
         "similarity_boost": 0.85,
-        "style": 0.35,
+        "style": 0.6,
         "use_speaker_boost": true
       },
       "seed": 1212,
-      "tempo": 1.06
+      "tempo": 1.04,
+      "f0ref": 276
     },
     "pf": {
-      "name": "Pfropf (DE, tief, faul)",
-      "voice_id": "yvz9Q6w0xtp74piKcTUi",
+      "name": "Pfropf (DE, tief, schläfrig)",
+      "voice_id": "60QqaEwKeWbeCvUpTWud",
       "settings": {
-        "stability": 0.5,
+        "stability": 0.4,
         "similarity_boost": 0.85,
-        "style": 0.3,
+        "style": 0.6,
         "use_speaker_boost": true
       },
       "seed": 2323,
-      "tempo": 1.06
+      "tempo": 1.04,
+      "f0ref": 86
     },
     "watt": {
-      "name": "Wattestäbchen (DE, frech)",
-      "voice_id": "bF3rVjXZtAfDZVJn5SNR",
+      "name": "Wattestäbchen (DE, Angeber)",
+      "voice_id": "57UyT2voiMHSkl25qJtO",
       "settings": {
-        "stability": 0.5,
+        "stability": 0.4,
         "similarity_boost": 0.85,
-        "style": 0.35,
+        "style": 0.6,
         "use_speaker_boost": true
       },
       "seed": 3434,
-      "tempo": 1.06
+      "tempo": 1.04,
+      "f0ref": 159
     },
     "arzt": {
       "name": "Arzt (DE, ruhig, älter)",

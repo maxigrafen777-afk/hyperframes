@@ -140,6 +140,15 @@ Daraus folgt:
 - **Lustigere Figuren, trotzdem anatomisch richtig:** jede Figur bekommt Augenbrauen (`browPair`, `brows(ch, mood, t)`), Gestresste schwitzen (`sweat`), Körperteile reagieren physisch (Trommelfell beult sich, Pfropf räkelt sich und quetscht), Gegenstände bekommen Accessoires (Wattestäbchen mit Sonnenbrille, die beim „Upps“ verrutscht).
 - **SFX nie auf ein Wort legen**, auch nicht auf kurze („Upps“ ging unter einem Boing verloren). Nach dem Rendern den Mix transkribieren.
 
+## Stimmen lebendig, Timing dicht, Musik leise (Ohrenschmalz v2)
+
+- **Lebendigkeit messen:** `f0s.py` gibt Tonhöhe (Median), Tonhöhen-Schwankung in Halbtönen (`var`) und Dynamik aus. Unter ~4 Halbtönen klingt eine Stimme monoton („langweilig“). Voice-Design mit überzeichneten Beschreibungen („extrem hysterisch, schrill“, „sehr tief, schläfrig, schmatzend“, „großspuriger Angeber“), `eleven_ttv_v3`, `guidance_scale: 5`, 6 Vorschläge pro Rolle; den mit hoher `var`, Wortfehlerrate 0 und passender Tonhöhe nehmen.
+- **Sprechen:** `eleven_multilingual_v2`, `stability 0.4`, `style 0.6` war im Test lebendiger als v3.
+- **Konsistenz-QA:** `f0ref` pro Stimme in `script.json`, `qa.maxF0Dev: 0.3` (Oktaven). Takes, die in eine andere Tonlage kippen (z. B. 308 statt 159 Hz), werden neu erzeugt. Ausnahme: geschriene Einwörter liegen naturgemäß höher.
+- **Timing dicht:** Zeilen starten immer direkt nach der vorigen (`GAP` 0,05 s im Streit), nur `"wait": 1.1` in `script.json` lässt Platz für eine Aktion (z. B. Plopp). Szenen enden kurz nach dem letzten Satz (keine feste Mindestlänge). `maxPause` 0,22 s.
+- **Musikbett 0,08** (~19 dB unter den Stimmen).
+- Aktuelle Stimmen: Trommelfell `qUEezpe9PVeBGCAuvgCT`, Pfropf `60QqaEwKeWbeCvUpTWud`, Wattestäbchen `57UyT2voiMHSkl25qJtO`; Arzt `Og1j4Myr6614gRWlVatR`, Patient `DG0JkxHQrOrx7vnDPwPZ`.
+
 ## Stolperfallen
 
 - QA-Normalisierung ignoriert Bindestriche („Kot-Stein“ = „Kotstein“); schwierige Wörter mit Bindestrich schreiben hilft der Aussprache.

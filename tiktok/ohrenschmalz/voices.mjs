@@ -138,7 +138,20 @@ if (!retimeOnly) {
       const data = await tts(line, take);
       const buf = Buffer.from(data.audio_base64, "base64");
       const heard = QA.maxTakes > 1 ? await stt(buf) : line.text;
-      const score = wer(normWords(line.text), normWords(heard));
+      let score = wer(normWords(line.text), normWords(heard));
+      // Konsistenz: Tonhöhe des Takes muss nah an der Stimme der Figur liegen
+      // (sonst kippt sie z. B. in die Kopfstimme und klingt wie jemand anderes).
+      const ref = voices[line.speaker].f0ref;
+      if (ref && QA.maxF0Dev) {
+        const tmp = here(`./assets/vo/raw/_qa.mp3`).pathname;
+        writeFileSync(tmp, buf);
+        const f0 = JSON.parse(
+          execFileSync("python3", ["-I", here("./f0s.py").pathname, tmp]).toString(),
+        ).f0;
+        const dev = f0 ? Math.abs(Math.log2(f0 / ref)) : 1;
+        console.log(`    F0 ${f0} Hz (Ziel ${ref}, Abweichung ${dev.toFixed(2)} Okt.)`);
+        if (dev > QA.maxF0Dev) score += 1;
+      }
       console.log(`  ${line.id} Take ${take}: WER ${score.toFixed(2)}  "${heard}"`);
       if (!best || score < best.score) best = { data, buf, score, heard };
       if (score <= QA.maxWer) break;
