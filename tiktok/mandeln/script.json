@@ -1,0 +1,497 @@
+{
+  "title": "Mandeln werden entfernt",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "hook": [
+    ["WARUM HILFT", 80, "#fff"],
+    ["EIS", 150, "#7FE3FF"],
+    ["NICHT MEHR?", 86, "#fff"]
+  ],
+  "scenes": {
+    "teaser": [90, 92.8],
+    "streit": [0, 14.0],
+    "spaeter": [15, 16.4],
+    "nachher": [20, 24.0],
+    "op": [30, 48],
+    "praxis": [55, 57],
+    "patient": [60, 64]
+  },
+  "order": ["teaser", "streit", "spaeter", "nachher", "op", "praxis", "patient"],
+  "qa": {
+    "maxTakes": 3,
+    "maxWer": 0.1
+  },
+  "lines": [
+    {
+      "id": "t1",
+      "speaker": "ml",
+      "start": 90.3,
+      "end": 91.3,
+      "text": "Nicht ohne meinen Bruder!",
+      "emph": ["Bruder"],
+      "reuse": "o3"
+    },
+    {
+      "id": "s1",
+      "speaker": "zp",
+      "start": 0.35,
+      "end": 1.35,
+      "text": "Hey! Ihr zwei! Ich krieg keine Luft!",
+      "emph": ["Luft"]
+    },
+    {
+      "id": "s2",
+      "speaker": "ml",
+      "start": 1.6,
+      "end": 2.6,
+      "text": "Wir sind die Türsteher!",
+      "emph": ["Türsteher"]
+    },
+    {
+      "id": "s3",
+      "speaker": "mr",
+      "start": 2.6,
+      "end": 3.6,
+      "text": "Genau!"
+    },
+    {
+      "id": "s4",
+      "speaker": "zp",
+      "start": 3.6,
+      "end": 4.6,
+      "text": "Türsteher? Ihr seid voller Bakterien!",
+      "emph": ["Bakterien"]
+    },
+    {
+      "id": "i1",
+      "speaker": "zp",
+      "start": 7.0,
+      "end": 8.0,
+      "text": "Oh! Ein Eis! Das kühlt so schön!",
+      "emph": ["Eis"]
+    },
+    {
+      "id": "i2",
+      "speaker": "ml",
+      "start": 9.0,
+      "end": 10.0,
+      "text": "Brrr… ist das kalt!",
+      "emph": ["kalt"]
+    },
+    {
+      "id": "i3",
+      "speaker": "mr",
+      "start": 11.0,
+      "end": 12.0,
+      "text": "Netter Versuch.",
+      "emph": ["Versuch"]
+    },
+    {
+      "id": "l6",
+      "speaker": "card",
+      "start": 15.1,
+      "end": 16.1,
+      "text": "Später"
+    },
+    {
+      "id": "n1",
+      "speaker": "zp",
+      "start": 20.3,
+      "end": 21.3,
+      "text": "Schon wieder entzündet! Das fünfte Mal dieses Jahr!",
+      "emph": ["fünfte"]
+    },
+    {
+      "id": "n2",
+      "speaker": "ml",
+      "start": 21.6,
+      "end": 22.6,
+      "text": "Wir ziehen hier nicht aus."
+    },
+    {
+      "id": "n3",
+      "speaker": "zp",
+      "start": 22.8,
+      "end": 23.8,
+      "text": "Herr Doktor! Holen Sie die raus!",
+      "emph": ["Doktor"]
+    },
+    {
+      "id": "a1",
+      "speaker": "arzt",
+      "start": 30.2,
+      "end": 31.2,
+      "text": "Der Patient schläft. Ein Sperrer hält den Mund weit offen.",
+      "emph": ["Sperrer"]
+    },
+    {
+      "id": "a2",
+      "speaker": "arzt",
+      "start": 32.0,
+      "end": 33.0,
+      "text": "Wir fassen die Mandel und lösen sie vorsichtig aus ihrem Bett.",
+      "emph": ["Mandel"]
+    },
+    {
+      "id": "o2",
+      "speaker": "mr",
+      "start": 33.0,
+      "end": 34.0,
+      "text": "Hey! Das ist meine Wohnung!",
+      "emph": ["Wohnung"]
+    },
+    {
+      "id": "a3",
+      "speaker": "arzt",
+      "start": 34.0,
+      "end": 35.0,
+      "text": "Dann kommt sie heraus. Danach die zweite.",
+      "emph": ["zweite"]
+    },
+    {
+      "id": "o3",
+      "speaker": "ml",
+      "start": 35.0,
+      "end": 36.0,
+      "text": "Nicht ohne meinen Bruder!",
+      "emph": ["Bruder"]
+    },
+    {
+      "id": "a4",
+      "speaker": "arzt",
+      "start": 36.0,
+      "end": 37.0,
+      "text": "Zum Schluss stillen wir die Blutung.",
+      "emph": ["Blutung"]
+    },
+    {
+      "id": "o4",
+      "speaker": "zp",
+      "start": 37.0,
+      "end": 38.0,
+      "text": "Endlich… Luft!",
+      "emph": ["Luft"]
+    },
+    {
+      "id": "d1",
+      "speaker": "arzt",
+      "start": 55.3,
+      "end": 56.3,
+      "text": "Bei ständigen Entzündungen hilft Kühlen nur kurz. Dann ist die OP oft die beste Lösung."
+    },
+    {
+      "id": "e1",
+      "speaker": "pat",
+      "start": 60.3,
+      "end": 61.3,
+      "text": "Darf ich jetzt endlich Eis essen?"
+    },
+    {
+      "id": "e2",
+      "speaker": "arzt",
+      "start": 61.5,
+      "end": 62.5,
+      "text": "Kaltes ja. Aber nichts Hartes oder Scharfes."
+    },
+    {
+      "id": "e3",
+      "speaker": "pat",
+      "start": 63.0,
+      "end": 64.0,
+      "text": "Juhu! … Au!",
+      "maxPause": 0.7
+    }
+  ],
+  "voices": {
+    "zp": {
+      "name": "Zäpfchen (DE, hoch, gestresst)",
+      "voice_id": "Xb7cfBV1lE0cYVC2AJjo",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.35,
+        "use_speaker_boost": true
+      },
+      "seed": 1111,
+      "tempo": 1.06
+    },
+    "ml": {
+      "name": "Mandel links (DE, tiefer Türsteher)",
+      "voice_id": "yvz9Q6w0xtp74piKcTUi",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 2222,
+      "tempo": 1.06
+    },
+    "mr": {
+      "name": "Mandel rechts (DE, frech)",
+      "voice_id": "bF3rVjXZtAfDZVJn5SNR",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.35,
+        "use_speaker_boost": true
+      },
+      "seed": 3333,
+      "tempo": 1.06
+    },
+    "arzt": {
+      "name": "Arzt (DE, ruhig, älter)",
+      "voice_id": "Og1j4Myr6614gRWlVatR",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.85,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "seed": 4444,
+      "tempo": 1.06
+    },
+    "pat": {
+      "name": "Patient (DE, locker)",
+      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 5555,
+      "tempo": 1.06
+    }
+  },
+  "genSfx": [
+    {
+      "id": "boom",
+      "prompt": "deep cinematic boom impact with sub bass, short",
+      "duration": 1.5
+    },
+    {
+      "id": "riser",
+      "prompt": "short tense suspense riser whoosh building up, ends abruptly",
+      "duration": 1.2
+    },
+    {
+      "id": "impact",
+      "prompt": "cartoon pop and heavy thud impact, tooth pulled out",
+      "duration": 1.0
+    },
+    {
+      "id": "boing",
+      "prompt": "comedic cartoon boing wobble, rubbery",
+      "duration": 1.0
+    },
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "throb",
+      "prompt": "cartoon throbbing pulse, deep dull thump thump",
+      "duration": 1.2
+    },
+    {
+      "id": "snip",
+      "prompt": "metal scissors snip, single crisp cut",
+      "duration": 0.6
+    },
+    {
+      "id": "rimshot",
+      "prompt": "comedic drum rimshot ba dum tss",
+      "duration": 1.2
+    },
+    {
+      "id": "rewind",
+      "prompt": "fast VHS tape rewind sound, whirring squeal",
+      "duration": 0.8
+    },
+    {
+      "id": "freeze",
+      "prompt": "icy frost crackle with a cold shimmering whoosh",
+      "duration": 1.0
+    },
+    {
+      "id": "sizzle",
+      "prompt": "short hiss sizzle of ice melting on something hot",
+      "duration": 1.0
+    },
+    {
+      "id": "cautery",
+      "prompt": "short electric zap buzz, surgical cautery",
+      "duration": 0.6
+    },
+    {
+      "id": "metal",
+      "prompt": "metal surgical instrument clank, mouth gag clicking open",
+      "duration": 0.8
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-whoosh0",
+      "src": "whoosh-short.mp3",
+      "start": 90.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-boom",
+      "src": "gen-boom.mp3",
+      "start": 90.0,
+      "volume": 0.7
+    },
+    {
+      "id": "sfx-rewind",
+      "src": "gen-rewind.mp3",
+      "anchor": "streit",
+      "offset": -0.7,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-ice-in",
+      "src": "whoosh-short.mp3",
+      "line": "i1",
+      "offset": -0.6,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-freeze",
+      "src": "gen-freeze.mp3",
+      "line": "i1",
+      "offset": 1.2,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-sizzle",
+      "src": "gen-sizzle.mp3",
+      "line": "i3",
+      "offset": -0.9,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-swell",
+      "src": "gen-throb.mp3",
+      "line": "i3",
+      "offset": 0.5,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-riser",
+      "src": "gen-riser.mp3",
+      "anchor": "spaeter",
+      "offset": -1.15,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-card-in",
+      "src": "whoosh-short.mp3",
+      "anchor": "spaeter",
+      "offset": -0.05,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-card-out",
+      "src": "whoosh-short.mp3",
+      "anchor": "nachher",
+      "offset": -0.1,
+      "volume": 0.45
+    },
+    {
+      "id": "sfx-throb2",
+      "src": "gen-throb.mp3",
+      "anchor": "nachher",
+      "offset": 0.1,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-gag",
+      "src": "gen-metal.mp3",
+      "line": "a1",
+      "offset": 1.6,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-grab",
+      "src": "click.mp3",
+      "line": "a2",
+      "offset": 1.3,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-snip1",
+      "src": "gen-snip.mp3",
+      "line": "a2",
+      "offset": 2.4,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-snip2",
+      "src": "gen-snip.mp3",
+      "line": "a2",
+      "offset": 2.9,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-out1",
+      "src": "gen-impact.mp3",
+      "line": "a3",
+      "offset": 0.5,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-out2",
+      "src": "gen-impact.mp3",
+      "line": "o3",
+      "offset": 1.2,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-zap1",
+      "src": "gen-cautery.mp3",
+      "line": "a4",
+      "offset": 1.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-zap2",
+      "src": "gen-cautery.mp3",
+      "line": "a4",
+      "offset": 1.6,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-rimshot",
+      "src": "gen-rimshot.mp3",
+      "line": "o4",
+      "offset": 1.4,
+      "volume": 0.35
+    },
+    {
+      "id": "sfx-praxis",
+      "src": "whoosh-short.mp3",
+      "anchor": "praxis",
+      "offset": -0.05,
+      "volume": 0.4
+    },
+    {
+      "id": "sfx-boing",
+      "src": "gen-boing.mp3",
+      "anchor": "patient",
+      "offset": 0.0,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-rimshot2",
+      "src": "gen-rimshot.mp3",
+      "line": "e3",
+      "offset": 1.0,
+      "volume": 0.4
+    }
+  ],
+  "maxPause": 0.3
+}

@@ -1,0 +1,871 @@
+{
+  "s1": {
+    "text": "Hey! Ihr zwei! Ich krieg keine Luft!",
+    "heard": "Hey, ihr zwei, ich krieg keine Luft",
+    "wer": 0,
+    "fileDuration": 3.291429,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0,
+        "end": 0.43
+      },
+      {
+        "text": "Ihr",
+        "start": 0.604,
+        "end": 0.836
+      },
+      {
+        "text": "zwei!",
+        "start": 0.894,
+        "end": 1.149
+      },
+      {
+        "text": "Ich",
+        "start": 1.196,
+        "end": 1.312
+      },
+      {
+        "text": "krieg",
+        "start": 1.358,
+        "end": 1.556
+      },
+      {
+        "text": "keine",
+        "start": 1.591,
+        "end": 1.858
+      },
+      {
+        "text": "Luft!",
+        "start": 1.904,
+        "end": 3.251
+      }
+    ]
+  },
+  "s2": {
+    "text": "Wir sind die Türsteher!",
+    "heard": "Wir sind die Türsteher",
+    "wer": 0,
+    "fileDuration": 1.38449,
+    "words": [
+      {
+        "text": "Wir",
+        "start": 0,
+        "end": 0.244
+      },
+      {
+        "text": "sind",
+        "start": 0.29,
+        "end": 0.464
+      },
+      {
+        "text": "die",
+        "start": 0.499,
+        "end": 0.58
+      },
+      {
+        "text": "Türsteher!",
+        "start": 0.615,
+        "end": 1.347
+      }
+    ]
+  },
+  "s3": {
+    "text": "Genau!",
+    "heard": "Genau",
+    "wer": 0,
+    "fileDuration": 1.201633,
+    "words": [
+      {
+        "text": "Genau!",
+        "start": 0,
+        "end": 1.161
+      }
+    ]
+  },
+  "s4": {
+    "text": "Türsteher? Ihr seid voller Bakterien!",
+    "heard": "Türsteher, ihr seid voller Bakterien",
+    "wer": 0,
+    "fileDuration": 1.933061,
+    "words": [
+      {
+        "text": "Türsteher?",
+        "start": 0,
+        "end": 0.639
+      },
+      {
+        "text": "Ihr",
+        "start": 0.673,
+        "end": 0.778
+      },
+      {
+        "text": "seid",
+        "start": 0.824,
+        "end": 0.987
+      },
+      {
+        "text": "voller",
+        "start": 1.033,
+        "end": 1.254
+      },
+      {
+        "text": "Bakterien!",
+        "start": 1.289,
+        "end": 1.904
+      }
+    ]
+  },
+  "s5": {
+    "text": "Na und? Wird halt ein bisschen warm hier.",
+    "heard": "Na und? Wird halt ein bisschen warm hier",
+    "wer": 0,
+    "fileDuration": 3.108571,
+    "words": [
+      {
+        "text": "Na",
+        "start": 0,
+        "end": 0.255
+      },
+      {
+        "text": "und?",
+        "start": 0.302,
+        "end": 0.673
+      },
+      {
+        "text": "Wird",
+        "start": 0.882,
+        "end": 1.045
+      },
+      {
+        "text": "halt",
+        "start": 1.091,
+        "end": 1.207
+      },
+      {
+        "text": "ein",
+        "start": 1.254,
+        "end": 1.324
+      },
+      {
+        "text": "bisschen",
+        "start": 1.37,
+        "end": 1.695
+      },
+      {
+        "text": "warm",
+        "start": 1.741,
+        "end": 2.055
+      },
+      {
+        "text": "hier.",
+        "start": 2.113,
+        "end": 3.065
+      }
+    ]
+  },
+  "i1": {
+    "text": "Oh! Ein Eis! Das kühlt so schön!",
+    "heard": "Oh, ein Eis! Das kühlt so schön",
+    "wer": 0,
+    "fileDuration": 2.638367,
+    "words": [
+      {
+        "text": "Oh!",
+        "start": 0,
+        "end": 0.267
+      },
+      {
+        "text": "Ein",
+        "start": 0.302,
+        "end": 0.464
+      },
+      {
+        "text": "Eis!",
+        "start": 0.557,
+        "end": 1.091
+      },
+      {
+        "text": "Das",
+        "start": 1.533,
+        "end": 1.788
+      },
+      {
+        "text": "kühlt",
+        "start": 1.858,
+        "end": 2.113
+      },
+      {
+        "text": "so",
+        "start": 2.148,
+        "end": 2.264
+      },
+      {
+        "text": "schön!",
+        "start": 2.31,
+        "end": 2.601
+      }
+    ]
+  },
+  "i2": {
+    "text": "Brrr… ist das kalt!",
+    "heard": "Brr, ist das kalt",
+    "wer": 0.25,
+    "fileDuration": 1.671837,
+    "words": [
+      {
+        "text": "Brrr…",
+        "start": 0,
+        "end": 0.546
+      },
+      {
+        "text": "ist",
+        "start": 0.604,
+        "end": 0.801
+      },
+      {
+        "text": "das",
+        "start": 0.824,
+        "end": 0.94
+      },
+      {
+        "text": "kalt!",
+        "start": 1.01,
+        "end": 1.625
+      }
+    ]
+  },
+  "i3": {
+    "text": "Netter Versuch.",
+    "heard": "Netter Versuch",
+    "wer": 0,
+    "fileDuration": 2.272653,
+    "words": [
+      {
+        "text": "Netter",
+        "start": 0,
+        "end": 0.313
+      },
+      {
+        "text": "Versuch.",
+        "start": 0.36,
+        "end": 2.229
+      }
+    ]
+  },
+  "n1": {
+    "text": "Schon wieder entzündet! Das fünfte Mal dieses Jahr!",
+    "heard": "Schon wieder entzündet. Das fünfte Mal dieses Jahr",
+    "wer": 0,
+    "fileDuration": 4.440816,
+    "words": [
+      {
+        "text": "Schon",
+        "start": 0,
+        "end": 0.209
+      },
+      {
+        "text": "wieder",
+        "start": 0.255,
+        "end": 0.499
+      },
+      {
+        "text": "entzündet!",
+        "start": 0.557,
+        "end": 1.254
+      },
+      {
+        "text": "Das",
+        "start": 1.428,
+        "end": 1.672
+      },
+      {
+        "text": "fünfte",
+        "start": 1.741,
+        "end": 2.136
+      },
+      {
+        "text": "Mal",
+        "start": 2.183,
+        "end": 2.415
+      },
+      {
+        "text": "dieses",
+        "start": 2.461,
+        "end": 2.798
+      },
+      {
+        "text": "Jahr!",
+        "start": 2.868,
+        "end": 4.412
+      }
+    ]
+  },
+  "n2": {
+    "text": "Wir ziehen hier nicht aus.",
+    "heard": "Wir ziehen hier nicht aus",
+    "wer": 0,
+    "fileDuration": 1.515102,
+    "words": [
+      {
+        "text": "Wir",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "ziehen",
+        "start": 0.255,
+        "end": 0.476
+      },
+      {
+        "text": "hier",
+        "start": 0.511,
+        "end": 0.627
+      },
+      {
+        "text": "nicht",
+        "start": 0.662,
+        "end": 0.848
+      },
+      {
+        "text": "aus.",
+        "start": 0.882,
+        "end": 1.486
+      }
+    ]
+  },
+  "n3": {
+    "text": "Herr Doktor! Holen Sie die raus!",
+    "heard": "Herr Doktor, holen Sie die raus!",
+    "wer": 0,
+    "fileDuration": 2.951837,
+    "words": [
+      {
+        "text": "Herr",
+        "start": 0,
+        "end": 0.313
+      },
+      {
+        "text": "Doktor!",
+        "start": 0.36,
+        "end": 1.091
+      },
+      {
+        "text": "Holen",
+        "start": 1.474,
+        "end": 1.788
+      },
+      {
+        "text": "Sie",
+        "start": 1.846,
+        "end": 1.939
+      },
+      {
+        "text": "die",
+        "start": 1.985,
+        "end": 2.09
+      },
+      {
+        "text": "raus!",
+        "start": 2.136,
+        "end": 2.926
+      }
+    ]
+  },
+  "a1": {
+    "text": "Der Patient schläft. Ein Sperrer hält den Mund weit offen.",
+    "heard": "Der Patient schläft. Ein Sperrer hält den Mund weit offen",
+    "wer": 0,
+    "fileDuration": 4.963265,
+    "words": [
+      {
+        "text": "Der",
+        "start": 0,
+        "end": 0.186
+      },
+      {
+        "text": "Patient",
+        "start": 0.244,
+        "end": 0.685
+      },
+      {
+        "text": "schläft.",
+        "start": 0.72,
+        "end": 1.382
+      },
+      {
+        "text": "Ein",
+        "start": 2.334,
+        "end": 2.461
+      },
+      {
+        "text": "Sperrer",
+        "start": 2.508,
+        "end": 2.902
+      },
+      {
+        "text": "hält",
+        "start": 2.961,
+        "end": 3.111
+      },
+      {
+        "text": "den",
+        "start": 3.135,
+        "end": 3.239
+      },
+      {
+        "text": "Mund",
+        "start": 3.297,
+        "end": 3.529
+      },
+      {
+        "text": "weit",
+        "start": 3.622,
+        "end": 3.866
+      },
+      {
+        "text": "offen.",
+        "start": 3.947,
+        "end": 4.923
+      }
+    ]
+  },
+  "o1": {
+    "text": "Endlich wird hier mal aufgeräumt.",
+    "heard": "Endlich wird hier mal aufgeräumt",
+    "wer": 0,
+    "fileDuration": 1.750204,
+    "words": [
+      {
+        "text": "Endlich",
+        "start": 0,
+        "end": 0.453
+      },
+      {
+        "text": "wird",
+        "start": 0.511,
+        "end": 0.65
+      },
+      {
+        "text": "hier",
+        "start": 0.685,
+        "end": 0.801
+      },
+      {
+        "text": "mal",
+        "start": 0.859,
+        "end": 0.975
+      },
+      {
+        "text": "aufgeräumt.",
+        "start": 1.033,
+        "end": 1.718
+      }
+    ]
+  },
+  "a2": {
+    "text": "Wir fassen die Mandel und lösen sie vorsichtig aus ihrem Bett.",
+    "heard": "Wir fassen die Mandel und lösen sie vorsichtig aus ihrem Bett",
+    "wer": 0,
+    "fileDuration": 4.493061,
+    "words": [
+      {
+        "text": "Wir",
+        "start": 0,
+        "end": 0.174
+      },
+      {
+        "text": "fassen",
+        "start": 0.221,
+        "end": 0.488
+      },
+      {
+        "text": "die",
+        "start": 0.534,
+        "end": 0.627
+      },
+      {
+        "text": "Mandel",
+        "start": 0.685,
+        "end": 1.115
+      },
+      {
+        "text": "und",
+        "start": 1.289,
+        "end": 1.44
+      },
+      {
+        "text": "lösen",
+        "start": 1.498,
+        "end": 1.823
+      },
+      {
+        "text": "sie",
+        "start": 1.869,
+        "end": 1.974
+      },
+      {
+        "text": "vorsichtig",
+        "start": 2.032,
+        "end": 2.682
+      },
+      {
+        "text": "aus",
+        "start": 2.728,
+        "end": 2.833
+      },
+      {
+        "text": "ihrem",
+        "start": 2.902,
+        "end": 3.135
+      },
+      {
+        "text": "Bett.",
+        "start": 3.193,
+        "end": 4.458
+      }
+    ]
+  },
+  "o2": {
+    "text": "Hey! Das ist meine Wohnung!",
+    "heard": "Hey, das ist meine Wohnung",
+    "wer": 0,
+    "fileDuration": 2.168163,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0,
+        "end": 0.488
+      },
+      {
+        "text": "Das",
+        "start": 0.813,
+        "end": 0.987
+      },
+      {
+        "text": "ist",
+        "start": 1.045,
+        "end": 1.138
+      },
+      {
+        "text": "meine",
+        "start": 1.184,
+        "end": 1.44
+      },
+      {
+        "text": "Wohnung!",
+        "start": 1.474,
+        "end": 2.136
+      }
+    ]
+  },
+  "a3": {
+    "text": "Dann kommt sie heraus. Danach die zweite.",
+    "heard": "Dann kommt sie heraus, danach die zweite",
+    "wer": 0,
+    "fileDuration": 3.578776,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0,
+        "end": 0.232
+      },
+      {
+        "text": "kommt",
+        "start": 0.29,
+        "end": 0.499
+      },
+      {
+        "text": "sie",
+        "start": 0.522,
+        "end": 0.627
+      },
+      {
+        "text": "heraus.",
+        "start": 0.685,
+        "end": 1.324
+      },
+      {
+        "text": "Danach",
+        "start": 1.405,
+        "end": 1.765
+      },
+      {
+        "text": "die",
+        "start": 1.811,
+        "end": 1.892
+      },
+      {
+        "text": "zweite.",
+        "start": 1.95,
+        "end": 3.529
+      }
+    ]
+  },
+  "o3": {
+    "text": "Nicht ohne meinen Bruder!",
+    "heard": "Nicht ohne meinen Bruder",
+    "wer": 0,
+    "fileDuration": 1.436735,
+    "words": [
+      {
+        "text": "Nicht",
+        "start": 0,
+        "end": 0.279
+      },
+      {
+        "text": "ohne",
+        "start": 0.348,
+        "end": 0.546
+      },
+      {
+        "text": "meinen",
+        "start": 0.592,
+        "end": 0.789
+      },
+      {
+        "text": "Bruder!",
+        "start": 0.836,
+        "end": 1.393
+      }
+    ]
+  },
+  "a4": {
+    "text": "Zum Schluss stillen wir die Blutung.",
+    "heard": "Zum Schluss stillen wir die Blutung",
+    "wer": 0,
+    "fileDuration": 3.160816,
+    "words": [
+      {
+        "text": "Zum",
+        "start": 0,
+        "end": 0.209
+      },
+      {
+        "text": "Schluss",
+        "start": 0.267,
+        "end": 0.673
+      },
+      {
+        "text": "stillen",
+        "start": 0.848,
+        "end": 1.242
+      },
+      {
+        "text": "wir",
+        "start": 1.289,
+        "end": 1.393
+      },
+      {
+        "text": "die",
+        "start": 1.416,
+        "end": 1.498
+      },
+      {
+        "text": "Blutung.",
+        "start": 1.544,
+        "end": 3.111
+      }
+    ]
+  },
+  "o4": {
+    "text": "Endlich… Luft!",
+    "heard": "Endlich Luft",
+    "wer": 0,
+    "fileDuration": 1.750204,
+    "words": [
+      {
+        "text": "Endlich…",
+        "start": 0,
+        "end": 0.639
+      },
+      {
+        "text": "Luft!",
+        "start": 0.813,
+        "end": 1.718
+      }
+    ]
+  },
+  "d1": {
+    "text": "Bei ständigen Entzündungen hilft Kühlen nur kurz. Dann ist die OP oft die beste Lösung.",
+    "heard": "Bei ständigen Entzündungen hilft Kühlen nur kurz. Dann ist die OP oft die beste Lösung.",
+    "wer": 0,
+    "fileDuration": 6.765714,
+    "words": [
+      {
+        "text": "Bei",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "ständigen",
+        "start": 0.232,
+        "end": 0.743
+      },
+      {
+        "text": "Entzündungen",
+        "start": 0.801,
+        "end": 1.428
+      },
+      {
+        "text": "hilft",
+        "start": 1.498,
+        "end": 1.834
+      },
+      {
+        "text": "Kühlen",
+        "start": 1.892,
+        "end": 2.299
+      },
+      {
+        "text": "nur",
+        "start": 2.415,
+        "end": 2.635
+      },
+      {
+        "text": "kurz.",
+        "start": 2.705,
+        "end": 3.344
+      },
+      {
+        "text": "Dann",
+        "start": 4.156,
+        "end": 4.342
+      },
+      {
+        "text": "ist",
+        "start": 4.4,
+        "end": 4.505
+      },
+      {
+        "text": "die",
+        "start": 4.528,
+        "end": 4.609
+      },
+      {
+        "text": "OP",
+        "start": 4.679,
+        "end": 4.911
+      },
+      {
+        "text": "oft",
+        "start": 5.085,
+        "end": 5.294
+      },
+      {
+        "text": "die",
+        "start": 5.317,
+        "end": 5.399
+      },
+      {
+        "text": "beste",
+        "start": 5.445,
+        "end": 5.747
+      },
+      {
+        "text": "Lösung.",
+        "start": 5.805,
+        "end": 6.734
+      }
+    ]
+  },
+  "e1": {
+    "text": "Darf ich jetzt endlich Eis essen?",
+    "heard": "Darf ich jetzt endlich Eis essen?",
+    "wer": 0,
+    "fileDuration": 1.38449,
+    "words": [
+      {
+        "text": "Darf",
+        "start": 0,
+        "end": 0.232
+      },
+      {
+        "text": "ich",
+        "start": 0.267,
+        "end": 0.348
+      },
+      {
+        "text": "jetzt",
+        "start": 0.372,
+        "end": 0.522
+      },
+      {
+        "text": "endlich",
+        "start": 0.546,
+        "end": 0.801
+      },
+      {
+        "text": "Eis",
+        "start": 0.859,
+        "end": 0.998
+      },
+      {
+        "text": "essen?",
+        "start": 1.068,
+        "end": 1.347
+      }
+    ]
+  },
+  "e2": {
+    "text": "Kaltes ja. Aber nichts Hartes oder Scharfes.",
+    "heard": "Kaltes ja, aber nichts Hartes oder Scharfes",
+    "wer": 0,
+    "fileDuration": 3.422041,
+    "words": [
+      {
+        "text": "Kaltes",
+        "start": 0,
+        "end": 0.488
+      },
+      {
+        "text": "ja.",
+        "start": 0.569,
+        "end": 0.859
+      },
+      {
+        "text": "Aber",
+        "start": 1.37,
+        "end": 1.591
+      },
+      {
+        "text": "nichts",
+        "start": 1.625,
+        "end": 1.846
+      },
+      {
+        "text": "Hartes",
+        "start": 1.892,
+        "end": 2.241
+      },
+      {
+        "text": "oder",
+        "start": 2.322,
+        "end": 2.531
+      },
+      {
+        "text": "Scharfes.",
+        "start": 2.566,
+        "end": 3.39
+      }
+    ]
+  },
+  "e3": {
+    "text": "Juhu! … Au!",
+    "heard": "Juhu. Au",
+    "wer": 0,
+    "fileDuration": 2.507755,
+    "words": [
+      {
+        "text": "Juhu!",
+        "start": 0,
+        "end": 0.43
+      },
+      {
+        "text": "Au!",
+        "start": 1.974,
+        "end": 2.461
+      }
+    ]
+  }
+}

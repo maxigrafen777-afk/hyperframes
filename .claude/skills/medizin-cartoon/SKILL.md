@@ -10,7 +10,7 @@ Hochformat-Kurzvideos, die den Referenzen des Creators folgen (Stil wie die
 das Handle des Creators). Alles ist Code: SVG-Zeichnungen und GSAP-Timeline in
 HyperFrames-Kompositionen. Lies vorher `/hyperframes` (Vertrag, Workflow).
 
-Referenzprojekte, die du kopierst und umbaust: `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
+Referenzprojekte, die du kopierst und umbaust: `tiktok/mandeln/` (neuester Stand: deutsche Design-Stimmen, Pausen-Kürzung, drei Figuren) und `tiktok/blinddarm/` (neuester Stand, ~60 s, Laparoskopie mit `lapTool`) und `tiktok/zehennagel/` (aktuellster Stand: Szenen-Reihenfolge, Hook aus `script.hook`, Opfer/Verursacher über `VICTIM`/`CAUSER` in `actLines`, Patient in Seitenansicht) und `tiktok/weisheitszahn/`.
 Bauteile-Bibliothek: `lib/parts.mjs` (Augen, Münder, Gesicht mit `lidFill` für Haut/Nagel, Zahn, Instrumente inkl. Schere und Wattestäbchen, Schmerzstern, Naht, Untertitel).
 
 ## Dramaturgie (immer gleich)
@@ -100,6 +100,14 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - 10.000 Credits pro Monat; QA-Retakes und Spracherkennung zählen mit. Texte vor dem Erzeugen final machen, Retakes sparsam.
 - `eleven_multilingual_v2` klingt pro Figur gleichmäßiger als v3 (fester `seed` pro Figur, `previous_text`/`next_text` derselben Figur). v3-Tags werden dafür aus dem Text entfernt; Emotion über Satzzeichen und `style`.
 - Englische Standardstimmen sprechen Deutsch nie ganz natürlich. Für muttersprachliche Stimmen braucht der Key „Voices: Read“ (Bibliothek durchsuchen) und „Voices: Write“ (Stimme hinzufügen).
+
+## Deutsche Stimmen per Voice-Design (gelernt an den Mandeln)
+
+- Mit Bezahl-Tarif: `POST /v1/text-to-voice/design` (Beschreibung auf Deutsch, „Deutscher Muttersprachler … klares Hochdeutsch ohne Akzent“, `eleven_multilingual_ttv_v2`) liefert 3 Vorschläge; `POST /v1/text-to-voice` legt den gewählten dauerhaft an. Kein „Voices: Read“ nötig.
+- Auswahl automatisch: Spracherkennung (Wortfehlerrate 0) und Tonhöhe (Median-F0 per Autokorrelation), so dass die Figuren klar auseinanderliegen (z. B. Zäpfchen 286 Hz, freche Mandel 229 Hz, Türsteher-Mandel 126 Hz, Arzt 100 Hz).
+- Angelegte Stimmen (IDs in `tiktok/mandeln/script.json`) für weitere Videos wiederverwenden, damit der Kanal wiedererkennbar klingt (vor allem der Arzt).
+- Native Stimmen machen nach Satzzeichen lange Kunstpausen: `voices.mjs` kürzt jede Pause im Satz auf `maxPause` (0,3 s; pro Zeile überschreibbar, z. B. 0,7 s für einen Gag-Beat) und verschiebt die Wortzeiten mit. Ergebnis: flüssiges Hin und Her.
+- Bei drei Figuren: `actLines` mit `MOOD` pro Zeile und `lookVec` (Zuhörer schauen zum Sprecher). Beim Zoom auf eine Figur prüfen, dass die anderen Gesichter nicht unter die Untertitel rutschen.
 
 ## Stolperfallen
 
