@@ -5,9 +5,10 @@ Zuschauer **A** oder **B** in die Kommentare, die Mehrheit entscheidet Teil 2.
 Alles ist Code: 3D-Szene in Three.js (`folge1/assets/scene.js`, lokal unter `assets/three/`, weil das CDN
 hier gesperrt ist), Untertitel und Endkarte als HyperFrames-Kompositionen, 1080×1920, 30 fps.
 
-| Folge | Ordner    | Thema                                                               |
-| ----- | --------- | ------------------------------------------------------------------- |
-| 1     | `folge1/` | Stockwerk 13: der Aufzug hält in einem Stockwerk, das es nicht gibt |
+| Folge | Ordner    | Thema                                                                                       |
+| ----- | --------- | ------------------------------------------------------------------------------------------- |
+| 1     | `folge1/` | Stockwerk 13: der Aufzug hält in einem Stockwerk, das es nicht gibt                         |
+| 2     | `folge2/` | Stockwerk 13, Weg A (Mehrheit): Flucht nach unten bis −13, Nachricht von der eigenen Nummer |
 
 ## Bauen
 
@@ -79,7 +80,20 @@ Danach `node build.mjs`: Untertitel, Schnitte und Audio-Clips übernehmen die ne
 - Untertitel nicht doppelt zu Text im Bild (Zettel, Endkarte) und nicht über Gesichtern.
 - Kein Wasserzeichen. Deterministisch: kein `Math.random`, keine Timer.
 
-## Teil 2 (Stockwerk 13) – Ansätze
+## Teil 2 (umgesetzt, Weg A hat gewonnen)
+
+Aufbau wie in den Vorbildern: Rückblick („Die meisten von euch haben entschieden …“) → der verlorene Weg B
+als kurzer Schreckmoment (Figur geht hinaus, Licht aus, Silhouette direkt vor dir) → **Zurückspulen**
+(`sceneTime()` in `scene.js` spielt die bereits gerenderten Sekunden rückwärts ab, dazu ◀◀-Overlay und
+Rewind-SFX) → Weg A: auf EG hämmern, die Silhouette rennt los, die Türen schließen eine Handbreit vor ihr,
+Schlag gegen die Tür, Fahrt nach unten über EG hinaus bis −13, Nachricht „Warum bist du weggelaufen?“,
+Keller mit grünem Notausgang-Schild, jemand tippt → neue Wahl:
+**A** zum Notausgang rennen · **B** zurückschreiben. Ein Chip unter dem Serientitel zeigt den laufenden Weg.
+
+Für Teil 3: `cp -r folge2 folge3` (ohne `renders/`, `.hyperframes/`, `assets/vo/`), Skript in `script.json`,
+Wortanker in `build.mjs` (`EV`, `disp`), Choreografie in `assets/scene.js` (`CUTS`, `update`).
+
+## Ideen-Archiv Teil 2 (vor der Abstimmung)
 
 - **A gewinnt**: Rückblick, B als Schreckmoment (Flur, Türen knallen zu, Silhouette direkt hinter dir),
   Zurückspulen, dann A: Aufzug fährt runter, die Anzeige zählt weiter: −1, −2, … → neue Wahl.

@@ -1,0 +1,169 @@
+{
+  "title": "Stockwerk 13 · Teil 2",
+  "voice": {
+    "engine": "elevenlabs",
+    "voiceId": "nPczCjzI2devNBz1zQrb",
+    "voiceName": "Brian (ElevenLabs Standardstimme)",
+    "elevenModel": "eleven_multilingual_v2",
+    "settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "style": 0.3,
+      "use_speaker_boost": true
+    },
+    "qa": {
+      "maxTakes": 3,
+      "maxWer": 0.1
+    },
+    "pitch": 1.0,
+    "tempo": 1.0,
+    "gap": 0.18,
+    "mbrolaVoice": "mb-de6",
+    "wpm": 180,
+    "espeakPitch": 30
+  },
+  "lines": [
+    {
+      "id": "p1",
+      "shot": "rueckblick",
+      "text": "Die meisten von euch haben entschieden: Du bleibst im Aufzug."
+    },
+    {
+      "id": "p2",
+      "shot": "b-aussteigen",
+      "text": "Gut so. Denn wärst du ausgestiegen …",
+      "gap": 0.25
+    },
+    {
+      "id": "p3",
+      "shot": "b-schreck",
+      "text": "… wäre das hier passiert.",
+      "gap": 0.15,
+      "emph": ["passiert"]
+    },
+    {
+      "id": "p4",
+      "shot": "rewind",
+      "text": "Spulen wir zurück.",
+      "gap": 0.9
+    },
+    {
+      "id": "p5",
+      "shot": "knoepfe",
+      "text": "Du hämmerst auf Erdgeschoss.",
+      "gap": 0.5
+    },
+    {
+      "id": "p6",
+      "shot": "flur",
+      "text": "Die Gestalt in deiner Tür rennt los.",
+      "emph": ["rennt"]
+    },
+    {
+      "id": "p7",
+      "shot": "tueren",
+      "text": "Die Türen schließen sich. Eine Handbreit vor ihrem Gesicht."
+    },
+    {
+      "id": "p8",
+      "shot": "kabine",
+      "text": "Dann ein Schlag gegen die Tür.",
+      "gap": 0.45,
+      "emph": ["Schlag"]
+    },
+    {
+      "id": "p9",
+      "shot": "anzeige",
+      "text": "Der Aufzug fährt nach unten. Zwölf. Acht. Vier. Erdgeschoss.",
+      "gap": 0.3
+    },
+    {
+      "id": "p10",
+      "shot": "gesicht",
+      "text": "Du atmest auf.",
+      "gap": 0.3
+    },
+    {
+      "id": "p11",
+      "shot": "gesicht",
+      "text": "Aber er hält nicht an.",
+      "gap": 0.3,
+      "emph": ["nicht"]
+    },
+    {
+      "id": "p12",
+      "shot": "anzeige",
+      "text": "Minus eins. Minus zwei. Minus drei."
+    },
+    {
+      "id": "p13",
+      "shot": "knoepfe",
+      "text": "Dein Haus hat keinen Keller.",
+      "emph": ["Keller"]
+    },
+    {
+      "id": "p14",
+      "shot": "anzeige",
+      "text": "Bei minus dreizehn bleibt er stehen.",
+      "emph": ["dreizehn"]
+    },
+    {
+      "id": "p15",
+      "shot": "handy",
+      "text": "Dein Handy vibriert. Eine Nachricht von deiner eigenen Nummer:",
+      "gap": 0.35,
+      "emph": ["eigenen"]
+    },
+    {
+      "id": "p16",
+      "shot": "handy",
+      "text": "Warum bist du weggelaufen?",
+      "gap": 0.25
+    },
+    {
+      "id": "p17",
+      "shot": "tueren",
+      "text": "Die Türen gehen auf.",
+      "gap": 0.4
+    },
+    {
+      "id": "p18",
+      "shot": "keller",
+      "text": "Ein dunkler Gang. Ganz hinten leuchtet ein Notausgang-Schild."
+    },
+    {
+      "id": "p19",
+      "shot": "handy",
+      "text": "Auf deinem Handy tippt jemand.",
+      "gap": 0.3
+    },
+    {
+      "id": "p20",
+      "shot": "wahl",
+      "text": "Du hast zwei Möglichkeiten:",
+      "gap": 0.3
+    },
+    {
+      "id": "p21",
+      "shot": "wahl",
+      "text": "A, du rennst zum Notausgang."
+    },
+    {
+      "id": "p22",
+      "shot": "wahl",
+      "text": "Oder B, du schreibst zurück."
+    },
+    {
+      "id": "p23",
+      "shot": "angst",
+      "text": "Also, was machst du?",
+      "gap": 0.25
+    },
+    {
+      "id": "p24",
+      "shot": "ende",
+      "text": "Schreib A oder B in die Kommentare."
+    }
+  ],
+  "tail": 3.0
+}
