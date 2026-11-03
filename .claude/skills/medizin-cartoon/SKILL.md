@@ -149,6 +149,16 @@ Daraus folgt:
 - **Musikbett 0,08** (~19 dB unter den Stimmen).
 - Aktuelle Stimmen: Trommelfell `qUEezpe9PVeBGCAuvgCT`, Pfropf `60QqaEwKeWbeCvUpTWud`, Wattestäbchen `57UyT2voiMHSkl25qJtO`; Arzt `Og1j4Myr6614gRWlVatR`, Patient `DG0JkxHQrOrx7vnDPwPZ`.
 
+## TikTok-Sicherheitszonen (gemessen am Upload-Screenshot, ab dem nächsten Video verbindlich)
+
+Die TikTok-Oberfläche verdeckt Teile des 1080×1920-Bilds:
+
+- **Oben bis y ≈ 340:** Tabs („LIVE / Gefolgt / Für dich“) und das „Story“-Feld. Dort nie Text: Hook-Titel, Sticker („Kennst du das?“), Schritt-Labels und Kommentar-Frage **erst ab y ≈ 360** (Block von 360 bis ~560).
+- **Rechts ab x ≈ 880, y ≈ 880–1700:** Profil, Like, Kommentar, Speichern, Teilen. Dort keine Gesichter und kein Text; Texte zentriert und höchstens ~760 px breit.
+- **Unten ab y ≈ 1540:** Name, Beschreibung, KI-Hinweis, Fortschrittsbalken. Untertitel bleiben bei y ≈ 1270; Wasserzeichen über y ≈ 1450 und nicht unter die Beschreibung.
+- **Weiter weg statt zu nah:** Die ganze Szene etwa 10–12 % kleiner anlegen (Rand lassen), Kamera-Zooms höchstens Faktor ~1,15 (statt bis 1,5), so dass Gesichter und Instrumente im sicheren Bereich x 60–880, y 360–1500 bleiben.
+- **Prüfen:** Vor dem Rendern einen Snapshot mit eingezeichneten Sicherheitszonen ansehen (Overlay-Rahmen), nicht nur das nackte Bild.
+
 ## Stolperfallen
 
 - QA-Normalisierung ignoriert Bindestriche („Kot-Stein“ = „Kotstein“); schwierige Wörter mit Bindestrich schreiben hilft der Aussprache.
