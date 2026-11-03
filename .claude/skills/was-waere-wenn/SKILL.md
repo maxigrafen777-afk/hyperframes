@@ -21,6 +21,22 @@ Füll-Beats ohne Pointe, CSS, das sich gegenseitig überschreibt, Elemente vor w
 Bildteilen. Erst rendern, wenn dir beim Durchsehen nichts mehr auffällt. Im Bericht nur noch
 sagen, was du korrigiert hast und was ehrlich offen bleibt.
 
+## Look ab v5: POV in echtem 3D (Feedback: "zu einfach, zu langweilig, mehr aus Sicht eines Menschen")
+
+- Kein HeyGen und kein neues Konto (Creator will keine Zusatzkosten). Stattdessen `pov.mjs`:
+  Three.js r149 (`assets/three.min.js`, im `index.html` geladen) mit freien Texturen aus dem
+  three.js-Repo (`assets/tex/`: NASA-Erde Tag/Nacht/Wolken, Mond, Milchstraße, Wasser-Normalen),
+  gerendert aus `render(t)` über `tl.eventCallback("onUpdate")` + `hf-seek`, Texturen über
+  `window.__hf.buildReady`.
+- Jede Station ist eine Einstellung aus deiner Sicht: Augenhöhe, Handkamera-Wackeln, Gegenstände
+  im Bild (Handy mit Kalender-App, Taschenlampe, Finsternis-Brille). Flache Grafik nur noch für
+  Texte, Karten und Stempel.
+- Stolperfallen: Wolken stecken im Alpha-Kanal von `earth_clouds_1024.png`; Wolken und Erde
+  brauchen dieselbe Lichtrichtung; beim Zoom auf ein Land die Sonne mitdrehen, sonst liegt es
+  auf der Nachtseite; GSAP auf einer `<g>` mit eigenem `transform` überschreibt die Position
+  (immer eine äußere Gruppe zum Platzieren, eine innere zum Animieren); Meeres-Ebene bis vor die
+  Kamera ziehen, sonst schaut unten der Himmel durch. Render dauert ~9 min (Software-WebGL).
+
 ## Inhalt
 
 - **Mischung aus echt und witzig:** etwa 4 echte Staun-Fakten + 1–2 Gags. Echte Fakten mit

@@ -795,6 +795,7 @@ const index = `<!doctype html>
     <meta name="viewport" content="width=${W}, height=${H}" />
     <title>${script.title}</title>
     <script src="assets/gsap.min.js"></script>
+    <script src="assets/three.min.js"></script>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { width: ${W}px; height: ${H}px; overflow: hidden; background: ${C.space}; }
@@ -803,7 +804,7 @@ const index = `<!doctype html>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
-      <div id="welt" data-composition-id="welt" data-composition-src="compositions/welt.html" data-start="0" data-duration="${DUR}" data-track-index="1" data-track-kind="graphics" data-width="${W}" data-height="${H}" style="z-index:1"></div>
+      <div id="pov" data-composition-id="pov" data-composition-src="compositions/pov.html" data-start="0" data-duration="${DUR}" data-track-index="1" data-track-kind="graphics" data-width="${W}" data-height="${H}" style="z-index:1"></div>
       <div id="captions" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="${DUR}" data-track-index="2" data-track-kind="captions" data-width="${W}" data-height="${H}" style="z-index:5"></div>
 ${sfx}
 ${vo}
@@ -821,6 +822,7 @@ mkdirSync(here("./compositions/"), { recursive: true });
 writeFileSync(here("./index.html"), index);
 writeFileSync(here("./compositions/welt.html"), page("welt", world, worldCss, worldJs));
 writeFileSync(here("./compositions/captions.html"), page("captions", capBody, capCss, capJs));
+writeFileSync(here("./assets/beats.json"), JSON.stringify({ T, L, DUR, WOB, TILT_MAX }, null, 1));
 console.log("Zeilen:", Object.entries(L).map(([k, v]) => `${k} ${v.s}–${v.e}`).join(", "));
 console.log("Beats:", JSON.stringify(T));
 console.log(`built: ${chunks.length} Untertitel, ${SFX.length} SFX, ${DUR}s`);
