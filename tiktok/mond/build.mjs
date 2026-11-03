@@ -15,7 +15,7 @@ const f = (n) => +n.toFixed(3);
 
 /* ================= Zeitplan aus den echten Takes ================= */
 // Pause VOR jeder Zeile (Platz für Kamerafahrten und Aktionen).
-const WAIT = { n1: 0.1, n2: 0.2, n3: 0.2, n4: 0.3, n5: 0.9, n6: 0.35, n7: 0.15, n8: 0.85, n9: 0.3, n10: 0.35 };
+const WAIT = { n1: 0.1, n2: 0.2, n3: 0.2, n4: 0.3, n5: 0.9, n6: 0.35, n7: 0.15, n8: 0.85, n9: 0.3, n10: 1.25 };
 const L = {};
 let t = 0;
 for (const line of script.lines) {
@@ -352,7 +352,6 @@ const world = `
   ${underwater}
   <rect id="dark" x="0" y="2600" width="${W}" height="${Y_WL - 2600}" fill="#02040B" opacity="0"/>
   <g id="stars2">${stars(120, 3150, 4400, "s2", 1.2, 3.4)}${sparkles(8, 3150, 4300, "s2")}</g>
-  <g id="lions"><g class="eye" ><ellipse cx="114" cy="4285" rx="20" ry="11" fill="#FFD23F"/><ellipse cx="146" cy="4285" rx="20" ry="11" fill="#FFD23F"/><rect x="112" y="4278" width="5" height="18" fill="#0A1020"/><rect x="144" y="4278" width="5" height="18" fill="#0A1020"/></g><g class="eye" ><ellipse cx="254" cy="4335" rx="20" ry="11" fill="#FFD23F"/><ellipse cx="286" cy="4335" rx="20" ry="11" fill="#FFD23F"/><rect x="252" y="4328" width="5" height="18" fill="#0A1020"/><rect x="284" y="4328" width="5" height="18" fill="#0A1020"/></g></g>
   <g id="moon-pos">${moonArt("moon", MOON.x, MOON.y, MOON.r)}</g>
   <g id="cracks" opacity="0" stroke="${C.ink}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M ${MOON.x - 20} ${MOON.y - 160} l 30 70 l -40 40 l 50 50 l -20 60"/>
@@ -362,6 +361,26 @@ const world = `
   ${ghost("moon-ghost", MOON.x, MOON.y, MOON.r, 'opacity="0"')}
 </svg>
 </div></div></div>
+<div id="savanna" class="ov" style="top:0;bottom:0">
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920"><g id="sv-pan">
+    <rect x="-60" y="0" width="1200" height="1920" fill="#070B18"/>
+    <rect x="-60" y="760" width="1200" height="420" fill="#0B1226"/>
+    ${stars(70, 120, 1000)}
+    ${ghost("sv-ghost", 560, 470, 120, 'opacity="0.7"')}
+    <path d="M -60 1120 C 200 1090 420 1110 640 1095 C 860 1080 1000 1100 1140 1090 L 1140 1920 L -60 1920 Z" fill="#0F0D08"/>
+    <path d="M 860 1100 C 862 1000 850 930 820 880 M 862 1000 C 900 950 940 930 990 920 M 850 960 C 810 940 770 935 730 930" stroke="#05070D" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M 640 905 C 700 850 820 830 920 845 C 1000 830 1080 860 1100 905 C 980 930 760 935 640 905 Z" fill="#05070D"/>
+    <path d="M 620 925 C 680 880 760 875 800 885 C 760 905 700 920 620 925 Z" fill="#05070D"/>
+    <path d="M 0 1180 q -6 -40 -10 -50" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 22 1180 q 0 -40 -5 -87" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 44 1180 q 6 -40 0 -79" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 66 1180 q -6 -40 5 -71" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 88 1180 q 0 -40 10 -63" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 110 1180 q 6 -40 -10 -55" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 132 1180 q -6 -40 -5 -92" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 154 1180 q 0 -40 0 -84" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 176 1180 q 6 -40 5 -76" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 198 1180 q -6 -40 10 -68" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 220 1180 q 0 -40 -10 -60" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 242 1180 q 6 -40 -5 -52" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 264 1180 q -6 -40 0 -89" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 286 1180 q 0 -40 5 -81" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 308 1180 q 6 -40 10 -73" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 330 1180 q -6 -40 -10 -65" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 352 1180 q 0 -40 -5 -57" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 374 1180 q 6 -40 0 -94" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 396 1180 q -6 -40 5 -86" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 418 1180 q 0 -40 10 -78" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 440 1180 q 6 -40 -10 -70" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 462 1180 q -6 -40 -5 -62" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 484 1180 q 0 -40 0 -54" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 506 1180 q 6 -40 5 -91" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 528 1180 q -6 -40 10 -83" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 550 1180 q 0 -40 -10 -75" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 572 1180 q 6 -40 -5 -67" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 594 1180 q -6 -40 0 -59" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 616 1180 q 0 -40 5 -51" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 638 1180 q 6 -40 10 -88" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 660 1180 q -6 -40 -10 -80" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 682 1180 q 0 -40 -5 -72" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 704 1180 q 6 -40 0 -64" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 726 1180 q -6 -40 5 -56" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 748 1180 q 0 -40 10 -93" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 770 1180 q 6 -40 -10 -85" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 792 1180 q -6 -40 -5 -77" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 814 1180 q 0 -40 0 -69" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 836 1180 q 6 -40 5 -61" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 858 1180 q -6 -40 10 -53" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 880 1180 q 0 -40 -10 -90" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 902 1180 q 6 -40 -5 -82" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 924 1180 q -6 -40 0 -74" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 946 1180 q 0 -40 5 -66" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 968 1180 q 6 -40 10 -58" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 990 1180 q -6 -40 -10 -50" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1012 1180 q 0 -40 -5 -87" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1034 1180 q 6 -40 0 -79" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1056 1180 q -6 -40 5 -71" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1078 1180 q 0 -40 10 -63" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1100 1180 q 6 -40 -10 -55" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1122 1180 q -6 -40 -5 -92" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1144 1180 q 0 -40 0 -84" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 1166 1180 q 6 -40 5 -76" stroke="#05070D" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="-60" y="1250" width="1200" height="700" fill="#16130A"/>
+    <path d="M -60 1250 C 240 1230 600 1270 1140 1240 L 1140 1300 L -60 1300 Z" fill="#16130A"/>
+    <path d="M 10 1330 q -8 -50 -14 -70" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 44 1390 q 0 -50 -7 -111" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 78 1450 q 8 -50 0 -92" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 112 1510 q -8 -50 7 -73" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 146 1330 q 0 -50 14 -114" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 180 1390 q 8 -50 -14 -95" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 214 1450 q -8 -50 -7 -76" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 248 1510 q 0 -50 0 -117" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 282 1330 q 8 -50 7 -98" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 316 1390 q -8 -50 14 -79" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 350 1450 q 0 -50 -14 -120" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 384 1510 q 8 -50 -7 -101" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 418 1330 q -8 -50 0 -82" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 452 1390 q 0 -50 7 -123" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 486 1450 q 8 -50 14 -104" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 520 1510 q -8 -50 -14 -85" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 554 1330 q 0 -50 -7 -126" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 588 1390 q 8 -50 0 -107" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 622 1450 q -8 -50 7 -88" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 656 1510 q 0 -50 14 -129" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 690 1330 q 8 -50 -14 -110" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 724 1390 q -8 -50 -7 -91" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 758 1450 q 0 -50 0 -72" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 792 1510 q 8 -50 7 -113" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 826 1330 q -8 -50 14 -94" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 860 1390 q 0 -50 -14 -75" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 894 1450 q 8 -50 -7 -116" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 928 1510 q -8 -50 0 -97" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 962 1330 q 0 -50 7 -78" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 996 1390 q 8 -50 14 -119" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 1030 1450 q -8 -50 -14 -100" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 1064 1510 q 0 -50 -7 -81" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 1098 1330 q 8 -50 0 -122" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 1132 1390 q -8 -50 7 -103" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M 1166 1450 q 0 -50 14 -84" stroke="#2C2614" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <g class="eye"><ellipse cx="700" cy="1430" rx="44" ry="22" fill="#FFD23F"/><ellipse cx="800" cy="1430" rx="44" ry="22" fill="#FFD23F"/><rect x="694" y="1412" width="11" height="36" fill="#0A1020"/><rect x="794" y="1412" width="11" height="36" fill="#0A1020"/></g>
+    <g class="eye"><ellipse cx="226" cy="1090" rx="24" ry="13" fill="#FFD23F"/><ellipse cx="272" cy="1090" rx="24" ry="13" fill="#FFD23F"/><rect x="223" y="1081" width="6" height="20" fill="#0A1020"/><rect x="269" y="1081" width="6" height="20" fill="#0A1020"/></g>
+    <g class="eye"><ellipse cx="470" cy="1130" rx="20" ry="11" fill="#FFD23F"/><ellipse cx="508" cy="1130" rx="20" ry="11" fill="#FFD23F"/><rect x="467" y="1122" width="5" height="17" fill="#0A1020"/><rect x="505" y="1122" width="5" height="17" fill="#0A1020"/></g>
+    <g class="eye"><ellipse cx="90" cy="1150" rx="17" ry="9" fill="#FFD23F"/><ellipse cx="122" cy="1150" rx="17" ry="9" fill="#FFD23F"/><rect x="88" y="1143" width="4" height="15" fill="#0A1020"/><rect x="120" y="1143" width="4" height="15" fill="#0A1020"/></g>
+  </g></svg>
+</div>
 <div id="grain"></div>
 <div id="flash"></div>
 <div id="hook" class="ov">
@@ -384,8 +403,8 @@ const world = `
   </svg>
 </div>
 <div id="third" class="ov"><div class="big-y">≈ ⅓</div></div>
-<div id="bigger" class="ov ratio"><div class="rt"><b>400×</b> GRÖSSER</div></div>
-<div id="farther" class="ov ratio ratio2"><div class="rt"><b>400×</b> WEITER WEG</div></div>
+<div id="tagA" class="ov tag400"><span>Ø</span> ×400</div>
+<div id="tagB" class="ov tag400 tagB"><span>⟷</span> ×400</div>
 <div id="stamp" class="ov"><div class="stp">NIE WIEDER</div></div>
 <div id="deg" class="ov"><div class="deg-n" id="deg-n">23,4°</div><div class="sub">Neigung der Erdachse</div></div>
 <div id="years" class="ov"><div class="yr" id="yr">+1 MIO. JAHRE</div></div>
@@ -420,6 +439,9 @@ const world = `
 const worldCss = `
   #root { background: ${C.space}; }
   #ostern { top: 360px; }
+  #tagA, #tagB { top: 1000px; left: 110px; right: auto; width: max-content; text-align: center; font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 76px; color: ${C.ink}; background: ${C.accent}; padding: 6px 26px; border-radius: 18px; border: 6px solid ${C.ink}; }
+  #tagA span, #tagB span { opacity: 0.7; }
+  #tagB { left: auto; right: 110px; }
   .os-q { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 120px; fill: #E8505B; }
   .ratio { top: 975px; } .ratio2 { top: 1075px; }
   .rt { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 62px; color: #fff; -webkit-text-stroke: 14px ${C.ink}; paint-order: stroke fill; }
@@ -489,15 +511,11 @@ const T = {
   dark: L.n3.s,
   starsIn: at("n3", "pechschwarz") + 0.2,
   lions: at("n3", "Löwen") - 0.1,
-  toTide: f(L.n4.s - 0.35),
-  bigTide: L.n4.s + 0.1,
-  smallTide: at("n4", "Schrumpfen") - 0.05,
-  third: at("n4", "Drittel"),
+  savanna: at("n3", "genau") - 0.25,
   rise: f(L.n5.s - 0.55),
   ghostSun: at("n5", "Riesenzufall") - 0.6,
   bigger: at("n5", "größer") - 0.1,
   farther: at("n5", "weiter") - 0.1,
-  ratioOut: at("n5", "Jetzt") - 0.1,
   stamp: at("n5", "nie") - 0.05,
   toEarth: f(L.n6.s - 0.35),
   orbitOut: at("n6", "Ohne"),
@@ -571,41 +589,26 @@ const worldJs = `
     tl.to("#dark", { opacity: 0.7, duration: 1.1, ease: "power2.inOut" }, ${T.dark});
     tl.to(".win", { opacity: 1, duration: 0.08, stagger: 0.3 }, ${T.dark} + 0.6);
     tl.to(".s2", { opacity: 0.9, duration: 0.2, stagger: 0.008, ease: "power1.out" }, ${T.starsIn});
-    tl.to("#zoom", { scale: 1.08, duration: ${f(T.toTide - T.dark - 0.02)}, ease: "power1.inOut" }, ${T.dark});
+    tl.to("#zoom", { scale: 1.08, duration: ${f(T.rise - T.dark - 0.02)}, ease: "power1.inOut" }, ${T.dark});
+    tl.to("#zoom", { scale: 1, duration: 1.2, ease: "power3.inOut" }, ${T.rise});
+    // Savanne: in genau solchen Nächten jagen Löwen. Wischt von rechts rein.
+    tl.fromTo("#savanna", { opacity: 1, xPercent: 100 }, { xPercent: 0, duration: 0.45, ease: "power3.out" }, ${T.savanna});
     gsap.set(".eye", { scaleY: 0, transformOrigin: "50% 50%" });
-    tl.to(".eye", { scaleY: 1, duration: 0.14, stagger: 0.12, ease: "power2.out" }, ${T.lions});
-    tl.to(".eye", { scaleY: 0.1, duration: 0.06 }, ${T.lions} + 1.3);
-    tl.to(".eye", { scaleY: 1, duration: 0.08 }, ${T.lions} + 1.38);
-    tl.to(".eye", { scaleY: 0, duration: 0.15 }, ${T.toTide});
-
-    // GEZEITEN: kurz und klar, große Tide → kleine Tide → ⅓.
-    tl.to("#zoom", { scale: 1, duration: 0.8, ease: "power3.inOut" }, ${T.toTide});
-    tl.to("#cam", { y: ${-CY.tide}, duration: 0.8, ease: "power3.inOut" }, ${T.toTide});
-    tl.to("#dark", { opacity: 0.3, duration: 0.8 }, ${T.toTide});
-    const tideTo = (y, d, t0) => {
-      tl.to("#tide-water", { attr: { y, height: ${Y_WL + 4} - y }, duration: d, ease: "sine.inOut" }, t0);
-      tl.to("#tide-edge", { attr: { y: y - 3 }, duration: d, ease: "sine.inOut" }, t0);
-    };
-    tl.to("#br-old", { opacity: 1, duration: 0.2 }, ${T.bigTide});
-    tideTo(${TIDE.mid - TIDE.big}, 0.4, ${T.bigTide});
-    tideTo(${TIDE.mid + TIDE.big}, ${f(T.smallTide - T.bigTide - 0.42)}, ${T.bigTide} + 0.4);
-    tl.to("#br-old", { opacity: 0.45, duration: 0.25 }, ${T.smallTide});
-    tl.to("#br-new", { opacity: 1, duration: 0.2 }, ${T.smallTide});
-    tideTo(${TIDE.mid - TIDE.small}, 0.4, ${T.smallTide});
-    tideTo(${TIDE.mid + TIDE.small}, 0.4, ${T.smallTide} + 0.4);
-    tideTo(${TIDE.mid}, 0.35, ${T.smallTide} + 0.8);
-    tl.fromTo("#third", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, ${T.third});
-    tl.to("#third", { opacity: 0, duration: 0.2 }, ${T.rise});
+    tl.to(".eye", { scaleY: 1, duration: 0.14, stagger: 0.15, ease: "power2.out" }, ${T.lions});
+    tl.to(".eye", { scaleY: 0.1, duration: 0.06 }, ${T.lions} + 1.2);
+    tl.to(".eye", { scaleY: 1, duration: 0.08 }, ${T.lions} + 1.28);
+    tl.to("#sv-pan", { x: -40, duration: ${f(L.n3.e - T.savanna)}, ease: "none" }, ${T.savanna});
+    tl.to("#savanna", { opacity: 0, duration: 0.35 }, ${T.rise} + 0.2);
 
     // SONNE: hoch ins All, der Geister-Mond deckt die Sonne exakt ab, 400 × 400.
     tl.to("#cam", { y: ${-CY.sun}, duration: 1.2, ease: "power3.inOut" }, ${T.rise});
     tl.to("#dark", { opacity: 0, duration: 0.6 }, ${T.rise});
     gsap.set("#ghost-sun-pos", { x: -760 });
     tl.to("#ghost-sun-pos", { x: 0, duration: 0.8, ease: "power3.out" }, ${T.ghostSun});
-    tl.fromTo("#bigger", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, ${T.bigger});
-    tl.fromTo("#farther", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, ${T.farther});
-    tl.to(["#bigger", "#farther"], { opacity: 0, duration: 0.15 }, ${T.stamp} - 0.15);
-    tl.to("#ghost-sun-pos", { x: 800, duration: 0.5, ease: "power3.in" }, ${T.ratioOut});
+    tl.to("#ghost-sun-pos", { x: 800, duration: 0.5, ease: "power3.in" }, ${T.stamp} - 0.45);
+    tl.fromTo("#tagA", { opacity: 0, scale: 0.4, rotation: -10 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.3, ease: "back.out(2.4)" }, ${T.bigger});
+    tl.fromTo("#tagB", { opacity: 0, scale: 0.4, rotation: 10 }, { opacity: 1, scale: 1, rotation: 4, duration: 0.3, ease: "back.out(2.4)" }, ${T.farther});
+    tl.to(["#tagA", "#tagB"], { opacity: 0, duration: 0.15 }, ${T.stamp} - 0.15);
     tl.fromTo("#stamp", { opacity: 0, scale: 1.8, rotation: -14 }, { opacity: 1, scale: 1, rotation: -7, duration: 0.18, ease: "power4.in" }, ${T.stamp});
     tl.to("#shake", { x: 10, y: -8, duration: 0.05 }, ${T.stamp} + 0.18);
     tl.to("#shake", { x: -7, y: 6, duration: 0.05 }, ${T.stamp} + 0.23);
@@ -682,8 +685,8 @@ const worldJs = `
     tl.set(["#moon2a", "#moon2b"], { opacity: 1 }, ${T.twoMoons});
     tl.fromTo("#m2a", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${T.twoMoons});
     tl.fromTo("#m2b", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false }, ${T.twoMoons} + 0.25);
-    tl.fromTo("#moon2a", { x: 0, y: 0 }, { x: 470, y: 118, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
-    tl.fromTo("#moon2b", { x: 0, y: 0 }, { x: -470, y: -118, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
+    tl.fromTo("#moon2a", { x: 0, y: 0 }, { x: 110, y: 62, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
+    tl.fromTo("#moon2b", { x: 0, y: 0 }, { x: -110, y: -62, duration: ${f(DUR - T.twoMoons)}, ease: "sine.inOut", immediateRender: false }, ${T.twoMoons});
     gsap.set(["#m2a", "#m2b"], { scale: 0 });
 `;
 
@@ -755,13 +758,12 @@ const SFX = [
   ["pop2", "gen-pop", T.ostern, 0.45],
   ["pop3", "gen-pop", T.vollmond + 0.2, 0.4],
   ["dark", "gen-dark", T.dark, 0.45],
+  ["swoosh0", "gen-swoosh2", T.savanna - 0.05, 0.35],
   ["growl", "gen-growl", T.lions + 0.6, 0.4],
-  ["wave2", "gen-wave", T.toTide + 0.2, 0.3],
-  ["pop4", "gen-pop", T.third, 0.45],
   ["rise", "gen-rise", T.rise, 0.5],
-  ["pop5", "gen-pop", T.bigger, 0.35],
-  ["pop6", "gen-pop", T.farther, 0.35],
   ["stamp", "gen-stamp", T.stamp + 0.15, 0.6],
+  ["pop5", "gen-pop", T.bigger - 0.05, 0.35],
+  ["pop6", "gen-pop", T.farther - 0.05, 0.35],
   ["swoosh", "gen-swoosh2", T.toEarth, 0.35],
   ["tick", "gen-tick", T.years, 0.2],
   ["rumble", "gen-rumble", T.tip - 0.2, 0.5],
