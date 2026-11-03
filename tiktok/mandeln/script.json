@@ -11,13 +11,12 @@
   "scenes": {
     "teaser": [90, 92.8],
     "streit": [0, 14.0],
-    "spaeter": [15, 16.4],
-    "nachher": [20, 24.0],
-    "op": [30, 48],
-    "praxis": [55, 57],
+    "nachher": [20, 23.0],
+    "op": [30, 44],
+    "praxis": [55, 56],
     "patient": [60, 64]
   },
-  "order": ["teaser", "streit", "spaeter", "nachher", "op", "praxis", "patient"],
+  "order": ["teaser", "streit", "nachher", "op", "praxis", "patient"],
   "qa": {
     "maxTakes": 3,
     "maxWer": 0.1
@@ -30,155 +29,143 @@
       "end": 91.3,
       "text": "Nicht ohne meinen Bruder!",
       "emph": ["Bruder"],
-      "reuse": "o3"
+      "reuse": "o4"
     },
     {
       "id": "s1",
       "speaker": "zp",
       "start": 0.35,
       "end": 1.35,
-      "text": "Hey! Ihr zwei! Ich krieg keine Luft!",
-      "emph": ["Luft"]
+      "text": "Hey, ihr zwei Fettklöße! Ich krieg keine Luft!",
+      "emph": ["Fettklöße"]
     },
     {
       "id": "s2",
       "speaker": "ml",
       "start": 1.6,
       "end": 2.6,
-      "text": "Wir sind die Türsteher!",
-      "emph": ["Türsteher"]
+      "text": "Fettklöße? Das sind Muskeln, Kleiner.",
+      "emph": ["Muskeln"]
     },
     {
       "id": "s3",
       "speaker": "mr",
       "start": 2.6,
       "end": 3.6,
-      "text": "Genau!"
+      "text": "Und du bist nur ein Wackelpudding mit Gesicht.",
+      "emph": ["Wackelpudding"]
     },
     {
       "id": "s4",
       "speaker": "zp",
       "start": 3.6,
       "end": 4.6,
-      "text": "Türsteher? Ihr seid voller Bakterien!",
+      "text": "Ihr seid voller Bakterien!",
       "emph": ["Bakterien"]
     },
     {
-      "id": "i1",
-      "speaker": "zp",
+      "id": "s5",
+      "speaker": "mr",
+      "start": 4.8,
+      "end": 5.8,
+      "text": "Das sind keine Bakterien. Das sind unsere Gäste.",
+      "emph": ["Gäste"]
+    },
+    {
+      "id": "i0",
+      "speaker": "eis",
       "start": 7.0,
       "end": 8.0,
-      "text": "Oh! Ein Eis! Das kühlt so schön!",
-      "emph": ["Eis"]
+      "text": "Keine Panik! Hier kommt die Kälte!",
+      "emph": ["Kälte"]
     },
     {
       "id": "i2",
       "speaker": "ml",
       "start": 9.0,
       "end": 10.0,
-      "text": "Brrr… ist das kalt!",
-      "emph": ["kalt"]
+      "text": "Brrr… okay, das ist frisch.",
+      "emph": ["frisch"]
     },
     {
       "id": "i3",
+      "speaker": "eis",
+      "start": 10.0,
+      "end": 11.0,
+      "text": "Ich… schmelze! Das ist ja wie in der Sauna hier!",
+      "emph": ["Sauna"],
+      "maxPause": 0.5
+    },
+    {
+      "id": "i4",
       "speaker": "mr",
       "start": 11.0,
       "end": 12.0,
-      "text": "Netter Versuch.",
-      "emph": ["Versuch"]
-    },
-    {
-      "id": "l6",
-      "speaker": "card",
-      "start": 15.1,
-      "end": 16.1,
-      "text": "Später"
-    },
-    {
-      "id": "n1",
-      "speaker": "zp",
-      "start": 20.3,
-      "end": 21.3,
-      "text": "Schon wieder entzündet! Das fünfte Mal dieses Jahr!",
-      "emph": ["fünfte"]
+      "text": "Tschüss, Eis. Netter Versuch.",
+      "emph": ["Tschüss"]
     },
     {
       "id": "n2",
       "speaker": "ml",
-      "start": 21.6,
-      "end": 22.6,
+      "start": 21.3,
+      "end": 22.3,
       "text": "Wir ziehen hier nicht aus."
     },
     {
       "id": "n3",
       "speaker": "zp",
-      "start": 22.8,
-      "end": 23.8,
+      "start": 22.3,
+      "end": 23.3,
       "text": "Herr Doktor! Holen Sie die raus!",
       "emph": ["Doktor"]
     },
     {
-      "id": "a1",
-      "speaker": "arzt",
-      "start": 30.2,
-      "end": 31.2,
-      "text": "Der Patient schläft. Ein Sperrer hält den Mund weit offen.",
-      "emph": ["Sperrer"]
-    },
-    {
-      "id": "a2",
-      "speaker": "arzt",
-      "start": 32.0,
-      "end": 33.0,
-      "text": "Wir fassen die Mandel und lösen sie vorsichtig aus ihrem Bett.",
-      "emph": ["Mandel"]
+      "id": "o1",
+      "speaker": "mr",
+      "start": 30.9,
+      "end": 31.9,
+      "text": "Ey, wer hat hier das Licht angemacht?",
+      "emph": ["Licht"]
     },
     {
       "id": "o2",
       "speaker": "mr",
-      "start": 33.0,
-      "end": 34.0,
-      "text": "Hey! Das ist meine Wohnung!",
+      "start": 33.6,
+      "end": 34.6,
+      "text": "Finger weg! Das ist meine Wohnung!",
       "emph": ["Wohnung"]
-    },
-    {
-      "id": "a3",
-      "speaker": "arzt",
-      "start": 34.0,
-      "end": 35.0,
-      "text": "Dann kommt sie heraus. Danach die zweite.",
-      "emph": ["zweite"]
     },
     {
       "id": "o3",
       "speaker": "ml",
-      "start": 35.0,
-      "end": 36.0,
+      "start": 36.8,
+      "end": 37.8,
+      "text": "Bruder? Bruder?!",
+      "emph": ["Bruder"]
+    },
+    {
+      "id": "o4",
+      "speaker": "ml",
+      "start": 38.8,
+      "end": 39.8,
       "text": "Nicht ohne meinen Bruder!",
       "emph": ["Bruder"]
     },
     {
-      "id": "a4",
-      "speaker": "arzt",
-      "start": 36.0,
-      "end": 37.0,
-      "text": "Zum Schluss stillen wir die Blutung.",
-      "emph": ["Blutung"]
-    },
-    {
-      "id": "o4",
+      "id": "o5",
       "speaker": "zp",
-      "start": 37.0,
-      "end": 38.0,
+      "start": 43.0,
+      "end": 43.0,
       "text": "Endlich… Luft!",
-      "emph": ["Luft"]
+      "emph": ["Luft"],
+      "maxPause": 0.5
     },
     {
       "id": "d1",
       "speaker": "arzt",
       "start": 55.3,
       "end": 56.3,
-      "text": "Bei ständigen Entzündungen hilft Kühlen nur kurz. Dann ist die OP oft die beste Lösung."
+      "text": "Ständig entzündete Mandeln? Dann müssen sie raus."
     },
     {
       "id": "e1",
@@ -192,15 +179,21 @@
       "speaker": "arzt",
       "start": 61.5,
       "end": 62.5,
-      "text": "Kaltes ja. Aber nichts Hartes oder Scharfes."
+      "text": "Kaltes ja. Aber nichts Hartes."
     },
     {
       "id": "e3",
       "speaker": "pat",
-      "start": 63.0,
-      "end": 64.0,
-      "text": "Juhu! … Au!",
-      "maxPause": 0.7
+      "start": 62.5,
+      "end": 63.5,
+      "text": "Juhu!"
+    },
+    {
+      "id": "e4",
+      "speaker": "eis",
+      "start": 63.2,
+      "end": 64.2,
+      "text": "Echt jetzt? Schon wieder ich?!"
     }
   ],
   "voices": {
@@ -262,6 +255,18 @@
         "use_speaker_boost": true
       },
       "seed": 5555,
+      "tempo": 1.06
+    },
+    "eis": {
+      "name": "Eis am Stiel (DE, quirlig)",
+      "voice_id": "MKgF32bWJbXQmEapgjoJ",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.4,
+        "use_speaker_boost": true
+      },
+      "seed": 6666,
       "tempo": 1.06
     }
   },
@@ -355,121 +360,30 @@
     {
       "id": "sfx-ice-in",
       "src": "whoosh-short.mp3",
-      "line": "i1",
+      "line": "i0",
       "offset": -0.6,
       "volume": 0.5
     },
     {
       "id": "sfx-freeze",
       "src": "gen-freeze.mp3",
-      "line": "i1",
-      "offset": 1.2,
+      "line": "i0",
+      "offset": 1.0,
       "volume": 0.55
     },
     {
       "id": "sfx-sizzle",
       "src": "gen-sizzle.mp3",
       "line": "i3",
-      "offset": -0.9,
+      "offset": 0.2,
       "volume": 0.6
     },
     {
       "id": "sfx-swell",
       "src": "gen-throb.mp3",
-      "line": "i3",
-      "offset": 0.5,
+      "line": "i4",
+      "offset": 0.3,
       "volume": 0.6
-    },
-    {
-      "id": "sfx-riser",
-      "src": "gen-riser.mp3",
-      "anchor": "spaeter",
-      "offset": -1.15,
-      "volume": 0.55
-    },
-    {
-      "id": "sfx-card-in",
-      "src": "whoosh-short.mp3",
-      "anchor": "spaeter",
-      "offset": -0.05,
-      "volume": 0.5
-    },
-    {
-      "id": "sfx-card-out",
-      "src": "whoosh-short.mp3",
-      "anchor": "nachher",
-      "offset": -0.1,
-      "volume": 0.45
-    },
-    {
-      "id": "sfx-throb2",
-      "src": "gen-throb.mp3",
-      "anchor": "nachher",
-      "offset": 0.1,
-      "volume": 0.55
-    },
-    {
-      "id": "sfx-gag",
-      "src": "gen-metal.mp3",
-      "line": "a1",
-      "offset": 1.6,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-grab",
-      "src": "click.mp3",
-      "line": "a2",
-      "offset": 1.3,
-      "volume": 0.6
-    },
-    {
-      "id": "sfx-snip1",
-      "src": "gen-snip.mp3",
-      "line": "a2",
-      "offset": 2.4,
-      "volume": 0.55
-    },
-    {
-      "id": "sfx-snip2",
-      "src": "gen-snip.mp3",
-      "line": "a2",
-      "offset": 2.9,
-      "volume": 0.55
-    },
-    {
-      "id": "sfx-out1",
-      "src": "gen-impact.mp3",
-      "line": "a3",
-      "offset": 0.5,
-      "volume": 0.55
-    },
-    {
-      "id": "sfx-out2",
-      "src": "gen-impact.mp3",
-      "line": "o3",
-      "offset": 1.2,
-      "volume": 0.55
-    },
-    {
-      "id": "sfx-zap1",
-      "src": "gen-cautery.mp3",
-      "line": "a4",
-      "offset": 1.0,
-      "volume": 0.5
-    },
-    {
-      "id": "sfx-zap2",
-      "src": "gen-cautery.mp3",
-      "line": "a4",
-      "offset": 1.6,
-      "volume": 0.5
-    },
-    {
-      "id": "sfx-rimshot",
-      "src": "gen-rimshot.mp3",
-      "line": "o4",
-      "offset": 1.4,
-      "volume": 0.35
     },
     {
       "id": "sfx-praxis",
@@ -488,9 +402,72 @@
     {
       "id": "sfx-rimshot2",
       "src": "gen-rimshot.mp3",
-      "line": "e3",
-      "offset": 1.0,
+      "line": "e4",
+      "offset": 1.3,
       "volume": 0.4
+    },
+    {
+      "id": "sfx-gag",
+      "src": "gen-metal.mp3",
+      "anchor": "op",
+      "offset": 0.4,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-grab",
+      "src": "click.mp3",
+      "line": "o2",
+      "offset": -0.2,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-snip1",
+      "src": "gen-snip.mp3",
+      "line": "o2",
+      "offset": 0.6,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-snip2",
+      "src": "gen-snip.mp3",
+      "line": "o2",
+      "offset": 1.1,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-out1",
+      "src": "gen-impact.mp3",
+      "line": "o3",
+      "offset": -0.6,
+      "volume": 0.55
+    },
+    {
+      "id": "sfx-grab2",
+      "src": "click.mp3",
+      "line": "o4",
+      "offset": -0.3,
+      "volume": 0.6
+    },
+    {
+      "id": "sfx-zap1",
+      "src": "gen-cautery.mp3",
+      "line": "o5",
+      "offset": -1.4,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-zap2",
+      "src": "gen-cautery.mp3",
+      "line": "o5",
+      "offset": -0.8,
+      "volume": 0.5
+    },
+    {
+      "id": "sfx-stick",
+      "src": "pop.mp3",
+      "line": "i4",
+      "offset": -0.1,
+      "volume": 0.45
     }
   ],
   "maxPause": 0.3

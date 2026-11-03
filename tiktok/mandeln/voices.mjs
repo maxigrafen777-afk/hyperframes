@@ -224,7 +224,12 @@ for (const line of script.lines) {
     start: +mapT(w.start).toFixed(3),
     end: +mapT(w.end).toFixed(3),
   }));
+  // Lautstärke-Hüllkurve für die Mundbewegung (Lippensynchronität).
+  const env = JSON.parse(
+    execFileSync("python3", ["-I", here("./env.py").pathname, out]).toString(),
+  );
   timings[line.id] = {
+    env,
     duration: +Math.min(fileDur, words.at(-1).end + 0.15).toFixed(3),
     fileDuration: fileDur,
     tempo: k,

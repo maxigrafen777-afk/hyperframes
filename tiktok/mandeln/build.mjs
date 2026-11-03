@@ -30,7 +30,6 @@ const ORDER = script.order;
 const GAP = {
   teaser: 0,
   streit: 0.08,
-  spaeter: 0,
   nachher: 0.08,
   op: 0.2,
   frage: 0.2,
@@ -40,7 +39,6 @@ const GAP = {
 const PAD = {
   teaser: 0.5,
   streit: 0.35,
-  spaeter: 0,
   nachher: 0.4,
   op: 0.4,
   frage: 0.4,
@@ -88,7 +86,11 @@ const L = Object.fromEntries(lines.map((l) => [l.id, [l.start, l.end]]));
 // frech = Schlafzimmerblick, jammern = Blick nach oben, seufzen = Lider runter.
 // Character acting helpers, injected into each scene script. Positions are
 // GLOBAL seconds; `tl` shifts them by the scene's start (O).
+const LIPMAP = Object.fromEntries(
+  lines.filter((l) => VO[l.id]?.env).map((l) => [l.start.toFixed(2), VO[l.id].env]),
+);
 const HELPERS = `
+  const LIP = ${JSON.stringify(LIPMAP)};
   const st = {};
   const lidSel = (ch) => ["#" + ch + "-eyeL-lid", "#" + ch + "-eyeR-lid"];
   function initChar(ch, r, lid) {
@@ -113,16 +115,28 @@ const HELPERS = `
   function squeeze(ch, on, t) {
     tl.set(["#" + ch + "-eyeL-sq", "#" + ch + "-eyeR-sq"], { opacity: on ? 1 : 0 }, t);
   }
+  // Lippensynchron: der Mund folgt der Lautstärke der echten Aufnahme (LIP,
+  // 30 Werte/s); in Pausen fast geschlossen. Ohne Hüllkurve: fester Takt.
   function talk(ch, t0, t1, rest = "flat", step = 0.13) {
     face(ch, "open", t0);
     const o = "#" + ch + "-m-open";
-    tl.set(o, { scaleY: 0.4, svgOrigin: "0 -6" }, t0);
-    let i = 0;
-    for (let t = t0; t < t1 - 0.05; t += step, i++) {
-      tl.to(o, { scaleY: i % 2 ? 0.35 : 1, duration: step * 0.9, ease: "sine.inOut" }, t);
+    tl.set(o, { scaleY: 0.1, svgOrigin: "0 -6" }, t0);
+    const env = LIP[(+t0).toFixed(2)];
+    if (env) {
+      for (let i = 0; i < env.length; i += 2) {
+        const t = t0 + i / 30;
+        if (t > t1 - 0.03) break;
+        const v = Math.max(env[i], env[i + 1] || 0);
+        tl.to(o, { scaleY: v < 0.12 ? 0.08 : 0.28 + v * 0.82, duration: 2 / 30, ease: "sine.out" }, t);
+      }
+    } else {
+      let i = 0;
+      for (let t = t0; t < t1 - 0.05; t += step, i++)
+        tl.to(o, { scaleY: i % 2 ? 0.35 : 1, duration: step * 0.9, ease: "sine.inOut" }, t);
     }
     face(ch, rest, t1);
   }
+
   function punch(sel, t, k = 1.07) {
     tl.to(sel, { scale: k, duration: 0.07, ease: "power2.out" }, t);
     tl.to(sel, { scale: 1, duration: 0.35, ease: "power2.inOut" }, t + 0.08);
@@ -176,7 +190,7 @@ const TZ = {
   tongueShade: "#C9505F",
   teeth: "#F8F7F1",
 };
-const POS = { zp: [540, 820], ml: [300, 1080], mr: [780, 1080] };
+const POS = { zp: [540, 820], ml: [300, 1080], mr: [780, 1080], eis: [540, 990] };
 const UVULA =
   "M 492 430 C 494 560 440 690 440 800 C 440 935 640 935 640 800 C 640 690 586 560 588 430 Z";
 const TONSIL = (cx, cy) =>
@@ -242,20 +256,26 @@ const throat = (p, env = "inside") => `
   <path id="${p}tongue" d="M -400 1500 C 0 1380 300 1340 540 1340 C 780 1340 1080 1380 1480 1500 L 1480 2600 L -400 2600 Z" fill="${TZ.tongue}" ${S()}/>
   <path d="M 540 1420 C 546 1620 546 1820 540 2050" fill="none" stroke="${TZ.tongueShade}" stroke-width="12" stroke-linecap="round"/>
   <g id="${p}ice" opacity="0">
-    <circle cx="540" cy="1010" r="92" fill="#FCE3EC" ${S()}/>
-    <path d="M 470 1040 q 10 30 0 50 M 600 1050 q 8 24 0 40" fill="none" stroke="#F2B8CA" stroke-width="12" stroke-linecap="round"/>
-    <circle cx="512" cy="980" r="14" fill="#fff" opacity="0.8"/>
-    ${[
-      [430, 930],
-      [650, 940],
-      [540, 890],
-    ]
-      .map(
-        ([x, y]) =>
-          `<path d="M ${x} ${y - 16} v 32 M ${x - 16} ${y} h 32 M ${x - 11} ${y - 11} l 22 22 M ${x + 11} ${y - 11} l -22 22" stroke="#BFE9FF" stroke-width="5" stroke-linecap="round"/>`,
-      )
-      .join("")}
+    <g id="${p}ice-stick"><rect x="522" y="1100" width="36" height="170" rx="16" fill="#E2B474" ${S(4)}/></g>
+    <g id="${p}ice-body">
+      <path d="M 462 1130 L 462 900 C 462 836 618 836 618 900 L 618 1130 Z" fill="#8FD8F0" ${S()}/>
+      <path d="M 462 1060 L 618 1060 L 618 1130 L 462 1130 Z" fill="#F7A8C4" ${S(4)}/>
+      <path d="M 486 900 C 486 880 500 866 516 862" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+      ${[
+        [440, 880],
+        [645, 900],
+        [452, 1020],
+      ]
+        .map(
+          ([x, y]) =>
+            `<path d="M ${x} ${y - 14} v 28 M ${x - 14} ${y} h 28 M ${x - 10} ${y - 10} l 20 20 M ${x + 10} ${y - 10} l -20 20" stroke="#E6F8FF" stroke-width="5" stroke-linecap="round"/>`,
+        )
+        .join("")}
+      <g transform="translate(540 960)">${toothFace(p + "eis", { r: 26, gap: 32, mouthY: 50, mouthS: 0.55, mouthInit: "smile", lidFill: "#8FD8F0" })}</g>
+      ${[0, 1, 2].map((i) => `<path id="${p}drip${i}" opacity="0" d="M ${480 + i * 55} 1130 q -8 18 0 30 q 8 -12 0 -30 Z" fill="#8FD8F0" ${S(3)}/>`).join("")}
+    </g>
   </g>
+
   ${[0, 1, 2].map((i) => `<path id="${p}steam${i}" opacity="0" d="M ${480 + i * 60} 960 q -18 -26 0 -52 t 0 -52" fill="none" stroke="#F4F0F0" stroke-width="10" stroke-linecap="round"/>`).join("")}
   <g transform="translate(540 1180)">${painStar(p + "pain", { r: 56 })}</g>
   ${
@@ -283,6 +303,7 @@ const BODY_INIT = `
     initChar("@zp", 34, 0.15);
     initChar("@ml", 44, 0.45);
     initChar("@mr", 44, 0.45);
+    initChar("@eis", 26, 0.05);
     gsap.set("#@cam", { svgOrigin: "540 960" });
     gsap.set("#@frame", { svgOrigin: "0 0" });
     const frameTo = (px, py, k, t, d = 0.3, ease = "power3.inOut") => {
@@ -329,20 +350,27 @@ const BODY_INIT = `
 // Stimmung pro Zeile (das Modell kennt keine Tags): laut, wütend, froh, kalt, frech, Panik.
 const MOOD = {
   s1: "loud",
+  s2: "smug",
+  s3: "smug",
   s4: "angry",
+  s5: "smug",
+  i0: "happy",
   i1: "happy",
   i2: "cold",
-  i3: "smug",
-  n1: "loud",
+  i3: "panic",
+  i4: "smug",
+  n1: "angry",
   n2: "smug",
   n3: "loud",
-  o2: "panic",
-  o3: "panic",
-  o4: "happy",
   t1: "panic",
 };
-const CHARS = ["zp", "ml", "mr"];
-const FACE = { zp: [540, 900, 1.1], ml: [330, 1060, 1.25], mr: [750, 1060, 1.25] };
+const CHARS = ["zp", "ml", "mr", "eis"];
+const FACE = {
+  zp: [540, 900, 1.1],
+  ml: [330, 1060, 1.25],
+  mr: [750, 1060, 1.25],
+  eis: [540, 960, 1.15],
+};
 function lookVec(from, to) {
   const dx = POS[to][0] - POS[from][0],
     dy = POS[to][1] - POS[from][1];
@@ -355,7 +383,7 @@ function actLines(scene, { frames = true, from = 0 } = {}) {
     .map((l) => {
       const me = l.speaker,
         mood = MOOD[l.id] || (me === "zp" ? "flat" : "smug");
-      let js = CHARS.filter((c) => c !== me)
+      let js = CHARS.filter((c) => c !== me && c !== "eis")
         .map((c) => `look("@${c}", ${lookVec(c, me).join(", ")}, ${+(l.start - 0.1).toFixed(2)});`)
         .join(" ");
       if (frames && l.start >= from) {
@@ -378,7 +406,7 @@ function actLines(scene, { frames = true, from = 0 } = {}) {
 const blinks = (scene, a, b) => {
   let js = "";
   for (let t = a + 1.3, i = 0; t < b - 0.3; t += 1.7, i++)
-    js += `blink("@${CHARS[i % 3]}", ${+t.toFixed(2)});`;
+    js += `blink("@${["zp", "ml", "mr"][i % 3]}", ${+t.toFixed(2)});`;
   return js;
 };
 
@@ -392,47 +420,58 @@ const streitJs = `${HELPERS}${BODY_INIT}
     look("@zp", 0, 14, S0, 0.01); look("@ml", 12, -10, S0, 0.01); look("@mr", -12, -10, S0, 0.01);
     tl.fromTo("#vorher", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)", immediateRender: true }, S0);
     tl.to("#vorher", { opacity: 0, duration: 0.2 }, S0 + 1.7);
-    bacteria(S0 + 0.3, ${L.i1[0]});
+    bacteria(S0 + 0.3, ${L.i0[0]});
     ${JSON.stringify(emphTimes("streit").filter((t) => t > SC.streit[0] + 0.7))}.forEach((t) => { punch("#@cam", t); shake("#@cam", t, 0.25, 7); });
     // Mit jedem frechen Satz werden die Mandeln dicker.
     swell(1.2, ${L.s2[0]}); swell(1.3, ${L.s3[0]}); red(${L.s4[1]}, true, 0.8);
-    throb(${L.s4[1]}, ${L.i1[0]} - 0.6, 1.3, 0.8);
+    throb(${L.s4[1]}, ${L.i0[0]} - 0.7, 1.3, 0.8);
     ${actLines("streit", { from: SC.streit[0] + 0.3 })}
-    // Das Eis kommt: fällt rein, kühlt, die Mandeln schrumpfen und frieren.
-    const I0 = ${L.i1[0]} - 0.6;
-    frameTo(540, 1000, 1, I0, 0.4);
+    // Bakterien winken bei "unsere Gäste".
+    for (let k = 0; k < 6; k++) tl.to("#@bac" + k, { y: -24, duration: 0.15, yoyo: true, repeat: 3, ease: "sine.inOut" }, ${L.s5[0]} + 1.0 + k * 0.05);
+    // Das Eis am Stiel rauscht als Retter rein und kühlt: die Mandeln frieren und schrumpfen.
+    const I0 = ${L.i0[0]} - 0.6;
     tl.set("#@ice", { opacity: 1 }, I0);
-    tl.fromTo("#@ice", { y: -1100, scale: 1.3, svgOrigin: "540 1010" }, { y: 0, scale: 1, duration: 0.6, ease: "bounce.out", immediateRender: false }, I0);
-    tl.to(["#@ml-frost", "#@mr-frost"], { opacity: 0.45, duration: 0.6 }, ${L.i1[0]} + 1.2);
-    swell(0.98, ${L.i1[0]} + 1.2, 0.9, "power2.out");
-    red(${L.i1[0]} + 1.2, false, 0.9);
-    lids("@zp", 0.3, ${L.i1[0]} + 1.3);
-    // ... und schmilzt weg. Die Mandeln schwellen dicker als vorher wieder an.
-    const M0 = ${L.i3[0]} - 0.9;
-    tl.to("#@ice", { scale: 0.2, opacity: 0, duration: 0.8, ease: "power2.in" }, M0);
-    steam(M0, ${L.i3[0]} + 0.4);
-    tl.to(["#@ml-frost", "#@mr-frost"], { opacity: 0, duration: 0.5 }, M0 + 0.3);
-    swell(1.42, ${L.i3[0]} + 0.35, 0.7);
-    red(${L.i3[0]} + 0.35, true, 0.5);
-    tl.set("#@pain", { scale: 1 }, ${L.i3[0]} + 0.4);
-    squeeze("@zp", true, ${L.i3[0]} + 0.4); face("@zp", "wavy", ${L.i3[0]} + 0.4);
-    frameTo(540, 1000, 1, ${L.i3[1]} + 0.1, 0.4);
-    throb(${L.i3[1]} + 0.2, S1, 1.42, 0.7);
+    tl.fromTo("#@ice", { y: -1200, rotation: -25, svgOrigin: "540 1130" }, { y: 0, rotation: 0, duration: 0.6, ease: "back.out(1.4)", immediateRender: false }, I0);
+    look("@eis", 0, 0, I0, 0.01); lids("@eis", 0.05, I0, 0.01);
+    const F0 = ${L.i0[1]};
+    tl.to(["#@ml-frost", "#@mr-frost"], { opacity: 0.45, duration: 0.6 }, F0);
+    swell(1.0, F0, 0.9, "power2.out");
+    red(F0, false, 0.9);
+    // ... aber es schmilzt: wird kürzer, tropft, schwitzt. Am Ende fällt nur der Stiel.
+    const MT = ${L.i3[0]};
+    gsap.set("#@ice-body", { svgOrigin: "540 1130" });
+    tl.to("#@ice-body", { scaleY: 0.25, duration: ${+(L.i3[1] - L.i3[0]).toFixed(2)}, ease: "power1.in" }, MT + 0.2);
+    [0, 1, 2].forEach((k) => {
+      tl.set("#@drip" + k, { opacity: 1 }, MT + 0.3 + k * 0.4);
+      tl.fromTo("#@drip" + k, { y: 0 }, { y: 140, duration: 0.5, ease: "power2.in", immediateRender: false }, MT + 0.3 + k * 0.4);
+      tl.set("#@drip" + k, { opacity: 0 }, MT + 0.8 + k * 0.4);
+    });
+    steam(MT + 0.2, ${L.i3[1]});
+    tl.to(["#@ml-frost", "#@mr-frost"], { opacity: 0, duration: 0.5 }, MT + 0.4);
+    const ST = ${L.i4[0]} - 0.15;
+    tl.to("#@ice-body", { opacity: 0, duration: 0.15 }, ST);
+    gsap.set("#@ice-stick", { svgOrigin: "540 1185" });
+    tl.to("#@ice-stick", { y: 300, rotation: 80, duration: 0.45, ease: "bounce.out" }, ST);
+    tl.to("#@ice-stick", { opacity: 0, duration: 0.3 }, ST + 1.2);
+    swell(1.42, ${L.i4[0]} + 0.3, 0.7);
+    red(${L.i4[0]} + 0.3, true, 0.5);
+    tl.set("#@pain", { scale: 1 }, ${L.i4[0]} + 0.4);
+    squeeze("@zp", true, ${L.i4[0]} + 0.4); face("@zp", "wavy", ${L.i4[0]} + 0.4); squeeze("@zp", false, ${L.i4[1]});
+    throb(${L.i4[1]} + 0.2, S1, 1.42, 0.7);
     ${blinks("streit", SC.streit[0], SC.streit[1])}
 `;
 
 /* ---------- Szene 2b: Wochen später, wieder entzündet ---------- */
 const nachherJs = `${HELPERS}${BODY_INIT}
     const N0 = ${SC.nachher[0]}, N1 = ${SC.nachher[1]};
-    tl.set(T2, { scale: 1.5 }, N0); tl.set("#@zp-t", { scaleX: 0.72 }, N0);
+    tl.set("#@zp-t", { scaleX: 0.75 }, N0);
     tl.set(["#@ml-body", "#@mr-body"], { fill: "${TZ.tonsilRed}" }, N0);
-    tl.set(["#@ml-pus", "#@mr-pus"], { opacity: 1 }, N0);
+    tl.set(T2, { scale: 1.42 }, N0); swell(1.5, N0 + 0.2, 0.6);
+    tl.fromTo(["#@ml-pus", "#@mr-pus"], { opacity: 0 }, { opacity: 1, duration: 0.6, immediateRender: false }, N0 + 0.3);
     tl.set("#@pain", { scale: 1 }, N0);
     face("@zp", "wavy", N0); face("@ml", "smirk", N0); face("@mr", "smirk", N0);
     lids("@ml", 0.5, N0, 0.01); lids("@mr", 0.5, N0, 0.01);
-    gsap.set("#@cam", { scale: 1.08 });
-    tl.to("#@cam", { scale: 1, duration: 0.5, ease: "power3.out" }, N0);
-    throb(N0 + 0.2, N1, 1.5, 0.7);
+    throb(N0 + 0.9, N1, 1.5, 0.7);
     ${JSON.stringify(emphTimes("nachher"))}.forEach((t) => { punch("#@cam", t); shake("#@cam", t, 0.25, 7); });
     ${actLines("nachher")}
     look("@zp", 0, 0, ${L.n3[0]}); lids("@zp", 0, ${L.n3[0]});
@@ -483,35 +522,6 @@ const teaserJs = `${HELPERS}${BODY_INIT}${OP_TOOLS}
     tl.fromTo("#@flash", { opacity: 0 }, { opacity: 0.7, duration: 0.5, ease: "power2.in", immediateRender: false }, RW);
 `;
 
-/* ---------- Schwellungs-Balken ---------- */
-const meterBody = `<div id="meter"><div id="m-label">SCHWELLUNG</div><div id="m-bar"><div id="m-fill"></div></div></div>`;
-const meterCss = `
-  #meter { position: absolute; left: 0; right: 0; top: 150px; text-align: center; opacity: 0; }
-  #m-label { font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 46px; color: #fff;
-    -webkit-text-stroke: 10px #1d1414; paint-order: stroke fill; letter-spacing: 2px; }
-  #m-bar { margin: 10px auto 0; width: 560px; height: 46px; border-radius: 26px; border: 6px solid #1d1414;
-    background: rgba(0,0,0,0.45); overflow: hidden; }
-  #m-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #FFE14D, #FF8A3D 55%, #FF2E3F); transform-origin: left center; transform: scaleX(0); }`;
-const M = {
-  in: R(SC.streit[0], "streit") + 1.9,
-  ice: R(L.i1[0] + 1.2, "streit"),
-  melt: R(L.i3[0] + 0.35, "streit"),
-  card: R(SC.spaeter[0], "spaeter"),
-  n0: R(SC.nachher[0], "nachher"),
-  n1: R(SC.nachher[1] - 0.05, "nachher"),
-};
-const meterJs = `
-    tl.fromTo("#meter", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, ${M.in});
-    tl.fromTo("#m-fill", { scaleX: 0.35 }, { scaleX: 0.62, duration: ${+(M.ice - M.in).toFixed(2)}, ease: "none", immediateRender: false }, ${M.in});
-    tl.to("#m-fill", { scaleX: 0.25, duration: 0.9, ease: "power2.out" }, ${M.ice});
-    tl.to("#m-fill", { scaleX: 0.85, duration: 0.6, ease: "back.out(2)" }, ${M.melt});
-    tl.set("#meter", { opacity: 0 }, ${M.card});
-    tl.set("#meter", { opacity: 1 }, ${M.n0});
-    tl.fromTo("#m-fill", { scaleX: 0.9 }, { scaleX: 0.99, duration: 0.8, ease: "power2.out", immediateRender: false }, ${M.n0});
-    for (let t = ${M.n0} + 0.2, i = 0; t < ${M.n1} - 0.2; t += 0.4, i++) tl.to("#meter", { opacity: i % 2 ? 1 : 0.35, duration: 0.12 }, t);
-    tl.set("#meter", { opacity: 0 }, ${M.n1});
-`;
-
 /* ---------- Szene 3: Mandel-OP in 4 erklärten Schritten ---------- */
 // Alle Beats hängen an den Arzt-Sätzen a1–a4.
 const STEPS = ["NARKOSE & SPERRER", "MANDEL LÖSEN", "RAUS DAMIT", "BLUTUNG STILLEN"];
@@ -523,6 +533,7 @@ const stepsCss = `
   .st-t { margin-top: 12px; font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 64px; color: #fff;
     -webkit-text-stroke: 12px #1d1414; paint-order: stroke fill; text-shadow: 0 6px 0 rgba(0,0,0,0.35); }`;
 const opJs = `${HELPERS}${BODY_INIT}${OP_TOOLS}
+    // Ohne Arzt-Stimme: die Figuren kommentieren, kurze Schritt-Labels erklären.
     const O0 = ${SC.op[0]};
     opState(O0);
     face("@zp", "wavy", O0); face("@ml", "smirk", O0); face("@mr", "smirk", O0);
@@ -533,138 +544,67 @@ const opJs = `${HELPERS}${BODY_INIT}${OP_TOOLS}
       tl.fromTo("#st" + n, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)", immediateRender: false }, t);
       curStep = n;
     };
-    const a1 = ${L.a1[0]}, a2 = ${L.a2[0]}, a3 = ${L.a3[0]}, a4 = ${L.a4[0]};
+    const o1 = ${JSON.stringify(L.o1)}, o2 = ${JSON.stringify(L.o2)}, o3 = ${JSON.stringify(L.o3)}, o4 = ${JSON.stringify(L.o4)}, o5 = ${JSON.stringify(L.o5)};
     frameTo(540, 900, 1, O0, 0.01);
     tl.fromTo("#@flash", { opacity: 0.8 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, O0);
     gsap.set("#@flash", { opacity: 0.8 });
 
-    // Schritt 1: Narkose & Sperrer
-    step(1, a1 - 0.25);
-    tl.set("#@gag", { opacity: 1 }, a1 + 1.6);
-    tl.fromTo("#@gag", { y: -60 }, { y: 0, duration: 0.35, ease: "back.out(2)", immediateRender: false }, a1 + 1.6);
-    tl.to("#@tongue", { y: 40, duration: 0.35, ease: "power2.out" }, a1 + 1.7);
-    lids("@zp", 0.4, a1 + 0.3); lids("@ml", 0.6, a1 + 0.3); lids("@mr", 0.6, a1 + 0.3);
+    // Schritt 1: Sperrer rein, Licht an
+    step(1, O0 + 0.1);
+    tl.set("#@gag", { opacity: 1 }, O0 + 0.4);
+    tl.fromTo("#@gag", { y: -60 }, { y: 0, duration: 0.35, ease: "back.out(2)", immediateRender: false }, O0 + 0.4);
+    tl.to("#@tongue", { y: 40, duration: 0.35, ease: "power2.out" }, O0 + 0.5);
+    frameTo(750, 1060, 1.2, o1[0] - 0.15, 0.4);
+    lids("@mr", 0, o1[0], 0.08); look("@mr", -6, -14, o1[0]); talk("@mr", o1[0], o1[1], "frown");
+    look("@ml", 16, 0, o1[0]); look("@zp", 12, 12, o1[0]);
 
-    // Schritt 2: Mandel rechts fassen und aus dem Bett lösen
-    step(2, a2 - 0.25);
-    frameTo(760, 1080, 1.15, a2 - 0.15, 0.5);
-    grip("forc", false, a2 + 0.3);
-    go("forc", 760, 920, a2 + 0.4, 0.8, 20);
-    grip("forc", true, a2 + 1.3);
-    lids("@mr", 0, a2 + 1.3, 0.08);
-    go("sci", 900, 900, a2 + 1.8, 0.5, 15);
-    tl.set("#@cutR", { opacity: 1, strokeDasharray: 1400, strokeDashoffset: 1400 }, a2 + 2.2);
-    tl.to("#@cutR", { strokeDashoffset: 0, duration: 1.2, ease: "none" }, a2 + 2.2);
-    tl.to("#@sci-pos", { keyframes: [{ x: 930, y: 1100 }, { x: 860, y: 1260 }, { x: 680, y: 1240 }], duration: 1.2, ease: "none" }, a2 + 2.2);
-    snip(a2 + 2.4); snip(a2 + 2.9); snip(a2 + 3.3);
-    away("sci", a2 + 3.5);
-    squeeze("@mr", true, ${L.o2[0]}); talk("@mr", ${L.o2}, "wavy"); squeeze("@mr", false, ${L.o2[1]});
-    look("@ml", 16, 0, ${L.o2[0]}); look("@zp", 14, 12, ${L.o2[0]});
+    // Schritt 2: rechte Mandel fassen und herauslösen
+    step(2, o2[0] - 1.1);
+    frameTo(760, 1080, 1.15, o2[0] - 1.0, 0.45);
+    grip("forc", false, o2[0] - 1.0);
+    go("forc", 760, 920, o2[0] - 1.0, 0.7, 20);
+    grip("forc", true, o2[0] - 0.2);
+    squeeze("@mr", true, o2[0]); talk("@mr", o2[0], o2[1], "wavy"); squeeze("@mr", false, o2[1]);
+    go("sci", 900, 900, o2[0] + 0.1, 0.4, 15);
+    tl.set("#@cutR", { opacity: 1, strokeDasharray: 1400, strokeDashoffset: 1400 }, o2[0] + 0.5);
+    tl.to("#@cutR", { strokeDashoffset: 0, duration: 1.0, ease: "none" }, o2[0] + 0.5);
+    tl.to("#@sci-pos", { keyframes: [{ x: 930, y: 1100 }, { x: 860, y: 1260 }, { x: 680, y: 1240 }], duration: 1.0, ease: "none" }, o2[0] + 0.5);
+    snip(o2[0] + 0.6); snip(o2[0] + 1.1); snip(o2[0] + 1.4);
+    away("sci", o2[0] + 1.6);
 
-    // Schritt 3: raus damit, dann die zweite
-    step(3, a3 - 0.25);
-    tl.to(["#@forc-pos", "#@mr-t"], { y: "-=1400", duration: 0.8, ease: "power3.in" }, a3 + 0.3);
-    tl.to("#@mr-t", { scale: 1.1, duration: 0.8 }, a3 + 0.3);
-    tl.to("#@cutR", { opacity: 0, duration: 0.2 }, a3 + 0.6);
-    tl.set("#@forc-pos", { x: -300, y: -500, rotation: -30 }, a3 + 1.2); grip("forc", false, a3 + 1.2);
-    frameTo(320, 1080, 1.15, a3 + 1.3, 0.5);
-    go("forc", 320, 920, a3 + 1.5, 0.7, -20);
-    grip("forc", true, a3 + 2.2);
-    go("sci", 180, 1000, a3 + 2.2, 0.4, -10);
-    tl.set("#@cutL", { opacity: 1, strokeDasharray: 1400, strokeDashoffset: 1400 }, a3 + 2.5);
-    tl.to("#@cutL", { strokeDashoffset: 0, duration: 0.8, ease: "none" }, a3 + 2.5);
-    snip(a3 + 2.6); snip(a3 + 3.0);
-    away("sci", a3 + 3.3);
-    squeeze("@ml", true, ${L.o3[0]}); talk("@ml", ${L.o3}, "wavy");
-    const out2 = ${L.o3[1]} - 0.2;
-    tl.to(["#@forc-pos", "#@ml-t"], { y: "-=1400", duration: 0.8, ease: "power3.in" }, out2);
-    tl.to("#@cutL", { opacity: 0, duration: 0.2 }, out2 + 0.3);
-    away("forc", out2 + 0.9);
+    // Schritt 3: raus damit – dann merkt die linke, dass der Bruder fehlt
+    step(3, o3[0] - 0.9);
+    tl.to(["#@forc-pos", "#@mr-t"], { y: "-=1400", duration: 0.7, ease: "power3.in" }, o3[0] - 0.9);
+    tl.to("#@cutR", { opacity: 0, duration: 0.2 }, o3[0] - 0.6);
+    frameTo(330, 1060, 1.2, o3[0] - 0.15, 0.4);
+    lids("@ml", 0, o3[0], 0.08); look("@ml", 16, 0, o3[0]); talk("@ml", o3[0], o3[1], "wavy");
+    tl.set("#@forc-pos", { x: -300, y: -500, rotation: -30 }, o3[0]); grip("forc", false, o3[0]);
+    go("forc", 320, 920, o3[1] - 0.2, 0.6, -20);
+    grip("forc", true, o4[0] - 0.3);
+    squeeze("@ml", true, o4[0]); talk("@ml", o4[0], o4[1], "wavy");
+    go("sci", 180, 1000, o4[0], 0.3, -10);
+    tl.set("#@cutL", { opacity: 1, strokeDasharray: 1400, strokeDashoffset: 1400 }, o4[0] + 0.2);
+    tl.to("#@cutL", { strokeDashoffset: 0, duration: 0.7, ease: "none" }, o4[0] + 0.2);
+    snip(o4[0] + 0.3); snip(o4[0] + 0.7);
+    away("sci", o4[1] + 0.1);
+    tl.to(["#@forc-pos", "#@ml-t"], { y: "-=1400", duration: 0.7, ease: "power3.in" }, o4[1] + 0.2);
+    tl.to("#@cutL", { opacity: 0, duration: 0.2 }, o4[1] + 0.4);
+    away("forc", o4[1] + 1.0);
 
-    // Schritt 4: Blutung stillen
-    step(4, a4 - 0.25);
-    frameTo(540, 1080, 1, a4 - 0.15, 0.5);
-    go("bip", 780, 1080, a4 + 0.5, 0.5, 20);
-    tl.set("#@spark0", { opacity: 1 }, a4 + 1.0); tl.fromTo("#@spark0", { scale: 0.3, svgOrigin: "0 0" }, { scale: 1.1, duration: 0.15, immediateRender: false }, a4 + 1.0); tl.to("#@spark0", { opacity: 0, duration: 0.15 }, a4 + 1.2);
-    tl.to("#@bedR", { fill: "#B5535B", duration: 0.3 }, a4 + 1.0);
-    go("bip", 300, 1080, a4 + 1.25, 0.35, -15);
-    tl.set("#@spark1", { opacity: 1 }, a4 + 1.6); tl.fromTo("#@spark1", { scale: 0.3, svgOrigin: "0 0" }, { scale: 1.1, duration: 0.15, immediateRender: false }, a4 + 1.6); tl.to("#@spark1", { opacity: 0, duration: 0.15 }, a4 + 1.8);
-    tl.to("#@bedL", { fill: "#B5535B", duration: 0.3 }, a4 + 1.6);
-    away("bip", a4 + 2.0);
-    tl.to("#@zp-t", { scaleX: 1, duration: 0.6, ease: "elastic.out(1,0.5)" }, ${L.o4[0]} - 0.2);
-    frameTo(540, 900, 1.1, ${L.o4[0]} - 0.15, 0.4);
-    lids("@zp", 0.45, ${L.o4[0]}, 0.3); look("@zp", 0, 0, ${L.o4[0]}); talk("@zp", ${L.o4}, "smile");
-    tl.to("#st4", { opacity: 0, duration: 0.2 }, ${L.o4[0]});
-`;
-
-/* ================= Scene: SPÄTER card ================= */
-// Zeitsprung-Karte: dunkler Verlauf, feines Korn, Uhr, deren Zeiger vorspulen,
-// Schrift steigt Buchstabe für Buchstabe aus einer Maske, Akzentlinie wächst.
-const CARD = { bg0: "#18203A", bg1: "#06070D", accent: "#5EE6D0", text: "#F5F3EE" };
-const CLOCK_R = 118;
-const ticks = Array.from({ length: 12 }, (_, i) => {
-  const a = (i * Math.PI) / 6;
-  const r0 = i % 3 === 0 ? CLOCK_R - 30 : CLOCK_R - 20;
-  const r1 = CLOCK_R - 10;
-  const p = (r) => `${(Math.sin(a) * r).toFixed(1)} ${(-Math.cos(a) * r).toFixed(1)}`;
-  return `<path d="M ${p(r0)} L ${p(r1)}" stroke="${CARD.text}" stroke-width="${i % 3 === 0 ? 7 : 4}" stroke-linecap="round" opacity="${i % 3 === 0 ? 0.95 : 0.55}"/>`;
-}).join("");
-const SP_WORD = "SPÄTER";
-const spaeterSvg = `
-<svg viewBox="0 0 ${W} ${H}">
-  <defs>
-    <radialGradient id="sp-bg" cx="50%" cy="46%" r="75%">
-      <stop offset="0" stop-color="${CARD.bg0}"/><stop offset="1" stop-color="${CARD.bg1}"/>
-    </radialGradient>
-    <radialGradient id="sp-glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="${CARD.accent}" stop-opacity="0.22"/><stop offset="1" stop-color="${CARD.accent}" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="sp-grain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7"/>
-      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0"/>
-    </filter>
-  </defs>
-  <rect width="${W}" height="${H}" fill="url(#sp-bg)"/>
-  <circle id="sp-glow-c" cx="540" cy="780" r="420" fill="url(#sp-glow)"/>
-  <rect width="${W}" height="${H}" filter="url(#sp-grain)"/>
-  <g transform="translate(540 780)"><g id="sp-clock">
-    <circle r="${CLOCK_R}" fill="rgba(255,255,255,0.03)"/>
-    <circle id="sp-ring" r="${CLOCK_R}" fill="none" stroke="${CARD.accent}" stroke-width="9" transform="rotate(-90)"/>
-    <g id="sp-ticks">${ticks}</g>
-    <g id="sp-hour"><path d="M 0 12 L 0 -58" stroke="${CARD.text}" stroke-width="11" stroke-linecap="round"/></g>
-    <g id="sp-min"><path d="M 0 16 L 0 -88" stroke="${CARD.accent}" stroke-width="7" stroke-linecap="round"/></g>
-    <circle r="11" fill="${CARD.text}"/>
-  </g></g>
-</svg>
-<div id="sp-title">${[...SP_WORD].map((c, i) => `<span class="sp-mask"><span id="sp-l${i}" class="sp-l">${c}</span></span>`).join("")}</div>
-<div id="sp-line"></div>`;
-const spaeterCss = `
-  #sp-title { position: absolute; left: 0; right: 0; top: 960px; display: flex; justify-content: center;
-    font-family: "Montserrat", sans-serif; font-weight: 900; font-size: 132px; line-height: 1.1;
-    letter-spacing: 0.16em; padding-left: 0.16em; color: ${CARD.text}; }
-  .sp-mask { display: inline-block; overflow: hidden; padding-top: 0.12em; }
-  .sp-l { display: inline-block; }
-  #sp-line { position: absolute; left: 50%; top: 1140px; width: 300px; height: 8px; margin-left: -150px;
-    border-radius: 4px; background: ${CARD.accent}; }`;
-const spaeterJs = `
-    const T0 = O;
-    const RING = ${(2 * Math.PI * CLOCK_R).toFixed(1)};
-    gsap.set("#sp-ring", { strokeDasharray: RING, strokeDashoffset: RING });
-    gsap.set("#sp-clock", { scale: 0.7, opacity: 0, svgOrigin: "0 0" });
-    gsap.set(["#sp-min", "#sp-hour"], { svgOrigin: "0 0" });
-    gsap.set("#sp-hour", { rotation: 300 });
-    gsap.set(".sp-l", { yPercent: 115 });
-    gsap.set("#sp-line", { scaleX: 0 });
-    gsap.set("#sp-glow-c", { opacity: 0 });
-    tl.to("#sp-clock", { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, T0);
-    tl.to("#sp-glow-c", { opacity: 1, duration: 0.4, ease: "power2.out" }, T0);
-    tl.to("#sp-ring", { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, T0 + 0.05);
-    tl.to("#sp-min", { rotation: 720, duration: 1.05, ease: "power2.inOut" }, T0 + 0.1);
-    tl.to("#sp-hour", { rotation: 360, duration: 1.05, ease: "power2.inOut" }, T0 + 0.1);
-    ${JSON.stringify([...SP_WORD].map((_, i) => i))}.forEach((i) =>
-      tl.to("#sp-l" + i, { yPercent: 0, duration: 0.32, ease: "power3.out" }, T0 + 0.16 + i * 0.035));
-    tl.to("#sp-line", { scaleX: 1, duration: 0.45, ease: "power3.out" }, T0 + 0.35);
-    tl.to(["#sp-clock", "#sp-title", "#sp-line"], { opacity: 0, y: -24, duration: 0.16, ease: "power2.in" }, T0 + 1.22);
+    // Schritt 4: Blutung stillen – das Zäpfchen atmet auf
+    step(4, o5[0] - 1.8);
+    frameTo(540, 1080, 1, o5[0] - 1.8, 0.4);
+    go("bip", 780, 1080, o5[0] - 1.7, 0.35, 20);
+    tl.set("#@spark0", { opacity: 1 }, o5[0] - 1.4); tl.fromTo("#@spark0", { scale: 0.3, svgOrigin: "0 0" }, { scale: 1.1, duration: 0.15, immediateRender: false }, o5[0] - 1.4); tl.to("#@spark0", { opacity: 0, duration: 0.15 }, o5[0] - 1.2);
+    tl.to("#@bedR", { fill: "#B5535B", duration: 0.3 }, o5[0] - 1.4);
+    go("bip", 300, 1080, o5[0] - 1.15, 0.3, -15);
+    tl.set("#@spark1", { opacity: 1 }, o5[0] - 0.8); tl.fromTo("#@spark1", { scale: 0.3, svgOrigin: "0 0" }, { scale: 1.1, duration: 0.15, immediateRender: false }, o5[0] - 0.8); tl.to("#@spark1", { opacity: 0, duration: 0.15 }, o5[0] - 0.6);
+    tl.to("#@bedL", { fill: "#B5535B", duration: 0.3 }, o5[0] - 0.8);
+    away("bip", o5[0] - 0.4);
+    tl.to("#@zp-t", { scaleX: 1, duration: 0.6, ease: "elastic.out(1,0.5)" }, o5[0] - 0.3);
+    frameTo(540, 900, 1.1, o5[0] - 0.15, 0.4);
+    lids("@zp", 0.45, o5[0], 0.3); look("@zp", 0, 0, o5[0]); talk("@zp", o5[0], o5[1], "smile");
+    tl.to("#st4", { opacity: 0, duration: 0.2 }, o5[1]);
 `;
 
 /* ================= Scene: Praxis ================= */
@@ -962,10 +902,12 @@ const patientSvg = `
   <path d="M 430 850 L 470 960 L 430 968 L 404 862 Z" fill="#D94A4A" ${S(4)}/>
   <path d="M 500 900 C 560 960 600 920 580 860" fill="none" stroke="${C.ink}" stroke-width="72" stroke-linecap="round"/><path d="M 500 900 C 560 960 600 920 580 860" fill="none" stroke="${PT.sweater}" stroke-width="62" stroke-linecap="round"/>
   <g id="pt-belly">
-    <path d="M 552 830 L 612 830 L 582 940 Z" fill="#E2B474" ${S(4)}/>
-    <path d="M 560 846 L 604 846 M 566 866 L 598 866" stroke="#C99A58" stroke-width="5"/>
-    <circle cx="582" cy="806" r="40" fill="#FCE3EC" ${S()}/><circle cx="568" cy="794" r="9" fill="#fff" opacity="0.8"/>
+    <rect x="574" y="836" width="16" height="70" rx="7" fill="#E2B474" ${S(3)}/>
+    <path d="M 548 850 L 548 760 C 548 728 616 728 616 760 L 616 850 Z" fill="#8FD8F0" ${S(4)}/>
+    <path d="M 548 822 L 616 822 L 616 850 L 548 850 Z" fill="#F7A8C4" ${S(3)}/>
+    <g transform="translate(582 786)">${toothFace("pice", { r: 10, gap: 13, mouthY: 20, mouthS: 0.32, mouthInit: "smile", lidFill: "#8FD8F0" })}</g>
   </g>
+
   <circle cx="580" cy="856" r="28" fill="${P.skin}" ${S()}/>
   <g id="pt-puffs">
     <path d="M 270 1020 q -26 40 0 80 M 246 1036 q -18 26 0 52" fill="none" ${S(5)}/>
@@ -1002,7 +944,7 @@ const patientBase = (a, b) => `
     gsap.set(LIDS, { scaleY: 0.15, svgOrigin: "0 -26" });
     gsap.set("#pt-cam", { transformOrigin: "60% 50%", scale: 1.2 });
     gsap.set("#pt-head", { svgOrigin: "${HX} ${HY + 100}" });
-    gsap.set("#pt-belly", { svgOrigin: "582 940" });
+    gsap.set("#pt-belly", { svgOrigin: "582 900" });
     gsap.set("#pt-browL", { rotation: -12, svgOrigin: "${HX - 12} ${HY - 48}" });
     gsap.set("#pt-browR", { rotation: 12, svgOrigin: "${HX + 12} ${HY - 48}" });
     tl.to("#pt-cam", { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, ${a});
@@ -1021,20 +963,19 @@ const patientJs = `
     tl.to("#pt-head", { rotation: -3, duration: 0.3, ease: "sine.inOut" }, ${L.e1[0]});
     tl.to(PUP, { x: -8, y: 0, duration: 0.2, ease: "power3.out" }, ${L.e2[0]} - 0.1);
     tl.to("#pt-head", { rotation: 0, duration: 0.3, ease: "sine.inOut" }, ${L.e2[0]});
-    // "Juhu!" – Eis hoch, strahlen. "Au!" – reingebissen, Augen zu, Kopf zuckt.
-    const AU = ${L.e3[0]} + ${VO.e3 ? VO.e3.words.at(-1).start : 0.8};
+    // "Juhu!" – Eis hoch. Dann beschwert sich das Eis: "Schon wieder ich?!"
     tl.to(LIDS, { scaleY: 0.3, duration: 0.15 }, ${L.e3[0]});
-    tl.to("#pt-belly", { y: -40, rotation: -8, duration: 0.3, ease: "back.out(2)" }, ${L.e3[0]});
-    talk("pm", ${L.e3}, "frown", 0.12);
-    tl.to("#pt-belly", { x: -40, y: -90, duration: 0.25, ease: "power2.inOut" }, AU - 0.3);
-    tl.to(LIDS, { scaleY: 1, duration: 0.08 }, AU);
-    shake("#pt-head", AU, 0.45, 8, "x");
-    tl.fromTo("#pt-puffs", { opacity: 1, scale: 1.2, svgOrigin: "390 760" }, { opacity: 0.3, scale: 1, duration: 0.5, immediateRender: false }, AU);
-    tl.to(LIDS, { scaleY: 0.55, duration: 0.3 }, AU + 0.6);
-    tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${L.e3[0]} - 0.2);
-    tl.to("#ct2", { scale: 1.08, duration: 0.12, ease: "power2.out" }, ${L.e3[0]} + 0.5);
-    tl.to("#ct2", { scale: 1, duration: 0.25, ease: "power2.inOut" }, ${L.e3[0]} + 0.62);
-    tl.to("#ct3", { y: 8, duration: 0.4, ease: "sine.inOut", repeat: 4, yoyo: true }, ${L.e3[0]} + 0.6);
+    tl.to("#pt-belly", { y: -30, rotation: -8, duration: 0.3, ease: "back.out(2)" }, ${L.e3[0]});
+    talk("pm", ${L.e3}, "smile", 0.12);
+    gsap.set(["#pice-eyeL-lid", "#pice-eyeR-lid"], { scaleY: 0.05, svgOrigin: "0 -18" });
+    tl.to(PUP, { x: 10, y: 4, duration: 0.2 }, ${L.e4[0]} - 0.1);
+    tl.to(LIDS, { scaleY: 0.05, duration: 0.15 }, ${L.e4[0]});
+    shake("#pt-belly", ${L.e4[0]}, 0.4, 4, "x");
+    talk("pice", ${L.e4}, "frown");
+    tl.fromTo("#cta", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, ${L.e4[0]});
+    tl.to("#ct2", { scale: 1.08, duration: 0.12, ease: "power2.out" }, ${L.e4[0]} + 0.7);
+    tl.to("#ct2", { scale: 1, duration: 0.25, ease: "power2.inOut" }, ${L.e4[0]} + 0.82);
+    tl.to("#ct3", { y: 8, duration: 0.4, ease: "sine.inOut", repeat: 4, yoyo: true }, ${L.e4[0]} + 0.8);
 `;
 
 /* ================= Captions ================= */
@@ -1121,8 +1062,6 @@ const vo = lines
       `      <audio id="vo-${l.id}" class="clip" src="assets/vo/${l.reuse || l.id}.mp3" data-start="${RL(l)}" data-duration="${VO[l.id].fileDuration}" data-track-index="${40 + i}" data-volume="1"></audio>`,
   )
   .join("\n");
-const hostAt = (id, a, b, track, z = 1) =>
-  `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${+a.toFixed(3)}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="graphics" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
 const host = (id, track, kind = "graphics", z = 1) => {
   const [a, b] = SC[id] || (id === "hook" ? [0, HOOK_END] : [0, DUR]);
   return `      <div id="${id}" data-composition-id="${id}" data-composition-src="compositions/${id}.html" data-start="${ORDER.includes(id) ? R(a, id) : a}" data-duration="${+(b - a).toFixed(2)}" data-track-index="${track}" data-track-kind="${kind}" data-width="${W}" data-height="${H}" style="z-index:${z}"></div>`;
@@ -1144,8 +1083,7 @@ const index = `<!doctype html>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
 ${host("teaser", 13)}
 ${host("streit", 1)}
-${hostAt("meter", M.in - 0.01, M.n1 + 0.1, 14, 6)}
-${host("spaeter", 2, "graphics", 2)}
+
 ${host("op", 3)}
 ${host("praxis", 4)}
 ${host("captions", 5, "captions", 5)}
@@ -1198,7 +1136,6 @@ out(
   "./compositions/op.html",
   page("op", SC.op, throat("o-", "op") + stepsBody, stepsCss, pre("o-", opJs)),
 );
-out("./compositions/spaeter.html", page("spaeter", SC.spaeter, spaeterSvg, spaeterCss, spaeterJs));
 out(
   "./compositions/praxis.html",
   page(
@@ -1220,10 +1157,6 @@ out(
 out(
   "./compositions/teaser.html",
   page("teaser", SC.teaser, throat("t-", "op") + teaserBody, teaserCss, pre("t-", teaserJs)),
-);
-out(
-  "./compositions/meter.html",
-  page("meter", [M.in - 0.01, M.n1 + 0.1], meterBody, meterCss, meterJs),
 );
 out("./compositions/hook.html", page("hook", [0, HOOK_END], hookBody, hookCss, hookJs));
 out(

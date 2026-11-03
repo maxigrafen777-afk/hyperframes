@@ -109,6 +109,14 @@ Gemessen, nicht geschätzt (Bildübersicht alle 2 s, Transkript mit Wortzeiten, 
 - Native Stimmen machen nach Satzzeichen lange Kunstpausen: `voices.mjs` kürzt jede Pause im Satz auf `maxPause` (0,3 s; pro Zeile überschreibbar, z. B. 0,7 s für einen Gag-Beat) und verschiebt die Wortzeiten mit. Ergebnis: flüssiges Hin und Her.
 - Bei drei Figuren: `actLines` mit `MOOD` pro Zeile und `lookVec` (Zuhörer schauen zum Sprecher). Beim Zoom auf eine Figur prüfen, dass die anderen Gesichter nicht unter die Untertitel rutschen.
 
+## Feedback des Creators (Mandeln v2) – gilt ab jetzt
+
+- **Lippensynchron:** Münder folgen der Lautstärke-Hüllkurve der echten Aufnahme (`env.py`, 30 Werte/s, in `timings.json` als `env`; `talk()` liest `LIP`). Fester Klapp-Takt wirkte „passt nicht zur Stimme“.
+- **Keine Zeitsprung-Karte („Später“)** und **kein Gefahren-/Schwellungsbalken** mehr: die Story läuft am Stück.
+- **Arzt kurz halten:** keine Arzt-Stimme während der OP. Die Figuren kommentieren die OP, kurze Schritt-Labels erklären; in der Praxis höchstens ein knapper Satz (wie im ersten Weisheitszahn-Video).
+- **Frecher Dialog:** Beleidigungen mit Witz („Fettklöße“ – „Das sind Muskeln, Kleiner“ – „Wackelpudding mit Gesicht“), Running Gags, Callback am Ende (das Eis taucht wieder auf: „Schon wieder ich?!“).
+- **Requisiten als Figuren:** Hausmittel/Gegenstände (Eis am Stiel) bekommen Gesicht und eigene Stimme; Eis am Stiel statt Kugel.
+
 ## Stolperfallen
 
 - QA-Normalisierung ignoriert Bindestriche („Kot-Stein“ = „Kotstein“); schwierige Wörter mit Bindestrich schreiben hilft der Aussprache.
