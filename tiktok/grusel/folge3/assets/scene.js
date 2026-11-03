@@ -963,8 +963,8 @@ const phone = new THREE.Group();
     phone.add(f);
   }
   const hand = new THREE.Mesh(new THREE.CapsuleGeometry(0.05, 0.25, 6, 14), M.body);
-  hand.position.set(0, -0.2, -0.02);
-  hand.rotation.x = 0.3;
+  hand.position.set(0, -0.31, -0.03);
+  hand.rotation.x = 0.25;
   phone.add(hand);
 }
 world.add(phone);
@@ -1346,6 +1346,14 @@ function update(t, frameT = t) {
     phone.position.set(0, lerp(1.2, 1.4, a < EV.q9 ? kk : 1), -0.6);
     phone.rotation.set(-0.08, 0, lerp(0.15, -0.03, a < EV.q9 ? kk : 1));
     phoneLight.position.set(0, 1.42, -0.5);
+    if (o.zoom) {
+      phone.updateMatrixWorld(true);
+      const pw = photoPlane.getWorldPosition(new THREE.Vector3());
+      camera.position.set(pw.x, pw.y, pw.z + lerp(0.17, 0.115, eOut(u)));
+      camera.fov = 30;
+      camera.updateProjectionMatrix();
+      camera.lookAt(pw);
+    }
   }
 
   // Foto rendern: Blick der Gestalt von hinten auf dich (ohne Gestalt im Bild)
