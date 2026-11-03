@@ -184,3 +184,13 @@ Die TikTok-Oberfläche verdeckt Teile des 1080×1920-Bilds:
 - Pro Zeile überschreibbare Stimm-Einstellungen: `"settings": {...}` in `script.json`. Kippt ein Satz trotzdem immer in die falsche Tonlage, umformulieren (Ausrufe wie „Vergiss es!“ provozieren Kreischen).
 - **Sicherheitszonen-Check per Overlay:** Snapshots mit `--keep` erzeugen und mit ffmpeg `drawbox` die verdeckten Bereiche rot einfärben (oben 0–340, rechts x 880–1080/y 880–1700, unten ab 1540), dann als Raster ansehen.
 - Voice-Design braucht mindestens 100 Zeichen Vorschautext und 20 Zeichen Beschreibung.
+
+## Mitmach-Mechanik (ab dem nächsten Video)
+
+Erkenntnis aus einem Vergleichsaccount (3 Videos, 12.000 Follower, Serie „Tag 1/2/3“, Bio „1 Follow = 1 Astronaut / Top-Kommentar = neues Gesetz“): Nicht der Inhalt ist aufwendiger, sondern Zuschauer haben einen **Grund zu kommentieren und zu folgen**. Bei uns blieben Kommentare bei 0, weil die Endfrage nur eine Bitte war („Kennst du das?“).
+
+- **Top-Kommentar entscheidet das nächste Video.** Endkarte statt bloßer Frage: „Welches Organ ist als Nächstes dran? Der Top-Kommentar entscheidet ↓“ (ausgeschrieben, in der Safe Zone).
+- **Wahl im nächsten Video einlösen:** Gleich am Anfang (Frame 0, im Titel) „Ihr habt entschieden: <Thema>!“, damit Kommentieren sichtbar belohnt wird.
+- **Serie mit fester Patientenfigur:** immer derselbe Patient (z. B. „Patient Kevin – Fall 1, 2, 3 …“), der mit einem neuen Problem kommt, als Endgag und Wiedererkennung. Fallnummer im Titel/Hook.
+- **Bio-Vorschlag** für den Creator: „Ihr wählt die Krankheit, ich zeig die OP 🩺 / Top-Kommentar = nächstes Video“.
+- Für den Creator einen eigenen Kommentar zum Anpinnen vorschlagen, der zur Wahl anregt.
