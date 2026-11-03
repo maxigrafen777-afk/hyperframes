@@ -1,4 +1,4 @@
-// Zahnstein. Generates index.html + compositions/*.html from script.json.
+// Zahnstein (Mund-Ansicht). Generates index.html + compositions/*.html from script.json.
 // Run: node build.mjs
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import {
@@ -40,7 +40,7 @@ const PAD = {
   op: 0.4,
   frage: 0.4,
   praxis: 0.4,
-  patient: 2.3,
+  patient: 3.1,
 };
 const ORIG = Object.fromEntries(ORDER.map((id) => [id, [...SC[id]]]));
 // Szene jeder Zeile einmal vorab (nach Original-Start) festlegen.
@@ -173,113 +173,165 @@ ${js}
 </template>
 `;
 
-/* ================= Zähne (geteilt von streit und op) ================= */
-// Drei untere Schneidezähne von vorn. Alles Wichtige liegt in der TikTok-
-// Sicherheitszone (x 60–880, y 360–1500): Titel/Labels ab y 380, Gesichter links
-// der Like-Spalte, nichts Wichtiges unter y 1500.
+/* ================= Offener Mund (geteilt von streit und op) ================= */
+// Blick in den offenen Mund: Lippen, obere und untere Zahnreihe mit Zahnfleisch,
+// Zunge. Nur der Diva-Zahn (unterer Schneidezahn links der Mitte) und der Zahnstein
+// am Zahnfleischrand der unteren Front haben Gesichter. Alles Wichtige in der
+// TikTok-Sicherheitszone (Texte ab y 380, Gesichter links der Like-Spalte).
 const TZ = {
-  bg: "#4A1119",
-  gum: "#E9A2A9",
-  gumDark: "#D47F8B",
+  skin: "#F2C6A5",
+  skinShade: "#E2AE8B",
+  lip: "#D9707A",
+  lipDark: "#B8505C",
+  inside: "#3E0C14",
+  gum: "#E98F99",
+  gumDark: "#D06F7C",
+  tongue: "#E46B7A",
+  tongueShade: "#C9505F",
   tooth: "#F8F7F1",
-  toothShade: "#E6E3D8",
-  stain: "#E9E1C4",
+  toothShade: "#E3E0D3",
+  stain: "#E8DDB8",
   tartar: "#D9B25A",
   tartarDark: "#B88E33",
   floss: "#7FC8F0",
   metal: "#C3C8CD",
 };
-const POS = { zahn: [520, 820], stein: [520, 1150], seide: [112, 800] };
-const toothPath = (x0, x1, y0, y1) => {
+const POS = { zahn: [470, 1010], stein: [470, 1142], seide: [162, 772] };
+// Zahnformen: Schneidezahn (gerade Kante) und Eckzahn (Spitze); "up" = untere Zähne
+// (Kante oben, Zahnfleisch unten), sonst obere Zähne.
+function incisor(x0, x1, yEdge, yGum) {
   const w = x1 - x0,
-    m = (x0 + x1) / 2;
-  return `M ${x0 + w * 0.08} ${y1} C ${x0 - w * 0.02} ${y0 + (y1 - y0) * 0.45} ${x0 + w * 0.02} ${y0 + 40} ${m - w * 0.25} ${y0} C ${m - w * 0.1} ${y0 - 14} ${m + w * 0.1} ${y0 - 14} ${m + w * 0.25} ${y0} C ${x1 - w * 0.02} ${y0 + 40} ${x1 + w * 0.02} ${y0 + (y1 - y0) * 0.45} ${x1 - w * 0.08} ${y1} Z`;
-};
+    r = Math.min(18, w * 0.18),
+    up = yEdge < yGum,
+    s = up ? 1 : -1;
+  return `M ${x0 + r} ${yEdge} L ${x1 - r} ${yEdge} Q ${x1} ${yEdge} ${x1} ${yEdge + s * r} L ${x1 - w * 0.12} ${yGum} L ${x0 + w * 0.12} ${yGum} L ${x0} ${yEdge + s * r} Q ${x0} ${yEdge} ${x0 + r} ${yEdge} Z`;
+}
+function canine(x0, x1, yTip, yGum) {
+  const w = x1 - x0,
+    m = (x0 + x1) / 2,
+    h = yGum - yTip;
+  return `M ${x0} ${yTip + h * 0.3} Q ${m - w * 0.2} ${yTip + h * 0.05} ${m} ${yTip} Q ${m + w * 0.2} ${yTip + h * 0.05} ${x1} ${yTip + h * 0.3} L ${x1 - w * 0.14} ${yGum} L ${x0 + w * 0.14} ${yGum} Z`;
+}
+const tooth = (d, fill = TZ.tooth) => `<path d="${d}" fill="${fill}" ${S(4)}/>`;
+const OPENING =
+  "M 120 960 C 150 760 330 660 540 660 C 750 660 930 760 960 960 C 930 1170 760 1290 540 1290 C 320 1290 150 1170 120 960 Z";
+const LIPS =
+  "M 60 960 C 90 700 300 580 540 590 C 780 580 990 700 1020 960 C 990 1230 790 1370 540 1370 C 290 1370 90 1230 60 960 Z";
+const ZAHN = incisor(410, 530, 945, 1175);
 const TARTAR =
-  "M 330 1150 C 340 1100 380 1070 430 1085 C 470 1060 520 1065 560 1080 C 610 1060 660 1075 700 1100 C 730 1120 735 1180 700 1210 C 600 1230 440 1232 340 1222 C 320 1200 320 1170 330 1150 Z";
+  "M 412 1128 C 418 1100 448 1094 470 1098 C 494 1092 522 1100 528 1128 C 532 1158 524 1178 512 1180 L 428 1180 C 414 1176 408 1155 412 1128 Z";
 const browPair = (id, gap, r, y) =>
-  `<path id="${id}-browL" d="M ${-gap - r * 0.75} ${y} L ${-gap + r * 0.75} ${y}" fill="none" ${S(8)}/>` +
-  `<path id="${id}-browR" d="M ${gap - r * 0.75} ${y} L ${gap + r * 0.75} ${y}" fill="none" ${S(8)}/>`;
+  `<path id="${id}-browL" d="M ${-gap - r * 0.75} ${y} L ${-gap + r * 0.75} ${y}" fill="none" ${S(6)}/>` +
+  `<path id="${id}-browR" d="M ${gap - r * 0.75} ${y} L ${gap + r * 0.75} ${y}" fill="none" ${S(6)}/>`;
 // Zahnseide-Stick: Faden senkrecht bei x=0 (y -80..80), Bügel links, Griff nach links oben mit Gesicht.
 const flosser = (id) => `
   <g id="${id}">
-    <path d="M -230 -260 L -70 -40" stroke="${C.ink}" stroke-width="44" stroke-linecap="round"/>
-    <path d="M -230 -260 L -70 -40" stroke="${TZ.floss}" stroke-width="34" stroke-linecap="round"/>
-    <path d="M 0 -80 C -50 -80 -70 -60 -70 -40 L -70 40 C -70 60 -50 80 0 80" fill="none" stroke="${C.ink}" stroke-width="22" stroke-linecap="round"/>
-    <path d="M 0 -80 C -50 -80 -70 -60 -70 -40 L -70 40 C -70 60 -50 80 0 80" fill="none" stroke="${TZ.floss}" stroke-width="13" stroke-linecap="round"/>
+    <path d="M -230 -260 L -70 -40" stroke="${C.ink}" stroke-width="40" stroke-linecap="round"/>
+    <path d="M -230 -260 L -70 -40" stroke="${TZ.floss}" stroke-width="30" stroke-linecap="round"/>
+    <path d="M 0 -80 C -50 -80 -70 -60 -70 -40 L -70 40 C -70 60 -50 80 0 80" fill="none" stroke="${C.ink}" stroke-width="20" stroke-linecap="round"/>
+    <path d="M 0 -80 C -50 -80 -70 -60 -70 -40 L -70 40 C -70 60 -50 80 0 80" fill="none" stroke="${TZ.floss}" stroke-width="12" stroke-linecap="round"/>
     <path id="${id}-thTop" d="M 0 -80 L 0 0" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
     <path id="${id}-thBot" d="M 0 0 L 0 80" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-    <circle cx="-245" cy="-282" r="58" fill="${TZ.floss}" ${S()}/>
+    <circle cx="-245" cy="-282" r="56" fill="${TZ.floss}" ${S()}/>
     <g transform="translate(-245 -288)">${toothFace(id, { r: 18, gap: 22, mouthY: 30, mouthS: 0.45, mouthInit: "smile", lidFill: TZ.floss })}</g>
   </g>`;
 // Zahnarzt-Handinstrument: Spitze bei (0,0), Griff nach rechts oben.
 const handTool = (id, tip, color) => `
   <g id="${id}">
-    <path d="M 0 0 C 10 -20 30 -40 60 -60" fill="none" stroke="${C.ink}" stroke-width="14" stroke-linecap="round"/>
-    <path d="M 0 0 C 10 -20 30 -40 60 -60" fill="none" stroke="${TZ.metal}" stroke-width="7" stroke-linecap="round"/>
+    <path d="M 0 0 C 10 -20 30 -40 60 -60" fill="none" stroke="${C.ink}" stroke-width="12" stroke-linecap="round"/>
+    <path d="M 0 0 C 10 -20 30 -40 60 -60" fill="none" stroke="${TZ.metal}" stroke-width="6" stroke-linecap="round"/>
     ${tip}
-    <path d="M 60 -60 L 520 -560" stroke="${C.ink}" stroke-width="42" stroke-linecap="round"/>
-    <path d="M 60 -60 L 520 -560" stroke="${color}" stroke-width="32" stroke-linecap="round"/>
+    <path d="M 60 -60 L 520 -560" stroke="${C.ink}" stroke-width="38" stroke-linecap="round"/>
+    <path d="M 60 -60 L 520 -560" stroke="${color}" stroke-width="28" stroke-linecap="round"/>
     <path d="M 150 -160 L 200 -214 M 190 -204 L 240 -258" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
   </g>`;
+const upperTeeth = [
+  canine(165, 225, 830, 720),
+  canine(230, 305, 860, 705),
+  incisor(310, 400, 850, 700),
+  incisor(405, 535, 870, 695),
+  incisor(545, 675, 870, 695),
+  incisor(680, 770, 850, 700),
+  canine(775, 850, 860, 705),
+  canine(855, 915, 830, 720),
+];
+// "canine" mit yTip > yGum zeichnet die Spitze nach unten (obere Eckzähne).
+const lowerSide = [
+  canine(140, 200, 985, 1140),
+  canine(205, 285, 955, 1160),
+  incisor(290, 405, 950, 1172),
+  incisor(550, 670, 945, 1175),
+  incisor(675, 790, 950, 1172),
+  canine(795, 875, 955, 1160),
+  canine(880, 940, 985, 1140),
+];
 const teeth = (p, env = "inside") => `
 <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
  <g id="${p}frame"><g id="${p}cam">
-  <defs><radialGradient id="${p}bg" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#6A1C26"/><stop offset="1" stop-color="#320A11"/></radialGradient></defs>
-  <rect x="-400" y="-400" width="${W + 800}" height="${H + 1000}" fill="url(#${p}bg)"/>
-  <g id="${p}left"><path d="${toothPath(90, 330, 660, 1240)}" fill="${TZ.tooth}" ${S()}/><path d="M 130 760 C 120 900 122 1050 140 1180" fill="none" stroke="${TZ.toothShade}" stroke-width="18" stroke-linecap="round"/></g>
-  <g id="${p}right"><path d="${toothPath(705, 875, 680, 1240)}" fill="${TZ.tooth}" ${S()}/><path d="M 735 780 C 728 900 730 1050 742 1180" fill="none" stroke="${TZ.toothShade}" stroke-width="14" stroke-linecap="round"/></g>
-  <g id="${p}zahn-t">
-    <path id="${p}zahn-body" d="${toothPath(350, 690, 600, 1250)}" fill="${TZ.stain}" ${S()}/>
-    <path d="M 392 700 C 380 860 382 1020 400 1160" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" opacity="0.7"/>
-    <g id="${p}shine" opacity="0">${[
-      [420, 700, 22],
-      [640, 760, 16],
-      [610, 1000, 20],
-      [430, 960, 14],
-    ]
-      .map(
-        ([x, y, r]) =>
-          `<path d="M ${x} ${y - r} L ${x + r * 0.3} ${y - r * 0.3} L ${x + r} ${y} L ${x + r * 0.3} ${y + r * 0.3} L ${x} ${y + r} L ${x - r * 0.3} ${y + r * 0.3} L ${x - r} ${y} L ${x - r * 0.3} ${y - r * 0.3} Z" fill="#fff" ${S(3)}/>`,
-      )
-      .join("")}</g>
-    <g transform="translate(520 820)">${toothFace(p + "zahn", { r: 50, gap: 64, mouthY: 92, mouthS: 1, mouthInit: "frown", lidFill: TZ.tooth })}${browPair(p + "zahn", 64, 50, -72)}</g>
+  <rect x="-400" y="-400" width="${W + 800}" height="${H + 1000}" fill="${TZ.skin}"/>
+  <path d="M 120 1480 C 300 1560 780 1560 960 1480" fill="none" stroke="${TZ.skinShade}" stroke-width="16" stroke-linecap="round"/>
+  <path d="M 220 520 C 300 560 420 570 540 560 C 660 570 780 560 860 520" fill="none" stroke="${TZ.skinShade}" stroke-width="12" stroke-linecap="round"/>
+  <path d="${LIPS}" fill="${TZ.lip}" ${S()}/>
+  <clipPath id="${p}open-c"><path d="${OPENING}"/></clipPath>
+  <g clip-path="url(#${p}open-c)">
+    <rect x="0" y="600" width="${W}" height="760" fill="${TZ.inside}"/>
+    <ellipse cx="540" cy="1110" rx="330" ry="190" fill="${TZ.tongue}" ${S()}/>
+    <path d="M 540 940 C 546 1010 546 1080 540 1150" fill="none" stroke="${TZ.tongueShade}" stroke-width="12" stroke-linecap="round"/>
+    <path d="M 120 830 C 220 700 380 690 540 690 C 700 690 860 700 960 830 L 960 600 L 120 600 Z" fill="${TZ.gum}" ${S(4)}/>
+    ${upperTeeth.map((d) => tooth(d)).join("")}
+    <path d="M 120 1120 C 220 1250 380 1250 540 1250 C 700 1250 860 1250 960 1120 L 960 1360 L 120 1360 Z" fill="${TZ.gum}" ${S(4)}/>
+    ${lowerSide.map((d) => tooth(d)).join("")}
+    <g id="${p}zahn-t">
+      <path id="${p}zahn-body" d="${ZAHN}" fill="${TZ.stain}" ${S(4)}/>
+      <path d="M 432 970 C 426 1040 428 1110 438 1160" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity="0.7"/>
+      <g id="${p}shine" opacity="0">${[
+        [430, 965, 14],
+        [515, 990, 11],
+        [505, 1110, 13],
+        [440, 1080, 9],
+      ]
+        .map(
+          ([x, y, r]) =>
+            `<path d="M ${x} ${y - r} L ${x + r * 0.3} ${y - r * 0.3} L ${x + r} ${y} L ${x + r * 0.3} ${y + r * 0.3} L ${x} ${y + r} L ${x - r * 0.3} ${y + r * 0.3} L ${x - r} ${y} L ${x - r * 0.3} ${y - r * 0.3} Z" fill="#fff" ${S(2)}/>`,
+        )
+        .join("")}</g>
+      <g transform="translate(470 1010)">${toothFace(p + "zahn", { r: 24, gap: 30, mouthY: 44, mouthS: 0.5, mouthInit: "frown", lidFill: TZ.tooth })}${browPair(p + "zahn", 30, 24, -36)}</g>
+    </g>
+    <g id="${p}stein-t">
+      <clipPath id="${p}tL-c"><rect x="400" y="1050" width="46" height="160"/></clipPath>
+      <clipPath id="${p}tM-c"><rect x="446" y="1050" width="48" height="160"/></clipPath>
+      <clipPath id="${p}tR-c"><rect x="494" y="1050" width="46" height="160"/></clipPath>
+      ${["L", "M", "R"]
+        .map(
+          (k) =>
+            `<g id="${p}tar${k}"><g clip-path="url(#${p}t${k}-c)"><path d="${TARTAR}" fill="${TZ.tartar}" ${S(4)}/>${[
+              [425, 1150, 5],
+              [515, 1160, 5],
+              [500, 1128, 4],
+            ]
+              .map(
+                ([x, y, r]) =>
+                  `<circle cx="${x}" cy="${y}" r="${r}" fill="${TZ.tartarDark}" opacity="0.8"/>`,
+              )
+              .join("")}</g></g>`,
+        )
+        .join("")}
+      <g id="${p}stein-face"><g transform="translate(470 1140)">${toothFace(p + "stein", { r: 13, gap: 19, mouthY: 20, mouthS: 0.3, mouthInit: "smirk", lidFill: TZ.tartar })}${browPair(p + "stein", 19, 13, -20)}</g></g>
+    </g>
   </g>
-  <path d="M -400 1500 L -400 1190 C -200 1170 40 1250 90 1250 C 130 1250 170 1200 220 1200 C 270 1200 310 1250 345 1255 C 380 1250 430 1215 520 1215 C 610 1215 660 1250 700 1255 C 740 1250 770 1210 800 1210 C 840 1210 900 1250 1480 1200 L 1480 2600 L -400 2600 Z" fill="${TZ.gum}" ${S()}/>
-  <path d="M 0 1380 C 300 1350 800 1350 1080 1380" fill="none" stroke="${TZ.gumDark}" stroke-width="14" stroke-linecap="round" opacity="0.6"/>
-  <g id="${p}stein-t">
-    <clipPath id="${p}tL-c"><rect x="300" y="1000" width="160" height="260"/></clipPath>
-    <clipPath id="${p}tM-c"><rect x="460" y="1000" width="130" height="260"/></clipPath>
-    <clipPath id="${p}tR-c"><rect x="590" y="1000" width="170" height="260"/></clipPath>
-    ${["L", "M", "R"]
-      .map(
-        (k) =>
-          `<g id="${p}tar${k}"><g clip-path="url(#${p}t${k}-c)"><path d="${TARTAR}" fill="${TZ.tartar}" ${S()}/>${[
-            [370, 1130, 12],
-            [430, 1190, 9],
-            [560, 1110, 10],
-            [660, 1150, 13],
-            [700, 1190, 8],
-          ]
-            .map(
-              ([x, y, r]) =>
-                `<circle cx="${x}" cy="${y}" r="${r}" fill="${TZ.tartarDark}" opacity="0.8"/>`,
-            )
-            .join("")}</g></g>`,
-      )
-      .join("")}
-    <g id="${p}stein-face"><g transform="translate(520 1150)">${toothFace(p + "stein", { r: 24, gap: 34, mouthY: 34, mouthS: 0.5, mouthInit: "smirk", lidFill: TZ.tartar })}${browPair(p + "stein", 34, 24, -38)}</g></g>
-  </g>
-  ${Array.from({ length: 9 }, (_, i) => `<path id="${p}chip${i}" opacity="0" d="M -14 -6 L 2 -16 L 16 -4 L 8 14 L -10 12 Z" fill="${TZ.tartar}" ${S(3)}/>`).join("")}
-  ${[0, 1, 2, 3].map((i) => `<circle id="${p}spray${i}" opacity="0" r="${8 + (i % 2) * 4}" fill="#9FDCF7" ${S(2)}/>`).join("")}
+  <path d="${OPENING}" fill="none" stroke="${TZ.lipDark}" stroke-width="14"/>
+  <path d="${OPENING}" fill="none" ${S()}/>
+  <path d="M 300 640 C 400 610 480 640 540 625 C 600 640 680 610 780 640" fill="none" stroke="#E99AA3" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  ${Array.from({ length: 9 }, (_, i) => `<path id="${p}chip${i}" opacity="0" d="M -10 -4 L 2 -12 L 12 -3 L 6 10 L -8 9 Z" fill="${TZ.tartar}" ${S(2)}/>`).join("")}
+  ${[0, 1, 2, 3].map((i) => `<circle id="${p}spray${i}" opacity="0" r="${7 + (i % 2) * 3}" fill="#9FDCF7" ${S(2)}/>`).join("")}
   <g id="${p}seide-pos">${flosser(p + "seide")}</g>
   ${
     env === "op"
-      ? `<defs><radialGradient id="${p}lamp" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity="0.28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+      ? `<defs><radialGradient id="${p}lamp" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity="0.25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
   <rect x="-400" y="-400" width="${W + 800}" height="${H + 1000}" fill="url(#${p}lamp)"/>
-  <g id="${p}scaler-pos">${handTool(p + "scaler", `<g id="${p}vib" opacity="0"><path d="M -24 -10 q -10 10 0 20 M 24 -16 q 10 10 0 20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>`, "#8FA7B8")}</g>
-  <g id="${p}cur-pos">${handTool(p + "cur", `<path d="M 0 0 q -10 8 -4 18" fill="none" stroke="${C.ink}" stroke-width="8" stroke-linecap="round"/>`, "#B8A38F")}</g>
-  <g id="${p}pol-pos">${handTool(p + "pol", `<circle cx="0" cy="0" r="22" fill="#F7A8C4" ${S(4)}/><circle cx="0" cy="0" r="9" fill="#E07FA2"/>`, "#D9DDE1")}</g>`
+  <g id="${p}scaler-pos">${handTool(p + "scaler", `<g id="${p}vib" opacity="0"><path d="M -22 -10 q -10 10 0 20 M 22 -16 q 10 10 0 20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>`, "#8FA7B8")}</g>
+  <g id="${p}cur-pos">${handTool(p + "cur", `<path d="M 0 0 q -10 8 -4 18" fill="none" stroke="${C.ink}" stroke-width="7" stroke-linecap="round"/>`, "#B8A38F")}</g>
+  <g id="${p}pol-pos">${handTool(p + "pol", `<circle cx="0" cy="0" r="20" fill="#F7A8C4" ${S(4)}/><circle cx="0" cy="0" r="8" fill="#E07FA2"/>`, "#D9DDE1")}</g>`
       : ""
   }
  </g></g>
@@ -287,21 +339,22 @@ const teeth = (p, env = "inside") => `
 </svg>`;
 
 const BODY_INIT = `
-    initChar("@zahn", 50, 0.1);
-    initChar("@stein", 24, 0.5);
+    initChar("@zahn", 24, 0.1);
+    initChar("@stein", 13, 0.5);
     initChar("@seide", 18, 0.0);
     gsap.set("#@cam", { svgOrigin: "540 960" });
     gsap.set("#@frame", { svgOrigin: "0 0" });
-    // Kamera höchstens Faktor ~1,12 (weiter weg, nichts unter die TikTok-Oberfläche).
-    const frameTo = (px, py, k, t, d = 0.35, ease = "power3.inOut") => {
-      k = Math.min(k, 1.12);
+    // Weit für den Überblick (Mund, Lippen, Zahnreihen), nah (~1,5–1,6) für Dialog
+    // und Action; die Zielpunkte halten Gesichter in der TikTok-Sicherheitszone.
+    const frameTo = (px, py, k, t, d = 0.4, ease = "power3.inOut") => {
+      k = Math.min(k, 2.2);
       const x = Math.min(0, Math.max(${W} - k * ${W}, 540 - k * px));
       const y = Math.min(0, Math.max(${H} - k * 2400, 960 - k * py));
       tl.to("#@frame", { x, y, scale: k, duration: d, ease }, t);
     };
-    gsap.set("#@zahn-t", { svgOrigin: "520 1250" });
-    gsap.set("#@stein-t", { svgOrigin: "520 1220" });
-    const BROWO = { zahn: [64, -72], stein: [34, -38] };
+    gsap.set("#@zahn-t", { svgOrigin: "470 1175" });
+    gsap.set("#@stein-t", { svgOrigin: "470 1180" });
+    const BROWO = { zahn: [30, -36], stein: [19, -20] };
     Object.entries(BROWO).forEach(([c, [g, y]]) => { gsap.set("#@" + c + "-browL", { svgOrigin: -g + " " + y }); gsap.set("#@" + c + "-browR", { svgOrigin: g + " " + y }); });
     const BROW = { loud: [14, -14], angry: [18, -18], panic: [-16, 16], worried: [-14, 14], smug: [-12, 4], happy: [-6, 6], flat: [0, 0] };
     const brows = (ch, mood, t) => {
@@ -333,7 +386,7 @@ const MOOD = {
   o3: "happy",
 };
 const CHARS = ["zahn", "stein", "seide"];
-const FACE = { zahn: [520, 860, 1.08], stein: [520, 1120, 1.12], seide: [260, 900, 1.08] };
+const FACE = { zahn: [470, 1040, 1.95], stein: [470, 1090, 2.0], seide: [360, 1000, 1.75] };
 function lookVec(from, to) {
   const dx = POS[to][0] - POS[from][0],
     dy = POS[to][1] - POS[from][1];
@@ -376,6 +429,7 @@ const blinks = (scene, a, b) => {
 /* ---------- Szene 1: Zahn-Diva gegen Zahnstein, die Zahnseide reißt ---------- */
 const streitJs = `${HELPERS}${BODY_INIT}
     const S0 = ${SC.streit[0]}, S1 = ${SC.streit[1]};
+    frameTo(500, 1000, 1.45, S0, 0.01);
     face("@zahn", "frown", S0); face("@stein", "smirk", S0);
     look("@zahn", 0, 14, S0, 0.01); look("@stein", 0, -14, S0, 0.01);
     gsap.set("#@cam", { scale: 1.06 });
@@ -386,10 +440,10 @@ const streitJs = `${HELPERS}${BODY_INIT}
     ${actLines("streit", { from: 0.3 })}
     // Zahnseide kommt, quetscht sich in die Lücke, verhakt sich, reißt.
     const F0 = ${L.f1[0]} - 0.55;
-    tl.to("#@seide-pos", { x: 342, y: 1010, rotation: 0, duration: 0.55, ease: "back.out(1.3)" }, F0);
-    frameTo(330, 960, 1.05, F0, 0.4);
-    tl.to("#@seide-pos", { y: 1070, duration: 0.5, ease: "power1.inOut" }, ${L.f1[1]});
-    tl.to("#@seide-pos", { y: 1085, duration: 0.08, yoyo: true, repeat: 5 }, ${L.f2[0]});
+    tl.to("#@seide-pos", { x: 407, y: 1040, rotation: 0, duration: 0.55, ease: "back.out(1.3)" }, F0);
+    frameTo(360, 1000, 1.75, F0, 0.45);
+    tl.to("#@seide-pos", { y: 1080, duration: 0.5, ease: "power1.inOut" }, ${L.f1[1]});
+    tl.to("#@seide-pos", { y: 1092, duration: 0.08, yoyo: true, repeat: 5 }, ${L.f2[0]});
     tl.to("#@seide-thBot", { attr: { d: "M 0 0 Q 22 40 0 80" }, duration: 0.3 }, ${L.f2[0]} + 0.3);
     const SN = ${L.f3[0]} - 0.45;
     tl.to("#@seide-thTop", { rotation: -60, svgOrigin: "0 -80", duration: 0.25, ease: "power3.out" }, SN);
@@ -397,7 +451,7 @@ const streitJs = `${HELPERS}${BODY_INIT}
     shake("#@cam", SN, 0.3, 8);
     squeeze("@seide", true, SN); face("@seide", "wavy", SN);
     tl.to("#@seide-pos", { x: SOFF[0], y: SOFF[1], rotation: -30, duration: 0.6, ease: "power2.in" }, ${L.f3[0]} + 0.2);
-    frameTo(520, 1060, 1.06, ${L.f3[0]} - 0.15);
+    frameTo(450, 1060, 1.9, ${L.f3[0]} - 0.15);
     // Kommentar-Frage mitten im Video, gut lesbar unter der TikTok-Leiste.
     tl.fromTo("#ask", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, ${L.f2[0]});
     tl.to("#ask", { opacity: 0, duration: 0.2 }, S1 - 0.1);
@@ -424,7 +478,7 @@ const opJs = `${HELPERS}${BODY_INIT}
     look("@zahn", 0, 14, O0, 0.01); look("@stein", 0, -14, O0, 0.01);
     tl.fromTo("#@flash", { opacity: 0.8 }, { opacity: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, O0);
     gsap.set("#@flash", { opacity: 0.8 });
-    const TOFF = { scaler: [1300, 300], cur: [1300, 300], pol: [1300, 300] };
+    const TOFF = { scaler: [1700, 0], cur: [1700, 0], pol: [1700, 0] };
     Object.entries(TOFF).forEach(([k, [x, y]]) => gsap.set("#@" + k + "-pos", { x, y, svgOrigin: "0 0" }));
     const go = (k, x, y, t, d = 0.5) => tl.to("#@" + k + "-pos", { x, y, duration: d, ease: "power2.inOut" }, t);
     const away = (k, t, d = 0.45) => tl.to("#@" + k + "-pos", { x: TOFF[k][0], y: TOFF[k][1], duration: d, ease: "power2.in" }, t);
@@ -441,43 +495,44 @@ const opJs = `${HELPERS}${BODY_INIT}
       curStep = n;
     };
     const o1 = ${JSON.stringify(L.o1)}, o2 = ${JSON.stringify(L.o2)}, o3 = ${JSON.stringify(L.o3)};
-    frameTo(520, 1000, 1, O0, 0.01);
+    frameTo(500, 1000, 1.45, O0, 0.01);
 
     // Schritt 1: Ultraschall vibriert, Wasser sprüht, links und rechts bröckelt der Zahnstein.
     step(1, O0 + 0.1);
-    go("scaler", 380, 1140, o1[0] - 0.7, 0.5);
+    frameTo(470, 1090, 1.9, o1[0] - 0.9, 0.5);
+    go("scaler", 425, 1150, o1[0] - 0.7, 0.5);
     tl.set("#@vib", { opacity: 1 }, o1[0] - 0.2);
     shake("#@scaler", o1[0] - 0.2, o1[1] - o1[0] + 0.6, 3, "x");
     shake("#@stein-t", o1[0], o1[1] - o1[0], 4, "x");
     [0, 1, 2, 3].forEach((k) => {
       const t = o1[0] - 0.1 + k * 0.25;
-      tl.set("#@spray" + k, { opacity: 1, x: 380 + (k % 2) * 20, y: 1130 }, t);
-      tl.to("#@spray" + k, { x: 330 + k * 30, y: 1040, opacity: 0, duration: 0.45, ease: "power1.out" }, t);
+      tl.set("#@spray" + k, { opacity: 1, x: 425 + (k % 2) * 10, y: 1140 }, t);
+      tl.to("#@spray" + k, { x: 395 + k * 16, y: 1080, opacity: 0, duration: 0.45, ease: "power1.out" }, t);
     });
-    tl.to("#@tarL", { opacity: 0, duration: 0.3 }, o1[0] + 0.5); chips(380, 1150, o1[0] + 0.5, 0);
-    tl.to("#@scaler-pos", { x: 680, y: 1150, duration: 0.6, ease: "power1.inOut" }, o1[1] - 0.1);
-    tl.to("#@tarR", { opacity: 0, duration: 0.3 }, o1[1] + 0.4); chips(670, 1150, o1[1] + 0.4, 3);
+    tl.to("#@tarL", { opacity: 0, duration: 0.3 }, o1[0] + 0.5); chips(425, 1150, o1[0] + 0.5, 0);
+    tl.to("#@scaler-pos", { x: 515, y: 1150, duration: 0.6, ease: "power1.inOut" }, o1[1] - 0.1);
+    tl.to("#@tarR", { opacity: 0, duration: 0.3 }, o1[1] + 0.4); chips(515, 1150, o1[1] + 0.4, 3);
     tl.set("#@vib", { opacity: 0 }, o1[1] + 0.6);
     away("scaler", o1[1] + 0.6);
 
     // Schritt 2: Abkratzen – die letzte Ecke mit dem Gesicht.
     step(2, o2[0] - 0.9);
-    frameTo(520, 1120, 1.1, o2[0] - 0.9, 0.4);
-    go("cur", 600, 1120, o2[0] - 0.8, 0.45);
-    [0, 0.35, 0.7].forEach((d) => tl.to("#@cur-pos", { x: "-=40", y: "+=30", duration: 0.15, yoyo: true, repeat: 1 }, o2[0] - 0.3 + d));
-    tl.to("#@stein-face", { y: -120, x: -60, rotation: -30, opacity: 0, duration: 0.6, ease: "power2.in" }, o2[1] + 0.2);
-    tl.to("#@tarM", { opacity: 0, duration: 0.3 }, o2[1] + 0.2); chips(520, 1160, o2[1] + 0.2, 6);
+    frameTo(470, 1090, 2.0, o2[0] - 0.9, 0.4);
+    go("cur", 490, 1138, o2[0] - 0.8, 0.45);
+    [0, 0.35, 0.7].forEach((d) => tl.to("#@cur-pos", { x: "-=16", y: "+=10", duration: 0.15, yoyo: true, repeat: 1 }, o2[0] - 0.3 + d));
+    tl.to("#@stein-face", { y: -90, x: -40, rotation: -30, opacity: 0, duration: 0.6, ease: "power2.in" }, o2[1] + 0.2);
+    tl.to("#@tarM", { opacity: 0, duration: 0.3 }, o2[1] + 0.2); chips(470, 1150, o2[1] + 0.2, 6);
     away("cur", o2[1] + 0.4);
 
     // Schritt 3: Polieren – der Zahn wird wieder weiß und glänzt.
     step(3, o3[0] - 1.3);
-    frameTo(520, 900, 1.06, o3[0] - 1.3, 0.4);
-    go("pol", 520, 1000, o3[0] - 1.3, 0.45);
-    tl.to("#@pol-pos", { keyframes: [{ x: 440, y: 900 }, { x: 600, y: 880 }, { x: 520, y: 1020 }], duration: 1.0, ease: "none" }, o3[0] - 0.9);
+    frameTo(470, 1040, 1.95, o3[0] - 1.3, 0.4);
+    go("pol", 470, 1000, o3[0] - 1.3, 0.45);
+    tl.to("#@pol-pos", { keyframes: [{ x: 440, y: 970 }, { x: 505, y: 960 }, { x: 470, y: 1100 }], duration: 1.0, ease: "none" }, o3[0] - 0.9);
     tl.to("#@zahn-body", { fill: "${TZ.tooth}", duration: 1.0 }, o3[0] - 0.9);
     away("pol", o3[0] + 0.1);
     tl.to("#@shine", { opacity: 1, duration: 0.2 }, o3[0] - 0.1);
-    tl.fromTo("#@shine", { scale: 0.4, svgOrigin: "520 900" }, { scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false }, o3[0] - 0.1);
+    tl.fromTo("#@shine", { scale: 0.4, svgOrigin: "470 1040" }, { scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false }, o3[0] - 0.1);
     ${actLines("op", { frames: false })}
     lids("@zahn", 0.3, o3[0]); look("@zahn", 0, -4, o3[0]);
     tl.to("#st3", { opacity: 0, duration: 0.2 }, o3[1] + 0.3);
