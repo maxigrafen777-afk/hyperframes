@@ -1,0 +1,659 @@
+{
+  "k1": {
+    "text": "Nur ganz kurz… gleich hab ich ihn.",
+    "heard": "Nur ganz kurz, gleich hab ich",
+    "wer": 0.14,
+    "fileDuration": 1.619592,
+    "words": [
+      {
+        "text": "Nur",
+        "start": 0,
+        "end": 0.186
+      },
+      {
+        "text": "ganz",
+        "start": 0.209,
+        "end": 0.395
+      },
+      {
+        "text": "kurz…",
+        "start": 0.453,
+        "end": 0.813
+      },
+      {
+        "text": "gleich",
+        "start": 0.964,
+        "end": 1.138
+      },
+      {
+        "text": "hab",
+        "start": 1.196,
+        "end": 1.277
+      },
+      {
+        "text": "ich",
+        "start": 1.324,
+        "end": 1.405
+      },
+      {
+        "text": "ihn.",
+        "start": 1.44,
+        "end": 1.579
+      }
+    ]
+  },
+  "k2": {
+    "text": "Autsch! Mist, jetzt blutet es.",
+    "heard": "Autsch. Mist, jetzt blutet es",
+    "wer": 0,
+    "fileDuration": 2.533878,
+    "words": [
+      {
+        "text": "Autsch!",
+        "start": 0,
+        "end": 0.546
+      },
+      {
+        "text": "Mist,",
+        "start": 0.929,
+        "end": 1.161
+      },
+      {
+        "text": "jetzt",
+        "start": 1.196,
+        "end": 1.393
+      },
+      {
+        "text": "blutet",
+        "start": 1.416,
+        "end": 1.741
+      },
+      {
+        "text": "es.",
+        "start": 1.823,
+        "end": 2.508
+      }
+    ]
+  },
+  "t1": {
+    "text": "Hilfe! Ich bin schon voll!",
+    "heard": "Hilfe, ich bin schon voll",
+    "wer": 0,
+    "fileDuration": 1.906939,
+    "words": [
+      {
+        "text": "Hilfe!",
+        "start": 0,
+        "end": 0.72
+      },
+      {
+        "text": "Ich",
+        "start": 0.755,
+        "end": 0.882
+      },
+      {
+        "text": "bin",
+        "start": 0.917,
+        "end": 1.01
+      },
+      {
+        "text": "schon",
+        "start": 1.045,
+        "end": 1.207
+      },
+      {
+        "text": "voll!",
+        "start": 1.277,
+        "end": 1.858
+      }
+    ]
+  },
+  "t2": {
+    "text": "Ich auch?! Das hört ja gar nicht auf!",
+    "heard": "Ich auch? Das hört ja gar nicht auf",
+    "wer": 0,
+    "fileDuration": 2.037551,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.163
+      },
+      {
+        "text": "auch?!",
+        "start": 0.244,
+        "end": 0.592
+      },
+      {
+        "text": "Das",
+        "start": 0.673,
+        "end": 0.836
+      },
+      {
+        "text": "hört",
+        "start": 0.871,
+        "end": 0.987
+      },
+      {
+        "text": "ja",
+        "start": 1.033,
+        "end": 1.091
+      },
+      {
+        "text": "gar",
+        "start": 1.138,
+        "end": 1.254
+      },
+      {
+        "text": "nicht",
+        "start": 1.3,
+        "end": 1.451
+      },
+      {
+        "text": "auf!",
+        "start": 1.474,
+        "end": 1.997
+      }
+    ]
+  },
+  "k3": {
+    "text": "Okay. Kopf in den Nacken.",
+    "heard": "Okay, Kopf in den Nacken",
+    "wer": 0,
+    "fileDuration": 1.619592,
+    "words": [
+      {
+        "text": "Okay.",
+        "start": 0,
+        "end": 0.418
+      },
+      {
+        "text": "Kopf",
+        "start": 0.743,
+        "end": 0.987
+      },
+      {
+        "text": "in",
+        "start": 1.033,
+        "end": 1.08
+      },
+      {
+        "text": "den",
+        "start": 1.103,
+        "end": 1.196
+      },
+      {
+        "text": "Nacken.",
+        "start": 1.231,
+        "end": 1.579
+      }
+    ]
+  },
+  "k4": {
+    "text": "Bäh! Jetzt läuft's mir in den Hals.",
+    "heard": "Bäh, jetzt läuft's mir in den Hals",
+    "wer": 0,
+    "fileDuration": 2.76898,
+    "words": [
+      {
+        "text": "Bäh!",
+        "start": 0,
+        "end": 0.383
+      },
+      {
+        "text": "Jetzt",
+        "start": 0.894,
+        "end": 1.091
+      },
+      {
+        "text": "läuft's",
+        "start": 1.138,
+        "end": 1.37
+      },
+      {
+        "text": "mir",
+        "start": 1.416,
+        "end": 1.509
+      },
+      {
+        "text": "in",
+        "start": 1.544,
+        "end": 1.602
+      },
+      {
+        "text": "den",
+        "start": 1.637,
+        "end": 1.765
+      },
+      {
+        "text": "Hals.",
+        "start": 1.823,
+        "end": 2.74
+      }
+    ]
+  },
+  "k5": {
+    "text": "Dann eben nach vorne und zudrücken.",
+    "heard": "Dann eben nach vorne und zudrücken",
+    "wer": 0,
+    "fileDuration": 2.403265,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0,
+        "end": 0.174
+      },
+      {
+        "text": "eben",
+        "start": 0.232,
+        "end": 0.383
+      },
+      {
+        "text": "nach",
+        "start": 0.406,
+        "end": 0.546
+      },
+      {
+        "text": "vorne",
+        "start": 0.592,
+        "end": 0.836
+      },
+      {
+        "text": "und",
+        "start": 0.894,
+        "end": 0.964
+      },
+      {
+        "text": "zudrücken.",
+        "start": 0.998,
+        "end": 2.368
+      }
+    ]
+  },
+  "k6": {
+    "text": "Endlich. Es hört auf.",
+    "heard": "Endlich, es hört auf",
+    "wer": 0,
+    "fileDuration": 2.533878,
+    "words": [
+      {
+        "text": "Endlich.",
+        "start": 0,
+        "end": 0.673
+      },
+      {
+        "text": "Es",
+        "start": 1.184,
+        "end": 1.324
+      },
+      {
+        "text": "hört",
+        "start": 1.347,
+        "end": 1.498
+      },
+      {
+        "text": "auf.",
+        "start": 1.556,
+        "end": 2.508
+      }
+    ]
+  },
+  "q1": {
+    "text": "Herr Doktor, ich hab nur einmal gebohrt. Warum blutet das so?",
+    "heard": "Herr Doktor, ich hab nur einmal gebohrt. Warum blutet das so?",
+    "wer": 0,
+    "fileDuration": 3.657143,
+    "words": [
+      {
+        "text": "Herr",
+        "start": 0,
+        "end": 0.151
+      },
+      {
+        "text": "Doktor,",
+        "start": 0.186,
+        "end": 0.511
+      },
+      {
+        "text": "ich",
+        "start": 0.534,
+        "end": 0.627
+      },
+      {
+        "text": "hab",
+        "start": 0.662,
+        "end": 0.743
+      },
+      {
+        "text": "nur",
+        "start": 0.813,
+        "end": 0.906
+      },
+      {
+        "text": "einmal",
+        "start": 0.94,
+        "end": 1.161
+      },
+      {
+        "text": "gebohrt.",
+        "start": 1.196,
+        "end": 1.846
+      },
+      {
+        "text": "Warum",
+        "start": 2.357,
+        "end": 2.566
+      },
+      {
+        "text": "blutet",
+        "start": 2.612,
+        "end": 2.926
+      },
+      {
+        "text": "das",
+        "start": 2.949,
+        "end": 3.088
+      },
+      {
+        "text": "so?",
+        "start": 3.111,
+        "end": 3.622
+      }
+    ]
+  },
+  "d1": {
+    "text": "Vorne in der Nase liegen viele feine Äderchen direkt unter der Schleimhaut. Ein Kratzer reicht, und sie bluten.",
+    "heard": "Vorne in der Nase liegen viele feine Äderchen direkt unter der Schleimhaut. Ein Kratzer reicht und sie bluten",
+    "wer": 0,
+    "fileDuration": 8.907755,
+    "words": [
+      {
+        "text": "Vorne",
+        "start": 0,
+        "end": 0.325
+      },
+      {
+        "text": "in",
+        "start": 0.383,
+        "end": 0.441
+      },
+      {
+        "text": "der",
+        "start": 0.488,
+        "end": 0.569
+      },
+      {
+        "text": "Nase",
+        "start": 0.627,
+        "end": 1.115
+      },
+      {
+        "text": "liegen",
+        "start": 1.556,
+        "end": 1.823
+      },
+      {
+        "text": "viele",
+        "start": 1.881,
+        "end": 2.136
+      },
+      {
+        "text": "feine",
+        "start": 2.194,
+        "end": 2.496
+      },
+      {
+        "text": "Äderchen",
+        "start": 2.566,
+        "end": 3.077
+      },
+      {
+        "text": "direkt",
+        "start": 3.251,
+        "end": 3.669
+      },
+      {
+        "text": "unter",
+        "start": 3.738,
+        "end": 3.971
+      },
+      {
+        "text": "der",
+        "start": 4.017,
+        "end": 4.122
+      },
+      {
+        "text": "Schleimhaut.",
+        "start": 4.156,
+        "end": 4.946
+      },
+      {
+        "text": "Ein",
+        "start": 6.06,
+        "end": 6.188
+      },
+      {
+        "text": "Kratzer",
+        "start": 6.246,
+        "end": 6.641
+      },
+      {
+        "text": "reicht,",
+        "start": 6.699,
+        "end": 7.175
+      },
+      {
+        "text": "und",
+        "start": 7.291,
+        "end": 7.419
+      },
+      {
+        "text": "sie",
+        "start": 7.465,
+        "end": 7.558
+      },
+      {
+        "text": "bluten.",
+        "start": 7.605,
+        "end": 8.87
+      }
+    ]
+  },
+  "d2": {
+    "text": "Trockene Heizungsluft macht sie im Winter noch empfindlicher.",
+    "heard": "Trockene Heizungsluft macht sie im Winter noch empfindlicher.",
+    "wer": 0,
+    "fileDuration": 4.127347,
+    "words": [
+      {
+        "text": "Trockene",
+        "start": 0,
+        "end": 0.476
+      },
+      {
+        "text": "Heizungsluft",
+        "start": 0.522,
+        "end": 1.324
+      },
+      {
+        "text": "macht",
+        "start": 1.498,
+        "end": 1.73
+      },
+      {
+        "text": "sie",
+        "start": 1.753,
+        "end": 1.846
+      },
+      {
+        "text": "im",
+        "start": 1.881,
+        "end": 1.939
+      },
+      {
+        "text": "Winter",
+        "start": 1.997,
+        "end": 2.287
+      },
+      {
+        "text": "noch",
+        "start": 2.322,
+        "end": 2.473
+      },
+      {
+        "text": "empfindlicher.",
+        "start": 2.531,
+        "end": 4.087
+      }
+    ]
+  },
+  "d3": {
+    "text": "Also: Kopf nach vorne und die weiche Nase zehn Minuten zudrücken. Hört es nach zwanzig Minuten nicht auf, ab zum Arzt.",
+    "heard": "Also Kopf nach vorne und die weiche Nase zehn Minuten zudrücken. Hört es nach 20 Minuten nicht auf, ab zum Arzt.",
+    "wer": 0.05,
+    "fileDuration": 8.724898,
+    "words": [
+      {
+        "text": "Also:",
+        "start": 0,
+        "end": 0.534
+      },
+      {
+        "text": "Kopf",
+        "start": 0.65,
+        "end": 0.917
+      },
+      {
+        "text": "nach",
+        "start": 0.998,
+        "end": 1.138
+      },
+      {
+        "text": "vorne",
+        "start": 1.184,
+        "end": 1.544
+      },
+      {
+        "text": "und",
+        "start": 1.614,
+        "end": 1.718
+      },
+      {
+        "text": "die",
+        "start": 1.741,
+        "end": 1.823
+      },
+      {
+        "text": "weiche",
+        "start": 1.869,
+        "end": 2.194
+      },
+      {
+        "text": "Nase",
+        "start": 2.264,
+        "end": 2.601
+      },
+      {
+        "text": "zehn",
+        "start": 2.682,
+        "end": 2.879
+      },
+      {
+        "text": "Minuten",
+        "start": 2.937,
+        "end": 3.355
+      },
+      {
+        "text": "zudrücken.",
+        "start": 3.402,
+        "end": 4.087
+      },
+      {
+        "text": "Hört",
+        "start": 4.899,
+        "end": 5.108
+      },
+      {
+        "text": "es",
+        "start": 5.155,
+        "end": 5.213
+      },
+      {
+        "text": "nach",
+        "start": 5.259,
+        "end": 5.399
+      },
+      {
+        "text": "zwanzig",
+        "start": 5.445,
+        "end": 5.828
+      },
+      {
+        "text": "Minuten",
+        "start": 5.875,
+        "end": 6.304
+      },
+      {
+        "text": "nicht",
+        "start": 6.351,
+        "end": 6.583
+      },
+      {
+        "text": "auf,",
+        "start": 6.664,
+        "end": 7.082
+      },
+      {
+        "text": "ab",
+        "start": 7.152,
+        "end": 7.326
+      },
+      {
+        "text": "zum",
+        "start": 7.396,
+        "end": 7.546
+      },
+      {
+        "text": "Arzt.",
+        "start": 7.628,
+        "end": 8.684
+      }
+    ]
+  },
+  "e1": {
+    "text": "Nur ganz kurz…",
+    "heard": "Nur ganz kurz",
+    "wer": 0,
+    "fileDuration": 1.201633,
+    "words": [
+      {
+        "text": "Nur",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "ganz",
+        "start": 0.232,
+        "end": 0.441
+      },
+      {
+        "text": "kurz…",
+        "start": 0.499,
+        "end": 1.161
+      }
+    ]
+  },
+  "e2": {
+    "text": "Kevin!",
+    "heard": "Kevin",
+    "wer": 0,
+    "fileDuration": 0.731429,
+    "words": [
+      {
+        "text": "Kevin!",
+        "start": 0,
+        "end": 0.697
+      }
+    ]
+  }
+}

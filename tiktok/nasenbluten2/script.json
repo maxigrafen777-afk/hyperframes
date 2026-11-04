@@ -1,0 +1,315 @@
+{
+  "title": "Nasenbluten – Kevin bohrt",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "maxPause": 0.3,
+  "scenes": {
+    "front": [0, 20],
+    "profil": [20, 40],
+    "station": [45, 47]
+  },
+  "order": ["front", "profil", "station"],
+  "qa": {
+    "maxTakes": 4,
+    "maxWer": 0.1,
+    "maxF0Dev": 0.2
+  },
+  "lines": [
+    {
+      "id": "k1",
+      "speaker": "pat",
+      "start": 0.3,
+      "end": 0.35,
+      "text": "Nur ganz kurz… gleich hab ich ihn."
+    },
+    {
+      "id": "k2",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Autsch! Mist, jetzt blutet es.",
+      "wait": 1.0
+    },
+    {
+      "id": "t1",
+      "speaker": "tuch",
+      "start": 0.5,
+      "end": 0.55,
+      "text": "Hilfe! Ich bin schon voll!",
+      "wait": 1.1
+    },
+    {
+      "id": "t2",
+      "speaker": "tuch2",
+      "start": 0.6,
+      "end": 0.65,
+      "text": "Ich auch?! Das hört ja gar nicht auf!",
+      "wait": 1.1
+    },
+    {
+      "id": "k3",
+      "speaker": "pat",
+      "start": 20.3,
+      "end": 20.35,
+      "text": "Okay. Kopf in den Nacken."
+    },
+    {
+      "id": "k4",
+      "speaker": "pat",
+      "start": 20.4,
+      "end": 20.45,
+      "text": "Bäh! Jetzt läuft's mir in den Hals.",
+      "wait": 1.2
+    },
+    {
+      "id": "k5",
+      "speaker": "pat",
+      "start": 20.5,
+      "end": 20.55,
+      "text": "Dann eben nach vorne und zudrücken.",
+      "wait": 0.4
+    },
+    {
+      "id": "k6",
+      "speaker": "pat",
+      "start": 20.6,
+      "end": 20.650000000000002,
+      "text": "Endlich. Es hört auf.",
+      "wait": 1.9
+    },
+    {
+      "id": "q1",
+      "speaker": "pat",
+      "start": 45.4,
+      "end": 45.449999999999996,
+      "text": "Herr Doktor, ich hab nur einmal gebohrt. Warum blutet das so?"
+    },
+    {
+      "id": "d1",
+      "speaker": "arzt",
+      "start": 45.5,
+      "end": 45.55,
+      "text": "Vorne in der Nase liegen viele feine Äderchen direkt unter der Schleimhaut. Ein Kratzer reicht, und sie bluten."
+    },
+    {
+      "id": "d2",
+      "speaker": "arzt",
+      "start": 45.6,
+      "end": 45.65,
+      "text": "Trockene Heizungsluft macht sie im Winter noch empfindlicher."
+    },
+    {
+      "id": "d3",
+      "speaker": "arzt",
+      "start": 45.7,
+      "end": 45.75,
+      "text": "Also: Kopf nach vorne und die weiche Nase zehn Minuten zudrücken. Hört es nach zwanzig Minuten nicht auf, ab zum Arzt."
+    },
+    {
+      "id": "e1",
+      "speaker": "pfi",
+      "start": 45.8,
+      "end": 45.849999999999994,
+      "text": "Nur ganz kurz…",
+      "wait": 0.7
+    },
+    {
+      "id": "e2",
+      "speaker": "arzt",
+      "start": 45.9,
+      "end": 45.949999999999996,
+      "text": "Kevin!",
+      "wait": 0.2
+    }
+  ],
+  "voices": {
+    "pat": {
+      "name": "Patient (DE, locker)",
+      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.5,
+        "use_speaker_boost": true
+      },
+      "seed": 5555,
+      "tempo": 1.0,
+      "f0ref": 120
+    },
+    "tuch": {
+      "name": "Taschentuch 1 (Hand-Stimme, hochgepitcht)",
+      "voice_id": "pDG6X0RdbndwY5oM9QBN",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.35,
+        "use_speaker_boost": true
+      },
+      "seed": 8181,
+      "tempo": 1.0
+    },
+    "tuch2": {
+      "name": "Taschentuch 2 (Pickel-Stimme, hochgepitcht)",
+      "voice_id": "hmzGETctUW7XCobpQ3UF",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.5,
+        "use_speaker_boost": true
+      },
+      "seed": 8282,
+      "tempo": 1.0
+    },
+    "pfi": {
+      "name": "Kevin (Pointe)",
+      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 8383,
+      "tempo": 1.0,
+      "f0ref": 120
+    },
+    "arzt": {
+      "name": "Arzt (DE, ruhig, älter)",
+      "voice_id": "Og1j4Myr6614gRWlVatR",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.85,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "seed": 4444,
+      "tempo": 1.0
+    }
+  },
+  "genSfx": [
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "scratch",
+      "prompt": "finger scratching inside nose, squelchy rubbing, cartoon",
+      "duration": 1.0
+    },
+    {
+      "id": "burst",
+      "prompt": "tiny wet pop, small balloon of liquid bursting, cartoon",
+      "duration": 0.5
+    },
+    {
+      "id": "drip",
+      "prompt": "liquid dripping drops, cartoon drip drip",
+      "duration": 1.2
+    },
+    {
+      "id": "gulp",
+      "prompt": "cartoon swallowing gulp, liquid running down throat",
+      "duration": 0.8
+    },
+    {
+      "id": "squeeze",
+      "prompt": "soft rubbery squeeze, nose being pinched, cartoon honk short",
+      "duration": 0.5
+    },
+    {
+      "id": "tissue",
+      "prompt": "tissue paper rustle and dab, short",
+      "duration": 0.6
+    },
+    {
+      "id": "cough",
+      "prompt": "short disgusted cough, bleh, no words",
+      "duration": 0.7
+    },
+    {
+      "id": "tick",
+      "prompt": "fast clock ticking then soft ding",
+      "duration": 1.6
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-scratch",
+      "src": "gen-scratch.mp3",
+      "volume": 0.45,
+      "start": 0
+    },
+    {
+      "id": "sfx-burst",
+      "src": "gen-burst.mp3",
+      "volume": 0.55,
+      "line": "k2",
+      "offset": -0.55
+    },
+    {
+      "id": "sfx-drip",
+      "src": "gen-drip.mp3",
+      "volume": 0.35,
+      "line": "k2",
+      "offset": 1.5
+    },
+    {
+      "id": "sfx-tissue1",
+      "src": "gen-tissue.mp3",
+      "volume": 0.5,
+      "line": "t1",
+      "offset": -1.0
+    },
+    {
+      "id": "sfx-tissue2",
+      "src": "gen-tissue.mp3",
+      "volume": 0.5,
+      "line": "t2",
+      "offset": -1.0
+    },
+    {
+      "id": "sfx-cut",
+      "src": "whoosh-short.mp3",
+      "volume": 0.3,
+      "anchor": "profil",
+      "offset": -0.05
+    },
+    {
+      "id": "sfx-gulp",
+      "src": "gen-gulp.mp3",
+      "volume": 0.45,
+      "line": "k4",
+      "offset": -1.0
+    },
+    {
+      "id": "sfx-squeeze",
+      "src": "gen-squeeze.mp3",
+      "volume": 0.45,
+      "line": "k5",
+      "offset": 2.0
+    },
+    {
+      "id": "sfx-tick",
+      "src": "gen-tick.mp3",
+      "volume": 0.35,
+      "line": "k6",
+      "offset": -1.75
+    },
+    {
+      "id": "sfx-station",
+      "src": "whoosh-short.mp3",
+      "volume": 0.3,
+      "anchor": "station",
+      "offset": -0.05
+    },
+    {
+      "id": "sfx-rim",
+      "src": "gen-rimshot.mp3",
+      "volume": 0.35,
+      "line": "e2",
+      "offset": 0.7
+    }
+  ]
+}

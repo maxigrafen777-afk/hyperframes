@@ -243,3 +243,11 @@ Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok
 - **Falsches Hausmittel als Bewegung zeigen:** „Kopf in den Nacken“ = ganze Kopf-Gruppe dreht 24° um die Nasenhöhle (`svgOrigin` nah an den Figuren, sonst wandern sie aus dem Bild), das Blut läuft sichtbar den Rachen hinunter. Richtig = Kopf nach vorne (−8°), Handschuh-Hand drückt die Nasenflügel, Gerinnsel bildet sich.
 - Offscreen-Startpositionen in einer gedrehten Gruppe weit genug weg legen, sonst rutschen Objekte beim Kippen ins Bild.
 - Pointe in der Arzt-Szene: Kevins Finger wandert wieder zur Nase („Ist da noch was drin?“ – Arzt: „Kevin! Finger weg!“), danach Ja/Nein-Sticker oben („Bohrst du in der Nase? Ja oder Nein – schreib's in die Kommentare ↓“).
+
+### Nasenbluten v2 nach Creator-Vorbild (`tiktok/nasenbluten2/`) – gilt ab jetzt
+
+- **Nicht jede Folge ist eine feste Einstellung:** Das Vorbild zum Nasenbluten nutzt 3–4 einfache, sofort klare Ansichten mit harten Schnitten (Blick in die Nase → Nase von vorne groß → Profil beim Zudrücken → Arzt). Entscheidend ist, dass jede Ansicht in 1 s lesbar ist und das Problem groß im Bild ist (Nase füllt die Breite, Szene 1,6× skaliert).
+- **Die Hauptfigur ist der Mensch selbst** (Kevin spricht aus dem Off, ärgert sich): wenige sprechende Nebenfiguren statt vieler; zu viele Figuren (Finger, Hand, Äderchen, Popel) wirkten wie ein Kinder-Schaubild („ist scheiße“).
+- **Spannung durch Steigerung:** Es hört nicht auf (Taschentuch 1 voll, Taschentuch 2 voll), dann der falsche Weg, dann der richtige. Innenansicht als Lupen-Einblendung statt eigener Szene.
+- **Nicht nachbauen:** Prinzipien übernehmen, aber eigene Story, eigene Gags (sprechende Taschentücher, falsches „Kopf in den Nacken“ sichtbar, Heizungsluft-Fakt, Pointe „Nur ganz kurz…“ – „Kevin!“), eigener Arzt.
+- Kurze Ausrufe am Satzanfang („Au!“) verschluckt die Stimme oft; „Autsch!“ funktioniert.
