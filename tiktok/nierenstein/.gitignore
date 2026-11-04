@@ -1,0 +1,4 @@
+# aus gen-bed.mp3 erzeugt: node sfx-gen.mjs
+assets/sfx/bed-long.mp3
+# temporäre QA-Datei von voices.mjs
+assets/vo/raw/_qa.mp3
