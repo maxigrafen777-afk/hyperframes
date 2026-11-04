@@ -30,35 +30,28 @@
       "text": "Zu spät, Schätzchen. Wir haben schon ausgepackt."
     },
     {
-      "id": "h2",
-      "speaker": "haut",
-      "start": 0.7,
-      "end": 0.75,
-      "text": "Ich hab morgen ein Date!",
-      "wait": 0.7
-    },
-    {
-      "id": "p2",
-      "speaker": "pickel",
-      "start": 0.8,
-      "end": 0.8500000000000001,
-      "text": "Super. Ich komm mit. Ganz vorne."
-    },
-    {
       "id": "f1",
       "speaker": "finger",
       "start": 0.9,
       "end": 0.9500000000000001,
       "text": "Keine Sorge, ich drück den einfach weg!",
-      "wait": 1.0
+      "wait": 0.9
     },
     {
       "id": "h3",
       "speaker": "haut",
       "start": 1.0,
       "end": 1.05,
-      "text": "Nein! Nicht mit den Fingern!",
+      "text": "Nicht! Ich hab morgen ein Date!",
       "wait": 0.2
+    },
+    {
+      "id": "b1",
+      "speaker": "bac",
+      "start": 1.05,
+      "end": 1.1,
+      "text": "Juhu! Tiefer rein!",
+      "wait": 0.75
     },
     {
       "id": "p3",
@@ -66,15 +59,15 @@
       "start": 1.1,
       "end": 1.1500000000000001,
       "text": "Danke! Jetzt bin ich noch größer.",
-      "wait": 1.7
+      "wait": 0.3
     },
     {
       "id": "g1",
       "speaker": "hand",
       "start": 1.2,
       "end": 1.25,
-      "text": "Platz da. Erst mal desinfizieren.",
-      "wait": 1.1
+      "text": "Finger weg. Ich mach das steril.",
+      "wait": 0.8
     },
     {
       "id": "p4",
@@ -82,7 +75,7 @@
       "start": 1.3,
       "end": 1.35,
       "text": "Hey! Was wird das?",
-      "wait": 1.1
+      "wait": 0.35
     },
     {
       "id": "p5",
@@ -90,7 +83,7 @@
       "start": 1.4,
       "end": 1.45,
       "text": "Nein! Mein schönes Zuhause!",
-      "wait": 1.7
+      "wait": 1.1
     },
     {
       "id": "g2",
@@ -98,15 +91,31 @@
       "start": 1.5,
       "end": 1.55,
       "text": "Und jetzt ein Pickelpflaster drauf.",
-      "wait": 0.9
+      "wait": 0.6
     },
     {
       "id": "h4",
       "speaker": "haut",
       "start": 1.6,
       "end": 1.6500000000000001,
-      "text": "Endlich wieder glatt. Das Date kann kommen!",
-      "wait": 1.1
+      "text": "Endlich glatt. Das Date ist gerettet!",
+      "wait": 0.9
+    },
+    {
+      "id": "k1",
+      "speaker": "klein",
+      "start": 1.7,
+      "end": 1.75,
+      "text": "Hi! Ich bin sein kleiner Bruder.",
+      "wait": 0.7
+    },
+    {
+      "id": "h5",
+      "speaker": "haut",
+      "start": 1.8,
+      "end": 1.85,
+      "text": "Bitte nicht vor dem Date!",
+      "wait": 0.25
     },
     {
       "id": "q1",
@@ -213,6 +222,30 @@
       },
       "seed": 5555,
       "tempo": 1.0
+    },
+    "bac": {
+      "name": "Bakterien (Pickel-Stimme, hochgepitcht)",
+      "voice_id": "hmzGETctUW7XCobpQ3UF",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.5,
+        "use_speaker_boost": true
+      },
+      "seed": 6363,
+      "tempo": 1.0
+    },
+    "klein": {
+      "name": "Mini-Pickel (Pickel-Stimme, hochgepitcht)",
+      "voice_id": "hmzGETctUW7XCobpQ3UF",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.5,
+        "use_speaker_boost": true
+      },
+      "seed": 6464,
+      "tempo": 1.0
     }
   },
   "genSfx": [
@@ -249,13 +282,6 @@
   ],
   "sfx": [
     {
-      "id": "sfx-giggle",
-      "src": "gen-giggle.mp3",
-      "volume": 0.35,
-      "line": "h2",
-      "offset": -0.65
-    },
-    {
       "id": "sfx-fingers",
       "src": "whoosh-short.mp3",
       "volume": 0.4,
@@ -264,24 +290,17 @@
     },
     {
       "id": "sfx-press",
-      "src": "gen-press.mp3",
+      "src": "gen-press-short.mp3",
       "volume": 0.55,
-      "line": "p3",
-      "offset": -1.5
+      "line": "b1",
+      "offset": -0.7
     },
     {
       "id": "sfx-hand",
       "src": "whoosh-short.mp3",
       "volume": 0.4,
       "line": "g1",
-      "offset": -1.0
-    },
-    {
-      "id": "sfx-spray",
-      "src": "gen-spray.mp3",
-      "volume": 0.4,
-      "line": "p4",
-      "offset": -1.05
+      "offset": -0.8
     },
     {
       "id": "sfx-pop",
@@ -317,6 +336,20 @@
       "volume": 0.35,
       "anchor": "station",
       "offset": -0.05
+    },
+    {
+      "id": "sfx-boing",
+      "src": "gen-boing-short.mp3",
+      "volume": 0.4,
+      "line": "k1",
+      "offset": -0.55
+    },
+    {
+      "id": "sfx-rim",
+      "src": "gen-rimshot.mp3",
+      "volume": 0.35,
+      "line": "h5",
+      "offset": 1.5
     }
   ]
 }

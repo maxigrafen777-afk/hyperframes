@@ -200,35 +200,40 @@
     ]
   },
   "h3": {
-    "text": "Nein! Nicht mit den Fingern!",
-    "heard": "Nein, nicht mit den Fingern",
+    "text": "Nicht! Ich hab morgen ein Date!",
+    "heard": "Nicht! Ich hab morgen ein Date",
     "wer": 0,
-    "fileDuration": 2.272653,
+    "fileDuration": 2.45551,
     "words": [
       {
-        "text": "Nein!",
+        "text": "Nicht!",
         "start": 0,
-        "end": 0.708
+        "end": 0.557
       },
       {
-        "text": "Nicht",
-        "start": 0.743,
-        "end": 1.01
+        "text": "Ich",
+        "start": 0.766,
+        "end": 0.917
       },
       {
-        "text": "mit",
-        "start": 1.045,
-        "end": 1.149
+        "text": "hab",
+        "start": 0.964,
+        "end": 1.057
       },
       {
-        "text": "den",
-        "start": 1.173,
-        "end": 1.277
+        "text": "morgen",
+        "start": 1.115,
+        "end": 1.44
       },
       {
-        "text": "Fingern!",
-        "start": 1.347,
-        "end": 2.229
+        "text": "ein",
+        "start": 1.486,
+        "end": 1.625
+      },
+      {
+        "text": "Date!",
+        "start": 1.741,
+        "end": 2.415
       }
     ]
   },
@@ -271,35 +276,40 @@
     ]
   },
   "g1": {
-    "text": "Platz da. Erst mal desinfizieren.",
-    "heard": "Platz da. Erst mal desinfizieren",
+    "text": "Finger weg. Ich mach das steril.",
+    "heard": "Finger weg, ich mach das steril",
     "wer": 0,
-    "fileDuration": 2.35102,
+    "fileDuration": 2.037551,
     "words": [
       {
-        "text": "Platz",
+        "text": "Finger",
         "start": 0,
-        "end": 0.395
+        "end": 0.406
       },
       {
-        "text": "da.",
-        "start": 0.464,
-        "end": 0.731
+        "text": "weg.",
+        "start": 0.453,
+        "end": 0.801
       },
       {
-        "text": "Erst",
-        "start": 0.848,
-        "end": 1.126
+        "text": "Ich",
+        "start": 0.859,
+        "end": 0.998
       },
       {
-        "text": "mal",
-        "start": 1.196,
-        "end": 1.324
+        "text": "mach",
+        "start": 1.045,
+        "end": 1.173
       },
       {
-        "text": "desinfizieren.",
-        "start": 1.382,
-        "end": 2.322
+        "text": "das",
+        "start": 1.207,
+        "end": 1.312
+      },
+      {
+        "text": "steril.",
+        "start": 1.335,
+        "end": 1.997
       }
     ]
   },
@@ -393,45 +403,40 @@
     ]
   },
   "h4": {
-    "text": "Endlich wieder glatt. Das Date kann kommen!",
-    "heard": "Endlich wieder glatt. Das Date kann kommen",
+    "text": "Endlich glatt. Das Date ist gerettet!",
+    "heard": "Endlich glatt, das Date ist gerettet",
     "wer": 0,
-    "fileDuration": 3.578776,
+    "fileDuration": 3.186939,
     "words": [
       {
         "text": "Endlich",
         "start": 0,
-        "end": 0.418
-      },
-      {
-        "text": "wieder",
-        "start": 0.464,
-        "end": 0.685
+        "end": 0.65
       },
       {
         "text": "glatt.",
-        "start": 0.731,
+        "start": 0.743,
         "end": 1.184
       },
       {
         "text": "Das",
-        "start": 1.463,
-        "end": 1.695
+        "start": 1.207,
+        "end": 1.416
       },
       {
         "text": "Date",
-        "start": 1.788,
-        "end": 2.159
+        "start": 1.533,
+        "end": 1.823
       },
       {
-        "text": "kann",
-        "start": 2.218,
-        "end": 2.473
+        "text": "ist",
+        "start": 1.858,
+        "end": 1.974
       },
       {
-        "text": "kommen!",
-        "start": 2.566,
-        "end": 3.529
+        "text": "gerettet!",
+        "start": 2.02,
+        "end": 3.158
       }
     ]
   },
@@ -714,6 +719,100 @@
         "text": "drauf.",
         "start": 4.063,
         "end": 4.737
+      }
+    ]
+  },
+  "b1": {
+    "text": "Juhu! Tiefer rein!",
+    "heard": "Juhu, tiefer rein",
+    "wer": 0,
+    "fileDuration": 1.253878,
+    "words": [
+      {
+        "text": "Juhu!",
+        "start": 0,
+        "end": 0.418
+      },
+      {
+        "text": "Tiefer",
+        "start": 0.499,
+        "end": 0.824
+      },
+      {
+        "text": "rein!",
+        "start": 0.859,
+        "end": 1.207
+      }
+    ]
+  },
+  "k1": {
+    "text": "Hi! Ich bin sein kleiner Bruder.",
+    "heard": "Hi, ich bin sein kleiner Bruder",
+    "wer": 0,
+    "fileDuration": 1.619592,
+    "words": [
+      {
+        "text": "Hi!",
+        "start": 0,
+        "end": 0.348
+      },
+      {
+        "text": "Ich",
+        "start": 0.395,
+        "end": 0.534
+      },
+      {
+        "text": "bin",
+        "start": 0.569,
+        "end": 0.662
+      },
+      {
+        "text": "sein",
+        "start": 0.697,
+        "end": 0.824
+      },
+      {
+        "text": "kleiner",
+        "start": 0.859,
+        "end": 1.115
+      },
+      {
+        "text": "Bruder.",
+        "start": 1.149,
+        "end": 1.579
+      }
+    ]
+  },
+  "h5": {
+    "text": "Bitte nicht vor dem Date!",
+    "heard": "Bitte nicht vor dem Date",
+    "wer": 0,
+    "fileDuration": 2.168163,
+    "words": [
+      {
+        "text": "Bitte",
+        "start": 0,
+        "end": 0.372
+      },
+      {
+        "text": "nicht",
+        "start": 0.441,
+        "end": 0.778
+      },
+      {
+        "text": "vor",
+        "start": 0.848,
+        "end": 1.103
+      },
+      {
+        "text": "dem",
+        "start": 1.149,
+        "end": 1.3
+      },
+      {
+        "text": "Date!",
+        "start": 1.37,
+        "end": 2.136
       }
     ]
   }
