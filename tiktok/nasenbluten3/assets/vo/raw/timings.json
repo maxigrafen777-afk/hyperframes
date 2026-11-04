@@ -1,0 +1,875 @@
+{
+  "h1": {
+    "text": "Wenn deine Nase blutet, mach nie das, was alle machen.",
+    "heard": "Wenn deine Nase blutet, mach nie das, was alle machen",
+    "wer": 0,
+    "fileDuration": 2.925714,
+    "words": [
+      {
+        "text": "Wenn",
+        "start": 0,
+        "end": 0.139
+      },
+      {
+        "text": "deine",
+        "start": 0.174,
+        "end": 0.36
+      },
+      {
+        "text": "Nase",
+        "start": 0.406,
+        "end": 0.685
+      },
+      {
+        "text": "blutet,",
+        "start": 0.731,
+        "end": 1.242
+      },
+      {
+        "text": "mach",
+        "start": 1.312,
+        "end": 1.509
+      },
+      {
+        "text": "nie",
+        "start": 1.591,
+        "end": 1.73
+      },
+      {
+        "text": "das,",
+        "start": 1.776,
+        "end": 1.974
+      },
+      {
+        "text": "was",
+        "start": 1.997,
+        "end": 2.125
+      },
+      {
+        "text": "alle",
+        "start": 2.206,
+        "end": 2.368
+      },
+      {
+        "text": "machen.",
+        "start": 2.415,
+        "end": 2.879
+      }
+    ]
+  },
+  "e1": {
+    "text": "Kevin bohrt. Nur ganz kurz.",
+    "heard": "Kevin bohrt nur ganz kurz",
+    "wer": 0,
+    "fileDuration": 1.906939,
+    "words": [
+      {
+        "text": "Kevin",
+        "start": 0,
+        "end": 0.337
+      },
+      {
+        "text": "bohrt.",
+        "start": 0.406,
+        "end": 0.801
+      },
+      {
+        "text": "Nur",
+        "start": 0.848,
+        "end": 1.01
+      },
+      {
+        "text": "ganz",
+        "start": 1.033,
+        "end": 1.219
+      },
+      {
+        "text": "kurz.",
+        "start": 1.277,
+        "end": 1.858
+      }
+    ]
+  },
+  "k1": {
+    "text": "[focused] Gleich hab ich ihn…",
+    "heard": "Gleich hab ich ihn",
+    "wer": 1,
+    "fileDuration": 1.306122,
+    "words": [
+      {
+        "text": "Gleich",
+        "start": 0.23,
+        "end": 0.32
+      },
+      {
+        "text": "hab",
+        "start": 0.38,
+        "end": 0.56
+      },
+      {
+        "text": "ich",
+        "start": 0.58,
+        "end": 0.64
+      },
+      {
+        "text": "ihn…",
+        "start": 0.7,
+        "end": 1.28
+      }
+    ]
+  },
+  "e2": {
+    "text": "Vorne in der Nase liegen hunderte feine Äderchen. Direkt unter der Haut.",
+    "heard": "Vorne in der Nase liegen hunderte feine Äderchen direkt unter der Haut",
+    "wer": 0,
+    "fileDuration": 4.179592,
+    "words": [
+      {
+        "text": "Vorne",
+        "start": 0,
+        "end": 0.36
+      },
+      {
+        "text": "in",
+        "start": 0.406,
+        "end": 0.476
+      },
+      {
+        "text": "der",
+        "start": 0.511,
+        "end": 0.604
+      },
+      {
+        "text": "Nase",
+        "start": 0.65,
+        "end": 0.975
+      },
+      {
+        "text": "liegen",
+        "start": 1.033,
+        "end": 1.265
+      },
+      {
+        "text": "hunderte",
+        "start": 1.3,
+        "end": 1.707
+      },
+      {
+        "text": "feine",
+        "start": 1.765,
+        "end": 2.043
+      },
+      {
+        "text": "Äderchen.",
+        "start": 2.125,
+        "end": 2.728
+      },
+      {
+        "text": "Direkt",
+        "start": 2.81,
+        "end": 3.193
+      },
+      {
+        "text": "unter",
+        "start": 3.251,
+        "end": 3.437
+      },
+      {
+        "text": "der",
+        "start": 3.471,
+        "end": 3.564
+      },
+      {
+        "text": "Haut.",
+        "start": 3.611,
+        "end": 4.133
+      }
+    ]
+  },
+  "e3": {
+    "text": "Ein Kratzer reicht.",
+    "heard": "Ein Kratzer reicht",
+    "wer": 0,
+    "fileDuration": 1.567347,
+    "words": [
+      {
+        "text": "Ein",
+        "start": 0,
+        "end": 0.232
+      },
+      {
+        "text": "Kratzer",
+        "start": 0.325,
+        "end": 0.72
+      },
+      {
+        "text": "reicht.",
+        "start": 0.778,
+        "end": 1.533
+      }
+    ]
+  },
+  "n1": {
+    "text": "[shouting] Aua!",
+    "heard": "Aua",
+    "wer": 0,
+    "fileDuration": 1.306122,
+    "words": [
+      {
+        "text": "Aua!",
+        "start": 0.15,
+        "end": 1.28
+      }
+    ]
+  },
+  "e4": {
+    "text": "Es tropft. Erstes Taschentuch: durch.",
+    "heard": "Es tropft. Erstes Taschentuch durch",
+    "wer": 0,
+    "fileDuration": 2.742857,
+    "words": [
+      {
+        "text": "Es",
+        "start": 0,
+        "end": 0.209
+      },
+      {
+        "text": "tropft.",
+        "start": 0.302,
+        "end": 0.743
+      },
+      {
+        "text": "Erstes",
+        "start": 0.894,
+        "end": 1.242
+      },
+      {
+        "text": "Taschentuch:",
+        "start": 1.3,
+        "end": 1.95
+      },
+      {
+        "text": "durch.",
+        "start": 2.125,
+        "end": 2.694
+      }
+    ]
+  },
+  "e5": {
+    "text": "Zweites: durch.",
+    "heard": "Zweites: durch",
+    "wer": 0,
+    "fileDuration": 1.619592,
+    "words": [
+      {
+        "text": "Zweites:",
+        "start": 0,
+        "end": 0.65
+      },
+      {
+        "text": "durch.",
+        "start": 0.801,
+        "end": 1.579
+      }
+    ]
+  },
+  "k2": {
+    "text": "[panicked] Warum hört das nicht auf?!",
+    "heard": "Warum hört das nicht auf?",
+    "wer": 0,
+    "fileDuration": 2.037551,
+    "words": [
+      {
+        "text": "Warum",
+        "start": 0.204,
+        "end": 0.32
+      },
+      {
+        "text": "hört",
+        "start": 0.4,
+        "end": 0.64
+      },
+      {
+        "text": "das",
+        "start": 0.7,
+        "end": 0.88
+      },
+      {
+        "text": "nicht",
+        "start": 0.92,
+        "end": 1.12
+      },
+      {
+        "text": "auf?!",
+        "start": 1.24,
+        "end": 2
+      }
+    ]
+  },
+  "e6": {
+    "text": "Kevin macht, was alle machen. Kopf in den Nacken.",
+    "heard": "Kevin macht, was alle machen: Kopf in den Nacken",
+    "wer": 0,
+    "fileDuration": 3.056327,
+    "words": [
+      {
+        "text": "Kevin",
+        "start": 0,
+        "end": 0.406
+      },
+      {
+        "text": "macht,",
+        "start": 0.499,
+        "end": 0.824
+      },
+      {
+        "text": "was",
+        "start": 0.848,
+        "end": 1.01
+      },
+      {
+        "text": "alle",
+        "start": 1.103,
+        "end": 1.289
+      },
+      {
+        "text": "machen.",
+        "start": 1.347,
+        "end": 1.765
+      },
+      {
+        "text": "Kopf",
+        "start": 1.881,
+        "end": 2.171
+      },
+      {
+        "text": "in",
+        "start": 2.241,
+        "end": 2.299
+      },
+      {
+        "text": "den",
+        "start": 2.345,
+        "end": 2.473
+      },
+      {
+        "text": "Nacken.",
+        "start": 2.519,
+        "end": 3.019
+      }
+    ]
+  },
+  "e7": {
+    "text": "Das Blut hört nicht auf. Es läuft nur woanders hin.",
+    "heard": "Das Blut hört nicht auf, es läuft nur woanders hin",
+    "wer": 0,
+    "fileDuration": 2.873469,
+    "words": [
+      {
+        "text": "Das",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "Blut",
+        "start": 0.255,
+        "end": 0.464
+      },
+      {
+        "text": "hört",
+        "start": 0.488,
+        "end": 0.65
+      },
+      {
+        "text": "nicht",
+        "start": 0.697,
+        "end": 0.894
+      },
+      {
+        "text": "auf.",
+        "start": 0.964,
+        "end": 1.324
+      },
+      {
+        "text": "Es",
+        "start": 1.358,
+        "end": 1.521
+      },
+      {
+        "text": "läuft",
+        "start": 1.579,
+        "end": 1.788
+      },
+      {
+        "text": "nur",
+        "start": 1.846,
+        "end": 1.962
+      },
+      {
+        "text": "woanders",
+        "start": 1.985,
+        "end": 2.438
+      },
+      {
+        "text": "hin.",
+        "start": 2.496,
+        "end": 2.833
+      }
+    ]
+  },
+  "e8": {
+    "text": "In den Hals. In den Magen.",
+    "heard": "In den Hals, in den Magen",
+    "wer": 0,
+    "fileDuration": 1.802449,
+    "words": [
+      {
+        "text": "In",
+        "start": 0,
+        "end": 0.151
+      },
+      {
+        "text": "den",
+        "start": 0.186,
+        "end": 0.302
+      },
+      {
+        "text": "Hals.",
+        "start": 0.36,
+        "end": 0.801
+      },
+      {
+        "text": "In",
+        "start": 0.836,
+        "end": 0.94
+      },
+      {
+        "text": "den",
+        "start": 0.975,
+        "end": 1.091
+      },
+      {
+        "text": "Magen.",
+        "start": 1.138,
+        "end": 1.765
+      }
+    ]
+  },
+  "k3": {
+    "text": "[disgusted] Bäh… mir wird schlecht.",
+    "heard": "Bäh, mir wird schlecht",
+    "wer": 1,
+    "fileDuration": 1.724082,
+    "words": [
+      {
+        "text": "Bäh…",
+        "start": 0.224,
+        "end": 0.72
+      },
+      {
+        "text": "mir",
+        "start": 0.76,
+        "end": 0.88
+      },
+      {
+        "text": "wird",
+        "start": 0.912,
+        "end": 1.04
+      },
+      {
+        "text": "schlecht.",
+        "start": 1.093,
+        "end": 1.68
+      }
+    ]
+  },
+  "e9": {
+    "text": "Richtig wäre: nach vorne beugen. Und die weiche Nase zehn Minuten zudrücken.",
+    "heard": "Richtig wäre nach vorne beugen und die weiche Nase zehn Minuten zudrücken",
+    "wer": 0,
+    "fileDuration": 5.093878,
+    "words": [
+      {
+        "text": "Richtig",
+        "start": 0,
+        "end": 0.511
+      },
+      {
+        "text": "wäre:",
+        "start": 0.557,
+        "end": 1.068
+      },
+      {
+        "text": "nach",
+        "start": 1.242,
+        "end": 1.44
+      },
+      {
+        "text": "vorne",
+        "start": 1.498,
+        "end": 1.776
+      },
+      {
+        "text": "beugen.",
+        "start": 1.823,
+        "end": 2.276
+      },
+      {
+        "text": "Und",
+        "start": 2.392,
+        "end": 2.624
+      },
+      {
+        "text": "die",
+        "start": 2.705,
+        "end": 2.798
+      },
+      {
+        "text": "weiche",
+        "start": 2.833,
+        "end": 3.111
+      },
+      {
+        "text": "Nase",
+        "start": 3.181,
+        "end": 3.553
+      },
+      {
+        "text": "zehn",
+        "start": 3.669,
+        "end": 3.866
+      },
+      {
+        "text": "Minuten",
+        "start": 3.913,
+        "end": 4.238
+      },
+      {
+        "text": "zudrücken.",
+        "start": 4.284,
+        "end": 5.062
+      }
+    ]
+  },
+  "e10": {
+    "text": "Zehn Minuten später: trocken.",
+    "heard": "Zehn Minuten später: trocken",
+    "wer": 0,
+    "fileDuration": 2.533878,
+    "words": [
+      {
+        "text": "Zehn",
+        "start": 0,
+        "end": 0.255
+      },
+      {
+        "text": "Minuten",
+        "start": 0.313,
+        "end": 0.65
+      },
+      {
+        "text": "später:",
+        "start": 0.685,
+        "end": 1.265
+      },
+      {
+        "text": "trocken.",
+        "start": 1.591,
+        "end": 2.508
+      }
+    ]
+  },
+  "e11": {
+    "text": "Kevin versteht es nicht. Er hat doch nur einmal gebohrt.",
+    "heard": "Kevin versteht es nicht. Er hat doch nur einmal gebohrt",
+    "wer": 0,
+    "fileDuration": 3.343673,
+    "words": [
+      {
+        "text": "Kevin",
+        "start": 0,
+        "end": 0.302
+      },
+      {
+        "text": "versteht",
+        "start": 0.348,
+        "end": 0.697
+      },
+      {
+        "text": "es",
+        "start": 0.755,
+        "end": 0.824
+      },
+      {
+        "text": "nicht.",
+        "start": 0.894,
+        "end": 1.173
+      },
+      {
+        "text": "Er",
+        "start": 1.324,
+        "end": 1.428
+      },
+      {
+        "text": "hat",
+        "start": 1.474,
+        "end": 1.614
+      },
+      {
+        "text": "doch",
+        "start": 1.649,
+        "end": 1.8
+      },
+      {
+        "text": "nur",
+        "start": 1.858,
+        "end": 2.032
+      },
+      {
+        "text": "einmal",
+        "start": 2.148,
+        "end": 2.589
+      },
+      {
+        "text": "gebohrt.",
+        "start": 2.635,
+        "end": 3.297
+      }
+    ]
+  },
+  "a1": {
+    "text": "Das war nicht nur der Finger. Das war die Heizung.",
+    "heard": "Das war nicht nur der Finger, das war die Heizung",
+    "wer": 0,
+    "fileDuration": 3.186939,
+    "words": [
+      {
+        "text": "Das",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "war",
+        "start": 0.29,
+        "end": 0.406
+      },
+      {
+        "text": "nicht",
+        "start": 0.441,
+        "end": 0.615
+      },
+      {
+        "text": "nur",
+        "start": 0.639,
+        "end": 0.731
+      },
+      {
+        "text": "der",
+        "start": 0.766,
+        "end": 0.871
+      },
+      {
+        "text": "Finger.",
+        "start": 0.917,
+        "end": 1.324
+      },
+      {
+        "text": "Das",
+        "start": 1.765,
+        "end": 1.95
+      },
+      {
+        "text": "war",
+        "start": 2.02,
+        "end": 2.136
+      },
+      {
+        "text": "die",
+        "start": 2.171,
+        "end": 2.264
+      },
+      {
+        "text": "Heizung.",
+        "start": 2.322,
+        "end": 3.158
+      }
+    ]
+  },
+  "e12": {
+    "text": "Trockene Heizungsluft macht die Äderchen brüchig. Der Finger war nur der Auslöser.",
+    "heard": "Trockene Heizungsluft macht die Äderchen brüchig. Der Finger war nur der Auslöser",
+    "wer": 0,
+    "fileDuration": 4.310204,
+    "words": [
+      {
+        "text": "Trockene",
+        "start": 0,
+        "end": 0.418
+      },
+      {
+        "text": "Heizungsluft",
+        "start": 0.464,
+        "end": 1.126
+      },
+      {
+        "text": "macht",
+        "start": 1.184,
+        "end": 1.358
+      },
+      {
+        "text": "die",
+        "start": 1.382,
+        "end": 1.474
+      },
+      {
+        "text": "Äderchen",
+        "start": 1.521,
+        "end": 1.892
+      },
+      {
+        "text": "brüchig.",
+        "start": 1.939,
+        "end": 2.438
+      },
+      {
+        "text": "Der",
+        "start": 2.508,
+        "end": 2.635
+      },
+      {
+        "text": "Finger",
+        "start": 2.67,
+        "end": 2.926
+      },
+      {
+        "text": "war",
+        "start": 2.972,
+        "end": 3.088
+      },
+      {
+        "text": "nur",
+        "start": 3.135,
+        "end": 3.274
+      },
+      {
+        "text": "der",
+        "start": 3.297,
+        "end": 3.379
+      },
+      {
+        "text": "Auslöser.",
+        "start": 3.425,
+        "end": 4.272
+      }
+    ]
+  },
+  "e13": {
+    "text": "Kevin geht nach Hause. Und dreht die Heizung auf fünf.",
+    "heard": "Kevin geht nach Hause und dreht die Heizung auf fünf",
+    "wer": 0,
+    "fileDuration": 3.186939,
+    "words": [
+      {
+        "text": "Kevin",
+        "start": 0,
+        "end": 0.313
+      },
+      {
+        "text": "geht",
+        "start": 0.36,
+        "end": 0.488
+      },
+      {
+        "text": "nach",
+        "start": 0.546,
+        "end": 0.673
+      },
+      {
+        "text": "Hause.",
+        "start": 0.697,
+        "end": 1.173
+      },
+      {
+        "text": "Und",
+        "start": 1.242,
+        "end": 1.451
+      },
+      {
+        "text": "dreht",
+        "start": 1.521,
+        "end": 1.707
+      },
+      {
+        "text": "die",
+        "start": 1.788,
+        "end": 1.869
+      },
+      {
+        "text": "Heizung",
+        "start": 1.916,
+        "end": 2.287
+      },
+      {
+        "text": "auf",
+        "start": 2.345,
+        "end": 2.438
+      },
+      {
+        "text": "fünf.",
+        "start": 2.508,
+        "end": 3.158
+      }
+    ]
+  },
+  "e14": {
+    "text": "Dann juckt seine Nase.",
+    "heard": "Dann juckt seine Nase",
+    "wer": 0,
+    "fileDuration": 1.567347,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0,
+        "end": 0.267
+      },
+      {
+        "text": "juckt",
+        "start": 0.36,
+        "end": 0.58
+      },
+      {
+        "text": "seine",
+        "start": 0.604,
+        "end": 0.824
+      },
+      {
+        "text": "Nase.",
+        "start": 0.882,
+        "end": 1.533
+      }
+    ]
+  },
+  "k4": {
+    "text": "[sheepish] Nur ganz kurz…",
+    "heard": "Nur ganz kurz",
+    "wer": 0,
+    "fileDuration": 1.306122,
+    "words": [
+      {
+        "text": "Nur",
+        "start": 0.284,
+        "end": 0.32
+      },
+      {
+        "text": "ganz",
+        "start": 0.384,
+        "end": 0.64
+      },
+      {
+        "text": "kurz…",
+        "start": 0.736,
+        "end": 1.28
+      }
+    ]
+  }
+}

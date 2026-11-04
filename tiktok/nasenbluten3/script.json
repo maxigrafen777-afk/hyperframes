@@ -1,0 +1,401 @@
+{
+  "title": "Nasenbluten – Kevin bohrt (Erzählung)",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "maxPause": 0.35,
+  "scenes": {
+    "film": [0, 90]
+  },
+  "order": ["film"],
+  "qa": {
+    "maxTakes": 4,
+    "maxWer": 0.1,
+    "maxF0Dev": 0.3
+  },
+  "lines": [
+    {
+      "id": "h1",
+      "speaker": "erz",
+      "start": 0.3,
+      "end": 0.45,
+      "text": "Wenn deine Nase blutet, mach nie das, was alle machen.",
+      "emph": ["nie"]
+    },
+    {
+      "id": "e1",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Kevin bohrt. Nur ganz kurz.",
+      "wait": 0.35,
+      "emph": ["bohrt"]
+    },
+    {
+      "id": "k1",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[focused] Gleich hab ich ihn…",
+      "wait": 0.2
+    },
+    {
+      "id": "e2",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Vorne in der Nase liegen hunderte feine Äderchen. Direkt unter der Haut.",
+      "wait": 0.25,
+      "red": ["Äderchen"]
+    },
+    {
+      "id": "e3",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Ein Kratzer reicht.",
+      "wait": 0.2,
+      "red": ["Kratzer"]
+    },
+    {
+      "id": "n1",
+      "speaker": "nase",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[shouting] Aua!",
+      "wait": 0.15
+    },
+    {
+      "id": "e4",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Es tropft. Erstes Taschentuch: durch.",
+      "wait": 0.4,
+      "red": ["durch"]
+    },
+    {
+      "id": "e5",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Zweites: durch.",
+      "wait": 0.7,
+      "red": ["durch"]
+    },
+    {
+      "id": "k2",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[panicked] Warum hört das nicht auf?!",
+      "wait": 0.2
+    },
+    {
+      "id": "e6",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Kevin macht, was alle machen. Kopf in den Nacken.",
+      "wait": 0.3,
+      "emph": ["Nacken"]
+    },
+    {
+      "id": "e7",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Das Blut hört nicht auf. Es läuft nur woanders hin.",
+      "wait": 0.5,
+      "emph": ["woanders"]
+    },
+    {
+      "id": "e8",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "In den Hals. In den Magen.",
+      "wait": 0.2,
+      "red": ["Magen"]
+    },
+    {
+      "id": "k3",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[disgusted] Bäh… mir wird schlecht.",
+      "wait": 0.2
+    },
+    {
+      "id": "e9",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Richtig wäre: nach vorne beugen. Und die weiche Nase zehn Minuten zudrücken.",
+      "wait": 0.3,
+      "emph": ["vorne", "zehn"]
+    },
+    {
+      "id": "e10",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Zehn Minuten später: trocken.",
+      "wait": 1.0,
+      "emph": ["trocken"]
+    },
+    {
+      "id": "e11",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Kevin versteht es nicht. Er hat doch nur einmal gebohrt.",
+      "wait": 0.3
+    },
+    {
+      "id": "a1",
+      "speaker": "arzt",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Das war nicht nur der Finger. Das war die Heizung.",
+      "wait": 0.25
+    },
+    {
+      "id": "e12",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Trockene Heizungsluft macht die Äderchen brüchig. Der Finger war nur der Auslöser.",
+      "wait": 0.25,
+      "red": ["brüchig"]
+    },
+    {
+      "id": "e13",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Kevin geht nach Hause. Und dreht die Heizung auf fünf.",
+      "wait": 0.3,
+      "emph": ["fünf"]
+    },
+    {
+      "id": "e14",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Dann juckt seine Nase.",
+      "wait": 0.6,
+      "emph": ["juckt"]
+    },
+    {
+      "id": "k4",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[sheepish] Nur ganz kurz…",
+      "wait": 0.5
+    }
+  ],
+  "voices": {
+    "erz": {
+      "name": "Erzähler (DE, Thriller)",
+      "voice_id": "spxwiZxnePFLHftJHjv9",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.5,
+        "use_speaker_boost": true
+      },
+      "seed": 7777,
+      "tempo": 1.0,
+      "f0ref": 93
+    },
+    "pat": {
+      "name": "Kevin (DE, expressiv, v3)",
+      "voice_id": "cqyVmSq0c5HqMrXd3PFX",
+      "model": "eleven_v3",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.0,
+        "use_speaker_boost": true
+      },
+      "seed": 9191,
+      "tempo": 1.1,
+      "f0ref": 118
+    },
+    "nase": {
+      "name": "Nase (DE, empört, v3)",
+      "voice_id": "iMhFrwuReAMs8t3Bbu7O",
+      "model": "eleven_v3",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.0,
+        "use_speaker_boost": true
+      },
+      "seed": 9292,
+      "tempo": 1.1,
+      "f0ref": 255
+    },
+    "arzt": {
+      "name": "Arzt (DE, ruhig, älter)",
+      "voice_id": "Og1j4Myr6614gRWlVatR",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.85,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "seed": 4444,
+      "tempo": 1.0
+    }
+  },
+  "genSfx": [
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "scratch",
+      "prompt": "finger scratching inside nose, squelchy rubbing, cartoon",
+      "duration": 1.0
+    },
+    {
+      "id": "burst",
+      "prompt": "tiny wet pop, small balloon of liquid bursting, cartoon",
+      "duration": 0.5
+    },
+    {
+      "id": "drip",
+      "prompt": "liquid dripping drops, cartoon drip drip",
+      "duration": 1.2
+    },
+    {
+      "id": "gulp",
+      "prompt": "cartoon swallowing gulp, liquid running down throat",
+      "duration": 0.8
+    },
+    {
+      "id": "squeeze",
+      "prompt": "soft rubbery squeeze, nose being pinched, cartoon honk short",
+      "duration": 0.5
+    },
+    {
+      "id": "tissue",
+      "prompt": "tissue paper rustle and dab, short",
+      "duration": 0.6
+    },
+    {
+      "id": "cough",
+      "prompt": "short disgusted cough, bleh, no words",
+      "duration": 0.7
+    },
+    {
+      "id": "tick",
+      "prompt": "fast clock ticking then soft ding",
+      "duration": 1.6
+    },
+    {
+      "id": "heater",
+      "prompt": "old radiator thermostat knob clicking, then radiator ticking and hissing warm",
+      "duration": 1.5
+    },
+    {
+      "id": "hit",
+      "prompt": "dark cinematic low hit, suspense stinger",
+      "duration": 1.2
+    },
+    {
+      "id": "dripdark",
+      "prompt": "single drop of liquid echoing in silence",
+      "duration": 1.5
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-hit0",
+      "src": "gen-hit.mp3",
+      "volume": 0.45,
+      "start": 0
+    },
+    {
+      "id": "sfx-scratch",
+      "src": "gen-scratch.mp3",
+      "volume": 0.4,
+      "line": "e1",
+      "offset": 0.2
+    },
+    {
+      "id": "sfx-burst",
+      "src": "gen-burst.mp3",
+      "volume": 0.55,
+      "line": "e3",
+      "offset": 1.0
+    },
+    {
+      "id": "sfx-drip",
+      "src": "gen-drip.mp3",
+      "volume": 0.3,
+      "line": "e4",
+      "offset": 0.0
+    },
+    {
+      "id": "sfx-tissue1",
+      "src": "gen-tissue.mp3",
+      "volume": 0.45,
+      "line": "e4",
+      "offset": 1.0
+    },
+    {
+      "id": "sfx-tissue2",
+      "src": "gen-tissue.mp3",
+      "volume": 0.45,
+      "line": "e5",
+      "offset": -0.6
+    },
+    {
+      "id": "sfx-gulp",
+      "src": "gen-gulp.mp3",
+      "volume": 0.4,
+      "line": "e8",
+      "offset": -0.5
+    },
+    {
+      "id": "sfx-hit1",
+      "src": "gen-hit.mp3",
+      "volume": 0.35,
+      "line": "e7",
+      "offset": -0.45
+    },
+    {
+      "id": "sfx-tick",
+      "src": "gen-tick.mp3",
+      "volume": 0.3,
+      "line": "e10",
+      "offset": -1.0
+    },
+    {
+      "id": "sfx-hit2",
+      "src": "gen-hit.mp3",
+      "volume": 0.45,
+      "line": "a1",
+      "offset": -0.2
+    },
+    {
+      "id": "sfx-heater",
+      "src": "gen-heater.mp3",
+      "volume": 0.45,
+      "line": "e13",
+      "offset": 2.0
+    },
+    {
+      "id": "sfx-drip-end",
+      "src": "gen-dripdark.mp3",
+      "volume": 0.6,
+      "line": "k4",
+      "offset": 1.6
+    }
+  ]
+}

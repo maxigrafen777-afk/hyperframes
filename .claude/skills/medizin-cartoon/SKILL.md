@@ -257,3 +257,13 @@ Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok
 - **Bildsprache 1:1 an das Vorbild anlehnen** (Inhalt eigen): feine dunkle Linien 3 px statt dicker Konturen, weiche beige Haut `#F7E2C9` mit breiten hellen Schattenstrichen, Blut flach korallenrot `#F2545B` ohne Kontur, realistische Hände mit Nagel, echtes weißes Taschentuch mit Falten. Einstieg: Nase im Profil aufgeschnitten (dunkelrote Schleimhaut, Kruste, Augen auf der Innenwand), Finger kratzt von unten. Dann Nase frontal bildfüllend (ohne Lippen), dann schlichtes Profil.
 - **Stimmen „langweilig“ → `eleven_v3` mit Emotions-Tags** (`[panicked]`, `[whining]`, `[shocked]`, `[disgusted]`, `[sighs]`, `[relieved]`) für die Hauptfiguren; Arzt bleibt multilingual_v2. `voices.mjs` kann das Modell pro Stimme (`"model": "eleven_v3"` in `voices`). Gemessen: v3 9,7 Halbtöne Schwankung gegenüber 8,1 bei v2. Tempo 1,1, `qa.maxF0Dev` 0,3 (Emotion verschiebt die Tonlage). Neue Stimmen: Kevin `cqyVmSq0c5HqMrXd3PFX`, Nase `iMhFrwuReAMs8t3Bbu7O`.
 - `mixstt.mjs` zählt [Tags] als Wörter mit – für die Trefferquote Tags vorher entfernen.
+
+## Erzähl-Format (gelernt an einem viralen deutschen Story-Video, umgesetzt in `tiktok/nasenbluten3/`)
+
+- **Erster Satz = offene Regel/Behauptung**, die erst später aufgelöst wird („Wenn deine Nase blutet, mach nie das, was alle machen.“ → Auflösung bei „Kopf in den Nacken“).
+- **Ein Erzähler** (Thriller-Stimme `spxwiZxnePFLHftJHjv9`, multilingual_v2, 9,7 Halbtöne Schwankung) in kurzen Präsens-Sätzen; Figuren nur mit 1–2-Wort-Einwürfen (v3 mit Tags).
+- **Schnitt alle ~1,5–2 s:** eine Komposition `film`, alle Bilder als eigene `<svg id="set-…">`, `shot(set, t, px, py, k, dur, push)` schaltet hart um und schiebt langsam rein (Kamera geklemmt, sonst weiße Ränder).
+- **Arzt nur als Wendung** (ein Satz: „Das war nicht nur der Finger. Das war die Heizung.“), keine Erklär-Szene am Ende.
+- **Doppelte Wendung am Ende + Loop:** Heizung auf fünf, Nase juckt, „Nur ganz kurz…“, Schwarzbild mit Tropfen, dann Ja/Nein-Sticker.
+- **Untertitel 2–3 Wörter**, Schlüsselwörter gelb (`emph`) oder rot (`red`) in `script.json`.
+- Fehlt beim Rendern `hyperframe.manifest.json` oder ein `*.browser.js`, wurde das CLI nur halb gebaut: `cd packages/cli && bun run build`.
