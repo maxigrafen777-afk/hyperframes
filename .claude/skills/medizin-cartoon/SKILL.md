@@ -251,3 +251,9 @@ Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok
 - **Spannung durch Steigerung:** Es hört nicht auf (Taschentuch 1 voll, Taschentuch 2 voll), dann der falsche Weg, dann der richtige. Innenansicht als Lupen-Einblendung statt eigener Szene.
 - **Nicht nachbauen:** Prinzipien übernehmen, aber eigene Story, eigene Gags (sprechende Taschentücher, falsches „Kopf in den Nacken“ sichtbar, Heizungsluft-Fakt, Pointe „Nur ganz kurz…“ – „Kevin!“), eigener Arzt.
 - Kurze Ausrufe am Satzanfang („Au!“) verschluckt die Stimme oft; „Autsch!“ funktioniert.
+
+### Nasenbluten v3 – Bildsprache des Vorbilds + lebendige Stimmen
+
+- **Bildsprache 1:1 an das Vorbild anlehnen** (Inhalt eigen): feine dunkle Linien 3 px statt dicker Konturen, weiche beige Haut `#F7E2C9` mit breiten hellen Schattenstrichen, Blut flach korallenrot `#F2545B` ohne Kontur, realistische Hände mit Nagel, echtes weißes Taschentuch mit Falten. Einstieg: Nase im Profil aufgeschnitten (dunkelrote Schleimhaut, Kruste, Augen auf der Innenwand), Finger kratzt von unten. Dann Nase frontal bildfüllend (ohne Lippen), dann schlichtes Profil.
+- **Stimmen „langweilig“ → `eleven_v3` mit Emotions-Tags** (`[panicked]`, `[whining]`, `[shocked]`, `[disgusted]`, `[sighs]`, `[relieved]`) für die Hauptfiguren; Arzt bleibt multilingual_v2. `voices.mjs` kann das Modell pro Stimme (`"model": "eleven_v3"` in `voices`). Gemessen: v3 9,7 Halbtöne Schwankung gegenüber 8,1 bei v2. Tempo 1,1, `qa.maxF0Dev` 0,3 (Emotion verschiebt die Tonlage). Neue Stimmen: Kevin `cqyVmSq0c5HqMrXd3PFX`, Nase `iMhFrwuReAMs8t3Bbu7O`.
+- `mixstt.mjs` zählt [Tags] als Wörter mit – für die Trefferquote Tags vorher entfernen.

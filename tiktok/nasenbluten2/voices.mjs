@@ -62,17 +62,21 @@ export function toWords(al) {
 }
 
 // v3 versteht [Tags]; ältere Modelle (multilingual_v2) würden sie vorlesen.
-const isV3 = model === "eleven_v3";
-const spoken = (t) => (isV3 ? t : t.replace(/\[[^\]]*\]\s*/g, "").trim());
+// Modell pro Stimme überschreibbar ("model" in voices): v3 für lebendige Figuren.
+const modelOf = (sp) => voices[sp]?.model || model;
+const stripTags = (t) => t.replace(/\[[^\]]*\]\s*/g, "").trim();
 async function tts(line, take = 1) {
   const v = voices[line.speaker];
+  const lm = modelOf(line.speaker);
+  const isV3 = lm === "eleven_v3";
+  const spoken = (t) => (isV3 ? t : stripTags(t));
   // Gleichmäßiger Klang: fester Seed pro Figur, und (multilingual_v2) die
   // Nachbarsätze derselben Figur als Kontext.
   const same = script.lines.filter((l) => l.speaker === line.speaker && !l.reuse);
   const i = same.findIndex((l) => l.id === line.id);
   const body = {
     text: spoken(line.text),
-    model_id: model,
+    model_id: lm,
     voice_settings: { ...v.settings, ...(line.settings || {}) },
     seed: (v.seed ?? 4242) + take - 1,
   };

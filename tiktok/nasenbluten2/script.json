@@ -5,119 +5,135 @@
   "voiceModel": "eleven_multilingual_v2",
   "maxPause": 0.3,
   "scenes": {
-    "front": [0, 20],
-    "profil": [20, 40],
-    "station": [45, 47]
+    "innen": [0, 10],
+    "front": [10, 30],
+    "profil": [30, 50],
+    "station": [55, 57]
   },
-  "order": ["front", "profil", "station"],
+  "order": ["innen", "front", "profil", "station"],
   "qa": {
     "maxTakes": 4,
     "maxWer": 0.1,
-    "maxF0Dev": 0.2
+    "maxF0Dev": 0.3
   },
   "lines": [
     {
-      "id": "k1",
-      "speaker": "pat",
+      "id": "n1",
+      "speaker": "nase",
       "start": 0.3,
       "end": 0.35,
-      "text": "Nur ganz kurz… gleich hab ich ihn."
+      "text": "[angry] Ey! Das ist meine Haut, kein Kratzbaum!"
+    },
+    {
+      "id": "k1",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[excited] Moment… gleich hab ich ihn!",
+      "wait": 0.2
+    },
+    {
+      "id": "n2",
+      "speaker": "nase",
+      "start": 0.5,
+      "end": 0.55,
+      "text": "[shouting] Aua! Jetzt blute ich!",
+      "wait": 0.6
     },
     {
       "id": "k2",
       "speaker": "pat",
-      "start": 0.4,
-      "end": 0.45,
-      "text": "Autsch! Mist, jetzt blutet es.",
-      "wait": 1.0
-    },
-    {
-      "id": "t1",
-      "speaker": "tuch",
-      "start": 0.5,
-      "end": 0.55,
-      "text": "Hilfe! Ich bin schon voll!",
-      "wait": 1.1
-    },
-    {
-      "id": "t2",
-      "speaker": "tuch2",
-      "start": 0.6,
-      "end": 0.65,
-      "text": "Ich auch?! Das hört ja gar nicht auf!",
-      "wait": 1.1
+      "start": 10.4,
+      "end": 10.450000000000001,
+      "text": "[panicked] Oh nein. Warum blutet das so doll?"
     },
     {
       "id": "k3",
       "speaker": "pat",
-      "start": 20.3,
-      "end": 20.35,
-      "text": "Okay. Kopf in den Nacken."
+      "start": 10.5,
+      "end": 10.55,
+      "text": "[whining] Ich hab doch nur einmal gebohrt!",
+      "wait": 1.2
     },
     {
       "id": "k4",
       "speaker": "pat",
-      "start": 20.4,
-      "end": 20.45,
-      "text": "Bäh! Jetzt läuft's mir in den Hals.",
-      "wait": 1.2
+      "start": 10.6,
+      "end": 10.65,
+      "text": "[shocked] Was? Das Taschentuch ist auch schon durch?!",
+      "wait": 1.4
     },
     {
       "id": "k5",
       "speaker": "pat",
-      "start": 20.5,
-      "end": 20.55,
-      "text": "Dann eben nach vorne und zudrücken.",
-      "wait": 0.4
+      "start": 30.3,
+      "end": 30.35,
+      "text": "[nervous] Okay. Kopf in den Nacken, oder?"
     },
     {
       "id": "k6",
       "speaker": "pat",
-      "start": 20.6,
-      "end": 20.650000000000002,
-      "text": "Endlich. Es hört auf.",
+      "start": 30.4,
+      "end": 30.45,
+      "text": "[disgusted] Bäh! Das läuft mir in den Hals!",
+      "wait": 1.2
+    },
+    {
+      "id": "k7",
+      "speaker": "pat",
+      "start": 30.5,
+      "end": 30.55,
+      "text": "[sighs] Na gut. Nach vorne beugen und zudrücken.",
+      "wait": 0.4
+    },
+    {
+      "id": "k8",
+      "speaker": "pat",
+      "start": 30.6,
+      "end": 30.650000000000002,
+      "text": "[relieved] Endlich. Es hört auf.",
       "wait": 1.9
     },
     {
       "id": "q1",
       "speaker": "pat",
-      "start": 45.4,
-      "end": 45.449999999999996,
-      "text": "Herr Doktor, ich hab nur einmal gebohrt. Warum blutet das so?"
+      "start": 55.4,
+      "end": 55.449999999999996,
+      "text": "[confused] Herr Doktor, ich hab nur einmal gebohrt. Warum blutet das so?"
     },
     {
       "id": "d1",
       "speaker": "arzt",
-      "start": 45.5,
+      "start": 55.5,
       "end": 45.55,
       "text": "Vorne in der Nase liegen viele feine Äderchen direkt unter der Schleimhaut. Ein Kratzer reicht, und sie bluten."
     },
     {
       "id": "d2",
       "speaker": "arzt",
-      "start": 45.6,
+      "start": 55.5,
       "end": 45.65,
       "text": "Trockene Heizungsluft macht sie im Winter noch empfindlicher."
     },
     {
       "id": "d3",
       "speaker": "arzt",
-      "start": 45.7,
+      "start": 55.5,
       "end": 45.75,
       "text": "Also: Kopf nach vorne und die weiche Nase zehn Minuten zudrücken. Hört es nach zwanzig Minuten nicht auf, ab zum Arzt."
     },
     {
       "id": "e1",
       "speaker": "pfi",
-      "start": 45.8,
+      "start": 55.6,
       "end": 45.849999999999994,
-      "text": "Nur ganz kurz…",
+      "text": "[sheepish] Nur ganz kurz…",
       "wait": 0.7
     },
     {
       "id": "e2",
       "speaker": "arzt",
-      "start": 45.9,
+      "start": 55.5,
       "end": 45.949999999999996,
       "text": "Kevin!",
       "wait": 0.2
@@ -125,54 +141,32 @@
   ],
   "voices": {
     "pat": {
-      "name": "Patient (DE, locker)",
-      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
-      "settings": {
-        "stability": 0.45,
-        "similarity_boost": 0.85,
-        "style": 0.5,
-        "use_speaker_boost": true
-      },
-      "seed": 5555,
-      "tempo": 1.0,
-      "f0ref": 120
-    },
-    "tuch": {
-      "name": "Taschentuch 1 (Hand-Stimme, hochgepitcht)",
-      "voice_id": "pDG6X0RdbndwY5oM9QBN",
-      "settings": {
-        "stability": 0.45,
-        "similarity_boost": 0.85,
-        "style": 0.35,
-        "use_speaker_boost": true
-      },
-      "seed": 8181,
-      "tempo": 1.0
-    },
-    "tuch2": {
-      "name": "Taschentuch 2 (Pickel-Stimme, hochgepitcht)",
-      "voice_id": "hmzGETctUW7XCobpQ3UF",
-      "settings": {
-        "stability": 0.45,
-        "similarity_boost": 0.85,
-        "style": 0.5,
-        "use_speaker_boost": true
-      },
-      "seed": 8282,
-      "tempo": 1.0
-    },
-    "pfi": {
-      "name": "Kevin (Pointe)",
-      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "name": "Kevin (DE, expressiv, v3)",
+      "voice_id": "cqyVmSq0c5HqMrXd3PFX",
+      "model": "eleven_v3",
       "settings": {
         "stability": 0.5,
         "similarity_boost": 0.85,
-        "style": 0.3,
+        "style": 0.0,
         "use_speaker_boost": true
       },
-      "seed": 8383,
-      "tempo": 1.0,
-      "f0ref": 120
+      "seed": 9191,
+      "tempo": 1.1,
+      "f0ref": 118
+    },
+    "nase": {
+      "name": "Nase (DE, empört, v3)",
+      "voice_id": "iMhFrwuReAMs8t3Bbu7O",
+      "model": "eleven_v3",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.0,
+        "use_speaker_boost": true
+      },
+      "seed": 9292,
+      "tempo": 1.1,
+      "f0ref": 255
     },
     "arzt": {
       "name": "Arzt (DE, ruhig, älter)",
@@ -185,6 +179,20 @@
       },
       "seed": 4444,
       "tempo": 1.0
+    },
+    "pfi": {
+      "name": "Kevin (DE, expressiv, v3)",
+      "voice_id": "cqyVmSq0c5HqMrXd3PFX",
+      "model": "eleven_v3",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.0,
+        "use_speaker_boost": true
+      },
+      "seed": 9393,
+      "tempo": 1.1,
+      "f0ref": 118
     }
   },
   "genSfx": [
@@ -236,68 +244,6 @@
   ],
   "sfx": [
     {
-      "id": "sfx-scratch",
-      "src": "gen-scratch.mp3",
-      "volume": 0.45,
-      "start": 0
-    },
-    {
-      "id": "sfx-burst",
-      "src": "gen-burst.mp3",
-      "volume": 0.55,
-      "line": "k2",
-      "offset": -0.55
-    },
-    {
-      "id": "sfx-drip",
-      "src": "gen-drip.mp3",
-      "volume": 0.35,
-      "line": "k2",
-      "offset": 1.5
-    },
-    {
-      "id": "sfx-tissue1",
-      "src": "gen-tissue.mp3",
-      "volume": 0.5,
-      "line": "t1",
-      "offset": -1.0
-    },
-    {
-      "id": "sfx-tissue2",
-      "src": "gen-tissue.mp3",
-      "volume": 0.5,
-      "line": "t2",
-      "offset": -1.0
-    },
-    {
-      "id": "sfx-cut",
-      "src": "whoosh-short.mp3",
-      "volume": 0.3,
-      "anchor": "profil",
-      "offset": -0.05
-    },
-    {
-      "id": "sfx-gulp",
-      "src": "gen-gulp.mp3",
-      "volume": 0.45,
-      "line": "k4",
-      "offset": -1.0
-    },
-    {
-      "id": "sfx-squeeze",
-      "src": "gen-squeeze.mp3",
-      "volume": 0.45,
-      "line": "k5",
-      "offset": 2.0
-    },
-    {
-      "id": "sfx-tick",
-      "src": "gen-tick.mp3",
-      "volume": 0.35,
-      "line": "k6",
-      "offset": -1.75
-    },
-    {
       "id": "sfx-station",
       "src": "whoosh-short.mp3",
       "volume": 0.3,
@@ -310,6 +256,68 @@
       "volume": 0.35,
       "line": "e2",
       "offset": 0.7
+    },
+    {
+      "id": "sfx-scratch",
+      "src": "gen-scratch.mp3",
+      "volume": 0.45,
+      "start": 0
+    },
+    {
+      "id": "sfx-burst",
+      "src": "gen-burst.mp3",
+      "volume": 0.5,
+      "line": "n2",
+      "offset": -0.45
+    },
+    {
+      "id": "sfx-cut1",
+      "src": "whoosh-short.mp3",
+      "volume": 0.3,
+      "anchor": "front",
+      "offset": -0.05
+    },
+    {
+      "id": "sfx-tissue1",
+      "src": "gen-tissue.mp3",
+      "volume": 0.5,
+      "line": "k3",
+      "offset": -1.05
+    },
+    {
+      "id": "sfx-tissue2",
+      "src": "gen-tissue.mp3",
+      "volume": 0.5,
+      "line": "k4",
+      "offset": -1.25
+    },
+    {
+      "id": "sfx-cut2",
+      "src": "whoosh-short.mp3",
+      "volume": 0.3,
+      "anchor": "profil",
+      "offset": -0.05
+    },
+    {
+      "id": "sfx-gulp",
+      "src": "gen-gulp.mp3",
+      "volume": 0.45,
+      "line": "k6",
+      "offset": -1.0
+    },
+    {
+      "id": "sfx-squeeze",
+      "src": "gen-squeeze.mp3",
+      "volume": 0.45,
+      "line": "k8",
+      "offset": -1.2
+    },
+    {
+      "id": "sfx-tick",
+      "src": "gen-tick.mp3",
+      "volume": 0.3,
+      "line": "k8",
+      "offset": -0.9
     }
   ]
 }
