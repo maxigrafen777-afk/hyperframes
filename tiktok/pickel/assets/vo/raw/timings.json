@@ -1,0 +1,720 @@
+{
+  "h1": {
+    "text": "Hey! Das ist eine Pore, kein Hotel!",
+    "heard": "Hey, das ist eine Pore, kein Hotel",
+    "wer": 0,
+    "fileDuration": 2.586122,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0,
+        "end": 0.557
+      },
+      {
+        "text": "Das",
+        "start": 0.627,
+        "end": 0.789
+      },
+      {
+        "text": "ist",
+        "start": 0.836,
+        "end": 0.929
+      },
+      {
+        "text": "eine",
+        "start": 0.964,
+        "end": 1.138
+      },
+      {
+        "text": "Pore,",
+        "start": 1.196,
+        "end": 1.683
+      },
+      {
+        "text": "kein",
+        "start": 1.73,
+        "end": 1.985
+      },
+      {
+        "text": "Hotel!",
+        "start": 2.032,
+        "end": 2.554
+      }
+    ]
+  },
+  "p1": {
+    "text": "Zu spät, Schätzchen. Wir haben schon ausgepackt.",
+    "heard": "Zu spät, Schätzchen. Wir haben schon ausgepackt",
+    "wer": 0,
+    "fileDuration": 3.108571,
+    "words": [
+      {
+        "text": "Zu",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "spät,",
+        "start": 0.279,
+        "end": 0.673
+      },
+      {
+        "text": "Schätzchen.",
+        "start": 0.697,
+        "end": 1.254
+      },
+      {
+        "text": "Wir",
+        "start": 1.289,
+        "end": 1.405
+      },
+      {
+        "text": "haben",
+        "start": 1.44,
+        "end": 1.637
+      },
+      {
+        "text": "schon",
+        "start": 1.66,
+        "end": 1.823
+      },
+      {
+        "text": "ausgepackt.",
+        "start": 1.881,
+        "end": 3.065
+      }
+    ]
+  },
+  "h2": {
+    "text": "Ich hab morgen ein Date!",
+    "heard": "Ich hab morgen ein Date",
+    "wer": 0,
+    "fileDuration": 1.985306,
+    "words": [
+      {
+        "text": "Ich",
+        "start": 0,
+        "end": 0.163
+      },
+      {
+        "text": "hab",
+        "start": 0.197,
+        "end": 0.29
+      },
+      {
+        "text": "morgen",
+        "start": 0.348,
+        "end": 0.673
+      },
+      {
+        "text": "ein",
+        "start": 0.731,
+        "end": 0.871
+      },
+      {
+        "text": "Date!",
+        "start": 0.987,
+        "end": 1.95
+      }
+    ]
+  },
+  "p2": {
+    "text": "Super. Ich komm mit. Ganz vorne.",
+    "heard": "Super, ich komm mit, ganz vorne",
+    "wer": 0,
+    "fileDuration": 2.220408,
+    "words": [
+      {
+        "text": "Super.",
+        "start": 0,
+        "end": 0.534
+      },
+      {
+        "text": "Ich",
+        "start": 0.627,
+        "end": 0.778
+      },
+      {
+        "text": "komm",
+        "start": 0.813,
+        "end": 0.975
+      },
+      {
+        "text": "mit.",
+        "start": 1.022,
+        "end": 1.335
+      },
+      {
+        "text": "Ganz",
+        "start": 1.405,
+        "end": 1.625
+      },
+      {
+        "text": "vorne.",
+        "start": 1.66,
+        "end": 2.183
+      }
+    ]
+  },
+  "f1": {
+    "text": "Keine Sorge, ich drück den einfach weg!",
+    "heard": "Keine Sorge, ich drück den einfach weg",
+    "wer": 0,
+    "fileDuration": 1.906939,
+    "words": [
+      {
+        "text": "Keine",
+        "start": 0,
+        "end": 0.232
+      },
+      {
+        "text": "Sorge,",
+        "start": 0.267,
+        "end": 0.639
+      },
+      {
+        "text": "ich",
+        "start": 0.708,
+        "end": 0.813
+      },
+      {
+        "text": "drück",
+        "start": 0.836,
+        "end": 0.975
+      },
+      {
+        "text": "den",
+        "start": 1.01,
+        "end": 1.091
+      },
+      {
+        "text": "einfach",
+        "start": 1.126,
+        "end": 1.37
+      },
+      {
+        "text": "weg!",
+        "start": 1.416,
+        "end": 1.858
+      }
+    ]
+  },
+  "h3": {
+    "text": "Nein! Nicht mit den Fingern!",
+    "heard": "Nein, nicht mit den Fingern",
+    "wer": 0,
+    "fileDuration": 2.272653,
+    "words": [
+      {
+        "text": "Nein!",
+        "start": 0,
+        "end": 0.708
+      },
+      {
+        "text": "Nicht",
+        "start": 0.743,
+        "end": 1.01
+      },
+      {
+        "text": "mit",
+        "start": 1.045,
+        "end": 1.149
+      },
+      {
+        "text": "den",
+        "start": 1.173,
+        "end": 1.277
+      },
+      {
+        "text": "Fingern!",
+        "start": 1.347,
+        "end": 2.229
+      }
+    ]
+  },
+  "p3": {
+    "text": "Danke! Jetzt bin ich noch größer.",
+    "heard": "Danke, jetzt bin ich noch größer",
+    "wer": 0,
+    "fileDuration": 1.985306,
+    "words": [
+      {
+        "text": "Danke!",
+        "start": 0,
+        "end": 0.569
+      },
+      {
+        "text": "Jetzt",
+        "start": 0.848,
+        "end": 1.057
+      },
+      {
+        "text": "bin",
+        "start": 1.08,
+        "end": 1.196
+      },
+      {
+        "text": "ich",
+        "start": 1.231,
+        "end": 1.312
+      },
+      {
+        "text": "noch",
+        "start": 1.358,
+        "end": 1.474
+      },
+      {
+        "text": "größer.",
+        "start": 1.509,
+        "end": 1.95
+      }
+    ]
+  },
+  "g1": {
+    "text": "Platz da. Erst mal desinfizieren.",
+    "heard": "Platz da. Erst mal desinfizieren",
+    "wer": 0,
+    "fileDuration": 3.239184,
+    "words": [
+      {
+        "text": "Platz",
+        "start": 0,
+        "end": 0.43
+      },
+      {
+        "text": "da.",
+        "start": 0.511,
+        "end": 0.929
+      },
+      {
+        "text": "Erst",
+        "start": 1.533,
+        "end": 1.846
+      },
+      {
+        "text": "mal",
+        "start": 1.904,
+        "end": 2.043
+      },
+      {
+        "text": "desinfizieren.",
+        "start": 2.101,
+        "end": 3.204
+      }
+    ]
+  },
+  "p4": {
+    "text": "Hey! Was wird das?",
+    "heard": "Hey, was wird das?",
+    "wer": 0,
+    "fileDuration": 1.38449,
+    "words": [
+      {
+        "text": "Hey!",
+        "start": 0,
+        "end": 0.453
+      },
+      {
+        "text": "Was",
+        "start": 0.662,
+        "end": 0.871
+      },
+      {
+        "text": "wird",
+        "start": 0.917,
+        "end": 1.08
+      },
+      {
+        "text": "das?",
+        "start": 1.103,
+        "end": 1.347
+      }
+    ]
+  },
+  "p5": {
+    "text": "Nein! Mein schönes Zuhause!",
+    "heard": "Nein, mein schönes Zuhause",
+    "wer": 0,
+    "fileDuration": 1.933061,
+    "words": [
+      {
+        "text": "Nein!",
+        "start": 0,
+        "end": 0.488
+      },
+      {
+        "text": "Mein",
+        "start": 0.569,
+        "end": 0.72
+      },
+      {
+        "text": "schönes",
+        "start": 0.755,
+        "end": 1.08
+      },
+      {
+        "text": "Zuhause!",
+        "start": 1.138,
+        "end": 1.904
+      }
+    ]
+  },
+  "g2": {
+    "text": "Und jetzt ein Pickelpflaster drauf.",
+    "heard": "Und jetzt ein Pickelpflaster drauf",
+    "wer": 0,
+    "fileDuration": 2.403265,
+    "words": [
+      {
+        "text": "Und",
+        "start": 0,
+        "end": 0.279
+      },
+      {
+        "text": "jetzt",
+        "start": 0.395,
+        "end": 0.662
+      },
+      {
+        "text": "ein",
+        "start": 0.708,
+        "end": 0.848
+      },
+      {
+        "text": "Pickelpflaster",
+        "start": 0.964,
+        "end": 1.672
+      },
+      {
+        "text": "drauf.",
+        "start": 1.695,
+        "end": 2.368
+      }
+    ]
+  },
+  "h4": {
+    "text": "Endlich wieder glatt. Das Date kann kommen!",
+    "heard": "Endlich wieder glatt. Das Date kann kommen",
+    "wer": 0,
+    "fileDuration": 3.578776,
+    "words": [
+      {
+        "text": "Endlich",
+        "start": 0,
+        "end": 0.418
+      },
+      {
+        "text": "wieder",
+        "start": 0.464,
+        "end": 0.685
+      },
+      {
+        "text": "glatt.",
+        "start": 0.731,
+        "end": 1.184
+      },
+      {
+        "text": "Das",
+        "start": 1.463,
+        "end": 1.695
+      },
+      {
+        "text": "Date",
+        "start": 1.788,
+        "end": 2.159
+      },
+      {
+        "text": "kann",
+        "start": 2.218,
+        "end": 2.473
+      },
+      {
+        "text": "kommen!",
+        "start": 2.566,
+        "end": 3.529
+      }
+    ]
+  },
+  "q1": {
+    "text": "Herr Doktor, warum darf ich Pickel nicht selbst ausdrücken?",
+    "heard": "Herr Doktor, warum darf ich Pickel nicht selbst ausdrücken?",
+    "wer": 0,
+    "fileDuration": 2.586122,
+    "words": [
+      {
+        "text": "Herr",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "Doktor,",
+        "start": 0.232,
+        "end": 0.488
+      },
+      {
+        "text": "warum",
+        "start": 0.511,
+        "end": 0.697
+      },
+      {
+        "text": "darf",
+        "start": 0.755,
+        "end": 0.906
+      },
+      {
+        "text": "ich",
+        "start": 0.964,
+        "end": 1.033
+      },
+      {
+        "text": "Pickel",
+        "start": 1.08,
+        "end": 1.312
+      },
+      {
+        "text": "nicht",
+        "start": 1.347,
+        "end": 1.509
+      },
+      {
+        "text": "selbst",
+        "start": 1.533,
+        "end": 1.765
+      },
+      {
+        "text": "ausdrücken?",
+        "start": 1.823,
+        "end": 2.554
+      }
+    ]
+  },
+  "d1": {
+    "text": "Mit den Fingern drückst du Bakterien tiefer in die Haut. Dann entzündet es sich stärker, und es können Narben bleiben.",
+    "heard": "Mit den Fingern drückst du Bakterien tiefer in die Haut. Dann entzündet es sich stärker und es können Narben bleiben.",
+    "wer": 0,
+    "fileDuration": 8.542041,
+    "words": [
+      {
+        "text": "Mit",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "den",
+        "start": 0.221,
+        "end": 0.325
+      },
+      {
+        "text": "Fingern",
+        "start": 0.395,
+        "end": 0.708
+      },
+      {
+        "text": "drückst",
+        "start": 0.743,
+        "end": 1.022
+      },
+      {
+        "text": "du",
+        "start": 1.045,
+        "end": 1.103
+      },
+      {
+        "text": "Bakterien",
+        "start": 1.161,
+        "end": 1.811
+      },
+      {
+        "text": "tiefer",
+        "start": 1.881,
+        "end": 2.229
+      },
+      {
+        "text": "in",
+        "start": 2.287,
+        "end": 2.345
+      },
+      {
+        "text": "die",
+        "start": 2.392,
+        "end": 2.485
+      },
+      {
+        "text": "Haut.",
+        "start": 2.531,
+        "end": 3.053
+      },
+      {
+        "text": "Dann",
+        "start": 3.75,
+        "end": 3.947
+      },
+      {
+        "text": "entzündet",
+        "start": 4.005,
+        "end": 4.516
+      },
+      {
+        "text": "es",
+        "start": 4.586,
+        "end": 4.656
+      },
+      {
+        "text": "sich",
+        "start": 4.679,
+        "end": 4.865
+      },
+      {
+        "text": "stärker,",
+        "start": 4.899,
+        "end": 5.584
+      },
+      {
+        "text": "und",
+        "start": 5.793,
+        "end": 5.933
+      },
+      {
+        "text": "es",
+        "start": 5.991,
+        "end": 6.049
+      },
+      {
+        "text": "können",
+        "start": 6.118,
+        "end": 6.385
+      },
+      {
+        "text": "Narben",
+        "start": 6.444,
+        "end": 6.792
+      },
+      {
+        "text": "bleiben.",
+        "start": 6.827,
+        "end": 8.499
+      }
+    ]
+  },
+  "d2": {
+    "text": "Beim Hautarzt wird der Pickel desinfiziert und steril geöffnet.",
+    "heard": "Beim Hautarzt wird der Pickel desinfiziert und steril geöffnet",
+    "wer": 0,
+    "fileDuration": 4.728163,
+    "words": [
+      {
+        "text": "Beim",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "Hautarzt",
+        "start": 0.267,
+        "end": 0.94
+      },
+      {
+        "text": "wird",
+        "start": 1.033,
+        "end": 1.196
+      },
+      {
+        "text": "der",
+        "start": 1.231,
+        "end": 1.324
+      },
+      {
+        "text": "Pickel",
+        "start": 1.382,
+        "end": 1.683
+      },
+      {
+        "text": "desinfiziert",
+        "start": 1.753,
+        "end": 2.67
+      },
+      {
+        "text": "und",
+        "start": 2.844,
+        "end": 2.984
+      },
+      {
+        "text": "steril",
+        "start": 3.019,
+        "end": 3.437
+      },
+      {
+        "text": "geöffnet.",
+        "start": 3.506,
+        "end": 4.69
+      }
+    ]
+  },
+  "d3": {
+    "text": "Zu Hause gilt: Finger weg, Haut sauber halten und ein Pickelpflaster drauf.",
+    "heard": "Zu Hause gilt: Finger weg, Haut sauber halten und ein Pickelpflaster drauf",
+    "wer": 0,
+    "fileDuration": 4.780408,
+    "words": [
+      {
+        "text": "Zu",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "Hause",
+        "start": 0.244,
+        "end": 0.522
+      },
+      {
+        "text": "gilt:",
+        "start": 0.58,
+        "end": 0.952
+      },
+      {
+        "text": "Finger",
+        "start": 1.045,
+        "end": 1.405
+      },
+      {
+        "text": "weg,",
+        "start": 1.451,
+        "end": 1.776
+      },
+      {
+        "text": "Haut",
+        "start": 1.892,
+        "end": 2.136
+      },
+      {
+        "text": "sauber",
+        "start": 2.183,
+        "end": 2.531
+      },
+      {
+        "text": "halten",
+        "start": 2.577,
+        "end": 2.879
+      },
+      {
+        "text": "und",
+        "start": 2.961,
+        "end": 3.065
+      },
+      {
+        "text": "ein",
+        "start": 3.135,
+        "end": 3.204
+      },
+      {
+        "text": "Pickelpflaster",
+        "start": 3.274,
+        "end": 4.029
+      },
+      {
+        "text": "drauf.",
+        "start": 4.063,
+        "end": 4.737
+      }
+    ]
+  }
+}

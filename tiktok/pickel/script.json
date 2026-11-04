@@ -1,0 +1,323 @@
+{
+  "title": "Pickel wird ausgedrückt",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "maxPause": 0.3,
+  "scenes": {
+    "haut": [0, 40],
+    "frage": [45, 47],
+    "praxis": [50, 51]
+  },
+  "order": ["haut", "frage", "praxis"],
+  "qa": {
+    "maxTakes": 4,
+    "maxWer": 0.1,
+    "maxF0Dev": 0.3
+  },
+  "lines": [
+    {
+      "id": "h1",
+      "speaker": "haut",
+      "start": 0.5,
+      "end": 0.55,
+      "text": "Hey! Das ist eine Pore, kein Hotel!"
+    },
+    {
+      "id": "p1",
+      "speaker": "pickel",
+      "start": 0.6,
+      "end": 0.65,
+      "text": "Zu spät, Schätzchen. Wir haben schon ausgepackt."
+    },
+    {
+      "id": "h2",
+      "speaker": "haut",
+      "start": 0.7,
+      "end": 0.75,
+      "text": "Ich hab morgen ein Date!",
+      "wait": 0.7
+    },
+    {
+      "id": "p2",
+      "speaker": "pickel",
+      "start": 0.8,
+      "end": 0.8500000000000001,
+      "text": "Super. Ich komm mit. Ganz vorne."
+    },
+    {
+      "id": "f1",
+      "speaker": "finger",
+      "start": 0.9,
+      "end": 0.9500000000000001,
+      "text": "Keine Sorge, ich drück den einfach weg!",
+      "wait": 1.0
+    },
+    {
+      "id": "h3",
+      "speaker": "haut",
+      "start": 1.0,
+      "end": 1.05,
+      "text": "Nein! Nicht mit den Fingern!",
+      "wait": 0.2
+    },
+    {
+      "id": "p3",
+      "speaker": "pickel",
+      "start": 1.1,
+      "end": 1.1500000000000001,
+      "text": "Danke! Jetzt bin ich noch größer.",
+      "wait": 1.7
+    },
+    {
+      "id": "g1",
+      "speaker": "hand",
+      "start": 1.2,
+      "end": 1.25,
+      "text": "Platz da. Erst mal desinfizieren.",
+      "wait": 1.1
+    },
+    {
+      "id": "p4",
+      "speaker": "pickel",
+      "start": 1.3,
+      "end": 1.35,
+      "text": "Hey! Was wird das?",
+      "wait": 1.1
+    },
+    {
+      "id": "p5",
+      "speaker": "pickel",
+      "start": 1.4,
+      "end": 1.45,
+      "text": "Nein! Mein schönes Zuhause!",
+      "wait": 1.7
+    },
+    {
+      "id": "g2",
+      "speaker": "hand",
+      "start": 1.5,
+      "end": 1.55,
+      "text": "Und jetzt ein Pickelpflaster drauf.",
+      "wait": 0.9
+    },
+    {
+      "id": "h4",
+      "speaker": "haut",
+      "start": 1.6,
+      "end": 1.6500000000000001,
+      "text": "Endlich wieder glatt. Das Date kann kommen!",
+      "wait": 1.1
+    },
+    {
+      "id": "q1",
+      "speaker": "pat",
+      "start": 45.4,
+      "end": 45.449999999999996,
+      "text": "Herr Doktor, warum darf ich Pickel nicht selbst ausdrücken?"
+    },
+    {
+      "id": "d1",
+      "speaker": "arzt",
+      "start": 50.3,
+      "end": 50.349999999999994,
+      "text": "Mit den Fingern drückst du Bakterien tiefer in die Haut. Dann entzündet es sich stärker, und es können Narben bleiben."
+    },
+    {
+      "id": "d2",
+      "speaker": "arzt",
+      "start": 50.4,
+      "end": 50.449999999999996,
+      "text": "Beim Hautarzt wird der Pickel desinfiziert und steril geöffnet."
+    },
+    {
+      "id": "d3",
+      "speaker": "arzt",
+      "start": 50.5,
+      "end": 50.55,
+      "text": "Zu Hause gilt: Finger weg, Haut sauber halten und ein Pickelpflaster drauf."
+    }
+  ],
+  "voices": {
+    "haut": {
+      "name": "Haut (DE, Diva)",
+      "voice_id": "DsA1uvE2ZoRgL4RBPRcg",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.85,
+        "style": 0.6,
+        "use_speaker_boost": true
+      },
+      "f0ref": 242,
+      "seed": 7171,
+      "tempo": 1.0
+    },
+    "pickel": {
+      "name": "Pickel (DE, frech, rau)",
+      "voice_id": "9ZrR0jtRG2p5pnW3D2ye",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.85,
+        "style": 0.6,
+        "use_speaker_boost": true
+      },
+      "f0ref": 113,
+      "seed": 7272,
+      "tempo": 1.0
+    },
+    "finger": {
+      "name": "Finger (DE, Angeber)",
+      "voice_id": "57UyT2voiMHSkl25qJtO",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.85,
+        "style": 0.6,
+        "use_speaker_boost": true
+      },
+      "seed": 3434,
+      "tempo": 1.0,
+      "f0ref": 159
+    },
+    "hand": {
+      "name": "Handschuh-Hand (DE, tief, ruhig)",
+      "voice_id": "60QqaEwKeWbeCvUpTWud",
+      "settings": {
+        "stability": 0.55,
+        "similarity_boost": 0.85,
+        "style": 0.35,
+        "use_speaker_boost": true
+      },
+      "seed": 2323,
+      "tempo": 1.0,
+      "f0ref": 86
+    },
+    "arzt": {
+      "name": "Arzt (DE, ruhig, älter)",
+      "voice_id": "Og1j4Myr6614gRWlVatR",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.85,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "seed": 4444,
+      "tempo": 1.0
+    },
+    "pat": {
+      "name": "Patient (DE, locker)",
+      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 5555,
+      "tempo": 1.0
+    }
+  },
+  "genSfx": [
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "giggle",
+      "prompt": "tiny high pitched squeaky giggles of several small cartoon creatures, no words",
+      "duration": 1.2
+    },
+    {
+      "id": "press",
+      "prompt": "squishy fleshy squeeze, wet rubbery pressure, cartoon",
+      "duration": 1.2
+    },
+    {
+      "id": "pimplepop",
+      "prompt": "satisfying wet cartoon pop, pimple popping, short splat",
+      "duration": 0.8
+    },
+    {
+      "id": "patch",
+      "prompt": "soft sticky plaster pressed on skin, gentle pat",
+      "duration": 0.6
+    },
+    {
+      "id": "whee",
+      "prompt": "cartoon whistle falling away, slide whistle down",
+      "duration": 1.0
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-giggle",
+      "src": "gen-giggle.mp3",
+      "volume": 0.35,
+      "line": "h2",
+      "offset": -0.65
+    },
+    {
+      "id": "sfx-fingers",
+      "src": "whoosh-short.mp3",
+      "volume": 0.4,
+      "line": "f1",
+      "offset": -0.95
+    },
+    {
+      "id": "sfx-press",
+      "src": "gen-press.mp3",
+      "volume": 0.55,
+      "line": "p3",
+      "offset": -1.5
+    },
+    {
+      "id": "sfx-hand",
+      "src": "whoosh-short.mp3",
+      "volume": 0.4,
+      "line": "g1",
+      "offset": -1.0
+    },
+    {
+      "id": "sfx-spray",
+      "src": "gen-spray.mp3",
+      "volume": 0.4,
+      "line": "p4",
+      "offset": -1.05
+    },
+    {
+      "id": "sfx-pop",
+      "src": "gen-pimplepop.mp3",
+      "volume": 0.6,
+      "line": "p5",
+      "offset": -1.1
+    },
+    {
+      "id": "sfx-whee",
+      "src": "gen-whee.mp3",
+      "volume": 0.35,
+      "line": "p5",
+      "offset": -0.75
+    },
+    {
+      "id": "sfx-patch",
+      "src": "gen-patch.mp3",
+      "volume": 0.5,
+      "line": "h4",
+      "offset": -0.8
+    },
+    {
+      "id": "sfx-sparkle",
+      "src": "gen-sparkle.mp3",
+      "volume": 0.35,
+      "line": "h4",
+      "offset": -0.35
+    },
+    {
+      "id": "sfx-praxis",
+      "src": "whoosh-short.mp3",
+      "volume": 0.35,
+      "anchor": "praxis",
+      "offset": -0.05
+    }
+  ]
+}
