@@ -638,7 +638,7 @@ function actLines(scene) {
 }
 const hautJs = `${HELPERS}
     initChar("@haut", 40, 0.15); initChar("@pickel", 31, 0.5); initChar("@finger", 22, 0.1); initChar("@hand", 26, 0.15); initChar("@klein", 15, 0.1);
-    gsap.set("#@mini", { opacity: 0, svgOrigin: "690 902" });
+    gsap.set("#@mini", { opacity: 0, transformOrigin: "50% 100%" });
     const BROWO = { haut: [41, -56], pickel: [32, -44], finger: [23, -32], hand: [27, -38], klein: [15, -22] };
     Object.entries(BROWO).forEach(([c, [g, y]]) => { gsap.set("#@" + c + "-browL", { svgOrigin: -g + " " + y }); gsap.set("#@" + c + "-browR", { svgOrigin: g + " " + y }); });
     const BROW = { angry: [18, -18], panic: [-16, 16], worried: [-14, 14], smug: [-12, 4], happy: [-6, 6], flat: [0, 0] };
