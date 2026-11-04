@@ -26,6 +26,7 @@ for (const l of script.lines) if (l.reuse && VO[l.reuse]) VO[l.id] = VO[l.reuse]
 const ORDER = script.order;
 const GAP = {
   haut: 0.3,
+  station: 0.4,
   teaser: 0,
   streit: 0.25,
   nachher: 0.08,
@@ -36,6 +37,7 @@ const GAP = {
 };
 const PAD = {
   haut: 0.6,
+  station: 1.2,
   teaser: 0.5,
   streit: 0.35,
   nachher: 0.4,
@@ -168,313 +170,183 @@ ${js}
 </template>
 `;
 
-/* ================= Scene: Praxis ================= */
-// Halbnahe wie das Referenzbild: alter Arzt mit weißem Zopf, runder Goldbrille,
-// Maske unterm Kinn, Krawatte, Stethoskop; schreibt auf ein Klemmbrett, dahinter
-// Fenster mit Kräutertöpfen, vorne der Tisch mit Akten.
-const P = {
-  wall: "#B9C79A",
-  wallSide: "#A9B889",
-  ceiling: "#C9D3AE",
-  wallLow: "#A3B282",
-  trim: "#8D9A6C",
-  frame: "#CBD1C2",
-  sky: "#DCEEF1",
-  tree: "#A7C69B",
-  tree2: "#8FB585",
-  pot: "#B8693F",
-  potDark: "#97522F",
-  leaf: "#6F9A57",
-  skin: "#F3D2B8",
-  skinShade: "#E4B99A",
-  hair: "#EFEFEB",
-  hairShade: "#D3D3CE",
-  coat: "#F8F9F6",
-  coatShade: "#E3E6E1",
-  shirt: "#F3EDD6",
-  tie: "#6F8DB4",
-  tieStripe: "#D2DEEB",
-  mask: "#CFE7EC",
-  maskDot: "#8FB7C7",
-  gold: "#D2A548",
-  tube: "#2F3036",
-  board: "#9C7853",
-  boardDark: "#7E5F40",
-  desk: "#EEEDD5",
-  deskSide: "#A5AF86",
-  paper: "#E7D9B5",
+/* ================= Krankenzimmer: Arzt mit Maske + Patient im Bett (wie das Vorbild) ================= */
+// Ein Bild für Frage und Erklärung: links steht der Arzt (weißes Haar, Brille,
+// grüne Maske, weißer Kittel, grüne Krawatte, Stethoskop) und zeigt das Mittel
+// auf der Handfläche, rechts sitzt Kevin im Bett, vorne die weiße Bettdecke.
+const ST2 = {
+  wall: "#C8D5DC",
+  wallLow: "#BCCAD2",
+  rail: "#F4F7F8",
+  skin: "#F6DAC3",
+  skinShade: "#E8C3A6",
+  hairDoc: "#E9E9E6",
+  hairDocShade: "#C9CAC6",
+  hairPat: "#4A2E1F",
+  mask: "#2BA84A",
+  maskDark: "#1F8A3B",
+  coat: "#FAFAFA",
+  coatShade: "#E2E5E7",
+  shirt: "#1F3550",
+  tie: "#2EA04E",
+  pants: "#23262B",
+  tube: "#2A2A2E",
+  steel: "#C9CED3",
+  glove: "#F3F1E8",
+  sweater: "#3D79C9",
+  sweaterDark: "#3166AD",
+  sheet: "#FBFBFB",
+  fold: "#C9CED3",
+  patch: "#EED9B8",
 };
-const stroke2 = (d, w, col) =>
-  `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="${w + 8}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-const plant = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})">
-    ${[
-      "M 0 -60 C -6 -110 -30 -150 -40 -190",
-      "M 0 -60 C 4 -120 12 -170 6 -215",
-      "M 0 -60 C 10 -100 36 -135 52 -165",
-    ]
-      .map(
-        (d) =>
-          `<path d="${d}" fill="none" stroke="${P.leaf}" stroke-width="6" stroke-linecap="round"/>`,
-      )
-      .join("")}
-    ${[
-      [-14, -95, -40],
-      [-28, -135, -30],
-      [-38, -175, -20],
-      [2, -110, 10],
-      [8, -160, -6],
-      [4, -205, 0],
-      [18, -100, 40],
-      [34, -128, 35],
-      [48, -158, 30],
-    ]
-      .map(
-        ([lx, ly, r]) =>
-          `<ellipse cx="${lx}" cy="${ly}" rx="10" ry="22" transform="rotate(${r} ${lx} ${ly})" fill="${P.leaf}" ${S(3)}/>`,
-      )
-      .join("")}
-    <path d="M -48 -62 L 48 -62 L 38 20 L -38 20 Z" fill="${P.pot}" ${S(4)}/>
-    <rect x="-54" y="-74" width="108" height="20" rx="4" fill="${P.potDark}" ${S(4)}/>
-  </g>`;
-const docEye = (id, x, y) =>
-  `<g transform="translate(${x} ${y})"><clipPath id="${id}-c"><ellipse rx="25" ry="21"/></clipPath>
-    <ellipse rx="25" ry="21" fill="#fff"/>
-    <g id="${id}-p"><circle r="10" fill="${C.ink}"/><circle cx="-3" cy="-3" r="2.6" fill="#fff"/></g>
-    <g clip-path="url(#${id}-c)"><rect id="${id}-lid" x="-32" y="-28" width="64" height="56" fill="${P.skin}" ${S(4)} vector-effect="non-scaling-stroke"/></g>
-    <ellipse rx="25" ry="21" fill="none" ${S(4)}/></g>`;
-const tieClip = "M 616 1246 L 646 1246 L 668 1560 L 632 1600 L 596 1560 Z";
+const ss = (d, w, col) =>
+  `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const smallEye = (id, x, y, lid) =>
+  `<g transform="translate(${x} ${y})"><clipPath id="${id}-c"><ellipse rx="17" ry="14"/></clipPath>
+    <ellipse rx="17" ry="14" fill="#fff"/>
+    <g id="${id}-p"><circle r="6.5" fill="${C.ink}"/></g>
+    <g clip-path="url(#${id}-c)"><rect id="${id}-lid" x="-22" y="-20" width="44" height="40" fill="${lid}" ${S(3)} vector-effect="non-scaling-stroke"/></g>
+    <ellipse rx="17" ry="14" fill="none" ${S(3)}/></g>`;
+const stationSvg = `
+<svg id="st-cam" viewBox="0 0 ${W} ${H}">
+  <rect width="${W}" height="${H}" fill="${ST2.wall}"/>
+  <g transform="translate(560 900) scale(1.3) translate(-560 -900)">
+  <rect x="-200" y="0" width="${W + 400}" height="${H}" fill="${ST2.wall}"/>
+  <rect x="-200" y="1180" width="${W + 400}" height="${H}" fill="${ST2.wallLow}"/>
+  <rect x="-210" y="372" width="${W + 420}" height="22" fill="${ST2.rail}" ${S(3)}/>
+  <rect x="975" y="394" width="16" height="1200" fill="${ST2.rail}" ${S(3)}/>
+  <rect x="118" y="394" width="12" height="1200" fill="${ST2.rail}" opacity="0.7"/>
 
-const praxisSvg = `
-<svg viewBox="0 0 ${W} ${H}">
-  <!-- Raum -->
-  <rect width="${W}" height="${H}" fill="${P.wall}"/>
-  <path d="M 0 0 L ${W} 0 L ${W} 150 L 96 150 L 0 108 Z" fill="${P.ceiling}"/>
-  <path d="M 0 108 L 96 150 L ${W} 150" fill="none" ${S(4)}/>
-  <path d="M 0 108 L 96 150 L 96 1430 L 0 1460 Z" fill="${P.wallSide}"/>
-  <path d="M 96 150 L 96 1430" fill="none" ${S(4)}/>
-  <path d="M 96 1340 L ${W} 1340 L ${W} ${H} L 96 ${H} Z" fill="${P.wallLow}"/>
-  <path d="M 0 1370 L 96 1340 L 96 ${H} L 0 ${H} Z" fill="#97A676"/>
-  <path d="M 0 1370 L 96 1340 L ${W} 1340" fill="none" ${S(4)}/>
-
-  <!-- Fenster -->
-  <rect x="620" y="560" width="500" height="560" fill="${P.sky}"/>
-  <clipPath id="win-c"><rect x="640" y="580" width="480" height="520"/></clipPath>
-  <g clip-path="url(#win-c)">
-    <path d="M 640 760 L 1120 600 L 1120 660 L 640 820 Z" fill="#fff" opacity="0.35"/>
-    <path d="M 800 1100 C 760 1000 800 930 860 940 C 870 880 940 860 980 900 C 1010 840 1090 840 1120 880 L 1120 1100 Z" fill="${P.tree}" ${S(4)}/>
-    <path d="M 640 1100 C 630 1030 670 990 720 1000 C 740 960 800 960 820 1000 C 850 1010 860 1060 850 1100 Z" fill="${P.tree2}" ${S(4)}/>
-    <path d="M 1010 1100 C 1000 960 1040 760 1120 700 L 1120 1100 Z" fill="${P.tree2}" ${S(4)}/>
+  <!-- Kissen + Patient -->
+  <rect x="840" y="830" width="300" height="440" rx="70" fill="${ST2.sheet}" ${S(3.5)}/>
+  <path d="M 870 900 C 920 940 960 1040 950 1180" fill="none" stroke="${ST2.fold}" stroke-width="16" stroke-linecap="round" opacity="0.7"/>
+  <g id="pat">
+    <path d="M 640 1440 L 660 1020 C 670 960 730 936 800 936 C 880 936 945 960 962 1022 L 1000 1440 Z" fill="${ST2.sweater}" ${S(3.5)}/>
+    <path d="M 742 936 L 800 1000 L 858 936 L 836 920 L 800 962 L 764 920 Z" fill="#fff" ${S(3)}/>
+    <rect x="770" y="880" width="60" height="62" fill="${ST2.skin}" ${S(3.5)}/>
+    <ellipse cx="892" cy="800" rx="17" ry="28" fill="${ST2.skin}" ${S(3.5)}/>
+    <g id="pat-head">
+      <ellipse cx="800" cy="790" rx="94" ry="112" fill="${ST2.skin}" ${S(3.5)}/>
+      <path d="M 706 776 C 694 676 740 650 800 650 C 872 650 910 684 898 778 C 884 734 862 714 838 708 C 800 724 756 720 728 708 C 716 730 708 752 706 776 Z" fill="${ST2.hairPat}" ${S(3.5)}/>
+      ${smallEye("pe1", 762, 790, ST2.skin)}${smallEye("pe2", 828, 790, ST2.skin)}
+      <path id="pat-browL" d="M 744 760 Q 762 752 780 758" fill="none" ${S(4)}/>
+      <path id="pat-browR" d="M 812 758 Q 830 752 848 760" fill="none" ${S(4)}/>
+      <path d="M 790 806 q -8 20 6 24" fill="none" ${S(3)}/>
+      <g transform="translate(792 860)">${mouth("pm-m", { s: 0.5, initial: "flat" })}</g>
+      <g transform="translate(852 836) rotate(-14)"><rect x="-26" y="-14" width="52" height="28" rx="11" fill="${ST2.patch}" ${S(3)}/></g>
+    </g>
+    ${ss("M 676 1060 C 650 1180 664 1280 706 1336", 70, ST2.sweater)}
+    <path d="M 690 1320 C 720 1300 760 1310 766 1340 C 770 1366 740 1378 712 1372 C 690 1366 680 1340 690 1320 Z" fill="${ST2.skin}" ${S(3.5)}/>
   </g>
-  <path d="M 610 470 L 1120 470 L 1120 1150 L 610 1150 Z M 640 580 L 640 1110 L 1120 1110 L 1120 580 Z" fill="${P.frame}" fill-rule="evenodd" ${S(4)}/>
-  <rect x="600" y="470" width="520" height="96" fill="#E4E7DC" ${S(4)}/>
-  <path d="M 600 502 L 1120 502 M 600 534 L 1120 534" ${S(3)} opacity="0.6"/>
-  ${plant(770, 1100, 0.95)}${plant(935, 1104, 0.85)}
-  <rect x="590" y="1104" width="530" height="34" fill="#DDE1D2" ${S(4)}/>
 
   <!-- Arzt -->
   <g id="doc">
-    <g id="doc-tail">
-      <path d="M 458 945 C 390 960 312 1002 280 1080 C 256 1140 246 1220 282 1305 C 292 1250 306 1214 326 1186 C 316 1240 326 1282 356 1316 C 356 1236 372 1162 412 1090 C 436 1046 456 1008 470 974 Z" fill="${P.hair}" ${S()}/>
-      <path d="M 300 1130 C 300 1180 296 1220 300 1260 M 340 1100 C 336 1150 340 1200 348 1250" fill="none" stroke="${P.hairShade}" stroke-width="5" stroke-linecap="round"/>
-      <path d="M 262 1210 C 240 1240 232 1270 240 1300 M 372 1120 C 390 1160 392 1200 384 1240" fill="none" ${S(3)}/>
+    <path d="M 246 1380 L 404 1380 L 414 1900 L 340 1900 L 326 1520 L 314 1900 L 240 1900 Z" fill="${ST2.pants}" ${S(3.5)}/>
+    <path d="M 232 930 C 262 902 382 902 412 930 L 420 1410 L 222 1410 Z" fill="${ST2.shirt}" ${S(3.5)}/>
+    <path d="M 306 930 L 336 930 L 348 1190 L 321 1226 L 294 1190 Z" fill="${ST2.tie}" ${S(3.5)}/>
+    <path d="M 292 912 L 321 950 L 350 912" fill="#fff" ${S(3)}/>
+    <path d="M 172 960 C 182 922 232 906 284 902 L 302 1010 L 292 1500 L 158 1500 C 148 1310 150 1110 172 960 Z" fill="${ST2.coat}" ${S(3.5)}/>
+    <path d="M 470 960 C 460 922 410 906 358 902 L 340 1010 L 350 1500 L 484 1500 C 494 1310 492 1110 470 960 Z" fill="${ST2.coat}" ${S(3.5)}/>
+    <path d="M 200 1100 C 196 1250 196 1380 204 1480" fill="none" stroke="${ST2.coatShade}" stroke-width="12" stroke-linecap="round"/>
+    <rect x="291" y="850" width="60" height="64" fill="${ST2.skin}" ${S(3.5)}/>
+    ${ss("M 272 908 C 232 990 240 1086 296 1126", 8, ST2.tube)}
+    ${ss("M 372 908 C 410 990 404 1064 384 1112", 8, ST2.tube)}
+    <circle cx="384" cy="1132" r="18" fill="${ST2.steel}" ${S(3.5)}/>
+    ${ss("M 186 990 C 168 1120 166 1260 176 1360", 74, ST2.coat)}
+    <path d="M 160 1356 C 186 1346 206 1360 204 1386 C 202 1408 178 1416 160 1406 C 146 1396 146 1366 160 1356 Z" fill="${ST2.skin}" ${S(3.5)}/>
+    <g id="doc-arm">
+      ${ss("M 452 978 C 500 1060 540 1130 620 1166", 72, ST2.coat)}
+      <path d="M 616 1140 C 650 1130 730 1136 748 1156 C 760 1172 740 1186 706 1186 L 640 1192 C 618 1192 606 1176 616 1140 Z" fill="${ST2.glove}" ${S(3.5)}/>
+      <path d="M 640 1150 C 650 1130 672 1126 684 1140" fill="none" ${S(3)}/>
+      <g transform="translate(690 1132) rotate(-6)"><rect x="-30" y="-14" width="60" height="26" rx="11" fill="${ST2.patch}" ${S(3)}/></g>
     </g>
-    <path d="M 296 ${H} C 296 1520 308 1300 378 1226 C 428 1184 500 1170 560 1162 L 700 1162 C 772 1172 842 1194 884 1244 C 934 1314 944 1520 944 ${H} Z" fill="${P.coat}" ${S()}/>
-    <path d="M 548 1156 L 712 1156 L 664 1570 L 598 1570 Z" fill="${P.shirt}" ${S(4)}/>
-    <path d="M 588 1050 L 590 1172 L 674 1172 L 680 1050 Z" fill="${P.skin}" ${S()}/>
-    <path d="M 592 1140 C 615 1150 650 1150 676 1138" fill="none" stroke="${P.skinShade}" stroke-width="8"/>
-    <path d="M 562 1138 L 540 1206 L 616 1228 L 628 1168 Z" fill="${P.shirt}" ${S(4)}/>
-    <path d="M 700 1138 L 722 1206 L 646 1228 L 634 1168 Z" fill="${P.shirt}" ${S(4)}/>
-    <path d="M 610 1204 L 652 1204 L 646 1248 L 616 1248 Z" fill="${P.tie}" ${S(4)}/>
-    <clipPath id="tie-c"><path d="${tieClip}"/></clipPath>
-    <path d="${tieClip}" fill="${P.tie}"/>
-    <g clip-path="url(#tie-c)">${[1250, 1320, 1390, 1460, 1530].map((y) => `<path d="M 580 ${y + 40} L 690 ${y - 30}" stroke="${P.tieStripe}" stroke-width="13"/>`).join("")}</g>
-    <path d="${tieClip}" fill="none" ${S(4)}/>
-    <path d="M 552 1150 L 476 1268 L 528 1318 L 502 1360 L 600 1590 L 614 1500 Z" fill="${P.coat}" ${S(4)}/>
-    <path d="M 708 1150 L 784 1268 L 732 1318 L 758 1360 L 660 1590 L 646 1500 Z" fill="${P.coat}" ${S(4)}/>
-    <path d="M 420 1300 C 420 1420 430 1520 440 1640 M 840 1300 C 846 1420 846 1520 838 1640" fill="none" stroke="${P.coatShade}" stroke-width="12" stroke-linecap="round"/>
-    <!-- Stethoskop -->
-    ${stroke2("M 566 1166 C 478 1210 452 1320 468 1420 C 476 1470 506 1494 532 1478", 11, P.tube)}
-    ${stroke2("M 696 1166 C 752 1208 768 1262 762 1296", 11, P.tube)}
-    <circle cx="536" cy="1474" r="10" fill="${P.tube}" ${S(3)}/>
-    <circle cx="760" cy="1316" r="28" fill="#C9CED3" ${S()}/><circle cx="760" cy="1316" r="15" fill="#E9ECEE" ${S(3)}/>
-    <!-- Maske unterm Kinn -->
-    <path d="M 456 892 C 470 960 500 1030 528 1066" fill="none" stroke="#9FC6CF" stroke-width="6" stroke-linecap="round"/>
-    <path d="M 516 1056 C 560 1108 704 1118 768 1046 C 780 1080 770 1124 736 1146 C 684 1176 588 1176 542 1138 C 516 1116 508 1084 516 1056 Z" fill="${P.mask}" ${S()}/>
-    <path d="M 530 1090 C 590 1124 690 1126 752 1084 M 540 1116 C 600 1146 690 1148 744 1112" fill="none" stroke="${P.maskDot}" stroke-width="4" stroke-linecap="round"/>
-    ${[
-      [560, 1104],
-      [620, 1122],
-      [690, 1118],
-      [730, 1096],
-      [585, 1138],
-      [655, 1146],
-      [710, 1132],
-    ]
-      .map(([x, y]) => `<path d="M ${x - 6} ${y} l 6 -6 l 6 6 l -6 6 Z" fill="${P.maskDot}"/>`)
-      .join("")}
-
     <g id="doc-head">
-      <path d="M 486 700 C 428 724 404 804 414 884 C 420 934 436 964 458 984 C 452 934 460 902 472 882 C 456 840 460 780 492 742 Z" fill="${P.hair}" ${S()}/>
-      <path d="M 470 822 C 460 700 520 600 622 594 C 732 590 800 680 795 800 C 793 880 780 942 760 992 C 734 1052 690 1086 630 1088 C 570 1088 530 1056 508 1002 C 490 956 476 892 470 822 Z" fill="${P.skin}" ${S()}/>
-      <path d="M 790 690 C 830 720 846 780 832 836 C 826 870 812 900 796 920 C 802 880 804 840 800 800 C 818 780 816 730 790 690 Z" fill="${P.hair}" ${S()}/>
-      <ellipse cx="472" cy="872" rx="27" ry="45" fill="${P.skin}" ${S()}/>
-      <path d="M 478 850 C 462 858 462 888 478 896" fill="none" ${S(4)}/>
-      <!-- Haarbüschel oben -->
-      <path d="M 548 640 C 520 600 530 556 578 548 C 560 566 562 590 580 610 C 586 570 620 548 660 556 C 640 568 636 588 648 606 C 668 580 708 576 736 596 C 712 600 698 620 700 640 C 670 620 640 612 610 616 C 590 620 566 628 548 640 Z" fill="${P.hair}" ${S(4)}/>
-      <path d="M 520 660 C 500 640 494 610 506 588 M 760 640 C 784 630 800 606 798 580 M 742 616 C 760 600 776 598 790 604" fill="none" ${S(3)}/>
-      <!-- Falten -->
-      <path d="M 566 688 Q 630 670 708 690 M 552 716 Q 630 698 724 718 M 574 742 Q 630 730 700 744" fill="none" stroke="${P.skinShade}" stroke-width="5" stroke-linecap="round"/>
-      <path d="M 566 688 Q 630 670 708 690 M 552 716 Q 630 698 724 718" fill="none" ${S(3)} opacity="0.55"/>
-      <path d="M 758 870 l 22 -8 M 760 890 l 22 2 M 506 880 l -18 -6" fill="none" ${S(3)} opacity="0.7"/>
-      <path d="M 538 922 Q 565 934 592 922 M 672 922 Q 700 934 728 922" fill="none" ${S(3)} opacity="0.7"/>
-      <path d="M 600 990 C 584 1004 584 1024 592 1040 M 690 990 C 706 1004 708 1024 700 1040" fill="none" ${S(3)}/>
-      <!-- Augen, Brauen, Brille -->
-      ${docEye("de1", 566, 864)}${docEye("de2", 700, 864)}
-      <g id="doc-brows">
-        <path d="M 514 822 C 532 790 580 780 614 798 C 600 800 590 806 584 812 C 566 806 540 812 520 830 Z" fill="${P.hairShade}" ${S(4)}/>
-        <path d="M 652 798 C 686 780 734 790 752 822 C 740 816 722 808 698 812 C 690 806 676 800 652 798 Z" fill="${P.hairShade}" ${S(4)}/>
+      <ellipse cx="222" cy="742" rx="18" ry="30" fill="${ST2.skin}" ${S(3.5)}/>
+      <ellipse cx="420" cy="742" rx="18" ry="30" fill="${ST2.skin}" ${S(3.5)}/>
+      <ellipse cx="321" cy="730" rx="100" ry="122" fill="${ST2.skin}" ${S(3.5)}/>
+      <path d="M 216 724 C 202 606 254 574 321 572 C 394 572 440 608 426 724 C 414 684 404 660 384 646 C 352 658 296 660 258 646 C 240 664 226 692 216 724 Z" fill="${ST2.hairDoc}" ${S(3.5)}/>
+      <path d="M 250 600 C 270 586 300 580 320 582 M 340 582 C 370 584 396 594 410 610" fill="none" stroke="${ST2.hairDocShade}" stroke-width="6" stroke-linecap="round"/>
+      <path id="doc-browL" d="M 262 680 Q 282 672 300 678" fill="none" stroke="${ST2.hairDocShade}" stroke-width="9" stroke-linecap="round"/>
+      <path id="doc-browR" d="M 342 678 Q 360 672 380 680" fill="none" stroke="${ST2.hairDocShade}" stroke-width="9" stroke-linecap="round"/>
+      ${smallEye("de1", 282, 712, ST2.skin)}${smallEye("de2", 360, 712, ST2.skin)}
+      <rect x="252" y="692" width="60" height="40" rx="10" fill="#fff" opacity="0.15" stroke="${C.ink}" stroke-width="4"/>
+      <rect x="330" y="692" width="60" height="40" rx="10" fill="#fff" opacity="0.15" stroke="${C.ink}" stroke-width="4"/>
+      <path d="M 312 708 L 330 708 M 252 706 L 224 700 M 390 706 L 418 700" fill="none" ${S(4)}/>
+      <path d="M 226 752 C 250 770 260 790 264 800 M 416 752 C 392 770 382 790 378 800" fill="none" stroke="${ST2.maskDark}" stroke-width="4"/>
+      <g id="doc-mask">
+        <path d="M 234 748 C 262 734 380 734 408 748 L 404 808 C 380 846 262 846 238 808 Z" fill="${ST2.mask}" ${S(3.5)}/>
+        <path d="M 246 772 C 290 764 352 764 396 772 M 248 796 C 290 790 352 790 394 796" fill="none" stroke="${ST2.maskDark}" stroke-width="4" stroke-linecap="round"/>
       </g>
-      ${stroke2("M 616 860 Q 633 846 650 860", 5, P.gold)}
-      ${stroke2("M 516 856 L 486 846", 5, P.gold)}
-      <circle cx="566" cy="864" r="50" fill="#fff" opacity="0.12"/>
-      <circle cx="700" cy="864" r="50" fill="#fff" opacity="0.12"/>
-      <circle cx="566" cy="864" r="50" fill="none" stroke="${C.ink}" stroke-width="13"/><circle cx="566" cy="864" r="50" fill="none" stroke="${P.gold}" stroke-width="6"/>
-      <circle cx="700" cy="864" r="50" fill="none" stroke="${C.ink}" stroke-width="13"/><circle cx="700" cy="864" r="50" fill="none" stroke="${P.gold}" stroke-width="6"/>
-      <path d="M 536 838 Q 548 826 562 824 M 670 838 Q 682 826 696 824" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
-      <!-- Nase, Mund -->
-      <path d="M 640 868 C 640 912 650 944 670 968 C 684 988 664 1004 638 998 C 622 994 612 986 608 976" fill="${P.skin}" ${S()}/>
-      <path d="M 636 986 q 8 4 14 -2" fill="none" ${S(3)}/>
-      <g transform="translate(646 1036)">${mouth("doc-m", { s: 0.78, initial: "smile" })}</g>
     </g>
-
-    <!-- Linker Arm (Bildseite rechts) mit Klemmbrett -->
-    ${stroke2("M 884 1270 C 934 1330 960 1400 968 1470", 104, P.coat)}
-    <g transform="rotate(-24 810 1530)">
-      <rect x="640" y="1330" width="340" height="400" rx="14" fill="${P.board}" ${S()}/>
-      <path d="M 660 1366 L 660 1710" stroke="${P.boardDark}" stroke-width="8" opacity="0.5"/>
-      <rect x="752" y="1304" width="116" height="52" rx="12" fill="#C3C8CD" ${S(4)}/>
-      <circle cx="810" cy="1318" r="10" fill="#F0F2F3" ${S(3)}/>
-    </g>
-    <g transform="translate(10 -110)"><path d="M 966 1560 C 1010 1556 1028 1600 1012 1640 C 996 1676 952 1680 936 1650 C 924 1620 930 1572 966 1560 Z" fill="${P.skin}" ${S()}/>
-    <path d="M 950 1590 C 970 1588 986 1596 992 1610 M 946 1620 C 966 1618 982 1626 988 1640" fill="none" ${S(3)}/></g>
-    <!-- Rechter Arm mit Stift -->
-    ${stroke2("M 386 1266 C 346 1400 346 1520 396 1590 L 630 1570", 104, P.coat)}
-    <path d="M 450 1520 C 470 1560 520 1572 580 1560" fill="none" stroke="${P.coatShade}" stroke-width="10" stroke-linecap="round"/>
-    <g transform="translate(46 12)"><g id="doc-hand">
-      <g id="doc-pen">
-        <path d="M 610 1540 L 676 1430" stroke="${C.ink}" stroke-width="22" stroke-linecap="round"/>
-        <path d="M 610 1540 L 676 1430" stroke="#2C2B33" stroke-width="13" stroke-linecap="round"/>
-        <path d="M 652 1470 L 664 1450" stroke="${P.gold}" stroke-width="13"/>
-        <path d="M 606 1548 L 598 1562" stroke="${P.gold}" stroke-width="6" stroke-linecap="round"/>
-      </g>
-      <path d="M 576 1508 C 610 1496 646 1512 650 1546 C 654 1580 622 1600 592 1596 C 562 1592 548 1566 552 1540 C 554 1524 562 1514 576 1508 Z" fill="${P.skin}" ${S()}/>
-      <path d="M 600 1520 C 616 1520 630 1530 634 1544" fill="none" ${S(3)}/>
-    </g></g>
   </g>
 
-  <!-- Tisch mit Akten -->
-  <path d="M -20 1660 C 300 1642 800 1630 1110 1612 L 1110 1712 C 800 1726 300 1740 -20 1756 Z" fill="${P.desk}" ${S()}/>
-  <path d="M -20 1756 C 300 1740 800 1726 1110 1712 L 1110 1960 L -20 1960 Z" fill="${P.deskSide}" ${S()}/>
-  <path d="M 0 1780 C 300 1766 800 1752 1100 1738" fill="none" stroke="#B9C29A" stroke-width="10"/>
-  ${[0, 1, 2, 3]
+  <!-- Bettdecke vorne -->
+  <path d="M 380 1470 C 520 1400 700 1372 880 1380 C 990 1386 1060 1400 1110 1420 L 1300 1420 L 1300 1960 L 380 1960 C 356 1760 356 1600 380 1470 Z" fill="${ST2.sheet}" ${S(3.5)}/>
+  ${[
+    "M 470 1520 C 560 1480 680 1470 760 1500",
+    "M 520 1640 C 640 1590 820 1600 940 1640",
+    "M 820 1450 C 900 1460 980 1500 1040 1560",
+    "M 430 1760 C 560 1720 720 1740 860 1790",
+  ]
     .map(
-      (i) => `<g transform="translate(${872 - i * 4} ${1640 - i * 22}) rotate(${-4 + (i % 2) * 3})">
-      <path d="M 0 0 L 230 -14 L 236 18 L 6 32 Z" fill="${i % 2 ? P.paper : "#D9C79A"}" ${S(4)}/>
-      <rect x="30" y="-6" width="34" height="14" rx="3" fill="#B9BEC3" ${S(3)}/></g>`,
+      (d) =>
+        `<path d="${d}" fill="none" stroke="${ST2.fold}" stroke-width="22" stroke-linecap="round" opacity="0.8"/>`,
     )
     .join("")}
-</svg>`;
-
-const praxisJs = `
-    const docLines = ${JSON.stringify(lines.filter((l) => l.speaker === "arzt" && LINE_SCENE[l.id] === "praxis").map((l) => [l.start, l.end]))};
-    const LIDS = ["#de1-lid", "#de2-lid"], PUP = ["#de1-p", "#de2-p"];
-    gsap.set(LIDS, { scaleY: 0.42, svgOrigin: "0 -28" });
-    gsap.set(PUP, { x: 6, y: 9 });
-    gsap.set("#doc-head", { svgOrigin: "630 1080" });
-    gsap.set("#doc-hand", { svgOrigin: "560 1560" });
-    const blinkD = (t, v) => { tl.to(LIDS, { scaleY: 1, duration: 0.06 }, t); tl.to(LIDS, { scaleY: v, duration: 0.09 }, t + 0.07); };
-    // Schreiben: kleine Kringel mit dem Stift.
-    const write = (t0, t1) => {
-      for (let t = t0, i = 0; t < t1 - 0.12; t += 0.16, i++)
-        tl.to("#doc-hand", { x: [0, 6, -2, 8][i % 4], y: [0, -4, 3, -2][i % 4], duration: 0.15, ease: "sine.inOut" }, t);
-      tl.to("#doc-hand", { x: 0, y: 0, duration: 0.15 }, t1 - 0.12);
-    };
-    const S0 = ${SC.praxis[0]}, S1 = ${SC.praxis[1]};
-    gsap.set("#px-cam", { transformOrigin: "58% 45%" });
-    tl.fromTo("#px-cam", { scale: 1 }, { scale: 1.07, duration: S1 - S0, ease: "none" }, S0);
-    let prev = S0;
-    docLines.forEach(([a, b], i) => {
-      if (a - prev > 0.35) write(prev + 0.05, a - 0.1);
-      // aufschauen, Kopf leicht heben, Brauen hoch, erklären
-      tl.to(PUP, { x: 0, y: -2, duration: 0.2, ease: "power3.out" }, a - 0.15);
-      tl.to(LIDS, { scaleY: 0.3, duration: 0.2 }, a - 0.15);
-      tl.to("#doc-head", { rotation: i % 2 ? 1.5 : -1.5, y: -6, duration: 0.5, ease: "sine.inOut" }, a - 0.15);
-      tl.to("#doc-brows", { y: -8, duration: 0.18, ease: "power2.out" }, a);
-      tl.to("#doc-brows", { y: 0, duration: 0.3, ease: "power2.inOut" }, a + 0.5);
-      talk("doc", a, b, "smile", 0.12);
-      blinkD(a + (b - a) * 0.55, 0.3);
-      tl.to(PUP, { x: 6, y: 9, duration: 0.25, ease: "power2.inOut" }, b + 0.05);
-      tl.to(LIDS, { scaleY: 0.42, duration: 0.25 }, b + 0.05);
-      tl.to("#doc-head", { rotation: 0, y: 0, duration: 0.5, ease: "sine.inOut" }, b + 0.05);
-      prev = b;
-    });
-    if (S1 - prev > 0.4) write(prev + 0.2, S1 - 0.05);
-`;
-
-/* ================= Patient mit dickem Zeh-Verband ================= */
-// Patient sitzt, Fuß zur Kamera hochgelegt (Sohle sichtbar), der große Zeh ist
-// ein riesiger weißer Verband, der pocht.
-const PT = { hair: "#5A3A26", sweater: "#3D79C9", pants: "#33343A", chair: "#3F7FD0" };
-const ptEye = (id, x, y) =>
-  `<g transform="translate(${x} ${y})"><clipPath id="${id}-c"><circle r="20"/></clipPath>
-    <circle r="20" fill="#fff"/>
-    <g id="${id}-p"><circle r="9" fill="${C.ink}"/><circle cx="-3" cy="-3" r="2.4" fill="#fff"/></g>
-    <g clip-path="url(#${id}-c)"><rect id="${id}-lid" x="-26" y="-26" width="52" height="52" fill="${P.skin}" ${S(4)} vector-effect="non-scaling-stroke"/></g>
-    <circle r="20" fill="none" ${S(4)}/></g>`;
-// Seitenansicht: Patient sitzt links, Bein liegt auf einem Hocker, vorne der
-// große Zeh als riesiger Verband. Kopf frontal zur Kamera.
-const HX = 390,
-  HY = 740;
-const patientSvg = `
-<svg id="pt-cam" viewBox="0 0 ${W} ${H}">
-  <rect width="${W}" height="${H}" fill="${P.wall}"/>
-  <rect y="0" width="${W}" height="110" fill="${P.ceiling}"/>
-  <path d="M 0 110 L ${W} 110" ${S(4)}/>
-  <rect y="1180" width="${W}" height="400" fill="${P.wallLow}"/>
-  <path d="M 0 1180 L ${W} 1180" ${S(4)}/>
-  <rect y="1560" width="${W}" height="${H - 1560}" fill="#A0978A"/>
-  <path d="M 0 1560 L ${W} 1560" ${S(4)}/>
-  ${[1640, 1760, 1900].map((y) => `<path d="M 0 ${y} L ${W} ${y}" stroke="#7E766B" stroke-width="5"/>`).join("")}
-  <rect x="700" y="600" width="230" height="300" rx="6" fill="#F3F1E6" ${S(4)}/>
-  <path d="M 740 670 h 150 M 740 720 h 120 M 740 770 h 140 M 740 820 h 90" stroke="#B9C29A" stroke-width="10" stroke-linecap="round"/>
-  <!-- Stuhl -->
-  <rect x="150" y="760" width="90" height="480" rx="30" fill="${PT.chair}" ${S()}/>
-  <rect x="150" y="1150" width="400" height="80" rx="30" fill="${PT.chair}" ${S()}/>
-  <path d="M 200 1230 L 190 1560 M 500 1230 L 510 1560" ${S(14)}/>
-  <!-- Oberkörper -->
-  <path d="M 230 1170 C 220 1010 240 890 320 860 L 460 860 C 530 890 550 1010 530 1170 Z" fill="${PT.sweater}" ${S()}/>
-  <path d="M 355 860 L 390 920 L 425 860 Z" fill="#fff" ${S(4)}/>
-  <rect x="362" y="800" width="56" height="70" fill="${P.skin}" ${S()}/>
-  <!-- vorderes Bein (sitzt) -->
-  <path d="M 300 1110 L 640 1110 C 690 1110 700 1150 700 1200 L 720 1540 L 600 1540 L 590 1230 L 300 1220 Z" fill="${PT.pants}" ${S()}/>
-  <path d="M 590 1530 L 760 1530 C 790 1530 800 1570 770 1572 L 590 1572 Z" fill="#1A1A1C" ${S()}/>
-  <!-- Schal um den Hals, Eis in der Hand -->
-  <path d="M 330 820 C 360 850 420 850 450 820 L 456 860 C 420 890 360 890 324 860 Z" fill="#D94A4A" ${S(4)}/>
-  <path d="M 430 850 L 470 960 L 430 968 L 404 862 Z" fill="#D94A4A" ${S(4)}/>
-  <path d="M 500 900 C 540 980 560 1060 560 1120" fill="none" stroke="${C.ink}" stroke-width="72" stroke-linecap="round"/><path d="M 500 900 C 540 980 560 1060 560 1120" fill="none" stroke="${PT.sweater}" stroke-width="62" stroke-linecap="round"/>
-  <g id="pt-head">
-    <ellipse cx="${HX - 88}" cy="${HY}" rx="18" ry="30" fill="${P.skin}" ${S()}/>
-    <ellipse cx="${HX + 88}" cy="${HY}" rx="18" ry="30" fill="${P.skin}" ${S()}/>
-    <g id="pt-face"><ellipse cx="${HX}" cy="${HY}" rx="90" ry="104" fill="${P.skin}" ${S()}/></g>
-    <path d="M ${HX - 90} ${HY - 10} C ${HX - 100} ${HY - 90} ${HX - 52} ${HY - 130} ${HX} ${HY - 132} C ${HX + 60} ${HY - 130} ${HX + 104} ${HY - 90} ${HX + 92} ${HY - 10} C ${HX + 80} ${HY - 50} ${HX + 50} ${HY - 70} ${HX + 20} ${HY - 66} C ${HX} ${HY - 82} ${HX - 30} ${HY - 80} ${HX - 46} ${HY - 64} C ${HX - 70} ${HY - 62} ${HX - 84} ${HY - 40} ${HX - 90} ${HY - 10} Z" fill="${PT.hair}" ${S()}/>
-    ${ptEye("pe1", HX - 32, HY)}${ptEye("pe2", HX + 34, HY)}
-    <path id="pt-browL" d="M ${HX - 56} ${HY - 36} L ${HX - 12} ${HY - 48}" fill="none" ${S(6)}/>
-    <path id="pt-browR" d="M ${HX + 12} ${HY - 48} L ${HX + 56} ${HY - 36}" fill="none" ${S(6)}/>
-    <path d="M ${HX} ${HY + 18} q -10 22 4 26" fill="none" ${S(4)}/>
-    <g transform="translate(${HX} ${HY + 62})">${mouth("pm-m", { s: 0.6, initial: "frown" })}</g>
-    <g transform="translate(452 792) rotate(-12)"><rect x="-30" y="-16" width="60" height="32" rx="13" fill="#EED9B8" ${S(4)}/></g>
   </g>
 </svg>`;
+const stationJs = `${HELPERS}
+    const S0 = ${SC.station[0]}, S1 = ${SC.station[1]};
+    const PL = ["#pe1-lid", "#pe2-lid"], PP = ["#pe1-p", "#pe2-p"];
+    const DL = ["#de1-lid", "#de2-lid"], DP = ["#de1-p", "#de2-p"];
+    gsap.set(PL, { scaleY: 0.1, svgOrigin: "0 -20" });
+    gsap.set(DL, { scaleY: 0.35, svgOrigin: "0 -20" });
+    gsap.set(PP, { x: -7, y: -1 });
+    gsap.set(DP, { x: 7, y: 2 });
+    gsap.set("#doc-mask", { svgOrigin: "321 748" });
+    gsap.set("#doc-head", { svgOrigin: "321 850" });
+    gsap.set("#pat-head", { svgOrigin: "800 900" });
+    gsap.set("#doc-arm", { svgOrigin: "452 978" });
+    const blinkP = (t, v = 0.1) => { tl.to(PL, { scaleY: 1, duration: 0.06 }, t); tl.to(PL, { scaleY: v, duration: 0.09 }, t + 0.07); };
+    const blinkD = (t, v = 0.35) => { tl.to(DL, { scaleY: 1, duration: 0.06 }, t); tl.to(DL, { scaleY: v, duration: 0.09 }, t + 0.07); };
+    // Unter der Maske: sie bewegt sich mit der Lautstärke der Stimme.
+    const maskTalk = (t0, t1) => {
+      const env = LIP[(+t0).toFixed(2)] || [];
+      for (let i = 0; i < env.length; i += 2) {
+        const t = t0 + i / 30;
+        if (t > t1 - 0.03) break;
+        const v = Math.max(env[i], env[i + 1] || 0);
+        tl.to("#doc-mask", { scaleY: 1 + v * 0.07, y: v * 3, duration: 2 / 30, ease: "sine.out" }, t);
+      }
+      tl.to("#doc-mask", { scaleY: 1, y: 0, duration: 0.15 }, t1);
+    };
+    const q = ${JSON.stringify(L.q1)};
+    const D = ${JSON.stringify(lines.filter((l) => l.speaker === "arzt" && LINE_SCENE[l.id] === "station").map((l) => [l.start, l.end]))};
+    // Kevin fragt, der Arzt hört zu.
+    tl.to("#pat-browL", { rotation: -10, svgOrigin: "780 758", duration: 0.2 }, q[0]);
+    tl.to("#pat-browR", { rotation: 10, svgOrigin: "812 758", duration: 0.2 }, q[0]);
+    talk("pm", q[0], q[1], "flat", 0.12);
+    tl.to("#doc-head", { rotation: 3, duration: 0.6, ease: "sine.inOut" }, q[0] + 0.3);
+    blinkD(q[0] + 1.4);
+    tl.to("#pat-browL", { rotation: 0, duration: 0.3 }, q[1]);
+    tl.to("#pat-browR", { rotation: 0, duration: 0.3 }, q[1]);
+    // Der Arzt erklärt und zeigt das Pickelpflaster auf der Handfläche.
+    D.forEach(([a, b], i) => {
+      maskTalk(a, b);
+      tl.to("#doc-head", { rotation: i % 2 ? -2 : 2, duration: 0.6, ease: "sine.inOut" }, a);
+      tl.to(["#doc-browL", "#doc-browR"], { y: -6, duration: 0.18 }, a);
+      tl.to(["#doc-browL", "#doc-browR"], { y: 0, duration: 0.3 }, a + 0.6);
+      tl.to("#doc-arm", { rotation: -3, duration: 0.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, a + 0.4);
+      for (let t = a + 1.3; t < b - 0.3; t += 2.4) blinkD(t);
+      // Kevin hört zu: Augen zu und nicken, dann wieder aufmachen.
+      tl.to(PL, { scaleY: 0.85, duration: 0.2 }, a + 0.8);
+      tl.to("#pat-head", { rotation: -3, duration: 0.25, yoyo: true, repeat: 1 }, a + 1.0);
+      tl.to(PL, { scaleY: 0.1, duration: 0.2 }, Math.min(b, a + 2.6));
+      for (let t = a + 3.4; t < b - 0.3; t += 2.2) blinkP(t);
+    });
+    tl.to("#pat-head", { rotation: -4, duration: 0.25, yoyo: true, repeat: 1 }, S1 - 0.9);
+`;
+
 /* ================= Haut-Querschnitt (eine feste Einstellung, Stil v2) ================= */
 // Oben "draußen" (Luft, hellblau): dort kommen Finger, Handschuh-Hand, Spray,
 // Pflaster ins Bild. Unten der Hautquerschnitt: Oberhaut, Lederhaut mit Pickel
@@ -522,8 +394,8 @@ const DERM_D = {
   flat: surf(0, 950),
 };
 const browPair = (id, gap, r, y) =>
-  `<path id="${id}-browL" d="M ${-gap - r * 0.75} ${y} L ${-gap + r * 0.75} ${y}" fill="none" ${S(4)}/>` +
-  `<path id="${id}-browR" d="M ${gap - r * 0.75} ${y} L ${gap + r * 0.75} ${y}" fill="none" ${S(4)}/>`;
+  `<path id="${id}-browL" d="M ${-gap - r * 0.6} ${y + 3} Q ${-gap} ${y - 5} ${-gap + r * 0.6} ${y + 3}" fill="none" ${S(3)}/>` +
+  `<path id="${id}-browR" d="M ${gap - r * 0.6} ${y + 3} Q ${gap} ${y - 5} ${gap + r * 0.6} ${y + 3}" fill="none" ${S(3)}/>`;
 const bacterium = (id, x, y) =>
   `<g id="${id}" transform="translate(${x} ${y})"><g id="${id}-b"><ellipse rx="17" ry="13" fill="${TK.bac}" ${S(3)}/>
     <circle cx="-6" cy="-3" r="4.5" fill="#fff" ${S(2)}/><circle cx="6" cy="-3" r="4.5" fill="#fff" ${S(2)}/>
@@ -536,7 +408,7 @@ const finger = (id, w = 100, face = false) => `
     <path d="M ${-w / 2 + 14} -210 q ${w / 2 - 14} 14 ${w - 28} 0 M ${-w / 2 + 14} -350 q ${w / 2 - 14} 14 ${w - 28} 0" fill="none" stroke="#D9A58A" stroke-width="5" stroke-linecap="round"/>
     <rect x="${-w / 2 + 16}" y="-86" width="${w - 32}" height="78" rx="${(w - 32) / 2.4}" fill="${TK.nail}" ${S(3)}/>
     <path d="M ${-w / 2 + 20} -14 Q 0 4 ${w / 2 - 20} -14" fill="none" stroke="${TK.dirt}" stroke-width="7" stroke-linecap="round"/>
-    ${face ? `<g transform="translate(0 -300)">${toothFace(id, { r: 17, gap: 21, mouthY: 34, mouthS: 0.4, mouthInit: "smile", lidFill: TK.skin })}${browPair(id, 21, 17, -28)}</g>` : ""}
+    ${face ? `<g transform="translate(0 -300)">${toothFace(id, { r: 22, gap: 23, mouthY: 36, mouthS: 0.36, mouthInit: "smile", lidFill: TK.skin, pupil: 0.24, sw: 3.5 })}${browPair(id, 23, 22, -32)}</g>` : ""}
   </g>`;
 // Handschuh-Hand mit Komedonenquetscher: Schlaufe bei (0,0), Hand oben.
 const gloveHand = (id) => `
@@ -549,7 +421,7 @@ const gloveHand = (id) => `
     <path d="M -96 -280 C -110 -370 -60 -410 0 -410 C 70 -410 112 -370 100 -280 C 92 -200 50 -170 0 -170 C -50 -170 -88 -200 -96 -280 Z" fill="${TK.glove}" ${S(4)}/>
     <path d="M -96 -250 C -120 -230 -110 -190 -70 -190 C -40 -190 -30 -210 -24 -220" fill="${TK.glove}" ${S(4)}/>
     <path d="M -70 -320 C -40 -330 40 -330 70 -320" fill="none" stroke="${TK.gloveShade}" stroke-width="6" stroke-linecap="round"/>
-    <g transform="translate(6 -290)">${toothFace(id, { r: 21, gap: 28, mouthY: 40, mouthS: 0.45, mouthInit: "flat", lidFill: TK.glove })}${browPair(id, 28, 21, -33)}</g>
+    <g transform="translate(6 -290)">${toothFace(id, { r: 26, gap: 27, mouthY: 42, mouthS: 0.4, mouthInit: "flat", lidFill: TK.glove, pupil: 0.24, sw: 3.5 })}${browPair(id, 27, 26, -38)}</g>
   </g>`;
 const sprayCan = (id) => `
   <g id="${id}">
@@ -562,10 +434,15 @@ const sprayCan = (id) => `
 const skin = (p) => `
 <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
  <g transform="translate(540 1000) scale(1.35) translate(-540 -1000)"><g id="${p}cam">
-  <rect x="-200" y="-400" width="${W + 400}" height="${SURF + 400}" fill="${TK.air}"/>
+  <rect x="-200" y="-400" width="${W + 400}" height="${SURF + 400}" fill="url(#${p}airG)"/>
   <path d="M -100 520 L 1180 160 L 1180 300 L -100 660 Z" fill="${TK.airHi}" opacity="0.6"/>
-  <path id="${p}surf" d="${SURF_D.start}" fill="${TK.epi}" ${S(4)}/>
-  <path id="${p}derm" d="${DERM_D.start}" fill="${TK.derm}"/>
+  <path id="${p}surf" d="${SURF_D.start}" fill="${TK.epi}" ${S(3)}/>
+  <defs>
+    <linearGradient id="${p}dermG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0BDAA"/><stop offset="1" stop-color="${TK.dermDark}"/></linearGradient>
+    <radialGradient id="${p}pusG" cx="45%" cy="38%" r="65%"><stop offset="0" stop-color="#FBF2C9"/><stop offset="1" stop-color="${TK.pusDark}"/></radialGradient>
+    <linearGradient id="${p}airG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFDDF0"/><stop offset="1" stop-color="#DCEEF7"/></linearGradient>
+  </defs>
+  <path id="${p}derm" d="${DERM_D.start}" fill="url(#${p}dermG)"/>
   <path d="M -60 965 L 1140 965" stroke="${TK.epiLine}" stroke-width="5" stroke-dasharray="14 12" opacity="0.7"/>
   <rect x="-60" y="1380" width="${W + 120}" height="700" fill="${TK.fat}"/>
   <path d="M -60 1380 L 1140 1380" ${S(3)} opacity="0.5"/>
@@ -605,12 +482,12 @@ const skin = (p) => `
   </g>
   <path d="M ${PK.x} 870 L ${PK.x} 960" stroke="${C.ink}" stroke-width="38" stroke-linecap="round"/>
   <path d="M ${PK.x} 870 L ${PK.x} 960" stroke="${TK.pusDark}" stroke-width="28" stroke-linecap="round"/>
-  <g id="${p}pocket"><ellipse cx="${PK.x}" cy="${PK.y}" rx="128" ry="142" fill="${TK.pit}" ${S(4)}/></g>
+  <g id="${p}pocket"><ellipse cx="${PK.x}" cy="${PK.y}" rx="128" ry="142" fill="${TK.pit}" ${S(3)}/></g>
   <path d="M 648 1010 C 690 990 720 1020 704 1050 C 730 1070 710 1110 680 1100 C 664 1124 630 1110 636 1084 C 610 1070 620 1030 648 1010 Z" fill="${TK.gland}" ${S(3)}/>
   <g id="${p}pickel-t">
-    <ellipse cx="${PK.x}" cy="${PK.y}" rx="124" ry="138" fill="${TK.pus}" ${S(4)}/>
+    <ellipse cx="${PK.x}" cy="${PK.y}" rx="124" ry="138" fill="url(#${p}pusG)" ${S(3)}/>
     <path d="M ${PK.x - 90} ${PK.y + 40} C ${PK.x - 70} ${PK.y + 100} ${PK.x + 60} ${PK.y + 110} ${PK.x + 92} ${PK.y + 48}" fill="none" stroke="${TK.pusDark}" stroke-width="12" stroke-linecap="round"/>
-    <g transform="translate(${PK.x} ${PK.y - 30})">${toothFace(p + "pickel", { r: 24, gap: 30, mouthY: 44, mouthS: 0.5, mouthInit: "smirk", lidFill: TK.pus })}${browPair(p + "pickel", 30, 24, -36)}</g>
+    <g transform="translate(${PK.x} ${PK.y - 30})">${toothFace(p + "pickel", { r: 31, gap: 32, mouthY: 50, mouthS: 0.46, mouthInit: "smirk", lidFill: TK.pus, pupil: 0.24, sw: 3.5 })}${browPair(p + "pickel", 32, 31, -44)}</g>
     ${bacterium(p + "bac0", PK.x - 72, PK.y + 48)}${bacterium(p + "bac1", PK.x + 70, PK.y + 40)}${bacterium(p + "bac2", PK.x - 4, PK.y + 92)}${bacterium(p + "bac3", PK.x + 64, PK.y - 74)}
   </g>
   <circle id="${p}head" cx="${PK.x}" cy="842" r="24" fill="${TK.head}" ${S(3)}/>
@@ -620,10 +497,10 @@ const skin = (p) => `
   <g transform="translate(${HF.x} ${HF.y})">
     <ellipse id="${p}blushL" cx="-62" cy="46" rx="22" ry="12" fill="#E8676F" opacity="0"/>
     <ellipse id="${p}blushR" cx="62" cy="46" rx="22" ry="12" fill="#E8676F" opacity="0"/>
-    ${toothFace(p + "haut", { r: 34, gap: 46, mouthY: 70, mouthS: 0.68, mouthInit: "frown", lidFill: TK.derm })}${browPair(p + "haut", 46, 34, -50)}
+    ${toothFace(p + "haut", { r: 40, gap: 41, mouthY: 66, mouthS: 0.55, mouthInit: "frown", lidFill: TK.derm, pupil: 0.24, sw: 3.5 })}${browPair(p + "haut", 41, 40, -56)}
   </g>
   <g id="${p}sweat" opacity="0"><path d="M ${HF.x + 92} ${HF.y - 50} C ${HF.x + 104} ${HF.y - 32} ${HF.x + 106} ${HF.y - 20} ${HF.x + 96} ${HF.y - 12} C ${HF.x + 86} ${HF.y - 6} ${HF.x + 76} ${HF.y - 14} ${HF.x + 80} ${HF.y - 28} Z" fill="#BFE6F5" ${S(3)}/></g>
-  <g id="${p}patch-pos"><rect x="-96" y="-50" width="192" height="70" rx="30" fill="${TK.patch}" opacity="0.92" ${S(4)}/>
+  <g id="${p}patch-pos"><rect x="-96" y="-50" width="192" height="70" rx="30" fill="${TK.patch}" opacity="0.92" ${S(3)}/>
     <circle cx="-50" cy="-16" r="4" fill="#D8BF96"/><circle cx="0" cy="-22" r="4" fill="#D8BF96"/><circle cx="48" cy="-14" r="4" fill="#D8BF96"/></g>
   <g id="${p}spray-pos">${sprayCan(p + "spray")}</g>
   <g id="${p}fi-pos">${finger(p + "finger", 104, true)}</g>
@@ -678,8 +555,8 @@ function actLines(scene) {
     .join("\n    ");
 }
 const hautJs = `${HELPERS}
-    initChar("@haut", 34, 0.15); initChar("@pickel", 24, 0.5); initChar("@finger", 17, 0.1); initChar("@hand", 21, 0.15);
-    const BROWO = { haut: [46, -50], pickel: [30, -36], finger: [21, -28], hand: [28, -33] };
+    initChar("@haut", 40, 0.15); initChar("@pickel", 31, 0.5); initChar("@finger", 22, 0.1); initChar("@hand", 26, 0.15);
+    const BROWO = { haut: [41, -56], pickel: [32, -44], finger: [23, -32], hand: [27, -38] };
     Object.entries(BROWO).forEach(([c, [g, y]]) => { gsap.set("#@" + c + "-browL", { svgOrigin: -g + " " + y }); gsap.set("#@" + c + "-browR", { svgOrigin: g + " " + y }); });
     const BROW = { angry: [18, -18], panic: [-16, 16], worried: [-14, 14], smug: [-12, 4], happy: [-6, 6], flat: [0, 0] };
     const brows = (ch, mood, t) => {
@@ -783,17 +660,6 @@ const hautJs = `${HELPERS}
     look("@finger", 10, 10, F0 + 0.5); look("@hand", -6, 12, G0 + 0.5);
 `;
 
-/* ================= Kevin fragt (Pflaster auf der Wange) ================= */
-const frageJs = `${HELPERS}
-    const LIDS = ["#pe1-lid", "#pe2-lid"], PUP = ["#pe1-p", "#pe2-p"];
-    gsap.set(LIDS, { scaleY: 0.15, svgOrigin: "0 -26" });
-    gsap.set("#pt-browL", { rotation: -12, svgOrigin: "${HX - 12} ${HY - 48}" });
-    gsap.set("#pt-browR", { rotation: 12, svgOrigin: "${HX + 12} ${HY - 48}" });
-    gsap.set(PUP, { x: 8, y: -2 });
-    talk("pm", ${L.q1}, "frown", 0.12);
-    tl.to(LIDS, { scaleY: 1, duration: 0.06 }, ${L.q1[0]} + 1.2); tl.to(LIDS, { scaleY: 0.15, duration: 0.09 }, ${L.q1[0]} + 1.27);
-`;
-
 /* ================= Captions ================= */
 // Karte zeigt "SPÄTER" schon groß, daher keine Untertitel dafür.
 const spoken = lines.filter((l) => l.speaker !== "card");
@@ -832,7 +698,7 @@ const capJs = `
 
 // Stil v2: kleine, ruhige Untertitel unten im Bild.
 const CAP_EMPH_CSS = `
-  .cap { --cap-y: 1392px; font-size: 52px; -webkit-text-stroke: 9px #1d1414; text-shadow: 0 4px 0 rgba(0,0,0,0.3); }`;
+  .cap { --cap-y: 1392px; font-size: 58px; -webkit-text-stroke: 10px #1d1414; text-shadow: 0 4px 0 rgba(0,0,0,0.3); }`;
 
 /* ================= index.html ================= */
 const sfx = script.sfx
@@ -876,8 +742,7 @@ const index = `<!doctype html>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${W}" data-height="${H}">
 ${host("haut", 1)}
-${host("frage", 3)}
-${host("praxis", 4)}
+${host("station", 3)}
 ${host("captions", 5, "captions", 5)}
 ${host("marke", 6, "graphics", 4)}
 ${sfx}
@@ -912,17 +777,7 @@ const out = (f, s) => writeFileSync(new URL(f, import.meta.url), s);
 const pre = (p, js) => js.replaceAll("@", p);
 out("./index.html", index);
 out("./compositions/haut.html", page("haut", SC.haut, skin("h-"), "", pre("h-", hautJs)));
-out("./compositions/frage.html", page("frage", SC.frage, patientSvg, "", frageJs));
-out(
-  "./compositions/praxis.html",
-  page(
-    "praxis",
-    SC.praxis,
-    praxisSvg.replace("<svg ", '<svg id="px-cam" '),
-    "",
-    HELPERS + praxisJs,
-  ),
-);
+out("./compositions/station.html", page("station", SC.station, stationSvg, "", stationJs));
 out(
   "./compositions/captions.html",
   page("captions", [0, DUR], capBody, CAPTION_CSS + CAP_EMPH_CSS, capJs),

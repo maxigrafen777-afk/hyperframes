@@ -44,7 +44,7 @@ export const S = (w = W) =>
 /* ---------- Eyes ---------- */
 // Lid: rect hinged at the top of the eye; GSAP scaleY 0 = open, 1 = closed.
 // Squeeze: "> <" pain eyes, toggled with opacity.
-export function eye(id, { r = 52, lidFill = C.tooth, side = "L" } = {}) {
+export function eye(id, { r = 52, lidFill = C.tooth, side = "L", pupil = 0.3, sw = W } = {}) {
   const k = r + 8;
   const chev =
     side === "L"
@@ -54,10 +54,10 @@ export function eye(id, { r = 52, lidFill = C.tooth, side = "L" } = {}) {
   <g id="${id}">
     <clipPath id="${id}-clip"><circle r="${r}"/></clipPath>
     <circle r="${r}" fill="#fff"/>
-    <g id="${id}-pupil"><circle r="${r * 0.3}" fill="${C.ink}"/><circle cx="${-r * 0.1}" cy="${-r * 0.12}" r="${r * 0.09}" fill="#fff"/></g>
-    <g clip-path="url(#${id}-clip)"><rect id="${id}-lid" x="${-k}" y="${-k}" width="${2 * k}" height="${2 * k}" fill="${lidFill}" ${S()} vector-effect="non-scaling-stroke"/></g>
-    <g id="${id}-sq" opacity="0"><circle r="${r}" fill="#fff"/><path d="${chev}" fill="none" ${S(7)}/></g>
-    <circle r="${r}" fill="none" ${S()}/>
+    <g id="${id}-pupil"><circle r="${r * pupil}" fill="${C.ink}"/>${pupil >= 0.28 ? `<circle cx="${-r * 0.1}" cy="${-r * 0.12}" r="${r * 0.09}" fill="#fff"/>` : ""}</g>
+    <g clip-path="url(#${id}-clip)"><rect id="${id}-lid" x="${-k}" y="${-k}" width="${2 * k}" height="${2 * k}" fill="${lidFill}" ${S(sw)} vector-effect="non-scaling-stroke"/></g>
+    <g id="${id}-sq" opacity="0"><circle r="${r}" fill="#fff"/><path d="${chev}" fill="none" ${S(sw + 2)}/></g>
+    <circle r="${r}" fill="none" ${S(sw)}/>
   </g>`;
 }
 
@@ -104,12 +104,21 @@ export function toothBody(id, { halo = true, gumLine = 270 } = {}) {
 // A tooth character: body + face. `face` = {x,y,rot,r,gap,mouthY,mouthS}
 export function toothFace(
   id,
-  { r = 52, gap = 62, mouthY = 92, mouthS = 1, mouthInit = "flat", lidFill = C.tooth } = {},
+  {
+    r = 52,
+    gap = 62,
+    mouthY = 92,
+    mouthS = 1,
+    mouthInit = "flat",
+    lidFill = C.tooth,
+    pupil = 0.3,
+    sw = W,
+  } = {},
 ) {
   return `
   <g id="${id}-face">
-    <g transform="translate(${-gap} 0)">${eye(`${id}-eyeL`, { r, side: "L", lidFill })}</g>
-    <g transform="translate(${gap} 0)">${eye(`${id}-eyeR`, { r, side: "R", lidFill })}</g>
+    <g transform="translate(${-gap} 0)">${eye(`${id}-eyeL`, { r, side: "L", lidFill, pupil, sw })}</g>
+    <g transform="translate(${gap} 0)">${eye(`${id}-eyeR`, { r, side: "R", lidFill, pupil, sw })}</g>
     <g transform="translate(0 ${mouthY})">${mouth(`${id}-m`, { s: mouthS, initial: mouthInit })}</g>
   </g>`;
 }

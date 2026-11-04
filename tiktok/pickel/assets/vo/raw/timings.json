@@ -8,36 +8,36 @@
       {
         "text": "Hey!",
         "start": 0,
-        "end": 0.557
+        "end": 0.697
       },
       {
         "text": "Das",
-        "start": 0.627,
-        "end": 0.789
+        "start": 0.731,
+        "end": 0.859
       },
       {
         "text": "ist",
-        "start": 0.836,
-        "end": 0.929
+        "start": 0.906,
+        "end": 1.01
       },
       {
         "text": "eine",
-        "start": 0.964,
-        "end": 1.138
+        "start": 1.033,
+        "end": 1.196
       },
       {
         "text": "Pore,",
-        "start": 1.196,
-        "end": 1.683
+        "start": 1.242,
+        "end": 1.66
       },
       {
         "text": "kein",
-        "start": 1.73,
-        "end": 1.985
+        "start": 1.695,
+        "end": 1.892
       },
       {
         "text": "Hotel!",
-        "start": 2.032,
+        "start": 1.95,
         "end": 2.554
       }
     ]
@@ -46,42 +46,42 @@
     "text": "Zu spät, Schätzchen. Wir haben schon ausgepackt.",
     "heard": "Zu spät, Schätzchen. Wir haben schon ausgepackt",
     "wer": 0,
-    "fileDuration": 3.108571,
+    "fileDuration": 2.089796,
     "words": [
       {
         "text": "Zu",
         "start": 0,
-        "end": 0.221
+        "end": 0.093
       },
       {
         "text": "spät,",
-        "start": 0.279,
-        "end": 0.673
+        "start": 0.128,
+        "end": 0.383
       },
       {
         "text": "Schätzchen.",
-        "start": 0.697,
-        "end": 1.254
+        "start": 0.406,
+        "end": 0.894
       },
       {
         "text": "Wir",
-        "start": 1.289,
-        "end": 1.405
+        "start": 0.929,
+        "end": 1.033
       },
       {
         "text": "haben",
-        "start": 1.44,
-        "end": 1.637
+        "start": 1.057,
+        "end": 1.219
       },
       {
         "text": "schon",
-        "start": 1.66,
-        "end": 1.823
+        "start": 1.242,
+        "end": 1.37
       },
       {
         "text": "ausgepackt.",
-        "start": 1.881,
-        "end": 3.065
+        "start": 1.428,
+        "end": 2.043
       }
     ]
   },
@@ -120,39 +120,39 @@
   },
   "p2": {
     "text": "Super. Ich komm mit. Ganz vorne.",
-    "heard": "Super, ich komm mit, ganz vorne",
-    "wer": 0,
-    "fileDuration": 2.220408,
+    "heard": "Super, ich komme mit. Ganz vorne",
+    "wer": 0.17,
+    "fileDuration": 1.854694,
     "words": [
       {
         "text": "Super.",
         "start": 0,
-        "end": 0.534
+        "end": 0.499
       },
       {
         "text": "Ich",
-        "start": 0.627,
-        "end": 0.778
+        "start": 0.534,
+        "end": 0.662
       },
       {
         "text": "komm",
-        "start": 0.813,
-        "end": 0.975
+        "start": 0.685,
+        "end": 0.836
       },
       {
         "text": "mit.",
-        "start": 1.022,
-        "end": 1.335
+        "start": 0.859,
+        "end": 1.08
       },
       {
         "text": "Ganz",
-        "start": 1.405,
-        "end": 1.625
+        "start": 1.115,
+        "end": 1.335
       },
       {
         "text": "vorne.",
-        "start": 1.66,
-        "end": 2.183
+        "start": 1.382,
+        "end": 1.811
       }
     ]
   },
@@ -160,42 +160,42 @@
     "text": "Keine Sorge, ich drück den einfach weg!",
     "heard": "Keine Sorge, ich drück den einfach weg",
     "wer": 0,
-    "fileDuration": 1.906939,
+    "fileDuration": 2.690612,
     "words": [
       {
         "text": "Keine",
         "start": 0,
-        "end": 0.232
+        "end": 0.522
       },
       {
         "text": "Sorge,",
-        "start": 0.267,
-        "end": 0.639
+        "start": 0.58,
+        "end": 1.103
       },
       {
         "text": "ich",
-        "start": 0.708,
-        "end": 0.813
+        "start": 1.184,
+        "end": 1.324
       },
       {
         "text": "drück",
-        "start": 0.836,
-        "end": 0.975
+        "start": 1.37,
+        "end": 1.544
       },
       {
         "text": "den",
-        "start": 1.01,
-        "end": 1.091
+        "start": 1.591,
+        "end": 1.695
       },
       {
         "text": "einfach",
-        "start": 1.126,
-        "end": 1.37
+        "start": 1.753,
+        "end": 2.078
       },
       {
         "text": "weg!",
-        "start": 1.416,
-        "end": 1.858
+        "start": 2.125,
+        "end": 2.647
       }
     ]
   },
@@ -236,37 +236,37 @@
     "text": "Danke! Jetzt bin ich noch größer.",
     "heard": "Danke, jetzt bin ich noch größer",
     "wer": 0,
-    "fileDuration": 1.985306,
+    "fileDuration": 1.567347,
     "words": [
       {
         "text": "Danke!",
         "start": 0,
-        "end": 0.569
+        "end": 0.441
       },
       {
         "text": "Jetzt",
-        "start": 0.848,
-        "end": 1.057
+        "start": 0.499,
+        "end": 0.673
       },
       {
         "text": "bin",
-        "start": 1.08,
-        "end": 1.196
+        "start": 0.697,
+        "end": 0.789
       },
       {
         "text": "ich",
-        "start": 1.231,
-        "end": 1.312
+        "start": 0.813,
+        "end": 0.882
       },
       {
         "text": "noch",
-        "start": 1.358,
-        "end": 1.474
+        "start": 0.929,
+        "end": 1.045
       },
       {
         "text": "größer.",
-        "start": 1.509,
-        "end": 1.95
+        "start": 1.068,
+        "end": 1.533
       }
     ]
   },
@@ -274,32 +274,32 @@
     "text": "Platz da. Erst mal desinfizieren.",
     "heard": "Platz da. Erst mal desinfizieren",
     "wer": 0,
-    "fileDuration": 3.239184,
+    "fileDuration": 2.35102,
     "words": [
       {
         "text": "Platz",
         "start": 0,
-        "end": 0.43
+        "end": 0.395
       },
       {
         "text": "da.",
-        "start": 0.511,
-        "end": 0.929
+        "start": 0.464,
+        "end": 0.731
       },
       {
         "text": "Erst",
-        "start": 1.533,
-        "end": 1.846
+        "start": 0.848,
+        "end": 1.126
       },
       {
         "text": "mal",
-        "start": 1.904,
-        "end": 2.043
+        "start": 1.196,
+        "end": 1.324
       },
       {
         "text": "desinfizieren.",
-        "start": 2.101,
-        "end": 3.204
+        "start": 1.382,
+        "end": 2.322
       }
     ]
   },
@@ -307,27 +307,27 @@
     "text": "Hey! Was wird das?",
     "heard": "Hey, was wird das?",
     "wer": 0,
-    "fileDuration": 1.38449,
+    "fileDuration": 1.48898,
     "words": [
       {
         "text": "Hey!",
         "start": 0,
-        "end": 0.453
+        "end": 0.418
       },
       {
         "text": "Was",
-        "start": 0.662,
-        "end": 0.871
+        "start": 0.534,
+        "end": 0.72
       },
       {
         "text": "wird",
-        "start": 0.917,
-        "end": 1.08
+        "start": 0.778,
+        "end": 0.906
       },
       {
         "text": "das?",
-        "start": 1.103,
-        "end": 1.347
+        "start": 0.929,
+        "end": 1.44
       }
     ]
   },
@@ -335,27 +335,27 @@
     "text": "Nein! Mein schönes Zuhause!",
     "heard": "Nein, mein schönes Zuhause",
     "wer": 0,
-    "fileDuration": 1.933061,
+    "fileDuration": 1.619592,
     "words": [
       {
         "text": "Nein!",
         "start": 0,
-        "end": 0.488
+        "end": 0.372
       },
       {
         "text": "Mein",
-        "start": 0.569,
-        "end": 0.72
+        "start": 0.441,
+        "end": 0.592
       },
       {
         "text": "schönes",
-        "start": 0.755,
-        "end": 1.08
+        "start": 0.615,
+        "end": 0.882
       },
       {
         "text": "Zuhause!",
-        "start": 1.138,
-        "end": 1.904
+        "start": 0.929,
+        "end": 1.579
       }
     ]
   },
@@ -363,32 +363,32 @@
     "text": "Und jetzt ein Pickelpflaster drauf.",
     "heard": "Und jetzt ein Pickelpflaster drauf",
     "wer": 0,
-    "fileDuration": 2.403265,
+    "fileDuration": 2.089796,
     "words": [
       {
         "text": "Und",
         "start": 0,
-        "end": 0.279
+        "end": 0.174
       },
       {
         "text": "jetzt",
-        "start": 0.395,
-        "end": 0.662
+        "start": 0.244,
+        "end": 0.441
       },
       {
         "text": "ein",
-        "start": 0.708,
-        "end": 0.848
+        "start": 0.476,
+        "end": 0.58
       },
       {
         "text": "Pickelpflaster",
-        "start": 0.964,
-        "end": 1.672
+        "start": 0.65,
+        "end": 1.324
       },
       {
         "text": "drauf.",
-        "start": 1.695,
-        "end": 2.368
+        "start": 1.358,
+        "end": 2.043
       }
     ]
   },

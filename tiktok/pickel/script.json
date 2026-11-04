@@ -6,14 +6,13 @@
   "maxPause": 0.3,
   "scenes": {
     "haut": [0, 40],
-    "frage": [45, 47],
-    "praxis": [50, 51]
+    "station": [45, 47]
   },
-  "order": ["haut", "frage", "praxis"],
+  "order": ["haut", "station"],
   "qa": {
     "maxTakes": 4,
     "maxWer": 0.1,
-    "maxF0Dev": 0.3
+    "maxF0Dev": 0.2
   },
   "lines": [
     {
@@ -119,21 +118,21 @@
     {
       "id": "d1",
       "speaker": "arzt",
-      "start": 50.3,
+      "start": 45.5,
       "end": 50.349999999999994,
       "text": "Mit den Fingern drückst du Bakterien tiefer in die Haut. Dann entzündet es sich stärker, und es können Narben bleiben."
     },
     {
       "id": "d2",
       "speaker": "arzt",
-      "start": 50.4,
+      "start": 45.5,
       "end": 50.449999999999996,
       "text": "Beim Hautarzt wird der Pickel desinfiziert und steril geöffnet."
     },
     {
       "id": "d3",
       "speaker": "arzt",
-      "start": 50.5,
+      "start": 45.5,
       "end": 50.55,
       "text": "Zu Hause gilt: Finger weg, Haut sauber halten und ein Pickelpflaster drauf."
     }
@@ -148,48 +147,48 @@
         "style": 0.6,
         "use_speaker_boost": true
       },
-      "f0ref": 242,
+      "f0ref": 238,
       "seed": 7171,
       "tempo": 1.0
     },
     "pickel": {
-      "name": "Pickel (DE, frech, rau)",
-      "voice_id": "9ZrR0jtRG2p5pnW3D2ye",
+      "name": "Pickel (DE, frech, nasal)",
+      "voice_id": "hmzGETctUW7XCobpQ3UF",
       "settings": {
-        "stability": 0.4,
+        "stability": 0.45,
         "similarity_boost": 0.85,
-        "style": 0.6,
+        "style": 0.5,
         "use_speaker_boost": true
       },
-      "f0ref": 113,
-      "seed": 7272,
-      "tempo": 1.0
+      "seed": 6161,
+      "tempo": 1.0,
+      "f0ref": 185
     },
     "finger": {
-      "name": "Finger (DE, Angeber)",
-      "voice_id": "57UyT2voiMHSkl25qJtO",
-      "settings": {
-        "stability": 0.4,
-        "similarity_boost": 0.85,
-        "style": 0.6,
-        "use_speaker_boost": true
-      },
-      "seed": 3434,
-      "tempo": 1.0,
-      "f0ref": 159
-    },
-    "hand": {
-      "name": "Handschuh-Hand (DE, tief, ruhig)",
-      "voice_id": "60QqaEwKeWbeCvUpTWud",
+      "name": "Finger (DE, Partykumpel)",
+      "voice_id": "vSzEU6wMkp9JWMpPv0JD",
       "settings": {
         "stability": 0.55,
+        "similarity_boost": 0.9,
+        "style": 0.45,
+        "use_speaker_boost": true
+      },
+      "seed": 3535,
+      "tempo": 1.0,
+      "f0ref": 124
+    },
+    "hand": {
+      "name": "Handschuh-Hand (DE, ruhige Frau)",
+      "voice_id": "pDG6X0RdbndwY5oM9QBN",
+      "settings": {
+        "stability": 0.45,
         "similarity_boost": 0.85,
         "style": 0.35,
         "use_speaker_boost": true
       },
-      "seed": 2323,
+      "seed": 6262,
       "tempo": 1.0,
-      "f0ref": 86
+      "f0ref": 180
     },
     "arzt": {
       "name": "Arzt (DE, ruhig, älter)",
@@ -316,7 +315,7 @@
       "id": "sfx-praxis",
       "src": "whoosh-short.mp3",
       "volume": 0.35,
-      "anchor": "praxis",
+      "anchor": "station",
       "offset": -0.05
     }
   ]
