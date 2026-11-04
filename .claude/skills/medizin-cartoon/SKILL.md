@@ -236,3 +236,10 @@ Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok
 - Kleine Figuren: Pickel-Stimme per ffmpeg hochpitchen (`asetrate=44100*1.41,aresample=44100,atempo=1/1.41`, Länge bleibt gleich, Wortzeiten stimmen).
 - Fehlt beim `check` „Missing browser script …browser.js“, wurde das CLI ohne Kopierschritt gebaut: `node packages/cli/scripts/build-copy.mjs`.
 - Ohne Titel im Bild: dem Creator raten, beim Hochladen in TikTok einen Cover-Text zu setzen (z. B. „Pickel ausdrücken? 😳“), weil das erste Bild das Cover ist.
+
+### Nasenbluten (`tiktok/nasenbluten/`, 41 s) – gelernt
+
+- **Ort erkennbar machen:** Ein abstrakter Schlauch liest sich nicht als Nase. Organe in ihrem Körperumriss zeigen (hier: Kopf im Profil mit Stirn, Nase, Lippen, Kinn, Hals; darin Nasenhöhle → Nasenrachen → Rachen, Zunge), Szene 1,55× skaliert um die Nase.
+- **Falsches Hausmittel als Bewegung zeigen:** „Kopf in den Nacken“ = ganze Kopf-Gruppe dreht 24° um die Nasenhöhle (`svgOrigin` nah an den Figuren, sonst wandern sie aus dem Bild), das Blut läuft sichtbar den Rachen hinunter. Richtig = Kopf nach vorne (−8°), Handschuh-Hand drückt die Nasenflügel, Gerinnsel bildet sich.
+- Offscreen-Startpositionen in einer gedrehten Gruppe weit genug weg legen, sonst rutschen Objekte beim Kippen ins Bild.
+- Pointe in der Arzt-Szene: Kevins Finger wandert wieder zur Nase („Ist da noch was drin?“ – Arzt: „Kevin! Finger weg!“), danach Ja/Nein-Sticker oben („Bohrst du in der Nase? Ja oder Nein – schreib's in die Kommentare ↓“).

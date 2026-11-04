@@ -1,0 +1,541 @@
+{
+  "f1": {
+    "text": "Moment, da hängt was. Das hol ich raus.",
+    "heard": "Moment, da hängt was. Das hole ich raus",
+    "wer": 0.13,
+    "fileDuration": 2.35102,
+    "words": [
+      {
+        "text": "Moment,",
+        "start": 0,
+        "end": 0.522
+      },
+      {
+        "text": "da",
+        "start": 0.569,
+        "end": 0.685
+      },
+      {
+        "text": "hängt",
+        "start": 0.743,
+        "end": 0.964
+      },
+      {
+        "text": "was.",
+        "start": 0.998,
+        "end": 1.324
+      },
+      {
+        "text": "Das",
+        "start": 1.358,
+        "end": 1.509
+      },
+      {
+        "text": "hol",
+        "start": 1.544,
+        "end": 1.649
+      },
+      {
+        "text": "ich",
+        "start": 1.695,
+        "end": 1.776
+      },
+      {
+        "text": "raus.",
+        "start": 1.823,
+        "end": 2.322
+      }
+    ]
+  },
+  "n1": {
+    "text": "Nicht kratzen! Da sind meine Äderchen!",
+    "heard": "Nicht kratzen, da sind meine Äderchen",
+    "wer": 0,
+    "fileDuration": 1.985306,
+    "words": [
+      {
+        "text": "Nicht",
+        "start": 0,
+        "end": 0.302
+      },
+      {
+        "text": "kratzen!",
+        "start": 0.372,
+        "end": 0.871
+      },
+      {
+        "text": "Da",
+        "start": 0.929,
+        "end": 1.022
+      },
+      {
+        "text": "sind",
+        "start": 1.057,
+        "end": 1.184
+      },
+      {
+        "text": "meine",
+        "start": 1.231,
+        "end": 1.416
+      },
+      {
+        "text": "Äderchen!",
+        "start": 1.474,
+        "end": 1.95
+      }
+    ]
+  },
+  "a1": {
+    "text": "Au! Wir platzen!",
+    "heard": "Au, wir platzen",
+    "wer": 0,
+    "fileDuration": 0.862041,
+    "words": [
+      {
+        "text": "Au!",
+        "start": 0,
+        "end": 0.186
+      },
+      {
+        "text": "Wir",
+        "start": 0.209,
+        "end": 0.325
+      },
+      {
+        "text": "platzen!",
+        "start": 0.348,
+        "end": 0.836
+      }
+    ]
+  },
+  "f2": {
+    "text": "Ups. Schnell, Kopf in den Nacken!",
+    "heard": "Ups, schnell Kopf in den Nacken",
+    "wer": 0,
+    "fileDuration": 1.697959,
+    "words": [
+      {
+        "text": "Ups.",
+        "start": 0,
+        "end": 0.464
+      },
+      {
+        "text": "Schnell,",
+        "start": 0.488,
+        "end": 0.813
+      },
+      {
+        "text": "Kopf",
+        "start": 0.859,
+        "end": 1.057
+      },
+      {
+        "text": "in",
+        "start": 1.103,
+        "end": 1.149
+      },
+      {
+        "text": "den",
+        "start": 1.173,
+        "end": 1.265
+      },
+      {
+        "text": "Nacken!",
+        "start": 1.3,
+        "end": 1.672
+      }
+    ]
+  },
+  "n2": {
+    "text": "Falsch! Jetzt läuft alles in den Hals!",
+    "heard": "Falsch. Jetzt läuft alles in den Hals",
+    "wer": 0,
+    "fileDuration": 2.037551,
+    "words": [
+      {
+        "text": "Falsch!",
+        "start": 0,
+        "end": 0.476
+      },
+      {
+        "text": "Jetzt",
+        "start": 0.557,
+        "end": 0.766
+      },
+      {
+        "text": "läuft",
+        "start": 0.801,
+        "end": 0.964
+      },
+      {
+        "text": "alles",
+        "start": 1.01,
+        "end": 1.184
+      },
+      {
+        "text": "in",
+        "start": 1.231,
+        "end": 1.277
+      },
+      {
+        "text": "den",
+        "start": 1.3,
+        "end": 1.382
+      },
+      {
+        "text": "Hals!",
+        "start": 1.428,
+        "end": 1.997
+      }
+    ]
+  },
+  "g1": {
+    "text": "Kopf nach vorne. Und vorne zudrücken.",
+    "heard": "Kopf nach vorne und vorne zudrücken",
+    "wer": 0,
+    "fileDuration": 2.586122,
+    "words": [
+      {
+        "text": "Kopf",
+        "start": 0,
+        "end": 0.418
+      },
+      {
+        "text": "nach",
+        "start": 0.499,
+        "end": 0.662
+      },
+      {
+        "text": "vorne.",
+        "start": 0.72,
+        "end": 1.219
+      },
+      {
+        "text": "Und",
+        "start": 1.289,
+        "end": 1.44
+      },
+      {
+        "text": "vorne",
+        "start": 1.509,
+        "end": 1.753
+      },
+      {
+        "text": "zudrücken.",
+        "start": 1.834,
+        "end": 2.554
+      }
+    ]
+  },
+  "a2": {
+    "text": "Puh. Es ist dicht!",
+    "heard": "Puh, es ist dicht",
+    "wer": 0,
+    "fileDuration": 1.332245,
+    "words": [
+      {
+        "text": "Puh.",
+        "start": 0,
+        "end": 0.441
+      },
+      {
+        "text": "Es",
+        "start": 0.499,
+        "end": 0.639
+      },
+      {
+        "text": "ist",
+        "start": 0.685,
+        "end": 0.789
+      },
+      {
+        "text": "dicht!",
+        "start": 0.813,
+        "end": 1.3
+      }
+    ]
+  },
+  "g2": {
+    "text": "Zehn Minuten festhalten.",
+    "heard": "Zehn Minuten festhalten",
+    "wer": 0,
+    "fileDuration": 1.567347,
+    "words": [
+      {
+        "text": "Zehn",
+        "start": 0,
+        "end": 0.232
+      },
+      {
+        "text": "Minuten",
+        "start": 0.267,
+        "end": 0.569
+      },
+      {
+        "text": "festhalten.",
+        "start": 0.615,
+        "end": 1.533
+      }
+    ]
+  },
+  "q1": {
+    "text": "Herr Doktor, warum nicht den Kopf nach hinten?",
+    "heard": "Herr Doktor, warum nicht den Kopf nach hinten?",
+    "wer": 0,
+    "fileDuration": 1.985306,
+    "words": [
+      {
+        "text": "Herr",
+        "start": 0,
+        "end": 0.197
+      },
+      {
+        "text": "Doktor,",
+        "start": 0.232,
+        "end": 0.488
+      },
+      {
+        "text": "warum",
+        "start": 0.511,
+        "end": 0.697
+      },
+      {
+        "text": "nicht",
+        "start": 0.72,
+        "end": 0.871
+      },
+      {
+        "text": "den",
+        "start": 0.894,
+        "end": 0.987
+      },
+      {
+        "text": "Kopf",
+        "start": 1.033,
+        "end": 1.219
+      },
+      {
+        "text": "nach",
+        "start": 1.277,
+        "end": 1.382
+      },
+      {
+        "text": "hinten?",
+        "start": 1.405,
+        "end": 1.95
+      }
+    ]
+  },
+  "d1": {
+    "text": "Dann schluckst du das Blut, und dir wird übel. Kopf nach vorne und zehn Minuten die Nase zudrücken.",
+    "heard": "Dann schluckst du das Blut und dir wird übel. Kopf nach vorne und zehn Minuten die Nase zudrücken",
+    "wer": 0,
+    "fileDuration": 7.366531,
+    "words": [
+      {
+        "text": "Dann",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "schluckst",
+        "start": 0.244,
+        "end": 0.592
+      },
+      {
+        "text": "du",
+        "start": 0.615,
+        "end": 0.673
+      },
+      {
+        "text": "das",
+        "start": 0.731,
+        "end": 0.859
+      },
+      {
+        "text": "Blut,",
+        "start": 0.929,
+        "end": 1.347
+      },
+      {
+        "text": "und",
+        "start": 1.463,
+        "end": 1.591
+      },
+      {
+        "text": "dir",
+        "start": 1.625,
+        "end": 1.73
+      },
+      {
+        "text": "wird",
+        "start": 1.776,
+        "end": 1.916
+      },
+      {
+        "text": "übel.",
+        "start": 2.032,
+        "end": 2.531
+      },
+      {
+        "text": "Kopf",
+        "start": 3.344,
+        "end": 3.587
+      },
+      {
+        "text": "nach",
+        "start": 3.646,
+        "end": 3.773
+      },
+      {
+        "text": "vorne",
+        "start": 3.831,
+        "end": 4.203
+      },
+      {
+        "text": "und",
+        "start": 4.354,
+        "end": 4.516
+      },
+      {
+        "text": "zehn",
+        "start": 4.551,
+        "end": 4.737
+      },
+      {
+        "text": "Minuten",
+        "start": 4.795,
+        "end": 5.19
+      },
+      {
+        "text": "die",
+        "start": 5.224,
+        "end": 5.317
+      },
+      {
+        "text": "Nase",
+        "start": 5.375,
+        "end": 5.7
+      },
+      {
+        "text": "zudrücken.",
+        "start": 5.77,
+        "end": 7.338
+      }
+    ]
+  },
+  "d2": {
+    "text": "Hört es nach zwanzig Minuten nicht auf, ab zum Arzt.",
+    "heard": "Hört es nach 20 Minuten nicht auf, ab zum Arzt",
+    "wer": 0.1,
+    "fileDuration": 3.604898,
+    "words": [
+      {
+        "text": "Hört",
+        "start": 0,
+        "end": 0.221
+      },
+      {
+        "text": "es",
+        "start": 0.279,
+        "end": 0.337
+      },
+      {
+        "text": "nach",
+        "start": 0.383,
+        "end": 0.522
+      },
+      {
+        "text": "zwanzig",
+        "start": 0.58,
+        "end": 0.998
+      },
+      {
+        "text": "Minuten",
+        "start": 1.045,
+        "end": 1.463
+      },
+      {
+        "text": "nicht",
+        "start": 1.486,
+        "end": 1.707
+      },
+      {
+        "text": "auf,",
+        "start": 1.776,
+        "end": 2.183
+      },
+      {
+        "text": "ab",
+        "start": 2.264,
+        "end": 2.426
+      },
+      {
+        "text": "zum",
+        "start": 2.508,
+        "end": 2.659
+      },
+      {
+        "text": "Arzt.",
+        "start": 2.752,
+        "end": 3.576
+      }
+    ]
+  },
+  "e1": {
+    "text": "Ist da noch was drin?",
+    "heard": "Ist da noch was drin?",
+    "wer": 0,
+    "fileDuration": 1.149388,
+    "words": [
+      {
+        "text": "Ist",
+        "start": 0,
+        "end": 0.163
+      },
+      {
+        "text": "da",
+        "start": 0.186,
+        "end": 0.232
+      },
+      {
+        "text": "noch",
+        "start": 0.279,
+        "end": 0.383
+      },
+      {
+        "text": "was",
+        "start": 0.406,
+        "end": 0.534
+      },
+      {
+        "text": "drin?",
+        "start": 0.604,
+        "end": 1.115
+      }
+    ]
+  },
+  "e2": {
+    "text": "Kevin! Finger weg!",
+    "heard": "Kevin, Finger weg",
+    "wer": 0,
+    "fileDuration": 1.48898,
+    "words": [
+      {
+        "text": "Kevin!",
+        "start": 0,
+        "end": 0.522
+      },
+      {
+        "text": "Finger",
+        "start": 0.604,
+        "end": 0.917
+      },
+      {
+        "text": "weg!",
+        "start": 0.964,
+        "end": 1.44
+      }
+    ]
+  }
+}
