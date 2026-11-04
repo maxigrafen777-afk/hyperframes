@@ -194,3 +194,10 @@ Erkenntnis aus einem Vergleichsaccount (3 Videos, 12.000 Follower, Serie „Tag 
 - **Serie mit fester Patientenfigur:** immer derselbe Patient (z. B. „Patient Kevin – Fall 1, 2, 3 …“), der mit einem neuen Problem kommt, als Endgag und Wiedererkennung. Fallnummer im Titel/Hook.
 - **Bio-Vorschlag** für den Creator: „Ihr wählt die Krankheit, ich zeig die OP 🩺 / Top-Kommentar = nächstes Video“.
 - Für den Creator einen eigenen Kommentar zum Anpinnen vorschlagen, der zur Wahl anregt.
+
+## Lektion Zahnstein (717 Aufrufe, Ø 27 %, 2,75 % ganz gesehen, die meisten weg bei 0:02)
+
+Zum Vergleich: Ohrenschmalz lag bei 40 % gesehen und 14,5 % ganz gesehen. Der Unterschied liegt im Start: Zahnstein begann mit der **Totalen** (ganzer Mund, kleine Gesichter) und dem erklärenden Titel „So kommt er weg“.
+
+- **Die ersten 2 s sind Nahaufnahme:** großes Gesicht mit starker Emotion, sofort Konflikt. Die Totale („Wo am Körper?“) erst ab ca. 2,5–3 s als Rückzoom einsetzen.
+- **Hook-Text provokant statt erklärend** (z. B. „DEIN ZAHN HAT EINEN MITBEWOHNER“, nicht „So kommt er weg“).
