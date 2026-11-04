@@ -1,0 +1,406 @@
+{
+  "title": "Nierenstein wird zertrümmert",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "maxPause": 0.3,
+  "hook": [
+    ["NIERENSTEIN", 104, "#FFE14D"],
+    ["SCHLIMMER ALS EINE GEBURT?", 58, "#fff"]
+  ],
+  "case": "PATIENT KEVIN · FALL 1",
+  "scenes": {
+    "streit": [0, 20],
+    "op": [25, 40],
+    "praxis": [45, 46],
+    "patient": [50, 53]
+  },
+  "order": ["streit", "op", "praxis", "patient"],
+  "qa": {
+    "maxTakes": 4,
+    "maxWer": 0.1,
+    "maxF0Dev": 0.3
+  },
+  "lines": [
+    {
+      "id": "n1",
+      "speaker": "niere",
+      "start": 0.15,
+      "end": 0.2,
+      "text": "Aua! Wer verstopft da meinen Abfluss?",
+      "emph": ["Abfluss"]
+    },
+    {
+      "id": "s1",
+      "speaker": "stein",
+      "start": 0.2,
+      "end": 0.25,
+      "text": "Ich. Dein neuer Untermieter.",
+      "emph": ["Untermieter"]
+    },
+    {
+      "id": "n2",
+      "speaker": "niere",
+      "start": 0.3,
+      "end": 0.35,
+      "text": "Du bist spitz, hart und steckst fest!",
+      "emph": ["spitz"]
+    },
+    {
+      "id": "s2",
+      "speaker": "stein",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Tja. Hättest du mal mehr getrunken.",
+      "emph": ["getrunken"]
+    },
+    {
+      "id": "b1",
+      "speaker": "bier",
+      "start": 0.5,
+      "end": 0.55,
+      "text": "Ganz ruhig, Kumpel. Ich spül den Kerl raus.",
+      "emph": ["Kumpel"],
+      "wait": 0.7
+    },
+    {
+      "id": "b2",
+      "speaker": "bier",
+      "start": 0.7,
+      "end": 0.75,
+      "text": "Hicks… der bewegt sich keinen Millimeter.",
+      "emph": ["Millimeter"],
+      "wait": 1.5
+    },
+    {
+      "id": "n3",
+      "speaker": "niere",
+      "start": 0.8,
+      "end": 0.8500000000000001,
+      "text": "Ich platz gleich! Holt einen Arzt!",
+      "emph": ["Arzt"]
+    },
+    {
+      "id": "o1",
+      "speaker": "stein",
+      "start": 26.05,
+      "end": 26.35,
+      "text": "Hey! Warum zielt ihr auf mich?",
+      "emph": ["zielt"]
+    },
+    {
+      "id": "o2",
+      "speaker": "stein",
+      "start": 26.4,
+      "end": 26.45,
+      "text": "Au! Au! Ich zerbrösel!",
+      "emph": ["zerbrösel"],
+      "wait": 1.25
+    },
+    {
+      "id": "o3",
+      "speaker": "niere",
+      "start": 26.5,
+      "end": 26.55,
+      "text": "Endlich wieder frei!",
+      "emph": ["frei"],
+      "wait": 1.4
+    },
+    {
+      "id": "o4",
+      "speaker": "bier",
+      "start": 26.6,
+      "end": 26.650000000000002,
+      "text": "Siehste? Ich hab ihn rausgespült!",
+      "emph": ["Siehste"]
+    },
+    {
+      "id": "o5",
+      "speaker": "niere",
+      "start": 26.7,
+      "end": 26.75,
+      "text": "Das war Wasser, du Pfeife!",
+      "emph": ["Wasser"]
+    },
+    {
+      "id": "d1",
+      "speaker": "arzt",
+      "start": 45.3,
+      "end": 45.349999999999994,
+      "text": "Große Nierensteine zertrümmern wir mit Stoßwellen. Und viel Wasser trinken beugt vor."
+    },
+    {
+      "id": "e1",
+      "speaker": "pat",
+      "start": 50.4,
+      "end": 50.449999999999996,
+      "text": "Ab heute trink ich viel mehr!",
+      "emph": ["mehr"]
+    },
+    {
+      "id": "e2",
+      "speaker": "bier",
+      "start": 50.5,
+      "end": 50.55,
+      "text": "Endlich!",
+      "wait": 0.3
+    },
+    {
+      "id": "e3",
+      "speaker": "pat",
+      "start": 50.6,
+      "end": 50.65,
+      "text": "Wasser.",
+      "wait": 0.4
+    },
+    {
+      "id": "e4",
+      "speaker": "bier",
+      "start": 50.7,
+      "end": 50.75,
+      "text": "Mist.",
+      "wait": 0.4
+    }
+  ],
+  "voices": {
+    "niere": {
+      "name": "Niere (DE, hysterisch)",
+      "voice_id": "qUEezpe9PVeBGCAuvgCT",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.85,
+        "style": 0.6,
+        "use_speaker_boost": true
+      },
+      "seed": 1212,
+      "tempo": 1.0,
+      "f0ref": 276
+    },
+    "stein": {
+      "name": "Nierenstein (DE, tief, faul)",
+      "voice_id": "60QqaEwKeWbeCvUpTWud",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.85,
+        "style": 0.6,
+        "use_speaker_boost": true
+      },
+      "seed": 2323,
+      "tempo": 1.0,
+      "f0ref": 86
+    },
+    "bier": {
+      "name": "Bier (DE, Partykumpel)",
+      "voice_id": "vSzEU6wMkp9JWMpPv0JD",
+      "settings": {
+        "stability": 0.55,
+        "similarity_boost": 0.9,
+        "style": 0.45,
+        "use_speaker_boost": true
+      },
+      "seed": 3535,
+      "tempo": 1.0,
+      "f0ref": 124
+    },
+    "arzt": {
+      "name": "Arzt (DE, ruhig, älter)",
+      "voice_id": "Og1j4Myr6614gRWlVatR",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.85,
+        "style": 0.1,
+        "use_speaker_boost": true
+      },
+      "seed": 4444,
+      "tempo": 1.0
+    },
+    "pat": {
+      "name": "Patient (DE, locker)",
+      "voice_id": "DG0JkxHQrOrx7vnDPwPZ",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.3,
+        "use_speaker_boost": true
+      },
+      "seed": 5555,
+      "tempo": 1.0
+    }
+  },
+  "genSfx": [
+    {
+      "id": "boom",
+      "prompt": "deep cinematic boom impact with sub bass, short",
+      "duration": 1.5
+    },
+    {
+      "id": "impact",
+      "prompt": "cartoon pop and heavy thud impact",
+      "duration": 1.0
+    },
+    {
+      "id": "boing",
+      "prompt": "comedic cartoon boing wobble, rubbery",
+      "duration": 1.0
+    },
+    {
+      "id": "bed",
+      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "rimshot",
+      "prompt": "comedic drum rimshot ba dum tss",
+      "duration": 1.2
+    },
+    {
+      "id": "spray",
+      "prompt": "water jet rinsing, short gush and gurgle",
+      "duration": 1.5
+    },
+    {
+      "id": "sparkle",
+      "prompt": "bright magical sparkle shine chime",
+      "duration": 1.0
+    },
+    {
+      "id": "pour",
+      "prompt": "beer pouring from a mug with foam fizz, glug glug",
+      "duration": 2.0
+    },
+    {
+      "id": "hiccup",
+      "prompt": "single comedic cartoon hiccup sound, no voice words",
+      "duration": 0.6
+    },
+    {
+      "id": "lock",
+      "prompt": "sci-fi targeting lock-on beep beep beep then confirm tone",
+      "duration": 1.2
+    },
+    {
+      "id": "shock",
+      "prompt": "deep pulsing shockwave thumps, rhythmic low bass pulses, medical lithotripsy",
+      "duration": 2.5
+    },
+    {
+      "id": "crack",
+      "prompt": "stone cracking and crumbling into small pieces",
+      "duration": 1.0
+    },
+    {
+      "id": "flush",
+      "prompt": "water flushing down a pipe with bubbling gurgle",
+      "duration": 2.0
+    },
+    {
+      "id": "squish",
+      "prompt": "rubbery inflating squeak, balloon stretching",
+      "duration": 0.8
+    },
+    {
+      "id": "clink",
+      "prompt": "glass beer mug set down on wooden table, clink",
+      "duration": 0.6
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-boom",
+      "src": "gen-boom.mp3",
+      "volume": 0.55,
+      "start": 0
+    },
+    {
+      "id": "sfx-bier-in",
+      "src": "whoosh-short.mp3",
+      "volume": 0.45,
+      "line": "b1",
+      "offset": -0.7
+    },
+    {
+      "id": "sfx-pour",
+      "src": "gen-pour-short.mp3",
+      "volume": 0.45,
+      "line": "b1",
+      "offset": 2.65
+    },
+    {
+      "id": "sfx-squish",
+      "src": "gen-squish.mp3",
+      "volume": 0.5,
+      "line": "b2",
+      "offset": -0.6
+    },
+    {
+      "id": "sfx-light",
+      "src": "gen-boom.mp3",
+      "volume": 0.25,
+      "anchor": "op",
+      "offset": 0
+    },
+    {
+      "id": "sfx-lock",
+      "src": "gen-lock.mp3",
+      "volume": 0.4,
+      "line": "o1",
+      "offset": -1.1
+    },
+    {
+      "id": "sfx-shock",
+      "src": "gen-shock.mp3",
+      "volume": 0.5,
+      "line": "o2",
+      "offset": -1.4
+    },
+    {
+      "id": "sfx-crack",
+      "src": "gen-crack.mp3",
+      "volume": 0.55,
+      "line": "o2",
+      "offset": 1.5
+    },
+    {
+      "id": "sfx-flush",
+      "src": "gen-flush.mp3",
+      "volume": 0.45,
+      "line": "o3",
+      "offset": -1.5
+    },
+    {
+      "id": "sfx-sparkle",
+      "src": "gen-sparkle.mp3",
+      "volume": 0.35,
+      "line": "o3",
+      "offset": -0.1
+    },
+    {
+      "id": "sfx-rim1",
+      "src": "gen-rimshot.mp3",
+      "volume": 0.35,
+      "line": "o5",
+      "offset": 1.2
+    },
+    {
+      "id": "sfx-praxis",
+      "src": "whoosh-short.mp3",
+      "volume": 0.4,
+      "anchor": "praxis",
+      "offset": -0.05
+    },
+    {
+      "id": "sfx-clink",
+      "src": "gen-clink.mp3",
+      "volume": 0.5,
+      "line": "e3",
+      "offset": -0.35
+    },
+    {
+      "id": "sfx-rimshot",
+      "src": "gen-rimshot.mp3",
+      "volume": 0.4,
+      "line": "e4",
+      "offset": 0.7
+    }
+  ]
+}

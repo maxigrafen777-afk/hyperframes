@@ -201,3 +201,13 @@ Zum Vergleich: Ohrenschmalz lag bei 40 % gesehen und 14,5 % ganz gesehen. Der Un
 
 - **Die ersten 2 s sind Nahaufnahme:** großes Gesicht mit starker Emotion, sofort Konflikt. Die Totale („Wo am Körper?“) erst ab ca. 2,5–3 s als Rückzoom einsetzen.
 - **Hook-Text provokant statt erklärend** (z. B. „DEIN ZAHN HAT EINEN MITBEWOHNER“, nicht „So kommt er weg“).
+
+## Nierenstein (Projekt `tiktok/nierenstein/`, erstes Video mit allen Regeln)
+
+- **Aufbau:** Frame 0 nah (k 1,8) mit Niere + Stein im Streit, Hook „NIERENSTEIN / SCHLIMMER ALS EINE GEBURT?“ + Chip „PATIENT KEVIN · FALL 1“; bei ~2,3 s kurzer Rückzoom auf den ganzen Bauchraum (Rumpf-Silhouette, Wirbelsäule, Rippen, beide Nieren, Harnleiter, Blase), dann wieder nah.
+- **Startrahmen nie per Tween bei t 0 setzen, wenn eine zweite Kamerafahrt bei t 0 startet:** die zweite übernimmt die Anfangswerte (weit) und Frame 0 ist dann die Totale. Die erste Zeile aus `actLines` mit `skip` von der Kamerafahrt ausnehmen.
+- **Hausmittel als Figur, medizinisch korrekt scheitern lassen:** Bier gießt in die Niere, der Urin staut sich am Stein (Harnstau: Nierenbecken gelb, Harnleiter dicker, Niere schwillt). Payoff im OP: „Siehste? Ich hab ihn rausgespült!“ – „Das war Wasser, du Pfeife!“.
+- **ESWL in 3 Schritten:** Fadenkreuz ortet → Stoßwellen-Kopf von außen, Ringe bündeln sich auf den Stein, Risse, Zerfall → Wasser spült Bröckchen durch den Harnleiter in die Blase.
+- **Endgag Patient Kevin:** „Ab heute trink ich viel mehr!“ – Bier: „Endlich!“ – „Wasser.“ – „Mist.“; Endkarte „Welches Organ ist als Nächstes dran? Der Top-Kommentar entscheidet – schreib's in die Kommentare ↓“.
+- **Stimmen:** Niere = Trommelfell-Stimme (276 Hz), Stein = Pfropf-Stimme (86 Hz), Bier neu designt `vSzEU6wMkp9JWMpPv0JD` (multilingual_v2 ~110–150 Hz; laute Ausrufe wie „Keine Panik!“ kippen auf 200 Hz → ruhiger formulieren, Stabilität 0,55).
+- Objekte, die vom Bildrand kommen (Geräte), nicht wie Lupen aussehen lassen: runder Kopf + breites Gehäuse, das aus dem Bild zeigt.
