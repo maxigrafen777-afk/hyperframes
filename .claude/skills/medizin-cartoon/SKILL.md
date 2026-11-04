@@ -211,3 +211,16 @@ Zum Vergleich: Ohrenschmalz lag bei 40 % gesehen und 14,5 % ganz gesehen. Der Un
 - **Endgag Patient Kevin:** „Ab heute trink ich viel mehr!“ – Bier: „Endlich!“ – „Wasser.“ – „Mist.“; Endkarte „Welches Organ ist als Nächstes dran? Der Top-Kommentar entscheidet – schreib's in die Kommentare ↓“.
 - **Stimmen:** Niere = Trommelfell-Stimme (276 Hz), Stein = Pfropf-Stimme (86 Hz), Bier neu designt `vSzEU6wMkp9JWMpPv0JD` (multilingual_v2 ~110–150 Hz; laute Ausrufe wie „Keine Panik!“ kippen auf 200 Hz → ruhiger formulieren, Stabilität 0,55).
 - Objekte, die vom Bildrand kommen (Geräte), nicht wie Lupen aussehen lassen: runder Kopf + breites Gehäuse, das aus dem Bild zeigt.
+
+## Stil v2 nach Referenz mit 23 Mio. Aufrufen (Zäpfchen gegen Verstopfung) – ab jetzt verbindlich
+
+Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok-Endscreen, −15 LUFS, praktisch keine Stille.
+
+- **Ein ruhiges, sofort verständliches Bild statt Effekte:** Die ganzen ersten 28 s sind EINE feste Einstellung (kein Zoom, kein Wackeln, kein Schnitt). Oben ein Längsschnitt durch das Organ (realistische, gedeckte Farben: Beige-Haut, Lachs-Gewebe, Braun; dünne Konturen, weiche Schattierung), unten ein zweites Feld „draußen“ (hellblau), in dem das Hilfsmittel von einer Handschuh-Hand mit Gesicht gehalten wird. Geteiltes Bild: innen das Problem, außen die Lösung.
+- **Frame 0 ohne Titel und ohne Sticker:** Das Bild selbst ist der Haken (Kotbrocken mit Gesichtern stecken im Darm). Keine Hook-Schrift, keine Schritt-Labels, keine Endkarte. Untertitel klein (ein Wort, weiß, schmale Kontur, ~40 px), unten im Organbild.
+- **Viele kleine Gesichter:** Das Organ hat nur Augen, jeder Brocken hat ein eigenes kleines Gesicht (Gruppenwitz), die Hand ist eine Figur.
+- **Dialog ruhig und einfach:** erster Satz bei ~1,7 s und gleich ein Witz („Hey, das ist ein Ausgang!“), dann Frage/Antwort im normalen Sprechtempo, Satzlängen 1–3 s, insgesamt nur ~10 Sätze im ersten Teil.
+- **Der Wirkmechanismus ist der Höhepunkt:** Das Mittel wird eingeführt, dann sieht man ~6 s ohne Sprache, wie es wirkt (Wasser breitet sich durchscheinend aus, die Brocken werden heller/weicher, rutschen raus). Danach Erleichterung + „Siehste? Hab ich doch gesagt.“
+- **Zweiter Teil = Erklärung (≈ die Hälfte des Videos):** Arzt am Patientenbett, der Patient fragt („Doc, wie hilft das?“), der Arzt erklärt ruhig in 5–6 Sätzen, wie es wirkt. Kaum Animation (Blinzeln, Mund). Für uns: 15–20 s, weil der Creator lange Erklärungen früher zu viel fand.
+- **Themen:** alltäglich und leicht peinlich (Verstopfung, Zäpfchen), ein Hilfsmittel, dessen Wirkung man sehen kann.
+- Englisch erreicht weltweit ein viel größeres Publikum; eine englische Fassung pro Video ist mit denselben Stimmen-Werkzeugen möglich.
