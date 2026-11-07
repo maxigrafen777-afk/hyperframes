@@ -267,3 +267,11 @@ Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok
 - **Doppelte Wendung am Ende + Loop:** Heizung auf fünf, Nase juckt, „Nur ganz kurz…“, Schwarzbild mit Tropfen, dann Ja/Nein-Sticker.
 - **Untertitel 2–3 Wörter**, Schlüsselwörter gelb (`emph`) oder rot (`red`) in `script.json`.
 - Fehlt beim Rendern `hyperframe.manifest.json` oder ein `*.browser.js`, wurde das CLI nur halb gebaut: `cd packages/cli && bun run build`.
+
+### Fingerknacken (`tiktok/fingerknacken/`, 57 s) – Erzähl-Format v2
+
+- **Haken mit echter, überraschender Geschichte** (Arzt knackte 60 Jahre nur links, Ig-Nobelpreis 2009) als offene Frage; Auflösung erst bei ~42 s. Nach der ersten Erklärung (~25 s) sofort eine **zweite offene Frage** („Aber ein Knacken solltest du ernst nehmen.“).
+- **Teil-2-Aufhänger am Ende** („Beim Nacken ist das allerdings eine andere Geschichte.“ + „TEIL 2 – Folgen, damit du's nicht verpasst“) als Grund zum Folgen, dazu Ja/Nein-Frage.
+- Feste Texte (Jahreszähler) als HTML-Einblendung über dem Film, nicht im gezoomten SVG, sonst rutschen sie bei Nahaufnahmen aus dem Bild.
+- Hände von oben: Daumen innen (zur anderen Hand), kleiner Finger außen – vor dem Rendern prüfen.
+- Oma-Stimme `1KkrCu2tQ6TMu2pOQOLs` (v3).
