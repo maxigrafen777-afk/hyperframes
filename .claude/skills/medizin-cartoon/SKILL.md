@@ -275,3 +275,4 @@ Gemessen (Bild jede Sekunde, Transkript mit Zeiten, Pegel): 62 s Inhalt + TikTok
 - Feste Texte (Jahreszähler) als HTML-Einblendung über dem Film, nicht im gezoomten SVG, sonst rutschen sie bei Nahaufnahmen aus dem Bild.
 - Hände von oben: Daumen innen (zur anderen Hand), kleiner Finger außen – vor dem Rendern prüfen.
 - Oma-Stimme `1KkrCu2tQ6TMu2pOQOLs` (v3).
+- **„Viel zu langweilig“ (Fingerknacken v1, 57 s) → v2 (43 s):** Füllsätze raus, Sätze mit 2–6 Wörtern („Jeden Tag. Zweimal. Nie rechts.“), Erzähler multilingual_v2 `stability 0.35, style 0.7`, `tempo 1.12`, `maxPause 0.18`, `GAP 0.12`. Schnitt auf einzelne Wörter (`WT` = Wortzeiten pro Zeile, `w(id, i)`), Kamera-Stoß `hitCam` auf jedem Schlüsselwort, weißer Blitz `flash` bei Wendungen, Swish-SFX bei Ortswechseln, Spannungs-Musik (pulsierender Synth) statt Pizzicato.

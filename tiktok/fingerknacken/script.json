@@ -3,7 +3,7 @@
   "handle": "Dr. Arzterklärt",
   "duration": 0,
   "voiceModel": "eleven_multilingual_v2",
-  "maxPause": 0.35,
+  "maxPause": 0.18,
   "scenes": {
     "film": [0, 90]
   },
@@ -17,19 +17,28 @@
     {
       "id": "h1",
       "speaker": "erz",
-      "start": 0.3,
+      "start": 0.15,
       "end": 0.45,
-      "text": "Ein Arzt hat sechzig Jahre lang nur die Finger seiner linken Hand geknackt.",
-      "emph": ["linken"]
+      "text": "Dieser Arzt hat sechzig Jahre lang nur links geknackt.",
+      "emph": ["links"]
     },
     {
       "id": "h2",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Nie die rechte. Was er am Ende rausfand, glaubt kaum jemand.",
-      "wait": 0.2,
-      "emph": ["rechte"]
+      "text": "Jeden Tag. Zweimal. Nie rechts.",
+      "wait": 0.1,
+      "red": ["Nie"]
+    },
+    {
+      "id": "h3",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Er wollte eine Frage klären, die dir jeder schon gestellt hat.",
+      "wait": 0.1,
+      "emph": ["Frage"]
     },
     {
       "id": "o1",
@@ -37,7 +46,7 @@
       "start": 0.4,
       "end": 0.45,
       "text": "[scolding] Hör auf zu knacken! Davon kriegst du Arthrose!",
-      "wait": 0.7,
+      "wait": 0.15,
       "red": ["Arthrose"]
     },
     {
@@ -45,16 +54,16 @@
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Das sagt fast jeder. Aber was knackt da eigentlich?",
-      "wait": 0.25
+      "text": "Aber was knackt da überhaupt?",
+      "wait": 0.1
     },
     {
       "id": "e2",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Im Gelenk ist Flüssigkeit. Ziehst du es auseinander, sinkt der Druck.",
-      "wait": 0.25,
+      "text": "Du ziehst am Finger. Der Druck im Gelenk fällt.",
+      "wait": 0.1,
       "emph": ["Druck"]
     },
     {
@@ -62,8 +71,8 @@
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Es entsteht eine Gasblase.",
-      "wait": 0.2,
+      "text": "Und plötzlich: eine Gasblase.",
+      "wait": 0.1,
       "emph": ["Gasblase"]
     },
     {
@@ -72,15 +81,15 @@
       "start": 0.4,
       "end": 0.45,
       "text": "Plopp!",
-      "wait": 0.5
+      "wait": 0.3
     },
     {
       "id": "e4",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Deshalb klappt es nicht sofort nochmal. Das Gelenk braucht etwa zwanzig Minuten.",
-      "wait": 0.3,
+      "text": "Danach geht zwanzig Minuten lang nichts mehr.",
+      "wait": 0.15,
       "emph": ["zwanzig"]
     },
     {
@@ -88,17 +97,17 @@
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Aber ein Knacken solltest du ernst nehmen.",
-      "wait": 0.25,
-      "red": ["ernst"]
+      "text": "Aber Vorsicht.",
+      "wait": 0.15,
+      "red": ["Vorsicht"]
     },
     {
       "id": "e6",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Wenn es dabei weh tut, anschwillt oder hakt: ab zum Arzt.",
-      "wait": 0.25,
+      "text": "Tut es weh, schwillt an oder hakt: ab zum Arzt.",
+      "wait": 0.1,
       "red": ["weh"]
     },
     {
@@ -106,25 +115,26 @@
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Und der Arzt mit der linken Hand? Nach sechzig Jahren verglich er beide Hände.",
-      "wait": 0.3
+      "text": "Und der Arzt? Nach sechzig Jahren: Röntgen. Beide Hände.",
+      "wait": 0.2,
+      "emph": ["Röntgen"]
     },
     {
       "id": "e8",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Links: keine Arthrose. Rechts: keine Arthrose.",
-      "wait": 0.3,
-      "emph": ["keine"]
+      "text": "Links: nichts. Rechts: nichts.",
+      "wait": 0.15,
+      "emph": ["nichts"]
     },
     {
       "id": "e9",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Dafür bekam er sogar einen Preis.",
-      "wait": 0.25,
+      "text": "Keine Arthrose. Dafür: ein Preis.",
+      "wait": 0.15,
       "emph": ["Preis"]
     },
     {
@@ -133,15 +143,15 @@
       "start": 0.4,
       "end": 0.45,
       "text": "[smug] Siehst du, Oma!",
-      "wait": 0.2
+      "wait": 0.1
     },
     {
       "id": "e10",
       "speaker": "erz",
       "start": 0.4,
       "end": 0.45,
-      "text": "Beim Nacken ist das allerdings eine andere Geschichte.",
-      "wait": 0.6,
+      "text": "Beim Nacken allerdings… ist das eine andere Geschichte.",
+      "wait": 0.4,
       "red": ["Nacken"]
     }
   ],
@@ -150,14 +160,14 @@
       "name": "Erzähler (DE, Thriller)",
       "voice_id": "spxwiZxnePFLHftJHjv9",
       "settings": {
-        "stability": 0.45,
+        "stability": 0.35,
         "similarity_boost": 0.85,
-        "style": 0.5,
+        "style": 0.7,
         "use_speaker_boost": true
       },
       "seed": 7777,
-      "tempo": 1.0,
-      "f0ref": 93
+      "tempo": 1.12,
+      "f0ref": 97
     },
     "pat": {
       "name": "Kevin (DE, expressiv, v3)",
@@ -200,11 +210,6 @@
     }
   },
   "genSfx": [
-    {
-      "id": "bed",
-      "prompt": "playful light cartoon background music loop, pizzicato strings, soft marimba and light percussion, 100 bpm, no vocals, seamless loop",
-      "duration": 22
-    },
     {
       "id": "crack",
       "prompt": "knuckle cracking, several sharp knuckle pops in a row",
@@ -249,77 +254,106 @@
       "id": "hit",
       "prompt": "dark cinematic low hit, suspense stinger",
       "duration": 1.2
+    },
+    {
+      "id": "bed",
+      "prompt": "tense suspense documentary background music, pulsing low synth, ticking percussion, mysterious, 110 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "swish",
+      "prompt": "fast camera swish transition, short airy whoosh",
+      "duration": 0.5
+    },
+    {
+      "id": "flash",
+      "prompt": "sharp impact hit with reverse cymbal swell, dramatic reveal sting",
+      "duration": 1.0
     }
   ],
   "sfx": [
     {
       "id": "sfx-hit0",
       "src": "gen-hit.mp3",
-      "volume": 0.4,
+      "volume": 0.45,
       "start": 0
     },
     {
       "id": "sfx-crack-h",
       "src": "gen-crack1.mp3",
       "volume": 0.45,
-      "line": "h1",
-      "offset": -0.2
+      "line": "h2",
+      "offset": -0.15
     },
     {
       "id": "sfx-crack-k",
       "src": "gen-crack.mp3",
       "volume": 0.5,
       "line": "o1",
-      "offset": -0.75
+      "offset": -0.65
+    },
+    {
+      "id": "sfx-sw1",
+      "src": "gen-swish.mp3",
+      "volume": 0.35,
+      "line": "e1",
+      "offset": -0.12
     },
     {
       "id": "sfx-bubble",
       "src": "gen-bubble.mp3",
-      "volume": 0.35,
+      "volume": 0.3,
       "line": "e3",
-      "offset": -0.3
+      "offset": 0.2
     },
     {
       "id": "sfx-plop",
       "src": "gen-plop.mp3",
       "volume": 0.55,
       "line": "b1",
-      "offset": -0.35
-    },
-    {
-      "id": "sfx-tick",
-      "src": "gen-tick2.mp3",
-      "volume": 0.25,
-      "line": "e4",
-      "offset": 2.4
+      "offset": -0.3
     },
     {
       "id": "sfx-alarm",
       "src": "gen-alarm.mp3",
       "volume": 0.4,
       "line": "e5",
-      "offset": -0.3
+      "offset": -0.25
+    },
+    {
+      "id": "sfx-sw2",
+      "src": "gen-swish.mp3",
+      "volume": 0.35,
+      "line": "e7",
+      "offset": -0.12
+    },
+    {
+      "id": "sfx-flash",
+      "src": "gen-flash.mp3",
+      "volume": 0.4,
+      "line": "e8",
+      "offset": -0.2
     },
     {
       "id": "sfx-trophy",
       "src": "gen-trophy.mp3",
-      "volume": 0.35,
+      "volume": 0.3,
       "line": "e9",
-      "offset": 1.9
+      "offset": 1.3
     },
     {
       "id": "sfx-neck",
       "src": "gen-neck.mp3",
       "volume": 0.55,
       "line": "e10",
-      "offset": 3.1
+      "offset": 3.0
     },
     {
       "id": "sfx-hit2",
       "src": "gen-hit.mp3",
-      "volume": 0.45,
+      "volume": 0.5,
       "line": "e10",
-      "offset": 3.2
+      "offset": 3.05
     }
   ]
 }

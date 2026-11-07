@@ -1,137 +1,87 @@
 {
   "h1": {
-    "text": "Ein Arzt hat sechzig Jahre lang nur die Finger seiner linken Hand geknackt.",
-    "heard": "Ein Arzt hat 60 Jahre lang nur die Finger seiner linken Hand geknackt.",
-    "wer": 0.08,
-    "fileDuration": 4.127347,
+    "text": "Dieser Arzt hat sechzig Jahre lang nur links geknackt.",
+    "heard": "Dieser Arzt hat sechzig Jahre lang nur Links geknackt",
+    "wer": 0,
+    "fileDuration": 2.951837,
     "words": [
       {
-        "text": "Ein",
+        "text": "Dieser",
         "start": 0,
-        "end": 0.151
+        "end": 0.29
       },
       {
         "text": "Arzt",
-        "start": 0.244,
-        "end": 0.569
+        "start": 0.36,
+        "end": 0.697
       },
       {
         "text": "hat",
-        "start": 0.615,
-        "end": 0.766
+        "start": 0.743,
+        "end": 0.882
       },
       {
         "text": "sechzig",
-        "start": 0.882,
-        "end": 1.335
+        "start": 0.964,
+        "end": 1.358
       },
       {
         "text": "Jahre",
-        "start": 1.37,
-        "end": 1.625
+        "start": 1.382,
+        "end": 1.614
       },
       {
         "text": "lang",
-        "start": 1.672,
-        "end": 1.823
+        "start": 1.649,
+        "end": 1.788
       },
       {
         "text": "nur",
-        "start": 1.892,
-        "end": 2.032
+        "start": 1.823,
+        "end": 1.962
       },
       {
-        "text": "die",
-        "start": 2.067,
-        "end": 2.148
-      },
-      {
-        "text": "Finger",
-        "start": 2.218,
-        "end": 2.496
-      },
-      {
-        "text": "seiner",
-        "start": 2.543,
-        "end": 2.74
-      },
-      {
-        "text": "linken",
-        "start": 2.763,
-        "end": 3.053
-      },
-      {
-        "text": "Hand",
-        "start": 3.111,
-        "end": 3.274
+        "text": "links",
+        "start": 1.997,
+        "end": 2.206
       },
       {
         "text": "geknackt.",
-        "start": 3.344,
-        "end": 4.087
+        "start": 2.252,
+        "end": 2.926
       }
     ]
   },
   "h2": {
-    "text": "Nie die rechte. Was er am Ende rausfand, glaubt kaum jemand.",
-    "heard": "Nie die rechte. Was er am Ende rausfand, glaubt kaum jemand",
+    "text": "Jeden Tag. Zweimal. Nie rechts.",
+    "heard": "Jeden Tag zweimal nie rechts",
     "wer": 0,
-    "fileDuration": 3.657143,
+    "fileDuration": 2.533878,
     "words": [
       {
-        "text": "Nie",
+        "text": "Jeden",
         "start": 0,
-        "end": 0.244
+        "end": 0.325
       },
       {
-        "text": "die",
-        "start": 0.302,
-        "end": 0.406
+        "text": "Tag.",
+        "start": 0.372,
+        "end": 0.708
       },
       {
-        "text": "rechte.",
-        "start": 0.464,
-        "end": 0.882
+        "text": "Zweimal.",
+        "start": 0.859,
+        "end": 1.428
       },
       {
-        "text": "Was",
-        "start": 0.998,
-        "end": 1.231
+        "text": "Nie",
+        "start": 1.579,
+        "end": 1.823
       },
       {
-        "text": "er",
-        "start": 1.347,
-        "end": 1.44
-      },
-      {
-        "text": "am",
-        "start": 1.474,
-        "end": 1.579
-      },
-      {
-        "text": "Ende",
-        "start": 1.672,
-        "end": 1.858
-      },
-      {
-        "text": "rausfand,",
-        "start": 1.916,
-        "end": 2.485
-      },
-      {
-        "text": "glaubt",
-        "start": 2.519,
-        "end": 2.821
-      },
-      {
-        "text": "kaum",
-        "start": 2.879,
-        "end": 3.042
-      },
-      {
-        "text": "jemand.",
-        "start": 3.123,
-        "end": 3.622
+        "text": "rechts.",
+        "start": 1.904,
+        "end": 2.508
       }
     ]
   },
@@ -184,146 +134,116 @@
     ]
   },
   "e1": {
-    "text": "Das sagt fast jeder. Aber was knackt da eigentlich?",
-    "heard": "Das sagt fast jeder, aber was knackt da eigentlich?",
+    "text": "Aber was knackt da überhaupt?",
+    "heard": "Aber was knackt da überhaupt?",
     "wer": 0,
-    "fileDuration": 3.369796,
+    "fileDuration": 2.089796,
     "words": [
       {
-        "text": "Das",
-        "start": 0,
-        "end": 0.186
-      },
-      {
-        "text": "sagt",
-        "start": 0.209,
-        "end": 0.43
-      },
-      {
-        "text": "fast",
-        "start": 0.476,
-        "end": 0.673
-      },
-      {
-        "text": "jeder.",
-        "start": 0.743,
-        "end": 1.103
-      },
-      {
         "text": "Aber",
-        "start": 1.219,
-        "end": 1.509
+        "start": 0,
+        "end": 0.325
       },
       {
         "text": "was",
-        "start": 1.625,
-        "end": 1.8
+        "start": 0.395,
+        "end": 0.58
       },
       {
         "text": "knackt",
-        "start": 1.881,
-        "end": 2.252
+        "start": 0.65,
+        "end": 0.952
       },
       {
         "text": "da",
-        "start": 2.31,
-        "end": 2.45
+        "start": 0.975,
+        "end": 1.045
       },
       {
-        "text": "eigentlich?",
-        "start": 2.531,
-        "end": 3.344
+        "text": "überhaupt?",
+        "start": 1.103,
+        "end": 2.043
       }
     ]
   },
   "e2": {
-    "text": "Im Gelenk ist Flüssigkeit. Ziehst du es auseinander, sinkt der Druck.",
-    "heard": "Im Gelenk ist Flüssigkeit. Ziehst du es auseinander, sinkt der Druck",
+    "text": "Du ziehst am Finger. Der Druck im Gelenk fällt.",
+    "heard": "Du ziehst am Finger, der Druck im Gelenk fällt",
     "wer": 0,
-    "fileDuration": 5.093878,
+    "fileDuration": 2.638367,
     "words": [
       {
-        "text": "Im",
+        "text": "Du",
         "start": 0,
-        "end": 0.209
+        "end": 0.151
       },
       {
-        "text": "Gelenk",
-        "start": 0.29,
-        "end": 0.673
+        "text": "ziehst",
+        "start": 0.209,
+        "end": 0.406
       },
       {
-        "text": "ist",
-        "start": 0.755,
+        "text": "am",
+        "start": 0.453,
+        "end": 0.522
+      },
+      {
+        "text": "Finger.",
+        "start": 0.604,
         "end": 0.94
       },
       {
-        "text": "Flüssigkeit.",
-        "start": 0.998,
-        "end": 1.892
+        "text": "Der",
+        "start": 1.068,
+        "end": 1.196
       },
       {
-        "text": "Ziehst",
-        "start": 2.276,
-        "end": 2.531
+        "text": "Druck",
+        "start": 1.231,
+        "end": 1.474
       },
       {
-        "text": "du",
-        "start": 2.554,
-        "end": 2.624
+        "text": "im",
+        "start": 1.556,
+        "end": 1.625
       },
       {
-        "text": "es",
-        "start": 2.659,
-        "end": 2.717
+        "text": "Gelenk",
+        "start": 1.683,
+        "end": 1.974
       },
       {
-        "text": "auseinander,",
-        "start": 2.775,
-        "end": 3.425
-      },
-      {
-        "text": "sinkt",
-        "start": 3.576,
-        "end": 3.994
-      },
-      {
-        "text": "der",
-        "start": 4.063,
-        "end": 4.191
-      },
-      {
-        "text": "Druck.",
-        "start": 4.226,
-        "end": 5.062
+        "text": "fällt.",
+        "start": 2.02,
+        "end": 2.601
       }
     ]
   },
   "e3": {
-    "text": "Es entsteht eine Gasblase.",
-    "heard": "Es entsteht eine Gasblase",
+    "text": "Und plötzlich: eine Gasblase.",
+    "heard": "Und plötzlich eine Gasblase",
     "wer": 0,
-    "fileDuration": 2.037551,
+    "fileDuration": 2.586122,
     "words": [
       {
-        "text": "Es",
+        "text": "Und",
         "start": 0,
-        "end": 0.244
+        "end": 0.255
       },
       {
-        "text": "entsteht",
-        "start": 0.36,
-        "end": 0.778
+        "text": "plötzlich:",
+        "start": 0.337,
+        "end": 1.022
       },
       {
         "text": "eine",
-        "start": 0.836,
-        "end": 0.987
+        "start": 1.231,
+        "end": 1.416
       },
       {
         "text": "Gasblase.",
-        "start": 1.033,
-        "end": 1.997
+        "start": 1.463,
+        "end": 2.554
       }
     ]
   },
@@ -341,78 +261,53 @@
     ]
   },
   "e4": {
-    "text": "Deshalb klappt es nicht sofort nochmal. Das Gelenk braucht etwa zwanzig Minuten.",
-    "heard": "Deshalb klappt es nicht sofort noch mal. Das Gelenk braucht etwa zwanzig Minuten",
-    "wer": 0.17,
-    "fileDuration": 4.597551,
+    "text": "Danach geht zwanzig Minuten lang nichts mehr.",
+    "heard": "Danach geht 20 Minuten lang nichts mehr",
+    "wer": 0.14,
+    "fileDuration": 2.35102,
     "words": [
       {
-        "text": "Deshalb",
+        "text": "Danach",
         "start": 0,
-        "end": 0.476
+        "end": 0.325
       },
       {
-        "text": "klappt",
-        "start": 0.534,
-        "end": 0.801
-      },
-      {
-        "text": "es",
-        "start": 0.836,
-        "end": 0.906
-      },
-      {
-        "text": "nicht",
-        "start": 0.964,
-        "end": 1.115
-      },
-      {
-        "text": "sofort",
-        "start": 1.149,
-        "end": 1.498
-      },
-      {
-        "text": "nochmal.",
-        "start": 1.544,
-        "end": 2.02
-      },
-      {
-        "text": "Das",
-        "start": 2.136,
-        "end": 2.299
-      },
-      {
-        "text": "Gelenk",
-        "start": 2.345,
-        "end": 2.694
-      },
-      {
-        "text": "braucht",
-        "start": 2.775,
-        "end": 2.995
-      },
-      {
-        "text": "etwa",
-        "start": 3.053,
-        "end": 3.309
+        "text": "geht",
+        "start": 0.36,
+        "end": 0.488
       },
       {
         "text": "zwanzig",
-        "start": 3.379,
-        "end": 3.843
+        "start": 0.522,
+        "end": 0.917
       },
       {
-        "text": "Minuten.",
-        "start": 3.878,
-        "end": 4.551
+        "text": "Minuten",
+        "start": 0.952,
+        "end": 1.312
+      },
+      {
+        "text": "lang",
+        "start": 1.358,
+        "end": 1.498
+      },
+      {
+        "text": "nichts",
+        "start": 1.544,
+        "end": 1.788
+      },
+      {
+        "text": "mehr.",
+        "start": 1.846,
+        "end": 2.322
       }
     ]
   },
   "e5": {
-    "text": "Aber ein Knacken solltest du ernst nehmen.",
-    "heard": "Aber ein Knacken solltest du ernst nehmen",
+    "text": "Aber Vorsicht.",
+    "heard": "Aber Vorsicht",
     "wer": 0,
-    "fileDuration": 2.507755,
+    "fileDuration": 1.018776,
     "words": [
       {
         "text": "Aber",
@@ -420,251 +315,181 @@
         "end": 0.279
       },
       {
-        "text": "ein",
-        "start": 0.395,
-        "end": 0.58
-      },
-      {
-        "text": "Knacken",
-        "start": 0.65,
-        "end": 1.091
-      },
-      {
-        "text": "solltest",
-        "start": 1.149,
-        "end": 1.451
-      },
-      {
-        "text": "du",
-        "start": 1.474,
-        "end": 1.533
-      },
-      {
-        "text": "ernst",
-        "start": 1.625,
-        "end": 1.939
-      },
-      {
-        "text": "nehmen.",
-        "start": 1.997,
-        "end": 2.461
+        "text": "Vorsicht.",
+        "start": 0.337,
+        "end": 0.975
       }
     ]
   },
   "e6": {
-    "text": "Wenn es dabei weh tut, anschwillt oder hakt: ab zum Arzt.",
-    "heard": "Wenn es dabei wehtut, anschwillt oder hakt, ab zum Arzt",
-    "wer": 0.18,
-    "fileDuration": 3.787755,
+    "text": "Tut es weh, schwillt an oder hakt: ab zum Arzt.",
+    "heard": "Tut es weh, schwillt an oder hakt, ab zum Arzt",
+    "wer": 0,
+    "fileDuration": 3.291429,
     "words": [
       {
-        "text": "Wenn",
+        "text": "Tut",
         "start": 0,
-        "end": 0.174
+        "end": 0.232
       },
       {
         "text": "es",
-        "start": 0.197,
-        "end": 0.255
+        "start": 0.279,
+        "end": 0.36
       },
       {
-        "text": "dabei",
-        "start": 0.29,
-        "end": 0.511
+        "text": "weh,",
+        "start": 0.453,
+        "end": 0.755
       },
       {
-        "text": "weh",
-        "start": 0.569,
-        "end": 0.743
+        "text": "schwillt",
+        "start": 0.813,
+        "end": 1.115
       },
       {
-        "text": "tut,",
-        "start": 0.778,
-        "end": 1.138
-      },
-      {
-        "text": "anschwillt",
-        "start": 1.219,
-        "end": 1.8
+        "text": "an",
+        "start": 1.184,
+        "end": 1.405
       },
       {
         "text": "oder",
-        "start": 1.869,
-        "end": 2.125
+        "start": 1.498,
+        "end": 1.73
       },
       {
         "text": "hakt:",
-        "start": 2.194,
-        "end": 2.67
+        "start": 1.788,
+        "end": 2.171
       },
       {
         "text": "ab",
-        "start": 2.717,
-        "end": 2.879
+        "start": 2.264,
+        "end": 2.426
       },
       {
         "text": "zum",
-        "start": 2.961,
-        "end": 3.1
+        "start": 2.496,
+        "end": 2.647
       },
       {
         "text": "Arzt.",
-        "start": 3.216,
-        "end": 3.762
+        "start": 2.74,
+        "end": 3.251
       }
     ]
   },
   "e7": {
-    "text": "Und der Arzt mit der linken Hand? Nach sechzig Jahren verglich er beide Hände.",
-    "heard": "Und der Arzt mit der linken Hand? Nach sechzig Jahren verglich er beide Hände",
-    "wer": 0,
-    "fileDuration": 4.545306,
+    "text": "Und der Arzt? Nach sechzig Jahren: Röntgen. Beide Hände.",
+    "heard": "Und der Arzt nach 60 Jahren: Röntgen, beide Hände",
+    "wer": 0.11,
+    "fileDuration": 4.127347,
     "words": [
       {
         "text": "Und",
         "start": 0,
-        "end": 0.279
+        "end": 0.244
       },
       {
         "text": "der",
-        "start": 0.36,
-        "end": 0.488
+        "start": 0.337,
+        "end": 0.464
       },
       {
-        "text": "Arzt",
-        "start": 0.557,
-        "end": 0.824
-      },
-      {
-        "text": "mit",
-        "start": 0.871,
-        "end": 0.975
-      },
-      {
-        "text": "der",
-        "start": 0.998,
-        "end": 1.068
-      },
-      {
-        "text": "linken",
-        "start": 1.103,
-        "end": 1.393
-      },
-      {
-        "text": "Hand?",
-        "start": 1.451,
-        "end": 1.846
+        "text": "Arzt?",
+        "start": 0.534,
+        "end": 1.01
       },
       {
         "text": "Nach",
-        "start": 2.02,
-        "end": 2.206
+        "start": 1.126,
+        "end": 1.347
       },
       {
         "text": "sechzig",
-        "start": 2.241,
-        "end": 2.589
+        "start": 1.393,
+        "end": 1.776
       },
       {
-        "text": "Jahren",
-        "start": 2.612,
-        "end": 2.926
+        "text": "Jahren:",
+        "start": 1.811,
+        "end": 2.299
       },
       {
-        "text": "verglich",
-        "start": 2.972,
-        "end": 3.297
+        "text": "Röntgen.",
+        "start": 2.45,
+        "end": 3.042
       },
       {
-        "text": "er",
-        "start": 3.355,
-        "end": 3.413
-      },
-      {
-        "text": "beide",
-        "start": 3.495,
-        "end": 3.773
+        "text": "Beide",
+        "start": 3.193,
+        "end": 3.506
       },
       {
         "text": "Hände.",
-        "start": 3.82,
-        "end": 4.505
+        "start": 3.541,
+        "end": 4.087
       }
     ]
   },
   "e8": {
-    "text": "Links: keine Arthrose. Rechts: keine Arthrose.",
-    "heard": "Links keine Arthrose, rechts keine Arthrose",
+    "text": "Links: nichts. Rechts: nichts.",
+    "heard": "Links nichts, rechts nichts",
     "wer": 0,
-    "fileDuration": 3.94449,
+    "fileDuration": 2.220408,
     "words": [
       {
         "text": "Links:",
         "start": 0,
-        "end": 0.534
+        "end": 0.476
       },
       {
-        "text": "keine",
-        "start": 0.685,
-        "end": 0.952
-      },
-      {
-        "text": "Arthrose.",
-        "start": 0.987,
-        "end": 1.672
+        "text": "nichts.",
+        "start": 0.557,
+        "end": 1.068
       },
       {
         "text": "Rechts:",
-        "start": 1.846,
-        "end": 2.403
+        "start": 1.149,
+        "end": 1.614
       },
       {
-        "text": "keine",
-        "start": 2.577,
-        "end": 2.891
-      },
-      {
-        "text": "Arthrose.",
-        "start": 2.937,
-        "end": 3.901
+        "text": "nichts.",
+        "start": 1.683,
+        "end": 2.183
       }
     ]
   },
   "e9": {
-    "text": "Dafür bekam er sogar einen Preis.",
-    "heard": "Dafür bekam er sogar einen Preis",
+    "text": "Keine Arthrose. Dafür: ein Preis.",
+    "heard": "Keine Arthrose, dafür ein Preis",
     "wer": 0,
-    "fileDuration": 1.985306,
+    "fileDuration": 2.925714,
     "words": [
       {
-        "text": "Dafür",
+        "text": "Keine",
         "start": 0,
-        "end": 0.418
+        "end": 0.313
       },
       {
-        "text": "bekam",
-        "start": 0.453,
-        "end": 0.673
+        "text": "Arthrose.",
+        "start": 0.36,
+        "end": 0.94
       },
       {
-        "text": "er",
-        "start": 0.72,
-        "end": 0.766
+        "text": "Dafür:",
+        "start": 1.149,
+        "end": 1.73
       },
       {
-        "text": "sogar",
-        "start": 0.789,
-        "end": 1.022
-      },
-      {
-        "text": "einen",
-        "start": 1.057,
-        "end": 1.242
+        "text": "ein",
+        "start": 1.788,
+        "end": 1.985
       },
       {
         "text": "Preis.",
-        "start": 1.3,
-        "end": 1.95
+        "start": 2.055,
+        "end": 2.879
       }
     ]
   },
@@ -692,50 +517,113 @@
     ]
   },
   "e10": {
-    "text": "Beim Nacken ist das allerdings eine andere Geschichte.",
-    "heard": "Beim Nacken ist das allerdings eine andere Geschichte",
+    "text": "Beim Nacken allerdings… ist das eine andere Geschichte.",
+    "heard": "Beim Nacken allerdings ist das eine andere Geschichte",
     "wer": 0,
-    "fileDuration": 3.004082,
+    "fileDuration": 3.186939,
     "words": [
       {
         "text": "Beim",
         "start": 0,
-        "end": 0.244
+        "end": 0.197
       },
       {
         "text": "Nacken",
-        "start": 0.313,
-        "end": 0.685
+        "start": 0.267,
+        "end": 0.499
+      },
+      {
+        "text": "allerdings…",
+        "start": 0.557,
+        "end": 1.138
       },
       {
         "text": "ist",
-        "start": 0.766,
-        "end": 0.894
+        "start": 1.382,
+        "end": 1.567
       },
       {
         "text": "das",
-        "start": 0.917,
-        "end": 1.057
-      },
-      {
-        "text": "allerdings",
-        "start": 1.138,
-        "end": 1.533
+        "start": 1.591,
+        "end": 1.718
       },
       {
         "text": "eine",
-        "start": 1.579,
-        "end": 1.741
+        "start": 1.788,
+        "end": 1.974
       },
       {
         "text": "andere",
-        "start": 1.8,
-        "end": 2.125
+        "start": 2.032,
+        "end": 2.334
       },
       {
         "text": "Geschichte.",
-        "start": 2.183,
-        "end": 2.972
+        "start": 2.38,
+        "end": 3.158
+      }
+    ]
+  },
+  "h3": {
+    "text": "Er wollte eine Frage klären, die dir jeder schon gestellt hat.",
+    "heard": "Er wollte eine Frage klären, die dir jeder schon gestellt hat",
+    "wer": 0,
+    "fileDuration": 3.108571,
+    "words": [
+      {
+        "text": "Er",
+        "start": 0,
+        "end": 0.128
+      },
+      {
+        "text": "wollte",
+        "start": 0.163,
+        "end": 0.383
+      },
+      {
+        "text": "eine",
+        "start": 0.418,
+        "end": 0.557
+      },
+      {
+        "text": "Frage",
+        "start": 0.604,
+        "end": 0.952
+      },
+      {
+        "text": "klären,",
+        "start": 1.01,
+        "end": 1.416
+      },
+      {
+        "text": "die",
+        "start": 1.44,
+        "end": 1.521
+      },
+      {
+        "text": "dir",
+        "start": 1.556,
+        "end": 1.683
+      },
+      {
+        "text": "jeder",
+        "start": 1.753,
+        "end": 1.997
+      },
+      {
+        "text": "schon",
+        "start": 2.032,
+        "end": 2.194
+      },
+      {
+        "text": "gestellt",
+        "start": 2.241,
+        "end": 2.624
+      },
+      {
+        "text": "hat.",
+        "start": 2.659,
+        "end": 3.065
       }
     ]
   }

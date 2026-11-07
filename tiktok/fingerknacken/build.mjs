@@ -23,7 +23,7 @@ const VO = existsSync(VO_FILE) ? JSON.parse(readFileSync(VO_FILE, "utf8")) : {};
 for (const l of script.lines) if (l.reuse && VO[l.reuse]) VO[l.id] = VO[l.reuse];
 const ORDER = script.order;
 const GAP = {
-  film: 0.25,
+  film: 0.12,
   innen: 0.25,
   front: 0.3,
   profil: 0.3,
@@ -39,7 +39,7 @@ const GAP = {
   patient: 0.3,
 };
 const PAD = {
-  film: 4.2,
+  film: 3.6,
   innen: 0.5,
   front: 0.5,
   profil: 0.8,
@@ -407,104 +407,135 @@ const askCss = `#jahr { position: absolute; left: 0; right: 0; top: 400px; margi
 
 /* ================= Film ================= */
 const SETS = ["tisch", "kevin", "gelenk", "xray", "black"];
-const filmBody = tischSvg + kevinSvg + gelenkSvg + xraySvg + blackSvg + askBody;
+const filmBody =
+  `<div id="fw" style="position:absolute;inset:0">` +
+  tischSvg +
+  kevinSvg +
+  gelenkSvg +
+  xraySvg +
+  blackSvg +
+  `</div><div id="wflash" style="position:absolute;inset:0;background:#fff;opacity:0"></div>` +
+  askBody;
+const WT = Object.fromEntries(
+  lines.map((l) => [l.id, (VO[l.id]?.words || []).map((w) => +(l.start + w.start).toFixed(2))]),
+);
 const filmJs = `${HELPERS}
     const L = ${JSON.stringify(L)};
+    const WT = ${JSON.stringify(WT)};
     const S0 = ${SC.film[0]};
     const SETS = ${JSON.stringify(SETS)};
-    const shot = (set, t, px, py, k, dur = 1.6, push = 1.05) => {
+    const shot = (set, t, px, py, k, dur = 1.2, push = 1.08) => {
       SETS.forEach((s) => tl.set("#set-" + s, { opacity: s === set ? 1 : 0 }, t));
       tl.set("#jahr", { opacity: set === "tisch" ? 1 : 0 }, t);
       const cx = (kk) => Math.min(0, Math.max(1080 - kk * 1080, 540 - kk * px));
       const cy = (kk) => Math.min(0, Math.max(1920 - kk * 1920, 960 - kk * py));
       tl.set("#set-" + set, { x: cx(k), y: cy(k), scale: k, transformOrigin: "0 0" }, t);
-      if (push !== 1) tl.to("#set-" + set, { x: cx(k * push), y: cy(k * push), scale: k * push, duration: dur, ease: "none" }, t);
+      if (push !== 1) tl.to("#set-" + set, { x: cx(k * push), y: cy(k * push), scale: k * push, duration: dur, ease: "power1.out" }, t);
     };
+    // Kamera-Stoß auf ein Schlüsselwort, weißer Blitz bei Wendungen.
+    const hitCam = (t, k = 1.07) => { tl.set("#fw", { scale: k, transformOrigin: "50% 50%" }, t); tl.to("#fw", { scale: 1, duration: 0.25, ease: "power2.out" }, t + 0.02); };
+    const flash = (t, a = 0.85) => { tl.set("#wflash", { opacity: a }, t); tl.to("#wflash", { opacity: 0, duration: 0.18 }, t + 0.03); };
     const pop = (sel, t) => {
       tl.fromTo(sel, { opacity: 1, scale: 0.4, transformOrigin: "50% 50%" }, { scale: 1.2, duration: 0.18, ease: "power2.out", immediateRender: false }, t);
       tl.to(sel, { opacity: 0, duration: 0.12 }, t + 0.18);
     };
     const crackL = (t) => {
       tl.to(["#hl-f1", "#hl-f2"], { scaleY: 0.82, transformOrigin: "50% 100%", duration: 0.08, yoyo: true, repeat: 1 }, t);
-      pop("#hl-burst", t + 0.08); pop("#hl-burst2", t + 0.12);
+      pop("#hl-burst", t + 0.08); pop("#hl-burst2", t + 0.12); hitCam(t + 0.08, 1.05);
     };
+    const w = (id, i) => (WT[id] && WT[id][Math.min(i, WT[id].length - 1)]) ?? L[id][0];
     initChar("kev", 26, 0.3); initChar("oma", 22, 0.2); initChar("blase", 13, 0.05);
     gsap.set("#oma-pos", { x: -420 });
-    // ---------- 1 Haken: 60 Jahre, nur links ----------
-    shot("tisch", S0, 540, 1000, 1.0, L.h1[1] - S0, 1.06);
-    [S0 + 0.1, L.h1[0] + 1.6, L.h1[0] + 3.0].forEach(crackL);
-    const years = [1, 5, 12, 20, 31, 40, 48, 55, 60];
-    years.forEach((y, i) => tl.set("#jahr", { textContent: "JAHR " + y }, L.h1[0] + 0.6 + i * ((L.h2[1] - L.h1[0] - 1.2) / years.length)));
-    shot("tisch", L.h2[0] - 0.05, 790, 1020, 1.45, 1.4, 1.03);
-    shot("tisch", L.h2[0] + 1.3, 260, 1020, 1.45, L.h2[1] - L.h2[0] - 1.2, 1.04);
-    crackL(L.h2[0] + 1.6);
-    // ---------- 2 Kevin knackt, Oma schimpft ----------
-    shot("kevin", L.o1[0] - 0.75, 540, 960, 1.0, 1.0, 1.03);
-    tl.to("#kev-hands", { y: 30, scaleX: 1.06, transformOrigin: "50% 50%", duration: 0.12, yoyo: true, repeat: 3 }, L.o1[0] - 0.7);
-    pop("#kev-burst", L.o1[0] - 0.62); pop("#kev-burst2", L.o1[0] - 0.5); pop("#kev-burst", L.o1[0] - 0.38);
+    // ---------- 1 Haken ----------
+    shot("tisch", S0, 540, 1000, 1.0, 1.6, 1.12);
+    crackL(S0 + 0.05);
+    const years = [1, 9, 17, 26, 34, 43, 51, 60];
+    years.forEach((y, i) => tl.set("#jahr", { textContent: "JAHR " + y }, S0 + 0.3 + i * ((L.h2[1] - S0 - 0.4) / years.length)));
+    shot("tisch", w("h1", 5), 260, 1020, 1.5, 1.0, 1.1);
+    crackL(w("h1", 7));
+    // "Jeden Tag. Zweimal. Nie rechts."
+    shot("tisch", w("h2", 0), 260, 980, 1.8, 0.8, 1.06); crackL(w("h2", 0) + 0.1);
+    shot("tisch", w("h2", 2), 300, 900, 2.2, 0.6, 1.05); crackL(w("h2", 2) + 0.05);
+    shot("tisch", w("h2", 3), 790, 1020, 1.6, 1.0, 1.04); hitCam(w("h2", 4));
+    // "Er wollte eine Frage klären, die dir jeder schon gestellt hat."
+    shot("tisch", L.h3[0] - 0.05, 540, 1000, 1.0, 1.0, 1.08);
+    shot("kevin", w("h3", 5), 540, 1160, 1.5, 1.4, 1.1);
+    tl.to("#kev-hands", { y: 30, scaleX: 1.06, transformOrigin: "50% 50%", duration: 0.12, yoyo: true, repeat: 3 }, L.o1[0] - 0.65);
+    pop("#kev-burst", L.o1[0] - 0.55); pop("#kev-burst2", L.o1[0] - 0.45);
+    // ---------- 2 Oma ----------
+    shot("kevin", L.o1[0] - 0.3, 540, 960, 1.0, 0.8, 1.04);
     lids("kev", 0.6, L.o1[0] - 0.6); face("kev", "smile", L.o1[0] - 0.6);
-    tl.to("#oma-pos", { x: 0, duration: 0.4, ease: "back.out(1.4)" }, L.o1[0] - 0.2);
-    look("oma", 14, 4, L.o1[0] - 0.2, 0.01); look("kev", -14, 0, L.o1[0] + 0.3);
+    tl.to("#oma-pos", { x: 0, duration: 0.3, ease: "back.out(1.4)" }, L.o1[0] - 0.3);
+    look("oma", 14, 4, L.o1[0] - 0.3, 0.01); look("kev", -14, 0, L.o1[0] + 0.2);
     squeeze("oma", true, L.o1[0]); squeeze("oma", false, L.o1[0] + 0.4);
     talk("oma", L.o1[0], L.o1[1], "frown");
-    lids("kev", 0.1, L.o1[0] + 0.3); face("kev", "frown", L.o1[0] + 0.3);
-    shot("kevin", L.e1[0] - 0.05, 540, 1170, 1.6, L.e1[1] - L.e1[0], 1.12);
-    // ---------- 3 Was knackt da? Gelenk im Schnitt ----------
-    shot("gelenk", L.e2[0] - 0.05, 540, 960, 1.0, L.e2[1] - L.e2[0], 1.04);
-    tl.to("#g-arrows", { opacity: 1, duration: 0.2 }, L.e2[0] + 1.6);
-    tl.to("#g-bone2", { x: 46, duration: 0.6, ease: "power2.out" }, L.e2[0] + 1.8);
-    tl.to("#g-fluid", { attr: { rx: 118 }, duration: 0.6 }, L.e2[0] + 1.8);
-    tl.to("#g-arrows", { opacity: 0, duration: 0.2 }, L.e2[1]);
-    shot("gelenk", L.e3[0] - 0.05, 540, 960, 1.9, L.b1[1] - L.e3[0] + 0.3, 1.04);
-    tl.to("#g-bubble", { opacity: 1, duration: 0.05 }, L.e3[0] + 0.3);
-    tl.fromTo("#g-bubble", { scale: 0.1, transformOrigin: "50% 50%" }, { scale: 1.15, duration: 0.9, ease: "power1.out", immediateRender: false }, L.e3[0] + 0.3);
-    look("blase", 0, -8, L.e3[0] + 0.3, 0.01);
-    const PO = L.b1[0] - 0.35;
-    tl.to("#g-bubble", { scale: 1.4, duration: 0.1 }, PO - 0.1);
-    tl.to("#g-bubble", { opacity: 0, duration: 0.05 }, PO);
-    tl.fromTo("#g-pop", { opacity: 1, scale: 0.6, transformOrigin: "50% 50%" }, { scale: 1.4, opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, PO);
-    shake("#set-gelenk", PO, 0.25, 8);
+    lids("kev", 0.1, L.o1[0] + 0.2); face("kev", "frown", L.o1[0] + 0.2);
+    shot("kevin", w("o1", 5), 160, 800, 1.7, 1.0, 1.06); hitCam(w("o1", 7));
+    // ---------- 3 Was knackt da? ----------
+    shot("gelenk", L.e1[0] - 0.05, 540, 960, 1.0, L.e1[1] - L.e1[0], 1.18);
+    shot("gelenk", L.e2[0] - 0.05, 540, 900, 1.1, 1.4, 1.05);
+    tl.to("#g-arrows", { opacity: 1, duration: 0.15 }, w("e2", 1));
+    tl.to("#g-bone2", { x: 46, duration: 0.5, ease: "power2.out" }, w("e2", 2));
+    tl.to("#g-fluid", { attr: { rx: 118 }, duration: 0.5 }, w("e2", 2));
+    shot("gelenk", w("e2", 4), 530, 960, 1.7, 1.2, 1.08);
+    tl.to("#g-arrows", { opacity: 0, duration: 0.15 }, w("e2", 4));
+    shot("gelenk", L.e3[0] - 0.05, 530, 960, 1.9, 0.8, 1.03);
+    shot("gelenk", w("e3", 2), 530, 960, 2.4, L.b1[1] - w("e3", 2) + 0.2, 1.05);
+    tl.to("#g-bubble", { opacity: 1, duration: 0.05 }, w("e3", 2));
+    tl.fromTo("#g-bubble", { scale: 0.1, transformOrigin: "50% 50%" }, { scale: 1.15, duration: 0.6, ease: "back.out(1.6)", immediateRender: false }, w("e3", 2));
+    look("blase", 0, -8, w("e3", 2), 0.01);
+    const PO = L.b1[0] - 0.3;
+    tl.to("#g-bubble", { scale: 1.4, duration: 0.08 }, PO - 0.08);
+    tl.to("#g-bubble", { opacity: 0, duration: 0.03 }, PO);
+    tl.fromTo("#g-pop", { opacity: 1, scale: 0.6, transformOrigin: "50% 50%" }, { scale: 1.5, opacity: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, PO);
+    flash(PO, 0.7); hitCam(PO, 1.1); shake("#set-gelenk", PO, 0.25, 10);
     // ---------- 4 Zwanzig Minuten ----------
-    shot("gelenk", L.e4[0] - 0.05, 540, 860, 1.0, L.e4[1] - L.e4[0], 1.03);
-    tl.to("#g-bone2", { x: 0, duration: 0.5 }, L.e4[0] + 0.4);
-    tl.to("#g-fluid", { attr: { rx: 95 }, duration: 0.5 }, L.e4[0] + 0.4);
-    tl.to("#g-clock", { opacity: 1, duration: 0.2 }, L.e4[0] + 2.2);
-    tl.to("#g-hand-m", { rotation: 720, svgOrigin: "540 520", duration: L.e4[1] - L.e4[0] - 2.2, ease: "none" }, L.e4[0] + 2.4);
-    tl.to("#g-clock", { opacity: 0, duration: 0.2 }, L.e4[1] + 0.1);
-    // ---------- 5 Zweite Frage: dieses Knacken ernst nehmen ----------
-    shot("gelenk", L.e5[0] - 0.05, 540, 960, 1.35, L.e6[1] - L.e5[0], 1.06);
-    tl.to("#g-redtint", { opacity: 1, duration: 0.3 }, L.e5[0]);
-    tl.to("#g-caps", { scale: 1.18, transformOrigin: "50% 50%", duration: 0.8, ease: "power2.out" }, L.e6[0] + 0.6);
-    tl.to("#g-pain", { opacity: 1, duration: 0.1 }, L.e6[0] + 0.4);
-    tl.to("#g-pain", { scale: 1.15, transformOrigin: "50% 50%", duration: 0.25, yoyo: true, repeat: 5 }, L.e6[0] + 0.4);
-    // ---------- 6 Auflösung: beide Hände ----------
-    shot("tisch", L.e7[0] - 0.05, 540, 1000, 1.0, 2.2, 1.04);
+    shot("gelenk", L.e4[0] - 0.05, 540, 820, 1.0, L.e4[1] - L.e4[0], 1.06);
+    tl.to("#g-bone2", { x: 0, duration: 0.4 }, L.e4[0]);
+    tl.to("#g-fluid", { attr: { rx: 95 }, duration: 0.4 }, L.e4[0]);
+    tl.to("#g-clock", { opacity: 1, duration: 0.1 }, L.e4[0] + 0.3);
+    tl.to("#g-hand-m", { rotation: 1080, svgOrigin: "540 520", duration: L.e4[1] - L.e4[0], ease: "power1.in" }, L.e4[0] + 0.3);
+    tl.to("#g-clock", { opacity: 0, duration: 0.1 }, L.e4[1] + 0.05);
+    // ---------- 5 Aber Vorsicht ----------
+    shot("gelenk", L.e5[0] - 0.05, 530, 960, 1.5, 0.8, 1.04);
+    tl.to("#g-redtint", { opacity: 1, duration: 0.1 }, L.e5[0]);
+    flash(L.e5[0], 0.4); hitCam(w("e5", 1), 1.08);
+    shot("gelenk", L.e6[0] - 0.05, 530, 900, 1.25, L.e6[1] - L.e6[0], 1.08);
+    tl.to("#g-caps", { scale: 1.2, transformOrigin: "50% 50%", duration: 0.6, ease: "power2.out" }, w("e6", 3));
+    tl.to("#g-pain", { opacity: 1, duration: 0.05 }, w("e6", 1));
+    tl.to("#g-pain", { scale: 1.2, transformOrigin: "50% 50%", duration: 0.18, yoyo: true, repeat: 7 }, w("e6", 1));
+    hitCam(w("e6", 1));
+    // ---------- 6 Auflösung ----------
+    shot("tisch", L.e7[0] - 0.05, 540, 1000, 1.0, 1.0, 1.06);
     tl.set("#jahr", { textContent: "JAHR 60" }, L.e7[0] - 0.05);
-    shot("xray", L.e7[0] + 2.2, 540, 960, 1.0, L.e7[1] - L.e7[0] - 2.2, 1.04);
-    shot("xray", L.e8[0] - 0.05, 285, 1000, 1.45, 1.4, 1.03);
-    tl.to("#x-chkL", { opacity: 1, duration: 0.05 }, L.e8[0] + 0.3);
-    tl.fromTo("#x-chkL", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, L.e8[0] + 0.3);
-    shot("xray", L.e8[0] + 1.5, 795, 1000, 1.45, L.e8[1] - L.e8[0] - 1.5, 1.03);
-    tl.to("#x-chkR", { opacity: 1, duration: 0.05 }, L.e8[0] + 1.8);
-    tl.fromTo("#x-chkR", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, L.e8[0] + 1.8);
-    shot("xray", L.e9[0] - 0.05, 540, 960, 1.0, L.e9[1] - L.e9[0] + 0.3, 1.04);
-    tl.to("#x-trophy", { opacity: 1, duration: 0.05 }, L.e9[0] + 1.2);
-    tl.fromTo("#x-trophy", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.4, ease: "back.out(2.5)", immediateRender: false }, L.e9[0] + 1.2);
-    // ---------- 7 Kevin triumphiert – und der Nacken ----------
-    shot("kevin", L.k1[0] - 0.05, 540, 800, 1.35, L.k1[1] - L.k1[0] + 0.2, 1.02);
+    shot("tisch", w("e7", 3), 540, 900, 1.3, 0.8, 1.05); hitCam(w("e7", 4));
+    shot("xray", w("e7", 6), 540, 960, 1.0, L.e7[1] - w("e7", 6) + 0.2, 1.06); flash(w("e7", 6));
+    shot("xray", L.e8[0] - 0.05, 285, 1000, 1.5, 1.0, 1.04);
+    tl.to("#x-chkL", { opacity: 1, duration: 0.05 }, w("e8", 1));
+    tl.fromTo("#x-chkL", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.25, ease: "back.out(3)", immediateRender: false }, w("e8", 1)); hitCam(w("e8", 1));
+    shot("xray", w("e8", 2), 795, 1000, 1.5, 1.0, 1.04);
+    tl.to("#x-chkR", { opacity: 1, duration: 0.05 }, w("e8", 3));
+    tl.fromTo("#x-chkR", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.25, ease: "back.out(3)", immediateRender: false }, w("e8", 3)); hitCam(w("e8", 3));
+    shot("xray", L.e9[0] - 0.05, 540, 1100, 1.15, 1.0, 1.04); hitCam(w("e9", 1));
+    shot("xray", w("e9", 2), 540, 880, 1.4, 1.2, 1.06);
+    tl.to("#x-trophy", { opacity: 1, duration: 0.05 }, w("e9", 3));
+    tl.fromTo("#x-trophy", { scale: 0.3, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.35, ease: "back.out(2.5)", immediateRender: false }, w("e9", 3));
+    flash(w("e9", 3), 0.6);
+    // ---------- 7 Kevin – und der Nacken ----------
+    shot("kevin", L.k1[0] - 0.05, 540, 800, 1.4, L.k1[1] - L.k1[0] + 0.1, 1.04);
+    tl.set("#oma-pos", { x: 0 }, L.k1[0] - 0.05);
     face("kev", "smirk", L.k1[0] - 0.05); lids("kev", 0.55, L.k1[0] - 0.05); look("kev", -14, 0, L.k1[0] - 0.05);
     talk("kev", L.k1[0], L.k1[1], "smirk");
-    tl.to("#oma-pos", { x: -40, duration: 0.3 }, L.k1[1]);
-    shot("kevin", L.e10[0] - 0.05, 540, 900, 1.15, L.e10[1] - L.e10[0] + 0.8, 1.08);
-    tl.to("#oma-pos", { x: -420, duration: 0.4, ease: "power2.in" }, L.e10[0]);
+    shot("kevin", L.e10[0] - 0.05, 540, 900, 1.1, L.e10[1] - L.e10[0] + 0.6, 1.25);
+    tl.set("#oma-pos", { x: -420 }, L.e10[0] - 0.05);
     look("kev", 0, 0, L.e10[0]);
-    tl.to("#kev-head", { rotation: 16, svgOrigin: "540 900", duration: 0.5, ease: "power2.inOut" }, L.e10[1] - 0.2);
-    tl.to("#kev-head", { rotation: -6, svgOrigin: "540 900", duration: 0.08, ease: "power2.in" }, L.e10[1] + 0.3);
-    lids("kev", 1, L.e10[1] + 0.3);
-    const BK = L.e10[1] + 0.45;
+    tl.to("#kev-head", { rotation: 16, svgOrigin: "540 900", duration: 0.5, ease: "power2.inOut" }, L.e10[1] - 0.3);
+    tl.to("#kev-head", { rotation: -6, svgOrigin: "540 900", duration: 0.07, ease: "power2.in" }, L.e10[1] + 0.25);
+    lids("kev", 1, L.e10[1] + 0.25); hitCam(L.e10[1] + 0.3, 1.1);
+    const BK = L.e10[1] + 0.4;
     shot("black", BK, 540, 960, 1.0, 1.0, 1.0);
-    tl.fromTo("#teil2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)", immediateRender: true }, BK + 0.3);
-    tl.fromTo("#ask", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, BK + 0.9);
+    tl.fromTo("#teil2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, BK + 0.25);
+    tl.fromTo("#ask", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: true }, BK + 0.7);
 `;
 
 /* ================= Captions ================= */
