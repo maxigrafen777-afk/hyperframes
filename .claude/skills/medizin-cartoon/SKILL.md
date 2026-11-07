@@ -47,7 +47,7 @@ Betäubung (Spritze) → Schnitt → **Zahnfleisch sichtbar aufklappen** (Lappen
 4. `node build.mjs`, dann `npx hyperframes lint` und `npx hyperframes check` (in diesem Repo: `node packages/cli/dist/cli.js …`). GSAP liegt lokal unter `assets/gsap.min.js`, weil das CDN hier blockiert ist.
 5. `snapshot --at …` an jedem Beat ansehen: Gesichter lesbar, Instrumentenspitze trifft das Ziel, nichts Wichtiges unter den Untertiteln.
 6. **Stimme (ElevenLabs)**: Stimmen-Ids und Einstellungen pro Sprecher stehen in `script.json` unter `voices` (Opfer höher und gestresst, Verursacher frech, Arzt ruhig). `ELEVENLABS_API_KEY=… node voices.mjs` erzeugt `assets/vo/<zeile>.mp3` und `assets/vo/timings.json` mit Wortzeiten aus dem Alignment (`/with-timestamps`); zu lange Takes werden einmal schneller nachgesprochen. `node build.mjs` übernimmt danach die echte Länge als Zeilenende, setzt die Untertitel auf die echten Wortzeiten und legt die Audio-Clips an. Einzelne Zeilen neu: `node voices.mjs l3 l7`. Der Key braucht die Berechtigung „Text to Speech“.
-7. Rendern: `render -q delivery -o renders/<thema>_vN.mp4`.
+7. Rendern: `render -q delivery -o renders/THEMA_vN.mp4` (THEMA durch den Projektnamen ersetzen).
 
 ## Erkenntnisse aus den Vorbildern (Analyse von 3 Videos mit Millionen Aufrufen)
 

@@ -1,0 +1,361 @@
+{
+  "title": "Schluckauf – 68 Jahre",
+  "handle": "Dr. Arzterklärt",
+  "duration": 0,
+  "voiceModel": "eleven_multilingual_v2",
+  "maxPause": 0.18,
+  "scenes": {
+    "film": [0, 90]
+  },
+  "order": ["film"],
+  "qa": {
+    "maxTakes": 4,
+    "maxWer": 0.15,
+    "maxF0Dev": 0.3
+  },
+  "lines": [
+    {
+      "id": "h1",
+      "speaker": "erz",
+      "start": 0.15,
+      "end": 0.45,
+      "text": "Dieser Mann hatte achtundsechzig Jahre lang Schluckauf.",
+      "emph": ["achtundsechzig"]
+    },
+    {
+      "id": "h2",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Tag und Nacht. Über vierhundert Millionen Mal.",
+      "wait": 0.1,
+      "red": ["Millionen"]
+    },
+    {
+      "id": "h3",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Und wie es endete, glaubt kaum jemand.",
+      "wait": 0.1
+    },
+    {
+      "id": "k1",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[hiccups] Hicks!",
+      "wait": 0.2
+    },
+    {
+      "id": "o1",
+      "speaker": "oma",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[mischievous] Halt still… Buh!",
+      "wait": 0.15
+    },
+    {
+      "id": "k2",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[hiccups] …Hicks.",
+      "wait": 0.3
+    },
+    {
+      "id": "e1",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Was passiert da eigentlich?",
+      "wait": 0.15
+    },
+    {
+      "id": "e2",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Unter der Lunge liegt dein Zwerchfell. Plötzlich zuckt es.",
+      "wait": 0.1,
+      "emph": ["Zwerchfell"]
+    },
+    {
+      "id": "e3",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Du saugst Luft ein. Und oben knallt die Stimmritze zu.",
+      "wait": 0.1,
+      "emph": ["Stimmritze"]
+    },
+    {
+      "id": "k3",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[hiccups] Hicks!",
+      "wait": 0.1
+    },
+    {
+      "id": "e4",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Erschrecken hilft übrigens kaum. Besser: Luft anhalten oder kaltes Wasser, Schluck für Schluck.",
+      "wait": 0.25,
+      "emph": ["anhalten"],
+      "red": ["kaum"]
+    },
+    {
+      "id": "e5",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Aber Vorsicht.",
+      "wait": 0.15,
+      "red": ["Vorsicht"]
+    },
+    {
+      "id": "e6",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Dauert er länger als zwei Tage: ab zum Arzt.",
+      "wait": 0.1,
+      "red": ["Tage"]
+    },
+    {
+      "id": "e7",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Und der Mann? Achtundsechzig Jahre lang half nichts.",
+      "wait": 0.2,
+      "emph": ["nichts"]
+    },
+    {
+      "id": "e8",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Bis eines Morgens: Stille.",
+      "wait": 0.15,
+      "emph": ["Stille"]
+    },
+    {
+      "id": "e9",
+      "speaker": "erz",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "Der Schluckauf war weg. Einfach so.",
+      "wait": 0.6
+    },
+    {
+      "id": "k4",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[relieved] Bei mir auch! Weg!",
+      "wait": 0.2
+    },
+    {
+      "id": "o2",
+      "speaker": "oma",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[mischievous] Buh!",
+      "wait": 0.3
+    },
+    {
+      "id": "k5",
+      "speaker": "pat",
+      "start": 0.4,
+      "end": 0.45,
+      "text": "[hiccups] …Hicks.",
+      "wait": 0.35
+    }
+  ],
+  "voices": {
+    "erz": {
+      "name": "Erzähler (DE, Thriller)",
+      "voice_id": "spxwiZxnePFLHftJHjv9",
+      "settings": {
+        "stability": 0.35,
+        "similarity_boost": 0.85,
+        "style": 0.7,
+        "use_speaker_boost": true
+      },
+      "seed": 7777,
+      "tempo": 1.12,
+      "f0ref": 97
+    },
+    "pat": {
+      "name": "Kevin (DE, expressiv, v3)",
+      "voice_id": "cqyVmSq0c5HqMrXd3PFX",
+      "model": "eleven_v3",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.0,
+        "use_speaker_boost": true
+      },
+      "seed": 9191,
+      "tempo": 1.1,
+      "f0ref": 118
+    },
+    "oma": {
+      "name": "Oma (DE, resolut, v3)",
+      "voice_id": "1KkrCu2tQ6TMu2pOQOLs",
+      "model": "eleven_v3",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.0,
+        "use_speaker_boost": true
+      },
+      "seed": 9494,
+      "tempo": 1.1
+    }
+  },
+  "genSfx": [
+    {
+      "id": "bed",
+      "prompt": "tense suspense documentary background music, pulsing low synth, ticking percussion, mysterious, 110 bpm, no vocals, seamless loop",
+      "duration": 22
+    },
+    {
+      "id": "hiccup",
+      "prompt": "single loud comedic hiccup sound, male, no words",
+      "duration": 0.6
+    },
+    {
+      "id": "boo",
+      "prompt": "quick cartoon jump scare sting, spooky whoosh",
+      "duration": 0.8
+    },
+    {
+      "id": "thump",
+      "prompt": "deep muscle twitch thump, rubbery cartoon",
+      "duration": 0.5
+    },
+    {
+      "id": "snap",
+      "prompt": "small door slamming shut, cartoon snap",
+      "duration": 0.5
+    },
+    {
+      "id": "gulp",
+      "prompt": "drinking water gulps from a glass",
+      "duration": 1.2
+    },
+    {
+      "id": "silence",
+      "prompt": "soft high ringing tone fading into silence, eerie",
+      "duration": 1.6
+    },
+    {
+      "id": "ticker",
+      "prompt": "fast mechanical counter clicking",
+      "duration": 1.5
+    },
+    {
+      "id": "swish",
+      "prompt": "fast camera swish transition, short airy whoosh",
+      "duration": 0.5
+    },
+    {
+      "id": "flash",
+      "prompt": "sharp impact hit with reverse cymbal swell, dramatic reveal sting",
+      "duration": 1.0
+    },
+    {
+      "id": "alarm",
+      "prompt": "short warning sting, dramatic low brass hit",
+      "duration": 1.0
+    },
+    {
+      "id": "hit",
+      "prompt": "dark cinematic low hit, suspense stinger",
+      "duration": 1.2
+    }
+  ],
+  "sfx": [
+    {
+      "id": "sfx-hit0",
+      "src": "gen-hit.mp3",
+      "volume": 0.45,
+      "start": 0
+    },
+    {
+      "id": "sfx-ticker",
+      "src": "gen-ticker.mp3",
+      "volume": 0.3,
+      "line": "h2",
+      "offset": 0.0
+    },
+    {
+      "id": "sfx-boo",
+      "src": "gen-boo.mp3",
+      "volume": 0.45,
+      "line": "o1",
+      "offset": 1.0
+    },
+    {
+      "id": "sfx-sw1",
+      "src": "gen-swish.mp3",
+      "volume": 0.35,
+      "line": "e1",
+      "offset": -0.12
+    },
+    {
+      "id": "sfx-thump",
+      "src": "gen-thump.mp3",
+      "volume": 0.5,
+      "line": "e2",
+      "offset": 2.4
+    },
+    {
+      "id": "sfx-snap",
+      "src": "gen-snap.mp3",
+      "volume": 0.5,
+      "line": "e3",
+      "offset": 2.6
+    },
+    {
+      "id": "sfx-gulp",
+      "src": "gen-gulp.mp3",
+      "volume": 0.35,
+      "line": "e5",
+      "offset": -1.3
+    },
+    {
+      "id": "sfx-alarm",
+      "src": "gen-alarm.mp3",
+      "volume": 0.4,
+      "line": "e5",
+      "offset": -0.2
+    },
+    {
+      "id": "sfx-sw2",
+      "src": "gen-swish.mp3",
+      "volume": 0.35,
+      "line": "e7",
+      "offset": -0.12
+    },
+    {
+      "id": "sfx-silence",
+      "src": "gen-silence.mp3",
+      "volume": 0.45,
+      "line": "e8",
+      "offset": 1.2
+    },
+    {
+      "id": "sfx-boo2",
+      "src": "gen-boo.mp3",
+      "volume": 0.45,
+      "line": "o2",
+      "offset": -0.25
+    }
+  ]
+}
