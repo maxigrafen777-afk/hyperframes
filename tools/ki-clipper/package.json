@@ -1,0 +1,23 @@
+{
+  "name": "ki-clipper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turns a long video (YouTube link or local file) into 9:16 TikTok clips with German animated captions and hook titles, rendered with HyperFrames.",
+  "bin": {
+    "ki-clipper": "./src/cli.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "bun src/cli.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "typescript": "^5.9.3"
+  }
+}
