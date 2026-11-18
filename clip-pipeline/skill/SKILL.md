@@ -140,6 +140,7 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Ankündigungen („kann ich eine Tankstelle überfallen?“) am Ende des Rohschnitts: Die Pointe
   kommt erst danach. Nicht den ruhigen Vorlauf schicken, sondern auf den Folge-Kandidaten achten.
 - 2026-11-18 · Nacktszenen (Duschen) + anzüglicher Chat → verwerfen.
+- 2026-11-18 · Verlosungs-Geplänkel (Chat bettelt um PS5, „greedy chat“) erzeugt hohe Lach-Anteile ohne Spielmoment → verwerfen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
