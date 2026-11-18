@@ -169,6 +169,12 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Gewalt-Pointen (Halsschuss, „erstechen“) → verwerfen, auch wenn der Chat lacht.
 - 2026-11-18 · Abgrenzung zum Peggy-Typ: Klauen/Chaos mit NPC ja; NPC zusammenschlagen/erschießen als Pointe
   (z. B. Frau am Strand niedergeschlagen, #173) nein.
+- 2026-11-18 · Tier-Unfall ohne Reaktion des Streamers (#197 Pelikan kracht ins Boot, Zarbex redet weiter übers
+  Angeln) funktioniert mit Hook „Achte auf den …“ – der Zuschauer sucht das Tier. Moment in Standbildern suchen
+  (Sekundenraster um Chat-Zeit − 4 s), kurz halten (~25 s).
+- 2026-11-18 · Story-Abschnitte erzeugen Serien schlechter Kandidaten: Stripclub/Motel-Cutscenes (xHorny-Chat),
+  Missions-Schusswechsel mit Score-Musik (Trymacs, musik ≥ 60 s), „hör doch zu“-Chöre, Gore-Kopfschüsse → verwerfen.
+- 2026-11-18 · Whisper verhört „Subs“ als „Serbs“ → im Transkript korrigieren.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
