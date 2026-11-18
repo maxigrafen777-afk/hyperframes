@@ -131,3 +131,11 @@ def test_bots_and_templates_are_ignored():
     assert det.is_noise(ChatLine(ts=0, user="x", text="PartyHat Alles Gute zum Partner-Jubiläum!"))
     assert det.is_noise(ChatLine(ts=0, user="x", text="!drops"))
     assert not det.is_noise(ChatLine(ts=0, user="x", text="!clip"))
+
+
+def test_stretched_answers_are_answers():
+    det = ChatDetector("c", CFG)
+    for t in ["Jaaaa", "Yesss", "neeee", "auf jeden", "lets goo", "Klar", "nööö"]:
+        assert det.is_answer(t), t
+    for t in ["hahaha", "LUL LUL", "was ist da passiert", "alter wie krass"]:
+        assert not det.is_answer(t), t

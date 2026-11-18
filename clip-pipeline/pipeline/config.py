@@ -56,7 +56,8 @@ class DetectCfg(BaseModel):
     ignore_patterns: list[str] = Field(default_factory=lambda: [r"Partner-Jubiläum", r"^!(?!clip\b)"])
     # Antwortwelle: Streamer fragt, Chat antwortet "ja/nein/1/2". Kein Highlight.
     answer_words: list[str] = Field(default_factory=lambda: [
-        "ja", "jaa", "jo", "joa", "jap", "nein", "ne", "nee", "nö", "nope", "doch", "yes", "no", "yep",
+        "ja", "jo", "joa", "jap", "jup", "nein", "ne", "nö", "nope", "doch", "yes", "yep", "no",
+        "klar", "safe", "lets", "go", "logo", "auf", "jeden", "mach", "machen",
     ])
     max_answer_ratio: float = Field(default=0.35, ge=0, le=1)
 

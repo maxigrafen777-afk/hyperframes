@@ -20,6 +20,7 @@ CLIP_CALL = re.compile(r"\bclip(?:\s?it|\s?that|\s?das)?\b", re.IGNORECASE)
 # Lachen in jeder Schreibweise: hahaha, HAHAHAH, xD, XDDD, lol, loool, lmao, kekw
 LAUGH = re.compile(r"\b(?:a?h[ae]){3,}h?\b|\bx+d+\b|\blo+l\b|\blmao+\b|\bkekw?\b", re.IGNORECASE)
 _WORD = re.compile(r"[^\wäöüß]+")
+_REPEAT = re.compile(r"(.)\1+")
 CONTEXT_LINES = 40
 
 
@@ -78,7 +79,8 @@ class ChatDetector:
         return line.user.casefold() in self.ignore_users or any(p.search(line.text) for p in self.ignore)
 
     def is_answer(self, text: str) -> bool:
-        words = [w for w in _WORD.split(text.casefold()) if w]
+        # gedehnte Schreibweisen vereinheitlichen: "Jaaaa" -> "ja", "Yesss" -> "yes", "neeee" -> "ne"
+        words = [_REPEAT.sub(r"\1", w) for w in _WORD.split(text.casefold()) if w]
         return 0 < len(words) <= 2 and all(w in self.answers or (w.isdigit() and len(w) <= 2) for w in words)
 
     def feed(self, line: ChatLine) -> Trigger | None:
