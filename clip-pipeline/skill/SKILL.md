@@ -157,6 +157,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   probiert jetzt 100/95/90/85 % der Config-Größe. Kleinere Stufen (≤ 80 %) finden Minimap/Innenkanten → nicht nutzen.
 - 2026-11-18 · „Erster Bug“-Momente: Nur behalten, wenn der Bug im Bild klar und länger als ~2 s zu sehen ist
   (z. B. Figur fliegt, Auto im Boden). Kurzes Kamera-Clipping erkennt auf dem Handy niemand.
+- 2026-11-18 · Stark: Alligator-Angriffe (#79, #80 bei xRohat). Florida-Tiere sind ein GTA-6-Meme seit den Trailern,
+  dazu laute Panik-Reaktion („Ich drücke Kreis um mein Leben!“). Wiederholt sich so etwas, als „Teil 2“ liefern.
+- 2026-11-18 · Whisper macht aus Schreien Fantasiewörter („RENZTROCKING“) → vor dem Rendern aus dem Transkript nehmen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
