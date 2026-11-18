@@ -67,6 +67,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   direkte Ansprache nur, wenn das Ende liefert. Schlecht: Beschreibung („X spielt GTA 6“),
   Clickbait ohne Einlösung. Pro Clip 3 Hooks entwerfen und den stärksten nehmen.
 - Länge 20–60 s, meist 25–45. Kein Leerlauf: lieber dicht als lang.
+- Ein Clip braucht eine echte Pointe: laute/emotionale Reaktion des Streamers, Action (Verfolgung,
+  Crash, Schießerei, Chaos) oder einen Lacher. Ruhige Alltags-Fails, bei denen nur der Chat lacht, sind
+  zu schwach (Nutzer-Feedback: „langweilig“). Im Zweifel nicht schicken.
 
 - Antwortwelle erkennen: Stellt der Streamer kurz vor dem Chat-Ausschlag eine Frage an
   den Chat („oder?“, „wie findet ihr …?“, „was meint ihr?“) und der Chat antwortet
@@ -153,4 +156,6 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 
 ## Feedback
 
-(noch keins)
+- 2026-11-18 · #14 xRohat „Grün statt Blau“ (40 s, Hook „Er wollte unbedingt Blau …“): **langweilig**.
+  Konsequenz: Kleine Alltags-Fails ohne starke Reaktion des Streamers und ohne visuelle Pointe sind
+  höchstens hype 5. Der Chat-Chor allein trägt keinen Clip. 40 s ruhiges Streichen ist zu lang für so wenig.
