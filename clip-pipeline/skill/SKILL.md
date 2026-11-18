@@ -148,6 +148,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Guter Typ: witzige Nebenmissionen (#41 Peggys Elektromobil klauen, Oma rennt hinterher), Chat lacht
   laut (46 % Hype), Streamer kommentiert. Heikle Sätze („Ich liebe Behinderte“) aus dem Schnitt lassen:
   Ende direkt davor setzen.
+- 2026-11-18 · Streamer schaltet auf Vollbild-Cam (z. B. Zarbex zeigt BILD-Artikel über sich, #47) → layout "blur"
+  (Bild mittig 4:3), nicht "split" – es gibt dann keine eingeblendete Cam (Facecam-Suche meldet Score < 6).
+  Schnitt erst ab dem Umschalten beginnen. Drama/Reaktion auf Presse über den Streamer = starker Inhalt.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
