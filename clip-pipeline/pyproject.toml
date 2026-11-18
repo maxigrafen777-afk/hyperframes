@@ -7,6 +7,9 @@ dependencies = [
   "pydantic>=2.6",
   "websockets>=12",
   "streamlink>=6",
+  "anthropic>=2.10",
+  "faster-whisper>=1.1",
+  "numpy>=1.26",
 ]
 
 [project.optional-dependencies]

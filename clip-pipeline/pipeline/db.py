@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS clips (
     lease_owner  TEXT,
     lease_until  REAL,
     raw_path     TEXT,
+    raw_start_ts REAL,
     transcript_path TEXT,
     render_path  TEXT,
     candidate    TEXT    NOT NULL,
@@ -46,7 +47,7 @@ CREATE INDEX IF NOT EXISTS idx_clips_streamer_time ON clips(streamer, start_ts, 
 """
 
 # Spalten, die advance() direkt setzen darf.
-_FIELDS = {"raw_path", "transcript_path", "render_path", "error", "live"}
+_FIELDS = {"raw_path", "raw_start_ts", "transcript_path", "render_path", "error", "live"}
 
 
 class Clip(BaseModel):
@@ -62,6 +63,7 @@ class Clip(BaseModel):
     hype: int | None
     attempts: int
     raw_path: str | None
+    raw_start_ts: float | None
     transcript_path: str | None
     render_path: str | None
     candidate: Candidate
@@ -97,7 +99,9 @@ class DB:
 
     # ---------- anlegen ----------
 
-    def add_candidate(self, cand: Candidate, raw_path: str | None = None) -> int | None:
+    def add_candidate(
+        self, cand: Candidate, raw_path: str | None = None, raw_start_ts: float | None = None
+    ) -> int | None:
         """Legt einen Kandidaten an. Überlappt er mit einem bestehenden Clip
         desselben Streamers, bleibt nur der stärkere (Vorab-Score).
         Gibt die neue ID zurück, oder None, wenn der Kandidat verworfen wurde."""
@@ -118,11 +122,11 @@ class DB:
                 )
             cur = c.execute(
                 """INSERT INTO clips (status, streamer, live, created_at, updated_at,
-                       trigger_ts, start_ts, end_ts, pre_score, raw_path, candidate)
-                   VALUES ('NEW', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                       trigger_ts, start_ts, end_ts, pre_score, raw_path, raw_start_ts, candidate)
+                   VALUES ('NEW', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     cand.streamer, int(cand.live), now, now, cand.trigger_ts,
-                    cand.start_ts, cand.end_ts, cand.pre_score, raw_path,
+                    cand.start_ts, cand.end_ts, cand.pre_score, raw_path, raw_start_ts,
                     cand.model_dump_json(),
                 ),
             )

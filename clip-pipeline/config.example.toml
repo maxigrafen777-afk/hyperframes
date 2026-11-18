@@ -30,8 +30,15 @@ max_len_s = 59
 
 [judge]
 min_hype = 7
-provider = "ollama"      # "ollama" oder "cloud"
-model = "qwen2.5vl:7b"
+model = "claude-opus-5-5"   # Claude über die Anthropic-API (Schlüssel in .env)
+effort = "medium"           # low | medium | high
+frames = 6
+frame_width = 768
+
+[whisper]
+model = "small"             # läuft ohne GPU auf der CPU
+compute_type = "int8"
+vocabulary = ["GTA", "GTA 6", "Vice City", "Leonida", "Lucia", "Jason", "Keyless Go", "Mustang", "Zarbex"]
 
 # Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
 # Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?

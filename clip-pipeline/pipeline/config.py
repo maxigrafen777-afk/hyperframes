@@ -64,8 +64,18 @@ class ClipCfg(BaseModel):
 
 class JudgeCfg(BaseModel):
     min_hype: int = Field(default=7, ge=1, le=10)
-    provider: Literal["ollama", "cloud"] = "ollama"
-    model: str = "qwen2.5vl:7b"
+    model: str = "claude-opus-5-5"
+    effort: Literal["low", "medium", "high", "xhigh", "max"] = "medium"
+    frames: int = Field(default=6, ge=1, le=20)   # Standbilder pro Kandidat
+    frame_width: int = Field(default=768, ge=256)  # kleiner = günstiger
+
+
+class WhisperCfg(BaseModel):
+    model: str = "small"          # tiny/base/small/medium; ohne GPU: small
+    compute_type: str = "int8"    # schnell auf der CPU
+    threads: int = 0              # 0 = alle Kerne
+    # Begriffe, die Whisper sonst verhört (Spielnamen, Orte, Marken, Insider).
+    vocabulary: list[str] = Field(default_factory=list)
 
 
 class Config(BaseModel):
@@ -75,6 +85,7 @@ class Config(BaseModel):
     detect: DetectCfg = DetectCfg()
     clip: ClipCfg = ClipCfg()
     judge: JudgeCfg = JudgeCfg()
+    whisper: WhisperCfg = WhisperCfg()
     streamers: list[Streamer] = Field(default_factory=list)
 
     @model_validator(mode="after")

@@ -85,9 +85,10 @@ class Judgment(BaseModel):
     hype: int = Field(ge=1, le=10)
     category: str = ""
     summary: str = ""
-    start_s: float = Field(ge=0)
-    end_s: float = Field(gt=0)
-    peak_s: float = Field(ge=0)
+    # Ohne harte Grenzen: clamp() bringt die Zeiten auf die Cliplänge.
+    start_s: float
+    end_s: float
+    peak_s: float
     subject_x: float = Field(default=0.5, ge=0, le=1)
     layout: Literal["split", "blur"] = "split"
     hook: str = ""
@@ -98,8 +99,10 @@ class Judgment(BaseModel):
 
     @model_validator(mode="after")
     def _times(self) -> Judgment:
-        if not self.start_s <= self.peak_s <= self.end_s:
-            raise ValueError("Es muss gelten: start_s <= peak_s <= end_s")
+        # Reparieren statt ablehnen: eine verworfene KI-Antwort kostet Geld.
+        if self.end_s < self.start_s:
+            self.start_s, self.end_s = self.end_s, self.start_s
+        self.peak_s = min(max(self.peak_s, self.start_s), self.end_s)
         return self
 
     def final_keep(self, min_hype: int) -> bool:

@@ -101,8 +101,8 @@ def test_judgment_hard_rules():
     assert j.final_keep(7)
     j.flags.story_spoiler = True
     assert not j.final_keep(7)
-    with pytest.raises(ValueError):
-        Judgment(keep=True, hype=9, start_s=5, end_s=10, peak_s=2)
+    fixed = Judgment(keep=True, hype=9, start_s=10, end_s=5, peak_s=2)
+    assert (fixed.start_s, fixed.peak_s, fixed.end_s) == (5, 5, 10)
 
 
 def test_config_rejects_small_buffer():
