@@ -91,6 +91,12 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
 - 2026-11-18 · In den ersten Release-Tagen löst der Chat oft bei Story-Zwischensequenzen aus (z. B. Mission
   „Kapitel 1 – Rohre verlegen“) → als cutscene/spoiler verwerfen. Pausemenü im Bild = schwaches Bild,
   auch wenn der Streamer Gutes sagt (Hot Takes) → nur behalten, wenn er dabei Gameplay oder starke Mimik hat.
+- 2026-11-18 · xRohat: Chat feiert Grafik („Cinema“, „Geisteskrank“) beim Tauchen, aber ohne Reaktion des
+  Streamers, mit Tutorial-Hinweisen und englischen Missionsdialogen im Bild → hype 5, verworfen.
+  Grafik-Wow allein reicht nicht; es braucht eine Reaktion oder ein Ereignis.
+- 2026-11-18 · Chat-Insider („Ali“, „Goldmünze von Ali“) erzeugen Ausschläge ohne Moment im Bild → verwerfen.
+- 2026-11-18 · Mit Musik-Trennung landen englische Spieldialoge in der Stimmspur und damit in den Untertiteln.
+  Bei Missionsdialogen prüfen, ob die Untertitel dann noch Sinn ergeben.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
@@ -104,8 +110,9 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
 
 ### xRohat (`xrohat`)
 
-- Login vom Nutzer bestätigt (zuerst falsch als `rohat` angenommen). Facecam noch nicht gemessen
-  (Standbild landet in `data/snapshots/xrohat.jpg`).
+- Login vom Nutzer bestätigt (zuerst falsch als `rohat` angenommen).
+- Facecam oben rechts: x=1406, y=104, w=512, h=288. Darunter ein Overlay „SPENDENSTAND“ (Charity-Stream),
+  das der Gameplay-Ausschnitt meidet. HUD: Kompass oben, Minimap unten links.
 
 ## Feedback
 

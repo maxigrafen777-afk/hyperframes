@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import time
@@ -75,7 +76,9 @@ def cmd_show(cfg: Config, db: DB, a) -> None:
                     "-vf", "scale=384:-2,tile=3x2", "-frames:v", "1", str(sheet)], check=True)
     print(f"# Kandidat {c.id} – Kontaktabzug: {sheet}")
     print("# Standbilder bei: " + ", ".join(f"{t:.1f}s" for t, _ in frames))
-    print(content[-1]["text"])
+    # Nutzernamen nie ausgeben: sie sollen weder im Chat noch im Repo landen.
+    text = re.sub(r"^(\s+-?[0-9.]+s) [^:]+:", r"\1 <user>:", content[-1]["text"], flags=re.MULTILINE)
+    print(re.sub(r"@\w+", "@user", text))
 
 
 def _apply(cfg: Config, db: DB, cid: int, j: Judgment, *, rerender: bool) -> None:

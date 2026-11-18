@@ -68,4 +68,5 @@ platform = "twitch"
 login = "xrohat"
 language = "de"
 chat_delay_s = 4.0
-# facecam: noch nicht gemessen -> Layout "blur", bis ein Standbild vorliegt
+# Gemessen am 18.11.2026 (oben rechts, darunter Spendenstand-Overlay)
+facecam = { x = 1406, y = 104, w = 512, h = 288 }
