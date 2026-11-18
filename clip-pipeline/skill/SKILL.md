@@ -145,6 +145,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · xRohat spielt viel Story: die meisten seiner Auslöser sind Zwischensequenzen → Spoiler.
 - 2026-11-18 · Song-Momente: Chat feiert Musik („BANGER“, „W song“, „Copyright“) → der Moment IST die Musik
   → immer verwerfen (Musik darf nie veröffentlicht werden; Transkript enthält dann Liedtext).
+- 2026-11-18 · Guter Typ: witzige Nebenmissionen (#41 Peggys Elektromobil klauen, Oma rennt hinterher), Chat lacht
+  laut (46 % Hype), Streamer kommentiert. Heikle Sätze („Ich liebe Behinderte“) aus dem Schnitt lassen:
+  Ende direkt davor setzen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
