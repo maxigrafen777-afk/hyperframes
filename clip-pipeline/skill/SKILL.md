@@ -88,6 +88,9 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
   zeitweise oben einen 60-px-Balken („DAUERWERBESENDUNG“) ein, manchmal liegt der Text aber direkt
   auf dem Bild. Lösung: Balken pro Clip automatisch erkennen (`render/letterbox.py`).
 - 2026-11-18 · Nutzer: Twitch-Name im Video nicht nötig (`render.show_credit = false`); Quelle bleibt im Post-Text.
+- 2026-11-18 · In den ersten Release-Tagen löst der Chat oft bei Story-Zwischensequenzen aus (z. B. Mission
+  „Kapitel 1 – Rohre verlegen“) → als cutscene/spoiler verwerfen. Pausemenü im Bild = schwaches Bild,
+  auch wenn der Streamer Gutes sagt (Hot Takes) → nur behalten, wenn er dabei Gameplay oder starke Mimik hat.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
