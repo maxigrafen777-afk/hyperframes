@@ -15,8 +15,8 @@ schneidet 9:16 mit Untertiteln und schickt den Clip per Telegram aufs Handy.
 | Datenbank + Statusmaschine          | `pipeline/db.py`                  | ✅     |
 | Chat lesen (Twitch)                 | `pipeline/sources/twitch_chat.py` | ✅     |
 | Chat-Auslöser                       | `pipeline/detect/chat_stats.py`   | ✅     |
-| Recorder mit Puffer                 | `pipeline/sources/recorder.py`    | ⏳     |
-| Live-Check (Twitch-API, nur GTA VI) | `pipeline/sources/twitch_api.py`  | ⏳     |
+| Recorder mit Puffer                 | `pipeline/sources/recorder.py`    | ✅     |
+| Live-Check (Twitch-API, nur GTA VI) | `pipeline/sources/twitch_api.py`  | ✅     |
 | Whisper-Transkript                  | `pipeline/judge/`                 | ⏳     |
 | KI-Bewertung                        | `pipeline/judge/`                 | ⏳     |
 | Render 9:16 + Untertitel            | `pipeline/render/`                | ⏳     |

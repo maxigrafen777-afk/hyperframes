@@ -34,10 +34,12 @@ provider = "ollama"      # "ollama" oder "cloud"
 model = "qwen2.5vl:7b"
 
 # Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
+# Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?
 [[streamers]]
 platform = "twitch"
-login = "beispielstreamer"
+login = "zarbex"
 language = "de"
 chat_delay_s = 4.0       # wie viele Sekunden der Chat hinter dem Bild herhinkt
 # Facecam-Bereich im 1920x1080-Bild: x, y, Breite, Höhe. Weglassen = keine Facecam.
-facecam = { x = 1440, y = 760, w = 480, h = 320 }
+# Gemessen am 18.11.2026 (unten rechts). In GTA-Szenen ggf. neu prüfen.
+facecam = { x = 1452, y = 762, w = 468, h = 318 }
