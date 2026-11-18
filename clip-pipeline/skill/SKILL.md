@@ -141,6 +141,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   kommt erst danach. Nicht den ruhigen Vorlauf schicken, sondern auf den Folge-Kandidaten achten.
 - 2026-11-18 · Nacktszenen (Duschen) + anzüglicher Chat → verwerfen.
 - 2026-11-18 · Verlosungs-Geplänkel (Chat bettelt um PS5, „greedy chat“) erzeugt hohe Lach-Anteile ohne Spielmoment → verwerfen.
+- 2026-11-18 · Drastisches Blut/Gore (z. B. blutüberströmte Figur in Nebenmission) → verwerfen; TikTok schränkt das ein.
+- 2026-11-18 · xRohat spielt viel Story: die meisten seiner Auslöser sind Zwischensequenzen → Spoiler.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
