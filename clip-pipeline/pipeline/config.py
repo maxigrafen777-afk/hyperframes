@@ -46,6 +46,17 @@ class DetectCfg(BaseModel):
     cooldown_s: float = 60
     min_pre_score: float = Field(default=0.35, ge=0, le=1)
     hype_words: list[str] = Field(default_factory=list)
+    # Nachrichten von diesen Nutzern zählen gar nicht (Bots).
+    ignore_users: list[str] = Field(default_factory=lambda: [
+        "nightbot", "streamelements", "moobot", "fossabot", "streamlabs", "wizebot", "sery_bot",
+    ])
+    # Regex: passende Nachrichten zählen gar nicht (Vorlagen, Befehle außer !clip).
+    ignore_patterns: list[str] = Field(default_factory=lambda: [r"Partner-Jubiläum", r"^!(?!clip\b)"])
+    # Antwortwelle: Streamer fragt, Chat antwortet "ja/nein/1/2". Kein Highlight.
+    answer_words: list[str] = Field(default_factory=lambda: [
+        "ja", "jaa", "jo", "joa", "jap", "nein", "ne", "nee", "nö", "nope", "doch", "yes", "no", "yep",
+    ])
+    max_answer_ratio: float = Field(default=0.35, ge=0, le=1)
 
     @model_validator(mode="after")
     def _windows(self) -> DetectCfg:

@@ -108,3 +108,26 @@ def test_judgment_hard_rules():
 def test_config_rejects_small_buffer():
     with pytest.raises(ValueError):
         Config.model_validate({"recorder": {"buffer_s": 30}})
+
+
+def test_answer_wave_does_not_trigger():
+    """Echter Fall bei Zarbex: Frage an den Chat, 80 Leute antworten 'ne/nö/nein'."""
+    rng = random.Random(5)
+    lines = calm_chat(rng, 0, 600)
+    answers = ["ne", "nö", "Nein", "nee!", "nope", "NE", "ne ne", "2"]
+    lines += [ChatLine(ts=400 + i * 0.12, user=f"a{i}", text=answers[i % len(answers)]) for i in range(80)]
+    assert run(ChatDetector("c", CFG), lines) == []
+
+
+def test_laughter_counts_as_hype():
+    m = HypeMatcher([])
+    assert all(m(t) for t in ["hahahaha", "HAHAHAH", "xD", "XDDD", "loool", "KEKW", "hehehe"])
+    assert not any(m(t) for t in ["haha", "hallo", "Klolo", "ahoi"])
+
+
+def test_bots_and_templates_are_ignored():
+    det = ChatDetector("c", CFG)
+    assert det.is_noise(ChatLine(ts=0, user="Fossabot", text="🎬 Clip created!"))
+    assert det.is_noise(ChatLine(ts=0, user="x", text="PartyHat Alles Gute zum Partner-Jubiläum!"))
+    assert det.is_noise(ChatLine(ts=0, user="x", text="!drops"))
+    assert not det.is_noise(ChatLine(ts=0, user="x", text="!clip"))

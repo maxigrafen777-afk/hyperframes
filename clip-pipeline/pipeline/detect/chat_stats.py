@@ -17,6 +17,9 @@ from ..config import ClipCfg, DetectCfg, Streamer
 from ..models import Candidate, ChatLine, Signals
 
 CLIP_CALL = re.compile(r"\bclip(?:\s?it|\s?that|\s?das)?\b", re.IGNORECASE)
+# Lachen in jeder Schreibweise: hahaha, HAHAHAH, xD, XDDD, lol, loool, lmao, kekw
+LAUGH = re.compile(r"\b(?:a?h[ae]){3,}h?\b|\bx+d+\b|\blo+l\b|\blmao+\b|\bkekw?\b", re.IGNORECASE)
+_WORD = re.compile(r"[^\wäöüß]+")
 CONTEXT_LINES = 40
 
 
@@ -50,7 +53,7 @@ class HypeMatcher:
         self.symbols = [w for w in words if not w.isalnum()]
 
     def __call__(self, text: str) -> bool:
-        if any(sym in text for sym in self.symbols):
+        if LAUGH.search(text) or any(sym in text for sym in self.symbols):
             return True
         return any(tok.casefold().strip("!?.,") in self.tokens for tok in text.split())
 
@@ -62,13 +65,25 @@ class ChatDetector:
         self.channel = channel
         self.cfg = cfg
         self.is_hype = HypeMatcher(cfg.hype_words)
+        self.ignore_users = {u.casefold() for u in cfg.ignore_users}
+        self.ignore = [re.compile(p, re.IGNORECASE) for p in cfg.ignore_patterns]
+        self.answers = {w.casefold() for w in cfg.answer_words}
         self.per_second: Counter[int] = Counter()
         self.recent: deque[ChatLine] = deque()
         self.first_ts: float | None = None
         self.last_trigger_ts = -math.inf
         self.last_eval_sec: int | None = None
 
+    def is_noise(self, line: ChatLine) -> bool:
+        return line.user.casefold() in self.ignore_users or any(p.search(line.text) for p in self.ignore)
+
+    def is_answer(self, text: str) -> bool:
+        words = [w for w in _WORD.split(text.casefold()) if w]
+        return 0 < len(words) <= 2 and all(w in self.answers or (w.isdigit() and len(w) <= 2) for w in words)
+
     def feed(self, line: ChatLine) -> Trigger | None:
+        if self.is_noise(line):
+            return None
         if self.first_ts is None:
             self.first_ts = line.ts
         self.per_second[int(line.ts)] += 1
@@ -122,6 +137,10 @@ class ChatDetector:
         hype_ratio = sum(self.is_hype(l.text) for l in burst_lines) / burst
         clip_calls = len({l.user.casefold() for l in burst_lines if CLIP_CALL.search(l.text)})
         z, med, mad = robust_z(burst, baseline)
+
+        answer_ratio = sum(self.is_answer(l.text) for l in burst_lines) / burst
+        if answer_ratio > cfg.max_answer_ratio:
+            return None  # Antwortwelle auf eine Frage des Streamers
 
         if z >= cfg.z_threshold and len(users) >= cfg.min_unique_users and unique_ratio >= cfg.min_unique_ratio:
             reason = "z"

@@ -15,13 +15,17 @@ quality = "1080p60,1080p,best"
 burst_s = 10             # Fenster für "gerade eben"
 baseline_s = 300         # Fenster für "normal"
 min_baseline_s = 120     # vorher wird nie ausgelöst
-z_threshold = 4.0
+z_threshold = 3.5       # an 30 min echtem Zarbex-Chat eingestellt (18.11.2026)
 min_unique_users = 6
 min_unique_ratio = 0.5   # verschiedene Nutzer / Nachrichten im Burst
 clip_calls_trigger = 3   # so viele verschiedene Nutzer schreiben "clip"
 cooldown_s = 60
 min_pre_score = 0.35     # darunter fällt der Kandidat sofort weg
-hype_words = ["LUL", "KEKW", "OMEGALUL", "LMAO", "LOL", "W", "💀", "😂", "🤣", "PogChamp", "Pog", "POGGERS", "monkaS", "NAHHH", "bruh"]
+# Lachen (hahaha, xD, lol, kekw) wird automatisch erkannt. Hier zusätzlich Emotes:
+hype_words = ["LUL", "OMEGALUL", "W", "💀", "😂", "🤣", "PogChamp", "Pog", "POGGERS", "monkaS", "NAHHH", "EYOOOO", "bruh",
+              # Kanal-Emotes von Zarbex (aus echtem Chat gezählt)
+              "zarbexHehe", "zarbexGeil", "zarbexHyper", "zarbexHype", "zarbexYeah", "zarbexW", "zarbexLost", "zarbexRedFlag"]
+# ignore_users, ignore_patterns, answer_words: sinnvolle Standardwerte, siehe pipeline/config.py
 
 [clip]
 pre_roll_s = 20          # Sekunden vor dem geschätzten Moment
