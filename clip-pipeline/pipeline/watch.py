@@ -23,7 +23,7 @@ import time
 from pathlib import Path
 
 from .config import Config, Streamer, load_config
-from .db import DB
+from .db import DB, InvalidTransition
 from .detect.chat_stats import ChatDetector, Trigger, to_candidate
 from .judge.steps import step_transcribe
 from .models import Status
@@ -170,6 +170,9 @@ class Watcher:
                 continue
             try:
                 await asyncio.to_thread(step_transcribe, self.db, self.cfg, clip)
+            except InvalidTransition:
+                # Während der Transkription als Duplikat verworfen (stärkerer Kandidat überlappt) – normal.
+                log.info("Clip %s inzwischen verworfen (Duplikat), Transkript nicht benötigt", clip.id)
             except Exception as e:  # ein kaputter Clip darf den Dienst nicht stoppen
                 log.exception("Transkription Clip %s fehlgeschlagen", clip.id)
                 self.db.fail(clip.id, repr(e))
