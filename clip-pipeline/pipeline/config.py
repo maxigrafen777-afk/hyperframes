@@ -61,6 +61,9 @@ class DetectCfg(BaseModel):
         "o7", "f",  # Salut-/F-Wellen auf Aufforderung des Streamers
     ])
     max_answer_ratio: float = Field(default=0.35, ge=0, le=1)
+    # Chor: Chat wiederholt dieselbe kurze Anweisung („Anzeige“, „Waffe im Haus“) ohne zu lachen.
+    max_chorus_ratio: float = Field(default=0.3, ge=0, le=1)
+    chorus_max_hype: float = Field(default=0.2, ge=0, le=1)
 
     @model_validator(mode="after")
     def _windows(self) -> DetectCfg:

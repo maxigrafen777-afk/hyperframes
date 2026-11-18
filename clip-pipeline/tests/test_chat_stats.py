@@ -139,3 +139,18 @@ def test_stretched_answers_are_answers():
         assert det.is_answer(t), t
     for t in ["hahaha", "LUL LUL", "was ist da passiert", "alter wie krass"]:
         assert not det.is_answer(t), t
+
+
+def test_chorus_without_laughter_does_not_trigger():
+    """Echter Fall xRohat: Chat ruft im Chor „Anzeige“, während er im Menü sucht."""
+    rng = random.Random(8)
+    lines = calm_chat(rng, 0, 600)
+    texts = ["Anzeige", "anzeige", "ANZEIGE", "bei Anzeige", "da wars", "Anzeigee", "zurück"]
+    lines += [ChatLine(ts=400 + i * 0.15, user=f"c{i}", text=texts[i % len(texts)]) for i in range(70)]
+    assert run(ChatDetector("c", CFG), lines) == []
+
+
+def test_chorus_ratio():
+    from pipeline.detect.chat_stats import chorus_ratio
+    ls = [ChatLine(ts=0, user="a", text=t) for t in ["Anzeige", "anzeige!", "ANZEIGEE", "LUL", "was"]]
+    assert chorus_ratio(ls) == 0.6

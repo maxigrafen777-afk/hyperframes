@@ -140,14 +140,15 @@ class ChatDetector:
         clip_calls = len({l.user.casefold() for l in burst_lines if CLIP_CALL.search(l.text)})
         z, med, mad = robust_z(burst, baseline)
 
-        answer_ratio = sum(self.is_answer(l.text) for l in burst_lines) / burst
-        if answer_ratio > cfg.max_answer_ratio:
-            return None  # Antwortwelle auf eine Frage des Streamers
-
-        if z >= cfg.z_threshold and len(users) >= cfg.min_unique_users and unique_ratio >= cfg.min_unique_ratio:
+        if clip_calls >= cfg.clip_calls_trigger:
+            reason = "clip_calls"  # Clip-Rufe sind ein guter Chor: keine Wellen-Filter
+        elif z >= cfg.z_threshold and len(users) >= cfg.min_unique_users and unique_ratio >= cfg.min_unique_ratio:
+            answer_ratio = sum(self.is_answer(l.text) for l in burst_lines) / burst
+            if answer_ratio > cfg.max_answer_ratio:
+                return None  # Antwortwelle auf eine Frage des Streamers
+            if hype_ratio < cfg.chorus_max_hype and chorus_ratio(burst_lines) > cfg.max_chorus_ratio:
+                return None  # Chor: alle schreiben dieselbe Anweisung, niemand lacht
             reason = "z"
-        elif clip_calls >= cfg.clip_calls_trigger:
-            reason = "clip_calls"
         else:
             return None
 
@@ -165,6 +166,20 @@ class ChatDetector:
         peak_sec = max(burst_secs, key=lambda s: (self.per_second[s], s))
         chat = [l for l in self.recent if l.ts <= now][-CONTEXT_LINES:]
         return Trigger(self.channel, now, float(peak_sec), signals, score, chat)
+
+
+def _norm(text: str) -> str:
+    words = [_REPEAT.sub(r"\1", w) for w in _WORD.split(text.casefold()) if w]
+    return " ".join(words[:3])
+
+
+def chorus_ratio(lines: list[ChatLine]) -> float:
+    """Anteil der häufigsten (normalisierten, max. 3 Wörter) Nachricht im Burst."""
+    if not lines:
+        return 0.0
+    counts = Counter(_norm(l.text) for l in lines if len(l.text.split()) <= 4)
+    counts.pop("", None)
+    return (counts.most_common(1)[0][1] / len(lines)) if counts else 0.0
 
 
 def pre_score(s: Signals, cfg: DetectCfg) -> float:
