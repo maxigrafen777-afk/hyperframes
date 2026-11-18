@@ -56,6 +56,7 @@ platform = "twitch"
 login = "eliasn97"
 language = "de"
 chat_delay_s = 4.0
+facecam = { x = 1424, y = 46, w = 474, h = 264 }   # Rahmen-Cam oben rechts, gemessen 18.11. (Release)
 
 [[streamers]]
 platform = "twitch"
@@ -129,6 +130,7 @@ platform = "twitch"
 login = "rewinside"
 language = "de"
 chat_delay_s = 4.0
+facecam = { x = 1420, y = 0, w = 500, h = 360 }   # Cam oben rechts, darunter Chat-Overlay, gemessen 18.11.
 
 [[streamers]]
 platform = "twitch"
@@ -147,6 +149,7 @@ platform = "twitch"
 login = "mckytv"
 language = "de"
 chat_delay_s = 4.0
+facecam = { x = 1440, y = 332, w = 466, h = 314 }   # Cam rechts Mitte, gemessen 18.11.
 
 [[streamers]]
 platform = "twitch"
