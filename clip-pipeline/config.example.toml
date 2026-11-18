@@ -48,6 +48,10 @@ corrections = { schockst = "zockst", schocken = "zocken" }
 
 # Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
 # Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?
+[render]
+remove_music = true      # Musik nie veröffentlichen: nur die getrennte Stimmspur
+show_credit = false      # kein Twitch-Name im Video; Quelle steht im Post-Text
+
 [[streamers]]
 platform = "twitch"
 login = "zarbex"
@@ -56,10 +60,12 @@ chat_delay_s = 4.0       # wie viele Sekunden der Chat hinter dem Bild herhinkt
 # Facecam-Bereich im 1920x1080-Bild: x, y, Breite, Höhe. Weglassen = keine Facecam.
 # Gemessen am 18.11.2026 (unten rechts). In GTA-Szenen ggf. neu prüfen.
 facecam = { x = 1452, y = 762, w = 468, h = 318 }
+# Schwarze Balken (z. B. 60 px oben bei "DAUERWERBESENDUNG") werden pro Clip automatisch erkannt.
+# Nur bei Problemen fest einstellen: game_area = [62, 1080]
 
 [[streamers]]
 platform = "twitch"
-login = "rohat"          # Login noch nicht bestätigt
+login = "xrohat"
 language = "de"
 chat_delay_s = 4.0
 # facecam: noch nicht gemessen -> Layout "blur", bis ein Standbild vorliegt

@@ -5,12 +5,13 @@ from __future__ import annotations
 import json
 import re
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 from ..config import Rect
 from ..judge.media import Word
 from .layout import BlurLayout, SplitLayout, blur_layout, split_layout
+from .letterbox import detect_game_area
 from .subtitles import Placement, build_ass, shift_words
 
 FONTS_DIR = Path(__file__).resolve().parents[2] / "assets" / "fonts"
@@ -31,6 +32,8 @@ class RenderJob:
     hook: str
     credit: str
     censor: tuple[str, ...] = ()
+    audio: Path | None = None              # Stimmspur ohne Musik (gleiche Zeitachse wie raw)
+    area: tuple[int, int] | None = None    # sichtbarer Gameplay-Bereich; None = erkennen
 
 
 def _esc(path: Path) -> str:
@@ -54,9 +57,10 @@ def video_filter(job: RenderJob, ass: Path) -> str:
 
 
 def layout_for(job: RenderJob) -> SplitLayout | BlurLayout:
+    area = job.area or (0, 1080)
     if job.layout == "split" and job.facecam is not None:
-        return split_layout(job.facecam, job.subject_x)
-    return blur_layout(job.subject_x)
+        return split_layout(job.facecam, job.subject_x, area)
+    return blur_layout(job.subject_x, area)
 
 
 def placement(lay: SplitLayout | BlurLayout) -> Placement:
@@ -94,18 +98,22 @@ def render(job: RenderJob) -> Path:
     if dur <= 0.5:
         raise ValueError("Schnitt zu kurz")
     job.out.parent.mkdir(parents=True, exist_ok=True)
+    if job.area is None:
+        job = replace(job, area=detect_game_area(job.raw, job.start_s, dur))
     lay = layout_for(job)
     ass = job.out.with_suffix(".ass")
     words = shift_words(job.words, job.start_s, job.end_s)
     ass.write_text(build_ass(words, duration=dur, hook=job.hook, credit=job.credit, place=placement(lay),
                              censor=list(job.censor)),
                    encoding="utf-8")
-    measured = measure_loudness(job.raw, job.start_s, dur)
+    audio_src = job.audio or job.raw
+    measured = measure_loudness(audio_src, job.start_s, dur)
     cmd = [
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
         "-ss", f"{job.start_s:.3f}", "-t", f"{dur:.3f}", "-i", str(job.raw),
+        *(["-ss", f"{job.start_s:.3f}", "-t", f"{dur:.3f}", "-i", str(job.audio)] if job.audio else []),
         "-filter_complex", video_filter(job, ass), "-map", "[v]",
-        "-map", "0:a:0?", "-af", audio_filter(measured),
+        "-map", "1:a:0" if job.audio else "0:a:0?", "-af", audio_filter(measured),
         "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-maxrate", MAX_BITRATE, "-bufsize", "12M",
         "-profile:v", "high", "-fps_mode", "cfr",
         "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(job.out),

@@ -87,7 +87,7 @@ def _place(want_x: float, width: int, avoid: tuple[int, int] | None) -> int:
     return _even(x) if x > 0 else 0
 
 
-def split_layout(cam: Rect, subject_x: float) -> SplitLayout:
+def split_layout(cam: Rect, subject_x: float, area: tuple[int, int] = (0, SRC_H)) -> SplitLayout:
     cam_h = _even(min(max(OUT_W * cam.h / cam.w, 560), 860))
     # Cam-Ausschnitt auf das Ausgabe-Seitenverhältnis 1080:cam_h bringen
     target = OUT_W / cam_h
@@ -98,15 +98,19 @@ def split_layout(cam: Rect, subject_x: float) -> SplitLayout:
     cam_box = Box(_even(cam.x + (cam.w - cw) / 2), _even(cam.y + (cam.h - ch) / 2), _even(cw), _even(ch))
 
     game_h = OUT_H - cam_h
-    gw = min(_even(SRC_H * OUT_W / game_h), SRC_W)
+    y0, y1 = area
+    gh = _even(y1 - y0)
+    gw = min(_even(gh * OUT_W / game_h), SRC_W)
     gx = _place(subject_x * SRC_W - gw / 2, gw, (cam.x, cam.x + cam.w))
-    return SplitLayout(cam_box, cam_h, Box(gx, 0, gw, SRC_H), game_h)
+    return SplitLayout(cam_box, cam_h, Box(gx, _even(y0) if y0 else 0, gw, gh), game_h)
 
 
-def blur_layout(subject_x: float) -> BlurLayout:
-    fg_w = 1440  # 4:3 aus 1920x1080
+def blur_layout(subject_x: float, area: tuple[int, int] = (0, SRC_H)) -> BlurLayout:
+    y0, y1 = area
+    gh = _even(y1 - y0)
+    fg_w = _even(gh * 4 / 3)  # 4:3 aus dem sichtbaren Bereich
     fx = _place(subject_x * SRC_W - fg_w / 2, fg_w, None)
-    fg_h = _even(OUT_W * SRC_H / fg_w)
+    fg_h = _even(OUT_W * gh / fg_w)
     bg_full_w = _even(SRC_W * OUT_H / SRC_H)  # 3414 bei 1920 Höhe
     bg_x = int(min(max(subject_x * bg_full_w - OUT_W / 2, 0), bg_full_w - OUT_W))
-    return BlurLayout(bg_x, Box(fx, 0, fg_w, SRC_H), _even((OUT_H - fg_h) / 2), fg_h)
+    return BlurLayout(bg_x, Box(fx, _even(y0) if y0 else 0, fg_w, gh), _even((OUT_H - fg_h) / 2), fg_h)

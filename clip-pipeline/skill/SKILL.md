@@ -1,13 +1,18 @@
 ---
 name: gta-clip-editor
-description: Bewertet, schneidet und liefert TikTok-Clips aus GTA-6-Livestreams (Zarbex, Rohat) mit der clip-pipeline. Lesen bei jedem Weckruf der stündlichen Clip-Aufgabe, bevor Kandidaten bewertet werden, und wenn der Nutzer Feedback zu gelieferten Clips gibt.
+description: Bewertet, schneidet und liefert TikTok-Clips aus GTA-6-Livestreams (Zarbex, xRohat) mit der clip-pipeline. Lesen bei jedem Weckruf der stündlichen Clip-Aufgabe, bevor Kandidaten bewertet werden, und wenn der Nutzer Feedback zu gelieferten Clips gibt.
 ---
 
 # GTA-Clip-Editor
 
 Ziel: aus Livestreams die Momente finden, die auf TikTok funktionieren, und dem
 Nutzer fertige 9:16-Clips plus Text in den Chat schicken. Er lädt sie nach und
-nach hoch. Nur bestehendes Material schneiden, nichts erfinden, Quelle immer nennen.
+nach hoch. Nur bestehendes Material schneiden, nichts erfinden, Quelle im Post-Text nennen.
+
+**Pflicht: Musik darf nie veröffentlicht werden** – weder GTA-Radio noch Hintergrundmusik
+des Streamers. Die Pipeline verwendet nur die per Demucs getrennte Stimmspur
+(`render.remove_music = true`, nie ausschalten). Steht im Transkript gesungener Liedtext
+(siehe „Musik … in Sekunden“ in `show`), um diese Stelle herumschneiden oder verwerfen.
 
 ## Ablauf bei jedem Weckruf
 
@@ -17,7 +22,7 @@ Arbeitsverzeichnis: `clip-pipeline/`. Config: `config.toml` (Kopie von `config.e
 2. **Dienst prüfen:** `python3 tools/review.py status`.
    - Läuft er nicht (oder „nie gestartet“, z. B. neuer Container), neu starten:
      ```bash
-     pip install -q streamlink faster-whisper anthropic websockets pydantic numpy 2>&1 | grep -v WARNING
+     pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q demucs streamlink faster-whisper anthropic websockets pydantic numpy 2>&1 | grep -v WARNING
      test -f config.toml || cp config.example.toml config.toml
      nohup python3 -m pipeline.watch --config config.toml > data/watch.log 2>&1 &
      ```
@@ -28,7 +33,8 @@ Arbeitsverzeichnis: `clip-pipeline/`. Config: `config.toml` (Kopie von `config.e
    Judgment-JSON schreiben (Scratchpad) und `python3 tools/review.py decide <id> <json>`.
    Bei `keep` wird automatisch gerendert.
 5. **Gerenderte Clips prüfen** (2–3 Standbilder aus `clip.mp4` ansehen: Untertitel
-   lesbar, nichts überlappt, Cam-Ausschnitt stimmt), dann mit `SendUserFile` schicken:
+   lesbar, nichts überlappt, kein schwarzer Balken zwischen Cam und Gameplay, Cam-Ausschnitt
+   stimmt), dann mit `SendUserFile` schicken:
    `clip.mp4` + den Text aus `post.txt` im Chat. Danach `review.py delivered <id>`.
    Höchstens 3 Clips pro Weckruf, der beste zuerst. Schwache Stunden: lieber nichts schicken.
 6. **Lernen:** Neues unter _Gelerntes_ eintragen (Datum, was, Konsequenz). Wiederholt
@@ -57,6 +63,9 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
 - Hook: max. 6 Wörter, nur was belegt ist (Transkript/Bilder), Pointe nicht verraten,
   keine Emojis (Schrift kann sie nicht darstellen). Emojis gehören in die Caption.
 - Story-Spoiler (Handlung, Missionsausgang, Cutscenes) verwerfen. Die ersten Tage nach Release besonders streng.
+- Lief im Kandidaten deutlich Musik und enthält das Transkript dort Liedtext (Reime,
+  englische Songzeilen, Wiederholungen), diese Stelle nicht in den Schnitt nehmen; geht das
+  nicht, verwerfen.
 - Beleidigungen gegen echte Dritte, die bloßstellen (nicht freundschaftliches Frotzeln), verwerfen.
 <!-- judge-rules:end -->
 
@@ -72,6 +81,13 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
   `whisper.vocabulary` (Hinweis) und `whisper.corrections` (feste Ersetzung). Transkript vor dem Rendern überfliegen.
 - 2026-11-18 · Schimpfwörter in Untertiteln maskieren (`render.censor`), Ton bleibt.
 - 2026-11-18 · Telefon-Rant-Momente (Streamer macht Kumpel am Telefon fertig) funktionieren; Chat lacht stark.
+- 2026-11-18 · Nutzer: Musik zwingend entfernen. Umgesetzt mit Demucs (htdemucs, CPU, ~0,5× Echtzeit);
+  nur die Stimmspur wird gerendert und transkribiert. Nebenwirkung: Spielgeräusche (Crash, Schüsse)
+  fallen auch weg.
+- 2026-11-18 · Nutzer: schwarzer Balken zwischen Facecam und Gameplay stört. Ursache: Zarbex blendet
+  zeitweise oben einen 60-px-Balken („DAUERWERBESENDUNG“) ein, manchmal liegt der Text aber direkt
+  auf dem Bild. Lösung: Balken pro Clip automatisch erkennen (`render/letterbox.py`).
+- 2026-11-18 · Nutzer: Twitch-Name im Video nicht nötig (`render.show_credit = false`); Quelle bleibt im Post-Text.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
@@ -83,9 +99,10 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
 - Stil: lautes Kommentieren, Telefonate, viel Interaktion mit dem Chat (→ viele Antwortwellen).
 - GTA-6-Stream ab Release (18.11.2026), u. a. aus Neuseeland.
 
-### Rohat (`rohat`)
+### xRohat (`xrohat`)
 
-- Login noch nicht bestätigt. Facecam noch nicht gemessen (Standbild landet in `data/snapshots/rohat.jpg`).
+- Login vom Nutzer bestätigt (zuerst falsch als `rohat` angenommen). Facecam noch nicht gemessen
+  (Standbild landet in `data/snapshots/xrohat.jpg`).
 
 ## Feedback
 

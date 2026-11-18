@@ -23,6 +23,8 @@ class Streamer(BaseModel):
     language: str = "de"
     chat_delay_s: float = Field(default=4.0, ge=0)
     facecam: Rect | None = None
+    # Sichtbarer Gameplay-Bereich (y von/bis) bei festen schwarzen Balken; leer = automatisch erkennen
+    game_area: tuple[int, int] | None = None
 
     @property
     def key(self) -> str:
@@ -92,6 +94,9 @@ class WhisperCfg(BaseModel):
 
 
 class RenderCfg(BaseModel):
+    # Musik darf nie veröffentlicht werden: nur die per Demucs getrennte Stimmspur verwenden.
+    remove_music: bool = True
+    show_credit: bool = False   # Twitch-Name im Video (Quelle steht immer im Post-Text)
     # In den Untertiteln maskiert (der Ton bleibt). TikTok drosselt Schimpfwörter im Bild.
     censor: list[str] = Field(default_factory=lambda: [
         "scheiße", "scheisse", "schwanz", "fick", "ficken", "fotze", "hurensohn", "wichser", "arschloch", "fuck", "shit",

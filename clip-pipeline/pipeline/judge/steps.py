@@ -10,6 +10,7 @@ from ..config import Config, Streamer
 from ..db import DB, Clip
 from ..models import Status
 from .judge import build_user_content, judge
+from ..audio import separate_vocals
 from .media import Transcript, extract_frames, probe_duration, transcribe
 
 log = logging.getLogger(__name__)
@@ -30,7 +31,16 @@ def step_transcribe(db: DB, cfg: Config, clip: Clip) -> None:
     if not clip.raw_path:
         raise ValueError("Clip hat keinen Rohschnitt")
     streamer = streamer_for(cfg, clip.streamer)
-    tr = transcribe(Path(clip.raw_path), streamer.language, cfg.whisper)
+    source = Path(clip.raw_path)
+    music: list[int] = []
+    vocals: Path | None = None
+    if cfg.render.remove_music:
+        # Erst Musik entfernen, dann transkribieren: sauberere Sprache, gleiche Spur fürs Rendering.
+        vocals = clip_dir(cfg, clip.id) / "vocals.wav"
+        music = separate_vocals(source, vocals)
+        source = vocals
+    tr = transcribe(source, streamer.language, cfg.whisper)
+    tr = tr.model_copy(update={"music_seconds": music, "vocals_path": str(vocals) if vocals else None})
     out = clip_dir(cfg, clip.id) / "transcript.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(tr.model_dump_json(), encoding="utf-8")

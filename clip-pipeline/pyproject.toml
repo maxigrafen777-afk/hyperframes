@@ -10,6 +10,7 @@ dependencies = [
   "anthropic>=2.10",
   "faster-whisper>=1.1",
   "numpy>=1.26",
+  "demucs>=4.0",  # Musik entfernen; torch CPU: pip install torch --index-url https://download.pytorch.org/whl/cpu
 ]
 
 [project.optional-dependencies]

@@ -120,6 +120,9 @@ def build_user_content(
         "",
         "Lautstärke je Sekunde (dBFS): " + " ".join(f"{v:.0f}" for v in transcript.loudness_db),
         "Deutlich laute Sekunden: " + (", ".join(f"{s}s" for s in spikes) or "keine"),
+        "Musik/Geräusche (aus dem Ton entfernt) in Sekunden: "
+        + (", ".join(f"{s}s" for s in transcript.music_seconds) or "keine")
+        + ". Achtung: Dort kann gesungener Liedtext im Transkript stehen – nicht als Sprache werten.",
         "",
         "Chat (Zeit relativ zum Rohschnitt):",
     ]

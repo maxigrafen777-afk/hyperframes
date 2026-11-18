@@ -26,6 +26,8 @@ class Transcript(BaseModel):
     language: str
     words: list[Word]
     loudness_db: list[float]  # ein Wert pro Sekunde (RMS in dBFS)
+    music_seconds: list[int] = []   # dort lief Musik/Geräusch (aus der Stimmspur entfernt)
+    vocals_path: str | None = None  # Stimmspur ohne Musik (für das Rendering)
 
     @property
     def text(self) -> str:
