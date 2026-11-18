@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from functools import lru_cache
 from pathlib import Path
@@ -74,6 +75,14 @@ def _whisper(model: str, compute_type: str, threads: int):
     return WhisperModel(model, device="cpu", compute_type=compute_type, cpu_threads=threads)
 
 
+def correct(word: str, fixes: dict[str, str]) -> str:
+    """' schockst,' -> ' zockst,' (Satzzeichen und Leerzeichen bleiben)."""
+    m = re.match(r"^(\W*)(.*?)(\W*)$", word)
+    if not m or m.group(2).casefold() not in fixes:
+        return word
+    return m.group(1) + fixes[m.group(2).casefold()] + m.group(3)
+
+
 def transcribe(path: Path, language: str, cfg: WhisperCfg) -> Transcript:
     audio = load_audio(path)
     words: list[Word] = []
@@ -83,9 +92,10 @@ def transcribe(path: Path, language: str, cfg: WhisperCfg) -> Transcript:
             condition_on_previous_text=False,
             initial_prompt=", ".join(cfg.vocabulary) or None,
         )
+        fixes = {k.casefold(): v for k, v in cfg.corrections.items()}
         for seg in segments:
             for w in seg.words or []:
-                words.append(Word(start=round(w.start, 2), end=round(w.end, 2), word=w.word))
+                words.append(Word(start=round(w.start, 2), end=round(w.end, 2), word=correct(w.word, fixes)))
     return Transcript(language=language, words=words, loudness_db=loudness_per_second(audio))
 
 

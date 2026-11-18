@@ -30,6 +30,7 @@ class RenderJob:
     words: list[Word]          # Zeiten relativ zum Rohschnitt
     hook: str
     credit: str
+    censor: tuple[str, ...] = ()
 
 
 def _esc(path: Path) -> str:
@@ -96,7 +97,8 @@ def render(job: RenderJob) -> Path:
     lay = layout_for(job)
     ass = job.out.with_suffix(".ass")
     words = shift_words(job.words, job.start_s, job.end_s)
-    ass.write_text(build_ass(words, duration=dur, hook=job.hook, credit=job.credit, place=placement(lay)),
+    ass.write_text(build_ass(words, duration=dur, hook=job.hook, credit=job.credit, place=placement(lay),
+                             censor=list(job.censor)),
                    encoding="utf-8")
     measured = measure_loudness(job.raw, job.start_s, dur)
     cmd = [

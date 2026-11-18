@@ -119,3 +119,11 @@ def test_step_judge_moves_status(clip_file, tmp_path, hype, status):
     assert step_judge(db, cfg, FakeClient(j), clip) == status
     stored = db.get(cid)
     assert stored.status == status and stored.judgment.hype == hype
+
+
+def test_word_corrections():
+    from pipeline.judge.media import correct
+    fixes = {"schockst": "zockst"}
+    assert correct(" schockst,", fixes) == " zockst,"
+    assert correct(" Schockst", fixes) == " zockst"
+    assert correct(" schockt", fixes) == " schockt"

@@ -37,9 +37,22 @@ def _clean(text: str) -> str:
     return text.strip().replace("\\", "/").replace("{", "(").replace("}", ")").replace("\n", " ")
 
 
-def _caption_text(word: str) -> str:
-    """Großbuchstaben, ohne Komma/Punkt am Ende (! und ? bleiben)."""
-    return _clean(word).upper().rstrip(".,;:") or _clean(word).upper()
+def censor_word(word: str, bad: set[str]) -> str:
+    """'Scheiße!' -> 'Sch***e!' wenn der Wortstamm auf der Liste steht."""
+    core = word.strip(".,;:!?\"'()")
+    low = core.casefold()  # casefold macht aus "ß" ein "ss" – Liste genauso behandeln
+    stems = {b.casefold() for b in bad}
+    if not core or not any(low == b or (len(b) >= 4 and low.startswith(b)) for b in stems):
+        return word
+    keep = 3 if len(core) > 4 else 1
+    masked = core[:keep] + "*" * max(len(core) - keep - 1, 1) + core[-1]
+    return word.replace(core, masked, 1)
+
+
+def _caption_text(word: str, bad: set[str] = frozenset()) -> str:
+    """Großbuchstaben, ohne Komma/Punkt am Ende (! und ? bleiben), Schimpfwörter maskiert."""
+    t = censor_word(_clean(word), bad).upper()
+    return t.rstrip(".,;:") or t
 
 
 def group_lines(words: list[Word]) -> list[list[Word]]:
@@ -74,7 +87,11 @@ def shift_words(words: list[Word], start_s: float, end_s: float) -> list[Word]:
     return out
 
 
-def build_ass(words: list[Word], *, duration: float, hook: str, credit: str, place: Placement) -> str:
+def build_ass(
+    words: list[Word], *, duration: float, hook: str, credit: str, place: Placement,
+    censor: list[str] | None = None,
+) -> str:
+    bad = {c.casefold() for c in censor or []}
     head = f"""[Script Info]
 ScriptType: v4.00+
 PlayResX: {OUT_W}
@@ -95,7 +112,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     cx = OUT_W // 2
     lines = group_lines(words)
     for n, line in enumerate(lines):
-        texts = [_caption_text(w.word) for w in line]
+        texts = [_caption_text(w.word, bad) for w in line]
         # Eine Zeile endet spätestens, wenn die nächste beginnt (nie zwei übereinander).
         line_limit = lines[n + 1][0].start if n + 1 < len(lines) else duration
         for i, w in enumerate(line):

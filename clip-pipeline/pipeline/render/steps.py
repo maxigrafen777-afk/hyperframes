@@ -46,7 +46,7 @@ def step_render(db: DB, cfg: Config, clip: Clip) -> Path:
         raw=Path(clip.raw_path), out=out_dir / "clip.mp4",
         start_s=j.start_s, end_s=j.end_s, subject_x=j.subject_x, layout=j.layout,
         facecam=streamer.facecam, words=transcript.words, hook=j.hook,
-        credit=credit_for(clip.streamer),
+        credit=credit_for(clip.streamer), censor=tuple(cfg.render.censor),
     ))
     (out_dir / "post.txt").write_text(
         f"{j.title.strip()}\n\n" + post_text(j, clip.streamer), encoding="utf-8")

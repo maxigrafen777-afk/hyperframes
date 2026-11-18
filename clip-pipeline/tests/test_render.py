@@ -90,3 +90,12 @@ def test_render_end_to_end(tmp_path, layout):
     assert (v["width"], v["height"]) == (1080, 1920)
     assert any(s["codec_type"] == "audio" for s in info["streams"])
     assert abs(float(info["format"]["duration"]) - 3.0) < 0.2
+
+
+def test_censor():
+    from pipeline.render.subtitles import censor_word
+    bad = {"scheiße", "schwanz"}
+    assert censor_word("Scheiße!", bad) == "Sch***e!"
+    assert censor_word("Schwanz", bad) == "Sch***z"
+    assert censor_word("Schwanzlos", bad) == "Sch******s"
+    assert censor_word("Schein", bad) == "Schein"

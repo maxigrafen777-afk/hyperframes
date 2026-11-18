@@ -87,6 +87,15 @@ class WhisperCfg(BaseModel):
     threads: int = 0              # 0 = alle Kerne
     # Begriffe, die Whisper sonst verhört (Spielnamen, Orte, Marken, Insider).
     vocabulary: list[str] = Field(default_factory=list)
+    # Feste Korrekturen für Wörter, die Whisper trotzdem verhört (ganzes Wort, Groß/klein egal).
+    corrections: dict[str, str] = Field(default_factory=dict)
+
+
+class RenderCfg(BaseModel):
+    # In den Untertiteln maskiert (der Ton bleibt). TikTok drosselt Schimpfwörter im Bild.
+    censor: list[str] = Field(default_factory=lambda: [
+        "scheiße", "scheisse", "schwanz", "fick", "ficken", "fotze", "hurensohn", "wichser", "arschloch", "fuck", "shit",
+    ])
 
 
 class Config(BaseModel):
@@ -97,6 +106,7 @@ class Config(BaseModel):
     clip: ClipCfg = ClipCfg()
     judge: JudgeCfg = JudgeCfg()
     whisper: WhisperCfg = WhisperCfg()
+    render: RenderCfg = RenderCfg()
     streamers: list[Streamer] = Field(default_factory=list)
 
     @model_validator(mode="after")
