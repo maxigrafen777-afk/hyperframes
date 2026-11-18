@@ -160,6 +160,7 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Stark: Alligator-Angriffe (#79, #80 bei xRohat). Florida-Tiere sind ein GTA-6-Meme seit den Trailern,
   dazu laute Panik-Reaktion („Ich drücke Kreis um mein Leben!“). Wiederholt sich so etwas, als „Teil 2“ liefern.
 - 2026-11-18 · Whisper macht aus Schreien Fantasiewörter („RENZTROCKING“) → vor dem Rendern aus dem Transkript nehmen.
+- 2026-11-18 · „W“-Wellen bei großen Streamern (Trymacs) = meist Spenden/Sub-Gifts, kein Spielmoment → verwerfen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
