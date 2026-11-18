@@ -137,6 +137,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Sponsoring/Unboxing (z. B. Xbox-Paket, „DAUERWERBESENDUNG“ ohne Spiel) → verwerfen.
 - 2026-11-18 · Ausbeute erste Stunden: ~25 Kandidaten → 2 Clips. Antwortwellen bleiben der häufigste Ausschuss
   (bei beiden Streamern; sie fragen oft den Chat).
+- 2026-11-18 · Ankündigungen („kann ich eine Tankstelle überfallen?“) am Ende des Rohschnitts: Die Pointe
+  kommt erst danach. Nicht den ruhigen Vorlauf schicken, sondern auf den Folge-Kandidaten achten.
+- 2026-11-18 · Nacktszenen (Duschen) + anzüglicher Chat → verwerfen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
