@@ -84,7 +84,8 @@ def cmd_show(cfg: Config, db: DB, a) -> None:
 def _apply(cfg: Config, db: DB, cid: int, j: Judgment, *, rerender: bool) -> None:
     c = db.get(cid)
     duration = probe_duration(Path(c.raw_path or ""))
-    j = clamp(j, duration, streamer_for(cfg, c.streamer).facecam is not None)
+    j = clamp(j, duration, streamer_for(cfg, c.streamer).facecam is not None, cfg.judge.min_len_s,
+              cfg.judge.max_len_s)
     if rerender:
         db.advance(cid, Status.JUDGED, judgment=j)
     elif not j.final_keep(cfg.judge.min_hype):

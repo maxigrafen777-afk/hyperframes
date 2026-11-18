@@ -29,9 +29,9 @@ Skala für "hype" (sei streng, die meisten Momente sind Mittelmaß):
 Regeln:
 - Nichts erfinden. Beschreibe nur, was auf den Bildern, im Transkript oder im Chat zu sehen ist.
 - Alle Zeiten in Sekunden relativ zum Anfang dieses Rohschnitts.
-- start_s / end_s: der engste Schnitt, der den Moment trägt. Kurz vor dem Auslöser \
-anfangen, kurz nach der Reaktion aufhören. Idealerweise 12-45 Sekunden. peak_s ist \
-der Höhepunkt.
+- start_s / end_s: Länge {min_len:.0f}-{max_len:.0f} Sekunden (meist 25-45). Am ersten Satz \
+einsteigen, der den Moment verständlich macht, nach der Reaktion 0,5-1 s stehen lassen. \
+Kein Leerlauf: lieber kürzer und dicht. peak_s ist der Höhepunkt.
 - Der Chat reagiert erst einige Sekunden nach dem Geschehen. Der Höhepunkt liegt \
 also vor dem Chat-Ausschlag.
 - subject_x: waagrechte Position (0 = links, 1 = rechts) der Action im Gameplay, \
@@ -41,8 +41,14 @@ ohne die Facecam. Im Zweifel 0.5.
 Handlung der Story verraten wird. flags.needs_context = true, wenn man den Moment \
 ohne Vorwissen nicht versteht.
 - keep = false, wenn hype unter {min_hype} liegt, bei Cutscenes oder bei Spoilern.
-- hook: max. 6 Wörter, wird die ersten Sekunden groß eingeblendet. Neugierig machen, \
-nicht die Pointe verraten.
+- hook: DAS WICHTIGSTE FELD. Er steht in den ersten Sekunden groß im Bild und \
+entscheidet, ob jemand weiterschaut. Max. 7 Wörter, konkret, macht eine Frage oder \
+Spannung auf, verrät die Pointe nicht und ist durch Bild/Transkript belegt. Muster, die \
+funktionieren: Konflikt („Er legt sich mit dem Falschen an“), Erwartungsbruch („Das \
+wollte er NICHT sehen“), direkte Ansprache („Warte aufs Ende“ nur, wenn das Ende \
+wirklich liefert), Zitat-Teaser (ein kurzes starkes Zitat aus dem Transkript). Schlecht: \
+Beschreibungen („Zarbex spielt GTA 6“), Clickbait ohne Einlösung, Emojis. Ohne starken \
+Hook keinen hype über 6.
 - title, caption und hook in der Sprache des Streamers ({language}). caption: 1-2 \
 kurze Sätze. hashtags: 3-6 passende, ohne '#'.
 """
@@ -62,9 +68,9 @@ def learned_rules(path: Path = SKILL_FILE) -> str:
     return text.split(start, 1)[1].split(end, 1)[0].strip()
 
 
-def system_prompt(min_hype: int, language: str) -> str:
+def system_prompt(min_hype: int, language: str, min_len: float = 20, max_len: float = 60) -> str:
     rules = learned_rules()
-    base = SYSTEM.format(min_hype=min_hype, language=language)
+    base = SYSTEM.format(min_hype=min_hype, language=language, min_len=min_len, max_len=max_len)
     return base + ("\nGelernte Regeln aus bisherigen Streams:\n" + rules + "\n" if rules else "")
 
 
@@ -137,11 +143,18 @@ class JudgeError(RuntimeError):
     pass
 
 
-def clamp(j: Judgment, duration: float, has_facecam: bool) -> Judgment:
-    """KI-Schnittpunkte in gültige Grenzen bringen."""
+def clamp(j: Judgment, duration: float, has_facecam: bool, min_len: float = 20, max_len: float = 60) -> Judgment:
+    """KI-Schnittpunkte in gültige Grenzen bringen: im Rohschnitt, Länge min_len..max_len."""
     start = min(max(j.start_s, 0.0), max(duration - 1, 0.0))
     end = min(max(j.end_s, start + 1), duration)
     peak = min(max(j.peak_s, start), end)
+    if end - start < min_len:  # zu kurz: erst nach hinten, dann nach vorne verlängern
+        end = min(start + min_len, duration)
+        start = max(end - min_len, 0.0)
+    if end - start > max_len:  # zu lang: Höhepunkt behalten, vorne kürzen
+        start = max(start, min(peak - 5, end - max_len))
+        end = min(end, start + max_len)
+    peak = min(max(peak, start), end)
     layout = j.layout if has_facecam else "blur"
     return j.model_copy(update={"start_s": start, "end_s": end, "peak_s": peak, "layout": layout})
 
@@ -160,7 +173,7 @@ def judge(
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",  # lehnt das Modell ab, springt automatisch ein anderes ein
         output_config={"effort": cfg.effort},
-        system=system_prompt(cfg.min_hype, streamer.language),
+        system=system_prompt(cfg.min_hype, streamer.language, cfg.min_len_s, cfg.max_len_s),
         messages=[{"role": "user", "content": content}],
         output_format=Judgment,
     )
@@ -170,4 +183,4 @@ def judge(
         raise JudgeError(f"keine gültige Antwort (stop_reason={response.stop_reason})")
     usage = response.usage
     log.info("Bewertung: %s in / %s out Tokens", usage.input_tokens, usage.output_tokens)
-    return clamp(response.parsed_output, duration, streamer.facecam is not None)
+    return clamp(response.parsed_output, duration, streamer.facecam is not None, cfg.min_len_s, cfg.max_len_s)

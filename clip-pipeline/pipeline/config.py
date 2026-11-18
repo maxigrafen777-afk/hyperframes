@@ -70,13 +70,15 @@ class DetectCfg(BaseModel):
 
 
 class ClipCfg(BaseModel):
-    pre_roll_s: float = 20
-    post_roll_s: float = 8
-    max_len_s: float = 59
+    pre_roll_s: float = 45   # Rohschnitt großzügig, damit 20-60-s-Clips möglich sind
+    post_roll_s: float = 15
+    max_len_s: float = 80    # Länge des Rohschnitts (nicht des fertigen Clips)
 
 
 class JudgeCfg(BaseModel):
     min_hype: int = Field(default=7, ge=1, le=10)
+    min_len_s: float = 20    # fertiger Clip
+    max_len_s: float = 60
     model: str = "claude-opus-5-5"
     effort: Literal["low", "medium", "high", "xhigh", "max"] = "medium"
     frames: int = Field(default=6, ge=1, le=20)   # Standbilder pro Kandidat

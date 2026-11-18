@@ -13,7 +13,7 @@ HIGHLIGHT = "&H0000D4FF&"   # Gelb (#FFD400) in ASS-Farbreihenfolge BGR
 MAX_WORDS = 3
 MAX_CHARS = 18
 PAUSE_BREAK_S = 0.6
-HOOK_S = 2.8
+HOOK_S = 3.5  # der Hook ist das Wichtigste: lange genug lesbar
 
 
 @dataclass(frozen=True)

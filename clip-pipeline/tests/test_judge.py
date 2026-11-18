@@ -83,7 +83,7 @@ def test_judge_request_shape():
     kw = client.calls[0]
     assert kw["model"] == "claude-opus-5-5" and kw["output_format"] is Judgment
     assert kw["fallbacks"] == "default" and kw["output_config"] == {"effort": "medium"}
-    assert "unter 7" in kw["system"] and "(de)" in kw["system"]
+    assert "unter 7" in kw["system"] and "(de)" in kw["system"] and "20-60 Sekunden" in kw["system"]
 
 
 def test_judge_refusal_raises():
@@ -134,3 +134,12 @@ def test_system_prompt_includes_learned_rules():
     rules = learned_rules()
     assert "Antwortwelle" in rules
     assert rules in system_prompt(7, "de")
+
+
+def test_clamp_enforces_20_to_60_seconds():
+    short = clamp(Judgment(keep=True, hype=8, start_s=10, end_s=18, peak_s=15), duration=70, has_facecam=True)
+    assert (short.start_s, short.end_s) == (10, 30)
+    edge = clamp(Judgment(keep=True, hype=8, start_s=60, end_s=68, peak_s=65), duration=70, has_facecam=True)
+    assert (edge.start_s, edge.end_s) == (50, 70)
+    long = clamp(Judgment(keep=True, hype=8, start_s=0, end_s=70, peak_s=60), duration=70, has_facecam=True)
+    assert long.end_s - long.start_s == 60 and long.start_s <= long.peak_s <= long.end_s

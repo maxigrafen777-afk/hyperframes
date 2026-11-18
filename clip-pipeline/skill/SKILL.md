@@ -47,7 +47,16 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
 
 ## Bewertungsregeln
 
+Wünsche des Nutzers (fest): **Der Hook ist das Wichtigste.** Clips **20–60 s** (meist 25–45).
+Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prüfen und den besten Clip zuerst schicken.
+
 <!-- judge-rules:start -->
+
+- Hook zuerst: Lässt sich kein starker, belegter Hook formulieren, ist der Clip höchstens hype 6.
+  Gute Muster: Konflikt, Erwartungsbruch, kurzes starkes Zitat aus dem Transkript als Teaser,
+  direkte Ansprache nur, wenn das Ende liefert. Schlecht: Beschreibung („X spielt GTA 6“),
+  Clickbait ohne Einlösung. Pro Clip 3 Hooks entwerfen und den stärksten nehmen.
+- Länge 20–60 s, meist 25–45. Kein Leerlauf: lieber dicht als lang.
 
 - Antwortwelle erkennen: Stellt der Streamer kurz vor dem Chat-Ausschlag eine Frage an
   den Chat („oder?“, „wie findet ihr …?“, „was meint ihr?“) und der Chat antwortet
@@ -59,8 +68,7 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
   Hook bezieht sich auf die Reaktion.
 - Schnitt: nicht mitten im Satz anfangen, wenn es sich vermeiden lässt; am ersten Satz
   einsteigen, der den Moment verständlich macht. Nach der Pointe/Reaktion 0,5–1 s stehen lassen.
-  Ideal 12–35 s.
-- Hook: max. 6 Wörter, nur was belegt ist (Transkript/Bilder), Pointe nicht verraten,
+- Hook: max. 7 Wörter, nur was belegt ist (Transkript/Bilder), Pointe nicht verraten,
   keine Emojis (Schrift kann sie nicht darstellen). Emojis gehören in die Caption.
 - Story-Spoiler (Handlung, Missionsausgang, Cutscenes) verwerfen. Die ersten Tage nach Release besonders streng.
 - Lief im Kandidaten deutlich Musik und enthält das Transkript dort Liedtext (Reime,
@@ -97,6 +105,8 @@ Nie Nutzernamen aus dem Chat an den Nutzer weitergeben oder committen.
 - 2026-11-18 · Chat-Insider („Ali“, „Goldmünze von Ali“) erzeugen Ausschläge ohne Moment im Bild → verwerfen.
 - 2026-11-18 · Mit Musik-Trennung landen englische Spieldialoge in der Stimmspur und damit in den Untertiteln.
   Bei Missionsdialogen prüfen, ob die Untertitel dann noch Sinn ergeben.
+- 2026-11-18 · Nutzer: Hook ist das Wichtigste; Clips 20–60 s; Streamer egal, Inhalt zählt.
+  Umgesetzt: Rohschnitt ~70 s (pre 45 / post 15), clamp() erzwingt 20–60 s, Hook 3,5 s im Bild.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

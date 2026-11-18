@@ -28,12 +28,14 @@ hype_words = ["LUL", "OMEGALUL", "W", "💀", "😂", "🤣", "PogChamp", "Pog",
 # ignore_users, ignore_patterns, answer_words: sinnvolle Standardwerte, siehe pipeline/config.py
 
 [clip]
-pre_roll_s = 20          # Sekunden vor dem geschätzten Moment
-post_roll_s = 8          # Sekunden nach dem Chat-Ausschlag
-max_len_s = 59
+pre_roll_s = 45          # Rohschnitt: Sekunden vor dem geschätzten Moment
+post_roll_s = 15         # Rohschnitt: Sekunden nach dem Chat-Ausschlag
+max_len_s = 80           # Rohschnitt höchstens so lang; der fertige Clip: [judge] min/max_len_s
 
 [judge]
 min_hype = 7
+min_len_s = 20              # fertiger Clip: 20-60 s (Wunsch des Nutzers)
+max_len_s = 60
 model = "claude-opus-5-5"   # Claude über die Anthropic-API (Schlüssel in .env)
 effort = "medium"           # low | medium | high
 frames = 6
