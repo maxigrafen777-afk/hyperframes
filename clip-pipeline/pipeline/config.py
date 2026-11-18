@@ -1,0 +1,130 @@
+"""Einstellungen aus config.toml laden, Schlüssel aus .env / Umgebung."""
+
+from __future__ import annotations
+
+import os
+import tomllib
+from pathlib import Path
+from typing import Literal
+
+from pydantic import BaseModel, Field, model_validator
+
+
+class Rect(BaseModel):
+    x: int = Field(ge=0)
+    y: int = Field(ge=0)
+    w: int = Field(gt=0)
+    h: int = Field(gt=0)
+
+
+class Streamer(BaseModel):
+    platform: Literal["twitch"] = "twitch"
+    login: str
+    language: str = "de"
+    chat_delay_s: float = Field(default=4.0, ge=0)
+    facecam: Rect | None = None
+
+    @property
+    def key(self) -> str:
+        return f"{self.platform}:{self.login.lower()}"
+
+
+class RecorderCfg(BaseModel):
+    segment_s: int = Field(default=2, ge=1)
+    buffer_s: int = Field(default=180, ge=30)
+    quality: str = "1080p60,1080p,best"
+
+
+class DetectCfg(BaseModel):
+    burst_s: int = Field(default=10, ge=1)
+    baseline_s: int = Field(default=300, ge=30)
+    min_baseline_s: int = Field(default=120, ge=10)
+    z_threshold: float = 4.0
+    min_unique_users: int = 6
+    min_unique_ratio: float = Field(default=0.5, ge=0, le=1)
+    clip_calls_trigger: int = 3
+    cooldown_s: float = 60
+    min_pre_score: float = Field(default=0.35, ge=0, le=1)
+    hype_words: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _windows(self) -> DetectCfg:
+        if self.baseline_s < self.burst_s * 3:
+            raise ValueError("baseline_s muss mindestens 3x burst_s sein")
+        if self.min_baseline_s > self.baseline_s:
+            raise ValueError("min_baseline_s darf nicht größer als baseline_s sein")
+        return self
+
+
+class ClipCfg(BaseModel):
+    pre_roll_s: float = 20
+    post_roll_s: float = 8
+    max_len_s: float = 59
+
+
+class JudgeCfg(BaseModel):
+    min_hype: int = Field(default=7, ge=1, le=10)
+    provider: Literal["ollama", "cloud"] = "ollama"
+    model: str = "qwen2.5vl:7b"
+
+
+class Config(BaseModel):
+    data_dir: Path = Path("data")
+    games: list[str] = Field(default_factory=list)
+    recorder: RecorderCfg = RecorderCfg()
+    detect: DetectCfg = DetectCfg()
+    clip: ClipCfg = ClipCfg()
+    judge: JudgeCfg = JudgeCfg()
+    streamers: list[Streamer] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _buffer_long_enough(self) -> Config:
+        # Der Puffer muss alles fassen, was nach dem Auslösen noch gebraucht wird.
+        max_delay = max((s.chat_delay_s for s in self.streamers), default=0)
+        need = self.clip.pre_roll_s + self.clip.post_roll_s + max_delay + self.detect.burst_s
+        if self.recorder.buffer_s < need * 1.5:
+            raise ValueError(f"recorder.buffer_s zu klein: mindestens {need * 1.5:.0f}s nötig")
+        return self
+
+    @property
+    def db_path(self) -> Path:
+        return self.data_dir / "pipeline.sqlite3"
+
+
+class Secrets(BaseModel):
+    twitch_client_id: str = ""
+    twitch_client_secret: str = ""
+    telegram_bot_token: str = ""
+    telegram_chat_id: str = ""
+
+    def __repr__(self) -> str:  # nie Schlüssel in Logs
+        return "Secrets(***)"
+
+    __str__ = __repr__
+
+
+def load_dotenv(path: Path) -> None:
+    """Minimaler .env-Leser. Bereits gesetzte Umgebungsvariablen gewinnen."""
+    if not path.exists():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        name, _, value = line.partition("=")
+        os.environ.setdefault(name.strip(), value.strip().strip('"').strip("'"))
+
+
+def load_config(path: Path | str = "config.toml") -> Config:
+    with open(path, "rb") as f:
+        return Config.model_validate(tomllib.load(f))
+
+
+def load_secrets(env_file: Path | str = ".env") -> Secrets:
+    load_dotenv(Path(env_file))
+    return Secrets(
+        twitch_client_id=os.environ.get("TWITCH_CLIENT_ID", ""),
+        twitch_client_secret=os.environ.get("TWITCH_CLIENT_SECRET", ""),
+        telegram_bot_token=os.environ.get("TELEGRAM_BOT_TOKEN", ""),
+        telegram_chat_id=os.environ.get("TELEGRAM_CHAT_ID", ""),
+    )

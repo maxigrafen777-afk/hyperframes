@@ -1,0 +1,43 @@
+# Kopieren nach config.toml und anpassen.
+
+data_dir = "data"
+
+# Nur aufnehmen, wenn der Streamer gerade eines dieser Spiele spielt
+# (Twitch-Kategoriename, exakt). Leer = alles aufnehmen.
+games = ["Grand Theft Auto VI"]
+
+[recorder]
+segment_s = 2            # Länge eines Puffer-Segments
+buffer_s = 180           # so viel Material hält der Puffer
+quality = "1080p60,1080p,best"
+
+[detect]
+burst_s = 10             # Fenster für "gerade eben"
+baseline_s = 300         # Fenster für "normal"
+min_baseline_s = 120     # vorher wird nie ausgelöst
+z_threshold = 4.0
+min_unique_users = 6
+min_unique_ratio = 0.5   # verschiedene Nutzer / Nachrichten im Burst
+clip_calls_trigger = 3   # so viele verschiedene Nutzer schreiben "clip"
+cooldown_s = 60
+min_pre_score = 0.35     # darunter fällt der Kandidat sofort weg
+hype_words = ["LUL", "KEKW", "OMEGALUL", "LMAO", "LOL", "W", "💀", "😂", "🤣", "PogChamp", "Pog", "POGGERS", "monkaS", "NAHHH", "bruh"]
+
+[clip]
+pre_roll_s = 20          # Sekunden vor dem geschätzten Moment
+post_roll_s = 8          # Sekunden nach dem Chat-Ausschlag
+max_len_s = 59
+
+[judge]
+min_hype = 7
+provider = "ollama"      # "ollama" oder "cloud"
+model = "qwen2.5vl:7b"
+
+# Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
+[[streamers]]
+platform = "twitch"
+login = "beispielstreamer"
+language = "de"
+chat_delay_s = 4.0       # wie viele Sekunden der Chat hinter dem Bild herhinkt
+# Facecam-Bereich im 1920x1080-Bild: x, y, Breite, Höhe. Weglassen = keine Facecam.
+facecam = { x = 1440, y = 760, w = 480, h = 320 }
