@@ -53,3 +53,16 @@ def test_music_is_removed(tmp_path):
     vocal_db = per_second_db(vocals).mean()
     assert music_db - vocal_db > 20, (music_db, vocal_db)   # Musik in der Stimmspur stark gedämpft
     assert len(music_secs) >= 6                              # und als Musik gemeldet
+
+
+def test_locate_finds_static_rectangle():
+    from pipeline.render.facecam import H, W, locate, static_edges
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    frames = []
+    for i in range(5):  # weiches, sich bewegendes "Spiel" + feste Cam rechts mittig
+        f = 128 + 100 * np.sin(xx / 41 + i * 1.3) * np.cos(yy / 29 - i * 0.7)
+        f[212:371, 728:] = 30 + 20 * i
+        frames.append(f.astype(np.float32))
+    gy, gx = static_edges(frames)
+    x, y, score = locate(gy, gx, 231, 156)
+    assert abs(x - 728) <= 3 and abs(y - 212) <= 3 and score > 6

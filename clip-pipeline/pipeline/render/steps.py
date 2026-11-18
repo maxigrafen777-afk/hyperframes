@@ -13,6 +13,7 @@ from ..judge.media import Transcript
 from ..judge.steps import clip_dir, streamer_for
 from ..models import Judgment, Status
 from .export import RenderJob, render
+from .facecam import find_facecam
 
 log = logging.getLogger(__name__)
 
@@ -51,10 +52,19 @@ def step_render(db: DB, cfg: Config, clip: Clip) -> Path:
         else:
             audio = out_dir / "vocals.wav"
             separate_vocals(Path(clip.raw_path), audio)
+    facecam = streamer.facecam
+    if facecam is not None and cfg.render.auto_facecam:
+        found, score = find_facecam(Path(clip.raw_path), j.start_s, j.end_s - j.start_s, facecam)
+        if score >= cfg.render.facecam_min_score:
+            if (found.x, found.y) != (facecam.x, facecam.y):
+                log.info("Clip %s: Facecam verschoben auf x=%d y=%d (score %.1f)", clip.id, found.x, found.y, score)
+            facecam = found
+        else:
+            log.warning("Clip %s: Facecam nicht sicher gefunden (score %.1f), nehme Config", clip.id, score)
     out = render(RenderJob(
         raw=Path(clip.raw_path), out=out_dir / "clip.mp4",
         start_s=j.start_s, end_s=j.end_s, subject_x=j.subject_x, layout=j.layout,
-        facecam=streamer.facecam, words=transcript.words, hook=j.hook,
+        facecam=facecam, words=transcript.words, hook=j.hook,
         credit=credit_for(clip.streamer) if cfg.render.show_credit else "",
         censor=tuple(cfg.render.censor), audio=audio, area=streamer.game_area,
     ))

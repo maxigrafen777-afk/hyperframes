@@ -20,12 +20,18 @@ Arbeitsverzeichnis: `clip-pipeline/`. Config: `config.toml` (Kopie von `config.e
 
 1. **Diese Datei lesen** (vor allem _Bewertungsregeln_ und _Gelerntes_).
 2. **Dienst prüfen:** `python3 tools/review.py status`.
-   - Läuft er nicht (oder „nie gestartet“, z. B. neuer Container), neu starten:
+   - Läuft er nicht (oder „nie gestartet“, z. B. neuer Container), neu starten – **als verfolgte
+     Hintergrundaufgabe** (Bash mit `run_in_background: true`, `timeout: 7200000`), nie mit
+     `nohup`/`setsid`: Nur eine verfolgte Aufgabe hält den Container wach, sonst wird er nach
+     wenigen Minuten Leerlauf angehalten und der Dienst stirbt (passiert am 18.11. um 14:21).
      ```bash
-     pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q demucs streamlink faster-whisper anthropic websockets pydantic numpy 2>&1 | grep -v WARNING
+     python3 -c "import demucs, faster_whisper, streamlink" || (pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu && pip install -q demucs streamlink faster-whisper anthropic websockets pydantic numpy)
      test -f config.toml || cp config.example.toml config.toml
-     nohup python3 -m pipeline.watch --config config.toml > data/watch.log 2>&1 &
+     timeout 7100 python3 -m pipeline.watch --config config.toml >> data/watch.log 2>&1
      ```
+   - Läuft er noch, aber seit über einer Stunde (Feld `started` in `data/heartbeat.json`), trotzdem
+     nicht anfassen: Er endet nach ~2 h von selbst, die Benachrichtigung darüber ist der Anlass zum
+     Neustart. Kommt diese Benachrichtigung, sofort neu starten.
    - `data/watch.log` auf Fehler prüfen (`tail -30`).
 3. **Kandidaten holen:** `python3 tools/review.py list`.
 4. **Jeden Kandidaten bewerten:** `python3 tools/review.py show <id>` ausgeben, den
@@ -33,8 +39,8 @@ Arbeitsverzeichnis: `clip-pipeline/`. Config: `config.toml` (Kopie von `config.e
    Judgment-JSON schreiben (Scratchpad) und `python3 tools/review.py decide <id> <json>`.
    Bei `keep` wird automatisch gerendert.
 5. **Gerenderte Clips prüfen** (2–3 Standbilder aus `clip.mp4` ansehen: Untertitel
-   lesbar, nichts überlappt, kein schwarzer Balken zwischen Cam und Gameplay, Cam-Ausschnitt
-   stimmt), dann mit `SendUserFile` schicken:
+   lesbar, nichts überlappt, kein schwarzer Balken zwischen Cam und Gameplay, **oben ist wirklich
+   die Facecam (eine Person) zu sehen**), dann mit `SendUserFile` schicken:
    `clip.mp4` + den Text aus `post.txt` im Chat. Danach `review.py delivered <id>`.
    Höchstens 3 Clips pro Weckruf, der beste zuerst. Schwache Stunden: lieber nichts schicken.
 6. **Lernen:** Neues unter _Gelerntes_ eintragen (Datum, was, Konsequenz). Wiederholt
@@ -107,6 +113,15 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Bei Missionsdialogen prüfen, ob die Untertitel dann noch Sinn ergeben.
 - 2026-11-18 · Nutzer: Hook ist das Wichtigste; Clips 20–60 s; Streamer egal, Inhalt zählt.
   Umgesetzt: Rohschnitt ~70 s (pre 45 / post 15), clamp() erzwingt 20–60 s, Hook 3,5 s im Bild.
+- 2026-11-18 · Fehlalarm-Typ „Gesundheit-Welle“: Streamer niest, Chat schreibt im Chor „Gesundheit“ → verwerfen.
+- 2026-11-18 · Zarbex hat die Facecam mitten im Stream von unten rechts (y=762) nach rechts Mitte (y≈426)
+  verschoben → erster Render zeigte oben Gameplay statt Cam. Lösung: `render/facecam.py` sucht die Cam
+  pro Clip (feste Kanten über mehrere Bilder, Rechteck in Cam-Größe, ±2 px Toleranz). An 7 Clips aus 3
+  Layouts richtig. Score < 6 → Config-Wert. Trotzdem jedes Mal visuell prüfen.
+- 2026-11-18 · Erster ausgelieferter Automatik-Clip: Zarbex Polizeiverfolgung 3 Sterne (#8), Hook
+  „Nur 3 Sterne … und das passiert“, 32 s. Schwarzes Wasted-Bild am Ende weggelassen (toter Leerlauf).
+- 2026-11-18 · Dienst lief entkoppelt (setsid) und starb, als der Container im Leerlauf angehalten wurde.
+  Jetzt als verfolgte Hintergrundaufgabe mit 2 h Laufzeit.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

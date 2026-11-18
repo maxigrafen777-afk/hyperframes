@@ -24,7 +24,7 @@ TRANSITIONS: dict[Status, set[Status]] = {
     Status.NEW: {Status.TRANSCRIBED, Status.REJECTED, Status.FAILED},
     Status.TRANSCRIBED: {Status.JUDGED, Status.REJECTED, Status.FAILED},
     Status.JUDGED: {Status.RENDERED, Status.REJECTED, Status.FAILED},
-    Status.RENDERED: {Status.DELIVERED, Status.FAILED},
+    Status.RENDERED: {Status.DELIVERED, Status.FAILED, Status.JUDGED, Status.REJECTED},  # JUDGED = vor Versand neu rendern
     Status.DELIVERED: {Status.POSTED, Status.REJECTED, Status.JUDGED},  # JUDGED = neu rendern
     Status.POSTED: set(),
     Status.REJECTED: set(),

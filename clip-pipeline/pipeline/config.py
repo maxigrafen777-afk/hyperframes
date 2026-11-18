@@ -99,6 +99,8 @@ class RenderCfg(BaseModel):
     # Musik darf nie veröffentlicht werden: nur die per Demucs getrennte Stimmspur verwenden.
     remove_music: bool = True
     show_credit: bool = False   # Twitch-Name im Video (Quelle steht immer im Post-Text)
+    auto_facecam: bool = True   # Cam-Position pro Clip suchen (Streamer verschieben sie)
+    facecam_min_score: float = 6.0
     # In den Untertiteln maskiert (der Ton bleibt). TikTok drosselt Schimpfwörter im Bild.
     censor: list[str] = Field(default_factory=lambda: [
         "scheiße", "scheisse", "schwanz", "fick", "ficken", "fotze", "hurensohn", "wichser", "arschloch", "fuck", "shit",
