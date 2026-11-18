@@ -46,7 +46,7 @@ model = "small"             # läuft ohne GPU auf der CPU
 compute_type = "int8"
 vocabulary = ["GTA", "GTA 6", "Vice City", "Leonida", "Lucia", "Jason", "Keyless Go", "Mustang", "Zarbex",
               "zocken", "zockst", "Privatjet", "Neuseeland", "Chat", "Subs"]
-corrections = { schockst = "zockst", schocken = "zocken" }
+corrections = { schockst = "zockst", schocken = "zocken", bildstaatsseite = "Bild-Startseite", wildstaatseite = "Bild-Startseite", umzuzocken = "um zu zocken" }
 
 # Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
 # Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?
