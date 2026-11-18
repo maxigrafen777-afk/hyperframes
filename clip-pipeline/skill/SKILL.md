@@ -161,6 +161,10 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   dazu laute Panik-Reaktion („Ich drücke Kreis um mein Leben!“). Wiederholt sich so etwas, als „Teil 2“ liefern.
 - 2026-11-18 · Whisper macht aus Schreien Fantasiewörter („RENZTROCKING“) → vor dem Rendern aus dem Transkript nehmen.
 - 2026-11-18 · „W“-Wellen bei großen Streamern (Trymacs) = meist Spenden/Sub-Gifts, kein Spielmoment → verwerfen.
+- 2026-11-18 · Sitzung war ~2 h weg (Worker-Neustart), Dienst lief bis zum 2-h-Timeout weiter, danach tot;
+  41 Kandidaten Rückstau. Nach Wiederkehr: Dienst sofort neu starten, Rückstau kompakt sichten
+  (Transkript-Anfang + 10 Chatzeilen je Kandidat), nur Hype ≥ ~20 % genauer ansehen.
+- 2026-11-18 · Gewalt-Pointen (Halsschuss, „erstechen“) → verwerfen, auch wenn der Chat lacht.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
