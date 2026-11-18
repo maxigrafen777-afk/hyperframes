@@ -153,3 +153,9 @@ platform = "twitch"
 login = "inscope21"
 language = "de"
 chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "schradin"
+language = "de"
+chat_delay_s = 4.0
