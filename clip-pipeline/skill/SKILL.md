@@ -167,6 +167,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   41 Kandidaten Rückstau. Nach Wiederkehr: Dienst sofort neu starten, Rückstau kompakt sichten
   (Transkript-Anfang + 10 Chatzeilen je Kandidat), nur Hype ≥ ~20 % genauer ansehen.
 - 2026-11-18 · Gewalt-Pointen (Halsschuss, „erstechen“) → verwerfen, auch wenn der Chat lacht.
+- 2026-11-18 · Abgrenzung zum Peggy-Typ: Klauen/Chaos mit NPC ja; NPC zusammenschlagen/erschießen als Pointe
+  (z. B. Frau am Strand niedergeschlagen, #173) nein.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
