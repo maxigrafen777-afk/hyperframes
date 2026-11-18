@@ -1,6 +1,6 @@
 ---
 name: gta-clip-editor
-description: Bewertet, schneidet und liefert TikTok-Clips aus GTA-6-Livestreams (Zarbex, xRohat) mit der clip-pipeline. Lesen bei jedem Weckruf der stündlichen Clip-Aufgabe, bevor Kandidaten bewertet werden, und wenn der Nutzer Feedback zu gelieferten Clips gibt.
+description: Bewertet, schneidet und liefert TikTok-Clips aus GTA-6-Livestreams (große deutsche Streamer: eliasn97, Sidney Friede, Trymacs, MontanaBlack, Papaplatte, Zarbex, xRohat u. a.) mit der clip-pipeline. Lesen bei jedem Weckruf der stündlichen Clip-Aufgabe, bevor Kandidaten bewertet werden, und wenn der Nutzer Feedback zu gelieferten Clips gibt.
 ---
 
 # GTA-Clip-Editor
@@ -170,6 +170,14 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - Chat: ~1,7 Nachrichten/s, sehr emote-lastig. Lach-Emotes: zarbexHehe, zarbexGeil, zarbexHyper.
 - Stil: lautes Kommentieren, Telefonate, viel Interaktion mit dem Chat (→ viele Antwortwellen).
 - GTA-6-Stream ab Release (18.11.2026), u. a. aus Neuseeland.
+
+### Weitere (seit 18.11., Nutzer: „alle großen deutschen Streamer“, ab 0 Uhr v. a. eliasn97, Sidney Friede, Trymacs)
+
+- Priorität = Reihenfolge in `config.example.toml`; höchstens `recorder.max_parallel` (6) Aufnahmen gleichzeitig.
+- Trymacs (`trymacs`) und MontanaBlack (`montanablack88`): Greenscreen-Cam ohne Rahmen → Facecam-Suche
+  scheitert, Config-Bereich wird genutzt. Papaplatte (`papaplatte`): Rahmen-Cam oben rechts.
+- Sidney Friede: Login `sidneyfriede` unbestätigt (war offline). Neue Streamer: Facecam am Standbild
+  `data/snapshots/<login>.jpg` messen und in die Config eintragen.
 
 ### xRohat (`xrohat`)
 

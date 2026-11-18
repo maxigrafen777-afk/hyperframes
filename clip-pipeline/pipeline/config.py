@@ -35,6 +35,7 @@ class RecorderCfg(BaseModel):
     segment_s: int = Field(default=2, ge=1)
     buffer_s: int = Field(default=180, ge=30)
     quality: str = "1080p60,1080p,best"
+    max_parallel: int = Field(default=6, ge=1)  # gleichzeitige Aufnahmen; Reihenfolge der Streamer = Priorität
 
 
 class DetectCfg(BaseModel):

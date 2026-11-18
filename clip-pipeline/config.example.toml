@@ -10,6 +10,7 @@ games = ["Grand Theft Auto VI"]
 segment_s = 2            # Länge eines Puffer-Segments
 buffer_s = 180           # so viel Material hält der Puffer
 quality = "1080p60,1080p,best"
+max_parallel = 6         # gleichzeitige Aufnahmen (Bandbreite/CPU)
 
 [detect]
 burst_s = 10             # Fenster für "gerade eben"
@@ -49,6 +50,41 @@ vocabulary = ["GTA", "GTA 6", "Vice City", "Leonida", "Lucia", "Jason", "Keyless
 corrections = { schockst = "zockst", schocken = "zocken", bildstaatsseite = "Bild-Startseite", wildstaatseite = "Bild-Startseite", umzuzocken = "um zu zocken" }
 
 # Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
+# Reihenfolge = Priorität bei mehr als recorder.max_parallel Live-Streams.
+[[streamers]]
+platform = "twitch"
+login = "eliasn97"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "sidneyfriede"  # Login vom Nutzer noch zu bestätigen
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "trymacs"
+language = "de"
+chat_delay_s = 4.0
+facecam = { x = 1360, y = 600, w = 560, h = 480 }   # Greenscreen unten rechts (keine Rahmen-Cam), gemessen 18.11.
+
+[[streamers]]
+platform = "twitch"
+login = "montanablack88"
+language = "de"
+chat_delay_s = 4.0
+facecam = { x = 1280, y = 700, w = 480, h = 380 }   # Greenscreen unten Mitte-rechts, gemessen 18.11.
+
+[[streamers]]
+platform = "twitch"
+login = "papaplatte"
+language = "de"
+chat_delay_s = 4.0
+facecam = { x = 1480, y = 104, w = 440, h = 330 }   # Cam oben rechts, darunter Chat-Overlay, gemessen 18.11.
+
+
 # Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?
 [render]
 remove_music = true      # Musik nie veröffentlichen: nur die getrennte Stimmspur
@@ -72,3 +108,48 @@ language = "de"
 chat_delay_s = 4.0
 # Gemessen am 18.11.2026 (oben rechts, darunter Spendenstand-Overlay)
 facecam = { x = 1406, y = 104, w = 512, h = 288 }
+
+# --- weitere große deutsche Streamer (Nutzerwunsch 18.11.: „alle großen“, ab 0 Uhr v. a. eliasn97, Sidney Friede, Trymacs)
+# Facecam noch nicht gemessen -> Layout "blur", bis aus data/snapshots/<login>.jpg gemessen.
+
+[[streamers]]
+platform = "twitch"
+login = "knossi"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "revedtv"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "rewinside"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "unge"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "stegi"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "mckytv"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "inscope21"
+language = "de"
+chat_delay_s = 4.0

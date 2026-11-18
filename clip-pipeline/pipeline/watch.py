@@ -91,15 +91,28 @@ class Watcher:
         self.started = time.time()
 
     async def poll_live(self) -> None:
-        while True:
-            for ch in self.channels.values():
+        sem = asyncio.Semaphore(5)  # Live-Checks parallel, aber nicht alle auf einmal
+
+        async def check(ch: Channel) -> None:
+            async with sem:
                 ch.info = await check_live(ch.s.login)
-                wanted = is_wanted(ch.info, self.cfg.games)
-                if wanted and not ch.recording:
+
+        order = list(self.channels.values())  # Reihenfolge in der Config = Priorität
+        while True:
+            await asyncio.gather(*(check(ch) for ch in order))
+            for ch in order:
+                if ch.recording and not is_wanted(ch.info, self.cfg.games):
+                    await ch.stop()
+            limit = self.cfg.recorder.max_parallel
+            wanted = [ch for ch in order if is_wanted(ch.info, self.cfg.games)][:limit]
+            for ch in order:  # wer nicht mehr unter den Top-N ist, macht Platz
+                if ch.recording and ch not in wanted:
+                    log.info("%s pausiert: Platz für höher priorisierten Streamer", ch.s.login)
+                    await ch.stop()
+            for ch in wanted:
+                if not ch.recording:
                     ch.start()
                     asyncio.create_task(self.snapshot(ch))
-                elif not wanted and ch.recording:
-                    await ch.stop()
             await asyncio.sleep(POLL_S)
 
     async def snapshot(self, ch: Channel) -> None:
