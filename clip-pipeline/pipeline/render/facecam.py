@@ -78,13 +78,20 @@ def locate(gy: np.ndarray, gx: np.ndarray, w: int, h: int) -> tuple[int, int, fl
     return best
 
 
+SCALES = (1.0, 0.95, 0.9, 0.85)  # leichte Größenänderung der Cam (xRohat, 18.11.); kleiner findet Minimap & Co.
+
+
 def find_facecam(path: Path, start: float, dur: float, known: Rect, samples: int = 6) -> tuple[Rect, float]:
-    """Cam mit der bekannten Größe im Clip suchen. Gibt (Rect in 1920x1080, Score)."""
+    """Cam im Clip suchen: bekannte Größe zuerst, dann kleinere Größen bei gleichem
+    Seitenverhältnis. Gibt (Rect in 1920x1080, Score)."""
     frames = _frames(path, start, dur, samples)
     if len(frames) < 3:
         return known, 0.0
     gy, gx = static_edges(frames)
-    w, h = known.w // 2, known.h // 2
-    x, y, score = locate(gy, gx, w, h)
-    found = Rect(x=x * 2, y=y * 2, w=min(known.w, 1920 - x * 2), h=min(known.h, 1080 - y * 2))
-    return found, score
+    best: tuple[Rect, float] = (known, 0.0)
+    for scale in SCALES:
+        w, h = int(known.w * scale) // 2, int(known.h * scale) // 2
+        x, y, score = locate(gy, gx, w, h)
+        if score > best[1] * 1.15:  # kleinere Größe nur bei deutlich besserem Rand
+            best = (Rect(x=x * 2, y=y * 2, w=min(w * 2, 1920 - x * 2), h=min(h * 2, 1080 - y * 2)), score)
+    return best

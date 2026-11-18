@@ -151,6 +151,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Streamer schaltet auf Vollbild-Cam (z. B. Zarbex zeigt BILD-Artikel über sich, #47) → layout "blur"
   (Bild mittig 4:3), nicht "split" – es gibt dann keine eingeblendete Cam (Facecam-Suche meldet Score < 6).
   Schnitt erst ab dem Umschalten beginnen. Drama/Reaktion auf Presse über den Streamer = starker Inhalt.
+- 2026-11-18 · xRohat hat seine Cam leicht verkleinert und verschoben (512→486 px, y 104→140). Facecam-Suche
+  probiert jetzt 100/95/90/85 % der Config-Größe. Kleinere Stufen (≤ 80 %) finden Minimap/Innenkanten → nicht nutzen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
