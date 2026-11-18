@@ -67,6 +67,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   direkte Ansprache nur, wenn das Ende liefert. Schlecht: Beschreibung („X spielt GTA 6“),
   Clickbait ohne Einlösung. Pro Clip 3 Hooks entwerfen und den stärksten nehmen.
 - Länge 20–60 s, meist 25–45. Kein Leerlauf: lieber dicht als lang.
+- Bester bisheriger Typ (Nutzer-Feedback): absurde, sofort verständliche Situation mit NPCs + Streamer, der
+  laufend kommentiert (Vorbild #41 Peggys Elektromobil). Solche Kandidaten großzügiger behalten.
 - Ein Clip braucht eine echte Pointe: laute/emotionale Reaktion des Streamers, Action (Verfolgung,
   Crash, Schießerei, Chaos) oder einen Lacher. Ruhige Alltags-Fails, bei denen nur der Chat lacht, sind
   zu schwach (Nutzer-Feedback: „langweilig“). Im Zweifel nicht schicken.
@@ -192,6 +194,12 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 
 ## Feedback
 
+- 2026-11-18 · **#41 Zarbex „Peggys Elektromobil“ (35 s, Hook „Er klaut Oma das Elektromobil …“): performt am
+  besten** (Nutzer). Warum vermutlich: absurde Situation sofort verständlich (Opa/Oma-Gefährt klauen), klares Bild
+  (Oma rennt hinterher), Streamer kommentiert laufend mit schlechtem Gewissen („Es tut mir so leid, Peggy“,
+  „Ich bin ein schrecklicher Mensch“), Hook = Konflikt in einem Satz. Konsequenz: absurde Nebenmissionen und
+  Alltags-Chaos mit NPCs (Omas, Nachbarn, Tiere) bevorzugen; Fortsetzungen/Callbacks zu solchen Figuren
+  (z. B. Shirley/Nachbarin, #88) sind gut.
 - 2026-11-18 · #14 xRohat „Grün statt Blau“ (40 s, Hook „Er wollte unbedingt Blau …“): **langweilig**.
   Konsequenz: Kleine Alltags-Fails ohne starke Reaktion des Streamers und ohne visuelle Pointe sind
   höchstens hype 5. Der Chat-Chor allein trägt keinen Clip. 40 s ruhiges Streichen ist zu lang für so wenig.
