@@ -87,15 +87,24 @@ def _place(want_x: float, width: int, avoid: tuple[int, int] | None) -> int:
     return _even(x) if x > 0 else 0
 
 
+CAM_INSET = 8        # px rundum nach innen: keine Gameplay-/Rahmenreste am Cam-Rand
+CAM_MIN_H, CAM_MAX_H = 520, 640   # Cam höchstens ein Drittel des Bildes, sonst zu groß und unscharf
+CAM_TOP_SHARE = 0.25  # muss oben/unten beschnitten werden: 25 % oben (Kopf!), 75 % unten (Tisch)
+
+
 def split_layout(cam: Rect, subject_x: float, area: tuple[int, int] = (0, SRC_H)) -> SplitLayout:
-    cam_h = _even(min(max(OUT_W * cam.h / cam.w, 560), 860))
+    inner = Rect(x=cam.x + CAM_INSET, y=cam.y + CAM_INSET,
+                 w=max(cam.w - 2 * CAM_INSET, 32), h=max(cam.h - 2 * CAM_INSET, 32))
+    cam_h = _even(min(max(OUT_W * inner.h / inner.w, CAM_MIN_H), CAM_MAX_H))
     # Cam-Ausschnitt auf das Ausgabe-Seitenverhältnis 1080:cam_h bringen
     target = OUT_W / cam_h
-    if cam.w / cam.h > target:   # Cam zu breit -> seitlich beschneiden
-        cw, ch = cam.h * target, cam.h
-    else:                        # Cam zu hoch -> oben/unten beschneiden
-        cw, ch = cam.w, cam.w / target
-    cam_box = Box(_even(cam.x + (cam.w - cw) / 2), _even(cam.y + (cam.h - ch) / 2), _even(cw), _even(ch))
+    if inner.w / inner.h > target:   # Cam zu breit -> seitlich beschneiden (mittig)
+        cw, ch = inner.h * target, inner.h
+        cx, cy = inner.x + (inner.w - cw) / 2, inner.y
+    else:                            # Cam zu hoch -> oben wenig, unten mehr beschneiden
+        cw, ch = inner.w, inner.w / target
+        cx, cy = inner.x, inner.y + (inner.h - ch) * CAM_TOP_SHARE
+    cam_box = Box(_even(cx), _even(cy), _even(cw), _even(ch))
 
     game_h = OUT_H - cam_h
     y0, y1 = area

@@ -34,6 +34,10 @@ Arbeitsverzeichnis: `clip-pipeline/`. Config: `config.toml` (Kopie von `config.e
      Neustart. Kommt diese Benachrichtigung, sofort neu starten.
    - `data/watch.log` auf Fehler prüfen (`tail -30`).
 3. **Kandidaten holen:** `python3 tools/review.py list`.
+   Zusätzlich zwischen den stündlichen Läufen: `tools/wait_candidates.sh` als verfolgte
+   Hintergrundaufgabe starten (`run_in_background: true`). Sie endet, sobald Kandidaten warten
+   (oder der Dienst tot ist) – das weckt mich, ich bewerte sofort und starte sie danach neu.
+   So kommen Clips ohne Wartezeit beim Nutzer an (Wunsch: „ständig neue Clips“).
 4. **Jeden Kandidaten bewerten:** `python3 tools/review.py show <id>` ausgeben, den
    Kontaktabzug (`data/clips/<id>/sheet.jpg`) ansehen, nach den Regeln unten ein
    Judgment-JSON schreiben (Scratchpad) und `python3 tools/review.py decide <id> <json>`.
@@ -122,6 +126,14 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   „Nur 3 Sterne … und das passiert“, 32 s. Schwarzes Wasted-Bild am Ende weggelassen (toter Leerlauf).
 - 2026-11-18 · Dienst lief entkoppelt (setsid) und starb, als der Container im Leerlauf angehalten wurde.
   Jetzt als verfolgte Hintergrundaufgabe mit 2 h Laufzeit.
+- 2026-11-18 · Nutzer: Facecam „sitzt komisch“. Ursachen: Gameplay-Ränder am Cam-Ausschnitt und Cam zu
+  groß (fast 40 % Höhe, 2,3-fach hochskaliert). Lösung: Cam rundum 8 px nach innen, Cam-Feld max. 640 px
+  (⅓), beim Beschneiden 25 % oben / 75 % unten (Kopf bleibt).
+- 2026-11-18 · Starkes Signal: Der Chat korrigiert den Streamer im Chor („du hast grün genommen“), während er
+  es noch nicht merkt → Fail-Clip mit Erwartungsbruch-Hook (#14, „Er wollte unbedingt Blau …“).
+- 2026-11-18 · Sponsoring/Unboxing (z. B. Xbox-Paket, „DAUERWERBESENDUNG“ ohne Spiel) → verwerfen.
+- 2026-11-18 · Ausbeute erste Stunden: ~25 Kandidaten → 2 Clips. Antwortwellen bleiben der häufigste Ausschuss
+  (bei beiden Streamern; sie fragen oft den Chat).
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
