@@ -48,6 +48,26 @@ kurze Sätze. hashtags: 3-6 passende, ohne '#'.
 """
 
 
+SKILL_FILE = Path(__file__).resolve().parents[2] / "skill" / "SKILL.md"
+
+
+def learned_rules(path: Path = SKILL_FILE) -> str:
+    """Bewertungsregeln aus dem Skill (eine Quelle für Hand- und API-Bewertung)."""
+    if not path.exists():
+        return ""
+    text = path.read_text("utf-8")
+    start, end = "<!-- judge-rules:start -->", "<!-- judge-rules:end -->"
+    if start not in text or end not in text:
+        return ""
+    return text.split(start, 1)[1].split(end, 1)[0].strip()
+
+
+def system_prompt(min_hype: int, language: str) -> str:
+    rules = learned_rules()
+    base = SYSTEM.format(min_hype=min_hype, language=language)
+    return base + ("\nGelernte Regeln aus bisherigen Streams:\n" + rules + "\n" if rules else "")
+
+
 def _mmss(t: float) -> str:
     return f"{t:5.1f}s"
 
@@ -137,7 +157,7 @@ def judge(
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",  # lehnt das Modell ab, springt automatisch ein anderes ein
         output_config={"effort": cfg.effort},
-        system=SYSTEM.format(min_hype=cfg.min_hype, language=streamer.language),
+        system=system_prompt(cfg.min_hype, streamer.language),
         messages=[{"role": "user", "content": content}],
         output_format=Judgment,
     )

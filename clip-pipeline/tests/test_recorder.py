@@ -86,3 +86,17 @@ def test_parse_streams_and_game_filter():
     assert [s.login for s in streams] == ["zarbex", "other"]
     assert list(wanted(streams, ["grand theft auto vi"])) == ["zarbex"]
     assert len(wanted(streams, [])) == 2
+
+
+def test_streamlink_live_check_parsing():
+    from pipeline.sources.live_check import is_wanted, parse_streamlink_json
+    live = json.dumps({"streams": {"best": {}}, "metadata": {"category": "Grand Theft Auto VI", "title": "GTA!"}})
+    off = json.dumps({"error": "No playable streams found on this URL"})
+    info = parse_streamlink_json("zarbex", live)
+    assert info and info.category == "Grand Theft Auto VI"
+    assert parse_streamlink_json("rohat", off) is None and parse_streamlink_json("x", "kaputt") is None
+    assert is_wanted(info, ["grand theft auto vi"]) and not is_wanted(info, ["Minecraft"])
+    # echte Form mit Qualitätsangabe "best"
+    best = json.dumps({"type": "hls", "url": "https://x", "metadata": {"category": "Grand Theft Auto VI"}})
+    assert parse_streamlink_json("zarbex", best).category == "Grand Theft Auto VI"
+    assert not is_wanted(None, [])

@@ -127,3 +127,10 @@ def test_word_corrections():
     assert correct(" schockst,", fixes) == " zockst,"
     assert correct(" Schockst", fixes) == " zockst"
     assert correct(" schockt", fixes) == " schockt"
+
+
+def test_system_prompt_includes_learned_rules():
+    from pipeline.judge.judge import learned_rules, system_prompt
+    rules = learned_rules()
+    assert "Antwortwelle" in rules
+    assert rules in system_prompt(7, "de")
