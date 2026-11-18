@@ -87,6 +87,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - Lief im Kandidaten deutlich Musik und enthält das Transkript dort Liedtext (Reime,
   englische Songzeilen, Wiederholungen), diese Stelle nicht in den Schnitt nehmen; geht das
   nicht, verwerfen.
+- Echte Personen im Stream (Partnerin, Familie, Gäste) nie bloßstellen: ungewollte Entblößung,
+  Kleidung, Körper → immer verwerfen, egal wie laut der Chat reagiert.
 - Beleidigungen gegen echte Dritte, die bloßstellen (nicht freundschaftliches Frotzeln), verwerfen.
 <!-- judge-rules:end -->
 
