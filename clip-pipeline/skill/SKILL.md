@@ -155,6 +155,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Schnitt erst ab dem Umschalten beginnen. Drama/Reaktion auf Presse über den Streamer = starker Inhalt.
 - 2026-11-18 · xRohat hat seine Cam leicht verkleinert und verschoben (512→486 px, y 104→140). Facecam-Suche
   probiert jetzt 100/95/90/85 % der Config-Größe. Kleinere Stufen (≤ 80 %) finden Minimap/Innenkanten → nicht nutzen.
+- 2026-11-18 · „Erster Bug“-Momente: Nur behalten, wenn der Bug im Bild klar und länger als ~2 s zu sehen ist
+  (z. B. Figur fliegt, Auto im Boden). Kurzes Kamera-Clipping erkennt auf dem Handy niemand.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
