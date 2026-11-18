@@ -175,6 +175,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · Story-Abschnitte erzeugen Serien schlechter Kandidaten: Stripclub/Motel-Cutscenes (xHorny-Chat),
   Missions-Schusswechsel mit Score-Musik (Trymacs, musik ≥ 60 s), „hör doch zu“-Chöre, Gore-Kopfschüsse → verwerfen.
 - 2026-11-18 · Whisper verhört „Subs“ als „Serbs“ → im Transkript korrigieren.
+- 2026-11-19 · Release-Nacht (DE-Release 0 Uhr): fast nur Story-Anfänge, Club-/Dusch-Nacktszenen, Charakter-Editor-
+  Abstimmungen und Missions-Schießereien mit Score-Musik. Nacktheit sofort verwerfen (Standbilder vorher prüfen).
+  Whisper-Endlosschleifen („waschen, waschen, …“) heißen: dort spricht niemand → Stelle nicht verwenden.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
