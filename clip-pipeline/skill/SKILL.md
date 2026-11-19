@@ -270,3 +270,4 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-18 · #14 xRohat „Grün statt Blau“ (40 s, Hook „Er wollte unbedingt Blau …“): **langweilig**.
   Konsequenz: Kleine Alltags-Fails ohne starke Reaktion des Streamers und ohne visuelle Pointe sind
   höchstens hype 5. Der Chat-Chor allein trägt keinen Clip. 40 s ruhiges Streichen ist zu lang für so wenig.
+- 19.11.: Eliasn97-Clips bekamen auf TikTok „kann nicht empfohlen werden“. Verdacht: Sponsor-Banner (Quantum/Würth) oben im Gameplay = Werbung ohne Kennzeichnung, dazu Waffe auf Zivilisten (Überfälle). Banner per game_area [96,1080] abgeschnitten. Bei Elias Überfälle mit Waffe auf Menschen meiden, lieber Fails/Fluchten/Lacher.

@@ -70,6 +70,7 @@ login = "eliasn97"
 language = "de"
 chat_delay_s = 4.0
 facecam = { x = 1424, y = 46, w = 474, h = 264 }   # Rahmen-Cam oben rechts, gemessen 18.11. (Release)
+game_area = [96, 1080]   # Sponsor-Banner oben abschneiden (TikTok: Werbung ohne Kennzeichnung)
 
 [[streamers]]
 platform = "twitch"
