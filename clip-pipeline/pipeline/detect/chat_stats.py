@@ -170,7 +170,7 @@ class ChatDetector:
 
 def _norm(text: str) -> str:
     words = [_REPEAT.sub(r"\1", w) for w in _WORD.split(text.casefold()) if w]
-    return " ".join(words[:3])
+    return " ".join(sorted(words[:3]))  # Reihenfolge egal: "safe hinten" == "hinten safe"
 
 
 def chorus_ratio(lines: list[ChatLine]) -> float:
