@@ -51,7 +51,9 @@ Beschreibungen („Zarbex spielt GTA 6“), Clickbait ohne Einlösung, Emojis. O
 Hook keinen hype über 6. Der Hook muss SPANNEND sein (Nutzerwunsch): Neugier oder \
 Gefahr aufbauen, als würde gleich etwas Unerwartetes passieren („Er ahnt nicht, was gleich \
 passiert", „Das ging SO schief", „Niemand hat damit gerechnet"), statt den Inhalt nur \
-zu beschreiben. Höchstens ~28 Zeichen, damit er in den roten Kasten passt.
+zu beschreiben. Höchstens ~28 Zeichen, damit er in den roten Kasten passt. Immer etwas \
+Krasses (Superlativ, Schock, Neugier). Auch starke Map-Einblicke sind gute Clips, wenn \
+Streamer oder Chat ausrasten (Wow-Momente), nicht nur Lustiges.
 - title, caption und hook in der Sprache des Streamers ({language}). caption: 1-2 \
 kurze Sätze. hashtags: 3-6 passende, ohne '#'.
 """

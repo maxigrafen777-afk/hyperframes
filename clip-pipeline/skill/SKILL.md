@@ -202,9 +202,15 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-19 · Nutzer: Facecam 40 % / Gameplay 60 % (CAM_MIN_H = CAM_MAX_H = 768). Nicht zu klein.
 - 2026-11-19 · Nutzer: SPARSAM mit Ressourcen/Limit. Kandidaten kompakt sichten (Transkript + 10 Chatzeilen),
   Standbilder nur bei echten Chancen (Lachen + sichtbarer Moment), keine Extra-Recherche, keine Feinschliff-Schleifen.
-- 2026-11-19 · Nutzer: „die ganze Nacht nur ein Clip“ – zu streng. min_hype jetzt 6; Momente mit klarer
-  Pointe und Reaktion (5–6) eher liefern als verwerfen. Streamer NUR: eliasn97, papaplatte, trymacs, zarbex,
+- 2026-11-19 · Nutzer: „die ganze Nacht nur ein Clip“ – zu streng. min_hype 6, aber nur mit echter Pointe oder echtem
+  Ausraster (siehe Feedback #334). Streamer NUR: eliasn97, papaplatte, trymacs, zarbex,
   schradin, sidneyeweka, willisommer. MontanaBlack nie.
+- 2026-11-19 · Nutzer-Feedback: #334 xRohat Truck umgekippt = „sau langweilig“ (kleiner Fail ohne echte Pointe
+  reicht NICHT). Zarbex/Peggy-Oma = Maßstab für „überragend“. Qualität vor Menge, aber nicht übervorsichtig.
+- 2026-11-19 · Nutzer: AUCH gute Map-Einblicke liefern, wenn Streamer oder Chat ausrasten (Wow-/„Holy“-Momente:
+  Aussicht, Stadt, Wetter, Details) – nicht nur Lustiges. Hook dann z. B. „SO sieht Vice City aus“, „Das ist KEIN Trailer“.
+- 2026-11-19 · Nutzer: Im roten Hook-Kasten muss IMMER etwas Krasses stehen, damit Leute bleiben (Superlativ,
+  Schock, Neugier). Kein neutraler Hook.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

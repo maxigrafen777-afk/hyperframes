@@ -24,6 +24,8 @@ cooldown_s = 60
 min_pre_score = 0.35     # darunter fällt der Kandidat sofort weg
 # Lachen (hahaha, xD, lol, kekw) wird automatisch erkannt. Hier zusätzlich Emotes:
 hype_words = ["LUL", "OMEGALUL", "W", "💀", "😂", "🤣", "PogChamp", "Pog", "POGGERS", "monkaS", "NAHHH", "EYOOOO", "bruh",
+              # Staunen über die Map (Nutzer 19.11.: Wow-Momente sind auch gute Clips)
+              "holy", "wow", "krass", "heftig", "insane", "geisteskrank", "cinema", "Cinema", "gänsehaut",
               # Kanal-Emotes von Zarbex (aus echtem Chat gezählt)
               "zarbexHehe", "zarbexGeil", "zarbexHyper", "zarbexHype", "zarbexYeah", "zarbexW", "zarbexLost", "zarbexRedFlag"]
 # ignore_users, ignore_patterns, answer_words: sinnvolle Standardwerte, siehe pipeline/config.py
