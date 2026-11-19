@@ -88,7 +88,7 @@ def _place(want_x: float, width: int, avoid: tuple[int, int] | None) -> int:
 
 
 CAM_INSET = 8        # px rundum nach innen: keine Gameplay-/Rahmenreste am Cam-Rand
-CAM_MIN_H, CAM_MAX_H = 520, 640   # Cam höchstens ein Drittel des Bildes, sonst zu groß und unscharf
+CAM_MIN_H, CAM_MAX_H = 768, 768   # Nutzer 19.11.: Cam 40 %, Gameplay 60 % (1920 hoch)
 CAM_TOP_SHARE = 0.25  # muss oben/unten beschnitten werden: 25 % oben (Kopf!), 75 % unten (Tisch)
 
 

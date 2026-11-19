@@ -199,6 +199,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Clip dort ablegen: `tools/archive_copy.sh <id>` (Kopie < 19 MB) → Artifact publish asset:true mit url + file_path
   data/archive/<id>.mp4 → `python3 tools/archive_row.py <id> <asset-id>` → ArtifactData set collection "clips",
   doc_id "c<id>", file_path data/archive/rows/<id>.json. Der Nutzer hakt dort „hochgeladen“ ab.
+- 2026-11-19 · Nutzer: Facecam 40 % / Gameplay 60 % (CAM_MIN_H = CAM_MAX_H = 768). Nicht zu klein.
+- 2026-11-19 · Nutzer: SPARSAM mit Ressourcen/Limit. Kandidaten kompakt sichten (Transkript + 10 Chatzeilen),
+  Standbilder nur bei echten Chancen (Lachen + sichtbarer Moment), keine Extra-Recherche, keine Feinschliff-Schleifen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
