@@ -229,6 +229,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   (hier 35 %) zweiten Blick wert. Verworfene mit >= 20 % Chat-Reaktion bei ruhiger Lage nochmal sichten.
 - 2026-11-19 · Nutzer: Untertitel im Doppelgänger-Clip hatten Fehler. Vor dem Rendern Transkript im Schnittbereich
   komplett lesen und offensichtliche Whisper-Fehler korrigieren (Namen, Wortsalat, „Buster“/„Sackstuff“ etc.).
+- 2026-11-19 · Nutzer: „Sei nicht so kritisch, hau alles rein was ansatzweise gut ist, ich sortiere aus.“ min_hype 5;
+  alles ab hype 5 liefern (Pflicht bleibt: keine Nacktheit, kein Gore, keine Musik, keine Story-Spoiler-Cutscene).
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
