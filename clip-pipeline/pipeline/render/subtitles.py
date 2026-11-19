@@ -11,7 +11,7 @@ from .layout import OUT_H, OUT_W
 FONT = "Montserrat Black"
 HIGHLIGHT = "&H0000D4FF&"   # Gelb (#FFD400) in ASS-Farbreihenfolge BGR
 MAX_WORDS = 3
-MAX_CHARS = 18
+MAX_CHARS = 14  # TikTok-Ränder: Untertitel schmal halten (Nutzer 19.11.)
 PAUSE_BREAK_S = 0.6
 HOOK_S = 3.5  # der Hook ist das Wichtigste: lange genug lesbar
 
@@ -101,7 +101,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Caption,{FONT},84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,1
+Style: Caption,{FONT},76,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,1
 Style: Hook,{FONT},74,&H00FFFFFF,&H00FFFFFF,&H001E1EE6,&H001E1EE6,0,0,0,0,100,100,0,0,3,20,0,5,60,60,0,1
 Style: Credit,{FONT},32,&H40FFFFFF,&H40FFFFFF,&H80000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,0,0,0,1
 
@@ -124,7 +124,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     if hook.strip():
         hook_end = min(HOOK_S, duration)
         text = _clean(hook).upper()
-        size = max(46, min(74, int(74 * 30 / max(len(text), 1))))  # lange Hooks kleiner, damit sie in den Kasten passen
+        if len(text) > 16 and " " in text:  # lange Hooks zweizeilig statt breit: bleibt in der Bildmitte
+            mid = len(text) // 2
+            cut = min((i for i, ch in enumerate(text) if ch == " "), key=lambda i: abs(i - mid))
+            text = text[:cut] + "\\N" + text[cut + 1:]
+        longest = max(len(x) for x in text.split("\\N"))
+        size = max(44, min(70, int(70 * 16 / max(longest, 1))))  # max. ~65 % der Bildbreite
         ev.append(
             f"Dialogue: 2,{_ts(0)},{_ts(hook_end)},Hook,,0,0,0,,"
             f"{{\\pos({cx},{place.hook_y})\\fs{size}\\fad(0,200)\\fscx70\\fscy70\\t(0,120,\\fscx108\\fscy108)\\t(120,220,\\fscx100\\fscy100)}}"

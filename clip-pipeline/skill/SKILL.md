@@ -218,6 +218,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-19 · Nutzer: Zarbex-Kampf „Lucia wird überwältigt“ war überragend – der Detektor hat ihn verpasst (Chat
   ohne Lachen). Action-Kämpfe/Missionen sind erwünscht (keine Gore-Pointe, keine Gewalt an Zivilisten als Witz).
   Puffer jetzt 7 min; Nutzer-Tipps sofort mit `python3 tools/cut_now.py <login> <sek_zurück> [länge]` schneiden.
+- 2026-11-19 · Nutzer: Text lief beim Hochladen aus dem Bild (TikTok-Ränder). Hook ab 17 Zeichen zweizeilig, max. ~65 %
+  Bildbreite; Untertitel max. 14 Zeichen/Zeile, Schrift 76.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
