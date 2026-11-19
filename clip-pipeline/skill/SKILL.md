@@ -276,3 +276,4 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 19.11. 20:00 TikTok-Views: Doppelgänger 1505, Trymacs Deal eskaliert 1234, Trymacs Karma 909, Trymacs Unspielbar 907, Zarbex Festgenommen 734, UFO 617, Jumbojet 228 / Mast 227 / Bike 104 (frisch). Trymacs läuft stark – Reaktion + klare Situation. Selbstironie/Pech (Doppelgänger, Karma) top.
 - 19.11.: Nutzer: Slapstick-Prügeleien mit NPCs (z. B. Zarbex haut wieder eine Oma) DÜRFEN rein. Weiter tabu: Waffe auf Zivilisten / Schießen auf Passanten (TikTok-Risiko), Gore, Nacktheit, Musik, Spoiler.
 - 19.11.: Nutzer: Clips ohne Reden des Streamers (Schradin Jetski #617, kaum Worte) sind nicht gut. Nur liefern, wenn der Streamer im Ausschnitt deutlich reagiert/spricht (Faustregel: ≥ 2 Wörter pro 3 s, Reaktion am Höhepunkt).
+- 19.11.: Creator-Rewards zahlt nur für Videos > 1 min. Nutzer: vorerst kurze Clips lassen (erst 100k Aufrufe sammeln), danach ggf. auf 61–90 s umstellen.
