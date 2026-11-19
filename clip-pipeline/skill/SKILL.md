@@ -202,6 +202,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-19 · Nutzer: Facecam 40 % / Gameplay 60 % (CAM_MIN_H = CAM_MAX_H = 768). Nicht zu klein.
 - 2026-11-19 · Nutzer: SPARSAM mit Ressourcen/Limit. Kandidaten kompakt sichten (Transkript + 10 Chatzeilen),
   Standbilder nur bei echten Chancen (Lachen + sichtbarer Moment), keine Extra-Recherche, keine Feinschliff-Schleifen.
+- 2026-11-19 · Nutzer: „die ganze Nacht nur ein Clip“ – zu streng. min_hype jetzt 6; Momente mit klarer
+  Pointe und Reaktion (5–6) eher liefern als verwerfen. Streamer NUR: eliasn97, papaplatte, trymacs, zarbex,
+  schradin, sidneyeweka, willisommer. MontanaBlack nie.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

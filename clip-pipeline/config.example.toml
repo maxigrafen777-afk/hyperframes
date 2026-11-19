@@ -34,7 +34,7 @@ post_roll_s = 15         # Rohschnitt: Sekunden nach dem Chat-Ausschlag
 max_len_s = 80           # Rohschnitt höchstens so lang; der fertige Clip: [judge] min/max_len_s
 
 [judge]
-min_hype = 7
+min_hype = 6
 min_len_s = 20              # fertiger Clip: 20-60 s (Wunsch des Nutzers)
 max_len_s = 60
 model = "claude-opus-5-5"   # Claude über die Anthropic-API (Schlüssel in .env)
@@ -51,34 +51,20 @@ corrections = { serbs = "Subs", schockst = "zockst", schocken = "zocken", bildst
 
 # Ein Block pro Streamer. Nur Streamer, die Clipping erlauben!
 # Reihenfolge = Priorität bei mehr als recorder.max_parallel Live-Streams.
+
+# Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?
+[render]
+remove_music = true      # Musik nie veröffentlichen: nur die getrennte Stimmspur
+show_credit = false      # kein Twitch-Name im Video; Quelle steht im Post-Text
+
+# Streamer (Nutzer 19.11.: nur diese, MontanaBlack nie)
+
 [[streamers]]
 platform = "twitch"
 login = "eliasn97"
 language = "de"
 chat_delay_s = 4.0
 facecam = { x = 1424, y = 46, w = 474, h = 264 }   # Rahmen-Cam oben rechts, gemessen 18.11. (Release)
-
-[[streamers]]
-platform = "twitch"
-login = "sidneyfriede"  # Login vom Nutzer noch zu bestätigen
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "trymacs"
-language = "de"
-chat_delay_s = 4.0
-facecam = { x = 1360, y = 600, w = 560, h = 480 }   # Greenscreen unten rechts (keine Rahmen-Cam), gemessen 18.11.
-facecam_frameless = true   # Greenscreen ohne Rahmen
-
-[[streamers]]
-platform = "twitch"
-login = "montanablack88"
-language = "de"
-chat_delay_s = 4.0
-facecam = { x = 1280, y = 700, w = 480, h = 380 }   # Greenscreen unten Mitte-rechts, gemessen 18.11.
-facecam_frameless = true   # Greenscreen ohne Rahmen
 
 [[streamers]]
 platform = "twitch"
@@ -89,9 +75,14 @@ facecam = { x = 1480, y = 104, w = 440, h = 330 }   # Cam oben rechts, darunter 
 
 
 # Vor dem Posten prüfen: erlaubt der Streamer Clipping / gibt es eine Kampagne?
-[render]
-remove_music = true      # Musik nie veröffentlichen: nur die getrennte Stimmspur
-show_credit = false      # kein Twitch-Name im Video; Quelle steht im Post-Text
+
+[[streamers]]
+platform = "twitch"
+login = "trymacs"
+language = "de"
+chat_delay_s = 4.0
+facecam = { x = 1360, y = 600, w = 560, h = 480 }   # Greenscreen unten rechts (keine Rahmen-Cam), gemessen 18.11.
+facecam_frameless = true   # Greenscreen ohne Rahmen
 
 [[streamers]]
 platform = "twitch"
@@ -106,247 +97,19 @@ facecam = { x = 1452, y = 762, w = 468, h = 318 }
 
 [[streamers]]
 platform = "twitch"
-login = "xrohat"
-language = "de"
-chat_delay_s = 4.0
-# Gemessen am 18.11.2026 (oben rechts, darunter Spendenstand-Overlay)
-facecam = { x = 1406, y = 104, w = 512, h = 288 }
-
-# --- weitere große deutsche Streamer (Nutzerwunsch 18.11.: „alle großen“, ab 0 Uhr v. a. eliasn97, Sidney Friede, Trymacs)
-# Facecam noch nicht gemessen -> Layout "blur", bis aus data/snapshots/<login>.jpg gemessen.
-
-[[streamers]]
-platform = "twitch"
-login = "knossi"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "revedtv"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "rewinside"
-language = "de"
-chat_delay_s = 4.0
-facecam = { x = 1424, y = 710, w = 496, h = 370 }   # Cam unten rechts (seit 19.11., vorher oben rechts)
-
-[[streamers]]
-platform = "twitch"
-login = "unge"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "stegi"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "mckytv"
-language = "de"
-chat_delay_s = 4.0
-facecam = { x = 1440, y = 332, w = 466, h = 314 }   # Cam rechts Mitte, gemessen 18.11.
-
-[[streamers]]
-platform = "twitch"
-login = "inscope21"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
 login = "schradin"
 language = "de"
 chat_delay_s = 4.0
 facecam = { x = 1440, y = 164, w = 476, h = 272 }   # Rahmen-Cam oben rechts, gemessen 19.11.
 
-# --- weitere bekannte deutsche Streamer (Nutzerwunsch 19.11.: „alle bekannten“). Facecam nach Snapshot messen.
-
 [[streamers]]
 platform = "twitch"
-login = "gronkh"
+login = "sidneyeweka"
 language = "de"
 chat_delay_s = 4.0
 
 [[streamers]]
 platform = "twitch"
-login = "handofblood"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "staiy"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "rumathra"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "mertabimula"
-language = "de"
-chat_delay_s = 4.0
-facecam = { x = 1456, y = 140, w = 444, h = 250 }   # Rahmen-Cam oben rechts, gemessen 19.11.
-
-[[streamers]]
-platform = "twitch"
-login = "dhalucard"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "amar"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "lostkittn"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "honeypuu"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "reeze"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "kayzahr"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "tanzverbot"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "letshugotv"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "pietsmiet"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "bonjwa"
-language = "de"
-chat_delay_s = 4.0
-facecam = { x = 1516, y = 430, w = 400, h = 334 }   # Cam rechts Mitte ohne Rahmen, gemessen 19.11.
-facecam_frameless = true
-
-[[streamers]]
-platform = "twitch"
-login = "nooreax"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "shurjoka"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "abugoku9999"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "maxim"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "mahluna"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "elotrix"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "marcelscorpion"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "dnerdtv"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "ssio"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "sterzik"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "rotpilz"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "nanimo"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "jules"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "lara_loft"
-language = "de"
-chat_delay_s = 4.0
-
-[[streamers]]
-platform = "twitch"
-login = "dagibee"
+login = "willisommer"
 language = "de"
 chat_delay_s = 4.0
