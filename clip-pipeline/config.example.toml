@@ -132,7 +132,7 @@ platform = "twitch"
 login = "rewinside"
 language = "de"
 chat_delay_s = 4.0
-facecam = { x = 1420, y = 0, w = 500, h = 360 }   # Cam oben rechts, darunter Chat-Overlay, gemessen 18.11.
+facecam = { x = 1424, y = 710, w = 496, h = 370 }   # Cam unten rechts (seit 19.11., vorher oben rechts)
 
 [[streamers]]
 platform = "twitch"
@@ -164,6 +164,7 @@ platform = "twitch"
 login = "schradin"
 language = "de"
 chat_delay_s = 4.0
+facecam = { x = 1440, y = 164, w = 476, h = 272 }   # Rahmen-Cam oben rechts, gemessen 19.11.
 
 # --- weitere bekannte deutsche Streamer (Nutzerwunsch 19.11.: „alle bekannten“). Facecam nach Snapshot messen.
 
@@ -196,6 +197,7 @@ platform = "twitch"
 login = "mertabimula"
 language = "de"
 chat_delay_s = 4.0
+facecam = { x = 1456, y = 140, w = 444, h = 250 }   # Rahmen-Cam oben rechts, gemessen 19.11.
 
 [[streamers]]
 platform = "twitch"
@@ -256,6 +258,8 @@ platform = "twitch"
 login = "bonjwa"
 language = "de"
 chat_delay_s = 4.0
+facecam = { x = 1516, y = 430, w = 400, h = 334 }   # Cam rechts Mitte ohne Rahmen, gemessen 19.11.
+facecam_frameless = true
 
 [[streamers]]
 platform = "twitch"
