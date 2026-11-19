@@ -30,7 +30,7 @@ hype_words = ["LUL", "OMEGALUL", "W", "💀", "😂", "🤣", "PogChamp", "Pog",
               "oma", "Oma", "opa", "Opa", "rentner", "rollator",  # Oma-Clips performen am besten
               "holy", "wow", "krass", "heftig", "insane", "geisteskrank", "cinema", "Cinema", "gänsehaut",
               # Kanal-Emotes von Zarbex (aus echtem Chat gezählt)
-              "zarbexHehe", "zarbexGeil", "zarbexHyper", "zarbexHype", "zarbexYeah", "zarbexW", "zarbexLost", "zarbexRedFlag"]
+              "zarbexHehe", "zarbexLost", "zarbexRedFlag"]  # W/Hype-Emotes kommen meist bei Spenden
 # ignore_users, ignore_patterns, answer_words: sinnvolle Standardwerte, siehe pipeline/config.py
 
 [clip]
