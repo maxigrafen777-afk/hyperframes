@@ -211,6 +211,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Aussicht, Stadt, Wetter, Details) – nicht nur Lustiges. Hook dann z. B. „SO sieht Vice City aus“, „Das ist KEIN Trailer“.
 - 2026-11-19 · Nutzer: Im roten Hook-Kasten muss IMMER etwas Krasses stehen, damit Leute bleiben (Superlativ,
   Schock, Neugier). Kein neutraler Hook.
+- 2026-11-19 · Nutzer: Verbrauch zu hoch. Vorfilter im Dienst: Kandidaten mit < 15 % Lachen/Staunen (ohne
+  Clip-Rufe) oder > 85 % Musik werden ohne Claude verworfen. Nur noch echte Chancen wecken den Wächter.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

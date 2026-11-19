@@ -70,6 +70,10 @@ class DetectCfg(BaseModel):
     # Chor: Chat wiederholt dieselbe kurze Anweisung („Anzeige“, „Waffe im Haus“) ohne zu lachen.
     max_chorus_ratio: float = Field(default=0.22, ge=0, le=1)
     chorus_max_hype: float = Field(default=0.2, ge=0, le=1)
+    # Vorfilter nach der Transkription (spart Claude-Aufrufe): ohne Lachen/Staunen im Chat und ohne
+    # Clip-Rufe wird nicht bewertet. Alle guten Clips bisher lagen bei >= 20 % (Nutzer 19.11.).
+    prefilter_min_hype: float = Field(default=0.15, ge=0, le=1)
+    prefilter_max_music: float = Field(default=0.85, ge=0, le=1)  # Anteil Sekunden mit Musik
 
     @model_validator(mode="after")
     def _windows(self) -> DetectCfg:

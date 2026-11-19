@@ -171,12 +171,34 @@ class Watcher:
                 continue
             try:
                 await asyncio.to_thread(step_transcribe, self.db, self.cfg, clip)
+                self.prefilter(clip.id)
             except InvalidTransition:
                 # Während der Transkription als Duplikat verworfen (stärkerer Kandidat überlappt) – normal.
                 log.info("Clip %s inzwischen verworfen (Duplikat), Transkript nicht benötigt", clip.id)
             except Exception as e:  # ein kaputter Clip darf den Dienst nicht stoppen
                 log.exception("Transkription Clip %s fehlgeschlagen", clip.id)
                 self.db.fail(clip.id, repr(e))
+
+    def prefilter(self, cid: int) -> None:
+        """Offensichtlich schwache Kandidaten ohne Claude verwerfen."""
+        c = self.db.get(cid)
+        if c is None or c.status != Status.TRANSCRIBED:
+            return
+        d, s = self.cfg.detect, c.candidate.signals
+        reason = None
+        if s.hype_ratio < d.prefilter_min_hype and s.clip_calls < d.clip_calls_trigger:
+            reason = f"Vorfilter: kaum Lachen/Staunen ({s.hype_ratio:.0%})"
+        else:
+            try:
+                t = json.loads(Path(c.transcript_path).read_text("utf-8"))
+                dur = max(c.candidate.end_ts - c.candidate.start_ts, 1)
+                if len(t.get("music_seconds", [])) / dur > d.prefilter_max_music:
+                    reason = "Vorfilter: fast nur Musik"
+            except (OSError, ValueError, TypeError):
+                pass
+        if reason:
+            self.db.advance(cid, Status.REJECTED, error=reason)
+            log.info("Clip %s %s", cid, reason)
 
     async def cleanup(self) -> None:
         while True:
