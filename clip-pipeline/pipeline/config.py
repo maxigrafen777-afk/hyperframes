@@ -59,10 +59,10 @@ class DetectCfg(BaseModel):
     # Antwortwelle: Streamer fragt, Chat antwortet "ja/nein/1/2". Kein Highlight.
     answer_words: list[str] = Field(default_factory=lambda: [
         "ja", "jo", "joa", "jap", "jup", "nein", "ne", "nö", "nope", "doch", "yes", "yep", "no",
-        "klar", "safe", "lets", "go", "logo", "auf", "jeden", "mach", "machen", "gut", "gute", "quatsch",
+        "klar", "safe", "logo", "auf", "jeden", "mach", "machen", "gut", "gute", "quatsch",
         "max", "mio", "k", "prozent",
         "moin", "moinsen", "hi", "hey", "hallo", "servus", "guten", "morgen", "abend", "yt", "youtube", "bye", "tschüss", "nacht",  # Begrüßungs-/Abschiedswellen
-        "gg", "ww", "w", "top", "ehre", "liebe", "danke",  # Sub-/Spenden-Danksagungen
+        "top", "ehre", "liebe", "danke",  # Sub-/Spenden-Danksagungen (gg/W zählen als Jubel)
         "rot", "schwarz", "schwarze", "blau", "gelb", "grün", "weiß", "silber", "black",  # Farbwahl-Abfragen
         "o7", "f",  # Salut-/F-Wellen auf Aufforderung des Streamers
     ])

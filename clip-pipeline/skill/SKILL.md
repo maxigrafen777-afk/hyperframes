@@ -213,6 +213,8 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Schock, Neugier). Kein neutraler Hook.
 - 2026-11-19 · Nutzer: Verbrauch zu hoch. Vorfilter im Dienst: Kandidaten mit < 15 % Lachen/Staunen (ohne
   Clip-Rufe) oder > 85 % Musik werden ohne Claude verworfen. Nur noch echte Chancen wecken den Wächter.
+- 2026-11-19 · Nutzer: Nicht nur Lacher – auch coole Missionen/Aktionen, die geschafft werden (Flucht gelungen,
+  Heist durch, krasser Stunt), wenn Chat/Streamer jubeln („LETS GO“, „GG“, „W“). Keine Story-Spoiler-Cutscenes.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

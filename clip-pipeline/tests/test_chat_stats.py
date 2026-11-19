@@ -135,7 +135,7 @@ def test_bots_and_templates_are_ignored():
 
 def test_stretched_answers_are_answers():
     det = ChatDetector("c", CFG)
-    for t in ["Jaaaa", "Yesss", "neeee", "auf jeden", "lets goo", "Klar", "nööö"]:
+    for t in ["Jaaaa", "Yesss", "neeee", "auf jeden", "Klar", "nööö"]:
         assert det.is_answer(t), t
     for t in ["hahaha", "LUL LUL", "was ist da passiert", "alter wie krass"]:
         assert not det.is_answer(t), t
