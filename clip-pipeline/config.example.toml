@@ -8,7 +8,7 @@ games = ["Grand Theft Auto VI"]
 
 [recorder]
 segment_s = 2            # Länge eines Puffer-Segments
-buffer_s = 180           # so viel Material hält der Puffer
+buffer_s = 420           # 7 min: Nutzer meldet Momente, die der Chat-Detektor verpasst
 quality = "1080p60,1080p,best"
 max_parallel = 8         # gleichzeitige Aufnahmen (Bandbreite/CPU)
 
