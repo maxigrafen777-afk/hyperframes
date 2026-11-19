@@ -178,6 +178,11 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 2026-11-19 · Release-Nacht (DE-Release 0 Uhr): fast nur Story-Anfänge, Club-/Dusch-Nacktszenen, Charakter-Editor-
   Abstimmungen und Missions-Schießereien mit Score-Musik. Nacktheit sofort verwerfen (Standbilder vorher prüfen).
   Whisper-Endlosschleifen („waschen, waschen, …“) heißen: dort spricht niemand → Stelle nicht verwenden.
+- 2026-11-19 · Hook höchstens ~28 Zeichen: „Beim Überfall kriegt er eine Panikattacke 😭“ lief links aus dem Bild.
+  Nach dem Rendern immer Bild bei 1 s prüfen.
+- 2026-11-19 · Gut: NPC mit absurder Reaktion beim Überfall (#254 Kassierer mit Panikattacke will seinen Vape),
+  Streamer mit schlechtem Gewissen – Peggy-Typ.
+- 2026-11-19 · Container-Neustart beendet den Dienst ohne „watch beendet“-Meldung → nach jedem Neustart prüfen und neu starten.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
