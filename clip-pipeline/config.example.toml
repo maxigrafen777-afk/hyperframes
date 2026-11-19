@@ -22,6 +22,7 @@ min_unique_ratio = 0.5   # verschiedene Nutzer / Nachrichten im Burst
 clip_calls_trigger = 3   # so viele verschiedene Nutzer schreiben "clip"
 cooldown_s = 45
 min_pre_score = 0.30     # darunter fällt der Kandidat sofort weg
+prefilter_min_hype = 0.10   # 19.11.: von 0.15 gesenkt
 # Lachen (hahaha, xD, lol, kekw) wird automatisch erkannt. Hier zusätzlich Emotes:
 hype_words = ["LUL", "OMEGALUL", "W", "💀", "😂", "🤣", "PogChamp", "Pog", "POGGERS", "monkaS", "NAHHH", "EYOOOO", "bruh",
               # Staunen über die Map (Nutzer 19.11.: Wow-Momente sind auch gute Clips)
