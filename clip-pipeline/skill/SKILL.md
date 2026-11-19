@@ -272,3 +272,4 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   höchstens hype 5. Der Chat-Chor allein trägt keinen Clip. 40 s ruhiges Streichen ist zu lang für so wenig.
 - 19.11.: Eliasn97-Clips bekamen auf TikTok „kann nicht empfohlen werden“. Verdacht: Sponsor-Banner (Quantum/Würth) oben im Gameplay = Werbung ohne Kennzeichnung, dazu Waffe auf Zivilisten (Überfälle). Banner per game_area [96,1080] abgeschnitten. Bei Elias Überfälle mit Waffe auf Menschen meiden, lieber Fails/Fluchten/Lacher.
 - 19.11.: Auch Elias-Krokodil-Clip (ohne Banner, ohne Waffe) „kann nicht empfohlen werden“ → Verdacht: nicht originaler Inhalt (eigene Clip-Kanäle). Nutzer: Elias vorerst NICHT liefern, Kandidaten verwerfen; Aufnahme läuft weiter.
+- 19.11.: Nach jedem gelieferten Clip PushNotification schicken („Neuer Clip #<id> <Streamer>: <Titel>“) – Nutzerwunsch.
