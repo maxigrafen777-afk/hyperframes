@@ -102,7 +102,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Caption,{FONT},84,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,1
-Style: Hook,{FONT},70,&H00000000,&H00000000,&H00FFFFFF,&H00FFFFFF,0,0,0,0,100,100,0,0,3,18,0,5,60,60,0,1
+Style: Hook,{FONT},74,&H00FFFFFF,&H00FFFFFF,&H001E1EE6,&H001E1EE6,0,0,0,0,100,100,0,0,3,20,0,5,60,60,0,1
 Style: Credit,{FONT},32,&H40FFFFFF,&H40FFFFFF,&H80000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,0,0,0,1
 
 [Events]
@@ -123,10 +123,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
     if hook.strip():
         hook_end = min(HOOK_S, duration)
+        text = _clean(hook).upper()
+        size = max(46, min(74, int(74 * 30 / max(len(text), 1))))  # lange Hooks kleiner, damit sie in den Kasten passen
         ev.append(
             f"Dialogue: 2,{_ts(0)},{_ts(hook_end)},Hook,,0,0,0,,"
-            f"{{\\pos({cx},{place.hook_y})\\fad(0,200)\\fscx85\\fscy85\\t(0,140,\\fscx100\\fscy100)}}"
-            f"{_clean(hook).upper()}"
+            f"{{\\pos({cx},{place.hook_y})\\fs{size}\\fad(0,200)\\fscx70\\fscy70\\t(0,120,\\fscx108\\fscy108)\\t(120,220,\\fscx100\\fscy100)}}"
+            f"{text}"
         )
     if credit.strip():
         ev.append(

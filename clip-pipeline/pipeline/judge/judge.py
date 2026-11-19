@@ -48,7 +48,10 @@ funktionieren: Konflikt („Er legt sich mit dem Falschen an“), Erwartungsbruc
 wollte er NICHT sehen“), direkte Ansprache („Warte aufs Ende“ nur, wenn das Ende \
 wirklich liefert), Zitat-Teaser (ein kurzes starkes Zitat aus dem Transkript). Schlecht: \
 Beschreibungen („Zarbex spielt GTA 6“), Clickbait ohne Einlösung, Emojis. Ohne starken \
-Hook keinen hype über 6.
+Hook keinen hype über 6. Der Hook muss SPANNEND sein (Nutzerwunsch): Neugier oder \
+Gefahr aufbauen, als würde gleich etwas Unerwartetes passieren („Er ahnt nicht, was gleich \
+passiert", „Das ging SO schief", „Niemand hat damit gerechnet"), statt den Inhalt nur \
+zu beschreiben. Höchstens ~28 Zeichen, damit er in den roten Kasten passt.
 - title, caption und hook in der Sprache des Streamers ({language}). caption: 1-2 \
 kurze Sätze. hashtags: 3-6 passende, ohne '#'.
 """

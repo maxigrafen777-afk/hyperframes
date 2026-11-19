@@ -116,15 +116,16 @@ class Watcher:
             await asyncio.sleep(POLL_S)
 
     async def snapshot(self, ch: Channel) -> None:
-        """Ein Standbild pro Session, um die Facecam-Position zu prüfen."""
+        """Standbild alle 10 min, um die Facecam-Position zu prüfen (Streamer verschieben sie)."""
         await asyncio.sleep(20)
-        if not ch.recorder or not ch.recorder.buffer.segments:
-            return
-        out = self.cfg.data_dir / "snapshots" / f"{ch.s.login}.jpg"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        seg = ch.recorder.buffer.segments[-1].path
-        await asyncio.to_thread(subprocess.run, ["ffmpeg", "-v", "error", "-y", "-i", str(seg),
-                                                 "-frames:v", "1", str(out)], check=False)
+        while ch.recording and ch.recorder:
+            if ch.recorder.buffer.segments:
+                out = self.cfg.data_dir / "snapshots" / f"{ch.s.login}.jpg"
+                out.parent.mkdir(parents=True, exist_ok=True)
+                seg = ch.recorder.buffer.segments[-1].path
+                await asyncio.to_thread(subprocess.run, ["ffmpeg", "-v", "error", "-y", "-i", str(seg),
+                                                         "-frames:v", "1", str(out)], check=False)
+            await asyncio.sleep(600)
 
     async def read_chats(self) -> None:
         logins = list(self.channels)

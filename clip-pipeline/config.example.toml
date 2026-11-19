@@ -10,7 +10,7 @@ games = ["Grand Theft Auto VI"]
 segment_s = 2            # Länge eines Puffer-Segments
 buffer_s = 180           # so viel Material hält der Puffer
 quality = "1080p60,1080p,best"
-max_parallel = 6         # gleichzeitige Aufnahmen (Bandbreite/CPU)
+max_parallel = 8         # gleichzeitige Aufnahmen (Bandbreite/CPU)
 
 [detect]
 burst_s = 10             # Fenster für "gerade eben"
@@ -70,6 +70,7 @@ login = "trymacs"
 language = "de"
 chat_delay_s = 4.0
 facecam = { x = 1360, y = 600, w = 560, h = 480 }   # Greenscreen unten rechts (keine Rahmen-Cam), gemessen 18.11.
+facecam_frameless = true   # Greenscreen ohne Rahmen
 
 [[streamers]]
 platform = "twitch"
@@ -77,6 +78,7 @@ login = "montanablack88"
 language = "de"
 chat_delay_s = 4.0
 facecam = { x = 1280, y = 700, w = 480, h = 380 }   # Greenscreen unten Mitte-rechts, gemessen 18.11.
+facecam_frameless = true   # Greenscreen ohne Rahmen
 
 [[streamers]]
 platform = "twitch"
@@ -160,5 +162,187 @@ chat_delay_s = 4.0
 [[streamers]]
 platform = "twitch"
 login = "schradin"
+language = "de"
+chat_delay_s = 4.0
+
+# --- weitere bekannte deutsche Streamer (Nutzerwunsch 19.11.: „alle bekannten“). Facecam nach Snapshot messen.
+
+[[streamers]]
+platform = "twitch"
+login = "gronkh"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "handofblood"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "staiy"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "rumathra"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "mertabimula"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "dhalucard"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "amar"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "lostkittn"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "honeypuu"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "reeze"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "kayzahr"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "tanzverbot"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "letshugotv"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "pietsmiet"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "bonjwa"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "nooreax"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "shurjoka"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "abugoku9999"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "maxim"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "mahluna"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "elotrix"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "marcelscorpion"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "dnerdtv"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "ssio"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "sterzik"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "rotpilz"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "nanimo"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "jules"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "lara_loft"
+language = "de"
+chat_delay_s = 4.0
+
+[[streamers]]
+platform = "twitch"
+login = "dagibee"
 language = "de"
 chat_delay_s = 4.0

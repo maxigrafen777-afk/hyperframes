@@ -23,6 +23,7 @@ class Streamer(BaseModel):
     language: str = "de"
     chat_delay_s: float = Field(default=4.0, ge=0)
     facecam: Rect | None = None
+    facecam_frameless: bool = False  # Greenscreen-Cam ohne Rahmen: Position aus Config übernehmen
     # Sichtbarer Gameplay-Bereich (y von/bis) bei festen schwarzen Balken; leer = automatisch erkennen
     game_area: tuple[int, int] | None = None
 

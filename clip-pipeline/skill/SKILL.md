@@ -83,6 +83,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Hook bezieht sich auf die Reaktion.
 - Schnitt: nicht mitten im Satz anfangen, wenn es sich vermeiden lässt; am ersten Satz
   einsteigen, der den Moment verständlich macht. Nach der Pointe/Reaktion 0,5–1 s stehen lassen.
+- Hook SPANNEND formulieren (Nutzer 19.11.): Neugier/Gefahr/Cliffhanger statt Beschreibung –
+  „Er ahnt nicht, was gleich passiert…", „Das ging SO schief", „Niemand hat damit gerechnet".
+  Wird weiß auf rotem Kasten eingeblendet (Pop-Animation), max. ~28 Zeichen.
 - Hook: max. 7 Wörter, nur was belegt ist (Transkript/Bilder), Pointe nicht verraten,
   keine Emojis (Schrift kann sie nicht darstellen). Emojis gehören in die Caption.
 - Story-Spoiler (Handlung, Missionsausgang, Cutscenes) verwerfen. Die ersten Tage nach Release besonders streng.
@@ -187,6 +190,10 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Kurz schneiden (~24 s) ab kurz vor der Einfahrt.
 - 2026-11-19 · Elektromobil/Rollator-Momente sind gefragt (Peggy), aber nicht wenn der Streamer den Besitzer
   dafür erschießt (#274) – dann verwerfen.
+- 2026-11-19 · Nutzer: Facecam MUSS sitzen. Render prüft jetzt: gefundene Cam (Rahmen-Score) → nehmen;
+  sonst Config-Stelle prüfen; sonst Layout ohne Cam (blur) statt falsch geschnittener Cam.
+  Greenscreen-Cams ohne Rahmen (Trymacs, MontanaBlack): facecam_frameless = true. Snapshots alle 10 min
+  (data/snapshots/<login>.jpg) – bei jedem neuen Streamer Cam messen und eintragen; jeden Render bei 1 s ansehen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

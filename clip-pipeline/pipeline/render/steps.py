@@ -13,7 +13,7 @@ from ..judge.media import Transcript
 from ..judge.steps import clip_dir, streamer_for
 from ..models import Judgment, Status
 from .export import RenderJob, render
-from .facecam import find_facecam
+from .facecam import check_facecam
 
 log = logging.getLogger(__name__)
 
@@ -54,13 +54,19 @@ def step_render(db: DB, cfg: Config, clip: Clip) -> Path:
             separate_vocals(Path(clip.raw_path), audio)
     facecam = streamer.facecam
     if facecam is not None and cfg.render.auto_facecam:
-        found, score = find_facecam(Path(clip.raw_path), j.start_s, j.end_s - j.start_s, facecam)
-        if score >= cfg.render.facecam_min_score:
+        found, score, at_config = check_facecam(Path(clip.raw_path), j.start_s, j.end_s - j.start_s, facecam)
+        if streamer.facecam_frameless:
+            pass  # Greenscreen-Cam ohne Rahmen: Kanten-Suche geht nicht, Config gilt
+        elif score >= cfg.render.facecam_min_score:
             if (found.x, found.y) != (facecam.x, facecam.y):
                 log.info("Clip %s: Facecam verschoben auf x=%d y=%d (score %.1f)", clip.id, found.x, found.y, score)
             facecam = found
+        elif at_config >= cfg.render.facecam_min_score * 0.6:
+            log.info("Clip %s: Facecam an Config-Stelle bestätigt (score %.1f)", clip.id, at_config)
         else:
-            log.warning("Clip %s: Facecam nicht sicher gefunden (score %.1f), nehme Config", clip.id, score)
+            # Lieber gar keine Cam als eine falsch sitzende: Layout ohne Cam (Blur)
+            log.warning("Clip %s: Facecam nicht gefunden (%.1f/%.1f) – Layout ohne Cam", clip.id, score, at_config)
+            facecam = None
     out = render(RenderJob(
         raw=Path(clip.raw_path), out=out_dir / "clip.mp4",
         start_s=j.start_s, end_s=j.end_s, subject_x=j.subject_x, layout=j.layout,
