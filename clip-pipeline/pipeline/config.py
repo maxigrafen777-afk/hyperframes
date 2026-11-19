@@ -61,6 +61,7 @@ class DetectCfg(BaseModel):
         "ja", "jo", "joa", "jap", "jup", "nein", "ne", "nö", "nope", "doch", "yes", "yep", "no",
         "klar", "safe", "lets", "go", "logo", "auf", "jeden", "mach", "machen", "gut", "gute", "quatsch",
         "max", "mio", "k", "prozent",
+        "moin", "moinsen", "hi", "hey", "hallo", "servus", "guten", "morgen", "abend", "yt", "youtube", "bye", "tschüss", "nacht",  # Begrüßungs-/Abschiedswellen
         "rot", "schwarz", "schwarze", "blau", "gelb", "grün", "weiß", "silber", "black",  # Farbwahl-Abfragen
         "o7", "f",  # Salut-/F-Wellen auf Aufforderung des Streamers
     ])
