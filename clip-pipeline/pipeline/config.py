@@ -59,6 +59,7 @@ class DetectCfg(BaseModel):
     answer_words: list[str] = Field(default_factory=lambda: [
         "ja", "jo", "joa", "jap", "jup", "nein", "ne", "nö", "nope", "doch", "yes", "yep", "no",
         "klar", "safe", "lets", "go", "logo", "auf", "jeden", "mach", "machen", "gut", "gute", "quatsch",
+        "max", "mio", "k", "prozent",
         "rot", "schwarz", "schwarze", "blau", "gelb", "grün", "weiß", "silber", "black",  # Farbwahl-Abfragen
         "o7", "f",  # Salut-/F-Wellen auf Aufforderung des Streamers
     ])

@@ -81,7 +81,7 @@ class ChatDetector:
     def is_answer(self, text: str) -> bool:
         # gedehnte Schreibweisen vereinheitlichen: "Jaaaa" -> "ja", "Yesss" -> "yes", "neeee" -> "ne"
         words = [_REPEAT.sub(r"\1", w) for w in _WORD.split(text.casefold()) if w]
-        return 0 < len(words) <= 2 and all(w in self.answers or (w.isdigit() and len(w) <= 2) for w in words)
+        return 0 < len(words) <= 2 and all(w in self.answers or (w.isdigit() and len(w) <= 4) for w in words)
 
     def feed(self, line: ChatLine) -> Trigger | None:
         if self.is_noise(line):
