@@ -277,3 +277,4 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 19.11.: Nutzer: Slapstick-Prügeleien mit NPCs (z. B. Zarbex haut wieder eine Oma) DÜRFEN rein. Weiter tabu: Waffe auf Zivilisten / Schießen auf Passanten (TikTok-Risiko), Gore, Nacktheit, Musik, Spoiler.
 - 19.11.: Nutzer: Clips ohne Reden des Streamers (Schradin Jetski #617, kaum Worte) sind nicht gut. Nur liefern, wenn der Streamer im Ausschnitt deutlich reagiert/spricht (Faustregel: ≥ 2 Wörter pro 3 s, Reaktion am Höhepunkt).
 - 19.11.: Creator-Rewards zahlt nur für Videos > 1 min. Nutzer: vorerst kurze Clips lassen (erst 100k Aufrufe sammeln), danach ggf. auf 61–90 s umstellen.
+- 19.11. abends: Nutzer lädt nachts nicht hoch. Nachts KEINE Einzel-Clips/Pushes schicken, sondern jeden guten Clip mit tools/night_add.sh <id> in data/nacht/ legen. Morgens 07:30 (Berlin) Paket: ZIP + Liste + Archiv + eine Push. Erinnerung trig_019yYwsXvvojVAGh8YWBiSGB.
