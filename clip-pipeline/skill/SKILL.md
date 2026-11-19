@@ -46,6 +46,7 @@ Arbeitsverzeichnis: `clip-pipeline/`. Config: `config.toml` (Kopie von `config.e
    lesbar, nichts überlappt, kein schwarzer Balken zwischen Cam und Gameplay, **oben ist wirklich
    die Facecam (eine Person) zu sehen**), dann mit `SendUserFile` schicken:
    `clip.mp4` + den Text aus `post.txt` im Chat. Danach `review.py delivered <id>`.
+   Dann ins **Clip-Archiv** legen (siehe Gelerntes 2026-11-19, Archiv-Ablauf).
    Höchstens 3 Clips pro Weckruf, der beste zuerst. Schwache Stunden: lieber nichts schicken.
 6. **Lernen:** Neues unter _Gelerntes_ eintragen (Datum, was, Konsequenz). Wiederholt
    sich etwas, als Regel unter _Bewertungsregeln_ aufnehmen oder im Code beheben
@@ -194,6 +195,10 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   sonst Config-Stelle prüfen; sonst Layout ohne Cam (blur) statt falsch geschnittener Cam.
   Greenscreen-Cams ohne Rahmen (Trymacs, MontanaBlack): facecam_frameless = true. Snapshots alle 10 min
   (data/snapshots/<login>.jpg) – bei jedem neuen Streamer Cam messen und eintragen; jeden Render bei 1 s ansehen.
+- 2026-11-19 · Clip-Archiv (Nutzerwunsch): https://claude.ai/artifact/4dzFJJ8s9ua4JSgXA99zcC – jeden gelieferten
+  Clip dort ablegen: `tools/archive_copy.sh <id>` (Kopie < 19 MB) → Artifact publish asset:true mit url + file_path
+  data/archive/<id>.mp4 → `python3 tools/archive_row.py <id> <asset-id>` → ArtifactData set collection "clips",
+  doc_id "c<id>", file_path data/archive/rows/<id>.json. Der Nutzer hakt dort „hochgeladen“ ab.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

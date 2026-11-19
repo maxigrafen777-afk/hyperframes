@@ -1,0 +1,181 @@
+<title>Clip-Archiv</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: ein Feed aus Hochkant-Karten (9:16), oben Zähler + Filter; Akzent = Rot des Hooks im Clip */
+:root {
+  --bg: #f3f1f1; --surface: #ffffff; --ink: #1c1718; --muted: #6d6466; --line: #e2dcdd;
+  --red: #d8232a; --red-ink: #ffffff; --ok: #1d7a4a; --ok-bg: #e3f3ea;
+  --display: "Montserrat", "Arial Black", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141112; --surface: #1f1a1b; --ink: #f2eeee; --muted: #a59a9c; --line: #352d2f;
+  --red: #e6363d; --red-ink: #ffffff; --ok: #5fd193; --ok-bg: #173226; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141112; --surface: #1f1a1b; --ink: #f2eeee; --muted: #a59a9c; --line: #352d2f;
+  --red: #e6363d; --red-ink: #ffffff; --ok: #5fd193; --ok-bg: #173226; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); line-height: 1.45; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+h1 { font-family: var(--display); font-weight: 900; font-size: clamp(28px, 6vw, 42px); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h1 .tag { display: inline-block; background: var(--red); color: var(--red-ink); padding: 2px 10px; transform: rotate(-2deg); }
+.sub { color: var(--muted); margin: 6px 0 0; font-size: 14px; }
+.stats { display: flex; gap: 18px; font-variant-numeric: tabular-nums; }
+.stat b { display: block; font-family: var(--display); font-size: 24px; }
+.stat span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; }
+.chip { font: 600 13px var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip:focus-visible, .btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.card.done { opacity: .78; }
+.vid { position: relative; aspect-ratio: 9 / 16; max-width: 100%; background: #000; }
+.vid video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.nr { position: absolute; top: 10px; left: 10px; background: var(--red); color: var(--red-ink); font: 900 12px var(--display); padding: 3px 8px; border-radius: 4px; }
+.flag { position: absolute; top: 10px; right: 10px; background: var(--ok-bg); color: var(--ok); font: 600 12px var(--body); padding: 3px 8px; border-radius: 999px; }
+.body { padding: 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.title { font-family: var(--display); font-weight: 700; font-size: 16px; margin: 0; text-wrap: balance; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 12px; color: var(--muted); }
+.meta .who { color: var(--ink); font-weight: 600; }
+details { font-size: 13px; }
+summary { cursor: pointer; color: var(--muted); }
+pre.post { white-space: pre-wrap; word-break: break-word; font: 13px/1.45 var(--body); background: var(--bg); border-radius: 8px; padding: 10px; margin: 8px 0 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { font: 600 13px var(--body); border-radius: 8px; padding: 8px 12px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.btn.primary { background: var(--red); color: var(--red-ink); border-color: var(--red); }
+.btn.ok { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+.btn[disabled] { opacity: .5; cursor: default; }
+.empty, .note { text-align: center; color: var(--muted); padding: 48px 16px; border: 1px dashed var(--line); border-radius: 14px; }
+.note { padding: 10px; margin-bottom: 16px; border-style: solid; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { h1 .tag { transform: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Clip-<span class="tag">Archiv</span></h1>
+      <p class="sub">Alle fertigen GTA-6-Clips mit Post-Text – Musik entfernt, Quelle im Text.</p>
+    </div>
+    <div class="stats" aria-live="polite">
+      <div class="stat"><b id="n-all">–</b><span>Clips</span></div>
+      <div class="stat"><b id="n-open">–</b><span>Offen</span></div>
+      <div class="stat"><b id="n-done">–</b><span>Hochgeladen</span></div>
+    </div>
+  </header>
+
+  <div class="filters" role="group" aria-label="Filter">
+    <button class="chip" id="f-open" data-f="open" aria-pressed="true">Noch hochladen</button>
+    <button class="chip" id="f-done" data-f="done" aria-pressed="false">Hochgeladen</button>
+    <button class="chip" id="f-all" data-f="all" aria-pressed="false">Alle</button>
+  </div>
+
+  <div id="note" class="note" hidden></div>
+  <div id="grid" class="grid"></div>
+  <div id="empty" class="empty">Clips werden geladen … Neue Clips landen hier automatisch, sobald Claude sie fertig hat.</div>
+</div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+let clips = [], filter = "open", db = null, downloads = null, canWrite = false;
+try { filter = localStorage.getItem("filter") || "open"; } catch (e) {}
+
+const $ = (id) => document.getElementById(id);
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 2200); }
+function fmtDate(iso) { try { return new Date(iso).toLocaleString("de-DE", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+function src(c) { return c.url || (c.asset ? "/_blob/" + c.asset : ""); }
+
+function render() {
+  document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
+  const done = clips.filter(c => c.posted).length;
+  $("n-all").textContent = clips.length; $("n-done").textContent = done; $("n-open").textContent = clips.length - done;
+  const list = clips.filter(c => filter === "all" || (filter === "done" ? c.posted : !c.posted));
+  const grid = $("grid"); grid.textContent = "";
+  $("empty").hidden = list.length > 0;
+  if (!list.length && clips.length) $("empty").textContent = filter === "done" ? "Noch nichts als hochgeladen markiert." : "Alles hochgeladen – neue Clips kommen automatisch dazu.";
+  for (const c of list) {
+    const card = document.createElement("article"); card.className = "card" + (c.posted ? " done" : "");
+    const vid = document.createElement("div"); vid.className = "vid";
+    const v = document.createElement("video"); v.controls = true; v.preload = "metadata"; v.playsInline = true; v.src = src(c);
+    const nr = document.createElement("span"); nr.className = "nr"; nr.textContent = "#" + c.nr;
+    vid.append(v, nr);
+    if (c.posted) { const f = document.createElement("span"); f.className = "flag"; f.textContent = "✓ hochgeladen"; vid.append(f); }
+    const body = document.createElement("div"); body.className = "body";
+    const h = document.createElement("h2"); h.className = "title"; h.textContent = c.title || "Clip #" + c.nr;
+    const meta = document.createElement("div"); meta.className = "meta";
+    const who = document.createElement("span"); who.className = "who"; who.textContent = c.streamer || "";
+    const when = document.createElement("span"); when.textContent = fmtDate(c.deliveredAt);
+    const len = document.createElement("span"); len.textContent = c.seconds ? Math.round(c.seconds) + " s" : "";
+    meta.append(who, when, len);
+    const det = document.createElement("details");
+    const sum = document.createElement("summary"); sum.textContent = "Post-Text anzeigen";
+    const pre = document.createElement("pre"); pre.className = "post"; pre.textContent = c.post || "";
+    det.append(sum, pre);
+    const act = document.createElement("div"); act.className = "actions";
+    const copy = document.createElement("button"); copy.className = "btn primary"; copy.textContent = "Text kopieren";
+    copy.onclick = () => copyText(c.post || "", pre, det);
+    const save = document.createElement("button"); save.className = "btn"; save.textContent = "Video speichern";
+    save.hidden = !downloads; save.onclick = () => saveVideo(c, save);
+    const mark = document.createElement("button"); mark.className = "btn" + (c.posted ? " ok" : "");
+    mark.textContent = c.posted ? "✓ Hochgeladen" : "Als hochgeladen markieren";
+    mark.disabled = !canWrite; mark.onclick = () => togglePosted(c, mark);
+    act.append(copy, save, mark);
+    body.append(h, meta, det, act);
+    card.append(vid, body); grid.append(card);
+  }
+}
+
+async function copyText(text, pre, det) {
+  try { await navigator.clipboard.writeText(text); toast("Post-Text kopiert"); }
+  catch (e) {
+    det.open = true; const r = document.createRange(); r.selectNodeContents(pre);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Text markiert – jetzt kopieren");
+  }
+}
+
+async function saveVideo(c, btn) {
+  if (!downloads) return;
+  btn.disabled = true; const old = btn.textContent; btn.textContent = "Lädt …";
+  try {
+    const res = await fetch(src(c)); if (!res.ok) throw new Error("http");
+    const blob = await res.blob();
+    const name = ("clip-" + c.nr + "-" + (c.streamer || "") ).replace(/[^\w-]+/g, "-") + ".mp4";
+    await downloads.save({ filename: name, data: blob }); toast("Gespeichert");
+  } catch (e) {
+    if (e && e.code === "declined") {} else toast("Speichern ging nicht – halte das Video gedrückt oder nutze ⋮ im Player");
+  } finally { btn.disabled = false; btn.textContent = old; }
+}
+
+async function togglePosted(c, btn) {
+  if (!db) return; btn.disabled = true;
+  try { await db.doc("clips/" + c.id).update({ posted: !c.posted, postedAt: !c.posted ? new Date().toISOString() : null }); }
+  catch (e) { toast("Konnte nicht speichern"); btn.disabled = false; }
+}
+
+document.querySelectorAll(".chip").forEach(b => b.onclick = () => {
+  filter = b.dataset.f; try { localStorage.setItem("filter", filter); } catch (e) {} render();
+});
+render();
+
+(async () => {
+  if (!window.claude) { $("empty").textContent = "Öffne die Seite auf claude.ai, um die Clips zu sehen."; return; }
+  const [dbNs, user, dl] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("downloads")]);
+  downloads = dl; db = dbNs;
+  canWrite = user ? (await user.can("data.write")) !== false : false;
+  if (!db) { $("empty").textContent = "Melde dich bei claude.ai an, um das Archiv zu sehen."; return; }
+  const timer = setTimeout(() => { const n = $("note"); n.hidden = false; n.textContent = "Das Archiv antwortet gerade nicht – die Liste kann veraltet sein."; }, 10000);
+  db.collection("clips").orderBy("nr", "desc").onSnapshot(snap => {
+    if (!snap.metadata || !snap.metadata.fromCache) { clearTimeout(timer); $("note").hidden = true; }
+    clips = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (!clips.length) $("empty").textContent = "Noch keine Clips im Archiv. Neue Clips landen hier automatisch.";
+    render();
+  }, err => { clearTimeout(timer); const n = $("note"); n.hidden = false; n.textContent = "Archiv nicht erreichbar (" + (err.code || "Fehler") + ")."; });
+})();
+</script>
