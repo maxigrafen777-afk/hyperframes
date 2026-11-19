@@ -16,12 +16,12 @@ max_parallel = 8         # gleichzeitige Aufnahmen (Bandbreite/CPU)
 burst_s = 10             # Fenster für "gerade eben"
 baseline_s = 300         # Fenster für "normal"
 min_baseline_s = 120     # vorher wird nie ausgelöst
-z_threshold = 3.2       # 19.11.: von 3.5 gesenkt für mehr Kandidaten
+z_threshold = 3.0       # 19.11.: auf 3.0 gesenkt für mehr Kandidaten
 min_unique_users = 6
 min_unique_ratio = 0.5   # verschiedene Nutzer / Nachrichten im Burst
 clip_calls_trigger = 3   # so viele verschiedene Nutzer schreiben "clip"
-cooldown_s = 60
-min_pre_score = 0.35     # darunter fällt der Kandidat sofort weg
+cooldown_s = 45
+min_pre_score = 0.30     # darunter fällt der Kandidat sofort weg
 # Lachen (hahaha, xD, lol, kekw) wird automatisch erkannt. Hier zusätzlich Emotes:
 hype_words = ["LUL", "OMEGALUL", "W", "💀", "😂", "🤣", "PogChamp", "Pog", "POGGERS", "monkaS", "NAHHH", "EYOOOO", "bruh",
               # Staunen über die Map (Nutzer 19.11.: Wow-Momente sind auch gute Clips)
