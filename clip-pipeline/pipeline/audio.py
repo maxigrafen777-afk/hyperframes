@@ -28,7 +28,8 @@ def _model():
 
 def _decode(path: Path) -> np.ndarray:
     raw = subprocess.run(
-        ["ffmpeg", "-v", "error", "-i", str(path), "-vn", "-ac", "2", "-ar", str(SR), "-f", "f32le", "pipe:1"],
+        ["ffmpeg", "-v", "error", "-i", str(path), "-vn", "-af", "aresample=async=1:first_pts=0",  # Lücken mit Stille füllen: gleiche Zeitachse wie das Video
+         "-ac", "2", "-ar", str(SR), "-f", "f32le", "pipe:1"],
         capture_output=True, check=True,
     ).stdout
     return np.frombuffer(raw, dtype=np.float32).reshape(-1, 2).T.copy()

@@ -231,6 +231,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   komplett lesen und offensichtliche Whisper-Fehler korrigieren (Namen, Wortsalat, „Buster“/„Sackstuff“ etc.).
 - 2026-11-19 · Nutzer: „Sei nicht so kritisch, hau alles rein was ansatzweise gut ist, ich sortiere aus.“ min_hype 5;
   alles ab hype 5 liefern (Pflicht bleibt: keine Nacktheit, kein Gore, keine Musik, keine Story-Spoiler-Cutscene).
+- 2026-11-19 · Nutzer: Stimme/Untertitel passten nicht zum Bild. Ursache: Rohschnitt (concat) hat kleine Tonlücken,
+  Demucs-Eingang ohne Lücken → Stimmspur ~1 % kürzer, Drift bis 0,5 s nach 45 s. Fix: ffmpeg-Decode mit
+  aresample=async=1:first_pts=0. Alte Clips mit `tools/redo_audio.py <id> <judgment>` neu erzeugen.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer

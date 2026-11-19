@@ -46,7 +46,7 @@ def load_audio(path: Path) -> np.ndarray:
     """Ton als 16-kHz-Mono-float32. Ohne Tonspur: leeres Array."""
     out = subprocess.run(
         ["ffmpeg", "-hide_banner", "-loglevel", "error", "-i", str(path),
-         "-vn", "-ac", "1", "-ar", str(SAMPLE_RATE), "-f", "f32le", "pipe:1"],
+         "-vn", "-af", "aresample=async=1:first_pts=0", "-ac", "1", "-ar", str(SAMPLE_RATE), "-f", "f32le", "pipe:1"],
         capture_output=True, check=True,
     )
     return np.frombuffer(out.stdout, dtype=np.float32)
