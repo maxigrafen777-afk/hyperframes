@@ -220,6 +220,10 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
   Puffer jetzt 7 min; Nutzer-Tipps sofort mit `python3 tools/cut_now.py <login> <sek_zurück> [länge]` schneiden.
 - 2026-11-19 · Nutzer: Text lief beim Hochladen aus dem Bild (TikTok-Ränder). Hook ab 17 Zeichen zweizeilig, max. ~65 %
   Bildbreite; Untertitel max. 14 Zeichen/Zeile, Schrift 76.
+- 2026-11-19 · TikTok-Views (Nutzer-Screenshot, 14:28): Oma-Elektromobil #41 66.082 ≫ Kühlschrank „Rockstar hat es
+  nicht gefixt“ #75 1.743 > BILD „versetzt Oma für GTA“ #47 1.106 > Überfall #73 941 > Pelikan #197 869 > Alligator-Deko
+  #80 613 > 423 > Alligator #79 225 > 4 Sterne #419 205 > Shirley #88 177 > Panikattacke #254 142.
+  Konsequenz: 1) „Oma/Opa/Rentner“-Momente (absurd, liebevoll, schlechtes Gewissen) sind der Hit – Hook mit OMA. 2) Trailer-/Easter-Egg-Vergleiche („Rockstar hat es nicht gefixt“, Detail aus dem Trailer) laufen gut. 3) Zarbex liefert die stärksten Clips. 4) Reine Action/Flucht ohne Gag (4 Sterne) und Panik-NPC schwächer.
 - 2026-11-18 · Idee: Layout „große Facecam“ für Momente, in denen nur die Reaktion zählt.
 
 ## Streamer
