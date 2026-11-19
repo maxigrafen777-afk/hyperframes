@@ -7,9 +7,9 @@ import re
 from pathlib import Path
 
 from ..config import Config
-from ..audio import separate_vocals
+from ..audio import separate_vocals, vocals_drift
 from ..db import DB, Clip
-from ..judge.media import Transcript
+from ..judge.media import Transcript, transcribe
 from ..judge.steps import clip_dir, streamer_for
 from ..models import Judgment, Status
 from .export import RenderJob, render
@@ -47,11 +47,16 @@ def step_render(db: DB, cfg: Config, clip: Clip) -> Path:
     audio = None
     if cfg.render.remove_music:
         # Ohne Stimmspur wird nie gerendert: Musik darf nicht veröffentlicht werden.
-        if transcript.vocals_path and Path(transcript.vocals_path).exists():
+        if transcript.vocals_path and Path(transcript.vocals_path).exists() \
+                and not vocals_drift(Path(clip.raw_path), Path(transcript.vocals_path)):
             audio = Path(transcript.vocals_path)
         else:
             audio = out_dir / "vocals.wav"
-            separate_vocals(Path(clip.raw_path), audio)
+            music = separate_vocals(Path(clip.raw_path), audio)
+            # Untertitel-Zeiten gehören zur Stimmspur: mit neuer Spur neu transkribieren
+            transcript = transcribe(audio, streamer.language, cfg.whisper).model_copy(
+                update={"music_seconds": music, "vocals_path": str(audio)})
+            Path(clip.transcript_path).write_text(transcript.model_dump_json(), encoding="utf-8")
     facecam = streamer.facecam
     if facecam is not None and cfg.render.auto_facecam:
         found, score, at_config = check_facecam(Path(clip.raw_path), j.start_s, j.end_s - j.start_s, facecam)

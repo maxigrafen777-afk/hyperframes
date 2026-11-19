@@ -76,3 +76,19 @@ def separate_vocals(src: Path, out_wav: Path) -> list[int]:
     _write_wav(out_wav, vocals)
     rest_db = per_second_db(rest.mean(0))
     return [int(i) for i in np.nonzero(rest_db > MUSIC_DB)[0]]
+
+
+def _duration(path: Path, stream: str) -> float:
+    out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", stream, "-show_entries",
+                          "stream=duration", "-of", "csv=p=0", str(path)], capture_output=True, text=True).stdout
+    try:
+        return float(out.split()[0])
+    except (IndexError, ValueError):
+        return 0.0
+
+
+def vocals_drift(raw: Path, vocals: Path, tol: float = 0.25) -> bool:
+    """True, wenn die Stimmspur nicht so lang ist wie der Ton des Rohschnitts
+    (alte Spur ohne Lückenfüllung -> Ton läuft dem Bild davon)."""
+    want = _duration(raw, "a:0")
+    return want > 0 and abs(_duration(vocals, "a:0") - want) > tol
