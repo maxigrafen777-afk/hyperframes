@@ -102,7 +102,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Caption,{FONT},76,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,1
-Style: Hook,{FONT},74,&H00FFFFFF,&H00FFFFFF,&H001E1EE6,&H001E1EE6,0,0,0,0,100,100,0,0,3,20,0,5,60,60,0,1
+Style: Hook,{FONT},90,&H00FFFFFF,&H00FFFFFF,&H001E1EE6,&H001E1EE6,-1,0,0,0,100,100,1,0,3,28,0,5,50,50,0,1
 Style: Credit,{FONT},32,&H40FFFFFF,&H40FFFFFF,&H80000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,0,0,0,1
 
 [Events]
@@ -129,10 +129,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             cut = min((i for i, ch in enumerate(text) if ch == " "), key=lambda i: abs(i - mid))
             text = text[:cut] + "\\N" + text[cut + 1:]
         longest = max(len(x) for x in text.split("\\N"))
-        size = max(44, min(70, int(70 * 16 / max(longest, 1))))  # max. ~65 % der Bildbreite
+        size = max(58, min(96, int(96 * 13 / max(longest, 1))))  # 20.11.: dicker/größer, max. ~80 % der Bildbreite
         ev.append(
             f"Dialogue: 2,{_ts(0)},{_ts(hook_end)},Hook,,0,0,0,,"
-            f"{{\\pos({cx},{place.hook_y})\\fs{size}\\fad(0,200)\\fscx70\\fscy70\\t(0,120,\\fscx108\\fscy108)\\t(120,220,\\fscx100\\fscy100)}}"
+            f"{{\\pos({cx},{place.hook_y})\\fs{size}\\fad(0,350)\\fscx60\\fscy60\\t(0,140,\\fscx115\\fscy115)\\t(140,260,\\fscx100\\fscy100)}}"
             f"{text}"
         )
     if credit.strip():
