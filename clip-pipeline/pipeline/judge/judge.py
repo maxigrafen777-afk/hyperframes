@@ -54,7 +54,7 @@ passiert", „Das ging SO schief", „Niemand hat damit gerechnet"), statt den I
 zu beschreiben. Höchstens ~28 Zeichen, damit er in den roten Kasten passt. Immer etwas \
 Krasses (Superlativ, Schock, Neugier). Auch starke Map-Einblicke sind gute Clips, wenn \
 Streamer oder Chat ausrasten (Wow-Momente), nicht nur Lustiges.
-- title, caption und hook in der Sprache des Streamers ({language}). caption: 1-2 \
+- title, caption und hook in der Sprache des Streamers ({language}). caption: genau EIN kurzer Satz \
 kurze Sätze. hashtags: 3-6 passende, ohne '#'.
 """
 

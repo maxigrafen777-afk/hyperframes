@@ -24,7 +24,7 @@ def credit_for(streamer_key: str) -> str:
 
 
 def post_text(j: Judgment, streamer_key: str) -> str:
-    """Textblock zum Kopieren: Caption, Hashtags, Quelle."""
+    """Textblock zum Kopieren: ein Satz (Caption), Hashtags, Quelle – kein Extra-Titel."""
     tags = []
     for t in j.hashtags:
         t = re.sub(r"[^\wäöüÄÖÜß]", "", t)
@@ -80,7 +80,7 @@ def step_render(db: DB, cfg: Config, clip: Clip) -> Path:
         censor=tuple(cfg.render.censor), audio=audio, area=streamer.game_area,
     ))
     (out_dir / "post.txt").write_text(
-        f"{j.title.strip()}\n\n" + post_text(j, clip.streamer), encoding="utf-8")
+        post_text(j, clip.streamer), encoding="utf-8")
     db.advance(clip.id, Status.RENDERED, render_path=str(out))
     log.info("Clip %s gerendert: %s", clip.id, out)
     return out
