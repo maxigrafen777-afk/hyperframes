@@ -288,3 +288,5 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 20.11. Nutzer: großzügig liefern – lustige Momente, spannende Momente, kranke Szenen, Easter Eggs, lustige Überfälle und Missionen; „alles was irgendwie interessant sein kann“. Harte Grenzen bleiben (Gore, Nacktheit, Musik, Story-Spoiler, Waffe auf Zivilisten).
 
 - 20.11. Post-Text (Nutzer): nur EIN Satz + Hashtags + Quelle. Kein separater Titel, keine zweite Zeile. post.txt enthält jetzt nur caption (ein Satz). Den Titel-Satz als caption verwenden.
+
+- 20.11. Nutzer: „Auch bekloppter Kack kann rein“ – absurde/dumme Momente, Blödsinn, Quatsch-Aktionen, peinliche Fails sind ausdrücklich erwünscht (Leute finden das lustig). Lieber liefern als zu streng sein; nur harte Grenzen gelten.
