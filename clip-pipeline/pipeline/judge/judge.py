@@ -55,7 +55,7 @@ zu beschreiben. Höchstens ~28 Zeichen, damit er in den roten Kasten passt. Imme
 Krasses (Superlativ, Schock, Neugier). Auch starke Map-Einblicke sind gute Clips, wenn \
 Streamer oder Chat ausrasten (Wow-Momente), nicht nur Lustiges.
 - title, caption und hook in der Sprache des Streamers ({language}). caption: genau EIN kurzer Satz \
-kurze Sätze. hashtags: 3-6 passende, ohne '#'.
+(keine zweite Zeile, kein Extra-Text). hashtags: 3-6 passende, ohne '#'.
 """
 
 
