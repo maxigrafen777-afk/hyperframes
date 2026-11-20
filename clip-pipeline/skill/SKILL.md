@@ -292,3 +292,10 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 20.11. Nutzer: „Auch bekloppter Kack kann rein“ – absurde/dumme Momente, Blödsinn, Quatsch-Aktionen, peinliche Fails sind ausdrücklich erwünscht (Leute finden das lustig). Lieber liefern als zu streng sein; nur harte Grenzen gelten.
 
 - 20.11. Nutzer: NPC-Momente und crazy NPC-Shit kommen immer super an, besonders Omas/Rentner – bei Zarbex gezielt darauf achten. Hype-Wörter oma/omi/granny/opa/rentner/npc ergänzt.
+
+## Best-of (täglich ~19 Uhr, Nutzer 20.11.)
+
+- Zusätzlich zu den Einzelclips: Top 5 eines EINZIGEN Streamers. Nutzer will dafür ANDERE kleine Sequenzen als die schon gelieferten Einzelclips: verworfene/vorgefilterte Kandidaten mit witzigem Satz (Transkripte in data/clips/<id>/transcript.json durchsuchen), je 10–14 s.
+- Ablauf: pro Schnipsel Judgment-JSON (start/end eng, hook = Titel des Moments) → `review.py rerender <id> <json>` (Untertitel vorher prüfen/korrigieren); zwei Schnipsel aus einem Rohschnitt: erst Clip kopieren, dann neu rendern. Dann `tools/bestof.sh <streamer> data/bestof/top5_<streamer>_<TT-MM>.mp4 <#5> <#4> <#3> <#2> <#1>`.
+- Post-Text: ein Satz + Hashtags + Quelle. Länge ~100 s ist ok (über 1 min).
+- Erstes Best-of 20.11.: Zarbex – #5 Tür auf ihr Loser, #4 Fahren+Schießen unmöglich, #3 urteilender Blick, #2 geklautes Geld einzahlen, #1 falsches Haus abgerissen.
