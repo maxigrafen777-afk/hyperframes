@@ -290,3 +290,5 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 20.11. Post-Text (Nutzer): nur EIN Satz + Hashtags + Quelle. Kein separater Titel, keine zweite Zeile. post.txt enthält jetzt nur caption (ein Satz). Den Titel-Satz als caption verwenden.
 
 - 20.11. Nutzer: „Auch bekloppter Kack kann rein“ – absurde/dumme Momente, Blödsinn, Quatsch-Aktionen, peinliche Fails sind ausdrücklich erwünscht (Leute finden das lustig). Lieber liefern als zu streng sein; nur harte Grenzen gelten.
+
+- 20.11. Nutzer: NPC-Momente und crazy NPC-Shit kommen immer super an, besonders Omas/Rentner – bei Zarbex gezielt darauf achten. Hype-Wörter oma/omi/granny/opa/rentner/npc ergänzt.
