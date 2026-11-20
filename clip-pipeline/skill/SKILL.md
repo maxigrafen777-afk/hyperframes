@@ -284,3 +284,5 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 20.11.: Nutzer-Feedback: Nacht-Clips waren gut; #704 (Trymacs zerlegt mit Greifarm das Haus, mit Versprecher/Sprachfehler-Moment) war der beste Clip von gestern. Mehr davon: Zerstörungs-Momente mit witzigem Kommentar/Versprecher des Streamers.
 
 - 20.11. Hook-Regel verschärft (Nutzer): Der rote Hook am Anfang muss krasser und aussagekräftiger sein – Zuschauer sollen sofort „oh shit“ denken. Konkretes Ereignis + Eskalation statt Beschreibung. Beispiele: statt „50 STUNDEN GEFARMT… WEG 🔥“ → „SEIN 200K-PORSCHE EXPLODIERT 💥“; statt „OMA DREHT KOMPLETT DURCH“ → „OMA ZIEHT WAFFE AN TANKE 😳“. Zahlen, Schock, Konsequenz; max ~28 Zeichen.
+
+- 20.11. Nutzer: großzügig liefern – lustige Momente, spannende Momente, kranke Szenen, Easter Eggs, lustige Überfälle und Missionen; „alles was irgendwie interessant sein kann“. Harte Grenzen bleiben (Gore, Nacktheit, Musik, Story-Spoiler, Waffe auf Zivilisten).
