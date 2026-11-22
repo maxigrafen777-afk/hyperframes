@@ -102,7 +102,8 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Caption,{FONT},76,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,1
-Style: Hook,{FONT},90,&H00FFFFFF,&H00FFFFFF,&H001E1EE6,&H001E1EE6,-1,0,0,0,100,100,1,0,3,28,0,5,50,50,0,1
+Style: Hook,{FONT},90,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,-1,0,0,0,100,100,1,0,1,2.2,0,5,50,50,0,1
+Style: HookBox,{FONT},20,&H001E1EE6,&H001E1EE6,&H001E1EE6,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
 Style: Credit,{FONT},32,&H40FFFFFF,&H40FFFFFF,&H80000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,0,0,0,1
 
 [Events]
@@ -129,7 +130,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             cut = min((i for i, ch in enumerate(text) if ch == " "), key=lambda i: abs(i - mid))
             text = text[:cut] + "\\N" + text[cut + 1:]
         longest = max(len(x) for x in text.split("\\N"))
-        size = max(58, min(96, int(96 * 13 / max(longest, 1))))  # 20.11.: dicker/größer, max. ~80 % der Bildbreite
+        size = max(66, min(112, int(112 * 12 / max(longest, 1))))  # 20.11.: dicker/größer, max. ~80 % der Bildbreite
+        nlines = text.count("\\N") + 1
+        bw = int(longest * size * 0.50 + 2 * 40)   # Breite grob aus Zeichenzahl (Montserrat Black)
+        bh = int(nlines * size * 1.05 + 2 * 26)
+        ev.append(
+            f"Dialogue: 1,{_ts(0)},{_ts(hook_end)},HookBox,,0,0,0,,"
+            f"{{\\an5\\pos({cx},{place.hook_y})\\fad(0,350)\\fscx60\\fscy60\\t(0,140,\\fscx115\\fscy115)\\t(140,260,\\fscx100\\fscy100)\\p1}}"
+            f"{_rounded_rect(bw, bh, 28)}{{\\p0}}"
+        )
         ev.append(
             f"Dialogue: 2,{_ts(0)},{_ts(hook_end)},Hook,,0,0,0,,"
             f"{{\\pos({cx},{place.hook_y})\\fs{size}\\fad(0,350)\\fscx60\\fscy60\\t(0,140,\\fscx115\\fscy115)\\t(140,260,\\fscx100\\fscy100)}}"
@@ -141,3 +150,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             f"{{\\pos({place.credit_x},{place.credit_y})}}{_clean(credit)}"
         )
     return head + "\n".join(ev) + "\n"
+
+
+def _rounded_rect(w: int, h: int, r: int) -> str:
+    """ASS-Zeichnung (\\p1) eines Rechtecks mit abgerundeten Ecken (Bezier)."""
+    r = max(0, min(r, w // 2, h // 2))
+    k = int(r * 0.45)
+    return (f"m {r} 0 l {w - r} 0 b {w - k} 0 {w} {k} {w} {r} l {w} {h - r} "
+            f"b {w} {h - k} {w - k} {h} {w - r} {h} l {r} {h} b {k} {h} 0 {h - k} 0 {h - r} "
+            f"l 0 {r} b 0 {k} {k} 0 {r} 0")

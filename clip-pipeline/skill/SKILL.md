@@ -317,3 +317,4 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - Nutzer ist jetzt im TikTok-Rewards-Programm: AB SOFORT nur Clips ÜBER 1 Minute, ideal 61–70 s (knapp drüber). Trotzdem top: starke Hook (provokant, Clipfänger), sichtbarer Moment, durchgehend Sprache.
 - config: [clip] pre_roll 65 / post_roll 25 / max_len 100; [judge] min_len 61 / max_len 72. Kurze Momente: Kontext davor + Reaktion danach mitnehmen, ruhige Stellen raus-schneiden (trim/concat) statt Füllmaterial.
 - Best-of (19 Uhr) ebenfalls >1 min halten (5 Szenen à ~12–14 s).
+- 22.11. Hook-Optik v2 (Nutzer): rote Box mit abgerundeten Ecken (ASS-Zeichnung \p1, \_rounded_rect), Schrift dicker (Montserrat Black + weiße 2,2-px-Kontur), größer (bis 112 px). Erinnerung Nutzer: Meinungen/Kritik der Streamer zum Spiel kommen gut an (siehe #1241, #983).
