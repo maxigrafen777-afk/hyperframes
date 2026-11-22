@@ -327,3 +327,4 @@ Clips über 1 min müssen die gleichen Aufrufe holen wie vorher: jeden Clip nach
 peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
 
 - 22.11. Nutzer: Der rote Hook muss ab dem allerersten Frame stehen – auch über dem Cold-Open. `tools/teaser.sh` legt die Hook-Zeilen aus `clip.ass` jetzt automatisch über den Teaser.
+- 22.11. abends Nutzer: KEIN Vorspann/Cold-Open mehr! Der rote Hook-Satz kommt direkt am Anfang des Clips – also das normale clip.mp4 liefern, tools/teaser.sh NICHT mehr benutzen.
