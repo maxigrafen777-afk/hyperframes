@@ -42,25 +42,32 @@ def main() -> None:
 
     # Lücken zwischen Wörtern (Clip-Zeit) als Schnittkandidaten
     ws = sorted((w["start"] - t0, w["end"] - t0) for w in words if t0 <= w["start"] < t1)
-    cuts = []
+    gaps = []
     prev_end = HOOK_KEEP
     for s, e in ws:
-        c0, c1 = prev_end + PAD, s - PAD
-        if c1 - c0 >= a.gap - 2 * PAD and not any(c0 < p1 and c1 > p0 for p0, p1 in prot):
-            cuts.append((c0, c1))
+        gaps.append((prev_end + PAD, s - PAD))
         prev_end = max(prev_end, e)
-    c0, c1 = prev_end + PAD, dur
-    if c1 - c0 >= a.gap and not any(c0 < p1 and c1 > p0 for p0, p1 in prot):
-        cuts.append((c0, c1))
+    gaps.append((prev_end + PAD, dur))
+    # geschützte Bereiche aus den Lücken herausnehmen
+    cuts = []
+    for c0, c1 in gaps:
+        parts = [(c0, c1)]
+        for p0, p1 in prot:
+            parts = [q for a0, a1 in parts for q in ((a0, min(a1, p0)), (max(a0, p1), a1))]
+        cuts += [(x0, x1) for x0, x1 in parts if x1 - x0 >= a.gap - 2 * PAD]
 
-    # größte Lücken zuerst, solange Mindestlänge hält
+    # größte Lücken zuerst, solange Mindestlänge hält; die letzte passende wird mittig gekürzt
     budget = dur - a.min_len
     chosen = []
-    for c in sorted(cuts, key=lambda c: c[1] - c[0], reverse=True):
-        length = c[1] - c[0]
-        if length <= budget:
-            chosen.append(c)
-            budget -= length
+    for c0, c1 in sorted(cuts, key=lambda c: c[1] - c[0], reverse=True):
+        if budget < 0.5:
+            break
+        length = c1 - c0
+        if length > budget:
+            mid = (c0 + c1) / 2
+            c0, c1, length = mid - budget / 2, mid + budget / 2, budget
+        chosen.append((c0, c1))
+        budget -= length
     chosen.sort()
     keep, pos = [], 0.0
     for c0, c1 in chosen:
