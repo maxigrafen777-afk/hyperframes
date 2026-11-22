@@ -311,3 +311,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - 21.11. 01:45 Nacht-Modus (Nutzer): ganze Nacht weiter clippen, KEINE Einzelsendungen/Pushes; gute Clips mit tools/night_add.sh <id> sammeln (+ review.py delivered). Präsentation um 10:00 Berlin (send_later „Nacht-Paket 10 Uhr“).
 - 21.11. Nutzer: Auch lustige Storys der Streamer aus ihrem Leben sind interessant (Ängste, Partys, Alltag) – als Story-Clip liefern, Post-Satz mit Frage an die Community.
 - 21.11.: Trymacs schaut nachmittags teils fremde Streams (anderer Streamer mit „INZONE“-Cam) – dann ist auch die Facecam-Region falsch. Solche Kandidaten verwerfen. Render-Tool erzwingt Mindestlänge ~20 s: kurze Teilstücke stattdessen aus einem langen Render mit ffmpeg trim/concat schneiden (siehe #1152).
+
+## 22.11.: Creator-Rewards-Modus (Nutzer)
+
+- Nutzer ist jetzt im TikTok-Rewards-Programm: AB SOFORT nur Clips ÜBER 1 Minute, ideal 61–70 s (knapp drüber). Trotzdem top: starke Hook (provokant, Clipfänger), sichtbarer Moment, durchgehend Sprache.
+- config: [clip] pre_roll 65 / post_roll 25 / max_len 100; [judge] min_len 61 / max_len 72. Kurze Momente: Kontext davor + Reaktion danach mitnehmen, ruhige Stellen raus-schneiden (trim/concat) statt Füllmaterial.
+- Best-of (19 Uhr) ebenfalls >1 min halten (5 Szenen à ~12–14 s).
