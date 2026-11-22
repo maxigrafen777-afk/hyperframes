@@ -328,3 +328,8 @@ peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
 
 - 22.11. Nutzer: Der rote Hook muss ab dem allerersten Frame stehen – auch über dem Cold-Open. `tools/teaser.sh` legt die Hook-Zeilen aus `clip.ass` jetzt automatisch über den Teaser.
 - 22.11. abends Nutzer: KEIN Vorspann/Cold-Open mehr! Der rote Hook-Satz kommt direkt am Anfang des Clips – also das normale clip.mp4 liefern, tools/teaser.sh NICHT mehr benutzen.
+- 22.11. abends Nutzer: 1-min-Clips performen deutlich schlechter – „probier was, es muss besser laufen“. Ab jetzt:
+  1. Jeden Clip nach dem Render mit `tools/tighten.py <id> [--protect A B]` straffen (Sprechpausen > 0,9 s raus, Hook-Anfang und
+     sichtbare Action per --protect [Rohschnitt-Zeiten] geschützt, nie unter 61 s). Fenster dafür eher lang wählen (≈72 s), dann auf ~61–64 s dicht schneiden. clip_tight.mp4 liefern.
+  2. Wenn mehrere mittelgute Momente eines Streamers da sind: „3 in 1“-Video (3 Pointen à ~20 s, ein gemeinsamer roter Hook) statt einen Moment zu strecken.
+  3. Hook als offene Schleife formulieren (Pointe kommt am Ende: „WARTE AUF DEN FLÜGEL …“), damit bis zum Schluss geschaut wird.
