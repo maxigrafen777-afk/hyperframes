@@ -325,3 +325,5 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 Clips über 1 min müssen die gleichen Aufrufe holen wie vorher: jeden Clip nach dem Render mit
 `tools/teaser.sh clip.mp4 out.mp4 <peak_s im Clip>` versehen (Höhepunkt 2,5 s vorne, Zoom, Weißblitz).
 peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
+
+- 22.11. Nutzer: Der rote Hook muss ab dem allerersten Frame stehen – auch über dem Cold-Open. `tools/teaser.sh` legt die Hook-Zeilen aus `clip.ass` jetzt automatisch über den Teaser.
