@@ -319,3 +319,9 @@ Streamer egal – nur die Qualität zählt; beide Streams jede Runde gleich prü
 - Best-of (19 Uhr) ebenfalls >1 min halten (5 Szenen à ~12–14 s).
 - 22.11. Hook-Optik v2 (Nutzer): rote Box mit abgerundeten Ecken (ASS-Zeichnung \p1, \_rounded_rect), Schrift dicker (Montserrat Black + weiße 2,2-px-Kontur), größer (bis 112 px). Erinnerung Nutzer: Meinungen/Kritik der Streamer zum Spiel kommen gut an (siehe #1241, #983).
 - 22.11. Tagesziel (Nutzer): ca. 9 Clips pro Tag (> 1 min, gute Hook). Bei jedem Weckruf mitzählen (`delivered` heute); hängt man hinterher, Standard leicht senken (hype 5 mit klarer Pointe/Reaktion oder Spielkritik reicht), aber Grenzen bleiben.
+
+## Cold-Open (22.11.)
+
+Clips über 1 min müssen die gleichen Aufrufe holen wie vorher: jeden Clip nach dem Render mit
+`tools/teaser.sh clip.mp4 out.mp4 <peak_s im Clip>` versehen (Höhepunkt 2,5 s vorne, Zoom, Weißblitz).
+peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
