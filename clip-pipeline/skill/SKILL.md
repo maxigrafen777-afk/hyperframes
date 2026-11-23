@@ -339,3 +339,4 @@ peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
 - Clips ohne echtes Reden (nur Schreie/„oh oh oh“, Streamer läuft von der Cam weg) kommen NICHT gut an → verwerfen. Der Streamer muss sprechen und in der Cam zu sehen sein.
 - Weiße Schrift muss lesbar sein: keine Clips, in denen die Untertitel kaum Text haben oder über hellem Bild verschwinden.
 - Facecam-Position vor jedem Render gegen den Rohschnitt prüfen: Zarbex hat die Cam am 23.11. verschoben (oben war ein Streifen Spiel zu sehen) → config.toml neu gemessen.
+- 23.11. Hook-Optik v3 (Nutzer): Schrift im roten Balken dünner (Montserrat SemiBold) mit schwarzem Rand (3 px), kurze Zeilen (≤16 Zeichen), groß. So lassen.
