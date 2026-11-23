@@ -13,6 +13,7 @@ HIGHLIGHT = "&H0000D4FF&"   # Gelb (#FFD400) in ASS-Farbreihenfolge BGR
 MAX_WORDS = 3
 MAX_CHARS = 14  # TikTok-Ränder: Untertitel schmal halten (Nutzer 19.11.)
 PAUSE_BREAK_S = 0.6
+HOOK_LINE = 16  # Zeichen pro Hook-Zeile
 HOOK_S = 3.5  # der Hook ist das Wichtigste: lange genug lesbar
 
 
@@ -102,7 +103,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Caption,{FONT},76,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,7,3,5,40,40,0,1
-Style: Hook,{FONT},90,&H00FFFFFF,&H00FFFFFF,&H00FFFFFF,&H00000000,-1,0,0,0,100,100,1,0,1,2.2,0,5,50,50,0,1
+Style: Hook,{FONT},90,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,1,0,1,3.5,0,5,50,50,0,1
 Style: HookBox,{FONT},20,&H001E1EE6,&H001E1EE6,&H001E1EE6,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
 Style: Credit,{FONT},32,&H40FFFFFF,&H40FFFFFF,&H80000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,0,0,0,1
 
@@ -125,12 +126,17 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     if hook.strip():
         hook_end = min(HOOK_S, duration)
         text = _clean(hook).upper()
-        if len(text) > 16 and " " in text:  # lange Hooks zweizeilig statt breit: bleibt in der Bildmitte
-            mid = len(text) // 2
-            cut = min((i for i, ch in enumerate(text) if ch == " "), key=lambda i: abs(i - mid))
-            text = text[:cut] + "\\N" + text[cut + 1:]
-        longest = max(len(x) for x in text.split("\\N"))
-        size = max(66, min(112, int(112 * 12 / max(longest, 1))))  # 20.11.: dicker/größer, max. ~80 % der Bildbreite
+        # 23.11. (Nutzer: weiße Schrift im roten Balken kaum lesbar): kurze Zeilen (max. ~16 Zeichen,
+        # auch dreizeilig) statt kleiner Schrift, damit die Schrift groß bleibt
+        lines: list[str] = []
+        for word in text.split():
+            if lines and len(lines[-1]) + 1 + len(word) <= HOOK_LINE:
+                lines[-1] += " " + word
+            else:
+                lines.append(word)
+        text = "\\N".join(lines)
+        longest = max(len(x) for x in lines)
+        size = max(84, min(116, int(116 * 12 / max(longest, 1))))
         nlines = text.count("\\N") + 1
         bw = int(longest * size * 0.50 + 2 * 40)   # Breite grob aus Zeichenzahl (Montserrat Black)
         bh = int(nlines * size * 1.05 + 2 * 26)
