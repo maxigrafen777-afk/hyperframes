@@ -341,3 +341,18 @@ peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
 - Facecam-Position vor jedem Render gegen den Rohschnitt prüfen: Zarbex hat die Cam am 23.11. verschoben (oben war ein Streifen Spiel zu sehen) → config.toml neu gemessen.
 - 23.11. Hook-Optik v3 (Nutzer): Schrift im roten Balken dünner (Montserrat SemiBold) mit schwarzem Rand (3 px), kurze Zeilen (≤16 Zeichen), groß. So lassen.
 - 23.11. abends: Der Chat-Detektor verpasst gute Momente (Exorzismus-Easter-Egg #1586 wurde als „fast nur Musik“ vorgefiltert). Wenn es ruhig ist, den Puffer aktiv abgreifen: `python3 tools/cut_now.py <login> 400 100` (+300/200/105) für jeden Live-Streamer, dann alle Abschnitte prüfen – auch vorgefilterte (REJECTED „Vorfilter“) per `review.py decide` retten.
+
+## 23.11. abends: Strategie v4 „Account soll boomen“ (Nutzer: „mach alles wie du meinst, aber guck dir nach wie vor alles an“)
+
+Zahlen vom Nutzer: Top-5-Best-of 22.11. → 710 Aufrufe, Ø 8,8 s, 3,8 % ganz geschaut (Anfang überladen, schwächster Moment zuerst).
+Eli „… WARTE AB“-Clip (61 s) → 3,1K Aufrufe, Ø 22,5 s, 11,3 % ganz. → Open-Loop-Hooks funktionieren, Ausstieg ~20 s.
+
+1. Qualität vor Menge: lieber 4–6 starke Clips/Tag als 9 mittelmäßige. Alles weiterhin selbst ansehen (Transkript + Bildraster), auch Puffer aktiv abgreifen.
+2. Mix: 2–3 lange Clips (61–72 s, Creator Rewards) NUR für Top-Momente; dazu 2–3 kurze Reichweiten-Clips 15–35 s:
+   `CLIP_SHORT=1 python3 tools/review.py decide <id> <json>` (klemmt auf 15–35 s), dann ohne tighten liefern.
+3. Erste 2 s: im ersten Bild schon Action/Reaktion, Hook als offene Schleife („„…“ … WARTE AB“, max. 6–8 Wörter). Kein Vorspann.
+4. Lange Clips: Auflösung/Pointe spätestens bei 25–30 s, danach zweiter Lacher oder Zeitlupen-Wiederholung → `tools/eli_edit.sh` jetzt für ALLE Streamer (Zoom-Punch + Zeitlupe), nach tighten.
+5. Render schärft das Spielbild nach (unsharp) – TikTok meldete „Videoauflösung verbessern“. Nutzer soll „Hochladen in hoher Qualität“ an haben.
+6. Best-of neu (tools/bestof.sh): 2,5 s vom #1-Moment vorne („WARTE AUF PLATZ 1“, `TEASER=<s>`), Platzierung klein unten rechts, keine Titelzeile. Läuft es weiter schlecht → Best-of einstellen.
+7. Post-Text endet mit Frage an die Community (Kommentare = Reichweite). Clips über den Abend verteilt posten lassen (17–22 Uhr).
+8. Regelmäßig Statistik-Screenshots (Ø Wiedergabe, % ganz geschaut) vom Nutzer auswerten und hier notieren.

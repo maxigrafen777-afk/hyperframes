@@ -48,11 +48,11 @@ def video_filter(job: RenderJob, ass: Path) -> str:
     if isinstance(lay, SplitLayout):
         return (base
                 + f"[a]{lay.cam_src.crop()},scale=1080:{lay.cam_h}:flags=lanczos[cam];"
-                + f"[b]{lay.game_src.crop()},scale=1080:{lay.game_h}:flags=lanczos[game];"
+                + f"[b]{lay.game_src.crop()},scale=1080:{lay.game_h}:flags=lanczos,unsharp=5:5:0.7:5:5:0[game];"
                 + f"[cam][game]vstack=inputs=2,{subs},format=yuv420p[v]")
     return (base
             + f"[a]scale=-2:1920,crop=1080:1920:{lay.bg_x}:0,boxblur=28:2,eq=brightness=-0.12:saturation=1.2[bg];"
-            + f"[b]{lay.fg_src.crop()},scale=1080:{lay.fg_h}:flags=lanczos[fg];"
+            + f"[b]{lay.fg_src.crop()},scale=1080:{lay.fg_h}:flags=lanczos,unsharp=5:5:0.7:5:5:0[fg];"
             + f"[bg][fg]overlay=0:{lay.fg_y},{subs},format=yuv420p[v]")
 
 

@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -84,8 +85,10 @@ def cmd_show(cfg: Config, db: DB, a) -> None:
 def _apply(cfg: Config, db: DB, cid: int, j: Judgment, *, rerender: bool) -> None:
     c = db.get(cid)
     duration = probe_duration(Path(c.raw_path or ""))
-    j = clamp(j, duration, streamer_for(cfg, c.streamer).facecam is not None, cfg.judge.min_len_s,
-              cfg.judge.max_len_s)
+    # CLIP_SHORT=1: kurzer Reichweiten-Clip (15–35 s) statt Creator-Rewards-Länge (23.11.)
+    short = os.environ.get("CLIP_SHORT") == "1"
+    j = clamp(j, duration, streamer_for(cfg, c.streamer).facecam is not None,
+              15 if short else cfg.judge.min_len_s, 35 if short else cfg.judge.max_len_s)
     if rerender:
         db.advance(cid, Status.JUDGED, judgment=j)
     elif not j.final_keep(cfg.judge.min_hype):
