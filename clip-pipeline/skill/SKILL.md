@@ -340,3 +340,4 @@ peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
 - Weiße Schrift muss lesbar sein: keine Clips, in denen die Untertitel kaum Text haben oder über hellem Bild verschwinden.
 - Facecam-Position vor jedem Render gegen den Rohschnitt prüfen: Zarbex hat die Cam am 23.11. verschoben (oben war ein Streifen Spiel zu sehen) → config.toml neu gemessen.
 - 23.11. Hook-Optik v3 (Nutzer): Schrift im roten Balken dünner (Montserrat SemiBold) mit schwarzem Rand (3 px), kurze Zeilen (≤16 Zeichen), groß. So lassen.
+- 23.11. abends: Der Chat-Detektor verpasst gute Momente (Exorzismus-Easter-Egg #1586 wurde als „fast nur Musik“ vorgefiltert). Wenn es ruhig ist, den Puffer aktiv abgreifen: `python3 tools/cut_now.py <login> 400 100` (+300/200/105) für jeden Live-Streamer, dann alle Abschnitte prüfen – auch vorgefilterte (REJECTED „Vorfilter“) per `review.py decide` retten.
