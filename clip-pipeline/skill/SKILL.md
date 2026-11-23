@@ -333,3 +333,9 @@ peak_s im Clip = peak_s - start_s. Nur Clips, die die ganze Minute tragen.
      sichtbare Action per --protect [Rohschnitt-Zeiten] geschützt, nie unter 61 s). Fenster dafür eher lang wählen (≈72 s), dann auf ~61–64 s dicht schneiden. clip_tight.mp4 liefern.
   2. Wenn mehrere mittelgute Momente eines Streamers da sind: „3 in 1“-Video (3 Pointen à ~20 s, ein gemeinsamer roter Hook) statt einen Moment zu strecken.
   3. Hook als offene Schleife formulieren (Pointe kommt am Ende: „WARTE AUF DEN FLÜGEL …“), damit bis zum Schluss geschaut wird.
+
+### Nutzer-Feedback 23.11. (Schradin #1557)
+
+- Clips ohne echtes Reden (nur Schreie/„oh oh oh“, Streamer läuft von der Cam weg) kommen NICHT gut an → verwerfen. Der Streamer muss sprechen und in der Cam zu sehen sein.
+- Weiße Schrift muss lesbar sein: keine Clips, in denen die Untertitel kaum Text haben oder über hellem Bild verschwinden.
+- Facecam-Position vor jedem Render gegen den Rohschnitt prüfen: Zarbex hat die Cam am 23.11. verschoben (oben war ein Streifen Spiel zu sehen) → config.toml neu gemessen.
