@@ -356,3 +356,5 @@ Eli „… WARTE AB“-Clip (61 s) → 3,1K Aufrufe, Ø 22,5 s, 11,3 % ganz. →
 6. Best-of neu (tools/bestof.sh): 2,5 s vom #1-Moment vorne („WARTE AUF PLATZ 1“, `TEASER=<s>`), Platzierung klein unten rechts, keine Titelzeile. Läuft es weiter schlecht → Best-of einstellen.
 7. Post-Text endet mit Frage an die Community (Kommentare = Reichweite). Clips über den Abend verteilt posten lassen (17–22 Uhr).
 8. Regelmäßig Statistik-Screenshots (Ø Wiedergabe, % ganz geschaut) vom Nutzer auswerten und hier notieren.
+
+- 23.11. Nutzer: Stimme klang roboterhaft (#1628, Musik im Hintergrund → Demucs-Artefakte). Für jeden Clip mit Musik-Sekunden vor dem Liefern `CLIP_SHORT=… python3 tools/redo_audio.py <id> <json>` (hq-Trennung, shifts=2) statt nur decide. Im Dienst bleibt die schnelle Trennung (hq dort ~10 min pro Kandidat). Clips mit fast durchgehender Musik lieber verwerfen.

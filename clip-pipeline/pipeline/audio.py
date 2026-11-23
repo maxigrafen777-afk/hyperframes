@@ -52,7 +52,7 @@ def per_second_db(mono: np.ndarray) -> np.ndarray:
     return 20 * np.log10(np.maximum(rms, 1e-9))
 
 
-def separate_vocals(src: Path, out_wav: Path) -> list[int]:
+def separate_vocals(src: Path, out_wav: Path, hq: bool = False) -> list[int]:
     """Schreibt nur die Stimmen nach `out_wav`. Gibt die Sekunden zurück, in denen
     in der Begleitspur deutlich Musik/Geräusche liefen."""
     import torch
@@ -67,8 +67,9 @@ def separate_vocals(src: Path, out_wav: Path) -> list[int]:
     ref = x.mean(0)
     mean, std = ref.mean(), ref.std() + 1e-8
     with torch.no_grad():
-        stems = apply_model(model, ((x - mean) / std)[None], device="cpu", shifts=2, split=True,  # 23.11.: shifts=2 – weniger Roboterstimme bei Musik
-                            overlap=0.5, progress=False)[0]
+        stems = apply_model(model, ((x - mean) / std)[None], device="cpu", shifts=2 if hq else 0, split=True,
+                            overlap=0.5 if hq else 0.25, progress=False)[0]
+    # 23.11.: hq (shifts=2) nur für gelieferte Clips via tools/redo_audio.py – im Dienst ~10x zu langsam
     stems = stems * std + mean
     vi = model.sources.index("vocals")
     vocals = stems[vi].numpy()

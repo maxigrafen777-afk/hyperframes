@@ -14,7 +14,7 @@ from pipeline.judge.steps import clip_dir, streamer_for
 cid, judgment = int(sys.argv[1]), sys.argv[2]
 cfg = load_config("config.toml"); db = DB(cfg.db_path); c = db.get(cid)
 vocals = clip_dir(cfg, cid) / "vocals.wav"
-music = separate_vocals(Path(c.raw_path), vocals)
+music = separate_vocals(Path(c.raw_path), vocals, hq=True)
 tr = transcribe(vocals, streamer_for(cfg, c.streamer).language, cfg.whisper)
 tr = tr.model_copy(update={"music_seconds": music, "vocals_path": str(vocals)})
 Path(c.transcript_path).write_text(tr.model_dump_json(), encoding="utf-8")
