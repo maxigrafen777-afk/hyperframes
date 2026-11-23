@@ -67,8 +67,8 @@ def separate_vocals(src: Path, out_wav: Path) -> list[int]:
     ref = x.mean(0)
     mean, std = ref.mean(), ref.std() + 1e-8
     with torch.no_grad():
-        stems = apply_model(model, ((x - mean) / std)[None], device="cpu", shifts=0, split=True,
-                            overlap=0.25, progress=False)[0]
+        stems = apply_model(model, ((x - mean) / std)[None], device="cpu", shifts=2, split=True,  # 23.11.: shifts=2 – weniger Roboterstimme bei Musik
+                            overlap=0.5, progress=False)[0]
     stems = stems * std + mean
     vi = model.sources.index("vocals")
     vocals = stems[vi].numpy()
