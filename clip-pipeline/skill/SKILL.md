@@ -371,3 +371,8 @@ Eli „… WARTE AB“-Clip (61 s) → 3,1K Aufrufe, Ø 22,5 s, 11,3 % ganz. →
 - Clipping-Kampagnen (Content Rewards/Whop) geprüft: GTA-6-Kampagnen zahlen meist nur Tier-1-Länder
   (USA/CA/UK/AU) → deutsche Clips bringen fast nichts. Casino-Logo-Kampagnen (z. B. Vavada) immer ablehnen:
   Glücksspielwerbung, in DE ohne GGL-Lizenz unzulässig, TikTok-Sperrgefahr, junges Publikum.
+- 24.11. Nachmittag: Zarbex/Schradin spielen viel Story → fast alles Spoiler oder Zwischensequenz. Gute Ausbeute
+  kam aus Chat-Interaktion: Zarbex kontert einen Hater (#1746, 71 s, Chat „REDE“, „1:0 zarbex“). Solche
+  Hater-Konter sind starke Rant-Clips, Länge darf dann die Rede tragen. `review.py decide` braucht immer eine
+  JSON-Datei, kein JSON-String. Während redo_audio läuft, kann der Dienst-Herzschlag kurz ausfallen
+  (Wächter meldet „DIENST TOT“) – erst Prozess prüfen, nicht blind neu starten.
