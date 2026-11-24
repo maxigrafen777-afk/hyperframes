@@ -380,3 +380,7 @@ Eli „… WARTE AB“-Clip (61 s) → 3,1K Aufrufe, Ø 22,5 s, 11,3 % ganz. →
   vermessen (x=1440, y=184, w=476, h=266) – nach jedem Rendern prüfen, dass keine Namen im Bild sind.
   Gute Schradin-Clips heute: selbstsicher falscher Rant („Navi-Fehler“, ist Luftlinie, #1775) und
   Quad-Crash von der Brücke (#1786). Jagd-Missionen (Tiere schießen) ablehnen. Vorgelesene Chat-Ranglisten ablehnen.
+- Sub-/Follow-Alerts mit Benutzernamen im Spielbild (Twitch-Overlay) vor dem Schicken verpixeln:
+  ffmpeg `[0:v]crop=W:H:X:Y,boxblur=20:5[b];[0:v][b]overlay=X:Y:enable='between(t,a,b)'` auf clip.mp4.
+  Achtung: redo_audio rendert neu → Verpixeln danach wiederholen. Philosophie-/„Simulation“-Rants von
+  Zarbex (#1823) sind starke Rant-Clips; Fortsetzungen zum gleichen Thema nicht doppelt liefern.
