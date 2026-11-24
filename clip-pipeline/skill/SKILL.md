@@ -376,3 +376,7 @@ Eli „… WARTE AB“-Clip (61 s) → 3,1K Aufrufe, Ø 22,5 s, 11,3 % ganz. →
   Hater-Konter sind starke Rant-Clips, Länge darf dann die Rede tragen. `review.py decide` braucht immer eine
   JSON-Datei, kein JSON-String. Während redo_audio läuft, kann der Dienst-Herzschlag kurz ausfallen
   (Wächter meldet „DIENST TOT“) – erst Prozess prüfen, nicht blind neu starten.
+- 24.11. abends: Schradin hat unter seiner Cam jetzt eine „MOST WANTED“-Rangliste mit Chat-Namen. Facecam neu
+  vermessen (x=1440, y=184, w=476, h=266) – nach jedem Rendern prüfen, dass keine Namen im Bild sind.
+  Gute Schradin-Clips heute: selbstsicher falscher Rant („Navi-Fehler“, ist Luftlinie, #1775) und
+  Quad-Crash von der Brücke (#1786). Jagd-Missionen (Tiere schießen) ablehnen. Vorgelesene Chat-Ranglisten ablehnen.
