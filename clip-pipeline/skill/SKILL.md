@@ -358,3 +358,16 @@ Eli „… WARTE AB“-Clip (61 s) → 3,1K Aufrufe, Ø 22,5 s, 11,3 % ganz. →
 8. Regelmäßig Statistik-Screenshots (Ø Wiedergabe, % ganz geschaut) vom Nutzer auswerten und hier notieren.
 
 - 23.11. Nutzer: Stimme klang roboterhaft (#1628, Musik im Hintergrund → Demucs-Artefakte). Für jeden Clip mit Musik-Sekunden vor dem Liefern `CLIP_SHORT=… python3 tools/redo_audio.py <id> <json>` (hq-Trennung, shifts=2) statt nur decide. Im Dienst bleibt die schnelle Trennung (hq dort ~10 min pro Kandidat). Clips mit fast durchgehender Musik lieber verwerfen.
+
+## 24.11.: Strategie v5 – nur noch Reichweite (ersetzt den Creator-Rewards-Teil von v4)
+
+- TikTok hat den Creator-Rewards-Antrag abgelehnt („nicht originale Inhalte“), neu bewerben frühestens 24.12.
+  Fremde Streamer-Clips kommen dort grundsätzlich nicht rein. Nutzer will weder Stimme noch Gesicht zeigen.
+- Deshalb: KEINE Pflicht mehr zu 61-s-Clips. Standard: kurze Clips 15–35 s (CLIP_SHORT=1), 3–5 starke pro Tag.
+  Länger nur, wenn der Moment die Länge wirklich trägt. Alles andere aus v4 bleibt: Hook ab Frame 0,
+  Open-Loop, Pausen raus, Frage im Post-Text, alles selbst ansehen, Puffer aktiv scannen.
+- Ziel: Reichweite und Follower, danach Anfrage beim Management der Streamer (Mail bereite ich vor,
+  sobald ein Clip 100k+ hat). Nutzer schickt wöchentlich Statistik-Screenshots.
+- Clipping-Kampagnen (Content Rewards/Whop) geprüft: GTA-6-Kampagnen zahlen meist nur Tier-1-Länder
+  (USA/CA/UK/AU) → deutsche Clips bringen fast nichts. Casino-Logo-Kampagnen (z. B. Vavada) immer ablehnen:
+  Glücksspielwerbung, in DE ohne GGL-Lizenz unzulässig, TikTok-Sperrgefahr, junges Publikum.
