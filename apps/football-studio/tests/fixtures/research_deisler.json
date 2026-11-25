@@ -1,0 +1,549 @@
+{
+  "qid": "Q160106",
+  "label": "Sebastian Deisler",
+  "short_name": "Sebastian Deisler",
+  "description": "deutscher Fußballspieler",
+  "kind": "person",
+  "lead": "Sebastian Toni Deisler (* 5. Januar 1980 in Lörrach) ist ein ehemaliger deutscher Fußballspieler.",
+  "facts": [
+    {
+      "id": "geburtsdatum",
+      "label": "Geburtsdatum",
+      "value": "1980-01-05",
+      "display": "5. Januar 1980",
+      "sources": ["wikidata", "dewiki", "enwiki"],
+      "conflicts": {},
+      "status": "verifiziert"
+    },
+    {
+      "id": "geburtsort",
+      "label": "Geburtsort",
+      "value": "Lörrach",
+      "display": "Lörrach",
+      "sources": ["wikidata", "dewiki"],
+      "conflicts": {},
+      "status": "verifiziert"
+    },
+    {
+      "id": "position",
+      "label": "Position",
+      "value": "Rechtes Mittelfeld, Offensives Mittelfeld",
+      "display": "Rechtes Mittelfeld, Offensives Mittelfeld",
+      "sources": ["dewiki"],
+      "conflicts": { "wikidata": "wing half" },
+      "status": "widerspruch"
+    },
+    {
+      "id": "groesse",
+      "label": "Größe",
+      "value": "181 cm",
+      "display": "181 cm",
+      "sources": ["dewiki"],
+      "conflicts": {},
+      "status": "einzelquelle"
+    },
+    {
+      "id": "laenderspiele",
+      "label": "Länderspiele (Deutschland)",
+      "value": { "matches": 36, "goals": 3, "years": "2000–2006", "team": "Deutschland" },
+      "display": "36 Spiele, 3 Tore (2000–2006)",
+      "sources": ["dewiki"],
+      "conflicts": {},
+      "status": "einzelquelle"
+    },
+    {
+      "id": "karriereende",
+      "label": "Letzte Profisaison (Jahr)",
+      "value": 2007,
+      "display": "2007",
+      "sources": ["dewiki", "wikidata"],
+      "conflicts": {},
+      "status": "verifiziert"
+    }
+  ],
+  "career": [
+    {
+      "years": "1998–1999",
+      "start": 1998,
+      "end": 1999,
+      "team": "Borussia Mönchengladbach",
+      "matches": 17,
+      "goals": 1,
+      "status": "verifiziert",
+      "sources": ["dewiki", "wikidata"]
+    },
+    {
+      "years": "1999–2002",
+      "start": 1999,
+      "end": 2002,
+      "team": "Hertha BSC",
+      "matches": 56,
+      "goals": 9,
+      "status": "verifiziert",
+      "sources": ["dewiki", "wikidata"]
+    },
+    {
+      "years": "2002–2007",
+      "start": 2002,
+      "end": 2007,
+      "team": "FC Bayern München",
+      "matches": 62,
+      "goals": 8,
+      "status": "verifiziert",
+      "sources": ["dewiki", "wikidata"]
+    },
+    {
+      "years": "2004",
+      "start": 2004,
+      "end": 2004,
+      "team": "FC Bayern München Amateure",
+      "matches": 4,
+      "goals": 1,
+      "status": "einzelquelle",
+      "sources": ["dewiki"]
+    }
+  ],
+  "sentences": [
+    {
+      "id": "s0",
+      "section": "Einleitung",
+      "text": "Sebastian Toni Deisler (* 5. Januar 1980 in Lörrach) ist ein ehemaliger deutscher Fußballspieler.",
+      "cites": []
+    },
+    {
+      "id": "s1",
+      "section": "Jugend",
+      "text": "Sebastian Deisler stammt aus der südbadischen Kreisstadt Lörrach und begann mit dem organisierten Jugendfußball in der E-Jugend des FV Tumringen.",
+      "cites": []
+    },
+    {
+      "id": "s2",
+      "section": "Jugend",
+      "text": "Da er zunächst zu jung für diese Altersklasse war, durfte Deisler die ersten beiden Jahre im Verein nur trainieren und keine Wettkampfspiele bestreiten.",
+      "cites": ["ref0"]
+    },
+    {
+      "id": "s3",
+      "section": "Jugend",
+      "text": "Als D-Jugendlicher schoss der schmale und eher schmächtige Junge in einer Saison 200 Tore und sein Vater – der mit 39 Jahren wegen einer Herzerkrankung Frührentner war – förderte das Talent seines Sohnes.",
+      "cites": []
+    },
+    {
+      "id": "s4",
+      "section": "Jugend",
+      "text": "Später spielte Deisler für die Jugendmannschaften des TuS Lörrach-Stetten und FV Lörrach, dem größten Verein seiner Heimatstadt.",
+      "cites": []
+    },
+    {
+      "id": "s5",
+      "section": "Jugend",
+      "text": "Der entscheidende Karriereschritt folgte 1995, als Deisler während eines U-15 Lehrgangs des DFB von Norbert Meier, Jugendtrainer bei Borussia Mönchengladbach, entdeckt wurde und daraufhin in die Nachwuchsabteilung der Borussen wechselte.",
+      "cites": ["ref1"]
+    },
+    {
+      "id": "s6",
+      "section": "Jugend",
+      "text": "Obwohl Deisler als begnadeter Techniker galt, der früh das Gespür für den perfekten Pass hatte, war er jedoch mit einer Körpergröße von 1,60 Meter recht klein.",
+      "cites": []
+    },
+    {
+      "id": "s7",
+      "section": "Jugend",
+      "text": "Wegen Heimweh wollte er das Nachwuchs-Internat nach nur wenigen Monaten wieder verlassen.",
+      "cites": ["ref2"]
+    },
+    {
+      "id": "s8",
+      "section": "Jugend",
+      "text": "Deisler setzte sich durch und absolvierte im September 1997 seinen ersten internationalen Auftritt bei der U-17-Weltmeisterschaft in Ägypten.",
+      "cites": []
+    },
+    {
+      "id": "s9",
+      "section": "Jugend",
+      "text": "Deisler präsentierte sich als torgefährlicher, enorm schneller und technisch brillanter Mittelfeldregisseur, der erstmals eine breite Öffentlichkeit beeindruckte und mit der U-17-Nationalmannschaft den vierten Platz belegte.",
+      "cites": []
+    },
+    {
+      "id": "s10",
+      "section": "Jugend",
+      "text": "Anschließend erhielt sein Spielerberater Norbert Pflippen ein Angebot von Real Madrid über eine Million DM – plus Umzug der gesamten Familie in die spanische Hauptstadt.",
+      "cites": []
+    },
+    {
+      "id": "s11",
+      "section": "Jugend",
+      "text": "Deislers Vater lehnte die Offerte ab.",
+      "cites": []
+    },
+    {
+      "id": "s12",
+      "section": "Borussia Mönchengladbach",
+      "text": "Zur Saison 1998/99 rückte Deisler in den Profikader auf.",
+      "cites": []
+    },
+    {
+      "id": "s13",
+      "section": "Borussia Mönchengladbach",
+      "text": "Er kam am 3. Spieltag (8. September 1998) zu seinem Bundesliga-Debüt, als er beim 1:1 gegen Eintracht Frankfurt zur 63. Spielminute für Markus Hausweiler eingewechselt wurde.",
+      "cites": []
+    },
+    {
+      "id": "s14",
+      "section": "Borussia Mönchengladbach",
+      "text": "In den Wochen danach erspielte sich Deisler, den sein Trainer Friedel Rausch als „Jahrhunderttalent“ bezeichnete, einen Stammplatz im rechten Mittelfeld.",
+      "cites": []
+    },
+    {
+      "id": "s15",
+      "section": "Borussia Mönchengladbach",
+      "text": "Nach den Vorstellungen der Vereinsführung sollte er mit den Eigengewächsen Marcel Ketelaer, Marco Villa und Robert Enke das Gerüst einer neuen Gladbacher Mannschaft bilden.",
+      "cites": []
+    },
+    {
+      "id": "s16",
+      "section": "Borussia Mönchengladbach",
+      "text": "Allerdings erlitt Deisler im Oktober 1998 einen Kreuzbandriss im rechten Knie und kehrte erst im Februar 1999 in die Mannschaft zurück.",
+      "cites": []
+    },
+    {
+      "id": "s17",
+      "section": "Borussia Mönchengladbach",
+      "text": "Borussia Mönchengladbach steckte mittlerweile als Tabellenletzter im Abstiegskampf und Rainer Bonhof hatte Friedel Rausch als Trainer ersetzt.",
+      "cites": []
+    },
+    {
+      "id": "s18",
+      "section": "Borussia Mönchengladbach",
+      "text": "Sein erstes Tor gelang ihm am 6. März 1999 (21. Spieltag) beim 2:0-Heimsieg über den TSV 1860 München.",
+      "cites": ["ref3"]
+    },
+    {
+      "id": "s19",
+      "section": "Borussia Mönchengladbach",
+      "text": "Deisler hatte sich vor dem eigenen Strafraum den Ball geschnappt, einen 60-Meter-Solo-Lauf hingelegt und das Leder aus 14 Metern im linken Winkel versenkt.",
+      "cites": []
+    },
+    {
+      "id": "s20",
+      "section": "Borussia Mönchengladbach",
+      "text": "Obwohl er zu diesem Zeitpunkt erst zehn Bundesliga-Spiele absolviert hatte, stand Deisler plötzlich im Zentrum des Medieninteresses und wurde bereits mit der Klub-Ikone Günter Netzer verglichen.",
+      "cites": []
+    },
+    {
+      "id": "s21",
+      "section": "Borussia Mönchengladbach",
+      "text": "Der 19-jährige Shootingstar personifizierte beim Tabellenletzten die Hoffnung auf den Klassenerhalt und musste ohne Erfahrung mit Medienarbeit auf Anweisung seines Arbeitgebers eine Pressekonferenz geben.",
+      "cites": ["ref4"]
+    },
+    {
+      "id": "s22",
+      "section": "Borussia Mönchengladbach",
+      "text": "Doch die Borussia schaffte die sportliche Wende nicht mehr und stand bereits am 31. Spieltag als Bundesliga-Absteiger fest.",
+      "cites": []
+    },
+    {
+      "id": "s23",
+      "section": "Borussia Mönchengladbach",
+      "text": "Deisler war damals der begehrteste Spieler der Liga, um den neben deutschen Vereinen wie Bayern München oder Borussia Dortmund auch internationale Spitzenklubs wie der AC Mailand, der FC Barcelona oder Real Madrid buhlten.",
+      "cites": []
+    },
+    {
+      "id": "s24",
+      "section": "Hertha BSC",
+      "text": "Nach nur einem Jahr und dem Abstieg der Borussia in die 2. Bundesliga wechselte er für eine Ablösesumme von 4,5 Millionen DM (zzgl. weiterer Zahlungen an Borussia Mönchengladbach bei späteren Länderspielen und einer Beteiligung bei späterem Weiterverkauf) zu Hertha BSC, für die er in drei Spielzeiten 56-mal zum Ligaeinsatz kam, neun Tore erzielte und 2001 den Ligapokal gewann.",
+      "cites": ["ref5"]
+    },
+    {
+      "id": "s25",
+      "section": "Bayern München",
+      "text": "Mit dem zur Saison 2002/03 vollzogenen Wechsel zum FC Bayern München trat er seinem letzten Verein als Aktiver bei.",
+      "cites": []
+    },
+    {
+      "id": "s26",
+      "section": "Bayern München",
+      "text": "Für die Bayern – als Spielmacher und Nachfolger von Stefan Effenberg verpflichtet – spielte Deisler bis zur Winterpause der Saison 2006/07 und errang dort mehrere Titel.",
+      "cites": []
+    },
+    {
+      "id": "s27",
+      "section": "Bayern München",
+      "text": "In der Saison 2003/04 setzte Deisler aufgrund von Depressionen mehrere Monate aus.",
+      "cites": ["ref6", "ref7"]
+    },
+    {
+      "id": "s28",
+      "section": "Bayern München",
+      "text": "Am 16. Januar 2007 zog der 27 Jahre alte Mittelfeldspieler die Konsequenzen aus zahlreichen Verletzungen und Erkrankungen, die ihn in den letzten Jahren immer wieder zurückgeworfen hatten, und erklärte gegenüber Uli Hoeneß das Ende seiner Karriere.",
+      "cites": []
+    },
+    {
+      "id": "s29",
+      "section": "Bayern München",
+      "text": "Er begründete dies mit fehlendem Vertrauen in die Stabilität seines Knies.",
+      "cites": []
+    },
+    {
+      "id": "s30",
+      "section": "Bayern München",
+      "text": "Obwohl Deisler damals erklärte, sein Schritt sei endgültig, ließ Hoeneß, der eigenen Aussagen zufolge lange versucht hatte, den Spieler umzustimmen, verlauten, der bis Juni 2009 gültige Vertrag Deislers beim FC Bayern München werde nur ausgesetzt, um dem Spieler eine Rückkehr zu ermöglichen.",
+      "cites": []
+    },
+    {
+      "id": "s31",
+      "section": "Bayern München",
+      "text": "Die Erklärung Deislers über das Ende seiner Karriere hatte indes Bestand.",
+      "cites": []
+    },
+    {
+      "id": "s32",
+      "section": "Bayern München",
+      "text": "Er bestritt kein Spiel mehr.",
+      "cites": []
+    },
+    {
+      "id": "s33",
+      "section": "Bayern München",
+      "text": "Auf einer Veranstaltung der Robert-Enke-Stiftung im November 2019 erzählte Hoeneß genauer, wie die letzten Tage von Deislers Karriere verliefen.",
+      "cites": []
+    },
+    {
+      "id": "s34",
+      "section": "Bayern München",
+      "text": "So befand sich der FC Bayern im Januar 2007 in einem Trainingslager in Dubai.",
+      "cites": []
+    },
+    {
+      "id": "s35",
+      "section": "Bayern München",
+      "text": "Deisler besuchte Hoeneß mehrfach in seiner Suite und gab ihm immer wieder zu verstehen, dass er „nicht mehr könne“ und am Ende seiner Kräfte sei.",
+      "cites": []
+    },
+    {
+      "id": "s36",
+      "section": "Bayern München",
+      "text": "Die Gespräche zogen sich oft von den Abenden bis in die Morgenstunden und am letzten Tag verließ Deisler Hoeneß sogar erst eine halbe Stunde vor dem Mannschaftsfrühstück.",
+      "cites": []
+    },
+    {
+      "id": "s37",
+      "section": "Bayern München",
+      "text": "Im darauffolgenden Training sei Deisler nach Hoeneß’ Aussage der beste Mann auf dem Platz gewesen.",
+      "cites": []
+    },
+    {
+      "id": "s38",
+      "section": "Bayern München",
+      "text": "Nach der Ankunft in Deutschland bat Deisler um ein erneutes Gespräch, in dem er ihm sein endgültiges Karriereende bekanntgab.",
+      "cites": []
+    },
+    {
+      "id": "s39",
+      "section": "Nationalmannschaft",
+      "text": "1998 erreichte er mit der U18-Nationalmannschaft das Endspiel der U18-Europameisterschaft, das gegen Irland erst im Elfmeterschießen mit 3:4 verloren wurde.",
+      "cites": []
+    },
+    {
+      "id": "s40",
+      "section": "Nationalmannschaft",
+      "text": "Für die U21-Nationalmannschaft spielte er dreimal, wobei er am 26. März 1999 in Belfast bei der 0:1-Niederlage gegen Nordirland erstmals eingesetzt wurde.",
+      "cites": []
+    },
+    {
+      "id": "s41",
+      "section": "Nationalmannschaft",
+      "text": "Sein Debüt in der A-Nationalmannschaft gab er am 23. Februar 2000 in Amsterdam bei der 1:2-Niederlage im Test-Länderspiel gegen die Niederlande, als er in der 46. Minute für Zoltan Sebescen eingewechselt wurde.",
+      "cites": []
+    },
+    {
+      "id": "s42",
+      "section": "Nationalmannschaft",
+      "text": "Bei der Weltmeisterschaft 2002 fehlte er ebenso verletzungsbedingt wie bei der Weltmeisterschaft 2006 im eigenen Land.",
+      "cites": []
+    },
+    {
+      "id": "s43",
+      "section": "Nationalmannschaft",
+      "text": "Sein letztes Spiel im Nationaltrikot bestritt er am 1. März 2006 in Florenz bei der 1:4-Niederlage im Test-Länderspiel gegen Italien.",
+      "cites": ["ref8"]
+    },
+    {
+      "id": "s44",
+      "section": "Nach der aktiven Zeit",
+      "text": "Nach seinem Karriereende zog Deisler sich weitgehend aus der Öffentlichkeit zurück.",
+      "cites": []
+    },
+    {
+      "id": "s45",
+      "section": "Nach der aktiven Zeit",
+      "text": "Ende September 2007, rund acht Monate nach seinem Rücktritt, sprach er in einem Interview erstmals über die Gründe für diesen Schritt.",
+      "cites": []
+    },
+    {
+      "id": "s46",
+      "section": "Nach der aktiven Zeit",
+      "text": "Im Oktober 2009 erschien die von Sportjournalist Michael Rosentritt (Der Tagesspiegel) in Zusammenarbeit mit ihm verfasste Biografie Sebastian Deisler.",
+      "cites": []
+    },
+    {
+      "id": "s47",
+      "section": "Privat",
+      "text": "Deisler, der mit seiner ehemaligen brasilianischen Lebensgefährtin einen Sohn (* 2004) hat, strebte nach seiner Fußballer-Karriere eine Tätigkeit als Physiotherapeut an.",
+      "cites": ["ref9"]
+    },
+    {
+      "id": "s48",
+      "section": "Privat",
+      "text": "Über seine berufliche Situation ist nichts bekannt.",
+      "cites": []
+    },
+    {
+      "id": "s49",
+      "section": "Privat",
+      "text": "Er lebt zurückgezogen in Freiburg.",
+      "cites": ["ref10"]
+    },
+    {
+      "id": "s50",
+      "section": "Privat",
+      "text": "In die Medien gelangte Deisler 2013 nochmals mit einer verlorenen Schadenersatzklage vor dem Landgericht Berlin gegen einen ehemaligen Berater.",
+      "cites": ["ref11"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "wikidata_Q160106",
+      "kind": "wikidata",
+      "title": "Wikidata Q160106",
+      "url": "https://www.wikidata.org/wiki/Q160106",
+      "retrieved_at": "2026-11-25T09:21:09",
+      "sha256": "47de7d562f3d653f735b80401f8a2a6ef6af701a9c2497da32db57809a2d863c",
+      "file": "research/sources/wikidata_Q160106.json",
+      "revision": 2566949277,
+      "permalink": "https://www.wikidata.org/w/index.php?oldid=2566949277"
+    },
+    {
+      "id": "dewiki",
+      "kind": "wikipedia",
+      "title": "Wikipedia (de): Sebastian Deisler",
+      "url": "https://de.wikipedia.org/wiki/Sebastian_Deisler",
+      "retrieved_at": "2026-11-25T09:21:09",
+      "sha256": "3068fe75933db0fdcf4321651463450d1b89cb1ec279274222e662b223bef7c2",
+      "file": "research/sources/dewiki.wikitext"
+    },
+    {
+      "id": "enwiki",
+      "kind": "wikipedia",
+      "title": "Wikipedia (en): Sebastian Deisler",
+      "url": "https://en.wikipedia.org/wiki/Sebastian_Deisler",
+      "retrieved_at": "2026-11-25T09:21:09",
+      "sha256": "e8a6e84a2974cf032f608fffde841c33b600b6825b0ee64292b01b0150af6b53",
+      "file": "research/sources/enwiki.wikitext"
+    },
+    {
+      "id": "ref0",
+      "kind": "einzelnachweis",
+      "title": "Porträt",
+      "url": "http://www.dfb.de/index.php?id=11145",
+      "work": "Deutscher Fußball-Bund",
+      "via": "dewiki"
+    },
+    {
+      "id": "ref1",
+      "kind": "einzelnachweis",
+      "title": "Gestatten, Sebastian Deisler, ein neues Jahrhundert-Talent",
+      "url": "https://www.welt.de/print-welt/article568117/Gestatten-Sebastian-Deisler-ein-neues-Jahrhundert-Talent.html",
+      "work": null,
+      "via": "dewiki"
+    },
+    {
+      "id": "ref2",
+      "kind": "einzelnachweis",
+      "title": "Sebastian Deisler: Die vielleicht tragischste Geschichte des deutschen Fußballs",
+      "url": "https://www.welt.de/sport/fussball/bundesliga/article244010651/Sebastian-Deisler-Die-vielleicht-tragischste-Geschichte-des-deutschen-Fussballs.html",
+      "work": "welt.de",
+      "via": "dewiki"
+    },
+    {
+      "id": "ref3",
+      "kind": "einzelnachweis",
+      "title": "Spielinfo",
+      "url": "https://www.kicker.de/mgladbach-gegen-muenchen-1999-bundesliga-102731/spielinfo",
+      "work": "kicker.de",
+      "via": "dewiki"
+    },
+    {
+      "id": "ref4",
+      "kind": "einzelnachweis",
+      "title": "„Basti Fantasti“ – die vielleicht tragischste Geschichte des deutschen Fußballs",
+      "url": "https://www.welt.de/sport/fussball/bundesliga/article244010651/Sebastian-Deisler-Die-vielleicht-tragischste-Geschichte-des-deutschen-Fussballs.html",
+      "work": "welt.de",
+      "via": "dewiki"
+    },
+    {
+      "id": "ref5",
+      "kind": "einzelnachweis",
+      "title": "Sebastian Deisler – Matches and Goals in Bundesliga",
+      "url": "https://www.rsssf.org/players/deislerdata.html",
+      "work": "Rec.Sport.Soccer Statistics Foundation",
+      "via": "dewiki"
+    },
+    {
+      "id": "ref6",
+      "kind": "einzelnachweis",
+      "title": "Artikel",
+      "url": "http://www.spiegel.de/sport/fussball/0,1518,275001,00.html",
+      "work": null,
+      "via": "dewiki"
+    },
+    {
+      "id": "ref7",
+      "kind": "einzelnachweis",
+      "title": "Interview",
+      "url": "http://www.zeit.de/2009/41/DOS-Deisler?page=1",
+      "work": null,
+      "via": "dewiki"
+    },
+    {
+      "id": "ref8",
+      "kind": "einzelnachweis",
+      "title": "Sebastian Deisler – International Appearances",
+      "url": "https://www.rsssf.org/miscellaneous/deisler-intl.html",
+      "work": "Rec.Sport.Soccer Statistics Foundation",
+      "via": "dewiki"
+    },
+    {
+      "id": "ref9",
+      "kind": "einzelnachweis",
+      "title": "Sebastian Deisler ist Vater geworden",
+      "url": "https://rp-online.de/panorama/deutschland/sebastian-deisler-ist-vater-geworden_aid-16957635",
+      "work": null,
+      "via": "dewiki"
+    },
+    {
+      "id": "ref10",
+      "kind": "einzelnachweis",
+      "title": "Bundesliga-Serie: Sebastian Deisler „Ich wollte doch nur Fußball spielen“",
+      "url": "https://www.berliner-zeitung.de/sport-leidenschaft/bundesliga-serie-sebastian-deisler-ich-wollte-doch-nur-fussball-spielen-li.52227",
+      "work": null,
+      "via": "dewiki"
+    },
+    {
+      "id": "ref11",
+      "kind": "einzelnachweis",
+      "title": "''Immobilien-Deal ging in die Hose Ex-Profi Sebastian Deisler vor Gericht''",
+      "url": "https://www.berliner-kurier.de/immobilien-deal-ging-in-die-hose-ex-profi-sebastian-deisler-vor-gericht-4756640",
+      "work": null,
+      "via": "dewiki"
+    }
+  ],
+  "photo": {
+    "used": false,
+    "name": "Sebastian Deisler (Confed-Cup 2005) r.JPG",
+    "licenses": ["GFDL", "CC BY-SA 3.0"],
+    "page": "https://commons.wikimedia.org/wiki/File:Sebastian_Deisler_%28Confed-Cup_2005%29_r.JPG"
+  },
+  "researched_at": "2026-11-25T09:21:09",
+  "summary": { "verifiziert": 3, "einzelquelle": 2, "widerspruch": 1, "saetze": 51, "quellen": 15 }
+}
