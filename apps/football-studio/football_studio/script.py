@@ -229,6 +229,11 @@ def finalize(script: Script, research: dict, settings: Settings) -> Script:
         sc.speech = to_speech(sc.text)
         if not sc.visual or sc.visual.get("type") not in VISUAL_TYPES:
             sc.visual = auto_visual(sc, research, i)
+            # Abwechslung: nicht zweimal hintereinander dieselbe Zahlen-Grafik
+            prev = script.scenes[i - 1].visual.get("type") if i else None
+            if sc.visual["type"] == prev and prev in ("year", "stat", "score"):
+                kw = _keyword(sc.text)
+                sc.visual = {"type": "keyword", "text": kw} if kw else {"type": "pitch", "text": _short_phrase(sc.text)}
         sc.visual.setdefault("bg", ["floodlight", "pitch", "grid", "stripes"][i % 4])
     script.words = sum(count_words(s.text) for s in script.scenes)
     script.est_seconds = est_seconds(script.scenes)

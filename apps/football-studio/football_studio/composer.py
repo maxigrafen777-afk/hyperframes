@@ -254,7 +254,8 @@ def caption_groups(words: list[dict], max_words: int = 3) -> list[dict]:
     for i, w in enumerate(words):
         cur.append(w)
         nxt = words[i + 1] if i + 1 < len(words) else None
-        brk = (len(cur) >= max_words or re.search(r"[.!?,;:]$", w["text"]) or nxt is None
+        long_next = nxt is not None and len(nxt["text"]) > 12
+        brk = (len(cur) >= max_words or len(w["text"]) > 12 or long_next or re.search(r"[.!?,;:]$", w["text"]) or nxt is None
                or nxt["scene"] != w["scene"] or (nxt["start"] - w["end"]) > 0.15
                or sum(len(x["text"]) for x in cur) > 20)
         if brk:
@@ -274,7 +275,7 @@ def captions_html(groups: list[dict], accent: str) -> str:
     for gi, g in enumerate(groups):
         chars = sum(len(w["text"]) for w in g["words"])
         longest = max(len(w["text"]) for w in g["words"])
-        size = int(min(74 if chars <= 12 else (64 if chars <= 18 else 56), 620 / (0.86 * max(longest, 1))))
+        size = int(min(74 if chars <= 12 else (64 if chars <= 18 else 56), 640 / (0.8 * max(longest, 1))))
         spans = " ".join(f'<span id="cw{gi}-{wi}" class="cw">{esc(w["text"])}</span>' for wi, w in enumerate(g["words"]))
         parts.append(f'<div id="cg{gi}" class="cg" style="font-size:{size}px">{spans}</div>')
         js.append(f"tl.set('#cg{gi}',{{visibility:'visible',opacity:1}},{g['start']});")
